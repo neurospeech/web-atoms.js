@@ -1,0 +1,49 @@
+﻿<div class="atom-date-list-box">
+    <div class="atom-date-list-box-calendar">
+        <select
+            atom-type="AtomComboBox"
+            class="atom-date-list-box-month"
+            atom-items="{AtomDate.monthList}"
+            atom-value="$[owner.templateParent.month]"
+            ></select>
+        <select
+            atom-type="AtomComboBox"
+            class="atom-date-list-box-year"
+            atom-items="[ Atom.range( $owner.value + $owner.templateParent.startYear, $owner.value + $owner.templateParent.endYear) ]"
+            atom-value="$[owner.templateParent.year]"
+            ></select>
+        <div
+            class="atom-date-list-box-days">
+            <span class="atom-date-list-box-weekend-header">S</span>
+            <span>M</span>
+            <span>T</span>
+            <span>W</span>
+            <span>T</span>
+            <span>F</span>
+            <span class="atom-date-list-box-weekend-header">S</span>
+        </div>
+        <div
+            class="atom-date-list-box-day-list"
+            atom-presenter="itemsPresenter">
+            <div
+                event-click="{ $owner.templateParent.toggleDateCommand }"
+                atom-data="[$owner.templateParent.items[$scope.item_index]]"
+                atom-class="[ ($owner.templateParent).getItemClass($data,$owner.templateParent.value) ]"
+                atom-template="itemTemplate">
+                <span atom-text="[$data.label]"></span>
+            </div>
+        </div>
+    </div>
+    <div class="atom-date-list-box-list"
+        atom-type="AtomListBox"
+        atom-items="[$owner.templateParent.selectedItems]"
+        atom-label-path="dateLabel"
+        atom-value-path="date"
+        atom-value="$[$owner.templateParent.visibleDate]"
+        >
+        <div 
+            atom-template="itemTemplate"
+            atom-text="{$data.dateLabel}">
+        </div>
+    </div>
+</div>

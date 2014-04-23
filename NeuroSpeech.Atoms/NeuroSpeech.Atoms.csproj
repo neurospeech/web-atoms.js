@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C55A271-FF1A-45FE-A04B-0FE5AD61CDA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NeuroSpeech.Atoms</RootNamespace>
+    <AssemblyName>NeuroSpeech.Atoms</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Style\busy.gif" />
+    <Content Include="Style\Buttons.css" />
+    <Content Include="Style\Buttons.png" />
+    <Content Include="Style\buttons\delete.png" />
+    <Content Include="Style\buttons\down.png" />
+    <Content Include="Style\buttons\up.png" />
+    <Content Include="Style\Icons.png" />
+    <Content Include="Style\atoms.css">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms.tt</DependentUpon>
+    </Content>
+    <Content Include="AtomPrototype.js" />
+    <Content Include="Controls\AtomAutoCompleteBox.css" />
+    <Content Include="Controls\AtomAutoCompleteBox.js" />
+    <Content Include="Controls\AtomAutoCompleteBox.template.html" />
+    <Content Include="Controls\AtomButton.css" />
+    <Content Include="Controls\AtomButton.js" />
+    <Content Include="Controls\AtomCalendar.gridTemplate.html" />
+    <Content Include="Controls\AtomCalendar.js" />
+    <Content Include="Controls\AtomCheckBox.js" />
+    <Content Include="Controls\AtomCheckBoxList.css" />
+    <Content Include="Controls\AtomCheckBoxList.itemTemplate.html" />
+    <Content Include="Controls\AtomCheckBoxList.js" />
+    <Content Include="Controls\AtomComboBox.js" />
+    <Content Include="Controls\AtomControl.css" />
+    <Content Include="Controls\AtomControl.js" />
+    <Content Include="Controls\AtomDataPager.css" />
+    <Content Include="Controls\AtomDataPager.js" />
+    <Content Include="Controls\AtomDataPager.template.html" />
+    <Content Include="Controls\AtomDateControl.js" />
+    <Content Include="Controls\AtomDateField.css" />
+    <Content Include="Controls\AtomDateField.js" />
+    <Content Include="Controls\AtomDateField.popupTemplate.html" />
+    <Content Include="Controls\AtomDateField.template.html" />
+    <Content Include="Controls\AtomDateListBox.css" />
+    <Content Include="Controls\AtomDateListBox.js" />
+    <Content Include="Controls\AtomDateListBox.template.html" />
+    <Content Include="Controls\AtomDeleteButton.js" />
+    <Content Include="Controls\AtomDockPanel.css" />
+    <Content Include="Controls\AtomDockPanel.js" />
+    <Content Include="Controls\AtomItemsControl.itemTemplate.html" />
+    <Content Include="Controls\AtomItemsControl.js" />
+    <Content Include="Controls\AtomLinkBar.css" />
+    <Content Include="Controls\AtomLinkBar.itemTemplate.html" />
+    <Content Include="Controls\AtomLinkBar.js" />
+    <Content Include="Controls\AtomLinkBar.menuTemplate.html" />
+    <Content Include="Controls\AtomListBox.css" />
+    <Content Include="Controls\AtomListBox.js" />
+    <Content Include="Controls\AtomMasterDetailList.js" />
+    <Content Include="Controls\AtomMasterDetailList.template.html" />
+    <Content Include="Controls\AtomMultiButtonList.js" />
+    <Content Include="Controls\AtomNavigatorList.css" />
+    <Content Include="Controls\AtomNavigatorList.detailTemplate.html" />
+    <Content Include="Controls\AtomNavigatorList.js" />
+    <Content Include="Controls\AtomNavigatorList.template.html" />
+    <Content Include="Controls\AtomNumberComboBox.js" />
+    <Content Include="Controls\AtomPhoneControl.css" />
+    <Content Include="Controls\AtomPhoneControl.js" />
+    <Content Include="Controls\AtomPostButton.js" />
+    <Content Include="Controls\AtomRadioButtonList.js" />
+    <Content Include="Controls\AtomSortableColumn.css" />
+    <Content Include="Controls\AtomSortableColumn.js" />
+    <Content Include="Controls\AtomSortableColumn.template.html" />
+    <Content Include="Controls\AtomTabButtonBar.css" />
+    <Content Include="Controls\AtomTabButtonBar.js" />
+    <Content Include="Controls\AtomTabControl.js" />
+    <Content Include="Controls\AtomTabControl.template.html" />
+    <Content Include="Controls\AtomTimePicker.js" />
+    <Content Include="Controls\AtomToggleButtonBar.css" />
+    <Content Include="Controls\AtomToggleButtonBar.js" />
+    <Content Include="Controls\AtomToggleButtonBar.template.html" />
+    <Content Include="Controls\AtomUploadButton.js" />
+    <Content Include="Controls\AtomViewBox.js" />
+    <Content Include="Controls\AtomViewStack.css" />
+    <Content Include="Controls\AtomViewStack.js" />
+    <Content Include="Controls\AtomWizard.css" />
+    <Content Include="Controls\AtomWizard.js" />
+    <Content Include="Controls\AtomWizard.template.html" />
+    <Content Include="Controls\AtomYesNoControl.js" />
+    <Content Include="Controls\AtomYesNoCustom.css" />
+    <Content Include="Controls\AtomYesNoCustom.js" />
+    <Content Include="Controls\AtomYesNoCustom.template.html" />
+    <Content Include="Core\Atom.js" />
+    <Content Include="Core\AtomApplication.busyTemplate.html" />
+    <Content Include="Core\AtomApplication.css" />
+    <Content Include="Core\AtomApplication.js" />
+    <Content Include="Core\AtomBrowser.js" />
+    <Content Include="Core\AtomComponent.js" />
+    <Content Include="Core\AtomDispatcher.js" />
+    <Content Include="Core\AtomEvaluator.js" />
+    <Content Include="Core\AtomPopup.js" />
+    <Content Include="Core\AtomQuery.js" />
+    <Content Include="Core\AtomSkinnedApplication.js" />
+    <Content Include="Core\AtomUI.js" />
+    <Content Include="Core\AtomUIComponent.js" />
+    <Content Include="Core\ChildEnumerator.js" />
+    <Content Include="Core\WebAtoms.Core.js" />
+    <Content Include="Core\ZZZZZInitializer.js" />
+    <Content Include="DataControls\AtomAutoPostForm.js" />
+    <Content Include="DataControls\AtomDataGrid.js" />
+    <Content Include="DataControls\AtomForm.js" />
+    <Content Include="DataControls\AtomFormField.js" />
+    <Content Include="DataControls\AtomFormGrid.css" />
+    <Content Include="DataControls\AtomFormGrid.js" />
+    <Content Include="DataControls\AtomFormGridLayout.fieldTemplate.html" />
+    <Content Include="DataControls\AtomFormLayout.css" />
+    <Content Include="DataControls\AtomFormLayout.fieldTemplate.html" />
+    <Content Include="DataControls\AtomFormLayout.js" />
+    <Content Include="DataControls\AtomFormNoLayout.js" />
+    <Content Include="DataControls\AtomFormVerticalLayout.fieldTemplate.html" />
+    <Content Include="DataControls\AtomFormVerticalLayout.js" />
+    <Content Include="Data\AtomBinding.js" />
+    <Content Include="Data\AtomBindingHelper.js" />
+    <Content Include="Data\AtomPromise.js" />
+    <Content Include="ie9-placeholder-fix.js" />
+    <Content Include="jquery-1.5.1-vsdoc.js" />
+    <Content Include="JSON.js" />
+    <Content Include="Layouts\AtomLayout.js" />
+    <Content Include="Layouts\AtomTableLayout.js" />
+    <Content Include="Layouts\AtomViewBoxLayout.js" />
+    <Content Include="atoms-debug.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms-debug.tt</DependentUpon>
+    </Content>
+    <Content Include="atoms.min.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms.min.tt</DependentUpon>
+    </Content>
+    <Content Include="Window\AtomAlert.js" />
+    <Content Include="Window\AtomWindow.alertTemplate.html" />
+    <Content Include="Window\AtomWindow.css" />
+    <Content Include="Window\AtomWindow.frameTemplate.html" />
+    <Content Include="Window\AtomWindow.js" />
+    <Content Include="Window\AtomWindow.windowTemplate.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Style\atoms.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms.css</LastGenOutput>
+    </None>
+    <None Include="atoms-debug.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms-debug.js</LastGenOutput>
+    </None>
+    <None Include="atoms.min.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms.min.js</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataControls\DataControls\" />
+    <Folder Include="Data\Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

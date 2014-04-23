@@ -1,0 +1,43 @@
+﻿<div 
+    class="popup" 
+    atom-class="[$owner.isOpen ? 'popup-open' : 'popup-closed' ]">
+    <div 
+        class="atom-date-list-box-calendar"
+        atom-presenter="calendarPresenter">
+        <select
+            atom-type="AtomComboBox"
+            class="atom-date-list-box-month"
+            atom-items="{AtomDate.monthList}"
+            atom-value="$[owner.templateParent.month]"
+            ></select>
+        <select
+            atom-type="AtomNumberComboBox"
+            class="atom-date-list-box-year"
+            atom-start-number="[ $owner.templateParent.currentYear + $owner.templateParent.startYear]"
+            atom-end-number="[ $owner.templateParent.currentYear + $owner.templateParent.endYear]"
+            atom-value="$[owner.templateParent.year]"
+            ></select>
+        <div
+            class="atom-date-list-box-days">
+            <span class="atom-date-list-box-weekend-header">S</span>
+            <span>M</span>
+            <span>T</span>
+            <span>W</span>
+            <span>T</span>
+            <span>F</span>
+            <span class="atom-date-list-box-weekend-header">S</span>
+        </div>
+        <div
+            class="atom-date-list-box-day-list"
+            atom-type="AtomItemsControl"
+            atom-items="[$owner.templateParent.items]"
+            atom-presenter="itemsPresenter">
+            <div
+                event-click="{ $owner.templateParent.templateParent.toggleDateCommand }"
+                atom-class="[ ($owner.templateParent.templateParent).getItemClass($data,$owner.templateParent.templateParent.value) ]"
+                atom-template="itemTemplate">
+                <span atom-text="[$data.label]"></span>
+            </div>
+        </div>
+    </div>
+</div>

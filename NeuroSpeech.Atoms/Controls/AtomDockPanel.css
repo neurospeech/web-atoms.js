@@ -1,0 +1,11 @@
+﻿.atom-dock-panel
+{
+    overflow:hidden;
+    position:absolute;
+}
+
+.atom-dock-panel > *
+{
+    position:absolute;
+}
+

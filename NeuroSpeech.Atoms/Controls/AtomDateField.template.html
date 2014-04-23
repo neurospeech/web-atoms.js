@@ -1,0 +1,5 @@
+﻿<div
+    class="date-label"
+    atom-class="[$owner.isOpen ? 'date-label-open' : 'date-label-closed']"
+    atom-event-click="[ { owner: { isOpen: ! $owner.isOpen } } ]"
+    atom-text="[ $owner.selectedItem ? $owner.selectedItem.dateLabel : 'SELECT' ]"></div>

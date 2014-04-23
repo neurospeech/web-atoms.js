@@ -1,0 +1,15 @@
+﻿/* Block size is 28 with 8 padding */
+
+.atom-icon-down-arrow
+{
+    /* 8th Row, 6th column - 0 based index */
+    background-color: transparent;
+    background-image: url(/resources/NeuroSpeech.WebAtoms/Content.Buttons.png?$$VERSION$$);
+    background-repeat:no-repeat;
+    background-clip:padding-box;
+    background-position-x:176px;
+    background-position-y:232px;
+    width:12px;
+    height:12px;
+    vertical-align:middle;    
+}

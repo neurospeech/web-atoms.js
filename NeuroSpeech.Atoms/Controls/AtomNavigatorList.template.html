@@ -1,0 +1,38 @@
+﻿<div 
+	atom-type="AtomViewStack"
+	atom-selected-index="[$owner.atomParent.displayMode]"
+	>
+	<div atom-type="AtomDockPanel" atom-presenter="gridPanel">
+        <div atom-dock="Fill" atom-presenter="gridPresenter" class="atom-navigator-list-grid">
+
+        </div>
+	</div>
+	<div 
+		atom-data="[$owner.templateParent.selectedItem]"
+		atom-presenter="detailView"
+		atom-type="AtomDockPanel">
+		<div 
+			atom-dock="Top"
+            atom-presenter="detailHeaderToolbar"
+            >
+			<input type="button" 
+                event-click="[$owner.templateParent.backCommand]"
+                value="Back" style="float: left" />
+		</div>
+	</div>
+
+	<div 
+		atom-data="[$owner.templateParent.newItemCopy]"
+		atom-presenter="newView"
+		atom-type="AtomDockPanel">
+		<div 
+			atom-dock="Top"
+            atom-presenter="newHeaderToolbar"
+            >
+			<input type="button" 
+                event-click="[$owner.templateParent.cancelAddCommand]"
+                value="Back" style="float: left" />
+		</div>
+	</div>
+
+</div>

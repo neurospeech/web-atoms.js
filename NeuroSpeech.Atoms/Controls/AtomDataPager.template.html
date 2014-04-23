@@ -1,0 +1,36 @@
+﻿<container>
+    <button 
+        class="atom-pager-first-button" 
+        atom-is-enabled="[$owner.pages.length > 1 &amp;&amp; $owner.currentPage]"
+        event-click="{$owner.goFirstCommand}" 
+        style="float:left">
+	    First
+    </button>
+    <span style="text-align:left">
+        <button 
+            class="atom-pager-prev-button" 
+            event-click="{$owner.goPrevCommand}"
+            atom-is-enabled="[$owner.currentPage]">
+	        Prev
+        </button>
+        <span>Goto: Page</span>
+        <select
+            atom-type="AtomComboBox"
+            atom-items="[$owner.atomParent.pages]"
+            atom-value="$[owner.atomParent.currentPage]">
+        </select>
+        <button 
+            class="atom-pager-next-button" 
+            event-click="{$owner.goNextCommand}"
+            atom-is-enabled="[$owner.currentPage &lt; $owner.pages.length -1 ]">
+	        Next
+        </button>
+    </span>
+    <button 
+        class="atom-pager-last-button" 
+        event-click="{$owner.goLastCommand}"
+        atom-is-enabled="[$owner.pages.length > 1 &amp;&amp; $owner.currentPage &lt; $owner.pages.length -1 ]"
+        style="float:right">
+	    Last
+    </button>
+</container>

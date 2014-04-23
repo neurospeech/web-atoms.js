@@ -1,0 +1,23 @@
+﻿.atom-navigator-list-iframe
+{
+    border-width:0px;
+    margin:0px;
+    padding:0px;
+}
+
+.atom-navigator-list-grid{
+    overflow:auto;
+}
+
+.atom-navigator-list-detail-header {
+    height:25px;
+    text-align:center;
+}
+
+.atom-navigator-list-header {
+    min-height:30px;
+}
+
+.atom-navigator-list-footer {
+    min-height:30px;
+}

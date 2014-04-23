@@ -1,0 +1,26 @@
+﻿<div
+    class="atom-window-background"
+	style-width="[$appScope.owner.bodyWidth + 'px']"
+	style-height="[$appScope.owner.appHeight + 'px']"
+	style-display="[$owner.isOpen ? 'block' : 'none']"
+	>
+	<div 
+        class="atom-window"
+		atom-presenter="windowDiv"
+		style="position:absolute"
+		style-width="[$owner.atomParent.windowWidth + 'px']"
+		style-height="[$owner.atomParent.windowHeight + 'px']"
+		style-left="[(($appScope.owner.bodyWidth-$owner.atomParent.windowWidth)/2) + 'px']"
+		style-top="[(($appScope.owner.bodyHeight-$owner.atomParent.windowHeight)/2) + 'px']"
+        atom-type="AtomDockPanel"
+		>
+		<div
+            class="atom-window-title"
+            atom-dock="Top"
+            atom-presenter="windowTitleDiv" atom-text="[$owner.atomParent.title]"></div>
+		<div 
+            class="atom-window-close-button"
+			atom-presenter="windowCloseButton" 
+			atom-event-click="{$owner.atomParent.closeCommand}"></div>
+	</div>
+</div>

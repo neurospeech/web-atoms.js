@@ -1,0 +1,30 @@
+﻿<container>
+    <div
+        atom-dock="Fill"
+        atom-type="AtomViewStack" 
+        atom-selected-index="$[owner.templateParent.currentStep]"
+        atom-presenter="viewPresenter">
+
+    </div>
+    <div
+        atom-dock="Bottom"
+        class="atom-wizard-command-bar"
+        >
+        <button
+            class="atom-wizard-back-button"
+            atom-is-enabled="[$owner.canMoveBack]"
+            atom-event-click="{$owner.goPrevCommand}"
+            style-visibility="[$owner.currentStep ? 'visible' : 'hidden']"
+            >
+            <span atom-text="[$owner.prevLabel]"></span>
+        </button>
+        <button
+            class="atom-wizard-next-button"
+            atom-class="[$owner.nextClass || ($owner.isLastStep ? 'finish-button' : '')]"
+            atom-event-click="{$owner.nextCommand}"
+            atom-is-enabled="[$owner.nextCommand]"
+            >
+            <span atom-text="[$owner.isLastStep ? $owner.finishLabel : $owner.nextLabel]"></span>
+        </button>
+    </div>
+</container>

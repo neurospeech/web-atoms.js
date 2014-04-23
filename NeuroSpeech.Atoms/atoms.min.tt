@@ -1,0 +1,415 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".js" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xaml" #>
+<#@ assembly name="System.Web" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Xaml" #>
+<#@ import namespace="System.Text" #>
+<# 
+	
+		string templateDirectory = System.IO.Path.GetDirectoryName(Host.TemplateFile);
+
+	
+		var debug = false;
+#>
+<#= System.IO.File.ReadAllText(templateDirectory + "\\AtomPrototype.js") #>
+
+
+// Global...
+var WebAtoms = {};
+
+(function(w){
+
+	var WebAtoms = w;
+
+	var window = this;
+	var $ = window.$;
+	var Templates = { jsonML: {} };
+	var document = window.document;
+
+	window.Templates = Templates;
+
+<# 
+	
+		//TemplateDictionary dictionary = new TemplateDictionary();	
+		WriteTemplates(templateDirectory);
+		#>
+
+		<#
+
+		// load all files.. of type .js...
+		JSCodeList codeList = new JSCodeList();
+		ParseDirectory(templateDirectory,codeList, false);
+		//codeList.Sort(codeList.Comparer);
+		foreach(JSCode code in codeList){
+			code.AssignParentReferences(codeList);
+		}
+		
+		JSCodeList orderedList = new JSCodeList();
+		foreach(JSCode code in codeList.OrderBy(x=>x.Index)){
+			orderedList.Add(code, codeList);
+		}
+		
+		foreach(JSCode code in orderedList){
+			int i = 0;
+			foreach(string line in code.Code){
+				if(debug){
+					if(!string.IsNullOrWhiteSpace(line))
+						Write("/*Line {0} - '{1}' */",i, code.FileName);
+					if(line.StartsWith("/// <reference"))
+						WriteLine("");
+					else
+						WriteLine(line);
+					i++;
+                }else{
+					string l = line.Trim();
+					if(string.IsNullOrWhiteSpace(l))
+						continue;
+					if(l.StartsWith("//"))
+						continue;
+					WriteLine(l);
+				}
+			}
+		}
+
+#>
+
+}).apply(window, [WebAtoms]);
+
+<# 
+		string txt = this.GenerationEnvironment.ToString();
+
+		this.GenerationEnvironment.Clear();
+
+		txt = System.Web.HttpUtility.UrlEncode(txt);
+
+		string postRequest = "output_format=xml&output_info=compiled_code&output_info=warnings&output_info=errors&output_info=statistics&compilation_level=SIMPLE_OPTIMIZATIONS&warning_level=default&output_file_name=default.js&js_code=";
+		postRequest += txt;
+
+		System.Net.WebClient client = new System.Net.WebClient();
+		client.Headers.Add(System.Net.HttpRequestHeader.ContentType,"application/x-www-form-urlencoded");
+		string result = client.UploadString("http://closure-compiler.appspot.com/compile",postRequest);
+
+		System.Xml.Linq.XDocument doc =System.Xml.Linq.XDocument.Parse(result);
+#>
+// License: https://github.com/neurospeech/atoms.js/blob/master/License.md
+<#		
+
+		this.GenerationEnvironment.Append(doc.Descendants().FirstOrDefault(x=>x.Name.LocalName == "compiledCode").Value);
+
+ #><#+
+		private void WriteTemplates(string dir){
+			foreach(string file in System.IO.Directory.EnumerateFiles(dir,"*.html")){
+				string name = System.IO.Path.GetFileNameWithoutExtension(file);
+				string[] tokens = name.Split('.');
+				string templateType = tokens[1];
+				name = tokens[0];
+				string text = string.Join("\n",System.IO.File.ReadAllLines(file).Select(x=>x.Trim()).Where(x=> !string.IsNullOrWhiteSpace(x) ));
+				//var d = td[name]; 
+				//d[templateType] = encode(text);
+				try{
+				WriteTemplate("WebAtoms." + name + "." + templateType, text);
+                }catch(Exception ex){
+					throw new Exception("Failed to parse " + name + "." + templateType, ex);
+				}
+			}
+			foreach(string child in System.IO.Directory.EnumerateDirectories(dir)){
+				WriteTemplates(child);
+			}
+		}
+
+		private void WriteTemplate(string key, string text){
+			if(string.IsNullOrWhiteSpace(text))
+				return;
+			var h = HtmlElement.Parse(text);
+			WriteLine("Templates.jsonML[\"" + key + "\"] = ");
+			if(h.Name == "container"){
+				// little differently??
+				WriteLine("[");
+				List<string> list = new List<string>();
+				foreach(HtmlElement c in h.Children){
+					list.Add(WriteElement(c));
+				}
+				WriteLine(string.Join(", ", list));
+				WriteLine("]");
+			}else{
+				WriteLine("[" + WriteElement(h) + "]");
+			}
+			WriteLine(";");
+
+		}
+
+		private string WriteElement(HtmlElement e, string postFix = ""){
+			StringBuilder sb = new StringBuilder();
+			sb.AppendFormat("[\"{0}\",\r\n",e.Name);
+			List<string> list = new List<string>();
+            foreach (HtmlAttribute a in e.Attributes)
+            {
+				list.Add(string.Format("\"{0}\": \"{1}\"", a.Name, encode( a.Value)));
+            }
+			sb.AppendFormat("{{ {0} }}\r\n", string.Join(", ", list));
+			list.Clear();
+			if(e.Children.Any()){
+				foreach (HtmlNode child in e.Children)
+				{
+					if(child is HtmlText){
+						list.Add(string.Format( "\"{0}\"", encode((child as HtmlText).Text) ));
+					}else{
+						list.Add(WriteElement((HtmlElement)child));
+					}
+				}
+				sb.AppendFormat(",{0}", string.Join(", ", list));
+            }
+			sb.AppendFormat("]");
+			return sb.ToString();
+		}
+		
+		private string encode(string txt){
+			return txt.Replace("\"","\\\"").Replace("\n","\\n").Replace("\r","\\r");
+		}
+		
+		public void ParseDirectory(string parent, List<JSCode> codeList , bool parseFiles = true){
+			if(parseFiles){
+				foreach(string file in System.IO.Directory.EnumerateFiles(parent,"*.js")){
+					JSCode code = new JSCode();
+					code.FileName = System.IO.Path.GetFileName(file);
+					code.FilePath = file;
+					code.Code = System.IO.File.ReadAllLines(file);
+					
+					code.LoadReferences();
+					codeList.Add(code);
+					if(code.FileName.StartsWith("ZZZZ"))
+						code.Index = int.MaxValue;
+					else
+						code.Index = int.MaxValue - 100;
+				}
+			}
+			
+			foreach(string dir in System.IO.Directory.EnumerateDirectories(parent,"*.*", System.IO.SearchOption.AllDirectories)){
+				ParseDirectory(dir,codeList);
+			}
+			
+		}
+		
+
+    public class HtmlAttribute {
+
+        public HtmlAttribute(string name, string value)
+        {
+            this.Name = name;
+            this.Value = value;
+        }
+
+        public string Name { get; set; }
+        public string Value { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}=\"{1}\"", Name, Value);
+        }
+    }
+
+    public class HtmlNode {
+        public List<HtmlNode> Children { get; private set; }
+
+        public HtmlNode()
+        {
+            Children = new List<HtmlNode>();
+        }
+    }
+
+    public class HtmlText : HtmlNode {
+
+        public HtmlText(XText t)
+        {
+            Text = t.Value;
+        }
+
+        public string Text { get; set; }
+    }
+
+    public class HtmlElement : HtmlNode {
+        public string Name { get; set; }
+        public List<HtmlAttribute> Attributes { get; private set; }
+
+        public HtmlElement(XElement e)
+        {
+            this.Name = e.Name.LocalName;
+
+            Attributes = new List<HtmlAttribute>();
+            
+            foreach (var a in e.Attributes())
+            {
+                Attributes.Add(new HtmlAttribute(a.Name.LocalName,a.Value));
+            }
+            foreach (var item in e.Nodes())
+            {
+                if (item is XText) {
+                    Children.Add(new HtmlText(item as XText));
+                }
+                if (item is XElement) {
+                    Children.Add(new HtmlElement(item as XElement));
+                }
+            }
+        }
+
+        public static HtmlElement Parse(string text) {
+            var doc = XDocument.Parse(text);
+            return new HtmlElement(doc.Root);
+        }
+    }
+
+	public class GrowingDictionary<T> 
+		where T:class
+	{
+		private Dictionary<string,T> values = new Dictionary<string,T>();
+		
+		public T this[string key]{
+			get{
+				T obj = default(T);
+				if(values.TryGetValue(key,out obj))
+					return obj;
+				obj = Activator.CreateInstance<T>();
+				values[key] = obj;
+				return obj;
+			}
+		}
+		
+		public IEnumerable<KeyValuePair<string,T>> Values{
+			get{
+				return values;
+			}
+		}
+	}
+	
+	/*public class TemplateDictionary: GrowingDictionary<Dictionary<string,string>>
+	{
+		public override string ToString(){
+			
+			List<string> tvalues = new List<string>();
+			foreach(var item in Values){
+				List<string> tlist = new List<string>();
+				foreach(var t in item.Value){
+					tlist.Add("\t" + t.Key + ": \"" + t.Value + "\"\r\n");
+				}
+				tvalues.Add(item.Key + ":{" + String.Join(",", tlist) + "}\r\n");
+			}
+			
+			return "{" + String.Join("," , tvalues) + "}";
+		}	
+	}*/
+
+	
+		
+	public class JSCodeList : List<JSCode> {
+
+		public void Add(JSCode code, JSCodeList all){
+			// make sure we have all existing base classes first...
+			foreach(string item in code.References){
+				JSCode parent = all.FirstOrDefault(x=>x.FileName == item);
+				if(parent!=null){
+					Add(parent,all);
+				}
+			}
+			
+			if(!this.Any(x=>x.FileName == code.FileName))
+				this.Add(code);
+			
+		}
+		
+		public IComparer<JSCode> Comparer {
+			get {
+				return new JSCodeListSort(this);
+			}
+		}
+
+		public class JSCodeListSort : IComparer<JSCode> {
+
+			private JSCodeList list;
+
+			public JSCodeListSort(JSCodeList list)
+			{
+				this.list = list;
+			}
+
+			#region public int  Compare(JSCode x, JSCode y)
+			public int Compare(JSCode x, JSCode y)
+			{
+				if(x.FileName.StartsWith("ZZZZZ"))
+					return +1;
+				if(y.FileName.StartsWith("ZZZZZ"))
+					return -1;
+				int n = 0;
+				n = x.IsParent(list,y);
+				if (n>0)
+					return -n;
+				n = y.IsParent(list,x);
+				if(n>0)
+					return n;
+				return 0;
+			}
+			#endregion
+
+		}
+
+	}
+
+	public class JSCode 
+	{
+		public string FilePath { get; set; }
+		public string FileName { get; set; }
+		public string FileNameSmall { get; set; }
+		public string[] Code { get; set; }
+		public string[] References { get; set; }
+		public int Index { get; set; }
+		
+		public void AssignParentReferences(JSCodeList list){
+			foreach(var item in References){
+				JSCode parent = list.FirstOrDefault(x=>x.FileName == item);
+				if(parent!=null){
+					parent.Index = this.Index -1;
+					parent.AssignParentReferences(list);
+				}
+			}
+		}
+
+		public int IsParent(JSCodeList list, JSCode other)
+		{
+			if (other.References.Any(x => x.Equals(this.FileName)))
+				return 1;
+			foreach (var item in other.References)
+			{
+				JSCode parentOther = list.FirstOrDefault(x => x.FileName.Equals(item));
+				if (parentOther != null) {
+					int n = this.IsParent(list, parentOther);
+					if(n>0)
+						return n+1;
+				}
+			}
+			return 0;
+		}
+		
+
+		public void LoadReferences(){
+			List<string> referenceList = new List<string>();
+				foreach(string line in this.Code.Where(x=>x.StartsWith("/// <reference "))){
+					string r = line.Substring(4);
+					XDocument doc = XDocument.Parse(r);
+					string path =  doc.Root.Attribute(XName.Get("path")).Value;
+					path = System.IO.Path.GetFileName(path);
+					referenceList.Add(path);
+				}
+				this.References = referenceList.ToArray();
+		}
+
+	}
+		
+		
+		#>
