@@ -1,3 +1,5 @@
 *.cache
 NeuroSpeech.Atoms/obj/*
 NeuroSpeech.Atoms/bin/*
+*.suo
+NeuroSpeech.Atoms/NeuroSpeech.Atoms.csproj.user
