@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,17 +42,26 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Style\busy.gif" />
-    <Content Include="Style\Buttons.css" />
-    <Content Include="Style\Buttons.png" />
-    <Content Include="Style\buttons\delete.png" />
-    <Content Include="Style\buttons\down.png" />
-    <Content Include="Style\buttons\up.png" />
-    <Content Include="Style\Icons.png" />
-    <Content Include="Style\atoms.css">
+    <Content Include="jquery-1.8.2.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\busy.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\buttons\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\buttons\down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\buttons\up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="style\atoms.css">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="AtomPrototype.js" />
     <Content Include="Controls\AtomAutoCompleteBox.css" />
@@ -167,11 +176,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms-debug.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="atoms.min.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.min.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Window\AtomAlert.js" />
     <Content Include="Window\AtomWindow.alertTemplate.html" />
@@ -181,7 +192,7 @@
     <Content Include="Window\AtomWindow.windowTemplate.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Style\atoms.tt">
+    <None Include="style\atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>atoms.css</LastGenOutput>
     </None>

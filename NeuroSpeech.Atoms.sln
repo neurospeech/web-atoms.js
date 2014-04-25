@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroSpeech.Atoms", "NeuroSpeech.Atoms\NeuroSpeech.Atoms.csproj", "{5C55A271-FF1A-45FE-A04B-0FE5AD61CDA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroSpeech.Atoms", "src\NeuroSpeech.Atoms.csproj", "{5C55A271-FF1A-45FE-A04B-0FE5AD61CDA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
