@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+
+<!-- setting control properties requires square brackets
+    because window appears after the button, so window was not
+    created and will be updated by framework later on. Using 
+    one-time binding will not work for controls defined later
+    in the visual hierarchy -->
+
+<button
+    atom-type="AtomButton"
+    atom-next="[$scope.theWindow.openCommand]"
+    atom-data="{ { label:'NeuroSpeech Frame', value: 'http://neurospeech.com' } }"
+    >Open NeuroSpeech.com</button>
+
+<button
+    atom-type="AtomButton"
+    atom-next="[$scope.theWindow.openCommand]"
+    atom-data="{ { label:'WebAtoms Frame', value: '/webatoms/docs' } }"
+    >Open WebAtoms</button>
+
+<!--
+    openerData will be set after creation of window, so one way binding
+    must be used
+    -->
+<div
+    atom-type="AtomWindow"
+    atom-name="theWindow"
+    atom-title="[$owner.openerData.label]"
+    atom-url="[$owner.openerData.value]"
+    >
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        user: {
+            firstName: '',
+            lastName: ''
+        }
+    })
+</script>
+
+<div
+    atom-type="AtomControl"
+    atom-data="{$scope.user}"
+    >
+
+    <input type="text" 
+        atom-value="$[data.firstName](keyup)" 
+        placeholder="First Name" /><br />
+    <input type="text" 
+        atom-value="$[data.lastName](keyup)" 
+        placeholder="Last Name" /><br />
+    <input type="button" value="Save" />
+    <span 
+        atom-text="['Name is ' + $data.firstName + ' ' + $data.lastName]">
+    </span>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

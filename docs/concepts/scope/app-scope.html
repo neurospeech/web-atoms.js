@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AppScope and Navigtation History</h1>
+    <p>Unless, scope initialization appears inside any Items control, scope is considered as a global Scope and is referred as <span class="inlineCode">$appScope</span>. <span class="inlineCode">$appScope</span> is same as <span class="inlineCode">$scope</span> for all controls in the same scope. However nested scope controls can access global scope by using <span class="inlineCode">$appScope</span>.</p>
+    <p>As we have come up with a pattern of defining <span class="inlineCode">model</span> named global variable for the page, we have included same model in <span class="inlineCode">$appScope</span>.</p>
+    <p class="inlineCode">&lt;script type=&#39;text/javascript&#39;&gt;<br />
+&nbsp;&nbsp;&nbsp; var model = { name: &#39;Atoms.js&#39; };<br />
+        &lt;/script&gt;</p>
+    <p>Now, <span class="inlineCode">$scope.model</span> in global scope, or <span class="inlineCode">$appScope.model</span> refers to exact same variable defined above.</p>
+    <h2>Initializing Other Variables in Scope</h2>
+    <p>If you have any other global variables that you would like add in the scope, you have to initialize scope as following. Lets say you have a variable named jConfigValues, defined in some javascript.</p>
+    <p class="inlineCode">&lt;script type=&#39;text/javascript&#39;&gt;<br />
+&nbsp;&nbsp;&nbsp; ({ jConfigValues: jConfigValues&nbsp; })<br />
+        &lt;/script&gt;</p>
+    <p class="note">Note: Please note the difference here, script shown in previous section is a simple javascript defined in page header. Script shown in this example is an Session Initialization Script which only appears within Atoms.js enabled HTML Elements.</p>
+    <h2>Navigation History</h2>
+    <p>
+        In AJAX applications, saving state of page is very important. As in browser, we need back button functionality to function exactly like the way we get with simple web pages. Atoms.js makes it easy to maintain navigation state by serializing global scope (appScope) values into URL separated by <span class="inlineCode">#</span> token. Scope initialization is ignored if values exists in URL hash and it works without writing any extra scripts.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/scope/samples/app-scope.html" style="height: 409px;">
+
+    </iframe>
+
+    <p>
+        Lets review above example.</p>
+    <ul>
+        <li>view property in scope is intialized to &#39;red&#39;. So when you first load the page, view is set to &#39;red&#39;.</li>
+        <li>We have set two way binding between <span class="inlineCode">$scope.view</span> and <span class="inlineCode">value</span> property of AtomToggleButtonBar. This causes AtomToggleButtonBar to set Apple as default selected item when the page is loaded first.</li>
+        <li>URL does not contain any hashtag to begin with.</li>
+        <li>Now when we change AtomToggleButtonBar by clicking on it, note that URL now contains hashtag for &#39;view&#39; property. This means scope has saved &#39;view&#39; on URL.</li>
+        <li>Now if you will refresh the page, view will be set to the value that was saved in URL. And AtomToggleButtonBar will be defaulted to last selected value.</li>
+    </ul>
+    <h2>URL Hash Change</h2>
+    <p>
+        URL hash changes whenever any scope property is modified by Atoms.js as a result of any User Action or any AJAX result. All the properties of appScope are saved onto URL. Size of URL depends upon browser, Atoms.js has no limit, but we recommend using only smaller values like integer indexes or short keywords to be saved.</p>
+    <h2>URL Hash Compatible Scope Values</h2>
+    <p>
+        You may notice that in above example, we also have a function called <span class="inlineCode">&#39;display&#39;</span> and a list called <span class="inlineCode">&#39;list&#39;</span>, but both were not serialized on URL. Here is why, scope values are only saved on URL under following conditions.</p>
+    <ol>
+        <li>Only Global (Root Level) or appScope values are saved on URL.</li>
+        <li>Value must be of type &quot;String&quot;, &quot;Number&quot; or &quot;Boolean&quot; only. Anything out of this, object, function or array are ignored.</li>
+        <li>Corresponding property name of value must not start with underscore. Anything that starts with _ is not saved onto URL. Sometimes puting everything on URL causes lots of navigation history cycles that user may get confused. So only few scope properties must be chosen that should be saved on URL. Rest must be named with _ underscore prefix to avoid confusion.</li>
+    </ol>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Scope</h1>
+    <p>
+        We have introduced concept of scope (UI scope) in Atoms.js to emulate UI scope as it exists in other UI frameworks such as flex, silverlight etc. UI scope basically creates boundary and it allows us to identify and reference named properites and named controls that is independent of other scopes. AtomApplication starts with a global scope referred as <span class="inlineCode">scope</span> in same scope and as <span class="inlineCode">appScope</span> in nested scope.</p>
+    <p>
+        Usually when you declare a function or variable, it executes in context of current window, JavaScript provides scoping within boundaries of function. However, this scoping has nothing to do with element within which JavaScript is executing. And there is no way to separate variable references in different scope based on its position in the element.</p>
+    <p>
+        To emulate private scope based on position of script within Html Element and to bind script to specific Element&#39;s private scope, Scope scripts were specially designed so that its normal execution does not affect anything, but they are executed in proper scope.</p>
+    <h2>Scope Initialization</h2>
+    <p>
+        To initialize values in scope, an object literal must be written in a scriptlet as shown below, please make sure, that it is surrounded by rounded brackets. This scriptlet does not get executed and it creates no effect while script is parsed by the browser, however Atoms.js recognizes it as a scope initialization and it creates properties in current scope and sets values.</p>
+    <p class="inlineCode">
+        &lt;script type=&quot;text/javascript&quot;&gt;<br />
+&nbsp;&nbsp; ({<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start: 0,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size: 20,
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; infoCommand: function(){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(&#39;Done&#39;);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; })<br />
+        &lt;/script&gt;</p>
+    <p>
+        Above script tag, causes start, size and infoCommand as properties in respective scope. infoCommand is a function, and it can be referenced in same scope.</p>
+    <p class="note">
+        Scope initialization is defined this way, because this form of script is actually just parsed by javascript, but nothing is executed as it is a valid object literal expression. Since scope is nested, and based on control life cycle, scope will be initialized at its perfect position in UI Hierarchy, this is just stored as reference code to be executed later on.</p>
+    <p class="note">
+        Scope initialization script nodes are removed from Document while parsing further children. 
+        For safety, any JavaScript other than Scope Initialization must only be kept in Document&#39;s Head Section.</p>
+    <h2>
+        Scope Control Name</h2>
+
+    <p>
+        By setting <span class="inlineCode">id</span> attribute, HTML element is accessible easily. But when we are dealing with multi item controls such as List, Grid etc, referencing items could be very difficult. Scope helps us in referncing different items in same scope very easily by setting <span class="inlineCode">atom-name</span> attribute of the AtomControl. Once you apply <span class="inlineCode">atom-name</span> attribute, you can easily refer properties of controls by calling <span class="inlineCode">$scope.controlName.propertyName</span> pattern. In binding expression, propertyNames are automatially resolved so you do not have to use <span class="inlineCode">Atom.get</span> or <span class="inlineCode">Atom.set</span> methods.</p>
+    
+</body>
+</html>

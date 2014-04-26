@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .auto-style1
+        {
+            width: 560px;
+            height: 258px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AtomNavigatorList</h1>
+    <p>
+        Navigator list is derived from AtomListBox and it adds UI Navigation similar to what is found in common mobile application. This control simplifies Master Detail View. When we select an item or add new item, detail view is slided in. And by clicking on back button, list will appear again.</p>
+    <p>
+        Navigator list contains Data Pager as well.</p>
+    <p>
+        List view is outlined as shown in following image. This is default view, navigator list starts with following view. You can customize 
+        template as per your requirements.</p>
+    <p>
+        <img alt="Navigator List" class="auto-style1" src="images/navigator-list.png" /></p>
+    <p>
+        When we click on an item, detail view opens and it is outlined as follow.</p>
+    <p>
+        <img alt="Navigator List Detail Template" class="auto-style1" src="images/navigator-list-detal.png" /></p>
+    <ul>
+        <li>Detail Header Template is required.</li>
+        <li>Either Detail Template or Detail Url must be defined. Detail Url should be bound to selected item&#39;s property which will be loaded when selected item will be selected.</li>
+    </ul>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-navigator-list.html" style="height: 290px;">
+
+</body>
+</html>
+    </iframe>
+    <p>
+        &nbsp;</p>
+    <p>
+        In above sample, detailTemplate is used to display the details. You can hide Search and Add New buttons by customizing templates. New Item property is used to create a new object with default values,
+    </p>
+    <p class="note">
+        For New Item property, Every property in object must be initialized to some default empty values since undefined is not a bindable value.</p>
+    <p>
+        As this is derived from AtomListBox, you can change item template and table headers for sorting.</p>

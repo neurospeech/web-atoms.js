@@ -1,0 +1,58 @@
+﻿[
+    {
+        "MovieName": "Terminator",
+        "MovieCategory": "Sci-Fi",
+        "Actors": [ { "Name": "Arnold" } ]
+    },
+    {
+        "MovieName": "Man of Steel",
+        "MovieCategory": "Sci-Fi",
+        "Actors": [ { "Name": "Jack" } ]
+    },
+    {
+        "MovieName": "Iron Man",
+        "MovieCategory": "Sci-Fi",
+        "Actors": []
+    },
+    {
+        "MovieName": "Avatar",
+        "MovieCategory": "Sci-Fi",
+        "Actors": []
+    },
+    {
+        "MovieName": "Up",
+        "MovieCategory": "Animated",
+        "Actors": []
+    },
+    {
+        "MovieName": "How to train your dragon",
+        "MovieCategory": "Animated",
+        "Actors": []
+    },
+    {
+        "MovieName": "True Lies",
+        "MovieCategory": "Action",
+        "Actors": []
+    },    
+    {
+        "MovieName": "Commander",
+        "MovieCategory": "Action",
+        "Actors": []
+    },    
+    {
+        "MovieName": "Rumble in the Bronx",
+        "MovieCategory": "Action",
+        "Actors": []
+    },    
+    {
+        "MovieName": "Happy Feet",
+        "MovieCategory": "Animated",
+        "Actors": []
+    },
+    {
+        "MovieName": "Dumb & Dumber",
+        "MovieCategory": "Comedy",
+        "Actors": []
+    }
+
+]

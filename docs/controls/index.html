@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Atoms.js Controls</h1>
+    <p>
+        Atoms.js Library ships with many standard ready to use controls that is sufficient to create any business application quickly. Most controls are quite similar as those were available in Adobe Flex. However, functionality and usage may be little different as only the user experience to that of flex is similar but underlying functionality is totally different.</p>
+    <h2>Properties</h2>
+    <p>
+        Each control has various properties, and properties must be bound to other properties or data for control to work properly. Atoms.js is designed to use more markup, so knowledge of properties will help you in writing better markup. Properties are usually get_ and set_ methods on the control class. While there are other patterns, we have decided to keep property names to be specifically start with get_ and set_ so that the end javascript can run on any browser and any implementation of javascript. Binding framework automatically identifies which are control properties and which are data properties. Data properties are just member of an object, where else control properties are methods.</p>
+    <h2>Templates</h2>
+    <p>
+        Each class contains set of templates, for example AtomItemsControl contains ItemTemplate, which is used to represent view of single item in the items array. Templates are used to create items on the go, they also help you customize the look and feel of the items.</p>
+    <h2>Styles</h2>
+    <p>
+        Every control adds some styles to its own element and child elements to maintain the look and feel. Atoms.js generally do not modify layout. Most of the time we rely to do our work through CSS only. However, AtomDockPanel, AtomViewStack are exceptions, these are only two controls that manages layout in javascript.</p>
+    <h2>
+        HTML Events</h2>
+    <p>
+        HTML events are basic events supported by browser. They are executed little differently, as specified in Concepts section.</p>
+
+</body>
+</html>

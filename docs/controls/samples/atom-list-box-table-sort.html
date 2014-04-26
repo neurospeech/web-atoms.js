@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        sortPath: 'MovieName asc'
+    })
+</script>
+
+<div
+    atom-type="AtomListBox"
+    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    atom-name="movieList"
+    atom-auto-select-on-click="{ false }"
+    atom-allow-multiple-selection="true"
+    atom-value-path="MovieName"
+    atom-sort-path="[$scope.sortPath]"
+    >
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input
+                        type="checkbox"
+                        atom-checked="$[scope.movieList.selectAll]"/>
+                </th>
+                <th
+                    atom-type="AtomSortableColumn"
+                    atom-label="Movie"
+                    atom-sort-field="MovieName"
+                    atom-value="$[scope.sortPath]"></th>
+                <th
+                    atom-type="AtomSortableColumn"
+                    atom-label="Category"
+                    atom-sort-field="MovieCategory"
+                    atom-value="$[scope.sortPath]"></th>
+            </tr>
+        </thead>
+        <tbody
+            atom-presenter="itemsPresenter">
+            <tr atom-template="itemTemplate">
+                <td><input type="checkbox" atom-checked="$[scope.itemSelected]"/></td>
+                <td atom-text="{ $data.MovieName }"></td>
+                <td atom-text="{ $data.MovieCategory }"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <span>Selected Movies: </span>
+    <span atom-text="[($scope.movieList.value || '')]" ></span>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

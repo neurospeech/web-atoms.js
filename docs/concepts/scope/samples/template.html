@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        view: 'small',
+        templates: [
+            { label: 'Small' , value: 'small'},
+            { label: 'Medium' , value: 'medium'}],
+        list: [
+            { label: 'Oranges', value: 'orange' },
+            { label: 'Apples', value: 'red' },
+            { label: 'Grapes', value: 'green' }]
+    })
+</script>
+
+<div 
+    atom-template-name="small"
+    style-background-color="{$data.value}"
+    style-float="left"
+    style-width="50px"
+    style-height="50px"
+    style-margin="5px"
+    style-padding="5px"
+    style-text-align="center"
+    style-vertical-align="middle"
+    >
+    <span atom-text="{$data.label}"></span>
+</div>
+
+<div 
+    atom-template-name="medium"
+    style-background-color="{$data.value}"
+    style-float="left"
+    style-width="150px"
+    style-height="150px"
+    style-margin="5px"
+    style-padding="5px"
+    style-text-align="center"
+    style-vertical-align="middle">
+    <span atom-text="{$data.label}"></span>
+</div>
+
+<div 
+    atom-type="AtomToggleButtonBar"
+    atom-items="{$scope.templates}"
+    atom-value="$[scope.view]"></div>
+
+<div
+    atom-type="AtomItemsControl"
+    atom-items="{ $scope.list }"
+    atom-item-template="[$scope[$scope.view]]">
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

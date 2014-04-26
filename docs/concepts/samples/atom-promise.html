@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<select
+    atom-name="countryCombo"
+    atom-type="AtomComboBox"
+    atom-items="{ AtomPromise.json('/concepts/samples/country-list.json').insertItem(0, { label:'Select',value:'' }) }"
+    atom-value="$[scope.view]"
+    >
+</select>
+
+<span 
+    atom-text="['Selected Country Code is ' + $scope.countryCombo.value]" >
+</span>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

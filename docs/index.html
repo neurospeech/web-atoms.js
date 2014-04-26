@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atoms.js</title>
+
+
+    <!-- Atoms.js Default Control Styles -->
+    <link href="../style/atoms.css" rel="stylesheet" />
+
+    <link href="style/docs.min.css" rel="stylesheet" />
+
+    <script src="../jquery-1.8.2.min.js"></script>
+    <script src="../atoms.min.js"></script>
+
+    <script src="sitemap.js"></script>
+
+    <style>
+        html, body{
+            margin:0px;
+            padding:0px;
+            background-color:lightgray;
+        }
+
+        .atom-application{
+            width:960px;
+            padding-left:5px;
+            margin-left:auto;
+            margin-right:auto;
+            background-color:white;
+        }
+
+        .title {
+            height:70px;
+        }
+
+        .toc {
+            width:200px;
+            overflow:auto;
+        }
+
+        .doc-frame {
+            border:none;
+        }
+
+        .children {
+            padding-left:10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div 
+        atom-type="AtomApplication">
+
+        <script type="text/javascript/scope">
+            ({
+                view: 'start/index.html'
+            })
+        </script>
+
+        <div 
+            class="title"
+            atom-dock="Top">
+            <h1>Atoms.js Documentation</h1>
+        </div>
+        <div
+            atom-dock="Left"
+            atom-type="AtomItemsControl"
+            atom-items="{links}"
+            class="toc"
+            >
+            <div
+                atom-template="itemTemplate">
+                <a 
+                    atom-text="{$data.label}"
+                    atom-href="{'#view=' + encodeURIComponent($data.value)}"></a>
+                <div
+                    class="children"
+                    atom-item-template="{$owner.templateParent.itemTemplate}"
+                    atom-items="{$data.links}"
+                    atom-type="AtomItemsControl"></div>
+            </div>
+        </div>
+        <iframe
+            atom-dock="Fill"
+            class="doc-frame"
+            atom-src="[$appScope.view]"
+            ></iframe>
+    </div>
+</body>
+</html>

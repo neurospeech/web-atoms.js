@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Concepts</h1>
+    <p>
+        Development using Atoms.js requires understanding of following concepts and the patterns.</p>
+    <h2>UI Logic at Client</h2>
+    <p>
+        Atoms.js focuses truly on model view separation, where UI is written strictly with use of binding and templates, and model is sent separately. <br />
+        Following creates a scoped variables model and fullName method, which are bound by the UI.
+    </p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/samples/model-view.html" style="height: 340px;">
+
+    </iframe>
+
+    <p>
+        Loading model from server in the form of JSON data is also very easy. Following code will load a JSON serialized array, which will be fetched from the given URL and list box will display items based on the label field. AtomPromise returns a json request promise, which will be invoked and returned array will be set as items properties of AtomListBox.</p>
+    <p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/samples/json-list.html" id="I1" name="I1" style="height: 112px;">
+
+    </iframe>
+
+    </p>
+
+    <h2>More Markup - Less Code</h2>
+    <p>
+        By separating Model and View, it becomes easy to maintain the code. Most JavaScript frameworks involve lots of coding, lots of ID mapping, which makes it difficult in visualizing the logic and UI at time of development. But WebAtoms is inspired from languages like Flex, Silverlight where XML markup binding makes it easy to visualize and control the UI.</p>
+    <ul>
+        <li>Markups are easy to collapse and expand in any visual editor. </li>
+        <li>Scripts can also be collapsed and expanded but not in hierarchical form. </li>
+        <li>We can visualize hierarchy easily by looking at the code. </li>
+        <li>Instead of server side code snippets, the layout of application and inline conditional binding of attributes makes it easy to maintain. </li>
+        <li>Markup errors are easy to detect. </li>
+        <li>Markups are easy to refractor and reuse.</li>
+    </ul>
+    <h2>Templates</h2>
+    <p>
+        Ok, we did get the model, that is available in the form JavaScript object, and object contains properties and collections etc. We need templates at client side that can display the data received from server.</p>
+    <h2>Binding</h2>
+    <p>
+        Binding expressions should help us in creating user interface elements display data correctly in the format that we expect and it should let us write complex conditional expressions to display data based on user’s choice and bound data contents.</p>
+    <h2>Two Way Binding</h2>
+    <p>
+        UI should update itself automatically as selections change by user or when data is entered by user. This needs concept of two ways binding let UI elements update its own properties or data based on user interaction.</p>
+    <h2>No New Language</h2>
+    <p>
+        Great, we want to incorporate everything, but we do not want to invent a new language, we want to use exiting HTML and add few attributes to make everything work correctly.</p>
+    <h2>Controls</h2>
+    <p>
+        WebAtoms comes with many inbuilt default controls, which lets you easily create application quickly and lets you customize user interface simply by adding your customized CSS.</p>
+    <h2>Application Container</h2>
+    <p>
+        Application container is an UI element, which auto resizes its children when host browser is resized. HTML does not support 100% height for child elements; it does not support docking simply by using CSS. CSS is still missing attributes for conditional resizing and other forms of UI controls that we usually see in any other UI platforms such as flex, Silverlight or any other native UI platform. We have introduced two powerful controls that allow us to create any complex UI.</p>
+    <h3>AtomDockPanel</h3>
+    <p>
+        DockPanel docks the children based on dock attribute. Toolbars are usually docked on the top, status bars are docked on the bottom. And Tree Views are docked on left, and middle space is filled with remaining space and only middle space is scrollable and internal items of Tree View etc are scrollable. As application host browser is resized, DockPanel will rearrange its children to make docked items appear correctly.</p>
+    <h3>AtomViewStack</h3>
+    <p>
+        ViewStack displays only one item at a time, and it stretches its visible child item to acquire entire space by the control. ViewStack’s item visibility can be changed by changing selectedIndex property and item at that index will become visible. You can think of ViewStack as the area just below tab buttons in tab control, where based on selected tab, the item is visible hiding all other tab’s corresponding items. ViewStack is usually used within templates to control visibility of item group or layout.</p>
+
+</body>
+</html>

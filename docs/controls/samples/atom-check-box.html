@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        termsAgreed: false
+    })
+</script>
+
+<input 
+    type="checkbox"  
+    atom-checked="$[scope.termsAgreed]"/>
+
+<br />
+
+<span
+    atom-text="[$scope.termsAgreed ? 'Terms agreed' : '(Please Accept Terms)']"
+    style-color="[$scope.termsAgreed ? 'inherit' : 'red']"></span>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

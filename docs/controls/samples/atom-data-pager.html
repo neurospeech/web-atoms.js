@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true" style="margin:10px;">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        start:0,
+        list: {
+            items: [{ label:'1' }, {label:'2'}],
+            total: 10,
+            merge: true
+        }
+    })
+</script>
+
+    <div>We are assuming paged JSON Response contains items and total properties.</div>
+
+<div
+    atom-type="AtomDataPager"
+    atom-items="{$scope.list}"
+    atom-items-path="items"
+    atom-total-path="total"
+    atom-page-size="2"
+    atom-current-page="$[scope.start]"
+    style="width:500px;"
+    ></div>
+
+<div
+    atom-text="['Current Page: ' + $scope.start]"></div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

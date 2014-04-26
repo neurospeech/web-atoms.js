@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+
+<div
+    atom-type="AtomWizard"
+    atom-name="theWizard"
+    atom-local-scope="true"
+    style="height:400px;width:600px;margin:50px; border-style:solid;"
+    >
+    <!-- View Template Does Nothing, it just holds references of child steps -->
+    <div atom-template="viewTemplate">
+        <!-- Step 1 View-->
+        <div atom-next="[$scope.step1Form.submitCommand]">
+            <div 
+                atom-type="AtomForm" 
+                atom-name="step1Form"
+                atom-next="{$localScope.owner.goNextCommand}"
+                >
+                <div>This is step 1 of wizard</div>
+                <div atom-type="AtomFormLayout">
+                    <input 
+                        type="text"
+                        atom-label="Name:"
+                        atom-required="true"
+                        />
+                </div>
+            </div>
+        </div>
+        <!-- Step 2 View-->
+        <div atom-next="[$scope.step2Form.submitCommand]">
+            <div 
+                atom-type="AtomForm" 
+                atom-name="step2Form"
+                atom-next="{$localScope.owner.goNextCommand}"
+                >
+                <div>This is step 2 of wizard</div>
+                <div atom-type="AtomFormLayout">
+                    <input 
+                        type="text"
+                        atom-label="Email:"
+                        atom-required="true"
+                        />
+                </div>
+            </div>
+        </div>
+        <!-- Step 3 View-->
+        <div>
+            This is step 3 of wizard
+        </div>
+        <!-- Final View-->
+        <div>
+            This is the final step
+        </div>
+    </div>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

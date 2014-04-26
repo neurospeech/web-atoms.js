@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomFormLayout</h1>
+    <p>AtomFormLayout is a special control, which encapsulates general form layout, i.e. display a label and required asterix and error label for erronous data. AtomFormLayout encapsulates every control within a class called AtomFormField, you need not define this type, it is automatically created by AtomFormLayout.</p>
+    <p>Every children of AtomFormLayout can define, <span class="inlineCode">atom-label</span>, <span class="inlineCode">atom-required</span>, <span class="inlineCode">atom-is-valid</span>, <span class="inlineCode">atom-data-type</span>. <span class="inlineCode">atom-regex</span>, <span class="inlineCode">atom-field-value</span> and <span class="inlineCode">atom-field-class</span>.</p>
+    <table>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-label</span></td>
+            <td>Label will be displayed on left side of form with right aligned by default.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-required</span></td>
+            <td>This will setup default validation for field to be required, if set true, either value of element or <span class="inlineCode">atom-field-value</span> cannot be empty.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-is-valid</span></td>
+            <td>In case when you have multiple required elements in one field, you can use this to bind to a valid expression, or you can use this to bind to custom expression that evaluate to true.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-data-type</span></td>
+            <td>If you setup data-type as email, field will be validated for perfect email address.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-regex</span></td>
+            <td>If you setup regex, it will be tested against <span class="inlineCode">atom-field-value</span> or value of element.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-field-value</span></td>
+            <td>If child control does not have value property, then you can bind this to any property of data that will be validated.</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-field-visible</span></td>
+            <td>You can bind this property to hide/show the field based on some boolean condition</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; padding-right: 5px; text-align: right;"><span class="inlineCode">atom-field-class</span></td>
+            <td>CSS class that should be applied to entire Field Row.</td>
+        </tr>
+    </table>
+    <br />
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-form-layout.html" style="height: 784px;">
+
+    </iframe>
+
+</body>
+</html>

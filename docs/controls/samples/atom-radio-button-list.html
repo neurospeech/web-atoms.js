@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AtomCheckBoxList Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        items: [
+            { label: 'Apple', value: 'apple' },
+            { label: 'Orange', value: 'orange' },
+            { label: 'Grapes', value: 'grapes' },
+            { label: 'Mango', value: 'mango' }
+        ],
+        fruits: ''
+    })
+</script>
+
+<div 
+    atom-type="AtomRadioButtonList"
+    atom-items="{$scope.items}"
+    atom-value="$[scope.fruits]"
+    atom-layout="{Atom.tableLayout(2,100,20)}"
+    ></div>
+
+<br />
+
+<span
+    atom-text="[$scope.fruits ? ('Selected Item: ' + $scope.fruits) : '(Please Select Items)']"
+    style-color="[$scope.fruits ? 'inherit' : 'red']"></span>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

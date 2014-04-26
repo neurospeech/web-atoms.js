@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomPromise - AJAX and Other Shortcut Methods</h1>
+    <p>
+        AtomPromise is little different then regular JavaScript promises, and it is made different to fit in the binding framework correctly.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/samples/atom-promise.html" style="height: 168px;">
+
+    </iframe>
+    <h2>AtomPromise is Asynchronous but looks Synchronous</h2>
+    <p>By definition, promise is asynchronous, however it looks like items property is assigned to json retrieved from url. Yes we made it look like it, so that its easy to program, however we are not assigning items yet, we are only assigning promise (AtomPromise). Atoms.js property system recognizes value of type AtomPromise and it queues the assignment from the promise result until the result is retrived by the promise.</p>
+    <p>In traditional JavaScripts, wiring up promises are so difficult and it leads to very ugly code, in order to make everything looks very simple, we have redesigned the whole property system to incorporate asynchronous assignments via promises.</p>
+    <p>It is easy to create your own custom AtomPromise, where you can easily wire asynchronous functionality that fits into Atoms.js easily.</p>
+    <p class="note">In case of failure of promise, simple alert is displayed, and you can control by calling showError method on promise.</p>
+    <h2>AtomPromise.json(url, q, options)</h2>
+    <p>AtomPromise.json expects URL as input and it returns an AJAX Promise which enables busy dialog while in progress and also displays an error if it fails. Next parameter q is an object literal that will be encoded as query string that must be passed to source URL. Options object is simply forwarded to jQuery.ajax method.</p>
+    <p>So, <span class="inlineCode">Page.php?a=1&amp;b=2</span> should be passed as <span class="inlineCode">AtomPromise.json( &#39;Page.php&#39; , { a: 1, b: 2 } )</span>, this helps in proper encoding and it is readable. And individual values are bindable, so instead of 1 and 2, we could have any scope parameters bound here.</p>
+    <h2>JSON POST - AtomConfig.ajax.jsonPostEncode</h2>
+    <p>By default, HTTP POST are encoded as formModel=JSON in HTML form encoded way to support previous ASP.NET Web Server. And on server side, you could use Request.Form[&quot;formModel&quot;] to retrieve JSON equivalent, and you can then deserialize JSON into Dictionary in .NET.</p>
+    <p>This is done to preserve the null and empty values of string. Sending Form Key=Value pairs does not send hierarchical data and it does not send empty string values correctly.</p>
+    <p>To have your own serialization method, in case of PHP or any other framework, you have to use following different code snippets.</p>
+    <h3>JSON Serialized as Form Value as formModel field (Default)</h3>
+    <p class="inlineCode">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+        AtomConfig.ajax.jsonPostEncode = function (data, options){<br />
+&nbsp;&nbsp;&nbsp; options.contentType = &#39;application/x-www-form-urlencoded&#39;;<br />
+&nbsp;&nbsp;&nbsp; return { formModel: JSON.stringify(data) };&nbsp;
+        <br />
+        };<br />
+        &lt;/script&gt;</p>
+    <h3>JSON Serialization</h3>
+    <p class="inlineCode">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+        AtomConfig.ajax.jsonPostEncode = function (data, options){<br />
+&nbsp;&nbsp;&nbsp; options.contentType = &#39;application/json&#39;;<br />
+&nbsp;&nbsp;&nbsp; return JSON.stringify(data);&nbsp;
+        <br />
+        };<br />
+        &lt;/script&gt;</p>
+
+    <h2>AtomPromise.get(url, q, options)</h2>
+    <p>
+        This returns a promise with simple HTTP Get operation, the return value is a string.</p>
+    <h2>
+        AtomPromise.ajax(url, q, options) (Primitive AJAX - Forwarded to jQuery)</h2>
+    <p>
+        In case if you want to send a custom ajax with your own headers, you can use this method. But we recommend using json and get methods as they can do everything needed. However the inbuilt post functionality of Forms and Buttons are wired through json/get methods. They internally call this method as well. You can use this for debugging.</p>
+    <h2>
+        AtomPromise.insertItem(index,item,arrayPath)</h2>
+    <p>
+        Most likely, we retrieve a list of items and we want to display them in a drop down menu, but we do not have any selection yet. Or we want to display an unselected or empty item in the list, which may not exist in the database. For this situation, insertItem comes handy, it inserts an empty item in the array retrieved after the ajax operation. This method only works with json method and arrayPath designates path of an array inside the result. If result itself is an array, you can omit arrayPath.</p>
+    <h2>
+        AtomPromise.persist(bool)</h2>
+    <p>
+        Data Controls such as AtomItemsControl allows refreshing of items by setting action set as control itself. However, in case of one time binding, promises will not be persisted. In this case control has no way to refresh its data. So you can set persist as true, so control will persist the promise in its local cache and when refresh method is invoked via action set, promise will be executed once again.</p>
+    <h2>
+        AtomPromise.cachedJson(url,q,options)</h2>
+    <p>
+        By default caching is disabled on json method, however, to enable caching and cache the result for multiple instances, you can use cachedJson method. This not only enables HTTP cache, but it also stores json results for next operations. Please note, results of cachedJson is cached as a local javascript object in current page&#39;s life cycle. For the same url, cachedJson will not invoke jQuery.ajax, instead returns earlier results. Everything vanishes along with page, so next time, promise will fetch data from jQuery.ajax, however it is subjected to HTTP caching by headers.</p>
+    <h2>AtomPromise.showError(bool)</h2>
+    <p>
+        By default, AtomPromise will display an alert with an error message in case of failure. You can set it to false to stop showing alert.</p>
+    <h2>AtomPromise.showProgress(bool)</h2>
+    <p>
+        While AJAX call is in progress, busy dialog will lock the screen, if you want to turn it off, you can set it to false.</p>
+
+</body>
+</html>

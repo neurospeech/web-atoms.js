@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomForm</h1>
+    <p>
+        AtomForm encapsulates HTML form functionality in AJAX form. HTML form redirects entire page upon response and this causes loss of form data. But AtomForm posts bound data to post url, and on successful response atom-next action set will be executed.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-form.html" style="height: 176px;">
+
+    </iframe>
+    <p>AtomForm only provides AJAX post, but we also need default form layout with label description etc, so we have created one more control, that gives simple form layout easily.</p>
+    <h2>Posting Data and Merge Data</h2>
+    <p>Unlike HTML Form, AtomForm posts only associated data with the form itself, and it merges data from mergeData properties. Input and other controls must bind properties of Data. This helps in binding non standard HTML properties of AtomControls. In above example, FirstName and LastName properties of Data will be posted. Since data will be inherited most of the times, we have provided mergeData property to merge different set of properties before posting.</p>
+    <h2>AtomFileUploader</h2>
+    <p>In AJAX, uploading file is not supported due to previous versions of IE, so flash alternative provides way to upload file. But this requires a separate upload connection, so uploading of file is done in following way.</p>
+    <ol>
+        <li>Post AtomForm and retrive a secure upload URL</li>
+        <li>Bind url property of AtomFileUploader to secure upload URL</li>
+        <li>Set atom-next property of AtomForm to AtomFileUploader control itself.</li>
+    </ol>
+    
+</body>
+</html>

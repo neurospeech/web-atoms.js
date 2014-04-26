@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        list: [
+            { label: 'Orange', itemColor: 'orange', itemWidth: 100 },
+            { label: 'Apple', itemColor: 'red', itemWidth: 200 }
+        ]
+    })
+</script>
+
+<div
+    atom-type="AtomItemsControl"
+    atom-items="{ $scope.list }"
+    >
+    <div
+        atom-template="itemTemplate"
+        atom-text="{$data.label}"
+        style-color="#000000"
+        style-background-color="{$data.itemColor}"
+        style-width="{ $data.itemWidth + 'px' }"
+        >
+    </div>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

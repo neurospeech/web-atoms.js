@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+    <div
+        atom-type="AtomApplication">
+        <div 
+            atom-dock="Top" 
+            style="height:50px; background-color:greenyellow">
+            Header
+        </div>
+        <div
+            atom-dock="Left" 
+            style="width:200px; background-color: lightgray">
+            Tree View
+        </div>
+        <div 
+            atom-dock="Fill" 
+            atom-type="AtomDockPanel">
+            <div 
+                atom-dock="Top" 
+                style="height:40px; background-color: lightcyan">
+                Nested DockPanel Header
+            </div>
+            <div 
+                atom-dock="Fill">
+                Nested Fill Element
+            </div>
+            <div 
+                atom-dock="Bottom" 
+                style="height:30px; background-color: lightseagreen">
+                Nested DockPanel Footer
+            </div>
+        </div>
+        <div 
+            atom-dock="Bottom" 
+            style="height:30px; background-color:greenyellow">
+            Footer 
+            <a 
+                href="http://web-atoms.neurospeech.com" 
+                target="_blank" 
+                style="right:5px; position:absolute">Powered by Atoms.js</a>
+        </div>
+    </div>
+</body>
+</html>

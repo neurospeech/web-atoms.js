@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<!-- Model (Data) -->
+<script type="text/javascript">
+({
+    model: {
+        firstName: 'Peter',
+        lastName: 'Parker'
+    },
+    fullName: function (fName, lName) {
+        return fName + ' ' + lName;
+    }
+})
+</script>
+
+<!-- View (User Interface) -->
+<div
+    atom-dock="Fill"
+    atom-type="AtomControl"
+    atom-data="{$scope.model}"
+    >
+    <div atom-text="{$data.firstName}"></div>
+    <div atom-text="{$data.firstName + ' ' + $data.lastName}"></div>
+    <div atom-text="{$scope.fullName($data.firstName,$data.lastName)}"></div>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

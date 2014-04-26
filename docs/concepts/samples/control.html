@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        uploadDone: function (scope, sender) {
+            alert("done");
+        }
+    })
+</script>
+
+<div
+    atom-type="AtomFileUploader"
+    atom-url="/upload/file"
+    atom-next="{ $scope.uploadDone }"
+    atom-file-types="{ [ { description:'Photos', extensions: '*.jpg;*.png;*.bmp;*.gif' } ] }"
+    >
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

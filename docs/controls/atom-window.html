@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomWindow</h1>
+    <p>
+        AtomWindow can host one div or it can host an IFrame and contains a close button along with a window frame. Elements behind AtomWindow are not accessible as Window is modal by default.</p>
+    <p>
+        Dragging functionality is not added yet, but it will be added in future. However you can still customize AtomWindow&#39;s default template as per your need.</p>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-window.html" style="height: 420px;">
+
+    </iframe>    
+    <p>
+        Important properties to note.</p>
+    <ul>
+        <li>closeCommand - you can bind window&#39;s close command to close button.</li>
+        <li>opener - control that opened this window</li>
+        <li>openerData - data property of window opener</li>
+    </ul>
+    <h2>AtomWindow with IFrame</h2>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-window-iframe.html" style="height: 420px;">
+
+    </iframe>    <p>
+        In this example, we are sending value through openerData property, we are setting Title and Url of iframe window to its own openerData property, which will be set when any of the button will be clicked.</p>
+</body>
+</html>

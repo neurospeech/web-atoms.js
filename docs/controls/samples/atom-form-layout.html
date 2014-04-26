@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<div
+    atom-type="AtomForm"
+    atom-post-url="/Url/Insert"
+    atom-data="{ { FirstName: '', LastName: '', Password: '', Password2:'' } }"
+    atom-success-message="Information Saved Correctly">
+    <div
+        atom-type="AtomFormLayout">
+
+        <input 
+            type="text"
+            atom-label="Username:"
+            atom-required="true"
+            atom-value="$[data.Username]"
+            />
+
+        <input 
+            type="password"
+            atom-label="Password:"
+            atom-value="$[data.Password]"
+            atom-required="true"
+            />
+
+        <input 
+            type="password"
+            atom-label="(Again) Password:"
+            atom-value="$[data.Password2]"
+            atom-is-valid="[$data.Password == $data.Password2]"
+            atom-error="[$owner.isValid ? '' : 'Passwords do not match']"
+            />
+
+        <span 
+            atom-label="Name:"
+            atom-required="true"
+            atom-is-valid="[$data.FirstName && $data.LastName]">
+            <input 
+                placeholder="First Name:"
+                type="text" 
+                atom-value="$[data.FirstName]" />
+    
+            <input
+                placeholder="Last Name:" 
+                type="text" 
+                atom-value="$[data.LastName]" />
+        </span>
+
+        <input 
+            atom-label="Email Address:"
+            type="text"
+            atom-data-type="email"
+            atom-value="$[data.EmailAddress]"
+            />
+
+        <input 
+            atom-label="Zip: (Numbers only)"
+            type="text"
+            atom-regex="/[0-9]+/"
+            atom-value="$[data.ZipCode]"
+            />
+
+        <input type="submit" value="Save" />
+
+    </div>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>
