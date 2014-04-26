@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+
+    <div 
+        atom-type="AtomControl"
+        atom-local-scope="true"
+        atom-abs-pos="100,100,500,200"
+        >
+
+        <script type="text/javascript">
+            ({
+                name: "Scope 1",
+                run: function (scope, sender) {
+                    alert("Called in Control with " + scope.name);
+                }
+            })
+        </script>
+
+        <button
+            atom-event-click="{$localScope.run}"
+            >Execute <span atom-text="{$localScope.name}"></span></button>
+
+    </div>
+
+    <div 
+        atom-type="AtomControl"
+        atom-local-scope="true"
+        atom-abs-pos="600,100,500,200"
+        >
+
+        <script type="text/javascript">
+            ({
+                name: "Scope 2",
+                run: function (scope, sender) {
+                    alert("Called in Control with " + scope.name);
+                }
+            })
+        </script>
+
+        <button
+            atom-event-click="{$localScope.run}"
+            >Execute <span atom-text="{$localScope.name}"></span></button>
+
+    </div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

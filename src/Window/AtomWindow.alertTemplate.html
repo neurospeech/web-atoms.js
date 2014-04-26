@@ -1,0 +1,22 @@
+﻿<div 
+    class="atom-alert"
+    atom-dock="Fill">
+
+    <pre 
+        atom-text="{$data.Message}">
+    </pre>
+
+    <div     
+        class="buttons"
+        atom-class="{ $data.Confirm ? 'confirm-buttons' : 'alert-buttons' }">
+        <button 
+            class="ok"
+            atom-event-click="{$owner.templateParent.closeCommand}">Ok</button>
+        <button 
+            class="yes"
+            atom-event-click="{ [ { data: { ConfirmValue: true } } , $owner.templateParent.closeCommand ] }">Yes</button>
+        <button 
+            class="no"
+            atom-event-click="{$owner.templateParent.closeCommand}">No</button>
+    </div>
+</div>

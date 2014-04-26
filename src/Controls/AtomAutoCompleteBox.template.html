@@ -1,0 +1,24 @@
+﻿<container> 
+	<input 
+		atom-presenter="selectionBox"
+        disabled="disabled"
+		type="text" 
+        style-display="[$owner.isPopupOpen ? '' : 'none']"
+		atom-value="[$owner.selectedText]" />
+	<input 
+		atom-presenter="inputBox"
+		atom-placeholder="[$owner.placeholder]"
+		type="text" 
+		atom-value="$[owner.displayLabel](keyup)" />
+	<div 
+		atom-presenter="itemsPresenter"
+        class="atom-list-box"
+		style="position: absolute; z-index: 100;"
+
+		style-left="[($owner.offsetLeft + 2) + 'px']"
+		style-top="[($owner.offsetTop + 24) + 'px']"
+		style-display="[$owner.isPopupOpen ? 'block' : 'none']"
+		>
+        <div atom-template="itemTemplate" style="min-width:100px;" atom-text="{ $data[$owner.templateParent.labelPath] }"></div>
+	</div>
+</container>

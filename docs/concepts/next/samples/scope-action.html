@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        name: 'John Carter',
+        color: 'Blue',
+    })
+</script>
+
+<span 
+    atom-text="['Favorite color of ' + $scope.name + ' is ' + $scope.color]">
+</span>
+
+<button
+    atom-type="AtomButton"
+    atom-next="{ { scope : { name: 'Akash Kava' , color: 'Orange' } } }"
+    >Modify Name</button>
+<!-- end-sample -->
+</div>
+</body>
+</html>

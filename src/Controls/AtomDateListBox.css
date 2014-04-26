@@ -1,0 +1,98 @@
+﻿.atom-date-list-box
+{
+    width: 300px;
+    height: 215px;
+    position:relative;
+    padding:2px;
+    border: 1px solid lightgray;
+    background-color:white;
+}
+
+.atom-date-list-box-calendar {
+    width:200px;
+    height:215px;
+    position:absolute;
+    left:2px;
+    top:2px;
+    background-color:white;
+    z-index:11;
+}
+
+.atom-date-list-box-list {
+    width:100px;
+    height:200px;
+    margin:1px;
+    position:absolute;
+    left:200px;
+    top:2px;
+    text-align:right;
+    overflow:auto;
+}
+
+
+.atom-date-list-box-days {
+    position:absolute;
+    left:10px;
+    top:35px;
+    height:25px;
+    text-align:center;
+}
+
+.atom-date-list-box-month {
+    margin-left:10px;
+    width:100px;
+}
+
+.atom-date-list-box-year{
+    width:70px;
+}
+
+.atom-date-list-box-days span {
+    display:inline-block;
+    width:25px;
+    height:25px;
+    margin:0px;
+    padding:0px;
+    float:left;
+}
+
+.atom-date-list-box-day-list {
+    position:absolute;
+    left:10px;
+    top:62px;
+    height:150px;
+    width:180px;
+}
+
+.atom-date-list-box-day-list-item {
+    width:23px;
+    height:23px;
+    margin:1px;
+    padding:0px;
+    float:left;
+    text-align:center;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+.atom-date-list-box-day-list-item:hover{
+    margin:0px;
+    border: 1px solid blue;
+}
+
+.atom-date-list-box-day-list-item-other {
+    color:lightgray;
+}
+
+.atom-date-list-box-weekend-header {
+    background-color: #bebebe
+}
+
+.atom-date-list-box-weekend {
+    background-color: #eeeeee
+}
+
+.atom-date-list-box-selected {
+    background-color: darkgreen;
+    color:white;
+}

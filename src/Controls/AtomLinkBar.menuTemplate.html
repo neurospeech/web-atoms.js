@@ -1,0 +1,21 @@
+﻿<div
+    class="menu"
+    atom-type="AtomLinkBar"
+    atom-items="[$data[$owner.templateParent.itemsPath]]"
+    atom-menu-template="{$owner.templateParent.menuTemplate}"
+    atom-menu-direction="vertical"
+    >
+    <div
+        atom-presenter="itemsPresenter"
+        >
+        <div
+            atom-template="itemTemplate">
+            <a 
+                atom-href="{$data[$owner.templateParent.valuePath]}"
+                atom-text="{$data[$owner.templateParent.labelPath]}"
+                atom-target="{$data.target}"
+                atom-event-click="{$data.action}"
+                ></a>
+        </div>
+    </div>
+</div>

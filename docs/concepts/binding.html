@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Data Binding</h1>
+    <p>
+        Various frameworks like Flex, Silver light, WPF etc introduced data binding mechanisms that helped us in creating templates of User Interface elements and differentiate between data and view. Declarative data binding helps in understanding relation between user interface and data (usually called as model).</p>
+    <p>
+        However, HTML and JavaScript currently do not support any forms of data binding. But HTML does allow you to define extra attributes, and JavaScript can process them.</p>
+    <p>
+        Atoms.js will process xml attribute values between curly braces {} and square brackets. And convert them into suitable binding expressions.</p>
+    <p>
+        In the following sample, you can see how firstName and lastName properties of model are bound to UI element. One time and One way binding expressions can contain any form of JavaScript expression. (JavaScript expression is entire expression after equal to (=) sign in assignment statement till semi colon.)</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/samples/model-view.html" style="height: 347px;">
+
+    </iframe>
+    <p class="note">
+        Note: Binding will only work for these keywords. $data (data property of current control), $scope, $owner (self, since this is not accessible here), $appScope (application level scope). Any property after these keywords will be bound automatically.</p>
+    <p>
+        Binding Expressions can only reference global javascript variables and properties of control (<span class="inlineCode">$owner</span>) that holds the element. Others are just shortcuts. In short, <span class="inlineCode">$data</span> is equivalent to <span class="inlineCode">$owner.data</span>, <span class="inlineCode">$scope</span> is equivalent to <span class="inlineCode">$owner.scope</span>.</p>
+    <p class="note">
+        Note: Binding expression will never raise null pointer exception, as binding will not be executed if any middle property is evaluated as null. For example in expression $scope.control.selectedItem.MovieName , if control&#39;s selectedItem is null, binding will cancel further evaluation and it will not raise any exceptions. Instead, entire expression will be considered as null.</p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Atom Control</h1>
+    <p>
+        Control is a class (with respect to OOPs) containing set of methods and event handlers to modify behavior of attached HTML Element. We have created set of controls that gives you ability to perform certain standard operations such as list, docking and view stack. View stack can be thought of Tab Control, you can customize look and feel of controls to make them look like any way you want.</p>
+    <p>
+        Atom Control also applies set of default styles, and provides ability to customize style for all controls as well as just one control.</p>
+    <h2>Initialization</h2>
+    <p>
+        First attribute of element must be <span class="inlineCode">atom-type</span> if you want to initialize it as a control.</p>
+    <h2>Setup Properties and Bindings</h2>
+    <p>
+        Controls define special properties that are now available with the element. And you can set them as follow.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/samples/model-view.html" style="height: 342px;">
+
+    </iframe>
+
+    <h2>Atom Properties</h2>
+    <p>
+        Every control is derived from AtomControl and inherits set of properties as defined below. Following properties are special properties, their behavior can not be inherited or modified.</p>
+    <h3>Data Property (Inherited, Read write)</h3>
+    <p>
+        AtomControl has a property called “data”, and it can hold any object/value in it. And it refreshes all other controls that are bound to this data property. If Data property is not set then it is inherited in DOM from the parent, and so on. You can set data property in code and in markup. By default, AtomItemsControl will create new AtomControl and set the data property corresponding to the index in items array. Thus data in child element of an AtomItemsControl will be different from the data of AtomItemsControl itself.</p>
+    <h3>Scope Property (Inherited, Read only)</h3>
+    <p>
+        Although, scope is read-only, but you can still set a value, and it will merge the values in existing scope. Scope is inherited same as data, but scope is setup automatically by the WebAtoms framework. You can never change the scope, but you can change the properties within the scope, and it will be merged and property in same scope will be accessible to every controls in the same scope.
+    </p>
+    <p>
+        Scope also allows you to create JavaScript functions with same names in different scopes. For example, child controls of AtomItemsControl can contain same named JavaScript functions but each of them will be different for every scope and within that scope they will be unique.</p>
+    <p>
+        Scope is defined at Atoms.js Control hierarchy. AppScope (referred as appScope) is global scope accessible from any level. Scopes are nested for child controls for List Controls, every item in List has its own scope.</p>
+    <h3>Name Property (Unique in Scope, Read write)</h3>
+    <p>
+        Every control can have atom-name attribute and this control will become an instance within the scope. So you can refer as $scope.name as instance of control within current scope. atom-name is different than id or html’s name. atom-name is way to identify current control in current scope. So you can have two control with same name in different scopes. This is important in case of AtomItemsControl with multiple items with exactly same item template and same logic. But since each item is in its own scope, every item refers correct control by having same name in different scope.</p>
+    <h3>Owner Property (Read only)</h3>
+    <p>
+        Owner refers to nearest parent AtomControl (Self in same AtomControl markup).</p>
+
+</body>
+</html>

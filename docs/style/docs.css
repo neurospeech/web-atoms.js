@@ -1,0 +1,72 @@
+html,
+body {
+  height: 100%;
+  font-family: 'Segoe UI', Helvetica, Verdana;
+  font-size: 9pt;
+}
+body,
+input,
+select,
+textarea,
+button {
+  line-height: 1.4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}
+p {
+  line-height: 1.5;
+}
+table.box {
+  border-style: solid;
+  border-width: 1px;
+}
+table.box th {
+  background-color: azure;
+}
+table.box td {
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+.inlineCode {
+  border-style: solid;
+  border-width: 1px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: azure;
+}
+p.note {
+  border-style: solid;
+  border-width: 1px;
+  background-color: lightyellow;
+  padding: 5px;
+}
+.atom-code {
+  padding: 5px;
+  padding-top: 20px;
+  border: solid 1px lightgray;
+  position: relative;
+}
+.atom-code a {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 5px;
+  display: block;
+  background-color: lightyellow;
+}
+.atom-code-frame {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 705px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7d7e7d;
+}

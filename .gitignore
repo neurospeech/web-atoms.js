@@ -1,0 +1,9 @@
+*.user
+*.suo
+*.cache
+src/obj/*
+src/bin/*
+docs/obj/*
+docs/bin/*
+NeuroSpeech.Atoms.dll
+NeuroSpeech.Atoms.pdb

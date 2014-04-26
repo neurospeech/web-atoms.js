@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomItemsControl</h1>
+    <p>
+        AtomItemsControl is base class for all multi item controls such as AtomComboBox, AtomListBox etc. AtomItemsControl basically provides multi items management and provides templating mechanism for children. Each child is associated with one item in items array. AtomItemsControl provides selection mechanism including property value selection.</p>
+    <p>
+        AtomItemsControl does not provide any styles for children, it only provides logic for items manipulation such as filter, sort, collection change notification and updates.</p>
+    <h2>
+        Cascaded Items Control</h2>
+    <p>
+        Most complicated UI objects are cascaded items controls, for example, Country Combo Box and corresponding State Combo Box, and managing two way binding between object properties. AtomItemsControl selection management is carefully adjusted to ignore &quot;undefined&quot; values and properly cascades selection without causing recursive endless binding updates.</p>
+    <p>
+        AtomItemsControl caches value of &quot;value&quot; property, which is used in selecting item or items after the item collection was loaded from the remote source. This may cause little unexpected behaviour, but this is by design to support selecting default or selected items even before item collection was loaded.</p>
+    <h2>
+        Scope</h2>
+    <p>
+        Every item of AtomItemsControl is created with a new Scope, so each item has its own private scope, and scope is managed by Atoms.js. This ensures scope bindings templates to remain private with each item and they do not conflict with one another. To refer to global scope, your binding must use <span class="inlineCode">$appScope</span> instead of just <span class="inlineCode">$scope</span>.</p>
+    <p>
+        Scope provides additional properties as follow,</p>
+    <ul>
+        <li>itemIndex - Index of current Item</li>
+        <li>itemIsFirst - True if this is the first item in the list</li>
+        <li>itemIsLast - True if this is the last item in the list</li>
+        <li>itemSelected - True if this item is selected, you can use this for changing selection as well</li>
+        <li>itemExpanded - This may be useful to perform tree kind of functionality</li>
+    </ul>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-items-control.html" style="height: 206px;">
+
+    </iframe>
+
+    
+    <p>In above example, we have following bindings,</p>
+    <ol>
+        <li>First item of the list has a border style set as &#39;solid&#39;</li>
+        <li>Every odd item is having light gray background color</li>
+        <li>First span indicates index of current item (we have added one to make it look like it starts from 1), indexes in JavaScript are zero based.</li>
+        <li>Finally name of Movie by binding MovieName property to text.</li>
+    </ol>
+
+
+    <h2>AtomItemsControl with Table Template</h2>
+    <p>To make AtomItemsControl look like table (With column headers etc), you have to mark an element as itemsPresenter which will contain itemTemplate. Here <span class="inlineCode">tbody</span> element becomes <span class="inlineCode">itemsPresenter</span> (an element which holds the items) and its immediate child becomes itemTemplate.</p>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-items-control-table.html" style="height: 632px;">
+
+    </iframe>
+    
+    
+    <p>
+        In this example, you can see that AtomToggleButtonBar is named as &quot;categoryList&quot; and it&#39;s selected value is displayed in last column, every item is in its own scope so we can bind properties of control with name.</p>
+    <h2>
+        Derived Controls</h2>
+    <ul>
+        <li>AtomComboBox</li>
+        <li>AtomLinkBar</li>
+        <li>AtomListBox</li>
+        <li>AtomNavigatorList</li>
+        <li>AtomToggleButtonBar</li>
+        <li>AtomViewStack</li>
+    </ul>
+
+</body>
+</html>

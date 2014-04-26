@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>One Time Binding - Simple Evaluation</h1>
+    <p>
+        Binding expression within curly braces are evaluated at time of initialization of control. You can consider them as simple eval expression which will be instantly evaluated at time of building of page.</p>
+    <p>
+        All expressions in following sample are one time binding expressions.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/binding/samples/one-time.html" style="height: 212px;">
+
+    </iframe>
+
+    <p>Here is how it works,</p>
+    <ul>
+        <li><span class="inlineCode">atom-type</span> set to AtomControl will make element an AtomControl that supports binding</li>
+        <li><span class="inlineCode">atom-data</span> will be initialized to anonymous object, please note outer curly braces are used to identify it as one time binding expression, and actual expression is inside curly braces.</li>
+        <li><span class="inlineCode">atom-text</span> will be evaluated as concatenation of firstName and lastName.</li>
+        <li><span class="inlineCode">style-color</span> will be evaluated as <span class="inlineCode">styleColor</span> set as <span class="inlineCode">favColor</span> property of object. Style binding has special syntax prefixed with <span class="inlineCode">style-</span> and it will be explained later in this help.</li>
+    </ul>
+
+    <p class="note">
+        Note: You must always use One Time Binding, that uses least memory. One Time binding will never refresh its data.</p>
+
+    <h2>
+        JavaScript Native Type Values</h2>
+    <p>
+        One Time Binding is also used to set native values in properties. For example, setting false to a boolean property can be tricky as <span class="inlineCode">&quot;false&quot;</span> string literal is considered as true. Curley braces expressions are simply evaluated by <span class="inlineCode">eval</span> function and the result is stored in the property. So <span class="inlineCode">&quot;{ false }&quot;</span> evaluates to a proper Boolean False value.</p>
+
+</body>
+</html>

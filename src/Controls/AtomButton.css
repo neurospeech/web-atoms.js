@@ -1,0 +1,40 @@
+﻿.atom-button-border
+{
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+}
+
+.atom-button
+{
+    padding:2px;
+    padding-left:4px;
+    padding-right:4px;
+    text-decoration:none;
+    vertical-align:middle;
+}
+
+    .atom-button *
+    {
+        vertical-align:middle;
+    }
+
+.atom-button-icon
+{
+    padding-right: 4px;
+}
+
+.atom-button a
+{
+    text-decoration:none;
+}
+
+td.atom-button {
+    cursor:pointer;
+    text-align:center;
+}
+th.atom-button {
+    cursor:pointer;
+    text-align:center;
+}

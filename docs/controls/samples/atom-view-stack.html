@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-View-Stack Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        links: [
+            { label: "Home", value: "home" },
+            { label: "About", value: "about" },
+            { label: "Contact", value: "contact" },
+        ],
+        view: "home"
+    })
+</script>
+
+<span
+    atom-dock="Top"
+    atom-type="AtomToggleButtonBar"
+    atom-name="buttonBar"
+    atom-items="{ $scope.links }"
+    atom-value="$[scope.view]"
+    style="height:30px;text-align:center"></span>
+
+<div
+    atom-dock="Fill"
+    atom-type="AtomViewStack"
+    atom-selected-index="[$scope.buttonBar.selectedIndex]">
+    <div style="background-color:lightyellow">
+        This is home page....
+    </div>
+    <div style="background-color:lightblue">
+        This is About page....
+    </div>
+    <div style="background-color:lightgreen">
+        This is Contact page....
+    </div>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

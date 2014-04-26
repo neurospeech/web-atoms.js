@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Scope Templates - Storing HTML Element in Scope as Template</h1>
+    <p>Templates are usually HTML elements with extra attributes, which are used by Atoms.js Template System. Apart from inline templates, scope templates gives you advantage of changing templates at runtime.</p>
+    <p>Once <span class="inlineCode">atom-template-name</span> attribute is applied to any element, element is then removed from the DOM and stored as template in scope. You can bind any template of any control to <span class="inlineCode">$scope.templateName</span> as shown below. In the following example, <span class="inlineCode">$scope[$scope.view]</span> determines the template to be used at runtime. Toggle button bar changes the selected template name, that causes <span class="inlineCode">atom-item-template</span> to be set to new value and all items are now rendered with new template. Scope Template can contain any atom controls as well, just like inline templates.</p>
+
+
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/scope/samples/template.html" style="height: 586px;">
+
+    </iframe>
+</body>
+</html>

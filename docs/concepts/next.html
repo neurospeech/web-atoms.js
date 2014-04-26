@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Next - Action Set</h1>
+    <p>
+        Every AtomControl has <span class="inlineCode">atom-next</span> property. This property will either hold string, object or reference to function referred as &quot;Action Set&quot;, which will be invoked when a default operation is executed. For example, on AtomButton, <span class="inlineCode">atom-next</span> will be invoked after clicking that button. And in case of AtomForm, <span class="inlineCode">atom-next</span> will be invoked after the form post was successful to give url.</p>
+    <p>
+        Action Set can also be invoked on any HTML Element event, explained in the next section.</p>
+    <h2>String Action</h2>
+    <p>
+        When contents of Action Set is set to pure string, it is assumed to be a URL and current page will be redirected to the String Content URL.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/next/samples/string-action.html" style="height: 94px;">
+
+    </iframe>
+
+    <h2>Object Literal Action</h2>
+    <p>
+        Object Literal Action consists of object literal notation with scope, appScope and data properties containing object literals. Each object literal is merged with respective owner&#39;s properties. For example <span class="inlineCode">{ scope: { a: 10 } }</span> will cause <span class="inlineCode">scope.setValue(&#39;a&#39;,10)</span> to be executed, which will set 10 for &#39;a&#39; property in the scope.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/next/samples/scope-action.html" style="height: 208px;">
+
+    </iframe>
+    <p class="note">Note: Outer curly braces mark expression as one time binding, actual expression starts within the braces, thats why you see two sets of curly braces to create an object literal in binding expression.</p>
+    <h2>Function/Command Action</h2>
+    <p>
+        When contents of Action Set is a function, function will be executed whenever Action Set will be executed. Function will receive current Scope and current Sender (owner) of the element. 
+        If this action set was invoked during response of an event, then it will receive third argument as jQuery event object.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/next/samples/function-action.html" style="height: 208px;">
+
+    </iframe>
+    <h2>Array Action</h2>
+    <p>
+        In case if you want to combine multiple action sets, you can just put them in an array and it will be executed one after another whenever it is needed to be executed.</p>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=concepts/next/samples/array-action.html" style="height: 210px;">
+
+    </iframe>
+    <p>This example is little complicated, because we are performing two operations as an array. In this case, each item of array is considered as an Action Set and they are invoked in given sequence. However, we have used one way binding, because we want to increment value of &quot;v&quot;, and it is set as, everytime button is clicked, scope&#39;s v property is set to current scope&#39;s v + 1.</p>
+</body>
+</html>

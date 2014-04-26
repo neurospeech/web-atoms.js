@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<a
+    atom-type="AtomButton"
+    atom-next="{ AtomPromise.alert('You clicked button !!!') }"
+    style="text-decoration:underline; color:blue; cursor:pointer"
+    >Click Me</a>
+
+<br />
+
+<button
+    atom-type="AtomButton"
+    atom-next="http://neurospeech.com"
+    >Go to NeuroSpeech.com</button>
+<!-- end-sample -->
+</div>
+</body>
+</html>

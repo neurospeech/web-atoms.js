@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomPostButton</h1>
+    <p>
+        AtomPostButton performs AJAX Post Operation when clicked. AtomPostButton also supports confirmation, if set to true, user will be alerted and only after user&#39;s confirmation, post activity will be performed. As usual, this control has &quot;next&quot; action set, that will be performed after successful post operation.</p>
+    <p>
+        In order to give more flexibility, post operation will be performed using postData property of button, if postData is not set, than data property will be posted. This is sometime useful in case when we want to send only &quot;id&quot; of object instead of posting whole object for operations like delete, archive etc.</p>
+    <p class="note">
+        If postUrl property of AtomPostButton is not set, AtomPostButon will simply act as AtomButton and execute next action event. This will not post data to same page url.</p>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-post-button.html" style="height: 700px;">
+
+    </iframe>
+    <p>
+        In this
+        example, we have added a&nbsp; button in every row, and we have added postUrl and postData properties. if postData is not specified, current inherited data property will be posted to the postUrl. postData is useful when we want to send only part of data, for example, only primary key of the object.</p>
+    <p>
+        While executing this example, you can check in network section in debugging, what will be posted. However, we do not have server side implementation, so no action will be taken. However if the operation on server side was successful, next action set will be invoked, that will be, list will refresh its contents.</p>
+    <p>
+        If you use AtomDeleteButton, confirm is automatically set to true, so it will always confirm the user before executing the action.</p>
+    <p class="note">
+        Difference between Form Post and AtomPostButton: AtomPostButton does not do any validation on data, if you want to perform validation, you must use AtomForm control along with input[type=submit].</p>
+
+</body>
+</html>

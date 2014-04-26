@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>WebAtoms - Documentation - NeuroSpeech&reg;</title>
+
+    <link href="../style/atoms.css" rel="stylesheet" />
+
+    <script src="../jquery-1.8.2.min.js"></script>
+    <script src="../atoms.min.js"></script>
+    <link href="style/docs.min.css" rel="stylesheet" />
+
+    <style>
+        .atom-list-item a {
+            color:blue;
+        }
+
+        .atom-list-item-selected > a {
+            color:white;
+        }
+    </style>
+
+    <script src="controls/metadata/class-info.js"></script>
+
+    <script type="text/javascript">
+        function onLoaded(a) {
+            classInfo.reset();
+
+            classInfo.load(a);
+
+            return classInfo;
+        }
+
+    </script>
+
+</head>
+<body>
+    <div
+        atom-type="AtomApplication"
+        atom-busy-image="Images/Busy.gif"
+        atom-data="[onLoaded($scope.overview)]"
+        >
+
+        <script type="text/javascript">
+            ({
+                overview: "atom-control",
+                classInfo: classInfo,
+                views: [
+                    { label: "Overview", value: "overview" },
+                    { label: "Properties", value: "properties" },
+                    { label: "Templates", value: "templates" },
+                    { label: "Styles", value: "styles" }
+                ]
+            })
+        </script>
+
+        <div
+            atom-dock="Top"
+            style="height:20px;padding:5px"
+            >
+
+                <span 
+                    atom-name="view"
+                    atom-items="{$scope.views}"
+                    atom-type="AtomToggleButtonBar"></span>
+
+                <span
+                    atom-name="tree"
+                    atom-type="AtomItemsControl"
+                    atom-items="[$scope.classInfo.baseTypes]"
+                    >
+                    <a 
+                        atom-template="itemTemplate"
+                        atom-text="{$data.name}"
+                        atom-href="{ Atom.url('index.html', null , { page: Atom.url( 'control.html', null,  { overview: $data.value } ) } ) }"
+                        style="margin-left:10px;"
+                        target="_top"
+                        ></a>
+                </span>
+
+        </div>
+
+        <div
+            atom-dock="Fill"
+            atom-type="AtomViewStack"
+            atom-selected-index="[$scope.view.selectedIndex]"
+            >
+
+            <iframe
+                atom-src="[ 'controls/' + $scope.overview + '.html' ]"
+                style="border:none"
+                >
+            </iframe>
+
+            <div
+                atom-type="AtomItemsControl"
+                atom-items="[$scope.classInfo.properties]"
+                style="overflow:auto"
+                >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Markup</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        atom-presenter="itemsPresenter">
+                        <tr atom-template="itemTemplate">
+                            <td atom-text="{ $data.label }"></td>
+                            <td 
+                                style="white-space:nowrap"
+                                atom-text="{ 'atom-' + $data.value }"></td>
+                            <td>
+                                <div style="font-weight:bold" atom-text="{ $data.readonly ? 'Readonly' : '' }"></div>
+                                <div atom-text="{ $data.description }"></div>
+                                <div atom-text="{ $data.def ? 'Default: ' + $data.def : '' }"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div
+                atom-type="AtomItemsControl"
+                atom-items="[$scope.classInfo.templates]"
+                style="overflow:auto"
+                >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Template</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        atom-presenter="itemsPresenter">
+                        <tr atom-template="itemTemplate">
+                            <td atom-text="{$data.label}"></td>
+                            <td atom-text="{ $data.description }"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div
+                atom-type="AtomItemsControl"
+                atom-items="[$scope.classInfo.styles]"
+                style="overflow:auto"
+                >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CSS Rule</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody
+                        atom-presenter="itemsPresenter">
+                        <tr atom-template="itemTemplate">
+                            <td atom-text="{$data.label}"></td>
+                            <td atom-text="{ $data.description }"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+</html>

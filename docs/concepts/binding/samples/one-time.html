@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<div
+    atom-type="AtomControl"
+    atom-data="{ {firstName: 'Akash', lastName:'Kava', favColor: 'orange'} }"
+    >
+
+    <span 
+        atom-text="{$data.firstName + ' ' + $data.lastName}"
+        style-color="{$data.favColor}"
+        ></span>
+
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

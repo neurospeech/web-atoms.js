@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        categories: [
+            { label: 'Action', value: 'Action' },
+            { label: 'Animated', value: 'Animated' },
+            { label: 'Sci-Fi', value: 'Sci-Fi' },
+        ]
+    })
+</script>
+
+<div
+    atom-type="AtomItemsControl"
+    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    >
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Movie</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody
+            atom-presenter="itemsPresenter"
+            >
+            <tr
+                atom-template="itemTemplate"
+                >
+                <td atom-text="{($scope.itemIndex + 1) + ')'}"></td>
+                <td atom-text="{$data.MovieName}"></td>
+                <td>
+                    <span 
+                        atom-type="AtomToggleButtonBar"
+                        atom-name="categoryList"
+                        atom-items="{$appScope.categories}"
+                        atom-value="$[data.MovieCategory]"
+                        ></span>
+                </td>
+                <td
+                    atom-text="['Category is ' + $scope.categoryList.value ]">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

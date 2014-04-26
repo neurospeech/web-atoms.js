@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../Scripts/WebAtoms.Debug.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        date: ""
+    })
+</script>
+
+    <div>Click on date to select it, click it again to deselect it. 
+        This allows multiple dates to be selected</div>
+
+<div
+    atom-type="AtomDateListBox"
+    atom-value="$[scope.date]"
+    style="margin:10px;"
+    ></div>
+
+<div
+    atom-text="['Selected Dates: ' + $scope.date]"></div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

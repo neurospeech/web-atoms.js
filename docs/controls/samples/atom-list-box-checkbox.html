@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<input
+    type="checkbox"
+    atom-checked="$[scope.movieList.selectAll]"/> Select All
+
+<div
+    atom-type="AtomListBox"
+    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    atom-name="movieList"
+    atom-auto-select-on-click="{ false }"
+    atom-allow-multiple-selection="true"
+    atom-value-path="MovieName"
+    >
+    <div
+        atom-template="itemTemplate">
+        <input type="checkbox" atom-checked="$[scope.itemSelected]"/>
+        <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
+        <span atom-text="{ $data.MovieName }"></span>
+    </div>
+</div>
+
+<div>
+    <span>Selected Movies: </span>
+    <span atom-text="[($scope.movieList.value || '')]" ></span>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

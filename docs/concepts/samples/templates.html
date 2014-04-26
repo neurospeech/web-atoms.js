@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        list: [
+            { label: "Orange", value: "orange" },
+            { label: "Apple", value: "red"}
+        ]
+    })
+</script>
+
+<!-- List Box with Default Template -->
+
+<div 
+    atom-type="AtomListBox"
+    atom-items="{$scope.list}"
+    >
+</div>
+
+<!-- List Box with Customized Item Template -->
+
+<div 
+    atom-type="AtomItemsControl"
+    atom-items="{$scope.list}"
+    >
+    <div
+        atom-template="itemTemplate"
+        style-background-color="{$data.value}"
+        style-border-color="black"
+        style-border-width="1px"
+        style-border-style="solid"
+        style-padding="5px"
+        >
+        <span atom-text="{$data.label}"></span>
+    </div>
+</div>
+
+<!-- List Box with customized Control Template and Item Template -->
+
+<div 
+    atom-type="AtomListBox"
+    atom-items="{$scope.list}"
+    >
+    <table>
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+        <tbody 
+            atom-presenter="itemsPresenter">
+            <tr atom-template="itemTemplate">
+                <td atom-text="{$data.label}"></td>
+                <td atom-text="{$data.value}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

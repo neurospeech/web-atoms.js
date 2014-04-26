@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>One Way Binding</h1>
+    <p>
+        Building data aware application requires updating
+        UI automatically when data changes. One way binding refreshes element automatically when data is modified by any one. To make it simpler, you have to write your binding expressions in square brackets <span class="inlineCode">[]</span></p>
+
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/binding/samples/one-way.html" style="height: 428px;">
+
+    </iframe>
+
+    <p>
+        By convention, variable named <span class="inlineCode">model</span> is automatically assigned in <span class="inlineCode">scope</span> at application level. <span class="inlineCode">AtomBinder</span> manages bindings between elements, if you are modifying property of an object, we recommend using <span class="inlineCode">AtomBinder.setValue</span>. However in Two Way Binding (explained in next section), binding is automatically updated by Atoms.js.</p>
+
+</body>
+</html>

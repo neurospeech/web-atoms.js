@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomWizard</h1>
+    <p>
+        AtomWizard is a multi step control which allows you to host multiple step operation with next and previous buttons.</p>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-wizard.html" style="height: 303px;">
+
+    </iframe>    
+    
+    <p>
+        Wizard hosts Multiple Steps, user can click on next or back button. Each step is hosted within a viewTemplate, which contains multiple children. Each child can contain <span class="inlineCode">atom-next</span> property which can hold an action set to be invoked on click of next button. If <span class="inlineCode">atom-next</span> is not set, wizard will automatically jump to next step.</p>
+    <p>
+        In example above, first two steps actually try to post data to http server, and if the post was successful, then form&#39;s <span class="inlineCode">atom-next</span> is set to <span class="inlineCode">goNextCommand</span> which will advance wizard to next step.</p>
+    
+</body>
+</html>

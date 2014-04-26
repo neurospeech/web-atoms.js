@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Event Binding (ActionSet for Events)</h1>
+    <p>
+        Wiring events on elements works same as expected in regular html even within the context of Atoms.js. However to execute an ActionSet (Explained in next session), on particular event, we have special way of defining action sets on event.</p>
+    
+    
+    <p>
+        Please note, action sets will be invoked in context of current of closest parent atom control. And if you have set function as action set then this function will receive parameters differently.</p>
+    <h2>
+        Function as ActionSet</h2>
+    <p>
+        When you are setting JavaScript function as action set, as usual function receives scope and sender as arguments and it receives third argument as &quot;event&quot; which is a jQuery event object for the particular event.</p>
+    
+</body>
+</html>

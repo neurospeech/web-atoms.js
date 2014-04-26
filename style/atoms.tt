@@ -1,0 +1,47 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".css" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xaml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Xaml" #>
+<#@ import namespace="System.Text" #>
+
+/* Auto Generated File - WebAtoms.css, for license, please refer http://webatoms.neurospeech.com */
+
+<# 
+	
+		string templateDirectory = System.IO.Path.GetDirectoryName(Host.TemplateFile);
+
+
+		var dir = new System.IO.DirectoryInfo(templateDirectory);
+
+		dir = dir.Parent;
+		dir = new System.IO.DirectoryInfo(dir.FullName + "\\src");
+		WriteDirectory(dir);
+
+
+#>
+<#+ 
+		private void WriteDirectory(System.IO.DirectoryInfo dir){
+		
+			foreach(var f in dir.EnumerateFiles("*.css")){
+
+				#><#=System.IO.File.ReadAllText(f.FullName)#>
+				<#+
+
+			}
+
+			foreach(var d in dir.EnumerateDirectories()){
+				WriteDirectory(d);
+			}
+
+		}
+		
+		
+		#>

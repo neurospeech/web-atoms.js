@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>LocalScope - Private Scope for Isolated Components</h1>
+    <p>In languages like Flex and Silverlight, ability to create User Controls provided isolation for component authors to avoid naming conflict. However, HTML does not have any naming scope related to HTML Element. Function level private scope is only applicable in scripting context which is independent of visual hierarchy of HTML Elements.</p>
+    <p>In order to reduce naming conflict, and to provide private data store, Atoms.js provides Local Scope for Atom Controls. By marking AtomControl with <span class="inlineCode">atom-local-scope=true</span> attribute, every child element and child AtomControl becomes part of private local scope created at this element. Control and its descendents can communicate with each other via <span class="inlineCode">localScope</span>. Following example illustrates how two different control on same page, with same named scope items are isolated for their execution.</p>
+
+
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/scope/samples/local-scope.html" style="height: 586px;">
+
+    </iframe>
+</body>
+</html>

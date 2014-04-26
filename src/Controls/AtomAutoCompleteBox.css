@@ -1,0 +1,98 @@
+﻿.atom-auto-complete-box{
+    position:relative;
+    
+    width:100px;
+    padding:1px;
+    margin:1px;
+    border:1px solid lightgray;
+    background:white;
+    height:23px;
+
+}
+
+span.atom-auto-complete-box{
+    display:inline-block;
+}
+
+
+.atom-auto-complete-box input{
+    border:none;
+    position:absolute;
+    left:0px;
+    top:0px;
+    background:transparent;
+    margin:0px;
+    width:100%;
+}
+
+.atom-auto-complete-box input:active{
+    border:none;
+    margin:0px;
+}
+
+.atom-auto-complete-box input:disabled{
+    border:none;
+    margin:0px;
+    color:lightgray;
+}
+
+.atom-auto-complete-box input:focus{
+    border:none;
+    margin:0px;
+}
+
+.atom-auto-complete-box input:hover{
+    border:none;
+    margin:0px;
+}
+
+.atom-auto-complete-popup
+{
+    max-height:200px; 
+    overflow-y:auto;
+    overflow-x:hidden;
+    border-style: solid;
+    border-width:1px;
+    border-color:#808080;
+    padding:2px;
+    background-color:white;
+}
+
+
+.atom-autocomplete-atom-list-item
+{
+background: #ffffff; 
+color:Black;
+cursor:pointer;
+}
+
+.atom-autocomplete-atom-list-item:hover
+{
+background: #cdeb8e; 
+color:Black;
+cursor:pointer;
+}
+
+.atom-autocomplete-atom-list-item-selected
+{
+background: #3039eb;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.atom-autocomplete-atom-column
+{
+background: #a9e4f7; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E5ZTRmNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwZmI0ZTciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #a9e4f7 0%, #0fb4e7 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e4f7), color-stop(100%,#0fb4e7)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #a9e4f7 0%,#0fb4e7 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #a9e4f7 0%,#0fb4e7 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #a9e4f7 0%,#0fb4e7 100%); /* IE10+ */
+background: linear-gradient(top,  #a9e4f7 0%,#0fb4e7 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=0 ); /* IE6-8 */
+cursor:pointer;
+}
+

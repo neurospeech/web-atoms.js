@@ -1,0 +1,27 @@
+﻿<table
+    class="atom-form-grid-row"
+    atom-type="AtomFormField"
+    atom-class="[$owner.fieldClass]"
+    style-display="[$owner.fieldVisible ? '' : 'none']">
+    <tbody>
+        <tr>
+            <td
+                class="atom-form-grid-label"
+                atom-text="[$owner.label]"
+                style-min-width="[$owner.atomParent.minLabelWidth ? ($owner.atomParent.minLabelWidth + 'px') : undefined]"></td>
+            <td 
+                class="atom-form-grid-required"
+                atom-class="[$owner.required ? 'atom-form-grid-required' : 'atom-form-grid-not-required']">*</td>
+            <td
+                class="atom-form-grid-content"
+                atom-class="[$owner.error ? 'atom-data-error' : '']"
+                atom-presenter="contentPresenter">
+            </td>
+            <td
+                atom-class="[$owner.error ? 'atom-data-error' : '']"
+                atom-text="[$owner.error || '']"
+                style-display="[$owner.error ? '' : 'none']">                
+            </td>
+        </tr>
+    </tbody>
+</table>

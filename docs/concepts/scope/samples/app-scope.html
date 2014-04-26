@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<script type="text/javascript">
+    ({
+        view: 'red',
+        list: [
+            { label: 'Oranges', value: 'orange' },
+            { label: 'Apples', value: 'red' },
+            { label: 'Grapes', value: 'green' }
+        ],
+        display: function (item) {
+            if (!item)
+                return '';
+            return item.label + ' are ' + item.value;
+        }
+    })
+</script>
+
+<div
+    atom-name="buttonBar"
+    atom-type="AtomToggleButtonBar"
+    atom-items="{ $scope.list }"
+    atom-value="$[scope.view]"
+    >
+    <span 
+        atom-template="itemTemplate" 
+        atom-text="[$data.label]"></span>
+</div>
+
+<span atom-text="[$scope.display($scope.buttonBar.selectedItem)]" ></span>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

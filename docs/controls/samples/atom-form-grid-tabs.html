@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<div
+    atom-type="AtomForm"
+    atom-dock="Fill"
+    atom-post-url="/Url/Insert"
+    atom-data="{ { FirstName: '', LastName: '', Password: '', Password2:'' } }"
+    atom-success-message="Information Saved Correctly">
+    <div
+        atom-type="AtomFormGridLayout"
+        atom-min-label-width="120">
+        <div atom-type="AtomFormTabControl">
+            <div atom-type="AtomFormTab" atom-label="Customer Details">
+                <span atom-type="AtomFormRow">
+                    <input 
+                        atom-label="First Name:"
+                        atom-required="true"
+                        placeholder="First Name:"
+                        type="text" 
+                        atom-value="$[data.FirstName]" />
+
+                    <input 
+                        atom-label="Middle Name:"
+                        atom-value="$[data.MiddleName]"
+                        />
+    
+                    <input
+                        atom-label="Last Name:"
+                        atom-required="true"
+                        placeholder="Last Name:" 
+                        type="text" 
+                        atom-value="$[data.LastName]" />
+                </span>
+
+                <span atom-type="AtomFormRow">
+                    <input 
+                        atom-label="Email Address:"
+                        type="text"
+                        atom-data-type="email"
+                        atom-value="$[data.EmailAddress]"
+                        />
+
+                    <input 
+                        atom-label="Zip: (Numbers only)"
+                        type="text"
+                        atom-regex="/[0-9]+/"
+                        atom-value="$[data.ZipCode]"
+                        />
+                </span>
+                <span atom-type="AtomFormRow">
+                    <textarea
+                        atom-label="Address:"
+                        atom-value="$[data.Address]"></textarea>
+                    <div atom-type="AtomFormGridLayout">
+                        <input
+                            atom-label="Country:"/>
+                        <input
+                            atom-label="State:"/>
+                        <input
+                            atom-label="City:"/>
+                    </div>
+                </span>
+
+            </div>
+            <div atom-type="AtomFormTab" atom-label="Profession Details">
+                <span atom-type="AtomFormRow">
+                    <input 
+                        atom-label="Company:"
+                        type="text"
+                        atom-value="$[data.Company]"
+                        />
+
+                    <input 
+                        atom-label="Since (Years):"
+                        type="text"
+                        atom-regex="/[0-9]+/"
+                        atom-value="$[data.SinceYears]"
+                        />
+                </span>
+
+                <span atom-type="AtomFormRow">
+                    <input 
+                        atom-label="Education:"
+                        type="text"
+                        atom-value="$[data.Education]"
+                        />
+
+                    <input 
+                        atom-label="Year Graduated:"
+                        type="text"
+                        atom-regex="/[0-9]+/"
+                        atom-value="$[data.GraduationYear]"
+                        />
+                </span>
+
+                <textarea
+                    atom-label="Experience:"
+                    atom-value="$[data.Address]"></textarea>
+
+            </div>
+        </div>
+        <input type="submit" value="Save" />
+    </div>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<script type="text/javascript">
+    ({
+        views: [
+            { label: "Overview", value: "overview" },
+            { label: "Properties", value: "properties" },
+            { label: "Templates", value: "templates" },
+            { label: "Styles", value: "styles" }
+        ]
+    })
+</script>
+
+<div
+    atom-dock="Top"
+    style="height:50px;"
+    >
+
+        <span 
+            atom-name="view"
+            atom-items="{$scope.views}"
+            atom-type="AtomToggleButtonBar"></span>
+
+</div>
+
+<div
+    atom-dock="Fill"
+    atom-type="AtomViewStack"
+    atom-selected-index="[$scope.view.selectedIndex]"
+    >
+
+    <div atom-presenter="appPresenter"></div>
+
+    <div
+        atom-type="AtomListBox"
+        atom-items="{classInfo.properties}"
+        style="overflow:auto"
+        >
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Binding</th>
+                    <th>JavaScript</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody
+                atom-presenter="itemsPresenter">
+                <tr atom-template="itemTemplate">
+                    <td atom-text="{$data.label}"></td>
+                    <td atom-text="{ 'atom-' + $data.value}"></td>
+                    <td atom-text="{ '(get|set)_' + $data.value}"></td>
+                    <td atom-text="{ $data.description }"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

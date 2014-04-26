@@ -1,0 +1,24 @@
+﻿<div 
+	style="position:absolute;left:0px;top:0px;z-index:10000; visibility:hidden"
+	style-width="[$owner.appWidth + 'px']"
+	style-height="[$owner.appHeight + 'px']"
+	style-visibility="[$owner.isBusy ? 'inherit' : 'hidden']"
+	>
+	<div 
+		class="atom-busy-window"
+		style="position:absolute"
+		style-left="[(($owner.appWidth/2)-100) + 'px']"
+		style-top="[(($owner.appHeight/2)-25) + 'px']"
+		>
+
+		<div atom-abs-pos="12,12,36,36" class="atom-busy-image"></div>
+		<div atom-abs-pos="56,24,145,null" atom-text="[$owner.busyMessage || 'Loading...']"></div> 
+
+        <div atom-abs-pos="0,48"
+            style="height:3px; background-color:green"
+            style-display="[$owner.isBusy &amp;&amp; $owner.progress ? 'block' : 'none']"
+            style-width="[$owner.progress + '%']"
+            ></div>
+
+	</div>
+</div>

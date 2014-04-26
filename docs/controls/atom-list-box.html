@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomListBox</h1>
+    <p>
+        AtomListBox is derived from AtomItemsControl, it acts as ListBox and DataGrid. Providing simple itemTemplate makes it work like ListBox and providing Table as template makes it look like DataGrid. Other classes like AtomToggleButtonBar and AtomLinkBar are derived from AtomListBox and their styles and templates are different.</p>
+
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-list-box.html" style="height: 260px;">
+
+    </iframe>
+
+    <h2>AutoSelectOnClick</h2>
+    <p>By default this is true, it means, when any part of item is clicked, item will be selected. However if you need only one button or checkbox to work for selection, then it can be customized in following ways.</p>
+    <p class="note">Note: To set any atom property as false, it must always be set in curley braces so that we identify it as javascript expression, otherwise in javascript string with &quot;false&quot; is considered as true.</p>
+    <h2>Using Button as Selector</h2>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-list-box-button.html" style="height: 290px;">
+
+    </iframe>
+    <h2>Using Checkbox as Selector for Multiple Selection</h2>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-list-box-checkbox.html" style="height: 350px;">
+
+    </iframe>
+    <h2>Display as DataGrid</h2>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-list-box-table.html" style="height: 540px;">
+
+    </iframe>
+    <h2>DataGrid with Sorting</h2>
+    <iframe class="atom-code-frame" src="../code.html#codeFile=controls/samples/atom-list-box-table-sort.html" style="height: 740px;">
+
+    </iframe>
+    <p>In this example, sorting is performed at client side, however if you want sorting to be performed at server side, all you have to do is bind <span class="inlineCode">$scope.sortPath</span> in <span class="inlineCode">AtomPromise.json</span> method&#39;s query parameter.</p>
+    <p>&nbsp;</p>
+
+</body>
+</html>

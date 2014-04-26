@@ -1,0 +1,22 @@
+﻿    <div>
+
+
+        <div class="title">
+            <button class="atom-prev-button" atom-event-click="{$owner.templateParent.prevMonthCommand}">Previous</button>
+            <span atom-text="[ AtomDate.monthList[$owner.templateParent.currentMonth-1].label + ' ' + $owner.templateParent.currentYear]"></span>
+            <button class="atom-next-button" atom-event-click="{$owner.templateParent.nextMonthCommand}">Next</button>
+        </div>
+
+        <div class="day-headers">
+            <span class="weekend">Sunday</span>
+            <span>Monday</span>
+            <span>Tuesday</span>
+            <span>Wednesday</span>
+            <span>Thursday</span>
+            <span>Friday</span>
+            <span class="weekend">Saturday</span>
+        </div>
+        <div class="days" atom-presenter="itemsPresenter">
+        </div>
+    </div>
+

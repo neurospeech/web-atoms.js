@@ -1,0 +1,6 @@
+﻿<a 
+    atom-href="{$data[$owner.atomParent.valuePath]}" 
+    atom-target="{$data[$owner.atomParent.targetPath]}"
+    atom-class="{$data[$owner.templateParent.itemsPath] ? (($data[$owner.templateParent.itemsPath]).length ? 'atom-link-bar-down-image' : '' ) : '' }">
+    <span atom-text="{$data[$owner.atomParent.labelPath]}"></span>
+</a>

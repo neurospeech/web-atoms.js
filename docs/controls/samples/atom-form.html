@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+<div
+    atom-type="AtomForm"
+    atom-post-url="/Url/Insert"
+    atom-data="{ { FirstName: 'Akash', LastName: 'Kava' } }"
+    atom-success-message="Information Saved Correctly">
+
+    <input type="text" atom-value="$[data.FirstName]" /><br />
+    
+    <input type="text" atom-value="$[data.LastName]" /><br />
+
+    <input type="submit" value="Save" />
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

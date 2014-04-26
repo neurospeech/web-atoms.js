@@ -1,0 +1,40 @@
+﻿.atom-application{
+    margin-left:auto;
+    margin-right:auto;
+    visibility:hidden;
+}
+
+.atom-dock-application{
+    position:relative;
+    height:100%;
+    overflow:hidden;
+}
+
+.atom-dock-application > *{
+    position:absolute
+}
+
+
+.atom-busy-window
+{
+    position: absolute;
+    visibility: inherit;
+    width: 200px;
+    height: 50px;
+    background-color: #fff;
+    border-style: solid;
+    border-width: 2px;
+    border-color:#DA3535;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align:middle;
+}
+
+.atom-busy-image {
+    background-image: url('busy.gif')
+}

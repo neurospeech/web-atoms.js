@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+<div
+    atom-type="AtomNavigatorList"
+    atom-new-item="{ { MovieName: '', MovieCategory: '' } }"
+    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    atom-name="movieList"
+    style="width:400px; height:400px; margin:50px;"
+    >
+    <table atom-template="gridTemplate">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody atom-presenter="itemsPresenter">
+            <tr atom-template="itemTemplate">
+                <td atom-text="{$data.MovieName}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <span 
+        atom-template="detailHeaderTemplate"
+        atom-text="['Movie: ' + $data.MovieName]">
+    </span>
+    <div 
+        atom-template="detailTemplate"
+        atom-type="AtomFormLayout">
+        <input 
+            atom-label="Movie Name:"
+            atom-value="$[data.MovieName]"/>
+        <input
+            atom-label="Movie Category:" 
+            atom-value="$[data.MovieCategory]"/>
+        <button
+            atom-event-click="{$owner.templateParent.backCommand}"
+            >Save</button>
+    </div>
+</div>
+
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

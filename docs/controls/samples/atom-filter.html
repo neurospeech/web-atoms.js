@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+    <script>
+        ({
+            name: '',
+            actor: ''
+        })
+    </script>
+
+<div>
+    <input type="text" atom-value="$[scope.name](keyup)" placeholder="Name of Movie" />
+    <input type="text" atom-value="$[scope.actor](keyup)" placeholder="Actors" />
+</div>
+
+<div
+    atom-type="AtomListBox"
+    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    atom-filter="[ { 'MovieName:startsWith': ($scope.name || undefined) , 'Actors:any': { 'Name:startsWith': ($scope.actor || undefined) } } ]"
+    atom-name="movieList"
+    >
+    <div
+        atom-template="itemTemplate">
+        <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
+        <span atom-text="{ $data.MovieName }"></span>
+    </div>
+</div>
+
+<div>
+    <span>Selected Movie: </span>
+    <span 
+        atom-text="[($scope.movieList.selectedItem.MovieName || '')]" >
+    </span>
+    <span 
+        atom-text="['('+($scope.movieList.selectedItem.MovieCategory||'')+')']" >
+    </span>
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

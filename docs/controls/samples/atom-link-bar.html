@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication">
+<!-- sample -->
+
+
+<script type="text/javascript">
+    ({
+        links: [
+            {
+                label: "Home",
+                value: "http://neurospeech.com/webatoms/docs"
+            },
+            {
+                label: "Products", value: "",
+                links: [
+                    {
+                        label: "Atoms.js",
+                        value: "http://neurospeech.com/webatoms"
+                    },
+                    {
+                        label: "WSClient++",
+                        value: "http://neurospeech.com/wsclient"
+                    }
+                ]
+            }
+        ]
+    })
+</script>
+
+<div 
+    atom-type="AtomLinkBar"
+    atom-items-path="links"
+    atom-items="{$scope.links}"
+    >
+
+</div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>

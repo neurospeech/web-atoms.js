@@ -1,0 +1,10 @@
+﻿.atom-view-stack
+{  
+    position:absolute;
+}
+
+.atom-view-stack > *
+{
+    visibility: hidden;
+    position:absolute;
+}

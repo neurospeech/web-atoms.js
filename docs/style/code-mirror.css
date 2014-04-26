@@ -1,0 +1,35 @@
+﻿        .cm-web-atom-attribute {
+            color: #800080;font-weight: bold
+        }
+        .cm-web-atom-two-way-binding {
+            color: #00008B;background-color: #FFE4C4;font-weight: bold
+        }
+        .cm-web-atom-binding {
+            background-color: #ECF6CE;
+        }
+        .cm-web-atom-exp {
+            background-color: #eaeaea;
+        }
+        .cm-web-atom-binding-exp {
+            color: #008080;font-weight: bold
+        }
+        .cm-web-atom-style {
+            color: #808080
+        }
+        .cm-web-atom-string {
+            color: #FF0000;font-weight: bold
+        }
+        .cm-web-atom-string-attribute {
+            color: #FF0000;
+        }
+        .cm-web-atom-event {
+            color: #808080;
+        }
+
+        .cm-s-default span.cm-attribute {color: #FF0000;}
+        
+        .cm-s-default span.cm-string {color: #0000ff;}
+
+        .cm-s-default span.cm-tag {color: #800000;}
+
+        .cm-s-default span.cm-comment {color: #170;}

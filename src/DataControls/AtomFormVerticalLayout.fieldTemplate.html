@@ -1,0 +1,15 @@
+﻿<tr atom-type="AtomFormField">
+    <td>
+        <div>
+            <span class="atom-form-label" atom-text="[$owner.label]"></span>
+            <span class="atom-form-required" atom-text="[$owner.required ? '*' : '']"></span>
+        </div>
+        <div 
+            class="atom-form-content"
+            atom-class="[$owner.error ? 'atom-data-error' : '']"
+            atom-presenter="contentPresenter"></div>
+        <div
+            class="atom-form-error"
+            atom-text="[$owner.error || '']"></div>
+    </td>
+</tr>
