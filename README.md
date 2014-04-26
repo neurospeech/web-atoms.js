@@ -23,6 +23,9 @@ Building Atoms.js project is very easy, you need Visual Studio 2012 onwards and 
 
 Documentation
 -------------
+
+<a href="http://atoms.azurewebsites.net/docs/index.html" target="_blank">Hosted Documentation</a>
+
 In order to view documentation with all samples, you can simply run the Visual Studio Project and test each sample along with the documentation.
 
 For non Windows platform, you may have to use Apache or some similar web server to host this project as website and then open it on any browser. Since AJAX is disabled on all browsers while accessing it from file:// URI pattern, simply opening index.html on browser will not be sufficient. You can view all documentation without any problems, but to run samples with AtomPromise, you will need a web server.
