@@ -17,10 +17,19 @@ h3,
 h4,
 h5,
 h6 {
-  line-height: 1.1;
+  border-bottom: solid 1px lightgray;
 }
 p {
   line-height: 1.5;
+}
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: blue;
+}
+a:hover {
+  text-decoration: underline;
 }
 table.box {
   border-style: solid;

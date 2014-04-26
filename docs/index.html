@@ -30,7 +30,7 @@
         }
 
         .title {
-            height:70px;
+            height:50px;
         }
 
         .toc {
@@ -38,12 +38,31 @@
             overflow:auto;
         }
 
+        .toc div.link-selected {
+            background-color:lightgoldenrodyellow;
+        }
+
+        .toc div.link:hover {
+            background-color: rgba(182, 255, 0, 0.10);
+        }
         .doc-frame {
             border:none;
         }
 
         .children {
             padding-left:10px;
+        }
+
+        .status-bar{
+            height:14px;
+            padding:2px;
+            text-align:right;
+            margin-top:2px;
+            border-top: solid 1px lightgray;
+        }
+
+        .status-bar a{
+            margin-right:10px;
         }
     </style>
 
@@ -61,7 +80,7 @@
         <div 
             class="title"
             atom-dock="Top">
-            <h1>Atoms.js Documentation</h1>
+            <h1 style="margin-top:5px;margin-bottom:5px;">Atoms.js Documentation</h1>
         </div>
         <div
             atom-dock="Left"
@@ -70,6 +89,7 @@
             class="toc"
             >
             <div
+                atom-class="[$appScope.view == $data.value ? 'link-selected' : 'link']"
                 atom-template="itemTemplate">
                 <a 
                     atom-text="{$data.label}"
@@ -86,6 +106,12 @@
             class="doc-frame"
             atom-src="[$appScope.view]"
             ></iframe>
+        <div
+            class="status-bar" 
+            atom-dock="Bottom">
+            <a href="http://codemirror.net/" target="_blank">Code Colorizer by CodeMirror</a>
+            <a href="http://neurospeech.com" target="_blank">&copy 2014 NeuroSpeech</a>
+        </div>
     </div>
 </body>
 </html>

@@ -13,8 +13,8 @@
 <script type="text/javascript">
 ({
     model: {
-        firstName: 'Peter',
-        lastName: 'Parker'
+        firstName: 'Akash',
+        lastName: 'Kava'
     },
     fullName: function (fName, lName) {
         return fName + ' ' + lName;
@@ -26,8 +26,7 @@
 <div
     atom-dock="Fill"
     atom-type="AtomControl"
-    atom-data="{$scope.model}"
-    >
+    atom-data="{$scope.model}">
     <div atom-text="{$data.firstName}"></div>
     <div atom-text="{$data.firstName + ' ' + $data.lastName}"></div>
     <div atom-text="{$scope.fullName($data.firstName,$data.lastName)}"></div>
