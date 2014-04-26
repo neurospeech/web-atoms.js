@@ -19,7 +19,7 @@ The project contains text template defined in Visual Studio C# Project which rec
 
 Build Instructions
 ------------------
-Building Atoms.js project is very easy, you need Visual Studio 2012 onwards and you have just transform all T4 text templates.
+Building Atoms.js project is very easy, you need Visual Studio 2012 onwards and you have to just transform all T4 text templates.
 
 Documentation
 -------------
