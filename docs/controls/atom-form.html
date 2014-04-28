@@ -15,13 +15,8 @@
     <p>AtomForm only provides AJAX post, but we also need default form layout with label description etc, so we have created one more control, that gives simple form layout easily.</p>
     <h2>Posting Data and Merge Data</h2>
     <p>Unlike HTML Form, AtomForm posts only associated data with the form itself, and it merges data from mergeData properties. Input and other controls must bind properties of Data. This helps in binding non standard HTML properties of AtomControls. In above example, FirstName and LastName properties of Data will be posted. Since data will be inherited most of the times, we have provided mergeData property to merge different set of properties before posting.</p>
-    <h2>AtomFileUploader</h2>
-    <p>In AJAX, uploading file is not supported due to previous versions of IE, so flash alternative provides way to upload file. But this requires a separate upload connection, so uploading of file is done in following way.</p>
-    <ol>
-        <li>Post AtomForm and retrive a secure upload URL</li>
-        <li>Bind url property of AtomFileUploader to secure upload URL</li>
-        <li>Set atom-next property of AtomForm to AtomFileUploader control itself.</li>
-    </ol>
+    <h2>File Upload</h2>
+    <p>In AJAX, uploading file is not supported due to previous versions of IE, there is no inbuilt file upload provided by Atoms.js. However, we have provided an upload plugin that helps you uploading files easily with Atoms.js, it blends with Atoms.js property model and it provides progress which is totally customizable.</p>
     
 </body>
 </html>

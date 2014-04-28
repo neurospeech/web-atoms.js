@@ -4,107 +4,6 @@
 /// <reference path="../jquery-1.5.1-vsdoc.js" />
 /// <reference path="AtomBrowser.js" />
 
-
-// TypeScript Copied...
-//var __extends = this.__extends || function (d, b) {
-//    function __() { this.constructor = d; }
-//    __.prototype = b.prototype;
-//    d.prototype = new __();
-//};
-
-
-
-
-//if (!Function.prototype.registerClass) {
-
-//    Function.__typeName = 'Function';
-//    Function.__class = true;
-//    Function.createDelegate = function Function$createDelegate(instance, method) {
-//        return function () {
-//            return method.apply(instance, arguments);
-//        };
-//    };
-
-//    //window.Sys = {};
-
-//    //Sys.EventArgs = {};
-//    //Sys.EventArgs.Empty = {};
-
-//    window.zEvalProp = function (t, p) {
-//        var i = p.indexOf('.');
-//        if (i == -1)
-//            return t[p];
-//        var n = p.substr(0, i);
-//        p = p.substr(i + 1);
-//        return window.zEvalProp(t[n], p);
-//    };
-
-//    // This class registers a prototype along with base Type
-//    // This must be called in inheirtence order only
-//    Function.prototype.registerClass = function (name, baseType) {
-//        var pname = window.zEvalProp(window,name);
-//        if (pname !== this)
-//            throw new Error("Type " + name + " does not exist");
-//        this.__typeName = name;
-//        if (baseType) {
-//            this.__baseType = baseType;
-//            this.baseType = baseType.prototype;
-//            //this.prototype = baseType;
-//            this.prototype.constructor = this;
-//            for (var m in baseType.prototype) {
-//                if (this.prototype[m])
-//                    continue;
-//                this.prototype[m] =  baseType.prototype[m];
-//            }
-//        }
-//    };
-
-//    // Should be used in constructor to call base class constructor
-//    Function.prototype.initializeBase = function (instance, baseArguements) {
-//        if (baseArguements) {
-//            this.__baseType.apply(instance, baseArguements);
-//        }else {
-//            this.__baseType.apply(instance);
-//        }
-//    };
-
-//    Function.prototype.callBaseMethod = function (instance, name, baseArguements) {
-//        var baseType = this.__baseType;
-//        var method = baseType.prototype[name];
-//        if (method) {
-//            if (baseArguements) {
-//                return method.apply(instance, baseArguements);
-//            }else {
-//                return method.apply(instance);
-//            }
-//        }else {
-//            return baseType.callBaseMethod(instance, name, baseArguements);
-//        }
-//    };
-
-//    Function.prototype.isNamespace = function (name) {
-//        return window[name];
-//    };
-
-//    Function.prototype.registerNamespace = function (name) {
-//        var ns = name.split('.');
-//        var root = window;
-//        for (var i = 0; i < ns.length; i++) {
-//            var n = ns[i];
-//            var type = root[n];
-//            if (!type) {
-//                type = {};
-//                root[n] = type;
-//            }
-//            root = type;
-//        }
-//    };
-
-//    window.Type = Function;
-//}
-
-
-
 var AtomEnumerator = (function (name, base) {
     return classCreator(name, base,
     function (array) {
@@ -324,9 +223,9 @@ var AtomDate = {
         return d.toJSON();
     },
 
-    m_names: new Array("Jan", "Feb", "Mar", 
+    m_names: ["Jan", "Feb", "Mar", 
 "Apr", "May", "Jun", "Jul", "Aug", "Sep", 
-"Oct", "Nov", "Dec"),
+"Oct", "Nov", "Dec"],
 
     setTime: function (dt, time) {
         if (!dt || !time)
@@ -412,8 +311,8 @@ var AtomDate = {
         var d = AtomDate.parse(v);
         var now = new Date();
 
-        if (now.getFullYear() == d.getFullYear()
-            && now.getMonth() == d.getMonth()) {
+        if (now.getFullYear() === d.getFullYear()
+            && now.getMonth() === d.getMonth()) {
             var diff = now.getDate() - d.getDate();
             switch(diff){
                 case -1:
@@ -434,7 +333,7 @@ var AtomDate = {
     parse: function (v) {
         if (!v)
             return null;
-        if (!(v.constructor == String))
+        if (v.constructor !== String)
             return v;
         if (/^\/date\([\-0-9]+\)\//gi.test(v)) {
             v = new Date(parseInt(v.substr(6),10));

@@ -61,14 +61,6 @@ classInfo.setup({
             def: "null",
             description: "Stores next invoker, that will be invoked for some default operation, for example if the control is button, next will be invoked after user click operation",
             url: ""
-        },
-        {
-            label: "cssPrefix",
-            value: "css-prefix",
-            readonly: false,
-            type: "string",
-            description: "Web Atoms uses default css rules to decorate the controls, and it can also add a prefix before every css rule that will be applied to the control, this allows you to customize one control in page by giving a prefix and defining separate set of prefixed css rules",
-            url: ""
         }
 
     ]   

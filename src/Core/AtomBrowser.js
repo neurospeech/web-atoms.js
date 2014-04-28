@@ -22,7 +22,7 @@ var log = function log(s) {
 
     AtomConfig.log += s + "\r\n";
 
-}
+};
 
 window.log = log;
 
