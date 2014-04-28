@@ -14,7 +14,7 @@ if (AtomBrowser.isIE && AtomBrowser.majorVersion < 9) {
 
         findNext: function () {
             var ne = this.nextItem;
-            while (ne && ne.nodeType != 1) {
+            while (ne && ne.nodeType !== 1) {
                 ne = ne.nextSibling;
             }
             this.nextItem = ne;
@@ -22,7 +22,7 @@ if (AtomBrowser.isIE && AtomBrowser.majorVersion < 9) {
         },
 
         isFirst: function () {
-            return this.index == 1;
+            return this.index === 1;
         },
 
         isLast: function () {

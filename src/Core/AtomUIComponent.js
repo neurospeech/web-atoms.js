@@ -53,19 +53,6 @@
                 return this._name;
             },
 
-            get_isVisible: function () {
-                return this._isVisible;
-            },
-            set_isVisible: function (v) {
-                var element = this.get_element();
-                this._isVisible = v;
-                if (!this._isVisible) {
-                    $(element).hide();
-                } else {
-                    $(element).show();
-                }
-            },
-
             getTemplate: function (k) {
 
                 var t = this["_" + k];

@@ -5,6 +5,7 @@
         value: "start/index.html",
         links: [
             { label: "Web Application", value: "start/app.html" },
+            { label: "License", value: "start/license.html" },
             { label: "Installation", value: "start/install.html" },
             { label: "Updates", value: "start/updates.html" }
         ]

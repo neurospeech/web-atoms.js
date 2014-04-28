@@ -59,8 +59,8 @@ var AtomBinders = {
         ctrl.bind(element, key, value, true, null, events);
     },
     "^[": function (ctrl, key, value, element) {
-    },
-    "^{": function (ctrl, key, value, element) {
+        value = value.substr(1, value.length - 2);
+        ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur");
     }
 };
 
@@ -850,7 +850,6 @@ window.AtomProperties = AtomProperties;
                 this.disposeChildren(this._element);
                 this.clearBinding();
                 this.bindings.length = 0;
-                //WebAtoms.AtomControl.callBaseMethod(this, "dispose");
                 base.dispose.apply(this, arguments);
             },
 
