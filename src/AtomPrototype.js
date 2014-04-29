@@ -100,7 +100,7 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
         };
     }
 
-    mapLibrary(name, window, f);
+    mapLibrary( /\./.test(name) ? name : 'WebAtoms.' + name, window, f);
 
     return f;
 };
