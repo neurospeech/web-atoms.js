@@ -21,6 +21,14 @@ Build Instructions
 ------------------
 Building Atoms.js project is very easy, you need Visual Studio 2012 onwards and you have to just transform all T4 text templates.
 
+Model Interactive View Controller Pattern
+-----------------------------------------
+Web application usually contains dual MVC Frameworks, one on server side and another on client side. Maintaining two different MVC is difficult. MVC is good for server side where flow of data is simple as request-process-response. Client side UI frameworks need much more than that. Thats why with Atoms.js, Model and Controller remains on server side, Interactive View is at client side, and interactive view communicates with server with JavaScript Promises (One Liner AJAX).
+
+Atoms.js is built using Component Object Modeling which expose properties for model, and commands for manipulating them. Components can be adujsted on document and data binding and command binding makes them absolutely free of JavaScript.
+
+Each MVC JavaScript requires you to fully understand JavaScript, where else Atoms.js can be used by designers without knowing much of JavaScript. 
+
 Documentation
 -------------
 
