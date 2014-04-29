@@ -93,7 +93,7 @@ window.CodeMirror = (function() {
     var pollingFast = false; // Ensures slowPoll doesn't cancel fastPoll
     var goalColumn = null;
 
-    // Initialize the content.
+    // init the content.
     operation(function(){setValue(options.value || ""); updateInput = false;})();
     var history = new History();
 

@@ -107,7 +107,7 @@ var AtomBrowser = {
     isSafari: false,
     isMac : false,
 
-    initialize: function () {
+    init: function () {
 
         this.isMac = /mac os x/gi.test(this.userAgent) && !(/iphone|ipad/gi.test(this.userAgent));
 
@@ -141,4 +141,4 @@ var AtomBrowser = {
 window.AtomBrowser = AtomBrowser;
 
 AtomBrowser.detect();
-AtomBrowser.initialize();
+AtomBrowser.init();

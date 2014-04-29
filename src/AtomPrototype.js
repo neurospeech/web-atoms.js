@@ -26,13 +26,14 @@ function createProperty(name, g) {
 function classCreator(name, basePrototype, classConstructor, classPrototype, classProperties, thisPrototype, thisProperties) {
     var baseClass = basePrototype ? basePrototype.constructor : null;
     var old = classConstructor || (function () { });
+    var cp = classProperties;
     var f = null;
     if (baseClass) {
         if (classProperties) {
             f = function () {
                 baseClass.apply(this, arguments);
                 this.__typeName = name;
-                var cp = Atom.clone(classProperties);
+                //var cp = Atom.clone(classProperties);
                 for (var k in cp) {
                     this["_" + k] = cp[k];
                 }
@@ -61,7 +62,7 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
         if (classProperties) {
             f = function () {
                 this.__typeName = name;
-                var cp = Atom.clone(classProperties);
+                //var cp = Atom.clone(classProperties);
                 for (var k in cp) {
                     this["_" + k] = cp[k];
                 }
@@ -100,7 +101,7 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
         };
     }
 
-    mapLibrary(name, window, f);
+    mapLibrary( /\./.test(name) ? name : 'WebAtoms.' + name, window, f);
 
     return f;
 };
@@ -108,3 +109,5 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
 function classCreatorEx(objDef) {
     return classCreator(objDef.name, objDef.base, objDef.start, objDef.methods, objDef.properties);
 }
+
+var createClass = classCreatorEx;

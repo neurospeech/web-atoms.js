@@ -77,7 +77,7 @@
                     e._templateParent = this;
                     this.onCreateChildren(p);
                     //this.setProperties(e);
-                    this.initializeChildren(p);
+                    this.initChildren(p);
                 } else {
                     p.appendChild(e);
                     e._templateParent = this;
@@ -179,8 +179,8 @@
                 }
             },
 
-            initialize: function () {
-                base.initialize.call(this);
+            init: function () {
+                base.init.call(this);
 
                 var _this = this;
 

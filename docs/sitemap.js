@@ -72,6 +72,15 @@
             { label: "AtomWizard", value: "control.html#overview=atom-wizard" },
             { label: "AtomYesNoControl", value: "control.html#overview=atom-yes-no-control" },
         ]
+    },
+    {
+        label: "Plugins",
+        value: "plugins/index.html",
+        links: [
+            { label:"Upload", value: "plugins/upload/index.html" },
+            { label:"VideoJS", value: "plugins/videojs/index.html" },
+            { label:"CKEditor", value: "plugins/ckeditor/index.html" }
+        ]
     }
 
 ];

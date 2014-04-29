@@ -1,7 +1,7 @@
 ﻿///// <reference path="AtomControl.js" />
 
 //WebAtoms.AtomCheckBox = function (element) {
-//    WebAtoms.AtomCheckBox.initializeBase(this, [element]);
+//    WebAtoms.AtomCheckBox.initBase(this, [element]);
 //    log("AtomCheckBox is depricated, use atom-checked instead on checkbox item");
 //};
 
@@ -35,12 +35,12 @@
 //        AtomBinder.refreshValue(this, "isChecked");
 //    },
 
-//    initialize: function () {
+//    init: function () {
 //        var _this = this;
 //        this.bindEvent(this._element, "change", function () {
 //            _this.onChange.apply(_this, arguments);
 //        });
-//        WebAtoms.AtomCheckBox.baseType.initialize.apply(this, arguments);
+//        WebAtoms.AtomCheckBox.baseType.init.apply(this, arguments);
 //    }
 //};
 

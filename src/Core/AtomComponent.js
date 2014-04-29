@@ -97,7 +97,7 @@
             },
 
 
-            initialize: function () {
+            init: function () {
             },
             dispose: function () {
                 // remove all event handlers...

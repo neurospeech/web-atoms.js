@@ -195,7 +195,7 @@ this.atomApplication = null;
                 }
             },
 
-            initializationComplete: function () {
+            onInitialized: function () {
 
                 // To save URL persistance of Scope Values
                 // We have to remember default scope values set 
@@ -223,7 +223,7 @@ this.atomApplication = null;
                 if (p) {
                     this._defaultScope = "#" + p;
                 }
-                base.initializationComplete.call(this);
+                base.onInitialized.call(this);
             },
 
             createChildren: function () {
@@ -237,8 +237,8 @@ this.atomApplication = null;
                 }
             },
 
-            onCreationComplete: function () {
-                base.onCreationComplete.call(this);
+            onCreated: function () {
+                base.onCreated.call(this);
 
 
                 if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
@@ -278,17 +278,17 @@ this.atomApplication = null;
 
             setup: function () {
                 this.createChildren();
-                this.initialize();
+                this.init();
             },
 
-            initializationComplete: function () {
-                base.initializationComplete.apply(this, arguments);
+            onInitialized: function () {
+                base.onInitialized.apply(this, arguments);
                 if (!this._renderAsPage) {
                     $(this._element).addClass("atom-dock-application");
                 }
             },
 
-            initialize: function () {
+            init: function () {
 
                 this.bindEvent(window, "resize", "invokeUpdateUI");
 
@@ -299,7 +299,7 @@ this.atomApplication = null;
 
                 this._scope._$_watcher = this;
 
-                base.initialize.call(this);
+                base.init.call(this);
 
 
                 this.closeCommand = function () {

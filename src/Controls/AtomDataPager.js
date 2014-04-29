@@ -103,7 +103,7 @@
                     this.preparePages();
                 },
 
-                onCreationComplete: function () {
+                onCreated: function () {
                     if (this._items) {
                         this.bindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
                         this.onCollectionChangedInternal("refresh", -1, null);
@@ -129,11 +129,11 @@
                         return;
                     this._total = v;
                 },
-                initialize: function () {
+                init: function () {
 
                     $(this._element).addClass("atom-data-pager");
 
-                    base.initialize.apply(this, arguments);
+                    base.init.apply(this, arguments);
                 }
             }
 

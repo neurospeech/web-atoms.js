@@ -55,8 +55,8 @@
                 AtomBinder.setValue(this, "value", this._sortField + " " + this._direction);
             },
 
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
 
                 this.bindEvent(this._element, "click", "onClick");
                 $(this._element).addClass("atom-column");

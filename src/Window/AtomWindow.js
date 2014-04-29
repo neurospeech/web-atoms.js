@@ -105,12 +105,12 @@
                 });
             },
 
-            initialize: function () {
+            init: function () {
 
 
 
                 $(this._element).addClass("atom-window-placeholder");
-                baseType.initialize.call(this);
+                baseType.init.call(this);
 
                 var _this = this;
                 this.closeCommand = function () {

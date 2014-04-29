@@ -12,9 +12,9 @@
             ];
         },
         methods: {
-            initialize: function () {
+            init: function () {
                 this._element.style.height = "26px";
-                baseType.initialize.call(this);
+                baseType.init.call(this);
             }
         }
     });

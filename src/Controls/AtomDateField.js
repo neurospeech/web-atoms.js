@@ -30,7 +30,7 @@
                     this._element.appendChild(this.popup);
                     this.onCreateChildren(this.popup);
                     this.setProperties(this.popup);
-                    this.initializeChildren(this.popup);
+                    this.initChildren(this.popup);
                     //var _this = this;
                     //WebAtoms.dispatcher.callLater(function () {
                     //    AtomPopup.show(_this._element, _this.popup, 0, function () {

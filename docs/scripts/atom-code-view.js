@@ -221,7 +221,7 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                 }
             },
 
-            initialize: function () {
+            init: function () {
 
                 var _this = this;
                 this.editor = CodeMirror.fromTextArea(this._codeView, {
@@ -239,7 +239,7 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                     }
                 });
 
-                baseType.initialize.call(this);
+                baseType.init.call(this);
             }
         }
     });

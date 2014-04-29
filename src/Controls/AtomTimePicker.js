@@ -8,7 +8,7 @@
             displayLabel: "9:00 AM"
         },
         methods: {
-            initialize: function () {
+            init: function () {
                 this._autoOpen = true;
                 var items = [];
                 for (var i = 0; i <= 23; i++) {
@@ -26,7 +26,7 @@
                     items.push({ label: item, value: item });
                 }
                 this._items = items;
-                baseType.initialize.call(this);
+                baseType.init.call(this);
             }
         }
     });

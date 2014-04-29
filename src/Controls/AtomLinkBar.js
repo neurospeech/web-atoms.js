@@ -127,8 +127,8 @@
                 base.dispose.apply(this, arguments);
             },
 
-            initialize: function () {
-                base.initialize.apply(this, arguments);
+            init: function () {
+                base.init.apply(this, arguments);
 
                 //this.bindEvent(this._element, "mouseover", "openMenuCommand");
                 this.bindEvent(this._element, "click", "openMenuCommand");

@@ -245,10 +245,10 @@ window.AtomAnimations = AtomAnimations;
                 }
 
             },
-            initialize: function () {
+            init: function () {
                 var element = this.get_element();
                 $(element).addClass("atom-view-stack");
-                baseType.initialize.call(this);
+                baseType.init.call(this);
                 //this.updateUI();
             }
         }

@@ -130,7 +130,7 @@
                 this.num.value = ns;
             },
 
-            initialize: function () {
+            init: function () {
                 this.cs = document.createElement("SELECT");
                 //this.cs.style['float'] = "left";
                 this.num = document.createElement("INPUT");
@@ -188,7 +188,7 @@
                 }).invoke();
 
 
-                base.initialize.call(this);
+                base.init.call(this);
             }
         }
     });

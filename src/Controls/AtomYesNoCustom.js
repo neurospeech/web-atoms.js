@@ -42,9 +42,9 @@
                 }
             },
 
-            initialize: function () {
+            init: function () {
 
-                baseType.initialize.call(this);
+                baseType.init.call(this);
 
                 this._yesNo = this._yesNo.atomControl;
 

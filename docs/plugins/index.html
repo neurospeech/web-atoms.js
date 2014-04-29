@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>How to make Atoms.js Plugin</title>
+    <link href="../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Atoms.js Plugins</h1>
+    <p>
+        Atoms.js is all about a UI component, and a plugin is an additional UI Component Library which you can use it on an Atom Application.</p>
+    <p>
+        We are shipping certain plugins by default with our library, however atoms.js do not include these plugins as they are little resource intensive and they need Flash fallback etc.</p>
+    <h2>How to make Plugin?</h2>
+    <p>
+        Plugin is a simple UI component, and Atoms.js has specific life cycle events that plugin must program. Plugin can control one or more UI controls. Following guidelines must be used while creating plugins.</p>
+    <ol>
+        <li>Plugin must and only contain UI Controls, other referenced JS files must be kept separate.</li>
+        <li>Plugin must specify external JS/CSS references in documentation correctly along with their licenses.</li>
+        <li>While encapsulating other JS library, plugin file name and UI control name should always begin with word &quot;Atom&quot;. For example VideoJS UI Control should be named as &quot;AtomVideoJS&quot; and file name should be &quot;atom-videojs&quot; or &quot;atom-video-js&quot;.</li>
+        <li>README.md must be provided in the same folder, all necessary JS references should be kept in the same folder or child folder.</li>
+    </ol>
+    <h2>Create Class</h2>
+    <p>
+        Atoms.js has a global method to create class, which obeys object oriented principles and also flatterns prototype chain for faster execution.</p>
+    <pre class="atom-code" style="font-family: Consolas; font-size: 13; color: black; background: white;">(<span style="color:blue;">function</span>&nbsp;(window,&nbsp;base)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">return</span>&nbsp;createClass({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;<span style="color:#a31515;">&quot;AtomClock&quot;</span>,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base:&nbsp;base,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;<span style="color:blue;">function</span>&nbsp;(e)&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(e).addClass(<span style="color:#a31515;">&quot;atom-clock&quot;</span>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;properties:&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time:&nbsp;(<span style="color:blue;">new</span>&nbsp;Date())
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods:&nbsp;{
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">/*init&nbsp;called&nbsp;before&nbsp;setting&nbsp;properties*/</span>
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">//init:&nbsp;function&nbsp;()&nbsp;{</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">//&nbsp;&nbsp;&nbsp;&nbsp;base.init.call(this);</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">//},</span>
+ 
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">/*onCreated&nbsp;gets&nbsp;called&nbsp;after&nbsp;successful&nbsp;creation&nbsp;of&nbsp;this&nbsp;component*/</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onCreated:&nbsp;<span style="color:blue;">function</span>&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base.onCreated.call(<span style="color:blue;">this</span>);
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green;">/*Pattern&nbsp;of&nbsp;passing&nbsp;this*/</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">var</span>&nbsp;_this&nbsp;=&nbsp;<span style="color:blue;">this</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setInterval(<span style="color:blue;">function</span>&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_this.updateTime();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;1000);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+ 
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;updateTime:&nbsp;<span style="color:blue;">function</span>&nbsp;()&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atom.set(<span style="color:blue;">this</span>,&nbsp;<span style="color:#a31515;">&quot;time&quot;</span>,&nbsp;(<span style="color:blue;">new</span>&nbsp;Date()));
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;&nbsp;});
+})(window,&nbsp;WebAtoms.AtomControl.prototype);</pre>
+    <h2>
+        Create Default Template</h2>
+    <p>
+        And you have to provide a default template for the control as shown as below, template must be provided in JsonML format.</p>
+    <pre class="atom-code" style="font-family: Consolas; font-size: 13; color: black; background: white;">Templates.jsonML[<span style="color:#a31515;">&quot;AtomClock.template&quot;</span>]&nbsp;=&nbsp;[
+&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#a31515;">&quot;span&quot;</span>,&nbsp;{&nbsp;<span style="color:#a31515;">&#39;atom-text&#39;</span>:&nbsp;<span style="color:#a31515;">&#39;[($owner.time).getHours()]&#39;</span>&nbsp;}],
+&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#a31515;">&quot;span&quot;</span>,&nbsp;{&nbsp;<span style="color:#a31515;">&#39;atom-text&#39;</span>:&nbsp;<span style="color:#a31515;">&#39;[($owner.time).getMinutes()]&#39;</span>&nbsp;}],
+&nbsp;&nbsp;&nbsp;&nbsp;[<span style="color:#a31515;">&quot;span&quot;</span>,&nbsp;{&nbsp;<span style="color:#a31515;">&#39;atom-text&#39;</span>:&nbsp;<span style="color:#a31515;">&#39;[($owner.time).getSeconds()]&#39;</span>&nbsp;}]
+];</pre>
+    <h2>
+        Create Default Style</h2>
+    <pre class="atom-code" style="font-family: Consolas; font-size: 13; color: black; background: white;"><span style="color:maroon;">.atom-clock</span>{
+ 
+}
+ 
+<span style="color:maroon;">.atom-clock</span>&nbsp;<span style="color:maroon;">span</span>{
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">margin-left</span>:<span style="color:blue;">5px</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">font-size</span>:<span style="color:blue;">large</span>;
+}</pre>
+    <h2>
+        Sample Documentation</h2>
+    <p>
+        Add &quot;atom-clock.js&quot; and &quot;atom-clock.css&quot; after other Atoms.js related resources in your HTML page.</p>
+    <h3>
+        Properties</h3>
+    <h4>
+        time</h4>
+    <p>
+        Automatically updates to current time every second any data bound element will refresh its content if bound to time property.</p>
+    <h2>
+        Sample Usage</h2>
+    <p>
+        &nbsp;</p>
+       <iframe class="atom-code-frame" src="../code.html#codeFile=plugins/samples/atom-clock.html" style="height: 414px;">
+
+    </iframe>
+
+</body>
+</html>
