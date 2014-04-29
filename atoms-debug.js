@@ -4270,7 +4270,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 /*Line 766 - 'AtomControl.js' */            },
 
-/*Line 768 - 'AtomControl.js' */            initializationComplete: function () {
+/*Line 768 - 'AtomControl.js' */            onInitialized: function () {
 /*Line 769 - 'AtomControl.js' */            },
 
 /*Line 771 - 'AtomControl.js' */            init: function () {
@@ -4328,9 +4328,9 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 823 - 'AtomControl.js' */                // init every children..
 /*Line 824 - 'AtomControl.js' */                this.initChildren(this._element);
 
-/*Line 826 - 'AtomControl.js' */                //fn = Function.createDelegate(this, this.initializationComplete);
+/*Line 826 - 'AtomControl.js' */                //fn = Function.createDelegate(this, this.onInitialized);
 /*Line 827 - 'AtomControl.js' */                WebAtoms.dispatcher.callLater(function () {
-/*Line 828 - 'AtomControl.js' */                    _this.initializationComplete();
+/*Line 828 - 'AtomControl.js' */                    _this.onInitialized();
 /*Line 829 - 'AtomControl.js' */                });
 /*Line 830 - 'AtomControl.js' */            },
 
@@ -6597,7 +6597,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 194 - 'AtomApplication.js' */                }
 /*Line 195 - 'AtomApplication.js' */            },
 
-/*Line 197 - 'AtomApplication.js' */            initializationComplete: function () {
+/*Line 197 - 'AtomApplication.js' */            onInitialized: function () {
 
 /*Line 199 - 'AtomApplication.js' */                // To save URL persistance of Scope Values
 /*Line 200 - 'AtomApplication.js' */                // We have to remember default scope values set 
@@ -6625,7 +6625,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 222 - 'AtomApplication.js' */                if (p) {
 /*Line 223 - 'AtomApplication.js' */                    this._defaultScope = "#" + p;
 /*Line 224 - 'AtomApplication.js' */                }
-/*Line 225 - 'AtomApplication.js' */                base.initializationComplete.call(this);
+/*Line 225 - 'AtomApplication.js' */                base.onInitialized.call(this);
 /*Line 226 - 'AtomApplication.js' */            },
 
 /*Line 228 - 'AtomApplication.js' */            createChildren: function () {
@@ -6683,8 +6683,8 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 280 - 'AtomApplication.js' */                this.init();
 /*Line 281 - 'AtomApplication.js' */            },
 
-/*Line 283 - 'AtomApplication.js' */            initializationComplete: function () {
-/*Line 284 - 'AtomApplication.js' */                base.initializationComplete.apply(this, arguments);
+/*Line 283 - 'AtomApplication.js' */            onInitialized: function () {
+/*Line 284 - 'AtomApplication.js' */                base.onInitialized.apply(this, arguments);
 /*Line 285 - 'AtomApplication.js' */                if (!this._renderAsPage) {
 /*Line 286 - 'AtomApplication.js' */                    $(this._element).addClass("atom-dock-application");
 /*Line 287 - 'AtomApplication.js' */                }

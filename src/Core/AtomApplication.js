@@ -195,7 +195,7 @@ this.atomApplication = null;
                 }
             },
 
-            initializationComplete: function () {
+            onInitialized: function () {
 
                 // To save URL persistance of Scope Values
                 // We have to remember default scope values set 
@@ -223,7 +223,7 @@ this.atomApplication = null;
                 if (p) {
                     this._defaultScope = "#" + p;
                 }
-                base.initializationComplete.call(this);
+                base.onInitialized.call(this);
             },
 
             createChildren: function () {
@@ -281,8 +281,8 @@ this.atomApplication = null;
                 this.init();
             },
 
-            initializationComplete: function () {
-                base.initializationComplete.apply(this, arguments);
+            onInitialized: function () {
+                base.onInitialized.apply(this, arguments);
                 if (!this._renderAsPage) {
                     $(this._element).addClass("atom-dock-application");
                 }

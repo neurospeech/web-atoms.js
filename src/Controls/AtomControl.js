@@ -766,7 +766,7 @@ window.AtomProperties = AtomProperties;
 
             },
 
-            initializationComplete: function () {
+            onInitialized: function () {
             },
 
             init: function () {
@@ -824,9 +824,9 @@ window.AtomProperties = AtomProperties;
                 // init every children..
                 this.initChildren(this._element);
 
-                //fn = Function.createDelegate(this, this.initializationComplete);
+                //fn = Function.createDelegate(this, this.onInitialized);
                 WebAtoms.dispatcher.callLater(function () {
-                    _this.initializationComplete();
+                    _this.onInitialized();
                 });
             },
 
