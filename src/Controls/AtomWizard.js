@@ -38,10 +38,10 @@
 
 
 
-            initialize: function () {
+            init: function () {
                 $(this._element).addClass('atom-wizard');
 
-                baseType.initialize.call(this);
+                baseType.init.call(this);
 
                 var _this = this;
 
@@ -88,7 +88,7 @@
 
                     var ct = $(item).attr("atom-type") || WebAtoms.AtomControl;
                     var cc = AtomUI.createControl(item, ct);
-                    cc.initialize();
+                    cc.init();
                 }
                 AtomBinder.setValue(this, "steps", i);
 

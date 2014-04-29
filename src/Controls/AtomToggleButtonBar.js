@@ -16,9 +16,9 @@
             showTabs: false
         },
         methods: {
-            initialize: function () {
+            init: function () {
 
-                baseType.initialize.call(this);
+                baseType.init.call(this);
 
                 this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
             }

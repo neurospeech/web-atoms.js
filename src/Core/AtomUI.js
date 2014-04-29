@@ -349,14 +349,14 @@ var AtomUI =
                 ctrl._scope = newScope;
             }
 
-            //initializes templates..
+            //inits templates..
             //ctrl.prepareControl();
 
-            //initialize templates and creates controls...
+            //init templates and creates controls...
             ctrl.createChildren();
 
             if (data) {
-                ctrl.initialize();
+                ctrl.init();
             }
             //$(element).removeAttr("atom-type");
             return ctrl;

@@ -68,11 +68,11 @@
             verifyTemplates: function () {
             },
 
-            initialize: function () {
+            init: function () {
 
                 var element = this.get_element();
                 this.bindEvent(element, "change", "onSelectionChanged");
-                base.initialize.apply(this, arguments);
+                base.init.apply(this, arguments);
             }
         }
     });

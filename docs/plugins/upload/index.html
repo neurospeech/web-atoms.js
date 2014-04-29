@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>AtomUpload Plugin</h1>
+    <p>
+        This plugin provides Flash fallback as well as it provides Pre Post to securely create non cookie based upload URL.</p>
+    <h2>Properties</h2>
+    <h3>upload-url</h3>
+    <p>
+        When using non-flash mode, you can simply set upload-url to HTTP URL where files will be uploaded.</p>
+    <h3>upload-on-select</h3>
+    <p>
+        By default it is true, files are uploaded as soon as they are selected.</p>
+    <h3>post-url</h3>
+    <p>
+        When using pre-post method, a JSON payload will be uploaded to specified post-url along with specified post-data. The result must contain a valid upload URL at upload-path specified.</p>
+    <h3>post-data</h3>
+    <p>
+        When using pre-post method, this property must contain JSON payload data. It should not be JSON encoded, it can be any JavaScript object type.</p>
+    <h3>upload-path</h3>
+    <p>
+        When using pre-post method, upload-path will be used to retrive upload url from the resultant JSON data.</p>
+    <h2>Commands</h2>
+    <h3>uploadCommand</h3>
+    <p>
+        If upload-on-select is false, this command must be specified as next to any UI operation or any form post.</p>
+    <h2>Modes of Usage</h2>
+    <h3>Pre Upload Post</h3>
+    <p>
+        Since flash does not send cookies along with upload, it is recommended that first we post data and server must send a unique one time usage upload url.</p>
+    <h3>Upload Url</h3>
+    <p>
+        If you are ok with not sending cookies for upload validation, then you can directly bind upload-url property where the files will be uploaded.</p>
+
+</body>
+</html>

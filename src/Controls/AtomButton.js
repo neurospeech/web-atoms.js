@@ -26,11 +26,11 @@
                 return false;
             },
 
-            initialize: function () {
+            init: function () {
 
                 var element = this._element;
                 this.bindEvent(element, "click", "onClickHandler");
-                base.initialize.apply(this);
+                base.init.apply(this);
             }
         }
 

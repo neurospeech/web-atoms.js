@@ -11,8 +11,8 @@
             this._dataElements = [];
         },
         methods: {
-            initialize: function () {
-                base.initialize.call(this);
+            init: function () {
+                base.init.call(this);
                 $(this._element).addClass("atom-check-box-list");
             }
         }

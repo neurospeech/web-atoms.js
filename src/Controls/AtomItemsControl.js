@@ -694,7 +694,7 @@
                 }
             },
 
-            onCreationComplete: function () {
+            onCreated: function () {
 
 
                 if (this._items) {
@@ -712,7 +712,7 @@
             },
 
 
-            initialize: function () {
+            init: function () {
 
                 var element = this.get_element();
 
@@ -729,7 +729,7 @@
                 this.bindEvent(this._selectedItems, "CollectionChanged", function () {
                     _this.onSelectedItemsChanged.apply(_this, arguments);
                 });
-                base.initialize.apply(this, arguments);
+                base.init.apply(this, arguments);
 
 
                 var caller = this;

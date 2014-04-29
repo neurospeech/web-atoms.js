@@ -8680,7 +8680,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 			return jQuery.offset.bodyOffset( elem );
 		}
 
-		jQuery.offset.initialize();
+		jQuery.offset.init();
 
 		var computedStyle,
 			offsetParent = elem.offsetParent,
@@ -8738,7 +8738,7 @@ if ( "getBoundingClientRect" in document.documentElement ) {
 }
 
 jQuery.offset = {
-	initialize: function() {
+	init: function() {
 		var body = document.body, container = document.createElement("div"), innerDiv, checkDiv, table, td, bodyMarginTop = parseFloat( jQuery.css(body, "marginTop") ) || 0,
 			html = "<div style='position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;'><div></div></div><table style='position:absolute;top:0;left:0;margin:0;border:5px solid #000;padding:0;width:1px;height:1px;' cellpadding='0' cellspacing='0'><tr><td></td></tr></table>";
 
@@ -8769,14 +8769,14 @@ jQuery.offset = {
 
 		body.removeChild( container );
 		body = container = innerDiv = checkDiv = table = td = null;
-		jQuery.offset.initialize = jQuery.noop;
+		jQuery.offset.init = jQuery.noop;
 	},
 
 	bodyOffset: function( body ) {
 		var top = body.offsetTop,
 			left = body.offsetLeft;
 
-		jQuery.offset.initialize();
+		jQuery.offset.init();
 
 		if ( jQuery.offset.doesNotIncludeMarginInBodyOffset ) {
 			top  += parseFloat( jQuery.css(body, "marginTop") ) || 0;

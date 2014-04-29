@@ -71,8 +71,8 @@
                 ap.invoke();
             },
 
-            onCreationComplete: function () {
-                baseType.onCreationComplete.apply(this, arguments);
+            onCreated: function () {
+                baseType.onCreated.apply(this, arguments);
                 var data = this.preparePostData();
                 if (!data)
                     return;
@@ -98,8 +98,8 @@
                 }
             },
 
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
 
                 var _this = this;
                 this.pushPostHandler = function () {

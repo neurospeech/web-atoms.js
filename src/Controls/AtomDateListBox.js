@@ -54,8 +54,8 @@
                 AtomBinder.refreshValue(this, "month");
             },
 
-            initialize: function () {
-                base.initialize.apply(this);
+            init: function () {
+                base.init.apply(this);
                 var _this = this;
                 this.toggleDateCommand = function (scope, sender) {
                     _this.toggleDate.apply(_this, arguments);

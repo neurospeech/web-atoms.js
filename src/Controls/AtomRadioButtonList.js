@@ -77,9 +77,9 @@
                 return cb;
             },
 
-            initialize: function () {
+            init: function () {
                 this._groupName = "__g" + AtomUI.getNewIndex();
-                baseType.initialize.call(this);
+                baseType.init.call(this);
             }
         }
     });

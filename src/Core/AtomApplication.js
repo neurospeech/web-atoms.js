@@ -237,8 +237,8 @@ this.atomApplication = null;
                 }
             },
 
-            onCreationComplete: function () {
-                base.onCreationComplete.call(this);
+            onCreated: function () {
+                base.onCreated.call(this);
 
 
                 if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
@@ -278,7 +278,7 @@ this.atomApplication = null;
 
             setup: function () {
                 this.createChildren();
-                this.initialize();
+                this.init();
             },
 
             initializationComplete: function () {
@@ -288,7 +288,7 @@ this.atomApplication = null;
                 }
             },
 
-            initialize: function () {
+            init: function () {
 
                 this.bindEvent(window, "resize", "invokeUpdateUI");
 
@@ -299,7 +299,7 @@ this.atomApplication = null;
 
                 this._scope._$_watcher = this;
 
-                base.initialize.call(this);
+                base.init.call(this);
 
 
                 this.closeCommand = function () {

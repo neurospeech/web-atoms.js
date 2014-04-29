@@ -51,9 +51,9 @@
                 }
             },
 
-            onCreationComplete: function () {
+            onCreated: function () {
                 this.bindEvent(this._itemsPresenter, "click", "onClick");
-                baseType.onCreationComplete.call(this);
+                baseType.onCreated.call(this);
             },
 
             invokePost: function () {
@@ -81,10 +81,10 @@
 
             },
 
-            initialize: function () {
+            init: function () {
 
 
-                baseType.initialize.call(this);
+                baseType.init.call(this);
                 var _this = this;
 
                 this.selectCommand = function () {

@@ -177,8 +177,8 @@
                 return isValid;
             },
 
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
 
                 var _this = this;
                 this._success = function () {

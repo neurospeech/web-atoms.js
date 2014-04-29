@@ -234,7 +234,7 @@
                 }, 10);
             },
 
-            onCreationComplete: function () {
+            onCreated: function () {
 
                 this._itemsPresenter._logicalParent = this._element;
 
@@ -244,7 +244,7 @@
 
                 $(this._itemsPresenter).addClass("atom-auto-complete-popup");
 
-                base.onCreationComplete.apply(this, arguments);
+                base.onCreated.apply(this, arguments);
                 this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
                 this.bindEvent(this._itemsPresenter, "mouseout", "onMouseOut");
             },
@@ -262,9 +262,9 @@
                 }, 1000);
             },
 
-            initialize: function () {
+            init: function () {
 
-                base.initialize.apply(this, arguments);
+                base.init.apply(this, arguments);
                 this.bindEvent(this._inputBox, "focus", "onInputFocus");
                 this.bindEvent(this._inputBox, "blur", "onInputBlur");
                 this.bindEvent(this._inputBox, "keyup", "onKeyUp");

@@ -13,7 +13,7 @@ document.createElement('track');
  *
  * **ALIASES** videojs, _V_ (deprecated)
  *
- * The `vjs` function can be used to initialize or retrieve a player.
+ * The `vjs` function can be used to init or retrieve a player.
  *
  *     var myPlayer = vjs('my_video_id');
  *
@@ -1515,7 +1515,7 @@ vjs.Component.prototype.options_;
  *     {
  *       children: {
  *         'childOne': { 'foo': 'baz', 'asdf': 'fdsa', 'abc': '123' },
- *         'childTwo': null, // Disabled. Won't be initialized.
+ *         'childTwo': null, // Disabled. Won't be initd.
  *         'childThree': {},
  *         'childFour': {}
  *       }
@@ -1784,7 +1784,7 @@ vjs.Component.prototype.removeChild = function(component){
 };
 
 /**
- * Add and initialize default child components from options
+ * Add and init default child components from options
  *
  *     // when an instance of MyComponent is created, all children in options
  *     // will be added to the instance by their name strings and options
@@ -2803,7 +2803,7 @@ vjs.MenuButton.prototype.unpressButton = function(){
 };
 
 /**
- * An instance of the `vjs.Player` class is created when any of the Video.js setup methods are used to initialize a video.
+ * An instance of the `vjs.Player` class is created when any of the Video.js setup methods are used to init a video.
  *
  * ```js
  * var myPlayer = videojs('example_video_1');
@@ -3093,7 +3093,7 @@ vjs.Player.prototype.loadTech = function(techName, source){
     this.cache_.src = source.src;
   }
 
-  // Initialize tech instance
+  // init tech instance
   this.tech = new window['videojs'][techName](this, techOptions);
 
   this.tech.ready(techReady);
@@ -4051,7 +4051,7 @@ vjs.Player.prototype.error = function(){ return this.techGet('error'); };
 vjs.Player.prototype.ended = function(){ return this.techGet('ended'); };
 vjs.Player.prototype.seeking = function(){ return this.techGet('seeking'); };
 
-// When the player is first initialized, trigger activity so components
+// When the player is first initd, trigger activity so components
 // like the control bar show themselves if needed
 vjs.Player.prototype.userActivity_ = true;
 vjs.Player.prototype.reportUserActivity = function(event){
@@ -6079,7 +6079,7 @@ vjs.Flash.embed = function(swf, placeHolder, flashVars, params, attributes){
 
   placeHolder.parentNode.replaceChild(obj, placeHolder);
 
-  // IE6 seems to have an issue where it won't initialize the swf object after injecting it.
+  // IE6 seems to have an issue where it won't init the swf object after injecting it.
   // This is a dumb fix
   var newObj = par.childNodes[0];
   setTimeout(function(){
@@ -6184,7 +6184,7 @@ vjs.Flash.isStreamingSrc = function(src) {
 };
 /**
  * The Media Loader is the component that decides which playback technology to load
- * when the player is initialized.
+ * when the player is initd.
  *
  * @constructor
  */
@@ -6193,7 +6193,7 @@ vjs.MediaLoader = vjs.Component.extend({
   init: function(player, options, ready){
     vjs.Component.call(this, player, options, ready);
 
-    // If there are no sources when the player is initialized,
+    // If there are no sources when the player is initd,
     // load the first supported playback technology.
     if (!player.options_['sources'] || player.options_['sources'].length === 0) {
       for (var i=0,j=player.options_['techOrder']; i<j.length; i++) {

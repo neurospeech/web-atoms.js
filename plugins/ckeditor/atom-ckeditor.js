@@ -170,8 +170,8 @@ function registerCKEDITORPlugin() {
                     this.editor.setData(v);
                 }
             },
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
 
                 //window.registerCKEDITORPlugin();
 

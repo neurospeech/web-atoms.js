@@ -20,8 +20,8 @@
                 this._currentYear = v;
                 this.updateCalendar();
             },
-            onCreationComplete: function () {
-                baseType.onCreationComplete.call(this);
+            onCreated: function () {
+                baseType.onCreated.call(this);
                 this.updateCalendar();
             },
 
@@ -87,8 +87,8 @@
                 }
                 AtomBinder.setValue(this, "currentMonth",m);
             },
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
                 var _this = this;
                 this.nextMonthCommand = function () {
                     _this.changeMonth(1);

@@ -128,7 +128,7 @@
                 }
                 return this._isValid;
             },
-            onCreationComplete: function () {
+            onCreated: function () {
                 this.setup();
             },
             onFocusOut: function () {

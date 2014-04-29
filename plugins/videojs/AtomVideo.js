@@ -89,8 +89,8 @@
                 //    this.player.show();
                 //}
             },
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
                 var _this = this;
                 var v = document.createElement("VIDEO");
                 AtomUI.assignID(v);

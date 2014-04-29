@@ -398,17 +398,17 @@ window.AtomProperties = AtomProperties;
                 }
             },
 
-            initializeProperties: function () {
+            initProperties: function () {
 
                 if (this._disposed)
                     return;
 
-                //// initialize properties...
+                //// init properties...
                 var element = this.get_element();
 
                 this.setProperties(element);
                 this._created = true;
-                this.onCreationComplete();
+                this.onCreated();
                 this.onLoaded();
             },
 
@@ -527,7 +527,7 @@ window.AtomProperties = AtomProperties;
                 }
             },
 
-            onCreationComplete: function () {
+            onCreated: function () {
                 this.updateUI();
             },
 
@@ -769,12 +769,12 @@ window.AtomProperties = AtomProperties;
             initializationComplete: function () {
             },
 
-            initialize: function () {
+            init: function () {
 
                 // first remove all templates ...
-                base.initialize.apply(this, arguments);
+                base.init.apply(this, arguments);
 
-                // initialize properties...
+                // init properties...
                 var element = this.get_element();
 
                 var amap = AtomUI.attributeMap(element, /^atom\-(name|local\-scope)$/gi);
@@ -815,14 +815,14 @@ window.AtomProperties = AtomProperties;
                     //}
                 }
 
-                //var fn = Function.createDelegate(this, this.initializeProperties);
+                //var fn = Function.createDelegate(this, this.initProperties);
                 var _this = this;
                 WebAtoms.dispatcher.callLater(function () {
-                    _this.initializeProperties();
+                    _this.initProperties();
                 });
 
-                // initialize every children..
-                this.initializeChildren(this._element);
+                // init every children..
+                this.initChildren(this._element);
 
                 //fn = Function.createDelegate(this, this.initializationComplete);
                 WebAtoms.dispatcher.callLater(function () {
@@ -905,11 +905,11 @@ window.AtomProperties = AtomProperties;
 
                 this.createChildren();
                 this.setProperties(this._element);
-                this.initializeChildren(this._element);
+                this.initChildren(this._element);
                 this.updateUI();
             },
 
-            initializeChildren: function (e) {
+            initChildren: function (e) {
                 var ae = new ChildEnumerator(e);
                 var item;
                 var ctrl;
@@ -946,9 +946,9 @@ window.AtomProperties = AtomProperties;
 
                     ctrl = item.atomControl;
                     if (ctrl) {
-                        ctrl.initialize();
+                        ctrl.init();
                     } else {
-                        this.initializeChildren(item);
+                        this.initChildren(item);
                     }
                 }
 

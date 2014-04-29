@@ -103,7 +103,7 @@
                 this.setDate();
                 AtomBinder.refreshValue(this, "value");
             },
-            initialize: function () {
+            init: function () {
 
                 var element = this._element;
 
@@ -136,7 +136,7 @@
                 this.setMonths();
 
 
-                base.initialize.apply(this, arguments);
+                base.init.apply(this, arguments);
 
 
             }

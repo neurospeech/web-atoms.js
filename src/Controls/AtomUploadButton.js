@@ -150,8 +150,8 @@
                 this.invokeAction(this._next, evt);
             },
 
-            initialize: function () {
-                baseType.initialize.call(this);
+            init: function () {
+                baseType.init.call(this);
 
                 var f = this._filePresenter;
 
