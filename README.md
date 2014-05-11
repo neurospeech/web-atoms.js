@@ -15,7 +15,9 @@ Features
 7. Powerful State Machine
 8. Customizable Templates
 9. Scalability (Able to manage 1000s of rows of data)
-11. Ready to use Line of Business Components
+10. Application State Persistance in URL
+11. Multiple Scopes for Scope Isolation
+12. Ready to use Line of Business Components
 
 Atoms.js (previously known as Web Atoms JS) is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.
