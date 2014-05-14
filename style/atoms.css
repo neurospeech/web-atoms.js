@@ -285,7 +285,7 @@ border-radius: 4px;
     background-color:white;
 }
 
-.atom-date-list-box-calendar {
+.atom-date-list-box .calendar {
     width:200px;
     height:215px;
     position:absolute;
@@ -295,7 +295,7 @@ border-radius: 4px;
     z-index:11;
 }
 
-.atom-date-list-box-list {
+.atom-date-list-box .list {
     width:100px;
     height:200px;
     margin:1px;
@@ -307,7 +307,7 @@ border-radius: 4px;
 }
 
 
-.atom-date-list-box-days {
+.atom-date-list-box .calendar .days {
     position:absolute;
     left:10px;
     top:35px;
@@ -315,16 +315,16 @@ border-radius: 4px;
     text-align:center;
 }
 
-.atom-date-list-box-month {
+.atom-date-list-box .calendar .month {
     margin-left:10px;
     width:100px;
 }
 
-.atom-date-list-box-year{
+.atom-date-list-box .year{
     width:70px;
 }
 
-.atom-date-list-box-days span {
+.atom-date-list-box .calendar .days span {
     display:inline-block;
     width:25px;
     height:25px;
@@ -333,7 +333,7 @@ border-radius: 4px;
     float:left;
 }
 
-.atom-date-list-box-day-list {
+.atom-date-list-box .calendar .day-list {
     position:absolute;
     left:10px;
     top:62px;
@@ -341,7 +341,7 @@ border-radius: 4px;
     width:180px;
 }
 
-.atom-date-list-box-day-list-item {
+.atom-date-list-box .calendar .list-item {
     width:23px;
     height:23px;
     margin:1px;
@@ -352,24 +352,24 @@ border-radius: 4px;
     text-decoration:none;
 }
 
-.atom-date-list-box-day-list-item:hover{
+.atom-date-list-box .calendar .list-item:hover{
     margin:0px;
     border: 1px solid blue;
 }
 
-.atom-date-list-box-day-list-item-other {
+.atom-date-list-box .calendar .other {
     color:lightgray;
 }
 
-.atom-date-list-box-weekend-header {
+.atom-date-list-box .calendar .weekend-header {
     background-color: #bebebe
 }
 
-.atom-date-list-box-weekend {
+.atom-date-list-box .calendar .weekend {
     background-color: #eeeeee
 }
 
-.atom-date-list-box-selected {
+.atom-date-list-box .calendar .selected {
     background-color: darkgreen;
     color:white;
 }

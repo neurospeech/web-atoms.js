@@ -161,7 +161,7 @@ Templates.jsonML["WebAtoms.AtomAutoCompleteBox.template"] =
 ]]
 ]
 ;
-Templates.jsonML["WebAtoms.AtomCalendar.gridTemplate"] = 
+Templates.jsonML["WebAtoms.AtomCalendar.template"] = 
 [["div",
 {  }
 ,["div",
@@ -222,17 +222,17 @@ Templates.jsonML["WebAtoms.AtomDataPager.template"] =
 ;
 Templates.jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
-{ "class": "popup", "atom-class": "[$owner.isOpen ? 'popup-open' : 'popup-closed' ]" }
+{ "class": "popup atom-date-list-box", "atom-class": "[$owner.isOpen ? 'popup-open' : 'popup-closed' ]" }
 ,["div",
-{ "class": "atom-date-list-box-calendar", "atom-presenter": "calendarPresenter" }
+{ "class": "calendar", "atom-presenter": "calendarPresenter" }
 ,["select",
-{ "atom-type": "AtomComboBox", "class": "atom-date-list-box-month", "atom-items": "{AtomDate.monthList}", "atom-value": "$[owner.templateParent.month]" }
+{ "atom-type": "AtomComboBox", "class": "month", "atom-items": "{AtomDate.monthList}", "atom-value": "$[owner.templateParent.month]" }
 ], ["select",
-{ "atom-type": "AtomNumberComboBox", "class": "atom-date-list-box-year", "atom-start-number": "[ $owner.templateParent.currentYear + $owner.templateParent.startYear]", "atom-end-number": "[ $owner.templateParent.currentYear + $owner.templateParent.endYear]", "atom-value": "$[owner.templateParent.year]" }
+{ "atom-type": "AtomNumberComboBox", "class": "year", "atom-start-number": "[ $owner.templateParent.currentYear + $owner.templateParent.startYear]", "atom-end-number": "[ $owner.templateParent.currentYear + $owner.templateParent.endYear]", "atom-value": "$[owner.templateParent.year]" }
 ], ["div",
-{ "class": "atom-date-list-box-days" }
+{ "class": "days" }
 ,["span",
-{ "class": "atom-date-list-box-weekend-header" }
+{ "class": "weekend-header" }
 ,"S"], ["span",
 {  }
 ,"M"], ["span",
@@ -244,11 +244,11 @@ Templates.jsonML["WebAtoms.AtomDateField.popupTemplate"] =
 ,"T"], ["span",
 {  }
 ,"F"], ["span",
-{ "class": "atom-date-list-box-weekend-header" }
+{ "class": "weekend-header" }
 ,"S"]], ["div",
-{ "class": "atom-date-list-box-day-list", "atom-type": "AtomItemsControl", "atom-items": "[$owner.templateParent.items]", "atom-presenter": "itemsPresenter" }
+{ "class": "day-list", "atom-type": "AtomItemsControl", "atom-items": "[$owner.templateParent.items]", "atom-presenter": "itemsPresenter" }
 ,["div",
-{ "event-click": "{ $owner.templateParent.templateParent.toggleDateCommand }", "atom-class": "[ ($owner.templateParent.templateParent).getItemClass($data,$owner.templateParent.templateParent.value) ]", "atom-template": "itemTemplate" }
+{ "event-click": "{ $owner.templateParent.templateParent.toggleDateCommand }", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth } ]", "atom-template": "itemTemplate" }
 ,["span",
 { "atom-text": "[$data.label]" }
 ]]]]]]
@@ -262,15 +262,15 @@ Templates.jsonML["WebAtoms.AtomDateListBox.template"] =
 [["div",
 { "class": "atom-date-list-box" }
 ,["div",
-{ "class": "atom-date-list-box-calendar" }
+{ "class": "calendar" }
 ,["select",
-{ "atom-type": "AtomComboBox", "class": "atom-date-list-box-month", "atom-items": "{AtomDate.monthList}", "atom-value": "$[owner.templateParent.month]" }
+{ "atom-type": "AtomComboBox", "class": "month", "atom-items": "{AtomDate.monthList}", "atom-value": "$[owner.templateParent.month]" }
 ], ["select",
-{ "atom-type": "AtomComboBox", "class": "atom-date-list-box-year", "atom-items": "[ Atom.range( $owner.value + $owner.templateParent.startYear, $owner.value + $owner.templateParent.endYear) ]", "atom-value": "$[owner.templateParent.year]" }
+{ "atom-type": "AtomComboBox", "class": "year", "atom-items": "[ Atom.range( $owner.value + $owner.templateParent.startYear, $owner.value + $owner.templateParent.endYear) ]", "atom-value": "$[owner.templateParent.year]" }
 ], ["div",
-{ "class": "atom-date-list-box-days" }
+{ "class": "days" }
 ,["span",
-{ "class": "atom-date-list-box-weekend-header" }
+{ "class": "weekend-header" }
 ,"S"], ["span",
 {  }
 ,"M"], ["span",
@@ -282,15 +282,15 @@ Templates.jsonML["WebAtoms.AtomDateListBox.template"] =
 ,"T"], ["span",
 {  }
 ,"F"], ["span",
-{ "class": "atom-date-list-box-weekend-header" }
+{ "class": "weekend-header" }
 ,"S"]], ["div",
-{ "class": "atom-date-list-box-day-list", "atom-presenter": "itemsPresenter" }
+{ "class": "day-list", "atom-presenter": "itemsPresenter" }
 ,["div",
-{ "event-click": "{ $owner.templateParent.toggleDateCommand }", "atom-data": "[$owner.templateParent.items[$scope.item_index]]", "atom-class": "[ ($owner.templateParent).getItemClass($data,$owner.templateParent.value) ]", "atom-template": "itemTemplate" }
+{ "event-click": "{ $owner.templateParent.toggleDateCommand }", "atom-data": "[$owner.templateParent.items[$scope.itemIndex]]", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth, 'selected': Atom.query($owner.templateParent.selectedItems).any({ value: $data.value}) } ]", "atom-template": "itemTemplate" }
 ,["span",
 { "atom-text": "[$data.label]" }
 ]]]], ["div",
-{ "class": "atom-date-list-box-list", "atom-type": "AtomListBox", "atom-items": "[$owner.templateParent.selectedItems]", "atom-label-path": "dateLabel", "atom-value-path": "date", "atom-value": "$[$owner.templateParent.visibleDate]" }
+{ "class": "list", "atom-type": "AtomListBox", "atom-items": "[$owner.templateParent.selectedItems]", "atom-label-path": "dateLabel", "atom-value-path": "date", "atom-value": "$[$owner.templateParent.visibleDate]" }
 ,["div",
 { "atom-template": "itemTemplate", "atom-text": "{$data.dateLabel}" }
 ]]]]
@@ -918,151 +918,155 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 288 - 'Atom.js' */            return "";
 /*Line 289 - 'Atom.js' */        var h = d.getHours();
 /*Line 290 - 'Atom.js' */        var s = "AM";
-/*Line 291 - 'Atom.js' */        if (h > 12) {
-/*Line 292 - 'Atom.js' */            h = h - 12;
-/*Line 293 - 'Atom.js' */            s = "PM";
-/*Line 294 - 'Atom.js' */        }
-/*Line 295 - 'Atom.js' */        var m = d.getMinutes();
-/*Line 296 - 'Atom.js' */        if (m < 10) {
-/*Line 297 - 'Atom.js' */            m = "0" + m;
-/*Line 298 - 'Atom.js' */        } else {
-/*Line 299 - 'Atom.js' */            m = m + "";
-/*Line 300 - 'Atom.js' */            if (m.length == 1) {
-/*Line 301 - 'Atom.js' */                m = m + "0";
-/*Line 302 - 'Atom.js' */            }
-/*Line 303 - 'Atom.js' */        }
-/*Line 304 - 'Atom.js' */        return h + ":" + m + " " + s;
-/*Line 305 - 'Atom.js' */    },
+/*Line 291 - 'Atom.js' */        if (h == 12) {
+/*Line 292 - 'Atom.js' */            s = "PM";
+/*Line 293 - 'Atom.js' */        } else {
+/*Line 294 - 'Atom.js' */            if (h > 12) {
+/*Line 295 - 'Atom.js' */                h = h - 12;
+/*Line 296 - 'Atom.js' */                s = "PM";
+/*Line 297 - 'Atom.js' */            }
+/*Line 298 - 'Atom.js' */        }
+/*Line 299 - 'Atom.js' */        var m = d.getMinutes();
+/*Line 300 - 'Atom.js' */        if (m < 10) {
+/*Line 301 - 'Atom.js' */            m = "0" + m;
+/*Line 302 - 'Atom.js' */        } else {
+/*Line 303 - 'Atom.js' */            m = m + "";
+/*Line 304 - 'Atom.js' */            if (m.length == 1) {
+/*Line 305 - 'Atom.js' */                m = m + "0";
+/*Line 306 - 'Atom.js' */            }
+/*Line 307 - 'Atom.js' */        }
+/*Line 308 - 'Atom.js' */        return h + ":" + m + " " + s;
+/*Line 309 - 'Atom.js' */    },
 
-/*Line 307 - 'Atom.js' */    smartDate: function (v) {
-/*Line 308 - 'Atom.js' */        if (!v)
-/*Line 309 - 'Atom.js' */            return null;
-/*Line 310 - 'Atom.js' */        var d = AtomDate.parse(v);
-/*Line 311 - 'Atom.js' */        var now = new Date();
+/*Line 311 - 'Atom.js' */    smartDate: function (v) {
+/*Line 312 - 'Atom.js' */        if (!v)
+/*Line 313 - 'Atom.js' */            return null;
+/*Line 314 - 'Atom.js' */        var d = AtomDate.parse(v);
+/*Line 315 - 'Atom.js' */        var now = new Date();
 
-/*Line 313 - 'Atom.js' */        if (now.getFullYear() === d.getFullYear()
-/*Line 314 - 'Atom.js' */            && now.getMonth() === d.getMonth()) {
-/*Line 315 - 'Atom.js' */            var diff = now.getDate() - d.getDate();
-/*Line 316 - 'Atom.js' */            switch(diff){
-/*Line 317 - 'Atom.js' */                case -1:
-/*Line 318 - 'Atom.js' */                    return "Tomorrow (" + AtomDate.toTimeString(d) + ")";
-/*Line 319 - 'Atom.js' */                case 0:
-/*Line 320 - 'Atom.js' */                    return "Today (" + AtomDate.toTimeString(d) + ")";
-/*Line 321 - 'Atom.js' */                case 1:
-/*Line 322 - 'Atom.js' */                    return "Yesterday (" + AtomDate.toTimeString(d) + ")";
-/*Line 323 - 'Atom.js' */            }
-/*Line 324 - 'Atom.js' */        }
-/*Line 325 - 'Atom.js' */        return AtomDate.toDateTimeString(d);
-/*Line 326 - 'Atom.js' */    },
-
-/*Line 328 - 'Atom.js' */    smartDateUTC: function (v) {
-/*Line 329 - 'Atom.js' */        return AtomDate.smartDate(v);
+/*Line 317 - 'Atom.js' */        if (now.getFullYear() === d.getFullYear()
+/*Line 318 - 'Atom.js' */            && now.getMonth() === d.getMonth()) {
+/*Line 319 - 'Atom.js' */            var diff = now.getDate() - d.getDate();
+/*Line 320 - 'Atom.js' */            switch(diff){
+/*Line 321 - 'Atom.js' */                case -1:
+/*Line 322 - 'Atom.js' */                    return "Tomorrow (" + AtomDate.toTimeString(d) + ")";
+/*Line 323 - 'Atom.js' */                case 0:
+/*Line 324 - 'Atom.js' */                    return "Today (" + AtomDate.toTimeString(d) + ")";
+/*Line 325 - 'Atom.js' */                case 1:
+/*Line 326 - 'Atom.js' */                    return "Yesterday (" + AtomDate.toTimeString(d) + ")";
+/*Line 327 - 'Atom.js' */            }
+/*Line 328 - 'Atom.js' */        }
+/*Line 329 - 'Atom.js' */        return AtomDate.toDateTimeString(d);
 /*Line 330 - 'Atom.js' */    },
 
-/*Line 332 - 'Atom.js' */    parse: function (v) {
-/*Line 333 - 'Atom.js' */        if (!v)
-/*Line 334 - 'Atom.js' */            return null;
-/*Line 335 - 'Atom.js' */        if (v.constructor !== String)
-/*Line 336 - 'Atom.js' */            return v;
-/*Line 337 - 'Atom.js' */        if (/^\/date\([\-0-9]+\)\//gi.test(v)) {
-/*Line 338 - 'Atom.js' */            v = new Date(parseInt(v.substr(6),10));
-/*Line 339 - 'Atom.js' */        } else {
-/*Line 340 - 'Atom.js' */            if (/^\/dateiso/gi.test(v)) {
-/*Line 341 - 'Atom.js' */                v = v.substr(9);
-/*Line 342 - 'Atom.js' */                v = v.substr(0, v.length - 1);
-/*Line 343 - 'Atom.js' */                var tokens = v.split('T');
-/*Line 344 - 'Atom.js' */                var date = tokens[0];
-/*Line 345 - 'Atom.js' */                var time = tokens[1];
-/*Line 346 - 'Atom.js' */                date = date.split('-');
-/*Line 347 - 'Atom.js' */                time = time.split(':');
-/*Line 348 - 'Atom.js' */                var d = new Date(date[0], parseInt(date[1]) - 1, date[2], time[0], time[1], parseFloat(time[2]));
-/*Line 349 - 'Atom.js' */                d = new Date(d.getTime() + AtomDate.zoneOffset);
-/*Line 350 - 'Atom.js' */                return d;
-/*Line 351 - 'Atom.js' */            } else {
-/*Line 352 - 'Atom.js' */                v = Date.parse(v);
-/*Line 353 - 'Atom.js' */            }
-/*Line 354 - 'Atom.js' */        }
-/*Line 355 - 'Atom.js' */        return v;
-/*Line 356 - 'Atom.js' */        //var i = v.getTime();
-/*Line 357 - 'Atom.js' */        //var z = v.getTimezoneOffset() * 60 * 1000;
-/*Line 358 - 'Atom.js' */        //i = i - z;
-/*Line 359 - 'Atom.js' */        //return new Date(i);
-/*Line 360 - 'Atom.js' */    }
-/*Line 361 - 'Atom.js' */};
+/*Line 332 - 'Atom.js' */    smartDateUTC: function (v) {
+/*Line 333 - 'Atom.js' */        return AtomDate.smartDate(v);
+/*Line 334 - 'Atom.js' */    },
 
-/*Line 363 - 'Atom.js' */window.AtomDate = AtomDate;
+/*Line 336 - 'Atom.js' */    parse: function (v) {
+/*Line 337 - 'Atom.js' */        if (!v)
+/*Line 338 - 'Atom.js' */            return null;
+/*Line 339 - 'Atom.js' */        if (v.constructor !== String)
+/*Line 340 - 'Atom.js' */            return v;
+/*Line 341 - 'Atom.js' */        if (/^\/date\([\-0-9]+\)\//gi.test(v)) {
+/*Line 342 - 'Atom.js' */            v = new Date(parseInt(v.substr(6),10));
+/*Line 343 - 'Atom.js' */        } else {
+/*Line 344 - 'Atom.js' */            if (/^\/dateiso/gi.test(v)) {
+/*Line 345 - 'Atom.js' */                v = v.substr(9);
+/*Line 346 - 'Atom.js' */                v = v.substr(0, v.length - 1);
+/*Line 347 - 'Atom.js' */                var tokens = v.split('T');
+/*Line 348 - 'Atom.js' */                var date = tokens[0];
+/*Line 349 - 'Atom.js' */                var time = tokens[1];
+/*Line 350 - 'Atom.js' */                date = date.split('-');
+/*Line 351 - 'Atom.js' */                time = time.split(':');
+/*Line 352 - 'Atom.js' */                var d = new Date(date[0], parseInt(date[1]) - 1, date[2], time[0], time[1], parseFloat(time[2]));
+/*Line 353 - 'Atom.js' */                d = new Date(d.getTime() + AtomDate.zoneOffset);
+/*Line 354 - 'Atom.js' */                return d;
+/*Line 355 - 'Atom.js' */            } else {
+/*Line 356 - 'Atom.js' */                v = Date.parse(v);
+/*Line 357 - 'Atom.js' */            }
+/*Line 358 - 'Atom.js' */        }
+/*Line 359 - 'Atom.js' */        return v;
+/*Line 360 - 'Atom.js' */        //var i = v.getTime();
+/*Line 361 - 'Atom.js' */        //var z = v.getTimezoneOffset() * 60 * 1000;
+/*Line 362 - 'Atom.js' */        //i = i - z;
+/*Line 363 - 'Atom.js' */        //return new Date(i);
+/*Line 364 - 'Atom.js' */    }
+/*Line 365 - 'Atom.js' */};
 
-/*Line 365 - 'Atom.js' */AtomDate.monthList = [
-/*Line 366 - 'Atom.js' */    { label: "January", value: 1 },
-/*Line 367 - 'Atom.js' */    { label: "February", value: 2 },
-/*Line 368 - 'Atom.js' */    { label: "March", value: 3 },
-/*Line 369 - 'Atom.js' */    { label: "April", value: 4 },
-/*Line 370 - 'Atom.js' */    { label: "May", value: 5 },
-/*Line 371 - 'Atom.js' */    { label: "June", value: 6 },
-/*Line 372 - 'Atom.js' */    { label: "July", value: 7 },
-/*Line 373 - 'Atom.js' */    { label: "August", value: 8 },
-/*Line 374 - 'Atom.js' */    { label: "September", value: 9 },
-/*Line 375 - 'Atom.js' */    { label: "October", value: 10 },
-/*Line 376 - 'Atom.js' */    { label: "November", value: 11 },
-/*Line 377 - 'Atom.js' */    { label: "December", value: 12 }
-/*Line 378 - 'Atom.js' */];
+/*Line 367 - 'Atom.js' */window.AtomDate = AtomDate;
+
+/*Line 369 - 'Atom.js' */AtomDate.monthList = [
+/*Line 370 - 'Atom.js' */    { label: "January", value: 1 },
+/*Line 371 - 'Atom.js' */    { label: "February", value: 2 },
+/*Line 372 - 'Atom.js' */    { label: "March", value: 3 },
+/*Line 373 - 'Atom.js' */    { label: "April", value: 4 },
+/*Line 374 - 'Atom.js' */    { label: "May", value: 5 },
+/*Line 375 - 'Atom.js' */    { label: "June", value: 6 },
+/*Line 376 - 'Atom.js' */    { label: "July", value: 7 },
+/*Line 377 - 'Atom.js' */    { label: "August", value: 8 },
+/*Line 378 - 'Atom.js' */    { label: "September", value: 9 },
+/*Line 379 - 'Atom.js' */    { label: "October", value: 10 },
+/*Line 380 - 'Atom.js' */    { label: "November", value: 11 },
+/*Line 381 - 'Atom.js' */    { label: "December", value: 12 }
+/*Line 382 - 'Atom.js' */];
 
 
-/*Line 381 - 'Atom.js' */var AtomFileSize = {
-/*Line 382 - 'Atom.js' */    toFileSize: function (val) {
-/*Line 383 - 'Atom.js' */        if (!val)
-/*Line 384 - 'Atom.js' */            return "";
-/*Line 385 - 'Atom.js' */        if (val.constructor == String)
-/*Line 386 - 'Atom.js' */            val = parseInt(val, 10);
-/*Line 387 - 'Atom.js' */        if (val > 1073741824) {
-/*Line 388 - 'Atom.js' */            return Math.round(val / 1073741824) + " GB";
-/*Line 389 - 'Atom.js' */        }
-/*Line 390 - 'Atom.js' */        if (val > 1048576) {
-/*Line 391 - 'Atom.js' */            return Math.round(val / 1048576) + " MB";
-/*Line 392 - 'Atom.js' */        }
-/*Line 393 - 'Atom.js' */        if (val > 1024) {
-/*Line 394 - 'Atom.js' */            return Math.round(val / 1024) + " KB";
-/*Line 395 - 'Atom.js' */        }
-/*Line 396 - 'Atom.js' */        return val + " B";
-/*Line 397 - 'Atom.js' */    }
-/*Line 398 - 'Atom.js' */};
+/*Line 385 - 'Atom.js' */var AtomFileSize = {
+/*Line 386 - 'Atom.js' */    toFileSize: function (val) {
+/*Line 387 - 'Atom.js' */        if (!val)
+/*Line 388 - 'Atom.js' */            return "";
+/*Line 389 - 'Atom.js' */        if (val.constructor == String)
+/*Line 390 - 'Atom.js' */            val = parseInt(val, 10);
+/*Line 391 - 'Atom.js' */        if (val > 1073741824) {
+/*Line 392 - 'Atom.js' */            return Math.round(val / 1073741824) + " GB";
+/*Line 393 - 'Atom.js' */        }
+/*Line 394 - 'Atom.js' */        if (val > 1048576) {
+/*Line 395 - 'Atom.js' */            return Math.round(val / 1048576) + " MB";
+/*Line 396 - 'Atom.js' */        }
+/*Line 397 - 'Atom.js' */        if (val > 1024) {
+/*Line 398 - 'Atom.js' */            return Math.round(val / 1024) + " KB";
+/*Line 399 - 'Atom.js' */        }
+/*Line 400 - 'Atom.js' */        return val + " B";
+/*Line 401 - 'Atom.js' */    }
+/*Line 402 - 'Atom.js' */};
 
-/*Line 400 - 'Atom.js' */window.AtomFileSize = AtomFileSize;
+/*Line 404 - 'Atom.js' */window.AtomFileSize = AtomFileSize;
 
-/*Line 402 - 'Atom.js' */var AtomPhone = {
-/*Line 403 - 'Atom.js' */    toSmallPhoneString: function (val) {
-/*Line 404 - 'Atom.js' */        if (!val)
-/*Line 405 - 'Atom.js' */            return "";
-/*Line 406 - 'Atom.js' */        var tokens = val.split(":", 6);
-/*Line 407 - 'Atom.js' */        var cc = tokens[2];
-/*Line 408 - 'Atom.js' */        cc = "(" + (/^\+/.test(cc) ? '' : '+') + tokens[2] + ") ";
-/*Line 409 - 'Atom.js' */        var phone = tokens[3];
-/*Line 410 - 'Atom.js' */        var ext = tokens[4];
-/*Line 411 - 'Atom.js' */        var msg = tokens[5];
-/*Line 412 - 'Atom.js' */        if (!phone)
-/*Line 413 - 'Atom.js' */            return "";
-/*Line 414 - 'Atom.js' */        return cc + phone;
-/*Line 415 - 'Atom.js' */    },
-/*Line 416 - 'Atom.js' */    toPhoneString: function (val) {
-/*Line 417 - 'Atom.js' */        if (!val)
-/*Line 418 - 'Atom.js' */            return "";
-/*Line 419 - 'Atom.js' */        var tokens = val.split(":", 6);
-/*Line 420 - 'Atom.js' */        var cc = "(+" + tokens[2] + ") ";
-/*Line 421 - 'Atom.js' */        var phone = tokens[3];
-/*Line 422 - 'Atom.js' */        var ext = tokens[4];
-/*Line 423 - 'Atom.js' */        var msg = tokens[5];
-/*Line 424 - 'Atom.js' */        if (!phone)
-/*Line 425 - 'Atom.js' */            return "";
-/*Line 426 - 'Atom.js' */        var txt = cc + phone;
-/*Line 427 - 'Atom.js' */        if (ext)
-/*Line 428 - 'Atom.js' */            txt += " (ext: " + ext + ")";
-/*Line 429 - 'Atom.js' */        if (msg)
-/*Line 430 - 'Atom.js' */            txt += " (" + msg + ")";
-/*Line 431 - 'Atom.js' */        return txt;
-/*Line 432 - 'Atom.js' */    }
-/*Line 433 - 'Atom.js' */};
+/*Line 406 - 'Atom.js' */var AtomPhone = {
+/*Line 407 - 'Atom.js' */    toSmallPhoneString: function (val) {
+/*Line 408 - 'Atom.js' */        if (!val)
+/*Line 409 - 'Atom.js' */            return "";
+/*Line 410 - 'Atom.js' */        var tokens = val.split(":", 6);
+/*Line 411 - 'Atom.js' */        var cc = tokens[2];
+/*Line 412 - 'Atom.js' */        cc = "(" + (/^\+/.test(cc) ? '' : '+') + tokens[2] + ") ";
+/*Line 413 - 'Atom.js' */        var phone = tokens[3];
+/*Line 414 - 'Atom.js' */        var ext = tokens[4];
+/*Line 415 - 'Atom.js' */        var msg = tokens[5];
+/*Line 416 - 'Atom.js' */        if (!phone)
+/*Line 417 - 'Atom.js' */            return "";
+/*Line 418 - 'Atom.js' */        return cc + phone;
+/*Line 419 - 'Atom.js' */    },
+/*Line 420 - 'Atom.js' */    toPhoneString: function (val) {
+/*Line 421 - 'Atom.js' */        if (!val)
+/*Line 422 - 'Atom.js' */            return "";
+/*Line 423 - 'Atom.js' */        var tokens = val.split(":", 6);
+/*Line 424 - 'Atom.js' */        var cc = "(+" + tokens[2] + ") ";
+/*Line 425 - 'Atom.js' */        var phone = tokens[3];
+/*Line 426 - 'Atom.js' */        var ext = tokens[4];
+/*Line 427 - 'Atom.js' */        var msg = tokens[5];
+/*Line 428 - 'Atom.js' */        if (!phone)
+/*Line 429 - 'Atom.js' */            return "";
+/*Line 430 - 'Atom.js' */        var txt = cc + phone;
+/*Line 431 - 'Atom.js' */        if (ext)
+/*Line 432 - 'Atom.js' */            txt += " (ext: " + ext + ")";
+/*Line 433 - 'Atom.js' */        if (msg)
+/*Line 434 - 'Atom.js' */            txt += " (" + msg + ")";
+/*Line 435 - 'Atom.js' */        return txt;
+/*Line 436 - 'Atom.js' */    }
+/*Line 437 - 'Atom.js' */};
 
-/*Line 435 - 'Atom.js' */window.AtomPhone = AtomPhone;
+/*Line 439 - 'Atom.js' */window.AtomPhone = AtomPhone;
 
 
 /*Line 2 - 'AtomEvaluator.js' */var AtomEvaluator = {
@@ -5996,7 +6000,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 76 - 'AtomDateListBox.js' */                    var e = AtomUI.cloneNode(t);
 /*Line 77 - 'AtomDateListBox.js' */                    e._templateParent = this;
 /*Line 78 - 'AtomDateListBox.js' */                    var sc = new AtomScope(this, s, atomApplication);
-/*Line 79 - 'AtomDateListBox.js' */                    sc.item_index = i;
+/*Line 79 - 'AtomDateListBox.js' */                    sc.itemIndex = i;
 /*Line 80 - 'AtomDateListBox.js' */                    $(its).append(e);
 /*Line 81 - 'AtomDateListBox.js' */                    var ac = AtomUI.createControl(e, WebAtoms.AtomControl, list[i], sc);
 /*Line 82 - 'AtomDateListBox.js' */                }
@@ -6064,247 +6068,48 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 144 - 'AtomDateListBox.js' */                var d = new Date(this._year, this._month - 1, 1);
 /*Line 145 - 'AtomDateListBox.js' */                var first = new Date(this._year, this._month - 1, 1);
 
-/*Line 147 - 'AtomDateListBox.js' */                if (first.getDay()) {
-/*Line 148 - 'AtomDateListBox.js' */                    // go to first day of the month...
-/*Line 149 - 'AtomDateListBox.js' */                    var start = first.getDay() - 1;
-/*Line 150 - 'AtomDateListBox.js' */                    start = -start;
+/*Line 147 - 'AtomDateListBox.js' */                var cm = this._month - 1;
 
-/*Line 152 - 'AtomDateListBox.js' */                    first.setDate(start);
-/*Line 153 - 'AtomDateListBox.js' */                }
+/*Line 149 - 'AtomDateListBox.js' */                if (first.getDay()) {
+/*Line 150 - 'AtomDateListBox.js' */                    // go to first day of the month...
+/*Line 151 - 'AtomDateListBox.js' */                    var start = first.getDay() - 1;
+/*Line 152 - 'AtomDateListBox.js' */                    start = -start;
 
-/*Line 155 - 'AtomDateListBox.js' */                var m = first.getMonth();
-/*Line 156 - 'AtomDateListBox.js' */                var y = first.getFullYear();
+/*Line 154 - 'AtomDateListBox.js' */                    first.setDate(start);
+/*Line 155 - 'AtomDateListBox.js' */                }
 
-/*Line 158 - 'AtomDateListBox.js' */                var items = [];
+/*Line 157 - 'AtomDateListBox.js' */                var m = first.getMonth();
+/*Line 158 - 'AtomDateListBox.js' */                var y = first.getFullYear();
 
-/*Line 160 - 'AtomDateListBox.js' */                var i = 0;
+/*Line 160 - 'AtomDateListBox.js' */                var items = [];
 
-/*Line 162 - 'AtomDateListBox.js' */                for (i = 0; i < 42; i++) {
-/*Line 163 - 'AtomDateListBox.js' */                    var cd = i + first.getDate();
-/*Line 164 - 'AtomDateListBox.js' */                    var id = new Date(y, m, cd);
-/*Line 165 - 'AtomDateListBox.js' */                    items.push({ label: id.getDate(), dateLabel: AtomDate.toShortDateString(id), value: AtomDate.toMMDDYY(id), date: id });
-/*Line 166 - 'AtomDateListBox.js' */                }
+/*Line 162 - 'AtomDateListBox.js' */                var i = 0;
 
-/*Line 168 - 'AtomDateListBox.js' */                this._items = items;
-/*Line 169 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "items");
-/*Line 170 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
-/*Line 171 - 'AtomDateListBox.js' */                if (this._created) {
-/*Line 172 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
-/*Line 173 - 'AtomDateListBox.js' */                }
-/*Line 174 - 'AtomDateListBox.js' */            }
-/*Line 175 - 'AtomDateListBox.js' */        }
-/*Line 176 - 'AtomDateListBox.js' */    });
-/*Line 177 - 'AtomDateListBox.js' */})(window, WebAtoms.AtomControl.prototype);
-/*Line 0 - 'AtomNavigatorList.js' */
+/*Line 164 - 'AtomDateListBox.js' */                for (i = 0; i < 42; i++) {
+/*Line 165 - 'AtomDateListBox.js' */                    var cd = i + first.getDate();
+/*Line 166 - 'AtomDateListBox.js' */                    var id = new Date(y, m, cd);
+/*Line 167 - 'AtomDateListBox.js' */                    var w = id.getDay();
+/*Line 168 - 'AtomDateListBox.js' */                    w = w == 0 || w == 6;
+/*Line 169 - 'AtomDateListBox.js' */                    items.push({
+/*Line 170 - 'AtomDateListBox.js' */                        label: id.getDate(),
+/*Line 171 - 'AtomDateListBox.js' */                        isWeekEnd: w,
+/*Line 172 - 'AtomDateListBox.js' */                        isOtherMonth: id.getMonth() != cm,
+/*Line 173 - 'AtomDateListBox.js' */                        dateLabel: AtomDate.toShortDateString(id),
+/*Line 174 - 'AtomDateListBox.js' */                        value: AtomDate.toMMDDYY(id),
+/*Line 175 - 'AtomDateListBox.js' */                        date: id
+/*Line 176 - 'AtomDateListBox.js' */                    });
+/*Line 177 - 'AtomDateListBox.js' */                }
 
-/*Line 2 - 'AtomNavigatorList.js' */(function (window, base) {
-/*Line 3 - 'AtomNavigatorList.js' */    return classCreatorEx({
-/*Line 4 - 'AtomNavigatorList.js' */        name: "WebAtoms.AtomNavigatorList",
-/*Line 5 - 'AtomNavigatorList.js' */        base: base,
-/*Line 6 - 'AtomNavigatorList.js' */        start: function () {
-/*Line 7 - 'AtomNavigatorList.js' */            // 0 = items, 1 = selection, 2 = new item..
-/*Line 8 - 'AtomNavigatorList.js' */            this._displayMode = 0;
-
-/*Line 10 - 'AtomNavigatorList.js' */            this._presenters =
-/*Line 11 - 'AtomNavigatorList.js' */                [
-/*Line 12 - 'AtomNavigatorList.js' */                    "gridPanel",
-/*Line 13 - 'AtomNavigatorList.js' */                    "gridPresenter",
-/*Line 14 - 'AtomNavigatorList.js' */                    "itemsPresenter",
-/*Line 15 - 'AtomNavigatorList.js' */                    "detailHeaderPresenter",
-/*Line 16 - 'AtomNavigatorList.js' */                    "newHeaderPresenter",
-/*Line 17 - 'AtomNavigatorList.js' */                    "detailPresenter",
-/*Line 18 - 'AtomNavigatorList.js' */                    "newPresenter",
-/*Line 19 - 'AtomNavigatorList.js' */                    "newView",
-/*Line 20 - 'AtomNavigatorList.js' */                    "detailView",
-/*Line 21 - 'AtomNavigatorList.js' */                    "newHeaderToolbar",
-/*Line 22 - 'AtomNavigatorList.js' */                    "detailHeaderToolbar"];
-
-/*Line 24 - 'AtomNavigatorList.js' */            this._layout = new WebAtoms.AtomViewBoxLayout();
-
-/*Line 26 - 'AtomNavigatorList.js' */            this._newItem = {};
-
-/*Line 28 - 'AtomNavigatorList.js' */        },
-/*Line 29 - 'AtomNavigatorList.js' */        properties: {
-/*Line 30 - 'AtomNavigatorList.js' */            autoShowDetail: true,
-/*Line 31 - 'AtomNavigatorList.js' */            currentPage: null,
-/*Line 32 - 'AtomNavigatorList.js' */            pageSize: undefined,
-/*Line 33 - 'AtomNavigatorList.js' */            newItem: null,
-/*Line 34 - 'AtomNavigatorList.js' */            newUrl: null,
-/*Line 35 - 'AtomNavigatorList.js' */            detailUrl: null,
-/*Line 36 - 'AtomNavigatorList.js' */            displayMode: null
-/*Line 37 - 'AtomNavigatorList.js' */        },
-/*Line 38 - 'AtomNavigatorList.js' */        methods: {
-/*Line 39 - 'AtomNavigatorList.js' */            get_newItemCopy: function () {
-/*Line 40 - 'AtomNavigatorList.js' */                return this._newItemCopy;
-/*Line 41 - 'AtomNavigatorList.js' */            },
-
-
-/*Line 44 - 'AtomNavigatorList.js' */            onBackCommand: function () {
-/*Line 45 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "displayMode", 0);
-/*Line 46 - 'AtomNavigatorList.js' */                this.updateDisplayMode();
-/*Line 47 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "selectedIndex", -1);
-/*Line 48 - 'AtomNavigatorList.js' */            },
-
-/*Line 50 - 'AtomNavigatorList.js' */            onCancelAddNewCommand: function () {
-/*Line 51 - 'AtomNavigatorList.js' */                this.onBackCommand();
-/*Line 52 - 'AtomNavigatorList.js' */                AtomBinder.refreshValue(this, "newItemCopy");
-/*Line 53 - 'AtomNavigatorList.js' */                this.refresh();
-/*Line 54 - 'AtomNavigatorList.js' */            },
-
-/*Line 56 - 'AtomNavigatorList.js' */            onAddCommand: function () {
-/*Line 57 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "selectedIndex", -1);
-/*Line 58 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "displayMode", 2);
-/*Line 59 - 'AtomNavigatorList.js' */                var item = this._newItem || {};
-/*Line 60 - 'AtomNavigatorList.js' */                this._newItemCopy = AtomBinder.getClone(item);
-/*Line 61 - 'AtomNavigatorList.js' */                AtomBinder.refreshValue(this, "newItemCopy");
-/*Line 62 - 'AtomNavigatorList.js' */                this.updateDisplayMode();
-/*Line 63 - 'AtomNavigatorList.js' */            },
-
-/*Line 65 - 'AtomNavigatorList.js' */            onSelectedItemsChanged: function () {
-/*Line 66 - 'AtomNavigatorList.js' */                base.onSelectedItemsChanged.apply(this, arguments);
-
-/*Line 68 - 'AtomNavigatorList.js' */                if (this._autoShowDetail) {
-/*Line 69 - 'AtomNavigatorList.js' */                    this.showDetailCommand();
-/*Line 70 - 'AtomNavigatorList.js' */                }
-/*Line 71 - 'AtomNavigatorList.js' */            },
-
-/*Line 73 - 'AtomNavigatorList.js' */            addTemplate: function (p, e, inite) {
-/*Line 74 - 'AtomNavigatorList.js' */                if (inite) {
-/*Line 75 - 'AtomNavigatorList.js' */                    p.appendChild(e);
-/*Line 76 - 'AtomNavigatorList.js' */                    e._templateParent = this;
-/*Line 77 - 'AtomNavigatorList.js' */                    this.onCreateChildren(p);
-/*Line 78 - 'AtomNavigatorList.js' */                    //this.setProperties(e);
-/*Line 79 - 'AtomNavigatorList.js' */                    this.initChildren(p);
-/*Line 80 - 'AtomNavigatorList.js' */                } else {
-/*Line 81 - 'AtomNavigatorList.js' */                    p.appendChild(e);
-/*Line 82 - 'AtomNavigatorList.js' */                    e._templateParent = this;
-/*Line 83 - 'AtomNavigatorList.js' */                    this.onCreateChildren(p);
-/*Line 84 - 'AtomNavigatorList.js' */                }
-/*Line 85 - 'AtomNavigatorList.js' */            },
-
-/*Line 87 - 'AtomNavigatorList.js' */            updateDisplayMode: function () {
-/*Line 88 - 'AtomNavigatorList.js' */                var v = this._displayMode;
-/*Line 89 - 'AtomNavigatorList.js' */                if (v == 0) {
-
-/*Line 91 - 'AtomNavigatorList.js' */                    if (this._detailPresenter) {
-/*Line 92 - 'AtomNavigatorList.js' */                        this._detailView.atomControl.dispose(this._detailPresenter);
-/*Line 93 - 'AtomNavigatorList.js' */                        this._detailPresenter = null;
-/*Line 94 - 'AtomNavigatorList.js' */                    }
-/*Line 95 - 'AtomNavigatorList.js' */                    if (this._newPresenter) {
-/*Line 96 - 'AtomNavigatorList.js' */                        this._newView.atomControl.dispose(this._newPresenter);
-/*Line 97 - 'AtomNavigatorList.js' */                        this._newPresenter = null;
-/*Line 98 - 'AtomNavigatorList.js' */                    }
-/*Line 99 - 'AtomNavigatorList.js' */                    if (this._detailHeaderPresenter) {
-/*Line 100 - 'AtomNavigatorList.js' */                        this._detailView.atomControl.dispose(this._detailHeaderPresenter);
-/*Line 101 - 'AtomNavigatorList.js' */                        this._detailHeaderPresenter = null;
-/*Line 102 - 'AtomNavigatorList.js' */                    }
-/*Line 103 - 'AtomNavigatorList.js' */                    if (this._newHeaderPresenter) {
-/*Line 104 - 'AtomNavigatorList.js' */                        this._newView.atomControl.dispose(this._newHeaderPresenter);
-/*Line 105 - 'AtomNavigatorList.js' */                        this._newHeaderPresenter = null;
-/*Line 106 - 'AtomNavigatorList.js' */                    }
-
-/*Line 108 - 'AtomNavigatorList.js' */                    return;
-/*Line 109 - 'AtomNavigatorList.js' */                }
-
-/*Line 111 - 'AtomNavigatorList.js' */                var c = null;
-/*Line 112 - 'AtomNavigatorList.js' */                var ct = this.getTemplate("detailTemplate");;
-/*Line 113 - 'AtomNavigatorList.js' */                var ch = null;
-/*Line 114 - 'AtomNavigatorList.js' */                var cht;
-/*Line 115 - 'AtomNavigatorList.js' */                var key = "";
-
-/*Line 117 - 'AtomNavigatorList.js' */                if (v == 1) {
-/*Line 118 - 'AtomNavigatorList.js' */                    c = this._detailView;
-/*Line 119 - 'AtomNavigatorList.js' */                    ch = this._detailHeaderToolbar;
-/*Line 120 - 'AtomNavigatorList.js' */                    cht = this.getTemplate("detailHeaderTemplate");
-/*Line 121 - 'AtomNavigatorList.js' */                    key = "_detail";
-/*Line 122 - 'AtomNavigatorList.js' */                } else {
-/*Line 123 - 'AtomNavigatorList.js' */                    c = this._newView;
-/*Line 124 - 'AtomNavigatorList.js' */                    ch = this._newHeaderToolbar;
-/*Line 125 - 'AtomNavigatorList.js' */                    cht = this.getTemplate("newHeaderTemplate");
-/*Line 126 - 'AtomNavigatorList.js' */                    key = "_new";
-/*Line 127 - 'AtomNavigatorList.js' */                }
-
-/*Line 129 - 'AtomNavigatorList.js' */                if (ch && cht) {
-/*Line 130 - 'AtomNavigatorList.js' */                    cht = AtomUI.cloneNode(cht);
-/*Line 131 - 'AtomNavigatorList.js' */                    this.addTemplate(ch, cht, true);
-/*Line 132 - 'AtomNavigatorList.js' */                    this[key + "HeaderPresenter"] = cht;
-/*Line 133 - 'AtomNavigatorList.js' */                }
-
-/*Line 135 - 'AtomNavigatorList.js' */                if (c && ct) {
-/*Line 136 - 'AtomNavigatorList.js' */                    ct = AtomUI.cloneNode(ct);
-/*Line 137 - 'AtomNavigatorList.js' */                    this.addTemplate(c, ct, true);
-/*Line 138 - 'AtomNavigatorList.js' */                    this[key + "Presenter"] = ct;
-/*Line 139 - 'AtomNavigatorList.js' */                }
-/*Line 140 - 'AtomNavigatorList.js' */            },
-
-/*Line 142 - 'AtomNavigatorList.js' */            createChildren: function () {
-/*Line 143 - 'AtomNavigatorList.js' */                base.createChildren.call(this);
-
-/*Line 145 - 'AtomNavigatorList.js' */                this.getTemplate("gridTemplate");
-/*Line 146 - 'AtomNavigatorList.js' */                this.getTemplate("detailTemplate");
-/*Line 147 - 'AtomNavigatorList.js' */                this.getTemplate("searchTemplate");
-/*Line 148 - 'AtomNavigatorList.js' */                this.getTemplate("detailHeaderTemplate");
-/*Line 149 - 'AtomNavigatorList.js' */                this.getTemplate("newHeaderTemplate");
-/*Line 150 - 'AtomNavigatorList.js' */                this.getTemplate("headerTemplate");
-/*Line 151 - 'AtomNavigatorList.js' */                this.getTemplate("footerTemplate");
-
-/*Line 153 - 'AtomNavigatorList.js' */                var p = this.get_scope();
-
-/*Line 155 - 'AtomNavigatorList.js' */                this._newView.atomControl._scope = new AtomScope(this, p);
-/*Line 156 - 'AtomNavigatorList.js' */                this._detailView.atomControl._scope = new AtomScope(this, p);
-
-/*Line 158 - 'AtomNavigatorList.js' */                var g = AtomUI.cloneNode(this._gridTemplate);
-/*Line 159 - 'AtomNavigatorList.js' */                this.addTemplate(this._gridPresenter, g);
-
-/*Line 161 - 'AtomNavigatorList.js' */                if (!($(this._detailTemplate).attr("atom-dock"))) {
-/*Line 162 - 'AtomNavigatorList.js' */                    $(this._detailTemplate).attr("atom-dock", "Fill");
-/*Line 163 - 'AtomNavigatorList.js' */                }
-
-/*Line 165 - 'AtomNavigatorList.js' */                if (this._headerTemplate) {
-/*Line 166 - 'AtomNavigatorList.js' */                    var hd = AtomUI.cloneNode(this._headerTemplate);
-/*Line 167 - 'AtomNavigatorList.js' */                    hd.setAttribute("atom-dock", "Top");
-/*Line 168 - 'AtomNavigatorList.js' */                    $(hd).addClass("atom-navigator-list-header");
-/*Line 169 - 'AtomNavigatorList.js' */                    hd._templateParent = this;
-/*Line 170 - 'AtomNavigatorList.js' */                    this.addTemplate(this._gridPanel, hd);
-/*Line 171 - 'AtomNavigatorList.js' */                }
-
-/*Line 173 - 'AtomNavigatorList.js' */                if (this._footerTemplate) {
-/*Line 174 - 'AtomNavigatorList.js' */                    var fd = AtomUI.cloneNode(this._footerTemplate);
-/*Line 175 - 'AtomNavigatorList.js' */                    fd.setAttribute("atom-dock", "Bottom");
-/*Line 176 - 'AtomNavigatorList.js' */                    $(hd).addClass("atom-navigator-list-footer");
-/*Line 177 - 'AtomNavigatorList.js' */                    this.addTemplate(this._gridPanel, fd);
-/*Line 178 - 'AtomNavigatorList.js' */                }
-/*Line 179 - 'AtomNavigatorList.js' */            },
-
-/*Line 181 - 'AtomNavigatorList.js' */            init: function () {
-/*Line 182 - 'AtomNavigatorList.js' */                base.init.call(this);
-
-/*Line 184 - 'AtomNavigatorList.js' */                var _this = this;
-
-/*Line 186 - 'AtomNavigatorList.js' */                this.backCommand = function () {
-/*Line 187 - 'AtomNavigatorList.js' */                    _this.onBackCommand.apply(_this, arguments);
-/*Line 188 - 'AtomNavigatorList.js' */                };
-
-/*Line 190 - 'AtomNavigatorList.js' */                this.addCommand = function () {
-/*Line 191 - 'AtomNavigatorList.js' */                    _this.onAddCommand.apply(_this, arguments);
-/*Line 192 - 'AtomNavigatorList.js' */                };
-
-/*Line 194 - 'AtomNavigatorList.js' */                this.cancelAddCommand = function () {
-/*Line 195 - 'AtomNavigatorList.js' */                    _this.onCancelAddNewCommand.apply(_this, arguments);
-/*Line 196 - 'AtomNavigatorList.js' */                };
-
-/*Line 198 - 'AtomNavigatorList.js' */                this.showDetailCommand = function () {
-/*Line 199 - 'AtomNavigatorList.js' */                    var s = _this.get_selectedItem();
-/*Line 200 - 'AtomNavigatorList.js' */                    if (s) {
-/*Line 201 - 'AtomNavigatorList.js' */                        AtomBinder.setValue(_this, "displayMode", 1);
-/*Line 202 - 'AtomNavigatorList.js' */                        _this.updateDisplayMode();
-/*Line 203 - 'AtomNavigatorList.js' */                    }
-/*Line 204 - 'AtomNavigatorList.js' */                };
-/*Line 205 - 'AtomNavigatorList.js' */            }
-/*Line 206 - 'AtomNavigatorList.js' */        }
-/*Line 207 - 'AtomNavigatorList.js' */    });
-/*Line 208 - 'AtomNavigatorList.js' */})(window, WebAtoms.AtomListBox.prototype);
-
+/*Line 179 - 'AtomDateListBox.js' */                this._items = items;
+/*Line 180 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "items");
+/*Line 181 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
+/*Line 182 - 'AtomDateListBox.js' */                if (this._created) {
+/*Line 183 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
+/*Line 184 - 'AtomDateListBox.js' */                }
+/*Line 185 - 'AtomDateListBox.js' */            }
+/*Line 186 - 'AtomDateListBox.js' */        }
+/*Line 187 - 'AtomDateListBox.js' */    });
+/*Line 188 - 'AtomDateListBox.js' */})(window, WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomPostButton.js' */
 
 /*Line 2 - 'AtomPostButton.js' */(function (window, base) {
@@ -7287,7 +7092,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 98 - 'AtomCalendar.js' */            }
 /*Line 99 - 'AtomCalendar.js' */        }
 /*Line 100 - 'AtomCalendar.js' */    });
-/*Line 101 - 'AtomCalendar.js' */})(window,WebAtoms.AtomNavigatorList.prototype);
+/*Line 101 - 'AtomCalendar.js' */})(window,WebAtoms.AtomListBox.prototype);
 /*Line 0 - 'AtomCheckBox.js' *////// <reference path="AtomControl.js" />
 
 /*Line 2 - 'AtomCheckBox.js' *///WebAtoms.AtomCheckBox = function (element) {
@@ -8043,6 +7848,216 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 165 - 'AtomMultiButtonList.js' */        }
 /*Line 166 - 'AtomMultiButtonList.js' */    });
 /*Line 167 - 'AtomMultiButtonList.js' */})(window, WebAtoms.AtomControl.prototype);
+/*Line 0 - 'AtomNavigatorList.js' */
+
+/*Line 2 - 'AtomNavigatorList.js' */(function (window, base) {
+/*Line 3 - 'AtomNavigatorList.js' */    return classCreatorEx({
+/*Line 4 - 'AtomNavigatorList.js' */        name: "WebAtoms.AtomNavigatorList",
+/*Line 5 - 'AtomNavigatorList.js' */        base: base,
+/*Line 6 - 'AtomNavigatorList.js' */        start: function () {
+/*Line 7 - 'AtomNavigatorList.js' */            // 0 = items, 1 = selection, 2 = new item..
+/*Line 8 - 'AtomNavigatorList.js' */            this._displayMode = 0;
+
+/*Line 10 - 'AtomNavigatorList.js' */            this._presenters =
+/*Line 11 - 'AtomNavigatorList.js' */                [
+/*Line 12 - 'AtomNavigatorList.js' */                    "gridPanel",
+/*Line 13 - 'AtomNavigatorList.js' */                    "gridPresenter",
+/*Line 14 - 'AtomNavigatorList.js' */                    "itemsPresenter",
+/*Line 15 - 'AtomNavigatorList.js' */                    "detailHeaderPresenter",
+/*Line 16 - 'AtomNavigatorList.js' */                    "newHeaderPresenter",
+/*Line 17 - 'AtomNavigatorList.js' */                    "detailPresenter",
+/*Line 18 - 'AtomNavigatorList.js' */                    "newPresenter",
+/*Line 19 - 'AtomNavigatorList.js' */                    "newView",
+/*Line 20 - 'AtomNavigatorList.js' */                    "detailView",
+/*Line 21 - 'AtomNavigatorList.js' */                    "newHeaderToolbar",
+/*Line 22 - 'AtomNavigatorList.js' */                    "detailHeaderToolbar"];
+
+/*Line 24 - 'AtomNavigatorList.js' */            this._layout = new WebAtoms.AtomViewBoxLayout();
+
+/*Line 26 - 'AtomNavigatorList.js' */            this._newItem = {};
+
+/*Line 28 - 'AtomNavigatorList.js' */        },
+/*Line 29 - 'AtomNavigatorList.js' */        properties: {
+/*Line 30 - 'AtomNavigatorList.js' */            autoShowDetail: true,
+/*Line 31 - 'AtomNavigatorList.js' */            currentPage: null,
+/*Line 32 - 'AtomNavigatorList.js' */            pageSize: undefined,
+/*Line 33 - 'AtomNavigatorList.js' */            newItem: null,
+/*Line 34 - 'AtomNavigatorList.js' */            newUrl: null,
+/*Line 35 - 'AtomNavigatorList.js' */            detailUrl: null,
+/*Line 36 - 'AtomNavigatorList.js' */            displayMode: null
+/*Line 37 - 'AtomNavigatorList.js' */        },
+/*Line 38 - 'AtomNavigatorList.js' */        methods: {
+/*Line 39 - 'AtomNavigatorList.js' */            get_newItemCopy: function () {
+/*Line 40 - 'AtomNavigatorList.js' */                return this._newItemCopy;
+/*Line 41 - 'AtomNavigatorList.js' */            },
+
+
+/*Line 44 - 'AtomNavigatorList.js' */            onBackCommand: function () {
+/*Line 45 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "displayMode", 0);
+/*Line 46 - 'AtomNavigatorList.js' */                this.updateDisplayMode();
+/*Line 47 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "selectedIndex", -1);
+/*Line 48 - 'AtomNavigatorList.js' */            },
+
+/*Line 50 - 'AtomNavigatorList.js' */            onCancelAddNewCommand: function () {
+/*Line 51 - 'AtomNavigatorList.js' */                this.onBackCommand();
+/*Line 52 - 'AtomNavigatorList.js' */                AtomBinder.refreshValue(this, "newItemCopy");
+/*Line 53 - 'AtomNavigatorList.js' */                this.refresh();
+/*Line 54 - 'AtomNavigatorList.js' */            },
+
+/*Line 56 - 'AtomNavigatorList.js' */            onAddCommand: function () {
+/*Line 57 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "selectedIndex", -1);
+/*Line 58 - 'AtomNavigatorList.js' */                AtomBinder.setValue(this, "displayMode", 2);
+/*Line 59 - 'AtomNavigatorList.js' */                var item = this._newItem || {};
+/*Line 60 - 'AtomNavigatorList.js' */                this._newItemCopy = AtomBinder.getClone(item);
+/*Line 61 - 'AtomNavigatorList.js' */                AtomBinder.refreshValue(this, "newItemCopy");
+/*Line 62 - 'AtomNavigatorList.js' */                this.updateDisplayMode();
+/*Line 63 - 'AtomNavigatorList.js' */            },
+
+/*Line 65 - 'AtomNavigatorList.js' */            onSelectedItemsChanged: function () {
+/*Line 66 - 'AtomNavigatorList.js' */                base.onSelectedItemsChanged.apply(this, arguments);
+
+/*Line 68 - 'AtomNavigatorList.js' */                if (this._autoShowDetail) {
+/*Line 69 - 'AtomNavigatorList.js' */                    this.showDetailCommand();
+/*Line 70 - 'AtomNavigatorList.js' */                }
+/*Line 71 - 'AtomNavigatorList.js' */            },
+
+/*Line 73 - 'AtomNavigatorList.js' */            addTemplate: function (p, e, inite) {
+/*Line 74 - 'AtomNavigatorList.js' */                if (inite) {
+/*Line 75 - 'AtomNavigatorList.js' */                    p.appendChild(e);
+/*Line 76 - 'AtomNavigatorList.js' */                    e._templateParent = this;
+/*Line 77 - 'AtomNavigatorList.js' */                    this.onCreateChildren(p);
+/*Line 78 - 'AtomNavigatorList.js' */                    //this.setProperties(e);
+/*Line 79 - 'AtomNavigatorList.js' */                    this.initChildren(p);
+/*Line 80 - 'AtomNavigatorList.js' */                } else {
+/*Line 81 - 'AtomNavigatorList.js' */                    p.appendChild(e);
+/*Line 82 - 'AtomNavigatorList.js' */                    e._templateParent = this;
+/*Line 83 - 'AtomNavigatorList.js' */                    this.onCreateChildren(p);
+/*Line 84 - 'AtomNavigatorList.js' */                }
+/*Line 85 - 'AtomNavigatorList.js' */            },
+
+/*Line 87 - 'AtomNavigatorList.js' */            updateDisplayMode: function () {
+/*Line 88 - 'AtomNavigatorList.js' */                var v = this._displayMode;
+/*Line 89 - 'AtomNavigatorList.js' */                if (v == 0) {
+
+/*Line 91 - 'AtomNavigatorList.js' */                    if (this._detailPresenter) {
+/*Line 92 - 'AtomNavigatorList.js' */                        this._detailView.atomControl.dispose(this._detailPresenter);
+/*Line 93 - 'AtomNavigatorList.js' */                        this._detailPresenter = null;
+/*Line 94 - 'AtomNavigatorList.js' */                    }
+/*Line 95 - 'AtomNavigatorList.js' */                    if (this._newPresenter) {
+/*Line 96 - 'AtomNavigatorList.js' */                        this._newView.atomControl.dispose(this._newPresenter);
+/*Line 97 - 'AtomNavigatorList.js' */                        this._newPresenter = null;
+/*Line 98 - 'AtomNavigatorList.js' */                    }
+/*Line 99 - 'AtomNavigatorList.js' */                    if (this._detailHeaderPresenter) {
+/*Line 100 - 'AtomNavigatorList.js' */                        this._detailView.atomControl.dispose(this._detailHeaderPresenter);
+/*Line 101 - 'AtomNavigatorList.js' */                        this._detailHeaderPresenter = null;
+/*Line 102 - 'AtomNavigatorList.js' */                    }
+/*Line 103 - 'AtomNavigatorList.js' */                    if (this._newHeaderPresenter) {
+/*Line 104 - 'AtomNavigatorList.js' */                        this._newView.atomControl.dispose(this._newHeaderPresenter);
+/*Line 105 - 'AtomNavigatorList.js' */                        this._newHeaderPresenter = null;
+/*Line 106 - 'AtomNavigatorList.js' */                    }
+
+/*Line 108 - 'AtomNavigatorList.js' */                    return;
+/*Line 109 - 'AtomNavigatorList.js' */                }
+
+/*Line 111 - 'AtomNavigatorList.js' */                var c = null;
+/*Line 112 - 'AtomNavigatorList.js' */                var ct = this.getTemplate("detailTemplate");;
+/*Line 113 - 'AtomNavigatorList.js' */                var ch = null;
+/*Line 114 - 'AtomNavigatorList.js' */                var cht;
+/*Line 115 - 'AtomNavigatorList.js' */                var key = "";
+
+/*Line 117 - 'AtomNavigatorList.js' */                if (v == 1) {
+/*Line 118 - 'AtomNavigatorList.js' */                    c = this._detailView;
+/*Line 119 - 'AtomNavigatorList.js' */                    ch = this._detailHeaderToolbar;
+/*Line 120 - 'AtomNavigatorList.js' */                    cht = this.getTemplate("detailHeaderTemplate");
+/*Line 121 - 'AtomNavigatorList.js' */                    key = "_detail";
+/*Line 122 - 'AtomNavigatorList.js' */                } else {
+/*Line 123 - 'AtomNavigatorList.js' */                    c = this._newView;
+/*Line 124 - 'AtomNavigatorList.js' */                    ch = this._newHeaderToolbar;
+/*Line 125 - 'AtomNavigatorList.js' */                    cht = this.getTemplate("newHeaderTemplate");
+/*Line 126 - 'AtomNavigatorList.js' */                    key = "_new";
+/*Line 127 - 'AtomNavigatorList.js' */                }
+
+/*Line 129 - 'AtomNavigatorList.js' */                if (ch && cht) {
+/*Line 130 - 'AtomNavigatorList.js' */                    cht = AtomUI.cloneNode(cht);
+/*Line 131 - 'AtomNavigatorList.js' */                    this.addTemplate(ch, cht, true);
+/*Line 132 - 'AtomNavigatorList.js' */                    this[key + "HeaderPresenter"] = cht;
+/*Line 133 - 'AtomNavigatorList.js' */                }
+
+/*Line 135 - 'AtomNavigatorList.js' */                if (c && ct) {
+/*Line 136 - 'AtomNavigatorList.js' */                    ct = AtomUI.cloneNode(ct);
+/*Line 137 - 'AtomNavigatorList.js' */                    this.addTemplate(c, ct, true);
+/*Line 138 - 'AtomNavigatorList.js' */                    this[key + "Presenter"] = ct;
+/*Line 139 - 'AtomNavigatorList.js' */                }
+/*Line 140 - 'AtomNavigatorList.js' */            },
+
+/*Line 142 - 'AtomNavigatorList.js' */            createChildren: function () {
+/*Line 143 - 'AtomNavigatorList.js' */                base.createChildren.call(this);
+
+/*Line 145 - 'AtomNavigatorList.js' */                this.getTemplate("gridTemplate");
+/*Line 146 - 'AtomNavigatorList.js' */                this.getTemplate("detailTemplate");
+/*Line 147 - 'AtomNavigatorList.js' */                this.getTemplate("searchTemplate");
+/*Line 148 - 'AtomNavigatorList.js' */                this.getTemplate("detailHeaderTemplate");
+/*Line 149 - 'AtomNavigatorList.js' */                this.getTemplate("newHeaderTemplate");
+/*Line 150 - 'AtomNavigatorList.js' */                this.getTemplate("headerTemplate");
+/*Line 151 - 'AtomNavigatorList.js' */                this.getTemplate("footerTemplate");
+
+/*Line 153 - 'AtomNavigatorList.js' */                var p = this.get_scope();
+
+/*Line 155 - 'AtomNavigatorList.js' */                this._newView.atomControl._scope = new AtomScope(this, p);
+/*Line 156 - 'AtomNavigatorList.js' */                this._detailView.atomControl._scope = new AtomScope(this, p);
+
+/*Line 158 - 'AtomNavigatorList.js' */                var g = AtomUI.cloneNode(this._gridTemplate);
+/*Line 159 - 'AtomNavigatorList.js' */                this.addTemplate(this._gridPresenter, g);
+
+/*Line 161 - 'AtomNavigatorList.js' */                if (!($(this._detailTemplate).attr("atom-dock"))) {
+/*Line 162 - 'AtomNavigatorList.js' */                    $(this._detailTemplate).attr("atom-dock", "Fill");
+/*Line 163 - 'AtomNavigatorList.js' */                }
+
+/*Line 165 - 'AtomNavigatorList.js' */                if (this._headerTemplate) {
+/*Line 166 - 'AtomNavigatorList.js' */                    var hd = AtomUI.cloneNode(this._headerTemplate);
+/*Line 167 - 'AtomNavigatorList.js' */                    hd.setAttribute("atom-dock", "Top");
+/*Line 168 - 'AtomNavigatorList.js' */                    $(hd).addClass("atom-navigator-list-header");
+/*Line 169 - 'AtomNavigatorList.js' */                    hd._templateParent = this;
+/*Line 170 - 'AtomNavigatorList.js' */                    this.addTemplate(this._gridPanel, hd);
+/*Line 171 - 'AtomNavigatorList.js' */                }
+
+/*Line 173 - 'AtomNavigatorList.js' */                if (this._footerTemplate) {
+/*Line 174 - 'AtomNavigatorList.js' */                    var fd = AtomUI.cloneNode(this._footerTemplate);
+/*Line 175 - 'AtomNavigatorList.js' */                    fd.setAttribute("atom-dock", "Bottom");
+/*Line 176 - 'AtomNavigatorList.js' */                    $(hd).addClass("atom-navigator-list-footer");
+/*Line 177 - 'AtomNavigatorList.js' */                    this.addTemplate(this._gridPanel, fd);
+/*Line 178 - 'AtomNavigatorList.js' */                }
+/*Line 179 - 'AtomNavigatorList.js' */            },
+
+/*Line 181 - 'AtomNavigatorList.js' */            init: function () {
+/*Line 182 - 'AtomNavigatorList.js' */                base.init.call(this);
+
+/*Line 184 - 'AtomNavigatorList.js' */                var _this = this;
+
+/*Line 186 - 'AtomNavigatorList.js' */                this.backCommand = function () {
+/*Line 187 - 'AtomNavigatorList.js' */                    _this.onBackCommand.apply(_this, arguments);
+/*Line 188 - 'AtomNavigatorList.js' */                };
+
+/*Line 190 - 'AtomNavigatorList.js' */                this.addCommand = function () {
+/*Line 191 - 'AtomNavigatorList.js' */                    _this.onAddCommand.apply(_this, arguments);
+/*Line 192 - 'AtomNavigatorList.js' */                };
+
+/*Line 194 - 'AtomNavigatorList.js' */                this.cancelAddCommand = function () {
+/*Line 195 - 'AtomNavigatorList.js' */                    _this.onCancelAddNewCommand.apply(_this, arguments);
+/*Line 196 - 'AtomNavigatorList.js' */                };
+
+/*Line 198 - 'AtomNavigatorList.js' */                this.showDetailCommand = function () {
+/*Line 199 - 'AtomNavigatorList.js' */                    var s = _this.get_selectedItem();
+/*Line 200 - 'AtomNavigatorList.js' */                    if (s) {
+/*Line 201 - 'AtomNavigatorList.js' */                        AtomBinder.setValue(_this, "displayMode", 1);
+/*Line 202 - 'AtomNavigatorList.js' */                        _this.updateDisplayMode();
+/*Line 203 - 'AtomNavigatorList.js' */                    }
+/*Line 204 - 'AtomNavigatorList.js' */                };
+/*Line 205 - 'AtomNavigatorList.js' */            }
+/*Line 206 - 'AtomNavigatorList.js' */        }
+/*Line 207 - 'AtomNavigatorList.js' */    });
+/*Line 208 - 'AtomNavigatorList.js' */})(window, WebAtoms.AtomListBox.prototype);
+
 /*Line 0 - 'AtomNumberComboBox.js' */
 
 /*Line 2 - 'AtomNumberComboBox.js' */(function (window, base) {

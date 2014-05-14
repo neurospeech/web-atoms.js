@@ -77,7 +77,7 @@
                     var e = AtomUI.cloneNode(t);
                     e._templateParent = this;
                     var sc = new AtomScope(this, s, atomApplication);
-                    sc.item_index = i;
+                    sc.itemIndex = i;
                     $(its).append(e);
                     var ac = AtomUI.createControl(e, WebAtoms.AtomControl, list[i], sc);
                 }
@@ -145,6 +145,8 @@
                 var d = new Date(this._year, this._month - 1, 1);
                 var first = new Date(this._year, this._month - 1, 1);
 
+                var cm = this._month - 1;
+
                 if (first.getDay()) {
                     // go to first day of the month...
                     var start = first.getDay() - 1;
@@ -163,7 +165,16 @@
                 for (i = 0; i < 42; i++) {
                     var cd = i + first.getDate();
                     var id = new Date(y, m, cd);
-                    items.push({ label: id.getDate(), dateLabel: AtomDate.toShortDateString(id), value: AtomDate.toMMDDYY(id), date: id });
+                    var w = id.getDay();
+                    w = w == 0 || w == 6;
+                    items.push({
+                        label: id.getDate(),
+                        isWeekEnd: w,
+                        isOtherMonth: id.getMonth() != cm,
+                        dateLabel: AtomDate.toShortDateString(id),
+                        value: AtomDate.toMMDDYY(id),
+                        date: id
+                    });
                 }
 
                 this._items = items;
