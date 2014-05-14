@@ -289,9 +289,13 @@ var AtomDate = {
             return "";
         var h = d.getHours();
         var s = "AM";
-        if (h > 12) {
-            h = h - 12;
+        if (h == 12) {
             s = "PM";
+        } else {
+            if (h > 12) {
+                h = h - 12;
+                s = "PM";
+            }
         }
         var m = d.getMinutes();
         if (m < 10) {
