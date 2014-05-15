@@ -13,6 +13,14 @@
             isOpen: false
         },
         methods: {
+            get_offsetLeft: function () {
+                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
+                return $(this._element).offset().left;
+            },
+            get_offsetTop: function () {
+                return $(this._element).offset().top;
+            },
+
             onPopupRemoved: function (e) {
                 AtomBinder.setValue(this, "isOpen", false);
             },
@@ -23,14 +31,20 @@
                     this.getTemplate("popupTemplate");
 
                     this.popup = AtomUI.cloneNode(this._popupTemplate);
-                    //this.popup._logicalParent = this._element;
+                    this.popup._logicalParent = this._element;
                     this.popup._templateParent = this;
                     //this.popup.style.visibility = "hidden";
-                    //document.body.appendChild(this.popup);
-                    this._element.appendChild(this.popup);
+                    document.body.appendChild(this.popup);
                     this.onCreateChildren(this.popup);
                     this.setProperties(this.popup);
                     this.initChildren(this.popup);
+
+                    var _this = this;
+                    this._refreshInterval = setInterval(function () {
+                        AtomBinder.refreshValue(_this, "offsetLeft");
+                        AtomBinder.refreshValue(_this, "offsetTop");
+                    });
+
                     //var _this = this;
                     //WebAtoms.dispatcher.callLater(function () {
                     //    AtomPopup.show(_this._element, _this.popup, 0, function () {
@@ -39,6 +53,9 @@
                     //});
                 } else {
                     //AtomPopup.hide(this.popup);
+                    if (this._refreshInterval) {
+                        clearInterval(this._refreshInterval);
+                    }
                     this.disposeChildren(this.popup);
                     $(this.popup).remove();
                 }

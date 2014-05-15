@@ -92,6 +92,11 @@
     background-color: #eeeeee
 }
 
+.atom-date-list-box .calendar .today {
+    background-color: #ff6a00
+}
+
+
 .atom-date-list-box .calendar .selected {
     background-color: darkgreen;
     color:white;
