@@ -25,7 +25,7 @@
             year: 0,
             selectedItems: [],
             startYear: -5,
-            endYear:0,
+            endYear: 0,
             currentYear: 0,
             monthList: null,
             items: undefined,
@@ -69,6 +69,15 @@
 
                 var its = this._itemsPresenter;
 
+                var et = this.getTemplate("itemTemplate");
+                if (et) {
+                    et = $(et).attr("atom-type");
+                    if (!et) {
+                        et = WebAtoms.AtomControl;
+                    }
+                }
+
+
                 this.updateList();
                 if (!t)
                     return;
@@ -79,7 +88,7 @@
                     var sc = new AtomScope(this, s, atomApplication);
                     sc.itemIndex = i;
                     $(its).append(e);
-                    var ac = AtomUI.createControl(e, WebAtoms.AtomControl, list[i], sc);
+                    var ac = AtomUI.createControl(e, et, list[i], sc);
                 }
             },
 
@@ -142,10 +151,10 @@
                 if (!this._month || !this._year)
                     return;
 
+                var now = new Date();
+
                 var d = new Date(this._year, this._month - 1, 1);
                 var first = new Date(this._year, this._month - 1, 1);
-
-                var cm = this._month - 1;
 
                 if (first.getDay()) {
                     // go to first day of the month...
@@ -162,6 +171,8 @@
 
                 var i = 0;
 
+                var cm = this._month - 1;
+
                 for (i = 0; i < 42; i++) {
                     var cd = i + first.getDate();
                     var id = new Date(y, m, cd);
@@ -170,6 +181,10 @@
                     items.push({
                         label: id.getDate(),
                         isWeekEnd: w,
+                        isToday:
+                            now.getDate() == id.getDate()
+                            && now.getMonth() == id.getMonth()
+                            && now.getFullYear() == id.getFullYear(),
                         isOtherMonth: id.getMonth() != cm,
                         dateLabel: AtomDate.toShortDateString(id),
                         value: AtomDate.toMMDDYY(id),

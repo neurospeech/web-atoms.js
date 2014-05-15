@@ -222,7 +222,9 @@ Templates.jsonML["WebAtoms.AtomDataPager.template"] =
 ;
 Templates.jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
-{ "class": "popup atom-date-list-box", "atom-class": "[$owner.isOpen ? 'popup-open' : 'popup-closed' ]" }
+{ "class": "atom-date-field-popup", "style-left": "[($owner.offsetLeft ) + 'px']", "style-top": "[($owner.offsetTop + 25) + 'px']" }
+,["div",
+{ "class": "atom-date-list-box", "atom-class": "[$owner.isOpen ? 'popup-open' : 'popup-closed' ]" }
 ,["div",
 { "class": "calendar", "atom-presenter": "calendarPresenter" }
 ,["select",
@@ -248,10 +250,10 @@ Templates.jsonML["WebAtoms.AtomDateField.popupTemplate"] =
 ,"S"]], ["div",
 { "class": "day-list", "atom-type": "AtomItemsControl", "atom-items": "[$owner.templateParent.items]", "atom-presenter": "itemsPresenter" }
 ,["div",
-{ "event-click": "{ $owner.templateParent.templateParent.toggleDateCommand }", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth } ]", "atom-template": "itemTemplate" }
+{ "atom-event-click": "{ $owner.templateParent.templateParent.toggleDateCommand }", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth, today: $data.isToday, 'selected': Atom.query($owner.templateParent.templateParent.selectedItems).any({ value: $data.value}) } ]", "atom-template": "itemTemplate" }
 ,["span",
 { "atom-text": "[$data.label]" }
-]]]]]]
+]]]]]]]
 ;
 Templates.jsonML["WebAtoms.AtomDateField.template"] = 
 [["div",
@@ -286,7 +288,7 @@ Templates.jsonML["WebAtoms.AtomDateListBox.template"] =
 ,"S"]], ["div",
 { "class": "day-list", "atom-presenter": "itemsPresenter" }
 ,["div",
-{ "event-click": "{ $owner.templateParent.toggleDateCommand }", "atom-data": "[$owner.templateParent.items[$scope.itemIndex]]", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth, 'selected': Atom.query($owner.templateParent.selectedItems).any({ value: $data.value}) } ]", "atom-template": "itemTemplate" }
+{ "event-click": "{ $owner.templateParent.toggleDateCommand }", "atom-data": "[$owner.templateParent.items[$scope.itemIndex]]", "atom-class": "[ { 'list-item':true, 'weekend': $data.isWeekEnd, other: $data.isOtherMonth, today: $data.isToday, 'selected': Atom.query($owner.templateParent.selectedItems).any({ value: $data.value}) } ]", "atom-template": "itemTemplate" }
 ,["span",
 { "atom-text": "[$data.label]" }
 ]]]], ["div",
@@ -3342,7 +3344,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 /*Line 28 - 'AtomUIComponent.js' */            get_localScope: function () {
 /*Line 29 - 'AtomUIComponent.js' */                if (this._localScope === undefined) {
-/*Line 30 - 'AtomUIComponent.js' */                    var ap = this.get_atomParent(this._element.parentNode);
+/*Line 30 - 'AtomUIComponent.js' */                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
 /*Line 31 - 'AtomUIComponent.js' */                    if (ap) {
 /*Line 32 - 'AtomUIComponent.js' */                        return ap.get_localScope();
 /*Line 33 - 'AtomUIComponent.js' */                    } else {
@@ -5948,7 +5950,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 24 - 'AtomDateListBox.js' */            year: 0,
 /*Line 25 - 'AtomDateListBox.js' */            selectedItems: [],
 /*Line 26 - 'AtomDateListBox.js' */            startYear: -5,
-/*Line 27 - 'AtomDateListBox.js' */            endYear:0,
+/*Line 27 - 'AtomDateListBox.js' */            endYear: 0,
 /*Line 28 - 'AtomDateListBox.js' */            currentYear: 0,
 /*Line 29 - 'AtomDateListBox.js' */            monthList: null,
 /*Line 30 - 'AtomDateListBox.js' */            items: undefined,
@@ -5992,124 +5994,139 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 /*Line 69 - 'AtomDateListBox.js' */                var its = this._itemsPresenter;
 
-/*Line 71 - 'AtomDateListBox.js' */                this.updateList();
-/*Line 72 - 'AtomDateListBox.js' */                if (!t)
-/*Line 73 - 'AtomDateListBox.js' */                    return;
-/*Line 74 - 'AtomDateListBox.js' */                var list = this._items;
-/*Line 75 - 'AtomDateListBox.js' */                for (var i = 0; i < 42; i++) {
-/*Line 76 - 'AtomDateListBox.js' */                    var e = AtomUI.cloneNode(t);
-/*Line 77 - 'AtomDateListBox.js' */                    e._templateParent = this;
-/*Line 78 - 'AtomDateListBox.js' */                    var sc = new AtomScope(this, s, atomApplication);
-/*Line 79 - 'AtomDateListBox.js' */                    sc.itemIndex = i;
-/*Line 80 - 'AtomDateListBox.js' */                    $(its).append(e);
-/*Line 81 - 'AtomDateListBox.js' */                    var ac = AtomUI.createControl(e, WebAtoms.AtomControl, list[i], sc);
-/*Line 82 - 'AtomDateListBox.js' */                }
-/*Line 83 - 'AtomDateListBox.js' */            },
+/*Line 71 - 'AtomDateListBox.js' */                var et = this.getTemplate("itemTemplate");
+/*Line 72 - 'AtomDateListBox.js' */                if (et) {
+/*Line 73 - 'AtomDateListBox.js' */                    et = $(et).attr("atom-type");
+/*Line 74 - 'AtomDateListBox.js' */                    if (!et) {
+/*Line 75 - 'AtomDateListBox.js' */                        et = WebAtoms.AtomControl;
+/*Line 76 - 'AtomDateListBox.js' */                    }
+/*Line 77 - 'AtomDateListBox.js' */                }
 
-/*Line 85 - 'AtomDateListBox.js' */            toggleDate: function (scope, sender) {
-/*Line 86 - 'AtomDateListBox.js' */                var item = sender.get_data();
-/*Line 87 - 'AtomDateListBox.js' */                var s = $.inArray(item.value, $.map(this._selectedItems, function (a) { return a.value; }));
-/*Line 88 - 'AtomDateListBox.js' */                if (s > -1) {
 
-/*Line 90 - 'AtomDateListBox.js' */                    AtomBinder.removeAtIndex(this._selectedItems, s);
-/*Line 91 - 'AtomDateListBox.js' */                } else {
-/*Line 92 - 'AtomDateListBox.js' */                    AtomBinder.addItem(this._selectedItems, item);
-/*Line 93 - 'AtomDateListBox.js' */                }
-/*Line 94 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "value");
-/*Line 95 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
-/*Line 96 - 'AtomDateListBox.js' */                this.invokeAction(this._next);
-/*Line 97 - 'AtomDateListBox.js' */            },
+/*Line 80 - 'AtomDateListBox.js' */                this.updateList();
+/*Line 81 - 'AtomDateListBox.js' */                if (!t)
+/*Line 82 - 'AtomDateListBox.js' */                    return;
+/*Line 83 - 'AtomDateListBox.js' */                var list = this._items;
+/*Line 84 - 'AtomDateListBox.js' */                for (var i = 0; i < 42; i++) {
+/*Line 85 - 'AtomDateListBox.js' */                    var e = AtomUI.cloneNode(t);
+/*Line 86 - 'AtomDateListBox.js' */                    e._templateParent = this;
+/*Line 87 - 'AtomDateListBox.js' */                    var sc = new AtomScope(this, s, atomApplication);
+/*Line 88 - 'AtomDateListBox.js' */                    sc.itemIndex = i;
+/*Line 89 - 'AtomDateListBox.js' */                    $(its).append(e);
+/*Line 90 - 'AtomDateListBox.js' */                    var ac = AtomUI.createControl(e, et, list[i], sc);
+/*Line 91 - 'AtomDateListBox.js' */                }
+/*Line 92 - 'AtomDateListBox.js' */            },
 
-/*Line 99 - 'AtomDateListBox.js' */            getItemClass: function (item, sv) {
-/*Line 100 - 'AtomDateListBox.js' */                var s = $.inArray(item.value, $.map(this._selectedItems, function (a) { return a.value; })) > -1;
-/*Line 101 - 'AtomDateListBox.js' */                var d = item.date.getDay();
-/*Line 102 - 'AtomDateListBox.js' */                // weekend..
-/*Line 103 - 'AtomDateListBox.js' */                var w = d == 0 || d == 6;
+/*Line 94 - 'AtomDateListBox.js' */            toggleDate: function (scope, sender) {
+/*Line 95 - 'AtomDateListBox.js' */                var item = sender.get_data();
+/*Line 96 - 'AtomDateListBox.js' */                var s = $.inArray(item.value, $.map(this._selectedItems, function (a) { return a.value; }));
+/*Line 97 - 'AtomDateListBox.js' */                if (s > -1) {
 
-/*Line 105 - 'AtomDateListBox.js' */                var cls = "atom-date-list-box-day-list-item ";
-/*Line 106 - 'AtomDateListBox.js' */                cls += w ? "atom-date-list-box-weekend " : "";
-/*Line 107 - 'AtomDateListBox.js' */                cls += s ? "atom-date-list-box-selected " : "atom-date-list-box-item ";
-/*Line 108 - 'AtomDateListBox.js' */                cls += (this._month == item.date.getMonth() + 1) ? "" : "atom-date-list-box-day-list-item-other";
+/*Line 99 - 'AtomDateListBox.js' */                    AtomBinder.removeAtIndex(this._selectedItems, s);
+/*Line 100 - 'AtomDateListBox.js' */                } else {
+/*Line 101 - 'AtomDateListBox.js' */                    AtomBinder.addItem(this._selectedItems, item);
+/*Line 102 - 'AtomDateListBox.js' */                }
+/*Line 103 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "value");
+/*Line 104 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
+/*Line 105 - 'AtomDateListBox.js' */                this.invokeAction(this._next);
+/*Line 106 - 'AtomDateListBox.js' */            },
 
-/*Line 110 - 'AtomDateListBox.js' */                return cls;
-/*Line 111 - 'AtomDateListBox.js' */            },
+/*Line 108 - 'AtomDateListBox.js' */            getItemClass: function (item, sv) {
+/*Line 109 - 'AtomDateListBox.js' */                var s = $.inArray(item.value, $.map(this._selectedItems, function (a) { return a.value; })) > -1;
+/*Line 110 - 'AtomDateListBox.js' */                var d = item.date.getDay();
+/*Line 111 - 'AtomDateListBox.js' */                // weekend..
+/*Line 112 - 'AtomDateListBox.js' */                var w = d == 0 || d == 6;
 
-/*Line 113 - 'AtomDateListBox.js' */            set_value: function (v) {
-/*Line 114 - 'AtomDateListBox.js' */                if (v === undefined) {
-/*Line 115 - 'AtomDateListBox.js' */                    return;
-/*Line 116 - 'AtomDateListBox.js' */                }
-/*Line 117 - 'AtomDateListBox.js' */                this._selectedItems.length = 0;
-/*Line 118 - 'AtomDateListBox.js' */                if (v !== null) {
-/*Line 119 - 'AtomDateListBox.js' */                    var items = v.split(',');
-/*Line 120 - 'AtomDateListBox.js' */                    for (var i = 0; i < items.length; i++) {
-/*Line 121 - 'AtomDateListBox.js' */                        var item = items[i];
-/*Line 122 - 'AtomDateListBox.js' */                        if (!item) {
-/*Line 123 - 'AtomDateListBox.js' */                            continue;
-/*Line 124 - 'AtomDateListBox.js' */                        }
-/*Line 125 - 'AtomDateListBox.js' */                        var dts = item.split('/');
-/*Line 126 - 'AtomDateListBox.js' */                        var d = new Date(parseInt(dts[2], 10), parseInt(dts[0], 10) - 1, parseInt(dts[1], 10));
-/*Line 127 - 'AtomDateListBox.js' */                        this._selectedItems.push({ date: d, dateLabel: AtomDate.toShortDateString(d), value: item, label: d.getDate() });
-/*Line 128 - 'AtomDateListBox.js' */                    }
-/*Line 129 - 'AtomDateListBox.js' */                }
-/*Line 130 - 'AtomDateListBox.js' */                if (this._created) {
-/*Line 131 - 'AtomDateListBox.js' */                    AtomBinder.refreshItems(this._selectedItems);
-/*Line 132 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
-/*Line 133 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "selectedItems");
-/*Line 134 - 'AtomDateListBox.js' */                }
-/*Line 135 - 'AtomDateListBox.js' */            },
-/*Line 136 - 'AtomDateListBox.js' */            get_value: function (v) {
-/*Line 137 - 'AtomDateListBox.js' */                return $.map(this._selectedItems, function (a) { return a.value; }).join(",");
-/*Line 138 - 'AtomDateListBox.js' */            },
+/*Line 114 - 'AtomDateListBox.js' */                var cls = "atom-date-list-box-day-list-item ";
+/*Line 115 - 'AtomDateListBox.js' */                cls += w ? "atom-date-list-box-weekend " : "";
+/*Line 116 - 'AtomDateListBox.js' */                cls += s ? "atom-date-list-box-selected " : "atom-date-list-box-item ";
+/*Line 117 - 'AtomDateListBox.js' */                cls += (this._month == item.date.getMonth() + 1) ? "" : "atom-date-list-box-day-list-item-other";
 
-/*Line 140 - 'AtomDateListBox.js' */            updateList: function () {
-/*Line 141 - 'AtomDateListBox.js' */                if (!this._month || !this._year)
-/*Line 142 - 'AtomDateListBox.js' */                    return;
+/*Line 119 - 'AtomDateListBox.js' */                return cls;
+/*Line 120 - 'AtomDateListBox.js' */            },
 
-/*Line 144 - 'AtomDateListBox.js' */                var d = new Date(this._year, this._month - 1, 1);
-/*Line 145 - 'AtomDateListBox.js' */                var first = new Date(this._year, this._month - 1, 1);
+/*Line 122 - 'AtomDateListBox.js' */            set_value: function (v) {
+/*Line 123 - 'AtomDateListBox.js' */                if (v === undefined) {
+/*Line 124 - 'AtomDateListBox.js' */                    return;
+/*Line 125 - 'AtomDateListBox.js' */                }
+/*Line 126 - 'AtomDateListBox.js' */                this._selectedItems.length = 0;
+/*Line 127 - 'AtomDateListBox.js' */                if (v !== null) {
+/*Line 128 - 'AtomDateListBox.js' */                    var items = v.split(',');
+/*Line 129 - 'AtomDateListBox.js' */                    for (var i = 0; i < items.length; i++) {
+/*Line 130 - 'AtomDateListBox.js' */                        var item = items[i];
+/*Line 131 - 'AtomDateListBox.js' */                        if (!item) {
+/*Line 132 - 'AtomDateListBox.js' */                            continue;
+/*Line 133 - 'AtomDateListBox.js' */                        }
+/*Line 134 - 'AtomDateListBox.js' */                        var dts = item.split('/');
+/*Line 135 - 'AtomDateListBox.js' */                        var d = new Date(parseInt(dts[2], 10), parseInt(dts[0], 10) - 1, parseInt(dts[1], 10));
+/*Line 136 - 'AtomDateListBox.js' */                        this._selectedItems.push({ date: d, dateLabel: AtomDate.toShortDateString(d), value: item, label: d.getDate() });
+/*Line 137 - 'AtomDateListBox.js' */                    }
+/*Line 138 - 'AtomDateListBox.js' */                }
+/*Line 139 - 'AtomDateListBox.js' */                if (this._created) {
+/*Line 140 - 'AtomDateListBox.js' */                    AtomBinder.refreshItems(this._selectedItems);
+/*Line 141 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
+/*Line 142 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "selectedItems");
+/*Line 143 - 'AtomDateListBox.js' */                }
+/*Line 144 - 'AtomDateListBox.js' */            },
+/*Line 145 - 'AtomDateListBox.js' */            get_value: function (v) {
+/*Line 146 - 'AtomDateListBox.js' */                return $.map(this._selectedItems, function (a) { return a.value; }).join(",");
+/*Line 147 - 'AtomDateListBox.js' */            },
 
-/*Line 147 - 'AtomDateListBox.js' */                var cm = this._month - 1;
+/*Line 149 - 'AtomDateListBox.js' */            updateList: function () {
+/*Line 150 - 'AtomDateListBox.js' */                if (!this._month || !this._year)
+/*Line 151 - 'AtomDateListBox.js' */                    return;
 
-/*Line 149 - 'AtomDateListBox.js' */                if (first.getDay()) {
-/*Line 150 - 'AtomDateListBox.js' */                    // go to first day of the month...
-/*Line 151 - 'AtomDateListBox.js' */                    var start = first.getDay() - 1;
-/*Line 152 - 'AtomDateListBox.js' */                    start = -start;
+/*Line 153 - 'AtomDateListBox.js' */                var now = new Date();
 
-/*Line 154 - 'AtomDateListBox.js' */                    first.setDate(start);
-/*Line 155 - 'AtomDateListBox.js' */                }
+/*Line 155 - 'AtomDateListBox.js' */                var d = new Date(this._year, this._month - 1, 1);
+/*Line 156 - 'AtomDateListBox.js' */                var first = new Date(this._year, this._month - 1, 1);
 
-/*Line 157 - 'AtomDateListBox.js' */                var m = first.getMonth();
-/*Line 158 - 'AtomDateListBox.js' */                var y = first.getFullYear();
+/*Line 158 - 'AtomDateListBox.js' */                if (first.getDay()) {
+/*Line 159 - 'AtomDateListBox.js' */                    // go to first day of the month...
+/*Line 160 - 'AtomDateListBox.js' */                    var start = first.getDay() - 1;
+/*Line 161 - 'AtomDateListBox.js' */                    start = -start;
 
-/*Line 160 - 'AtomDateListBox.js' */                var items = [];
+/*Line 163 - 'AtomDateListBox.js' */                    first.setDate(start);
+/*Line 164 - 'AtomDateListBox.js' */                }
 
-/*Line 162 - 'AtomDateListBox.js' */                var i = 0;
+/*Line 166 - 'AtomDateListBox.js' */                var m = first.getMonth();
+/*Line 167 - 'AtomDateListBox.js' */                var y = first.getFullYear();
 
-/*Line 164 - 'AtomDateListBox.js' */                for (i = 0; i < 42; i++) {
-/*Line 165 - 'AtomDateListBox.js' */                    var cd = i + first.getDate();
-/*Line 166 - 'AtomDateListBox.js' */                    var id = new Date(y, m, cd);
-/*Line 167 - 'AtomDateListBox.js' */                    var w = id.getDay();
-/*Line 168 - 'AtomDateListBox.js' */                    w = w == 0 || w == 6;
-/*Line 169 - 'AtomDateListBox.js' */                    items.push({
-/*Line 170 - 'AtomDateListBox.js' */                        label: id.getDate(),
-/*Line 171 - 'AtomDateListBox.js' */                        isWeekEnd: w,
-/*Line 172 - 'AtomDateListBox.js' */                        isOtherMonth: id.getMonth() != cm,
-/*Line 173 - 'AtomDateListBox.js' */                        dateLabel: AtomDate.toShortDateString(id),
-/*Line 174 - 'AtomDateListBox.js' */                        value: AtomDate.toMMDDYY(id),
-/*Line 175 - 'AtomDateListBox.js' */                        date: id
-/*Line 176 - 'AtomDateListBox.js' */                    });
-/*Line 177 - 'AtomDateListBox.js' */                }
+/*Line 169 - 'AtomDateListBox.js' */                var items = [];
 
-/*Line 179 - 'AtomDateListBox.js' */                this._items = items;
-/*Line 180 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "items");
-/*Line 181 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
-/*Line 182 - 'AtomDateListBox.js' */                if (this._created) {
-/*Line 183 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
-/*Line 184 - 'AtomDateListBox.js' */                }
-/*Line 185 - 'AtomDateListBox.js' */            }
-/*Line 186 - 'AtomDateListBox.js' */        }
-/*Line 187 - 'AtomDateListBox.js' */    });
-/*Line 188 - 'AtomDateListBox.js' */})(window, WebAtoms.AtomControl.prototype);
+/*Line 171 - 'AtomDateListBox.js' */                var i = 0;
+
+/*Line 173 - 'AtomDateListBox.js' */                var cm = this._month - 1;
+
+/*Line 175 - 'AtomDateListBox.js' */                for (i = 0; i < 42; i++) {
+/*Line 176 - 'AtomDateListBox.js' */                    var cd = i + first.getDate();
+/*Line 177 - 'AtomDateListBox.js' */                    var id = new Date(y, m, cd);
+/*Line 178 - 'AtomDateListBox.js' */                    var w = id.getDay();
+/*Line 179 - 'AtomDateListBox.js' */                    w = w == 0 || w == 6;
+/*Line 180 - 'AtomDateListBox.js' */                    items.push({
+/*Line 181 - 'AtomDateListBox.js' */                        label: id.getDate(),
+/*Line 182 - 'AtomDateListBox.js' */                        isWeekEnd: w,
+/*Line 183 - 'AtomDateListBox.js' */                        isToday:
+/*Line 184 - 'AtomDateListBox.js' */                            now.getDate() == id.getDate()
+/*Line 185 - 'AtomDateListBox.js' */                            && now.getMonth() == id.getMonth()
+/*Line 186 - 'AtomDateListBox.js' */                            && now.getFullYear() == id.getFullYear(),
+/*Line 187 - 'AtomDateListBox.js' */                        isOtherMonth: id.getMonth() != cm,
+/*Line 188 - 'AtomDateListBox.js' */                        dateLabel: AtomDate.toShortDateString(id),
+/*Line 189 - 'AtomDateListBox.js' */                        value: AtomDate.toMMDDYY(id),
+/*Line 190 - 'AtomDateListBox.js' */                        date: id
+/*Line 191 - 'AtomDateListBox.js' */                    });
+/*Line 192 - 'AtomDateListBox.js' */                }
+
+/*Line 194 - 'AtomDateListBox.js' */                this._items = items;
+/*Line 195 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "items");
+/*Line 196 - 'AtomDateListBox.js' */                AtomBinder.refreshValue(this, "selectedItems");
+/*Line 197 - 'AtomDateListBox.js' */                if (this._created) {
+/*Line 198 - 'AtomDateListBox.js' */                    AtomBinder.refreshValue(this, "value");
+/*Line 199 - 'AtomDateListBox.js' */                }
+/*Line 200 - 'AtomDateListBox.js' */            }
+/*Line 201 - 'AtomDateListBox.js' */        }
+/*Line 202 - 'AtomDateListBox.js' */    });
+/*Line 203 - 'AtomDateListBox.js' */})(window, WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomPostButton.js' */
 
 /*Line 2 - 'AtomPostButton.js' */(function (window, base) {
@@ -7444,82 +7461,99 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 12 - 'AtomDateField.js' */            isOpen: false
 /*Line 13 - 'AtomDateField.js' */        },
 /*Line 14 - 'AtomDateField.js' */        methods: {
-/*Line 15 - 'AtomDateField.js' */            onPopupRemoved: function (e) {
-/*Line 16 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
-/*Line 17 - 'AtomDateField.js' */            },
+/*Line 15 - 'AtomDateField.js' */            get_offsetLeft: function () {
+/*Line 16 - 'AtomDateField.js' */                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
+/*Line 17 - 'AtomDateField.js' */                return $(this._element).offset().left;
+/*Line 18 - 'AtomDateField.js' */            },
+/*Line 19 - 'AtomDateField.js' */            get_offsetTop: function () {
+/*Line 20 - 'AtomDateField.js' */                return $(this._element).offset().top;
+/*Line 21 - 'AtomDateField.js' */            },
 
-/*Line 19 - 'AtomDateField.js' */            set_isOpen: function (v) {
-/*Line 20 - 'AtomDateField.js' */                this._isOpen = v;
-/*Line 21 - 'AtomDateField.js' */                if (v) {
-/*Line 22 - 'AtomDateField.js' */                    this.getTemplate("popupTemplate");
+/*Line 23 - 'AtomDateField.js' */            onPopupRemoved: function (e) {
+/*Line 24 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
+/*Line 25 - 'AtomDateField.js' */            },
 
-/*Line 24 - 'AtomDateField.js' */                    this.popup = AtomUI.cloneNode(this._popupTemplate);
-/*Line 25 - 'AtomDateField.js' */                    //this.popup._logicalParent = this._element;
-/*Line 26 - 'AtomDateField.js' */                    this.popup._templateParent = this;
-/*Line 27 - 'AtomDateField.js' */                    //this.popup.style.visibility = "hidden";
-/*Line 28 - 'AtomDateField.js' */                    //document.body.appendChild(this.popup);
-/*Line 29 - 'AtomDateField.js' */                    this._element.appendChild(this.popup);
-/*Line 30 - 'AtomDateField.js' */                    this.onCreateChildren(this.popup);
-/*Line 31 - 'AtomDateField.js' */                    this.setProperties(this.popup);
-/*Line 32 - 'AtomDateField.js' */                    this.initChildren(this.popup);
-/*Line 33 - 'AtomDateField.js' */                    //var _this = this;
-/*Line 34 - 'AtomDateField.js' */                    //WebAtoms.dispatcher.callLater(function () {
-/*Line 35 - 'AtomDateField.js' */                    //    AtomPopup.show(_this._element, _this.popup, 0, function () {
-/*Line 36 - 'AtomDateField.js' */                    //        _this.onPopupRemoved(_this.popup);
-/*Line 37 - 'AtomDateField.js' */                    //    });
-/*Line 38 - 'AtomDateField.js' */                    //});
-/*Line 39 - 'AtomDateField.js' */                } else {
-/*Line 40 - 'AtomDateField.js' */                    //AtomPopup.hide(this.popup);
-/*Line 41 - 'AtomDateField.js' */                    this.disposeChildren(this.popup);
-/*Line 42 - 'AtomDateField.js' */                    $(this.popup).remove();
-/*Line 43 - 'AtomDateField.js' */                }
-/*Line 44 - 'AtomDateField.js' */            },
-/*Line 45 - 'AtomDateField.js' */            get_isOpen: function () {
-/*Line 46 - 'AtomDateField.js' */                return this._isOpen;
-/*Line 47 - 'AtomDateField.js' */            },
+/*Line 27 - 'AtomDateField.js' */            set_isOpen: function (v) {
+/*Line 28 - 'AtomDateField.js' */                this._isOpen = v;
+/*Line 29 - 'AtomDateField.js' */                if (v) {
+/*Line 30 - 'AtomDateField.js' */                    this.getTemplate("popupTemplate");
 
-/*Line 49 - 'AtomDateField.js' */            get_selectedItem: function () {
-/*Line 50 - 'AtomDateField.js' */                if (this._selectedItems.length)
-/*Line 51 - 'AtomDateField.js' */                    return this._selectedItems[0];
-/*Line 52 - 'AtomDateField.js' */                return null;
-/*Line 53 - 'AtomDateField.js' */            },
+/*Line 32 - 'AtomDateField.js' */                    this.popup = AtomUI.cloneNode(this._popupTemplate);
+/*Line 33 - 'AtomDateField.js' */                    this.popup._logicalParent = this._element;
+/*Line 34 - 'AtomDateField.js' */                    this.popup._templateParent = this;
+/*Line 35 - 'AtomDateField.js' */                    //this.popup.style.visibility = "hidden";
+/*Line 36 - 'AtomDateField.js' */                    document.body.appendChild(this.popup);
+/*Line 37 - 'AtomDateField.js' */                    this.onCreateChildren(this.popup);
+/*Line 38 - 'AtomDateField.js' */                    this.setProperties(this.popup);
+/*Line 39 - 'AtomDateField.js' */                    this.initChildren(this.popup);
 
-/*Line 55 - 'AtomDateField.js' */            set_value: function (v) {
-/*Line 56 - 'AtomDateField.js' */                v = AtomDate.parse(v);
-/*Line 57 - 'AtomDateField.js' */                this._value = v;
-/*Line 58 - 'AtomDateField.js' */                this._selectedItems.length = 0;
-/*Line 59 - 'AtomDateField.js' */                if (v) {
+/*Line 41 - 'AtomDateField.js' */                    var _this = this;
+/*Line 42 - 'AtomDateField.js' */                    this._refreshInterval = setInterval(function () {
+/*Line 43 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetLeft");
+/*Line 44 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetTop");
+/*Line 45 - 'AtomDateField.js' */                    });
 
-/*Line 61 - 'AtomDateField.js' */                    this._selectedItems.push({ date: v, dateLabel: AtomDate.toShortDateString(v), value: AtomDate.toMMDDYY(v), label: v.getDate() });
-/*Line 62 - 'AtomDateField.js' */                    this.set_visibleDate(v);
-/*Line 63 - 'AtomDateField.js' */                }
-/*Line 64 - 'AtomDateField.js' */                if (this._created) {
-/*Line 65 - 'AtomDateField.js' */                    AtomBinder.refreshItems(this._selectedItems);
-/*Line 66 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "value");
-/*Line 67 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItem");
-/*Line 68 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItems");
-/*Line 69 - 'AtomDateField.js' */                }
+/*Line 47 - 'AtomDateField.js' */                    //var _this = this;
+/*Line 48 - 'AtomDateField.js' */                    //WebAtoms.dispatcher.callLater(function () {
+/*Line 49 - 'AtomDateField.js' */                    //    AtomPopup.show(_this._element, _this.popup, 0, function () {
+/*Line 50 - 'AtomDateField.js' */                    //        _this.onPopupRemoved(_this.popup);
+/*Line 51 - 'AtomDateField.js' */                    //    });
+/*Line 52 - 'AtomDateField.js' */                    //});
+/*Line 53 - 'AtomDateField.js' */                } else {
+/*Line 54 - 'AtomDateField.js' */                    //AtomPopup.hide(this.popup);
+/*Line 55 - 'AtomDateField.js' */                    if (this._refreshInterval) {
+/*Line 56 - 'AtomDateField.js' */                        clearInterval(this._refreshInterval);
+/*Line 57 - 'AtomDateField.js' */                    }
+/*Line 58 - 'AtomDateField.js' */                    this.disposeChildren(this.popup);
+/*Line 59 - 'AtomDateField.js' */                    $(this.popup).remove();
+/*Line 60 - 'AtomDateField.js' */                }
+/*Line 61 - 'AtomDateField.js' */            },
+/*Line 62 - 'AtomDateField.js' */            get_isOpen: function () {
+/*Line 63 - 'AtomDateField.js' */                return this._isOpen;
+/*Line 64 - 'AtomDateField.js' */            },
+
+/*Line 66 - 'AtomDateField.js' */            get_selectedItem: function () {
+/*Line 67 - 'AtomDateField.js' */                if (this._selectedItems.length)
+/*Line 68 - 'AtomDateField.js' */                    return this._selectedItems[0];
+/*Line 69 - 'AtomDateField.js' */                return null;
 /*Line 70 - 'AtomDateField.js' */            },
-/*Line 71 - 'AtomDateField.js' */            get_value: function (v) {
-/*Line 72 - 'AtomDateField.js' */                if (this._selectedItems.length)
-/*Line 73 - 'AtomDateField.js' */                    return this._selectedItems[0].date;
-/*Line 74 - 'AtomDateField.js' */                return this._value;
-/*Line 75 - 'AtomDateField.js' */            },
 
-/*Line 77 - 'AtomDateField.js' */            toggleDate: function (scope, sender) {
-/*Line 78 - 'AtomDateField.js' */                var item = sender.get_data();
-/*Line 79 - 'AtomDateField.js' */                this._selectedItems.length = 0;
-/*Line 80 - 'AtomDateField.js' */                AtomBinder.addItem(this._selectedItems, item);
-/*Line 81 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "value");
-/*Line 82 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItem");
-/*Line 83 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItems");
-/*Line 84 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
-/*Line 85 - 'AtomDateField.js' */            }
+/*Line 72 - 'AtomDateField.js' */            set_value: function (v) {
+/*Line 73 - 'AtomDateField.js' */                v = AtomDate.parse(v);
+/*Line 74 - 'AtomDateField.js' */                this._value = v;
+/*Line 75 - 'AtomDateField.js' */                this._selectedItems.length = 0;
+/*Line 76 - 'AtomDateField.js' */                if (v) {
+
+/*Line 78 - 'AtomDateField.js' */                    this._selectedItems.push({ date: v, dateLabel: AtomDate.toShortDateString(v), value: AtomDate.toMMDDYY(v), label: v.getDate() });
+/*Line 79 - 'AtomDateField.js' */                    this.set_visibleDate(v);
+/*Line 80 - 'AtomDateField.js' */                }
+/*Line 81 - 'AtomDateField.js' */                if (this._created) {
+/*Line 82 - 'AtomDateField.js' */                    AtomBinder.refreshItems(this._selectedItems);
+/*Line 83 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "value");
+/*Line 84 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItem");
+/*Line 85 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItems");
+/*Line 86 - 'AtomDateField.js' */                }
+/*Line 87 - 'AtomDateField.js' */            },
+/*Line 88 - 'AtomDateField.js' */            get_value: function (v) {
+/*Line 89 - 'AtomDateField.js' */                if (this._selectedItems.length)
+/*Line 90 - 'AtomDateField.js' */                    return this._selectedItems[0].date;
+/*Line 91 - 'AtomDateField.js' */                return this._value;
+/*Line 92 - 'AtomDateField.js' */            },
+
+/*Line 94 - 'AtomDateField.js' */            toggleDate: function (scope, sender) {
+/*Line 95 - 'AtomDateField.js' */                var item = sender.get_data();
+/*Line 96 - 'AtomDateField.js' */                this._selectedItems.length = 0;
+/*Line 97 - 'AtomDateField.js' */                AtomBinder.addItem(this._selectedItems, item);
+/*Line 98 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "value");
+/*Line 99 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItem");
+/*Line 100 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItems");
+/*Line 101 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
+/*Line 102 - 'AtomDateField.js' */            }
 
 
-/*Line 88 - 'AtomDateField.js' */        }
-/*Line 89 - 'AtomDateField.js' */    });
-/*Line 90 - 'AtomDateField.js' */})(window, WebAtoms.AtomDateListBox.prototype);
+/*Line 105 - 'AtomDateField.js' */        }
+/*Line 106 - 'AtomDateField.js' */    });
+/*Line 107 - 'AtomDateField.js' */})(window, WebAtoms.AtomDateListBox.prototype);
 /*Line 0 - 'AtomDeleteButton.js' */
 
 /*Line 2 - 'AtomDeleteButton.js' */(function (window, base) {

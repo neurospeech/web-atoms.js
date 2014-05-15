@@ -248,15 +248,23 @@ border-radius: 4px;
 }
 
 
+.atom-date-field .atom-date-list-box{
+    position:absolute;
+}
+
 .atom-date-field .popup{
     margin-left:-2px;
-    position:relative;
+    position:absolute;
     display:none;
     width:198px;
     height:200px;
     background-color:white;
     left:-1px;
     z-index:11;
+}
+
+.atom-date-field-popup{
+    position:absolute;
 }
 
 .atom-date-field .popup-open{
@@ -368,6 +376,11 @@ border-radius: 4px;
 .atom-date-list-box .calendar .weekend {
     background-color: #eeeeee
 }
+
+.atom-date-list-box .calendar .today {
+    background-color: #ff6a00
+}
+
 
 .atom-date-list-box .calendar .selected {
     background-color: darkgreen;
