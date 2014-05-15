@@ -166,6 +166,9 @@ window.AtomProperties = AtomProperties;
             this.bindings = [];
             this._isVisible = true;
 
+            if (element.id && appScope) {
+                appScope[element.id] = this;
+            }
             AtomUI.assignID(element);
 
             allControls[element.id] = this;
