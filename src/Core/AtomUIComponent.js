@@ -28,7 +28,7 @@
 
             get_localScope: function () {
                 if (this._localScope === undefined) {
-                    var ap = this.get_atomParent(this._element.parentNode);
+                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
                     if (ap) {
                         return ap.get_localScope();
                     } else {

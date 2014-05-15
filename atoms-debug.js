@@ -3342,7 +3342,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 /*Line 28 - 'AtomUIComponent.js' */            get_localScope: function () {
 /*Line 29 - 'AtomUIComponent.js' */                if (this._localScope === undefined) {
-/*Line 30 - 'AtomUIComponent.js' */                    var ap = this.get_atomParent(this._element.parentNode);
+/*Line 30 - 'AtomUIComponent.js' */                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
 /*Line 31 - 'AtomUIComponent.js' */                    if (ap) {
 /*Line 32 - 'AtomUIComponent.js' */                        return ap.get_localScope();
 /*Line 33 - 'AtomUIComponent.js' */                    } else {
