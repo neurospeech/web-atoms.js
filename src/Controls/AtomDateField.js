@@ -60,6 +60,11 @@
                     $(this.popup).remove();
                 }
             },
+
+            dispose: function () {
+                this.set_isOpen(false);
+                base.dispose.call(this);
+            },
             get_isOpen: function () {
                 return this._isOpen;
             },
