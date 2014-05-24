@@ -200,6 +200,88 @@ var Atom = {
     }
 };
 
+Atom.resolve = function (obj, ap) {
+
+    var start = !ap;
+
+    if (!obj)
+        return obj;
+
+    if (start) {
+
+        ap = new AtomPromise();
+        ap.list = [];
+        ap.done = function (v) {
+            Atom.remove(ap.list, v);
+            if (ap.list.length == 0) {
+                ap.pushValue(obj);
+            }
+        };
+    }
+
+
+    var type = typeof (obj);
+
+    if (type == 'object') {
+        if (typeof (obj.length) != 'undefined') {
+            //this is an array
+            for (var i = 0; i < obj.length; i++) {
+                var v = obj[i];
+                if (!v)
+                    continue;
+                var item = obj;
+                var key = i;
+                if (v instanceof AtomPromise || v.constructor == AtomPromise) {
+                    ap.list.push(v);
+                    v.failed(function (a) {
+                        ap.done(a);
+                    });
+                    v.then(function (a) {
+                        item[key] = a.value();
+                        ap.done(a);
+                    });
+                    continue;
+                }
+                Atom.resolve(v, ap);
+            }
+        } else {
+            for (var i in obj) {
+                var v = obj[i];
+                if (!v)
+                    continue;
+                if (v instanceof AtomPromise || v.constructor == AtomPromise) {
+                    ap.list.push(v);
+                    v.failed(function (a) {
+                        ap.done(a);
+                    });
+                    var item = obj;
+                    var key = i;
+                    v.then(function (a) {
+                        item[key] = a.value();
+                        ap.done(a);
+                    });
+                    continue;
+                }
+                Atom.resolve(v, ap);
+            }
+        }
+    }
+
+    if (ap.list.length) {
+        if (start) {
+            ap.onInvoke(function () {
+                var ae = new AtomEnumerator(ap.list);
+                while (ae.next()) {
+                    ae.current().invoke(ap._invoker);
+                }
+            });
+        }
+        return ap;
+    }
+    return obj;
+
+};
+
 window.Atom = Atom;
 
 (function () {
