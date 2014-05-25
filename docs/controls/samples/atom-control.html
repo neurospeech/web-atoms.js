@@ -24,10 +24,10 @@
     >
 
     <input type="text" 
-        atom-value="$[data.firstName](keyup)" 
+        atom-value="$[data.firstName](keyup,keydown,keypress,blur)" 
         placeholder="First Name" /><br />
     <input type="text" 
-        atom-value="$[data.lastName](keyup)" 
+        atom-value="^[data.lastName]" 
         placeholder="Last Name" /><br />
     <input type="button" value="Save" />
     <span 

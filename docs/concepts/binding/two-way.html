@@ -19,8 +19,8 @@
         there is a toggle button bar, which displays list of items and one can be selected. Binding expression <span class="inlineCode">atom-selected-item</span> is written with <span class="inlineCode">$</span> prefix, which makes this expression as two way binding, which means any time either side expression is modified, other will be updated at the same time. Here, whenever selected item will be changed by user (by clicking and changing the default selected item of Toggle Button Bar), this binding expression will save selected item as selection named property in scope.</p>
     <p>
         So, whenever <span class="inlineCode">$[scope.selection]</span> will be updated by <span class="inlineCode">atom-selected-item</span> by user interaction, other elements bound to <span class="inlineCode">$scope.selection</span> will be updated automatically.</p>
-    <h2>Two Way Binding - Update Event</h2>
-    <p>By default, two way binding is updated on &quot;change&quot; event of HTML Element. However, sometimes you may want to update binding on any other event for example &quot;key up&quot; event. It can be done by typing comma separated events in brackets after declaration of two way binding.</p>
+    <h2>Two Way Binding - Instant Update</h2>
+    <p>By default, two way binding is updated on &quot;change&quot; event of HTML Element. This is done to improve performance, however if you want binding to be updated on every keyboard event, then you can use ^ instead of $. Or you can specify comma separated event names in bracket after the binding expression as shown below.</p>
     <iframe class="atom-code-frame" src="../../code.html#codeFile=controls/samples/atom-control.html" style="height: 362px;">
 
     </iframe>
