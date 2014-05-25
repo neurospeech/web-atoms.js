@@ -3652,909 +3652,912 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 59 - 'AtomControl.js' */    },
 /*Line 60 - 'AtomControl.js' */    "^[": function (ctrl, key, value, element) {
 /*Line 61 - 'AtomControl.js' */        value = value.substr(1, value.length - 2);
-/*Line 62 - 'AtomControl.js' */        ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur");
-/*Line 63 - 'AtomControl.js' */    }
-/*Line 64 - 'AtomControl.js' */};
+/*Line 62 - 'AtomControl.js' */        if (/^(@|\$)/g.test(value)) {
+/*Line 63 - 'AtomControl.js' */            value = value.substr(1);
+/*Line 64 - 'AtomControl.js' */        }
+/*Line 65 - 'AtomControl.js' */        ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur");
+/*Line 66 - 'AtomControl.js' */    }
+/*Line 67 - 'AtomControl.js' */};
 
-/*Line 66 - 'AtomControl.js' */// Property Handlers
-/*Line 67 - 'AtomControl.js' */var AtomProperties = {
-/*Line 68 - 'AtomControl.js' */    any: function (e, v, k) {
-/*Line 69 - 'AtomControl.js' */        //$(e).attr(k, v);
-/*Line 70 - 'AtomControl.js' */        e.setAttribute(k, v);
-/*Line 71 - 'AtomControl.js' */    },
-/*Line 72 - 'AtomControl.js' */    isEnabled: function(element,value){
-/*Line 73 - 'AtomControl.js' */        if (value) {
-/*Line 74 - 'AtomControl.js' */            $(element).removeAttr("disabled");
-/*Line 75 - 'AtomControl.js' */        } else {
-/*Line 76 - 'AtomControl.js' */            $(element).attr("disabled", "disabled");
-/*Line 77 - 'AtomControl.js' */        }
-/*Line 78 - 'AtomControl.js' */    },
-/*Line 79 - 'AtomControl.js' */    checked: function (element, value) {
-/*Line 80 - 'AtomControl.js' */        if (element.checked != value) {
-/*Line 81 - 'AtomControl.js' */            element.checked = value ? true : false;
-/*Line 82 - 'AtomControl.js' */        }
-/*Line 83 - 'AtomControl.js' */    },
-/*Line 84 - 'AtomControl.js' */    value: function (element, value) {
-/*Line 85 - 'AtomControl.js' */        if (/date|datetime/gi.test(element.type)) {
-/*Line 86 - 'AtomControl.js' */            element.valueAsDate = AtomDate.parse(value);
-/*Line 87 - 'AtomControl.js' */        } else {
-/*Line 88 - 'AtomControl.js' */            $(element).val(value);
-/*Line 89 - 'AtomControl.js' */        }
-/*Line 90 - 'AtomControl.js' */    },
-/*Line 91 - 'AtomControl.js' */    valueAsDate: function (element, value) {
-/*Line 92 - 'AtomControl.js' */        element.valueAsDate = AtomDate.parse(value);
+/*Line 69 - 'AtomControl.js' */// Property Handlers
+/*Line 70 - 'AtomControl.js' */var AtomProperties = {
+/*Line 71 - 'AtomControl.js' */    any: function (e, v, k) {
+/*Line 72 - 'AtomControl.js' */        //$(e).attr(k, v);
+/*Line 73 - 'AtomControl.js' */        e.setAttribute(k, v);
+/*Line 74 - 'AtomControl.js' */    },
+/*Line 75 - 'AtomControl.js' */    isEnabled: function(element,value){
+/*Line 76 - 'AtomControl.js' */        if (value) {
+/*Line 77 - 'AtomControl.js' */            $(element).removeAttr("disabled");
+/*Line 78 - 'AtomControl.js' */        } else {
+/*Line 79 - 'AtomControl.js' */            $(element).attr("disabled", "disabled");
+/*Line 80 - 'AtomControl.js' */        }
+/*Line 81 - 'AtomControl.js' */    },
+/*Line 82 - 'AtomControl.js' */    checked: function (element, value) {
+/*Line 83 - 'AtomControl.js' */        if (element.checked != value) {
+/*Line 84 - 'AtomControl.js' */            element.checked = value ? true : false;
+/*Line 85 - 'AtomControl.js' */        }
+/*Line 86 - 'AtomControl.js' */    },
+/*Line 87 - 'AtomControl.js' */    value: function (element, value) {
+/*Line 88 - 'AtomControl.js' */        if (/date|datetime/gi.test(element.type)) {
+/*Line 89 - 'AtomControl.js' */            element.valueAsDate = AtomDate.parse(value);
+/*Line 90 - 'AtomControl.js' */        } else {
+/*Line 91 - 'AtomControl.js' */            $(element).val(value);
+/*Line 92 - 'AtomControl.js' */        }
 /*Line 93 - 'AtomControl.js' */    },
-/*Line 94 - 'AtomControl.js' */    text: function (element, value) {
-/*Line 95 - 'AtomControl.js' */        //clears everything..
-/*Line 96 - 'AtomControl.js' */        element.innerHTML = "";
-/*Line 97 - 'AtomControl.js' */        var a = document.createTextNode(value);
-/*Line 98 - 'AtomControl.js' */        element.appendChild(a);
-/*Line 99 - 'AtomControl.js' */    },
-/*Line 100 - 'AtomControl.js' */    html: function (element, value) {
-/*Line 101 - 'AtomControl.js' */        element.innerHTML = value;
+/*Line 94 - 'AtomControl.js' */    valueAsDate: function (element, value) {
+/*Line 95 - 'AtomControl.js' */        element.valueAsDate = AtomDate.parse(value);
+/*Line 96 - 'AtomControl.js' */    },
+/*Line 97 - 'AtomControl.js' */    text: function (element, value) {
+/*Line 98 - 'AtomControl.js' */        //clears everything..
+/*Line 99 - 'AtomControl.js' */        element.innerHTML = "";
+/*Line 100 - 'AtomControl.js' */        var a = document.createTextNode(value);
+/*Line 101 - 'AtomControl.js' */        element.appendChild(a);
 /*Line 102 - 'AtomControl.js' */    },
-/*Line 103 - 'AtomControl.js' */    absPos: function (element, value) {
-/*Line 104 - 'AtomControl.js' */        AtomProperties.setPosition(true, element, value);
+/*Line 103 - 'AtomControl.js' */    html: function (element, value) {
+/*Line 104 - 'AtomControl.js' */        element.innerHTML = value;
 /*Line 105 - 'AtomControl.js' */    },
-/*Line 106 - 'AtomControl.js' */    relPos: function (element, value) {
-/*Line 107 - 'AtomControl.js' */        AtomProperties.setPosition(false, element, value);
+/*Line 106 - 'AtomControl.js' */    absPos: function (element, value) {
+/*Line 107 - 'AtomControl.js' */        AtomProperties.setPosition(true, element, value);
 /*Line 108 - 'AtomControl.js' */    },
-/*Line 109 - 'AtomControl.js' */    "class": function (element,value) {
-/*Line 110 - 'AtomControl.js' */        if (element.atomClass) {
-/*Line 111 - 'AtomControl.js' */            $(element).removeClass(element.atomClass);
-/*Line 112 - 'AtomControl.js' */        }
-/*Line 113 - 'AtomControl.js' */        if (value) {
-/*Line 114 - 'AtomControl.js' */            value = AtomUI.createCss(value);
-/*Line 115 - 'AtomControl.js' */            if (value) {
-/*Line 116 - 'AtomControl.js' */                $(element).addClass(value);
-/*Line 117 - 'AtomControl.js' */            }
-/*Line 118 - 'AtomControl.js' */            element.atomClass = value;
-/*Line 119 - 'AtomControl.js' */        }
-/*Line 120 - 'AtomControl.js' */    },
-/*Line 121 - 'AtomControl.js' */    setPosition: function (a, e, val) {
-/*Line 122 - 'AtomControl.js' */        var l = val;
+/*Line 109 - 'AtomControl.js' */    relPos: function (element, value) {
+/*Line 110 - 'AtomControl.js' */        AtomProperties.setPosition(false, element, value);
+/*Line 111 - 'AtomControl.js' */    },
+/*Line 112 - 'AtomControl.js' */    "class": function (element,value) {
+/*Line 113 - 'AtomControl.js' */        if (element.atomClass) {
+/*Line 114 - 'AtomControl.js' */            $(element).removeClass(element.atomClass);
+/*Line 115 - 'AtomControl.js' */        }
+/*Line 116 - 'AtomControl.js' */        if (value) {
+/*Line 117 - 'AtomControl.js' */            value = AtomUI.createCss(value);
+/*Line 118 - 'AtomControl.js' */            if (value) {
+/*Line 119 - 'AtomControl.js' */                $(element).addClass(value);
+/*Line 120 - 'AtomControl.js' */            }
+/*Line 121 - 'AtomControl.js' */            element.atomClass = value;
+/*Line 122 - 'AtomControl.js' */        }
+/*Line 123 - 'AtomControl.js' */    },
+/*Line 124 - 'AtomControl.js' */    setPosition: function (a, e, val) {
+/*Line 125 - 'AtomControl.js' */        var l = val;
 
-/*Line 124 - 'AtomControl.js' */        if (l.constructor == String) {
-/*Line 125 - 'AtomControl.js' */            l = eval("[" + l + "]");
-/*Line 126 - 'AtomControl.js' */        }
+/*Line 127 - 'AtomControl.js' */        if (l.constructor == String) {
+/*Line 128 - 'AtomControl.js' */            l = eval("[" + l + "]");
+/*Line 129 - 'AtomControl.js' */        }
 
-/*Line 128 - 'AtomControl.js' */        e.style.position = a ? 'absolute' : 'relative';
+/*Line 131 - 'AtomControl.js' */        e.style.position = a ? 'absolute' : 'relative';
 
-/*Line 130 - 'AtomControl.js' */        var left = l[0];
-/*Line 131 - 'AtomControl.js' */        var top = l[1];
+/*Line 133 - 'AtomControl.js' */        var left = l[0];
+/*Line 134 - 'AtomControl.js' */        var top = l[1];
 
-/*Line 133 - 'AtomControl.js' */        if (left !== null) {
-/*Line 134 - 'AtomControl.js' */            e.style.left = left + "px";
-/*Line 135 - 'AtomControl.js' */        }
-/*Line 136 - 'AtomControl.js' */        if (top !== null) {
-/*Line 137 - 'AtomControl.js' */            e.style.top = top + "px";
+/*Line 136 - 'AtomControl.js' */        if (left !== null) {
+/*Line 137 - 'AtomControl.js' */            e.style.left = left + "px";
 /*Line 138 - 'AtomControl.js' */        }
-/*Line 139 - 'AtomControl.js' */        if (l.length > 2) {
-/*Line 140 - 'AtomControl.js' */            var width = l[2];
-/*Line 141 - 'AtomControl.js' */            var height = l[3];
-/*Line 142 - 'AtomControl.js' */            if (width !== undefined && width !== null) {
-/*Line 143 - 'AtomControl.js' */                e.style.width = width + "px";
-/*Line 144 - 'AtomControl.js' */            }
-/*Line 145 - 'AtomControl.js' */            if (height !== undefined && height !== null) {
-/*Line 146 - 'AtomControl.js' */                e.style.height = height + "px";
+/*Line 139 - 'AtomControl.js' */        if (top !== null) {
+/*Line 140 - 'AtomControl.js' */            e.style.top = top + "px";
+/*Line 141 - 'AtomControl.js' */        }
+/*Line 142 - 'AtomControl.js' */        if (l.length > 2) {
+/*Line 143 - 'AtomControl.js' */            var width = l[2];
+/*Line 144 - 'AtomControl.js' */            var height = l[3];
+/*Line 145 - 'AtomControl.js' */            if (width !== undefined && width !== null) {
+/*Line 146 - 'AtomControl.js' */                e.style.width = width + "px";
 /*Line 147 - 'AtomControl.js' */            }
-/*Line 148 - 'AtomControl.js' */        }
-/*Line 149 - 'AtomControl.js' */    }
-/*Line 150 - 'AtomControl.js' */};
+/*Line 148 - 'AtomControl.js' */            if (height !== undefined && height !== null) {
+/*Line 149 - 'AtomControl.js' */                e.style.height = height + "px";
+/*Line 150 - 'AtomControl.js' */            }
+/*Line 151 - 'AtomControl.js' */        }
+/*Line 152 - 'AtomControl.js' */    }
+/*Line 153 - 'AtomControl.js' */};
 
-/*Line 152 - 'AtomControl.js' */window.AtomProperties = AtomProperties;
+/*Line 155 - 'AtomControl.js' */window.AtomProperties = AtomProperties;
 
-/*Line 154 - 'AtomControl.js' */(function (window, name, base) {
+/*Line 157 - 'AtomControl.js' */(function (window, name, base) {
 
 
-/*Line 157 - 'AtomControl.js' */    return classCreatorEx({
-/*Line 158 - 'AtomControl.js' */        name: name,
-/*Line 159 - 'AtomControl.js' */        base: base,
-/*Line 160 - 'AtomControl.js' */        start: function (element) {
-/*Line 161 - 'AtomControl.js' */            element.atomControl = this;
-/*Line 162 - 'AtomControl.js' */            this._element = element;
+/*Line 160 - 'AtomControl.js' */    return classCreatorEx({
+/*Line 161 - 'AtomControl.js' */        name: name,
+/*Line 162 - 'AtomControl.js' */        base: base,
+/*Line 163 - 'AtomControl.js' */        start: function (element) {
+/*Line 164 - 'AtomControl.js' */            element.atomControl = this;
+/*Line 165 - 'AtomControl.js' */            this._element = element;
 
-/*Line 164 - 'AtomControl.js' */            this.dispatcher = WebAtoms.dispatcher;
-/*Line 165 - 'AtomControl.js' */            this.bindings = [];
-/*Line 166 - 'AtomControl.js' */            this._isVisible = true;
+/*Line 167 - 'AtomControl.js' */            this.dispatcher = WebAtoms.dispatcher;
+/*Line 168 - 'AtomControl.js' */            this.bindings = [];
+/*Line 169 - 'AtomControl.js' */            this._isVisible = true;
 
-/*Line 168 - 'AtomControl.js' */            if (element.id && appScope) {
-/*Line 169 - 'AtomControl.js' */                appScope[element.id] = this;
-/*Line 170 - 'AtomControl.js' */            }
-/*Line 171 - 'AtomControl.js' */            AtomUI.assignID(element);
+/*Line 171 - 'AtomControl.js' */            if (element.id && appScope) {
+/*Line 172 - 'AtomControl.js' */                appScope[element.id] = this;
+/*Line 173 - 'AtomControl.js' */            }
+/*Line 174 - 'AtomControl.js' */            AtomUI.assignID(element);
 
-/*Line 173 - 'AtomControl.js' */            allControls[element.id] = this;
-/*Line 174 - 'AtomControl.js' */        },
-/*Line 175 - 'AtomControl.js' */        properties: {
-/*Line 176 - 'AtomControl.js' */            layout: null,
-/*Line 177 - 'AtomControl.js' */            loadNext: null,
-/*Line 178 - 'AtomControl.js' */            next: null,
-/*Line 179 - 'AtomControl.js' */            merge: undefined,
-/*Line 180 - 'AtomControl.js' */            value: undefined
-/*Line 181 - 'AtomControl.js' */        },
-/*Line 182 - 'AtomControl.js' */        methods: {
-/*Line 183 - 'AtomControl.js' */            set_merge: function (v) {
-/*Line 184 - 'AtomControl.js' */                this._mergeData2 = null;
-/*Line 185 - 'AtomControl.js' */                if (!v)
-/*Line 186 - 'AtomControl.js' */                    return;
-/*Line 187 - 'AtomControl.js' */                var d = v.data;
-/*Line 188 - 'AtomControl.js' */                if (d) {
-/*Line 189 - 'AtomControl.js' */                    Atom.merge(this.get_data(), d, true);
-/*Line 190 - 'AtomControl.js' */                    this._mergeData2 = d;
-/*Line 191 - 'AtomControl.js' */                }
-/*Line 192 - 'AtomControl.js' */                d = v.scope;
-/*Line 193 - 'AtomControl.js' */                if (d) {
-/*Line 194 - 'AtomControl.js' */                    Atom.merge(this.get_scope(), d, true);
-/*Line 195 - 'AtomControl.js' */                }
-/*Line 196 - 'AtomControl.js' */                d = v.appScope;
-/*Line 197 - 'AtomControl.js' */                if (d) {
-/*Line 198 - 'AtomControl.js' */                    Atom.merge(this.get_appScope(), d, true);
-/*Line 199 - 'AtomControl.js' */                }
-/*Line 200 - 'AtomControl.js' */                d = v.localScope;
-/*Line 201 - 'AtomControl.js' */                if (d) {
-/*Line 202 - 'AtomControl.js' */                    Atom.merge(this.get_localScope(), d, true);
-/*Line 203 - 'AtomControl.js' */                }
-/*Line 204 - 'AtomControl.js' */                d = v.owner;
-/*Line 205 - 'AtomControl.js' */                if (d) {
-/*Line 206 - 'AtomControl.js' */                    Atom.merge(this,d,true);
-/*Line 207 - 'AtomControl.js' */                }
-/*Line 208 - 'AtomControl.js' */            },
-/*Line 209 - 'AtomControl.js' */            invokeAction: function (action, evt) {
-/*Line 210 - 'AtomControl.js' */                if (!action)
-/*Line 211 - 'AtomControl.js' */                    return;
-/*Line 212 - 'AtomControl.js' */                if (action.constructor == String) {
-/*Line 213 - 'AtomControl.js' */                    location.href = action;
-/*Line 214 - 'AtomControl.js' */                }
-/*Line 215 - 'AtomControl.js' */                else {
+/*Line 176 - 'AtomControl.js' */            allControls[element.id] = this;
+/*Line 177 - 'AtomControl.js' */        },
+/*Line 178 - 'AtomControl.js' */        properties: {
+/*Line 179 - 'AtomControl.js' */            layout: null,
+/*Line 180 - 'AtomControl.js' */            loadNext: null,
+/*Line 181 - 'AtomControl.js' */            next: null,
+/*Line 182 - 'AtomControl.js' */            merge: undefined,
+/*Line 183 - 'AtomControl.js' */            value: undefined
+/*Line 184 - 'AtomControl.js' */        },
+/*Line 185 - 'AtomControl.js' */        methods: {
+/*Line 186 - 'AtomControl.js' */            set_merge: function (v) {
+/*Line 187 - 'AtomControl.js' */                this._mergeData2 = null;
+/*Line 188 - 'AtomControl.js' */                if (!v)
+/*Line 189 - 'AtomControl.js' */                    return;
+/*Line 190 - 'AtomControl.js' */                var d = v.data;
+/*Line 191 - 'AtomControl.js' */                if (d) {
+/*Line 192 - 'AtomControl.js' */                    Atom.merge(this.get_data(), d, true);
+/*Line 193 - 'AtomControl.js' */                    this._mergeData2 = d;
+/*Line 194 - 'AtomControl.js' */                }
+/*Line 195 - 'AtomControl.js' */                d = v.scope;
+/*Line 196 - 'AtomControl.js' */                if (d) {
+/*Line 197 - 'AtomControl.js' */                    Atom.merge(this.get_scope(), d, true);
+/*Line 198 - 'AtomControl.js' */                }
+/*Line 199 - 'AtomControl.js' */                d = v.appScope;
+/*Line 200 - 'AtomControl.js' */                if (d) {
+/*Line 201 - 'AtomControl.js' */                    Atom.merge(this.get_appScope(), d, true);
+/*Line 202 - 'AtomControl.js' */                }
+/*Line 203 - 'AtomControl.js' */                d = v.localScope;
+/*Line 204 - 'AtomControl.js' */                if (d) {
+/*Line 205 - 'AtomControl.js' */                    Atom.merge(this.get_localScope(), d, true);
+/*Line 206 - 'AtomControl.js' */                }
+/*Line 207 - 'AtomControl.js' */                d = v.owner;
+/*Line 208 - 'AtomControl.js' */                if (d) {
+/*Line 209 - 'AtomControl.js' */                    Atom.merge(this,d,true);
+/*Line 210 - 'AtomControl.js' */                }
+/*Line 211 - 'AtomControl.js' */            },
+/*Line 212 - 'AtomControl.js' */            invokeAction: function (action, evt) {
+/*Line 213 - 'AtomControl.js' */                if (!action)
+/*Line 214 - 'AtomControl.js' */                    return;
+/*Line 215 - 'AtomControl.js' */                if (action.constructor == String) {
+/*Line 216 - 'AtomControl.js' */                    location.href = action;
+/*Line 217 - 'AtomControl.js' */                }
+/*Line 218 - 'AtomControl.js' */                else {
 
-/*Line 217 - 'AtomControl.js' */                    var f = action;
+/*Line 220 - 'AtomControl.js' */                    var f = action;
 
-/*Line 219 - 'AtomControl.js' */                    // is it atomControl?
-/*Line 220 - 'AtomControl.js' */                    if (f.atomControl) {
-/*Line 221 - 'AtomControl.js' */                        f = f.atomControl;
-/*Line 222 - 'AtomControl.js' */                        if (f.refresh) {
-/*Line 223 - 'AtomControl.js' */                            f.refresh(this.get_scope(), this);
-/*Line 224 - 'AtomControl.js' */                        } else {
-/*Line 225 - 'AtomControl.js' */                            Atom.alert("no default action defined");
-/*Line 226 - 'AtomControl.js' */                        }
-/*Line 227 - 'AtomControl.js' */                    } else {
-/*Line 228 - 'AtomControl.js' */                        if (f._element) {
-/*Line 229 - 'AtomControl.js' */                            f.refresh(this.get_scope(), this);
-/*Line 230 - 'AtomControl.js' */                        } else {
+/*Line 222 - 'AtomControl.js' */                    // is it atomControl?
+/*Line 223 - 'AtomControl.js' */                    if (f.atomControl) {
+/*Line 224 - 'AtomControl.js' */                        f = f.atomControl;
+/*Line 225 - 'AtomControl.js' */                        if (f.refresh) {
+/*Line 226 - 'AtomControl.js' */                            f.refresh(this.get_scope(), this);
+/*Line 227 - 'AtomControl.js' */                        } else {
+/*Line 228 - 'AtomControl.js' */                            Atom.alert("no default action defined");
+/*Line 229 - 'AtomControl.js' */                        }
+/*Line 230 - 'AtomControl.js' */                    } else {
+/*Line 231 - 'AtomControl.js' */                        if (f._element) {
+/*Line 232 - 'AtomControl.js' */                            f.refresh(this.get_scope(), this);
+/*Line 233 - 'AtomControl.js' */                        } else {
 
-/*Line 232 - 'AtomControl.js' */                            //is it function
+/*Line 235 - 'AtomControl.js' */                            //is it function
 
-/*Line 234 - 'AtomControl.js' */                            if ((typeof f) == 'function') {
+/*Line 237 - 'AtomControl.js' */                            if ((typeof f) == 'function') {
 
-/*Line 236 - 'AtomControl.js' */                                // invoke method...
-/*Line 237 - 'AtomControl.js' */                                f(this.get_scope(), this, evt);
-/*Line 238 - 'AtomControl.js' */                            } else {
+/*Line 239 - 'AtomControl.js' */                                // invoke method...
+/*Line 240 - 'AtomControl.js' */                                f(this.get_scope(), this, evt);
+/*Line 241 - 'AtomControl.js' */                            } else {
 
-/*Line 240 - 'AtomControl.js' */                                // it is an array...
-/*Line 241 - 'AtomControl.js' */                                if (f.length) {
-/*Line 242 - 'AtomControl.js' */                                    var ae = new AtomEnumerator(f);
-/*Line 243 - 'AtomControl.js' */                                    while (ae.next()) {
-/*Line 244 - 'AtomControl.js' */                                        this.invokeAction(ae.current(), evt);
-/*Line 245 - 'AtomControl.js' */                                    }
-/*Line 246 - 'AtomControl.js' */                                    return;
-/*Line 247 - 'AtomControl.js' */                                }
+/*Line 243 - 'AtomControl.js' */                                // it is an array...
+/*Line 244 - 'AtomControl.js' */                                if (f.length) {
+/*Line 245 - 'AtomControl.js' */                                    var ae = new AtomEnumerator(f);
+/*Line 246 - 'AtomControl.js' */                                    while (ae.next()) {
+/*Line 247 - 'AtomControl.js' */                                        this.invokeAction(ae.current(), evt);
+/*Line 248 - 'AtomControl.js' */                                    }
+/*Line 249 - 'AtomControl.js' */                                    return;
+/*Line 250 - 'AtomControl.js' */                                }
 
-/*Line 249 - 'AtomControl.js' */                                // identify scope and actions...
-/*Line 250 - 'AtomControl.js' */                                var action = (f.timeOut || f.timeout);
-/*Line 251 - 'AtomControl.js' */                                if (action) {
-/*Line 252 - 'AtomControl.js' */                                    var _this = this;
-/*Line 253 - 'AtomControl.js' */                                    var tm = 100;
-/*Line 254 - 'AtomControl.js' */                                    if (action.hasOwnProperty("length")) {
-/*Line 255 - 'AtomControl.js' */                                        if (action.length > 1) {
-/*Line 256 - 'AtomControl.js' */                                            tm = action[0];
-/*Line 257 - 'AtomControl.js' */                                            action = action[1];
-/*Line 258 - 'AtomControl.js' */                                        }
-/*Line 259 - 'AtomControl.js' */                                    }
-/*Line 260 - 'AtomControl.js' */                                    setTimeout(function () {
-/*Line 261 - 'AtomControl.js' */                                        _this.invokeAction(action);
-/*Line 262 - 'AtomControl.js' */                                    }, tm);
-/*Line 263 - 'AtomControl.js' */                                    return;
-/*Line 264 - 'AtomControl.js' */                                }
-/*Line 265 - 'AtomControl.js' */                                this.set_merge(f);
-/*Line 266 - 'AtomControl.js' */                                action = f.confirm;
-/*Line 267 - 'AtomControl.js' */                                if (action) {
-/*Line 268 - 'AtomControl.js' */                                    var msg = "Are you sure?";
-/*Line 269 - 'AtomControl.js' */                                    if (action.hasOwnProperty("length")) {
-/*Line 270 - 'AtomControl.js' */                                        if (action.length > 1) {
-/*Line 271 - 'AtomControl.js' */                                            msg = action[0];
-/*Line 272 - 'AtomControl.js' */                                            action = action[1];
-/*Line 273 - 'AtomControl.js' */                                        } else {
-/*Line 274 - 'AtomControl.js' */                                            action = action[0];
-/*Line 275 - 'AtomControl.js' */                                        }
-/*Line 276 - 'AtomControl.js' */                                    }
-/*Line 277 - 'AtomControl.js' */                                    var _this = this;
-/*Line 278 - 'AtomControl.js' */                                    var _action = action;
-/*Line 279 - 'AtomControl.js' */                                    var _evt = evt;
-/*Line 280 - 'AtomControl.js' */                                    Atom.confirm(msg, function () {
-/*Line 281 - 'AtomControl.js' */                                        _this.invokeAction(_action, _evt);
-/*Line 282 - 'AtomControl.js' */                                    });
-/*Line 283 - 'AtomControl.js' */                                }
-/*Line 284 - 'AtomControl.js' */                                action = f.alert;
-/*Line 285 - 'AtomControl.js' */                                if (action) {
-/*Line 286 - 'AtomControl.js' */                                    Atom.alert(action);
-/*Line 287 - 'AtomControl.js' */                                }
-/*Line 288 - 'AtomControl.js' */                                action = f.next;
-/*Line 289 - 'AtomControl.js' */                                if (action) {
-/*Line 290 - 'AtomControl.js' */                                    this.invokeAction(action, evt);
-/*Line 291 - 'AtomControl.js' */                                    return;
-/*Line 292 - 'AtomControl.js' */                                }
-/*Line 293 - 'AtomControl.js' */                                action = f.control;
-/*Line 294 - 'AtomControl.js' */                                if (action) {
-/*Line 295 - 'AtomControl.js' */                                    allControls[action].refresh();
-/*Line 296 - 'AtomControl.js' */                                }
+/*Line 252 - 'AtomControl.js' */                                // identify scope and actions...
+/*Line 253 - 'AtomControl.js' */                                var action = (f.timeOut || f.timeout);
+/*Line 254 - 'AtomControl.js' */                                if (action) {
+/*Line 255 - 'AtomControl.js' */                                    var _this = this;
+/*Line 256 - 'AtomControl.js' */                                    var tm = 100;
+/*Line 257 - 'AtomControl.js' */                                    if (action.hasOwnProperty("length")) {
+/*Line 258 - 'AtomControl.js' */                                        if (action.length > 1) {
+/*Line 259 - 'AtomControl.js' */                                            tm = action[0];
+/*Line 260 - 'AtomControl.js' */                                            action = action[1];
+/*Line 261 - 'AtomControl.js' */                                        }
+/*Line 262 - 'AtomControl.js' */                                    }
+/*Line 263 - 'AtomControl.js' */                                    setTimeout(function () {
+/*Line 264 - 'AtomControl.js' */                                        _this.invokeAction(action);
+/*Line 265 - 'AtomControl.js' */                                    }, tm);
+/*Line 266 - 'AtomControl.js' */                                    return;
+/*Line 267 - 'AtomControl.js' */                                }
+/*Line 268 - 'AtomControl.js' */                                this.set_merge(f);
+/*Line 269 - 'AtomControl.js' */                                action = f.confirm;
+/*Line 270 - 'AtomControl.js' */                                if (action) {
+/*Line 271 - 'AtomControl.js' */                                    var msg = "Are you sure?";
+/*Line 272 - 'AtomControl.js' */                                    if (action.hasOwnProperty("length")) {
+/*Line 273 - 'AtomControl.js' */                                        if (action.length > 1) {
+/*Line 274 - 'AtomControl.js' */                                            msg = action[0];
+/*Line 275 - 'AtomControl.js' */                                            action = action[1];
+/*Line 276 - 'AtomControl.js' */                                        } else {
+/*Line 277 - 'AtomControl.js' */                                            action = action[0];
+/*Line 278 - 'AtomControl.js' */                                        }
+/*Line 279 - 'AtomControl.js' */                                    }
+/*Line 280 - 'AtomControl.js' */                                    var _this = this;
+/*Line 281 - 'AtomControl.js' */                                    var _action = action;
+/*Line 282 - 'AtomControl.js' */                                    var _evt = evt;
+/*Line 283 - 'AtomControl.js' */                                    Atom.confirm(msg, function () {
+/*Line 284 - 'AtomControl.js' */                                        _this.invokeAction(_action, _evt);
+/*Line 285 - 'AtomControl.js' */                                    });
+/*Line 286 - 'AtomControl.js' */                                }
+/*Line 287 - 'AtomControl.js' */                                action = f.alert;
+/*Line 288 - 'AtomControl.js' */                                if (action) {
+/*Line 289 - 'AtomControl.js' */                                    Atom.alert(action);
+/*Line 290 - 'AtomControl.js' */                                }
+/*Line 291 - 'AtomControl.js' */                                action = f.next;
+/*Line 292 - 'AtomControl.js' */                                if (action) {
+/*Line 293 - 'AtomControl.js' */                                    this.invokeAction(action, evt);
+/*Line 294 - 'AtomControl.js' */                                    return;
+/*Line 295 - 'AtomControl.js' */                                }
+/*Line 296 - 'AtomControl.js' */                                action = f.control;
+/*Line 297 - 'AtomControl.js' */                                if (action) {
+/*Line 298 - 'AtomControl.js' */                                    allControls[action].refresh();
+/*Line 299 - 'AtomControl.js' */                                }
 
-/*Line 298 - 'AtomControl.js' */                            }
-/*Line 299 - 'AtomControl.js' */                        }
-/*Line 300 - 'AtomControl.js' */                    }
-/*Line 301 - 'AtomControl.js' */                }
-/*Line 302 - 'AtomControl.js' */            },
+/*Line 301 - 'AtomControl.js' */                            }
+/*Line 302 - 'AtomControl.js' */                        }
+/*Line 303 - 'AtomControl.js' */                    }
+/*Line 304 - 'AtomControl.js' */                }
+/*Line 305 - 'AtomControl.js' */            },
 
-/*Line 304 - 'AtomControl.js' */            refresh: function () {
-/*Line 305 - 'AtomControl.js' */                // invoke some default action...!!!
-/*Line 306 - 'AtomControl.js' */            },
+/*Line 307 - 'AtomControl.js' */            refresh: function () {
+/*Line 308 - 'AtomControl.js' */                // invoke some default action...!!!
+/*Line 309 - 'AtomControl.js' */            },
 
-/*Line 308 - 'AtomControl.js' */            get_element: function () {
-/*Line 309 - 'AtomControl.js' */                return this._element;
-/*Line 310 - 'AtomControl.js' */            },
+/*Line 311 - 'AtomControl.js' */            get_element: function () {
+/*Line 312 - 'AtomControl.js' */                return this._element;
+/*Line 313 - 'AtomControl.js' */            },
 
-/*Line 312 - 'AtomControl.js' */            clearBinding: function (element, key) {
-/*Line 313 - 'AtomControl.js' */                var ae = new AtomEnumerator(this.bindings);
-/*Line 314 - 'AtomControl.js' */                var item;
-/*Line 315 - 'AtomControl.js' */                var removed = [];
-/*Line 316 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 317 - 'AtomControl.js' */                    item = ae.current();
-/*Line 318 - 'AtomControl.js' */                    if (element && item.element != element)
-/*Line 319 - 'AtomControl.js' */                        continue;
-/*Line 320 - 'AtomControl.js' */                    if (key && item.key != key)
-/*Line 321 - 'AtomControl.js' */                        continue;
-/*Line 322 - 'AtomControl.js' */                    //this.bindings.splice(ae.currentIndex(), 1);
-/*Line 323 - 'AtomControl.js' */                    item.dispose();
-/*Line 324 - 'AtomControl.js' */                    removed.push(item);
-/*Line 325 - 'AtomControl.js' */                }
-/*Line 326 - 'AtomControl.js' */                ae = new AtomEnumerator(removed);
-/*Line 327 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 328 - 'AtomControl.js' */                    AtomArray.remove(this.bindings, ae.current());
-/*Line 329 - 'AtomControl.js' */                }
-/*Line 330 - 'AtomControl.js' */            },
-/*Line 331 - 'AtomControl.js' */            addBinding: function (target, element, key, path, twoWays, jq, valueFunction, events) {
-/*Line 332 - 'AtomControl.js' */                this.clearBinding(element, key);
-/*Line 333 - 'AtomControl.js' */                var ab = new WebAtoms.AtomBinding(target, element, key, path, twoWays, jq, valueFunction, events);
-/*Line 334 - 'AtomControl.js' */                this.bindings.push(ab);
-/*Line 335 - 'AtomControl.js' */                ab.setup();
-/*Line 336 - 'AtomControl.js' */            },
+/*Line 315 - 'AtomControl.js' */            clearBinding: function (element, key) {
+/*Line 316 - 'AtomControl.js' */                var ae = new AtomEnumerator(this.bindings);
+/*Line 317 - 'AtomControl.js' */                var item;
+/*Line 318 - 'AtomControl.js' */                var removed = [];
+/*Line 319 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 320 - 'AtomControl.js' */                    item = ae.current();
+/*Line 321 - 'AtomControl.js' */                    if (element && item.element != element)
+/*Line 322 - 'AtomControl.js' */                        continue;
+/*Line 323 - 'AtomControl.js' */                    if (key && item.key != key)
+/*Line 324 - 'AtomControl.js' */                        continue;
+/*Line 325 - 'AtomControl.js' */                    //this.bindings.splice(ae.currentIndex(), 1);
+/*Line 326 - 'AtomControl.js' */                    item.dispose();
+/*Line 327 - 'AtomControl.js' */                    removed.push(item);
+/*Line 328 - 'AtomControl.js' */                }
+/*Line 329 - 'AtomControl.js' */                ae = new AtomEnumerator(removed);
+/*Line 330 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 331 - 'AtomControl.js' */                    AtomArray.remove(this.bindings, ae.current());
+/*Line 332 - 'AtomControl.js' */                }
+/*Line 333 - 'AtomControl.js' */            },
+/*Line 334 - 'AtomControl.js' */            addBinding: function (target, element, key, path, twoWays, jq, valueFunction, events) {
+/*Line 335 - 'AtomControl.js' */                this.clearBinding(element, key);
+/*Line 336 - 'AtomControl.js' */                var ab = new WebAtoms.AtomBinding(target, element, key, path, twoWays, jq, valueFunction, events);
+/*Line 337 - 'AtomControl.js' */                this.bindings.push(ab);
+/*Line 338 - 'AtomControl.js' */                ab.setup();
+/*Line 339 - 'AtomControl.js' */            },
 
-/*Line 338 - 'AtomControl.js' */            get_atomParent: function (element) {
-/*Line 339 - 'AtomControl.js' */                if (element == null) {
-/*Line 340 - 'AtomControl.js' */                    if (this._element._logicalParent || this._element.parentNode)
-/*Line 341 - 'AtomControl.js' */                        element = this._element._logicalParent || this._element.parentNode;
-/*Line 342 - 'AtomControl.js' */                    else
-/*Line 343 - 'AtomControl.js' */                        return null;
-/*Line 344 - 'AtomControl.js' */                }
-/*Line 345 - 'AtomControl.js' */                if (element.atomControl) {
-/*Line 346 - 'AtomControl.js' */                    return element.atomControl;
+/*Line 341 - 'AtomControl.js' */            get_atomParent: function (element) {
+/*Line 342 - 'AtomControl.js' */                if (element == null) {
+/*Line 343 - 'AtomControl.js' */                    if (this._element._logicalParent || this._element.parentNode)
+/*Line 344 - 'AtomControl.js' */                        element = this._element._logicalParent || this._element.parentNode;
+/*Line 345 - 'AtomControl.js' */                    else
+/*Line 346 - 'AtomControl.js' */                        return null;
 /*Line 347 - 'AtomControl.js' */                }
-/*Line 348 - 'AtomControl.js' */                if (element === document || element === window || !element.parentNode)
-/*Line 349 - 'AtomControl.js' */                    return null;
-/*Line 350 - 'AtomControl.js' */                return this.get_atomParent(element._logicalParent || element.parentNode);
-/*Line 351 - 'AtomControl.js' */            },
+/*Line 348 - 'AtomControl.js' */                if (element.atomControl) {
+/*Line 349 - 'AtomControl.js' */                    return element.atomControl;
+/*Line 350 - 'AtomControl.js' */                }
+/*Line 351 - 'AtomControl.js' */                if (element === document || element === window || !element.parentNode)
+/*Line 352 - 'AtomControl.js' */                    return null;
+/*Line 353 - 'AtomControl.js' */                return this.get_atomParent(element._logicalParent || element.parentNode);
+/*Line 354 - 'AtomControl.js' */            },
 
-/*Line 353 - 'AtomControl.js' */            get_templateParent: function (element) {
-/*Line 354 - 'AtomControl.js' */                if (!element) {
-/*Line 355 - 'AtomControl.js' */                    element = this._element;
-/*Line 356 - 'AtomControl.js' */                }
-/*Line 357 - 'AtomControl.js' */                if (element._templateParent) {
-/*Line 358 - 'AtomControl.js' */                    return element._templateParent;
+/*Line 356 - 'AtomControl.js' */            get_templateParent: function (element) {
+/*Line 357 - 'AtomControl.js' */                if (!element) {
+/*Line 358 - 'AtomControl.js' */                    element = this._element;
 /*Line 359 - 'AtomControl.js' */                }
-/*Line 360 - 'AtomControl.js' */                var p = element._logicalParent || element.parentNode;
-/*Line 361 - 'AtomControl.js' */                if (!p)
-/*Line 362 - 'AtomControl.js' */                    throw new Error("Could not find templateParent");
-/*Line 363 - 'AtomControl.js' */                return this.get_templateParent(element._logicalParent || element.parentNode);
-/*Line 364 - 'AtomControl.js' */            },
+/*Line 360 - 'AtomControl.js' */                if (element._templateParent) {
+/*Line 361 - 'AtomControl.js' */                    return element._templateParent;
+/*Line 362 - 'AtomControl.js' */                }
+/*Line 363 - 'AtomControl.js' */                var p = element._logicalParent || element.parentNode;
+/*Line 364 - 'AtomControl.js' */                if (!p)
+/*Line 365 - 'AtomControl.js' */                    throw new Error("Could not find templateParent");
+/*Line 366 - 'AtomControl.js' */                return this.get_templateParent(element._logicalParent || element.parentNode);
+/*Line 367 - 'AtomControl.js' */            },
 
-/*Line 366 - 'AtomControl.js' */            get_data: function () {
-/*Line 367 - 'AtomControl.js' */                if (this._data === undefined) {
-/*Line 368 - 'AtomControl.js' */                    // get parent...
-/*Line 369 - 'AtomControl.js' */                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
-/*Line 370 - 'AtomControl.js' */                    if (ap)
-/*Line 371 - 'AtomControl.js' */                        return ap.get_data();
-/*Line 372 - 'AtomControl.js' */                }
-/*Line 373 - 'AtomControl.js' */                return this._data;
-/*Line 374 - 'AtomControl.js' */            },
-/*Line 375 - 'AtomControl.js' */            set_data: function (d) {
-/*Line 376 - 'AtomControl.js' */                this._data = d;
-/*Line 377 - 'AtomControl.js' */                this.mergeData();
-/*Line 378 - 'AtomControl.js' */                // update child references...
-/*Line 379 - 'AtomControl.js' */                this.updateChildBindings(this._element);
-/*Line 380 - 'AtomControl.js' */            },
+/*Line 369 - 'AtomControl.js' */            get_data: function () {
+/*Line 370 - 'AtomControl.js' */                if (this._data === undefined) {
+/*Line 371 - 'AtomControl.js' */                    // get parent...
+/*Line 372 - 'AtomControl.js' */                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
+/*Line 373 - 'AtomControl.js' */                    if (ap)
+/*Line 374 - 'AtomControl.js' */                        return ap.get_data();
+/*Line 375 - 'AtomControl.js' */                }
+/*Line 376 - 'AtomControl.js' */                return this._data;
+/*Line 377 - 'AtomControl.js' */            },
+/*Line 378 - 'AtomControl.js' */            set_data: function (d) {
+/*Line 379 - 'AtomControl.js' */                this._data = d;
+/*Line 380 - 'AtomControl.js' */                this.mergeData();
+/*Line 381 - 'AtomControl.js' */                // update child references...
+/*Line 382 - 'AtomControl.js' */                this.updateChildBindings(this._element);
+/*Line 383 - 'AtomControl.js' */            },
 
-/*Line 382 - 'AtomControl.js' */            mergeData: function () {
-/*Line 383 - 'AtomControl.js' */                if (!this._mergeData2)
-/*Line 384 - 'AtomControl.js' */                    return;
-/*Line 385 - 'AtomControl.js' */                Atom.merge(this.get_data(), this._mergeData2, true);
-/*Line 386 - 'AtomControl.js' */            },
+/*Line 385 - 'AtomControl.js' */            mergeData: function () {
+/*Line 386 - 'AtomControl.js' */                if (!this._mergeData2)
+/*Line 387 - 'AtomControl.js' */                    return;
+/*Line 388 - 'AtomControl.js' */                Atom.merge(this.get_data(), this._mergeData2, true);
+/*Line 389 - 'AtomControl.js' */            },
 
-/*Line 388 - 'AtomControl.js' */            updateChildBindings: function (element) {
-/*Line 389 - 'AtomControl.js' */                var ae = new ChildEnumerator(element);
-/*Line 390 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 391 - 'AtomControl.js' */                    var child = ae.current();
-/*Line 392 - 'AtomControl.js' */                    if (child.atomControl && child.atomControl._created) {
-/*Line 393 - 'AtomControl.js' */                        var ctrl = child.atomControl;
-/*Line 394 - 'AtomControl.js' */                        if (ctrl._data !== undefined)
-/*Line 395 - 'AtomControl.js' */                            continue;
-/*Line 396 - 'AtomControl.js' */                        AtomBinder.refreshValue(ctrl, "data");
-/*Line 397 - 'AtomControl.js' */                        ctrl.mergeData();
-/*Line 398 - 'AtomControl.js' */                    }
-/*Line 399 - 'AtomControl.js' */                    this.updateChildBindings(child);
-/*Line 400 - 'AtomControl.js' */                }
-/*Line 401 - 'AtomControl.js' */            },
+/*Line 391 - 'AtomControl.js' */            updateChildBindings: function (element) {
+/*Line 392 - 'AtomControl.js' */                var ae = new ChildEnumerator(element);
+/*Line 393 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 394 - 'AtomControl.js' */                    var child = ae.current();
+/*Line 395 - 'AtomControl.js' */                    if (child.atomControl && child.atomControl._created) {
+/*Line 396 - 'AtomControl.js' */                        var ctrl = child.atomControl;
+/*Line 397 - 'AtomControl.js' */                        if (ctrl._data !== undefined)
+/*Line 398 - 'AtomControl.js' */                            continue;
+/*Line 399 - 'AtomControl.js' */                        AtomBinder.refreshValue(ctrl, "data");
+/*Line 400 - 'AtomControl.js' */                        ctrl.mergeData();
+/*Line 401 - 'AtomControl.js' */                    }
+/*Line 402 - 'AtomControl.js' */                    this.updateChildBindings(child);
+/*Line 403 - 'AtomControl.js' */                }
+/*Line 404 - 'AtomControl.js' */            },
 
-/*Line 403 - 'AtomControl.js' */            initProperties: function () {
+/*Line 406 - 'AtomControl.js' */            initProperties: function () {
 
-/*Line 405 - 'AtomControl.js' */                if (this._disposed)
-/*Line 406 - 'AtomControl.js' */                    return;
+/*Line 408 - 'AtomControl.js' */                if (this._disposed)
+/*Line 409 - 'AtomControl.js' */                    return;
 
-/*Line 408 - 'AtomControl.js' */                //// init properties...
-/*Line 409 - 'AtomControl.js' */                var element = this.get_element();
+/*Line 411 - 'AtomControl.js' */                //// init properties...
+/*Line 412 - 'AtomControl.js' */                var element = this.get_element();
 
-/*Line 411 - 'AtomControl.js' */                this.setProperties(element);
-/*Line 412 - 'AtomControl.js' */                this._created = true;
-/*Line 413 - 'AtomControl.js' */                this.onCreated();
-/*Line 414 - 'AtomControl.js' */                this.onLoaded();
-/*Line 415 - 'AtomControl.js' */            },
-
-
-/*Line 418 - 'AtomControl.js' */            createChildren: function () {
-
-/*Line 420 - 'AtomControl.js' */                this.onCreateChildren(this._element);
-
-/*Line 422 - 'AtomControl.js' */                var t = this.getTemplate("template");
-
-/*Line 424 - 'AtomControl.js' */                if (t) {
-/*Line 425 - 'AtomControl.js' */                    if ($(this._element).children().length == 0) {
-/*Line 426 - 'AtomControl.js' */                        if (t.constructor == String) {
-/*Line 427 - 'AtomControl.js' */                            this._element.innerHTML = t;
-/*Line 428 - 'AtomControl.js' */                            var caller = this;
-/*Line 429 - 'AtomControl.js' */                            $(this._element).children().each(function () {
-/*Line 430 - 'AtomControl.js' */                                this._templateParent = caller;
-/*Line 431 - 'AtomControl.js' */                            });
-/*Line 432 - 'AtomControl.js' */                        } else {
-/*Line 433 - 'AtomControl.js' */                            //this._element.innerHTML = this._template;
-/*Line 434 - 'AtomControl.js' */                            if (AtomUI.isNode(t)) {
-/*Line 435 - 'AtomControl.js' */                                t = AtomUI.cloneNode(t);
-/*Line 436 - 'AtomControl.js' */                                t._templateParent = this;
-/*Line 437 - 'AtomControl.js' */                                this._element.appendChild(t);
-/*Line 438 - 'AtomControl.js' */                            } else {
-/*Line 439 - 'AtomControl.js' */                                // should be an array...
-/*Line 440 - 'AtomControl.js' */                                var ae = new AtomEnumerator(t);
-/*Line 441 - 'AtomControl.js' */                                while (ae.next()) {
-/*Line 442 - 'AtomControl.js' */                                    var tc = ae.current();
-/*Line 443 - 'AtomControl.js' */                                    tc = AtomUI.cloneNode(tc);
-/*Line 444 - 'AtomControl.js' */                                    tc._templateParent = this;
-/*Line 445 - 'AtomControl.js' */                                    this._element.appendChild(tc);
-/*Line 446 - 'AtomControl.js' */                                }
-/*Line 447 - 'AtomControl.js' */                            }
-/*Line 448 - 'AtomControl.js' */                        }
-/*Line 449 - 'AtomControl.js' */                        this.onCreateChildren(this._element);
-/*Line 450 - 'AtomControl.js' */                    }
-/*Line 451 - 'AtomControl.js' */                }
-/*Line 452 - 'AtomControl.js' */            },
+/*Line 414 - 'AtomControl.js' */                this.setProperties(element);
+/*Line 415 - 'AtomControl.js' */                this._created = true;
+/*Line 416 - 'AtomControl.js' */                this.onCreated();
+/*Line 417 - 'AtomControl.js' */                this.onLoaded();
+/*Line 418 - 'AtomControl.js' */            },
 
 
-/*Line 455 - 'AtomControl.js' */            onCreateChildren: function (element) {
+/*Line 421 - 'AtomControl.js' */            createChildren: function () {
 
-/*Line 457 - 'AtomControl.js' */                var ae = new ChildEnumerator(element);
-/*Line 458 - 'AtomControl.js' */                var child;
-/*Line 459 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 460 - 'AtomControl.js' */                    child = ae.current();
+/*Line 423 - 'AtomControl.js' */                this.onCreateChildren(this._element);
 
-/*Line 462 - 'AtomControl.js' */                    var amap = AtomUI.attributeMap(child, /^atom\-(template|presenter|type|template\-name)$/gi);
+/*Line 425 - 'AtomControl.js' */                var t = this.getTemplate("template");
 
-/*Line 464 - 'AtomControl.js' */                    var t = amap["atom-template"];
-/*Line 465 - 'AtomControl.js' */                    if (t) {
-/*Line 466 - 'AtomControl.js' */                        child.removeAttributeNode(t.node);
-/*Line 467 - 'AtomControl.js' */                        element.templateOwner = true;
-/*Line 468 - 'AtomControl.js' */                        this["_" + t.value] = child;
-/*Line 469 - 'AtomControl.js' */                        element.removeChild(child);
-/*Line 470 - 'AtomControl.js' */                        continue;
-/*Line 471 - 'AtomControl.js' */                    }
+/*Line 427 - 'AtomControl.js' */                if (t) {
+/*Line 428 - 'AtomControl.js' */                    if ($(this._element).children().length == 0) {
+/*Line 429 - 'AtomControl.js' */                        if (t.constructor == String) {
+/*Line 430 - 'AtomControl.js' */                            this._element.innerHTML = t;
+/*Line 431 - 'AtomControl.js' */                            var caller = this;
+/*Line 432 - 'AtomControl.js' */                            $(this._element).children().each(function () {
+/*Line 433 - 'AtomControl.js' */                                this._templateParent = caller;
+/*Line 434 - 'AtomControl.js' */                            });
+/*Line 435 - 'AtomControl.js' */                        } else {
+/*Line 436 - 'AtomControl.js' */                            //this._element.innerHTML = this._template;
+/*Line 437 - 'AtomControl.js' */                            if (AtomUI.isNode(t)) {
+/*Line 438 - 'AtomControl.js' */                                t = AtomUI.cloneNode(t);
+/*Line 439 - 'AtomControl.js' */                                t._templateParent = this;
+/*Line 440 - 'AtomControl.js' */                                this._element.appendChild(t);
+/*Line 441 - 'AtomControl.js' */                            } else {
+/*Line 442 - 'AtomControl.js' */                                // should be an array...
+/*Line 443 - 'AtomControl.js' */                                var ae = new AtomEnumerator(t);
+/*Line 444 - 'AtomControl.js' */                                while (ae.next()) {
+/*Line 445 - 'AtomControl.js' */                                    var tc = ae.current();
+/*Line 446 - 'AtomControl.js' */                                    tc = AtomUI.cloneNode(tc);
+/*Line 447 - 'AtomControl.js' */                                    tc._templateParent = this;
+/*Line 448 - 'AtomControl.js' */                                    this._element.appendChild(tc);
+/*Line 449 - 'AtomControl.js' */                                }
+/*Line 450 - 'AtomControl.js' */                            }
+/*Line 451 - 'AtomControl.js' */                        }
+/*Line 452 - 'AtomControl.js' */                        this.onCreateChildren(this._element);
+/*Line 453 - 'AtomControl.js' */                    }
+/*Line 454 - 'AtomControl.js' */                }
+/*Line 455 - 'AtomControl.js' */            },
 
-/*Line 473 - 'AtomControl.js' */                    var tn = amap["atom-template-name"];
-/*Line 474 - 'AtomControl.js' */                    if (tn) {
-/*Line 475 - 'AtomControl.js' */                        child.removeAttributeNode(tn.node);
-/*Line 476 - 'AtomControl.js' */                        this._scopeTemplates = this._scopeTemplates || {};
-/*Line 477 - 'AtomControl.js' */                        this._scopeTemplates[tn.value] = child;
-/*Line 478 - 'AtomControl.js' */                        element.removeChild(child);
-/*Line 479 - 'AtomControl.js' */                        continue;
-/*Line 480 - 'AtomControl.js' */                    }
 
-/*Line 482 - 'AtomControl.js' */                    var p = amap["atom-presenter"];
-/*Line 483 - 'AtomControl.js' */                    if (p) {
-/*Line 484 - 'AtomControl.js' */                        // search upwords for expected presenter...
-/*Line 485 - 'AtomControl.js' */                        var owner = AtomUI.getPresenterOwner(this, p.value);
-/*Line 486 - 'AtomControl.js' */                        owner["_" + p.value] = child;
-/*Line 487 - 'AtomControl.js' */                    }
+/*Line 458 - 'AtomControl.js' */            onCreateChildren: function (element) {
 
-/*Line 489 - 'AtomControl.js' */                    var childType = amap["atom-type"];
+/*Line 460 - 'AtomControl.js' */                var ae = new ChildEnumerator(element);
+/*Line 461 - 'AtomControl.js' */                var child;
+/*Line 462 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 463 - 'AtomControl.js' */                    child = ae.current();
 
-/*Line 491 - 'AtomControl.js' */                    if (childType) {
-/*Line 492 - 'AtomControl.js' */                        AtomUI.createControl(child, childType.value);
-/*Line 493 - 'AtomControl.js' */                        //element.removeAttributeNode(childType.node);
-/*Line 494 - 'AtomControl.js' */                    } else {
-/*Line 495 - 'AtomControl.js' */                        this.onCreateChildren(child);
-/*Line 496 - 'AtomControl.js' */                    }
-/*Line 497 - 'AtomControl.js' */                }
-/*Line 498 - 'AtomControl.js' */            },
+/*Line 465 - 'AtomControl.js' */                    var amap = AtomUI.attributeMap(child, /^atom\-(template|presenter|type|template\-name)$/gi);
 
-/*Line 500 - 'AtomControl.js' */            onLoaded: function () {
+/*Line 467 - 'AtomControl.js' */                    var t = amap["atom-template"];
+/*Line 468 - 'AtomControl.js' */                    if (t) {
+/*Line 469 - 'AtomControl.js' */                        child.removeAttributeNode(t.node);
+/*Line 470 - 'AtomControl.js' */                        element.templateOwner = true;
+/*Line 471 - 'AtomControl.js' */                        this["_" + t.value] = child;
+/*Line 472 - 'AtomControl.js' */                        element.removeChild(child);
+/*Line 473 - 'AtomControl.js' */                        continue;
+/*Line 474 - 'AtomControl.js' */                    }
+
+/*Line 476 - 'AtomControl.js' */                    var tn = amap["atom-template-name"];
+/*Line 477 - 'AtomControl.js' */                    if (tn) {
+/*Line 478 - 'AtomControl.js' */                        child.removeAttributeNode(tn.node);
+/*Line 479 - 'AtomControl.js' */                        this._scopeTemplates = this._scopeTemplates || {};
+/*Line 480 - 'AtomControl.js' */                        this._scopeTemplates[tn.value] = child;
+/*Line 481 - 'AtomControl.js' */                        element.removeChild(child);
+/*Line 482 - 'AtomControl.js' */                        continue;
+/*Line 483 - 'AtomControl.js' */                    }
+
+/*Line 485 - 'AtomControl.js' */                    var p = amap["atom-presenter"];
+/*Line 486 - 'AtomControl.js' */                    if (p) {
+/*Line 487 - 'AtomControl.js' */                        // search upwords for expected presenter...
+/*Line 488 - 'AtomControl.js' */                        var owner = AtomUI.getPresenterOwner(this, p.value);
+/*Line 489 - 'AtomControl.js' */                        owner["_" + p.value] = child;
+/*Line 490 - 'AtomControl.js' */                    }
+
+/*Line 492 - 'AtomControl.js' */                    var childType = amap["atom-type"];
+
+/*Line 494 - 'AtomControl.js' */                    if (childType) {
+/*Line 495 - 'AtomControl.js' */                        AtomUI.createControl(child, childType.value);
+/*Line 496 - 'AtomControl.js' */                        //element.removeAttributeNode(childType.node);
+/*Line 497 - 'AtomControl.js' */                    } else {
+/*Line 498 - 'AtomControl.js' */                        this.onCreateChildren(child);
+/*Line 499 - 'AtomControl.js' */                    }
+/*Line 500 - 'AtomControl.js' */                }
 /*Line 501 - 'AtomControl.js' */            },
 
-/*Line 503 - 'AtomControl.js' */            onUpdateUI: function () {
-/*Line 504 - 'AtomControl.js' */                if (this._layout) {
-/*Line 505 - 'AtomControl.js' */                    this._layout.doLayout(this._element);
-/*Line 506 - 'AtomControl.js' */                } else {
-/*Line 507 - 'AtomControl.js' */                    this.updateChildUI(this.get_element());
-/*Line 508 - 'AtomControl.js' */                }
-/*Line 509 - 'AtomControl.js' */            },
+/*Line 503 - 'AtomControl.js' */            onLoaded: function () {
+/*Line 504 - 'AtomControl.js' */            },
 
-/*Line 511 - 'AtomControl.js' */            updateUI: function () {
-/*Line 512 - 'AtomControl.js' */                var ctrl = this;
-/*Line 513 - 'AtomControl.js' */                this.dispatcher.callLater(function () {
-/*Line 514 - 'AtomControl.js' */                    ctrl.onUpdateUI();
-/*Line 515 - 'AtomControl.js' */                });
-/*Line 516 - 'AtomControl.js' */            },
+/*Line 506 - 'AtomControl.js' */            onUpdateUI: function () {
+/*Line 507 - 'AtomControl.js' */                if (this._layout) {
+/*Line 508 - 'AtomControl.js' */                    this._layout.doLayout(this._element);
+/*Line 509 - 'AtomControl.js' */                } else {
+/*Line 510 - 'AtomControl.js' */                    this.updateChildUI(this.get_element());
+/*Line 511 - 'AtomControl.js' */                }
+/*Line 512 - 'AtomControl.js' */            },
 
-/*Line 518 - 'AtomControl.js' */            updateChildUI: function (parent) {
-/*Line 519 - 'AtomControl.js' */                if (!parent)
-/*Line 520 - 'AtomControl.js' */                    parent = this._element;
-/*Line 521 - 'AtomControl.js' */                var ae = new ChildEnumerator(parent);
-/*Line 522 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 523 - 'AtomControl.js' */                    var child = ae.current();
-/*Line 524 - 'AtomControl.js' */                    if (child.atomControl) {
-/*Line 525 - 'AtomControl.js' */                        child.atomControl.updateUI();
-/*Line 526 - 'AtomControl.js' */                        continue;
-/*Line 527 - 'AtomControl.js' */                    }
-/*Line 528 - 'AtomControl.js' */                    this.updateChildUI(child);
-/*Line 529 - 'AtomControl.js' */                }
-/*Line 530 - 'AtomControl.js' */            },
+/*Line 514 - 'AtomControl.js' */            updateUI: function () {
+/*Line 515 - 'AtomControl.js' */                var ctrl = this;
+/*Line 516 - 'AtomControl.js' */                this.dispatcher.callLater(function () {
+/*Line 517 - 'AtomControl.js' */                    ctrl.onUpdateUI();
+/*Line 518 - 'AtomControl.js' */                });
+/*Line 519 - 'AtomControl.js' */            },
 
-/*Line 532 - 'AtomControl.js' */            onCreated: function () {
-/*Line 533 - 'AtomControl.js' */                this.updateUI();
-/*Line 534 - 'AtomControl.js' */            },
+/*Line 521 - 'AtomControl.js' */            updateChildUI: function (parent) {
+/*Line 522 - 'AtomControl.js' */                if (!parent)
+/*Line 523 - 'AtomControl.js' */                    parent = this._element;
+/*Line 524 - 'AtomControl.js' */                var ae = new ChildEnumerator(parent);
+/*Line 525 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 526 - 'AtomControl.js' */                    var child = ae.current();
+/*Line 527 - 'AtomControl.js' */                    if (child.atomControl) {
+/*Line 528 - 'AtomControl.js' */                        child.atomControl.updateUI();
+/*Line 529 - 'AtomControl.js' */                        continue;
+/*Line 530 - 'AtomControl.js' */                    }
+/*Line 531 - 'AtomControl.js' */                    this.updateChildUI(child);
+/*Line 532 - 'AtomControl.js' */                }
+/*Line 533 - 'AtomControl.js' */            },
 
-/*Line 536 - 'AtomControl.js' */            setProperties: function (element) {
+/*Line 535 - 'AtomControl.js' */            onCreated: function () {
+/*Line 536 - 'AtomControl.js' */                this.updateUI();
+/*Line 537 - 'AtomControl.js' */            },
+
+/*Line 539 - 'AtomControl.js' */            setProperties: function (element) {
 
 
-/*Line 539 - 'AtomControl.js' */                var obj;
-/*Line 540 - 'AtomControl.js' */                var key;
-/*Line 541 - 'AtomControl.js' */                var value;
-/*Line 542 - 'AtomControl.js' */                var fn;
-/*Line 543 - 'AtomControl.js' */                var at;
+/*Line 542 - 'AtomControl.js' */                var obj;
+/*Line 543 - 'AtomControl.js' */                var key;
+/*Line 544 - 'AtomControl.js' */                var value;
+/*Line 545 - 'AtomControl.js' */                var fn;
+/*Line 546 - 'AtomControl.js' */                var at;
 
-/*Line 545 - 'AtomControl.js' */                var attr = element.attributes;
-/*Line 546 - 'AtomControl.js' */                var ae = new AtomEnumerator(attr);
+/*Line 548 - 'AtomControl.js' */                var attr = element.attributes;
+/*Line 549 - 'AtomControl.js' */                var ae = new AtomEnumerator(attr);
 
-/*Line 548 - 'AtomControl.js' */                var remove = [];
+/*Line 551 - 'AtomControl.js' */                var remove = [];
 
-/*Line 550 - 'AtomControl.js' */                var nodeValue = "value";
-/*Line 551 - 'AtomControl.js' */                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 9) {
-/*Line 552 - 'AtomControl.js' */                    nodeValue = "nodeValue";
-/*Line 553 - 'AtomControl.js' */                }
+/*Line 553 - 'AtomControl.js' */                var nodeValue = "value";
+/*Line 554 - 'AtomControl.js' */                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 9) {
+/*Line 555 - 'AtomControl.js' */                    nodeValue = "nodeValue";
+/*Line 556 - 'AtomControl.js' */                }
 
-/*Line 555 - 'AtomControl.js' */                var bindList = {};
+/*Line 558 - 'AtomControl.js' */                var bindList = {};
 
-/*Line 557 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 558 - 'AtomControl.js' */                    at = ae.current();
-/*Line 559 - 'AtomControl.js' */                    key = at.nodeName;
-/*Line 560 - 'AtomControl.js' */                    value = at[nodeValue];
-/*Line 561 - 'AtomControl.js' */                    if (/^atomControl$/g.test(key)) {
-/*Line 562 - 'AtomControl.js' */                        continue;
-/*Line 563 - 'AtomControl.js' */                    }
-/*Line 564 - 'AtomControl.js' */                    if (/^atom\-type$/.test(key)) {
-/*Line 565 - 'AtomControl.js' */                        remove.push(at);
-/*Line 566 - 'AtomControl.js' */                        continue;
-/*Line 567 - 'AtomControl.js' */                    }
-/*Line 568 - 'AtomControl.js' */                    if (!(/^(atom|bind|style|event)\-/g.test(key)))
+/*Line 560 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 561 - 'AtomControl.js' */                    at = ae.current();
+/*Line 562 - 'AtomControl.js' */                    key = at.nodeName;
+/*Line 563 - 'AtomControl.js' */                    value = at[nodeValue];
+/*Line 564 - 'AtomControl.js' */                    if (/^atomControl$/g.test(key)) {
+/*Line 565 - 'AtomControl.js' */                        continue;
+/*Line 566 - 'AtomControl.js' */                    }
+/*Line 567 - 'AtomControl.js' */                    if (/^atom\-type$/.test(key)) {
+/*Line 568 - 'AtomControl.js' */                        remove.push(at);
 /*Line 569 - 'AtomControl.js' */                        continue;
-/*Line 570 - 'AtomControl.js' */                    if (!(/^(style|event)\-/g.test(key)))
-/*Line 571 - 'AtomControl.js' */                        key = key.substr(5);
+/*Line 570 - 'AtomControl.js' */                    }
+/*Line 571 - 'AtomControl.js' */                    if (!(/^(atom|bind|style|event)\-/g.test(key)))
+/*Line 572 - 'AtomControl.js' */                        continue;
+/*Line 573 - 'AtomControl.js' */                    if (!(/^(style|event)\-/g.test(key)))
+/*Line 574 - 'AtomControl.js' */                        key = key.substr(5);
 
-/*Line 573 - 'AtomControl.js' */                    if (!value)
-/*Line 574 - 'AtomControl.js' */                        continue;
+/*Line 576 - 'AtomControl.js' */                    if (!value)
+/*Line 577 - 'AtomControl.js' */                        continue;
 
-/*Line 576 - 'AtomControl.js' */                    if (!/(^style$|dock)/.test(key)) {
-/*Line 577 - 'AtomControl.js' */                        remove.push(at);
-/*Line 578 - 'AtomControl.js' */                    }
+/*Line 579 - 'AtomControl.js' */                    if (!/(^style$|dock)/.test(key)) {
+/*Line 580 - 'AtomControl.js' */                        remove.push(at);
+/*Line 581 - 'AtomControl.js' */                    }
 
-/*Line 580 - 'AtomControl.js' */                    // rename key...
-/*Line 581 - 'AtomControl.js' */                    key = $.camelCase(key);
+/*Line 583 - 'AtomControl.js' */                    // rename key...
+/*Line 584 - 'AtomControl.js' */                    key = $.camelCase(key);
 
-/*Line 583 - 'AtomControl.js' */                    bindList[key] = value;
+/*Line 586 - 'AtomControl.js' */                    bindList[key] = value;
 
-/*Line 585 - 'AtomControl.js' */                }
+/*Line 588 - 'AtomControl.js' */                }
 
-/*Line 587 - 'AtomControl.js' */                // Since setValue may add up new attributes
-/*Line 588 - 'AtomControl.js' */                // We set value after we have collected attribute list
-/*Line 589 - 'AtomControl.js' */                for (key in bindList) {
-/*Line 590 - 'AtomControl.js' */                    this.setValue(key, bindList[key], true, element);
-/*Line 591 - 'AtomControl.js' */                }
+/*Line 590 - 'AtomControl.js' */                // Since setValue may add up new attributes
+/*Line 591 - 'AtomControl.js' */                // We set value after we have collected attribute list
+/*Line 592 - 'AtomControl.js' */                for (key in bindList) {
+/*Line 593 - 'AtomControl.js' */                    this.setValue(key, bindList[key], true, element);
+/*Line 594 - 'AtomControl.js' */                }
 
-/*Line 593 - 'AtomControl.js' */                ae = new AtomEnumerator(remove);
-/*Line 594 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 595 - 'AtomControl.js' */                    //$(element).removeAttr(ae.current().nodeName);
-/*Line 596 - 'AtomControl.js' */                    element.removeAttributeNode(ae.current());
-/*Line 597 - 'AtomControl.js' */                }
+/*Line 596 - 'AtomControl.js' */                ae = new AtomEnumerator(remove);
+/*Line 597 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 598 - 'AtomControl.js' */                    //$(element).removeAttr(ae.current().nodeName);
+/*Line 599 - 'AtomControl.js' */                    element.removeAttributeNode(ae.current());
+/*Line 600 - 'AtomControl.js' */                }
 
-/*Line 599 - 'AtomControl.js' */                var child = new ChildEnumerator(element);
-/*Line 600 - 'AtomControl.js' */                while (child.next()) {
-/*Line 601 - 'AtomControl.js' */                    var childItem = child.current();
-/*Line 602 - 'AtomControl.js' */                    if (childItem.atomControl)
-/*Line 603 - 'AtomControl.js' */                        continue;
-/*Line 604 - 'AtomControl.js' */                    this.setProperties(childItem);
-/*Line 605 - 'AtomControl.js' */                }
+/*Line 602 - 'AtomControl.js' */                var child = new ChildEnumerator(element);
+/*Line 603 - 'AtomControl.js' */                while (child.next()) {
+/*Line 604 - 'AtomControl.js' */                    var childItem = child.current();
+/*Line 605 - 'AtomControl.js' */                    if (childItem.atomControl)
+/*Line 606 - 'AtomControl.js' */                        continue;
+/*Line 607 - 'AtomControl.js' */                    this.setProperties(childItem);
+/*Line 608 - 'AtomControl.js' */                }
 
-/*Line 607 - 'AtomControl.js' */            },
+/*Line 610 - 'AtomControl.js' */            },
 
-/*Line 609 - 'AtomControl.js' */            setValue: function (key, value, bind, element) {
-/*Line 610 - 'AtomControl.js' */                if (value && value.constructor == String) {
+/*Line 612 - 'AtomControl.js' */            setValue: function (key, value, bind, element) {
+/*Line 613 - 'AtomControl.js' */                if (value && value.constructor == String) {
 
-/*Line 612 - 'AtomControl.js' */                    var s = value[0];
+/*Line 615 - 'AtomControl.js' */                    var s = value[0];
 
-/*Line 614 - 'AtomControl.js' */                    var f = AtomBinders[s];
-/*Line 615 - 'AtomControl.js' */                    if (f) {
-/*Line 616 - 'AtomControl.js' */                        f(this, key, value, element);
-/*Line 617 - 'AtomControl.js' */                        return;
-/*Line 618 - 'AtomControl.js' */                    }
+/*Line 617 - 'AtomControl.js' */                    var f = AtomBinders[s];
+/*Line 618 - 'AtomControl.js' */                    if (f) {
+/*Line 619 - 'AtomControl.js' */                        f(this, key, value, element);
+/*Line 620 - 'AtomControl.js' */                        return;
+/*Line 621 - 'AtomControl.js' */                    }
 
-/*Line 620 - 'AtomControl.js' */                    s += value[1];
-/*Line 621 - 'AtomControl.js' */                    f = AtomBinders[s];
-/*Line 622 - 'AtomControl.js' */                    if (f) {
-/*Line 623 - 'AtomControl.js' */                        f(this, key, value, element);
-/*Line 624 - 'AtomControl.js' */                        return;
-/*Line 625 - 'AtomControl.js' */                    }
+/*Line 623 - 'AtomControl.js' */                    s += value[1];
+/*Line 624 - 'AtomControl.js' */                    f = AtomBinders[s];
+/*Line 625 - 'AtomControl.js' */                    if (f) {
+/*Line 626 - 'AtomControl.js' */                        f(this, key, value, element);
+/*Line 627 - 'AtomControl.js' */                        return;
+/*Line 628 - 'AtomControl.js' */                    }
 
-/*Line 627 - 'AtomControl.js' */                }
+/*Line 630 - 'AtomControl.js' */                }
 
-/*Line 629 - 'AtomControl.js' */                this.setLocalValue(key, value, element);
-/*Line 630 - 'AtomControl.js' */            },
+/*Line 632 - 'AtomControl.js' */                this.setLocalValue(key, value, element);
+/*Line 633 - 'AtomControl.js' */            },
 
-/*Line 632 - 'AtomControl.js' */            setLocalValue: function (key, value, element, refresh) {
+/*Line 635 - 'AtomControl.js' */            setLocalValue: function (key, value, element, refresh) {
 
-/*Line 634 - 'AtomControl.js' */                // undefined can never be set
-/*Line 635 - 'AtomControl.js' */                if (value === undefined)
-/*Line 636 - 'AtomControl.js' */                    return;
+/*Line 637 - 'AtomControl.js' */                // undefined can never be set
+/*Line 638 - 'AtomControl.js' */                if (value === undefined)
+/*Line 639 - 'AtomControl.js' */                    return;
 
-/*Line 638 - 'AtomControl.js' */                if (value && value instanceof AtomPromise) {
+/*Line 641 - 'AtomControl.js' */                if (value && value instanceof AtomPromise) {
 
-/*Line 640 - 'AtomControl.js' */                    element._promisesQueue = element._promisesQueue || {};
+/*Line 643 - 'AtomControl.js' */                    element._promisesQueue = element._promisesQueue || {};
 
-/*Line 642 - 'AtomControl.js' */                    var op = element._promisesQueue[key];
-/*Line 643 - 'AtomControl.js' */                    if (op) {
-/*Line 644 - 'AtomControl.js' */                        op.abort();
-/*Line 645 - 'AtomControl.js' */                    }
-/*Line 646 - 'AtomControl.js' */                    element._promisesQueue[key] = value;
+/*Line 645 - 'AtomControl.js' */                    var op = element._promisesQueue[key];
+/*Line 646 - 'AtomControl.js' */                    if (op) {
+/*Line 647 - 'AtomControl.js' */                        op.abort();
+/*Line 648 - 'AtomControl.js' */                    }
+/*Line 649 - 'AtomControl.js' */                    element._promisesQueue[key] = value;
 
-/*Line 648 - 'AtomControl.js' */                    if (value._persist) {
+/*Line 651 - 'AtomControl.js' */                    if (value._persist) {
 
-/*Line 650 - 'AtomControl.js' */                        // is it a promise?
-/*Line 651 - 'AtomControl.js' */                        this._promises = this._promises || {};
+/*Line 653 - 'AtomControl.js' */                        // is it a promise?
+/*Line 654 - 'AtomControl.js' */                        this._promises = this._promises || {};
 
-/*Line 653 - 'AtomControl.js' */                        // cache promise...
-/*Line 654 - 'AtomControl.js' */                        this._promises[key] = value;
+/*Line 656 - 'AtomControl.js' */                        // cache promise...
+/*Line 657 - 'AtomControl.js' */                        this._promises[key] = value;
 
 
-/*Line 657 - 'AtomControl.js' */                    }
+/*Line 660 - 'AtomControl.js' */                    }
 
-/*Line 659 - 'AtomControl.js' */                    var caller = this;
+/*Line 662 - 'AtomControl.js' */                    var caller = this;
 
-/*Line 661 - 'AtomControl.js' */                    value.then(function (p) {
+/*Line 664 - 'AtomControl.js' */                    value.then(function (p) {
 
-/*Line 663 - 'AtomControl.js' */                        if (element._promisesQueue[key] == p) {
-/*Line 664 - 'AtomControl.js' */                            element._promisesQueue[key] = null;
-/*Line 665 - 'AtomControl.js' */                        }
+/*Line 666 - 'AtomControl.js' */                        if (element._promisesQueue[key] == p) {
+/*Line 667 - 'AtomControl.js' */                            element._promisesQueue[key] = null;
+/*Line 668 - 'AtomControl.js' */                        }
 
-/*Line 667 - 'AtomControl.js' */                        element._promisesQueue[key] = null;
+/*Line 670 - 'AtomControl.js' */                        element._promisesQueue[key] = null;
 
-/*Line 669 - 'AtomControl.js' */                        caller.setLocalValue(key, p.value(), element, true);
+/*Line 672 - 'AtomControl.js' */                        caller.setLocalValue(key, p.value(), element, true);
 
-/*Line 671 - 'AtomControl.js' */                        if (caller._loadNext) {
-/*Line 672 - 'AtomControl.js' */                            caller.invokeAction(caller._loadNext);
-/*Line 673 - 'AtomControl.js' */                        }
-/*Line 674 - 'AtomControl.js' */                    });
+/*Line 674 - 'AtomControl.js' */                        if (caller._loadNext) {
+/*Line 675 - 'AtomControl.js' */                            caller.invokeAction(caller._loadNext);
+/*Line 676 - 'AtomControl.js' */                        }
+/*Line 677 - 'AtomControl.js' */                    });
 
-/*Line 676 - 'AtomControl.js' */                    value.failed(function (p) {
-/*Line 677 - 'AtomControl.js' */                        if (element._promisesQueue[key] == p) {
-/*Line 678 - 'AtomControl.js' */                            element._promisesQueue[key] = null;
-/*Line 679 - 'AtomControl.js' */                        }
-/*Line 680 - 'AtomControl.js' */                    });
+/*Line 679 - 'AtomControl.js' */                    value.failed(function (p) {
+/*Line 680 - 'AtomControl.js' */                        if (element._promisesQueue[key] == p) {
+/*Line 681 - 'AtomControl.js' */                            element._promisesQueue[key] = null;
+/*Line 682 - 'AtomControl.js' */                        }
+/*Line 683 - 'AtomControl.js' */                    });
 
-/*Line 682 - 'AtomControl.js' */                    value.invoke();
-/*Line 683 - 'AtomControl.js' */                    return;
+/*Line 685 - 'AtomControl.js' */                    value.invoke();
+/*Line 686 - 'AtomControl.js' */                    return;
 
-/*Line 685 - 'AtomControl.js' */                }
+/*Line 688 - 'AtomControl.js' */                }
 
-/*Line 687 - 'AtomControl.js' */                if (this._element == element) {
-/*Line 688 - 'AtomControl.js' */                    var fn = this["set_" + key];
-/*Line 689 - 'AtomControl.js' */                    if (fn != null) {
-/*Line 690 - 'AtomControl.js' */                        if (refresh) {
-/*Line 691 - 'AtomControl.js' */                            // checking old value is necessary
-/*Line 692 - 'AtomControl.js' */                            // as two way binding may cause recursive
-/*Line 693 - 'AtomControl.js' */                            // updates
-/*Line 694 - 'AtomControl.js' */                            var oldValue = AtomBinder.getValue(this, key);
-/*Line 695 - 'AtomControl.js' */                            if (oldValue == value)
-/*Line 696 - 'AtomControl.js' */                                return;
-/*Line 697 - 'AtomControl.js' */                        }
-/*Line 698 - 'AtomControl.js' */                        fn.apply(this, [value]);
-/*Line 699 - 'AtomControl.js' */                        if (refresh) {
-/*Line 700 - 'AtomControl.js' */                            AtomBinder.refreshValue(this, key);
-/*Line 701 - 'AtomControl.js' */                        }
-/*Line 702 - 'AtomControl.js' */                        return;
-/*Line 703 - 'AtomControl.js' */                    }
-/*Line 704 - 'AtomControl.js' */                }
+/*Line 690 - 'AtomControl.js' */                if (this._element == element) {
+/*Line 691 - 'AtomControl.js' */                    var fn = this["set_" + key];
+/*Line 692 - 'AtomControl.js' */                    if (fn != null) {
+/*Line 693 - 'AtomControl.js' */                        if (refresh) {
+/*Line 694 - 'AtomControl.js' */                            // checking old value is necessary
+/*Line 695 - 'AtomControl.js' */                            // as two way binding may cause recursive
+/*Line 696 - 'AtomControl.js' */                            // updates
+/*Line 697 - 'AtomControl.js' */                            var oldValue = AtomBinder.getValue(this, key);
+/*Line 698 - 'AtomControl.js' */                            if (oldValue == value)
+/*Line 699 - 'AtomControl.js' */                                return;
+/*Line 700 - 'AtomControl.js' */                        }
+/*Line 701 - 'AtomControl.js' */                        fn.apply(this, [value]);
+/*Line 702 - 'AtomControl.js' */                        if (refresh) {
+/*Line 703 - 'AtomControl.js' */                            AtomBinder.refreshValue(this, key);
+/*Line 704 - 'AtomControl.js' */                        }
+/*Line 705 - 'AtomControl.js' */                        return;
+/*Line 706 - 'AtomControl.js' */                    }
+/*Line 707 - 'AtomControl.js' */                }
 
-/*Line 706 - 'AtomControl.js' */                if (/^style/g.test(key) && key.length > 5) {
-/*Line 707 - 'AtomControl.js' */                    var k = key.substr(5);
-/*Line 708 - 'AtomControl.js' */                    k = String.fromCharCode(k.charCodeAt(0)).toLowerCase() + k.substr(1);
-/*Line 709 - 'AtomControl.js' */                    element.style[k] = value;
-/*Line 710 - 'AtomControl.js' */                    return;
-/*Line 711 - 'AtomControl.js' */                }
+/*Line 709 - 'AtomControl.js' */                if (/^style/g.test(key) && key.length > 5) {
+/*Line 710 - 'AtomControl.js' */                    var k = key.substr(5);
+/*Line 711 - 'AtomControl.js' */                    k = String.fromCharCode(k.charCodeAt(0)).toLowerCase() + k.substr(1);
+/*Line 712 - 'AtomControl.js' */                    element.style[k] = value;
+/*Line 713 - 'AtomControl.js' */                    return;
+/*Line 714 - 'AtomControl.js' */                }
 
-/*Line 713 - 'AtomControl.js' */                if (/^event/g.test(key) && key.length > 5) {
-/*Line 714 - 'AtomControl.js' */                    var k = key.substr(5);
-/*Line 715 - 'AtomControl.js' */                    k = String.fromCharCode(k.charCodeAt(0)).toLowerCase() + k.substr(1);
-/*Line 716 - 'AtomControl.js' */                    var _this = this;
-/*Line 717 - 'AtomControl.js' */                    // unbind previous event...
-/*Line 718 - 'AtomControl.js' */                    this.unbindEvent(element, k);
-/*Line 719 - 'AtomControl.js' */                    this.bindEvent(element, k, null, null, function (evt) {
-/*Line 720 - 'AtomControl.js' */                        _this.invokeAction(value, evt);
-/*Line 721 - 'AtomControl.js' */                    });
-/*Line 722 - 'AtomControl.js' */                    return;
-/*Line 723 - 'AtomControl.js' */                }
+/*Line 716 - 'AtomControl.js' */                if (/^event/g.test(key) && key.length > 5) {
+/*Line 717 - 'AtomControl.js' */                    var k = key.substr(5);
+/*Line 718 - 'AtomControl.js' */                    k = String.fromCharCode(k.charCodeAt(0)).toLowerCase() + k.substr(1);
+/*Line 719 - 'AtomControl.js' */                    var _this = this;
+/*Line 720 - 'AtomControl.js' */                    // unbind previous event...
+/*Line 721 - 'AtomControl.js' */                    this.unbindEvent(element, k);
+/*Line 722 - 'AtomControl.js' */                    this.bindEvent(element, k, null, null, function (evt) {
+/*Line 723 - 'AtomControl.js' */                        _this.invokeAction(value, evt);
+/*Line 724 - 'AtomControl.js' */                    });
+/*Line 725 - 'AtomControl.js' */                    return;
+/*Line 726 - 'AtomControl.js' */                }
 
-/*Line 725 - 'AtomControl.js' */                var f = AtomProperties[key] || AtomProperties.any;
-/*Line 726 - 'AtomControl.js' */                if (f) {
-/*Line 727 - 'AtomControl.js' */                    f(element || this._element, value, key);
-/*Line 728 - 'AtomControl.js' */                }
+/*Line 728 - 'AtomControl.js' */                var f = AtomProperties[key] || AtomProperties.any;
+/*Line 729 - 'AtomControl.js' */                if (f) {
+/*Line 730 - 'AtomControl.js' */                    f(element || this._element, value, key);
+/*Line 731 - 'AtomControl.js' */                }
 
-/*Line 730 - 'AtomControl.js' */            },
+/*Line 733 - 'AtomControl.js' */            },
 
-/*Line 732 - 'AtomControl.js' */            bind: function (element, key, value, twoWays, vf, events) {
+/*Line 735 - 'AtomControl.js' */            bind: function (element, key, value, twoWays, vf, events) {
 
-/*Line 734 - 'AtomControl.js' */                if (value == null) {
-/*Line 735 - 'AtomControl.js' */                    // remove existing binding...
-/*Line 736 - 'AtomControl.js' */                    this.clearBinding(element, key);
-/*Line 737 - 'AtomControl.js' */                    return;
-/*Line 738 - 'AtomControl.js' */                }
+/*Line 737 - 'AtomControl.js' */                if (value == null) {
+/*Line 738 - 'AtomControl.js' */                    // remove existing binding...
+/*Line 739 - 'AtomControl.js' */                    this.clearBinding(element, key);
+/*Line 740 - 'AtomControl.js' */                    return;
+/*Line 741 - 'AtomControl.js' */                }
 
-/*Line 740 - 'AtomControl.js' */                var target = this;
-/*Line 741 - 'AtomControl.js' */                if (value && value.constructor == String && /^window\./g.test(value)) {
-/*Line 742 - 'AtomControl.js' */                    target = window;
-/*Line 743 - 'AtomControl.js' */                }
+/*Line 743 - 'AtomControl.js' */                var target = this;
+/*Line 744 - 'AtomControl.js' */                if (value && value.constructor == String && /^window\./g.test(value)) {
+/*Line 745 - 'AtomControl.js' */                    target = window;
+/*Line 746 - 'AtomControl.js' */                }
 
-/*Line 745 - 'AtomControl.js' */                var thisElement = this.get_element();
+/*Line 748 - 'AtomControl.js' */                var thisElement = this.get_element();
 
-/*Line 747 - 'AtomControl.js' */                var jq = thisElement != element;
+/*Line 750 - 'AtomControl.js' */                var jq = thisElement != element;
 
-/*Line 749 - 'AtomControl.js' */                if (!jq) {
-/*Line 750 - 'AtomControl.js' */                    var f = this["get_" + key];
-/*Line 751 - 'AtomControl.js' */                    if (f == undefined || f == null) {
-/*Line 752 - 'AtomControl.js' */                        jq = true;
-/*Line 753 - 'AtomControl.js' */                    }
-/*Line 754 - 'AtomControl.js' */                }
+/*Line 752 - 'AtomControl.js' */                if (!jq) {
+/*Line 753 - 'AtomControl.js' */                    var f = this["get_" + key];
+/*Line 754 - 'AtomControl.js' */                    if (f == undefined || f == null) {
+/*Line 755 - 'AtomControl.js' */                        jq = true;
+/*Line 756 - 'AtomControl.js' */                    }
+/*Line 757 - 'AtomControl.js' */                }
 
-/*Line 756 - 'AtomControl.js' */                switch (key) {
-/*Line 757 - 'AtomControl.js' */                    case "value":
-/*Line 758 - 'AtomControl.js' */                        if (/input/gi.test(element.nodeName)) { jq = true; }
-/*Line 759 - 'AtomControl.js' */                        this.addBinding(target, element, "value", value, twoWays, jq, vf, events);
-/*Line 760 - 'AtomControl.js' */                        break;
-/*Line 761 - 'AtomControl.js' */                    case "text":
-/*Line 762 - 'AtomControl.js' */                        this.addBinding(target, element, "text", value, false, true, vf, events);
+/*Line 759 - 'AtomControl.js' */                switch (key) {
+/*Line 760 - 'AtomControl.js' */                    case "value":
+/*Line 761 - 'AtomControl.js' */                        if (/input/gi.test(element.nodeName)) { jq = true; }
+/*Line 762 - 'AtomControl.js' */                        this.addBinding(target, element, "value", value, twoWays, jq, vf, events);
 /*Line 763 - 'AtomControl.js' */                        break;
-/*Line 764 - 'AtomControl.js' */                    default:
-/*Line 765 - 'AtomControl.js' */                        this.addBinding(target, element, key, value, twoWays, jq, vf, events);
+/*Line 764 - 'AtomControl.js' */                    case "text":
+/*Line 765 - 'AtomControl.js' */                        this.addBinding(target, element, "text", value, false, true, vf, events);
 /*Line 766 - 'AtomControl.js' */                        break;
-/*Line 767 - 'AtomControl.js' */                }
+/*Line 767 - 'AtomControl.js' */                    default:
+/*Line 768 - 'AtomControl.js' */                        this.addBinding(target, element, key, value, twoWays, jq, vf, events);
+/*Line 769 - 'AtomControl.js' */                        break;
+/*Line 770 - 'AtomControl.js' */                }
 
-/*Line 769 - 'AtomControl.js' */            },
-
-/*Line 771 - 'AtomControl.js' */            onInitialized: function () {
 /*Line 772 - 'AtomControl.js' */            },
 
-/*Line 774 - 'AtomControl.js' */            init: function () {
+/*Line 774 - 'AtomControl.js' */            onInitialized: function () {
+/*Line 775 - 'AtomControl.js' */            },
 
-/*Line 776 - 'AtomControl.js' */                // first remove all templates ...
-/*Line 777 - 'AtomControl.js' */                base.init.apply(this, arguments);
+/*Line 777 - 'AtomControl.js' */            init: function () {
 
-/*Line 779 - 'AtomControl.js' */                // init properties...
-/*Line 780 - 'AtomControl.js' */                var element = this.get_element();
+/*Line 779 - 'AtomControl.js' */                // first remove all templates ...
+/*Line 780 - 'AtomControl.js' */                base.init.apply(this, arguments);
 
-/*Line 782 - 'AtomControl.js' */                var amap = AtomUI.attributeMap(element, /^atom\-(name|local\-scope)$/gi);
+/*Line 782 - 'AtomControl.js' */                // init properties...
+/*Line 783 - 'AtomControl.js' */                var element = this.get_element();
 
-/*Line 784 - 'AtomControl.js' */                var ls = amap["atom-name"];
-/*Line 785 - 'AtomControl.js' */                if (ls) {
-/*Line 786 - 'AtomControl.js' */                    if (/^(app|window|owner|scope|localScope|parent)$/gi.test(ls.value))
-/*Line 787 - 'AtomControl.js' */                        throw new Error("Invalid Control Name '" + ls.value + "'");
-/*Line 788 - 'AtomControl.js' */                    var s = this.get_scope();
-/*Line 789 - 'AtomControl.js' */                    AtomBinder.setValue(s, ls.value, this);
-/*Line 790 - 'AtomControl.js' */                    this._name = ls.value;
-/*Line 791 - 'AtomControl.js' */                    element.removeAttributeNode(ls.node);
-/*Line 792 - 'AtomControl.js' */                }
+/*Line 785 - 'AtomControl.js' */                var amap = AtomUI.attributeMap(element, /^atom\-(name|local\-scope)$/gi);
 
-
-/*Line 795 - 'AtomControl.js' */                ls = amap["atom-local-scope"];
-/*Line 796 - 'AtomControl.js' */                if (ls) {
-/*Line 797 - 'AtomControl.js' */                    this._localScope = new AtomScope(this, this.get_scope(), atomApplication);
-/*Line 798 - 'AtomControl.js' */                    this._scope = this._localScope;
-/*Line 799 - 'AtomControl.js' */                    if (this._name) {
-/*Line 800 - 'AtomControl.js' */                        this._localScope[this._name] = this;
-/*Line 801 - 'AtomControl.js' */                    }
-/*Line 802 - 'AtomControl.js' */                    element.removeAttributeNode(ls.node);
-/*Line 803 - 'AtomControl.js' */                }
-
-/*Line 805 - 'AtomControl.js' */                // scope is now ready, set scopeTemplates...
-/*Line 806 - 'AtomControl.js' */                var st = this._scopeTemplates;
-/*Line 807 - 'AtomControl.js' */                if (st) {
-/*Line 808 - 'AtomControl.js' */                    var s = this.get_scope();
-/*Line 809 - 'AtomControl.js' */                    for (var i in st) {
-/*Line 810 - 'AtomControl.js' */                        var t = st[i];
-/*Line 811 - 'AtomControl.js' */                        AtomBinder.setValue(s, i, t);
-/*Line 812 - 'AtomControl.js' */                    }
-/*Line 813 - 'AtomControl.js' */                    //try {
-/*Line 814 - 'AtomControl.js' */                    //    delete this._scopeTemplates;
-/*Line 815 - 'AtomControl.js' */                    //} catch (exx) {
-
-/*Line 817 - 'AtomControl.js' */                    //}
-/*Line 818 - 'AtomControl.js' */                }
-
-/*Line 820 - 'AtomControl.js' */                //var fn = Function.createDelegate(this, this.initProperties);
-/*Line 821 - 'AtomControl.js' */                var _this = this;
-/*Line 822 - 'AtomControl.js' */                WebAtoms.dispatcher.callLater(function () {
-/*Line 823 - 'AtomControl.js' */                    _this.initProperties();
-/*Line 824 - 'AtomControl.js' */                });
-
-/*Line 826 - 'AtomControl.js' */                // init every children..
-/*Line 827 - 'AtomControl.js' */                this.initChildren(this._element);
-
-/*Line 829 - 'AtomControl.js' */                //fn = Function.createDelegate(this, this.onInitialized);
-/*Line 830 - 'AtomControl.js' */                WebAtoms.dispatcher.callLater(function () {
-/*Line 831 - 'AtomControl.js' */                    _this.onInitialized();
-/*Line 832 - 'AtomControl.js' */                });
-/*Line 833 - 'AtomControl.js' */            },
+/*Line 787 - 'AtomControl.js' */                var ls = amap["atom-name"];
+/*Line 788 - 'AtomControl.js' */                if (ls) {
+/*Line 789 - 'AtomControl.js' */                    if (/^(app|window|owner|scope|localScope|parent)$/gi.test(ls.value))
+/*Line 790 - 'AtomControl.js' */                        throw new Error("Invalid Control Name '" + ls.value + "'");
+/*Line 791 - 'AtomControl.js' */                    var s = this.get_scope();
+/*Line 792 - 'AtomControl.js' */                    AtomBinder.setValue(s, ls.value, this);
+/*Line 793 - 'AtomControl.js' */                    this._name = ls.value;
+/*Line 794 - 'AtomControl.js' */                    element.removeAttributeNode(ls.node);
+/*Line 795 - 'AtomControl.js' */                }
 
 
-/*Line 836 - 'AtomControl.js' */            dispose: function (e) {
+/*Line 798 - 'AtomControl.js' */                ls = amap["atom-local-scope"];
+/*Line 799 - 'AtomControl.js' */                if (ls) {
+/*Line 800 - 'AtomControl.js' */                    this._localScope = new AtomScope(this, this.get_scope(), atomApplication);
+/*Line 801 - 'AtomControl.js' */                    this._scope = this._localScope;
+/*Line 802 - 'AtomControl.js' */                    if (this._name) {
+/*Line 803 - 'AtomControl.js' */                        this._localScope[this._name] = this;
+/*Line 804 - 'AtomControl.js' */                    }
+/*Line 805 - 'AtomControl.js' */                    element.removeAttributeNode(ls.node);
+/*Line 806 - 'AtomControl.js' */                }
 
-/*Line 838 - 'AtomControl.js' */                // disposing only one element
-/*Line 839 - 'AtomControl.js' */                if (e) {
-/*Line 840 - 'AtomControl.js' */                    var eac = e.atomControl;
-/*Line 841 - 'AtomControl.js' */                    if (eac) {
-/*Line 842 - 'AtomControl.js' */                        eac.dispose();
-/*Line 843 - 'AtomControl.js' */                    } else {
-/*Line 844 - 'AtomControl.js' */                        this.clearBinding(e);
-/*Line 845 - 'AtomControl.js' */                        this.disposeChildren(e);
-/*Line 846 - 'AtomControl.js' */                    }
-/*Line 847 - 'AtomControl.js' */                    $(e).remove();
-/*Line 848 - 'AtomControl.js' */                    return;
-/*Line 849 - 'AtomControl.js' */                }
+/*Line 808 - 'AtomControl.js' */                // scope is now ready, set scopeTemplates...
+/*Line 809 - 'AtomControl.js' */                var st = this._scopeTemplates;
+/*Line 810 - 'AtomControl.js' */                if (st) {
+/*Line 811 - 'AtomControl.js' */                    var s = this.get_scope();
+/*Line 812 - 'AtomControl.js' */                    for (var i in st) {
+/*Line 813 - 'AtomControl.js' */                        var t = st[i];
+/*Line 814 - 'AtomControl.js' */                        AtomBinder.setValue(s, i, t);
+/*Line 815 - 'AtomControl.js' */                    }
+/*Line 816 - 'AtomControl.js' */                    //try {
+/*Line 817 - 'AtomControl.js' */                    //    delete this._scopeTemplates;
+/*Line 818 - 'AtomControl.js' */                    //} catch (exx) {
 
-/*Line 851 - 'AtomControl.js' */                this._disposed = true;
-/*Line 852 - 'AtomControl.js' */                this.disposeChildren(this._element);
-/*Line 853 - 'AtomControl.js' */                this.clearBinding();
-/*Line 854 - 'AtomControl.js' */                this.bindings.length = 0;
-/*Line 855 - 'AtomControl.js' */                base.dispose.apply(this, arguments);
-/*Line 856 - 'AtomControl.js' */            },
+/*Line 820 - 'AtomControl.js' */                    //}
+/*Line 821 - 'AtomControl.js' */                }
+
+/*Line 823 - 'AtomControl.js' */                //var fn = Function.createDelegate(this, this.initProperties);
+/*Line 824 - 'AtomControl.js' */                var _this = this;
+/*Line 825 - 'AtomControl.js' */                WebAtoms.dispatcher.callLater(function () {
+/*Line 826 - 'AtomControl.js' */                    _this.initProperties();
+/*Line 827 - 'AtomControl.js' */                });
+
+/*Line 829 - 'AtomControl.js' */                // init every children..
+/*Line 830 - 'AtomControl.js' */                this.initChildren(this._element);
+
+/*Line 832 - 'AtomControl.js' */                //fn = Function.createDelegate(this, this.onInitialized);
+/*Line 833 - 'AtomControl.js' */                WebAtoms.dispatcher.callLater(function () {
+/*Line 834 - 'AtomControl.js' */                    _this.onInitialized();
+/*Line 835 - 'AtomControl.js' */                });
+/*Line 836 - 'AtomControl.js' */            },
 
 
-/*Line 859 - 'AtomControl.js' */            disposeChildren: function (e) {
-/*Line 860 - 'AtomControl.js' */                var oldIE = AtomBrowser.isIE && AtomBrowser.majorVersion < 9;
-/*Line 861 - 'AtomControl.js' */                var ae = new ChildEnumerator(e);
-/*Line 862 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 863 - 'AtomControl.js' */                    var ce = ae.current();
-/*Line 864 - 'AtomControl.js' */                    if (ce.atomControl) {
-/*Line 865 - 'AtomControl.js' */                        ce.atomControl.dispose();
-/*Line 866 - 'AtomControl.js' */                        if (oldIE) {
-/*Line 867 - 'AtomControl.js' */                            ce.atomControl = undefined;
-/*Line 868 - 'AtomControl.js' */                        } else {
-/*Line 869 - 'AtomControl.js' */                            delete ce.atomControl;
-/*Line 870 - 'AtomControl.js' */                        }
-/*Line 871 - 'AtomControl.js' */                    } else {
-/*Line 872 - 'AtomControl.js' */                        this.clearBinding(ce);
-/*Line 873 - 'AtomControl.js' */                        this.unbindEvent(ce);
-/*Line 874 - 'AtomControl.js' */                        this.disposeChildren(ce);
-/*Line 875 - 'AtomControl.js' */                    }
-/*Line 876 - 'AtomControl.js' */                    //$(ce).remove();
-/*Line 877 - 'AtomControl.js' */                }
-/*Line 878 - 'AtomControl.js' */                // this will and should remove every children..
-/*Line 879 - 'AtomControl.js' */                try {
-/*Line 880 - 'AtomControl.js' */                    e.innerHTML = "";
-/*Line 881 - 'AtomControl.js' */                } catch (ex) {
-/*Line 882 - 'AtomControl.js' */                    $(e).html('');
-/*Line 883 - 'AtomControl.js' */                }
-/*Line 884 - 'AtomControl.js' */            },
+/*Line 839 - 'AtomControl.js' */            dispose: function (e) {
 
-/*Line 886 - 'AtomControl.js' */            get_innerTemplate: function () {
-/*Line 887 - 'AtomControl.js' */                return this._template;
-/*Line 888 - 'AtomControl.js' */            },
+/*Line 841 - 'AtomControl.js' */                // disposing only one element
+/*Line 842 - 'AtomControl.js' */                if (e) {
+/*Line 843 - 'AtomControl.js' */                    var eac = e.atomControl;
+/*Line 844 - 'AtomControl.js' */                    if (eac) {
+/*Line 845 - 'AtomControl.js' */                        eac.dispose();
+/*Line 846 - 'AtomControl.js' */                    } else {
+/*Line 847 - 'AtomControl.js' */                        this.clearBinding(e);
+/*Line 848 - 'AtomControl.js' */                        this.disposeChildren(e);
+/*Line 849 - 'AtomControl.js' */                    }
+/*Line 850 - 'AtomControl.js' */                    $(e).remove();
+/*Line 851 - 'AtomControl.js' */                    return;
+/*Line 852 - 'AtomControl.js' */                }
 
-/*Line 890 - 'AtomControl.js' */            set_innerTemplate: function (v) {
-/*Line 891 - 'AtomControl.js' */                if (this._template === v) {
-/*Line 892 - 'AtomControl.js' */                    if (this._created)
-/*Line 893 - 'AtomControl.js' */                        return;
-/*Line 894 - 'AtomControl.js' */                }
-/*Line 895 - 'AtomControl.js' */                if (!this._created) {
-/*Line 896 - 'AtomControl.js' */                    var _this = this;
-/*Line 897 - 'AtomControl.js' */                    // this is because, sometimes template change occurs while creation
-/*Line 898 - 'AtomControl.js' */                    // which creates endless loop
-/*Line 899 - 'AtomControl.js' */                    WebAtoms.dispatcher.callLater(function () {
-/*Line 900 - 'AtomControl.js' */                        _this.set_innerTemplate(v);
-/*Line 901 - 'AtomControl.js' */                    });
-/*Line 902 - 'AtomControl.js' */                    return;
-/*Line 903 - 'AtomControl.js' */                }
-/*Line 904 - 'AtomControl.js' */                this._template = v;
-/*Line 905 - 'AtomControl.js' */                // disposing all children...
-/*Line 906 - 'AtomControl.js' */                this.disposeChildren(this._element);
+/*Line 854 - 'AtomControl.js' */                this._disposed = true;
+/*Line 855 - 'AtomControl.js' */                this.disposeChildren(this._element);
+/*Line 856 - 'AtomControl.js' */                this.clearBinding();
+/*Line 857 - 'AtomControl.js' */                this.bindings.length = 0;
+/*Line 858 - 'AtomControl.js' */                base.dispose.apply(this, arguments);
+/*Line 859 - 'AtomControl.js' */            },
 
-/*Line 908 - 'AtomControl.js' */                this.createChildren();
-/*Line 909 - 'AtomControl.js' */                this.setProperties(this._element);
-/*Line 910 - 'AtomControl.js' */                this.initChildren(this._element);
-/*Line 911 - 'AtomControl.js' */                this.updateUI();
-/*Line 912 - 'AtomControl.js' */            },
 
-/*Line 914 - 'AtomControl.js' */            initChildren: function (e) {
-/*Line 915 - 'AtomControl.js' */                var ae = new ChildEnumerator(e);
-/*Line 916 - 'AtomControl.js' */                var item;
-/*Line 917 - 'AtomControl.js' */                var ctrl;
+/*Line 862 - 'AtomControl.js' */            disposeChildren: function (e) {
+/*Line 863 - 'AtomControl.js' */                var oldIE = AtomBrowser.isIE && AtomBrowser.majorVersion < 9;
+/*Line 864 - 'AtomControl.js' */                var ae = new ChildEnumerator(e);
+/*Line 865 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 866 - 'AtomControl.js' */                    var ce = ae.current();
+/*Line 867 - 'AtomControl.js' */                    if (ce.atomControl) {
+/*Line 868 - 'AtomControl.js' */                        ce.atomControl.dispose();
+/*Line 869 - 'AtomControl.js' */                        if (oldIE) {
+/*Line 870 - 'AtomControl.js' */                            ce.atomControl = undefined;
+/*Line 871 - 'AtomControl.js' */                        } else {
+/*Line 872 - 'AtomControl.js' */                            delete ce.atomControl;
+/*Line 873 - 'AtomControl.js' */                        }
+/*Line 874 - 'AtomControl.js' */                    } else {
+/*Line 875 - 'AtomControl.js' */                        this.clearBinding(ce);
+/*Line 876 - 'AtomControl.js' */                        this.unbindEvent(ce);
+/*Line 877 - 'AtomControl.js' */                        this.disposeChildren(ce);
+/*Line 878 - 'AtomControl.js' */                    }
+/*Line 879 - 'AtomControl.js' */                    //$(ce).remove();
+/*Line 880 - 'AtomControl.js' */                }
+/*Line 881 - 'AtomControl.js' */                // this will and should remove every children..
+/*Line 882 - 'AtomControl.js' */                try {
+/*Line 883 - 'AtomControl.js' */                    e.innerHTML = "";
+/*Line 884 - 'AtomControl.js' */                } catch (ex) {
+/*Line 885 - 'AtomControl.js' */                    $(e).html('');
+/*Line 886 - 'AtomControl.js' */                }
+/*Line 887 - 'AtomControl.js' */            },
 
-/*Line 919 - 'AtomControl.js' */                var remove = [];
+/*Line 889 - 'AtomControl.js' */            get_innerTemplate: function () {
+/*Line 890 - 'AtomControl.js' */                return this._template;
+/*Line 891 - 'AtomControl.js' */            },
 
-/*Line 921 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 922 - 'AtomControl.js' */                    item = ae.current();
+/*Line 893 - 'AtomControl.js' */            set_innerTemplate: function (v) {
+/*Line 894 - 'AtomControl.js' */                if (this._template === v) {
+/*Line 895 - 'AtomControl.js' */                    if (this._created)
+/*Line 896 - 'AtomControl.js' */                        return;
+/*Line 897 - 'AtomControl.js' */                }
+/*Line 898 - 'AtomControl.js' */                if (!this._created) {
+/*Line 899 - 'AtomControl.js' */                    var _this = this;
+/*Line 900 - 'AtomControl.js' */                    // this is because, sometimes template change occurs while creation
+/*Line 901 - 'AtomControl.js' */                    // which creates endless loop
+/*Line 902 - 'AtomControl.js' */                    WebAtoms.dispatcher.callLater(function () {
+/*Line 903 - 'AtomControl.js' */                        _this.set_innerTemplate(v);
+/*Line 904 - 'AtomControl.js' */                    });
+/*Line 905 - 'AtomControl.js' */                    return;
+/*Line 906 - 'AtomControl.js' */                }
+/*Line 907 - 'AtomControl.js' */                this._template = v;
+/*Line 908 - 'AtomControl.js' */                // disposing all children...
+/*Line 909 - 'AtomControl.js' */                this.disposeChildren(this._element);
 
-/*Line 924 - 'AtomControl.js' */                    if (item.nodeName == "SCRIPT") {
+/*Line 911 - 'AtomControl.js' */                this.createChildren();
+/*Line 912 - 'AtomControl.js' */                this.setProperties(this._element);
+/*Line 913 - 'AtomControl.js' */                this.initChildren(this._element);
+/*Line 914 - 'AtomControl.js' */                this.updateUI();
+/*Line 915 - 'AtomControl.js' */            },
 
-/*Line 926 - 'AtomControl.js' */                        // evalute and set scope...
-/*Line 927 - 'AtomControl.js' */                        var s = $.trim(item.innerHTML);
-/*Line 928 - 'AtomControl.js' */                        if (/^\(\{/.test(s) && /\}\)$/.test(s)) {
-/*Line 929 - 'AtomControl.js' */                            try {
-/*Line 930 - 'AtomControl.js' */                                s = (new Function("return " + s + ";"))()
-/*Line 931 - 'AtomControl.js' */                                //this.set_scope(s);
-/*Line 932 - 'AtomControl.js' */                                var scope = this._localScope || this.get_scope();
-/*Line 933 - 'AtomControl.js' */                                for (var k in s) {
-/*Line 934 - 'AtomControl.js' */                                    if (scope[k])
-/*Line 935 - 'AtomControl.js' */                                        continue;
-/*Line 936 - 'AtomControl.js' */                                    scope[k] = s[k];
-/*Line 937 - 'AtomControl.js' */                                }
-/*Line 938 - 'AtomControl.js' */                            } catch (ex) {
-/*Line 939 - 'AtomControl.js' */                                log(JSON.stringify(ex));
-/*Line 940 - 'AtomControl.js' */                                alert(JSON.stringify(ex));
-/*Line 941 - 'AtomControl.js' */                            }
+/*Line 917 - 'AtomControl.js' */            initChildren: function (e) {
+/*Line 918 - 'AtomControl.js' */                var ae = new ChildEnumerator(e);
+/*Line 919 - 'AtomControl.js' */                var item;
+/*Line 920 - 'AtomControl.js' */                var ctrl;
 
-/*Line 943 - 'AtomControl.js' */                        }
-/*Line 944 - 'AtomControl.js' */                        remove.push(item);
-/*Line 945 - 'AtomControl.js' */                        continue;
+/*Line 922 - 'AtomControl.js' */                var remove = [];
 
-/*Line 947 - 'AtomControl.js' */                    }
+/*Line 924 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 925 - 'AtomControl.js' */                    item = ae.current();
 
-/*Line 949 - 'AtomControl.js' */                    ctrl = item.atomControl;
-/*Line 950 - 'AtomControl.js' */                    if (ctrl) {
-/*Line 951 - 'AtomControl.js' */                        ctrl.init();
-/*Line 952 - 'AtomControl.js' */                    } else {
-/*Line 953 - 'AtomControl.js' */                        this.initChildren(item);
-/*Line 954 - 'AtomControl.js' */                    }
-/*Line 955 - 'AtomControl.js' */                }
+/*Line 927 - 'AtomControl.js' */                    if (item.nodeName == "SCRIPT") {
 
-/*Line 957 - 'AtomControl.js' */                ae = new AtomEnumerator(remove);
-/*Line 958 - 'AtomControl.js' */                while (ae.next()) {
-/*Line 959 - 'AtomControl.js' */                    e.removeChild(ae.current());
-/*Line 960 - 'AtomControl.js' */                }
-/*Line 961 - 'AtomControl.js' */            }
-/*Line 962 - 'AtomControl.js' */        }
-/*Line 963 - 'AtomControl.js' */    });
-/*Line 964 - 'AtomControl.js' */})(window,"WebAtoms.AtomControl",WebAtoms.AtomUIComponent.prototype);
+/*Line 929 - 'AtomControl.js' */                        // evalute and set scope...
+/*Line 930 - 'AtomControl.js' */                        var s = $.trim(item.innerHTML);
+/*Line 931 - 'AtomControl.js' */                        if (/^\(\{/.test(s) && /\}\)$/.test(s)) {
+/*Line 932 - 'AtomControl.js' */                            try {
+/*Line 933 - 'AtomControl.js' */                                s = (new Function("return " + s + ";"))()
+/*Line 934 - 'AtomControl.js' */                                //this.set_scope(s);
+/*Line 935 - 'AtomControl.js' */                                var scope = this._localScope || this.get_scope();
+/*Line 936 - 'AtomControl.js' */                                for (var k in s) {
+/*Line 937 - 'AtomControl.js' */                                    if (scope[k])
+/*Line 938 - 'AtomControl.js' */                                        continue;
+/*Line 939 - 'AtomControl.js' */                                    scope[k] = s[k];
+/*Line 940 - 'AtomControl.js' */                                }
+/*Line 941 - 'AtomControl.js' */                            } catch (ex) {
+/*Line 942 - 'AtomControl.js' */                                log(JSON.stringify(ex));
+/*Line 943 - 'AtomControl.js' */                                alert(JSON.stringify(ex));
+/*Line 944 - 'AtomControl.js' */                            }
+
+/*Line 946 - 'AtomControl.js' */                        }
+/*Line 947 - 'AtomControl.js' */                        remove.push(item);
+/*Line 948 - 'AtomControl.js' */                        continue;
+
+/*Line 950 - 'AtomControl.js' */                    }
+
+/*Line 952 - 'AtomControl.js' */                    ctrl = item.atomControl;
+/*Line 953 - 'AtomControl.js' */                    if (ctrl) {
+/*Line 954 - 'AtomControl.js' */                        ctrl.init();
+/*Line 955 - 'AtomControl.js' */                    } else {
+/*Line 956 - 'AtomControl.js' */                        this.initChildren(item);
+/*Line 957 - 'AtomControl.js' */                    }
+/*Line 958 - 'AtomControl.js' */                }
+
+/*Line 960 - 'AtomControl.js' */                ae = new AtomEnumerator(remove);
+/*Line 961 - 'AtomControl.js' */                while (ae.next()) {
+/*Line 962 - 'AtomControl.js' */                    e.removeChild(ae.current());
+/*Line 963 - 'AtomControl.js' */                }
+/*Line 964 - 'AtomControl.js' */            }
+/*Line 965 - 'AtomControl.js' */        }
+/*Line 966 - 'AtomControl.js' */    });
+/*Line 967 - 'AtomControl.js' */})(window,"WebAtoms.AtomControl",WebAtoms.AtomUIComponent.prototype);
 /*Line 0 - 'AtomItemsControl.js' */
 
 /*Line 2 - 'AtomItemsControl.js' */(function (window, base) {

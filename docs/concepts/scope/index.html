@@ -40,5 +40,9 @@
     <p>
         By setting <span class="inlineCode">id</span> attribute, HTML element is accessible easily. But when we are dealing with multi item controls such as List, Grid etc, referencing items could be very difficult. Scope helps us in referncing different items in same scope very easily by setting <span class="inlineCode">atom-name</span> attribute of the AtomControl. Once you apply <span class="inlineCode">atom-name</span> attribute, you can easily refer properties of controls by calling <span class="inlineCode">$scope.controlName.propertyName</span> pattern. In binding expression, propertyNames are automatially resolved so you do not have to use <span class="inlineCode">Atom.get</span> or <span class="inlineCode">Atom.set</span> methods.</p>
     
+    <h2>AppScope Control Name with ID</h2>
+    <p>
+        Attribute <span class="inlineCode">atom-name</span> is used to name the control in current scope, however if you want a control to be available globally even if it is nested inside a local scope, you can assign ID attribute to control, after that you can access <span class="inlineCode">$appScope.htmlIDAttribute.propertyName</span> as binding source.</p>
+    
 </body>
 </html>

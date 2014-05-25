@@ -60,6 +60,9 @@ var AtomBinders = {
     },
     "^[": function (ctrl, key, value, element) {
         value = value.substr(1, value.length - 2);
+        if (/^(@|\$)/g.test(value)) {
+            value = value.substr(1);
+        }
         ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur");
     }
 };
