@@ -31,7 +31,9 @@ var AtomEnumerator = (function (name, base) {
             this.i = -1;
         }
     });
-})("AtomEnumerator",null);
+})("AtomEnumerator", null);
+
+window.AtomEnumerator = AtomEnumerator;
     
 
 var Atom = {

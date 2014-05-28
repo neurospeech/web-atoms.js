@@ -381,11 +381,28 @@ AtomPromise.get = function (url, query, options) {
     return AtomPromise.ajax(url, query, options, "get");
 };
 
+AtomPromise.plugins = {
+};
+
 AtomPromise.json = function (url, query, options) {
     options = options || {};
     options.type = options.type || "get";
     options.dataType = options.dataType || "json";
-    return AtomPromise.ajax(url, query, options, "json");
+
+    var method = null;
+
+    var i = url.indexOf('://');
+    if (i != -1) {
+        var plugin = url.substr(0, i);
+        if (!/http|https/i.test(plugin)) {
+            url = url.substr(i + 3);
+            method = AtomPromise.plugins[plugin];
+        }
+    }
+
+    method = method | AtomPromise.ajax;
+
+    return method(url, query, options, "json");
 };
 
 AtomPromise.cache = {
@@ -562,3 +579,35 @@ AtomPromise.prototype.insertItem = function (index, item, arrayPath) {
 //    AtomBinder.remove_CollectionHandler(this,handler);
 //};
 
+
+var AtomLocalStorage = {
+
+    list: function (storage, query)
+    {
+    },
+    add: function (storage, query) {
+    },
+    remove: function (storage, query) {
+    },
+    clear: function (storage) {
+    },
+    set: function (storage, query, data) {
+    },
+    get: function (storage, query) {
+    }
+
+};
+
+
+AtomPromise.plugins["local-storage"] = function (url, query, options) {
+    var tokens = url.split('/');
+    var storage = tokens[0];
+    var method = tokens[1];
+    var ap = new AtomPromise();
+    ap.onInvoke(function (a) {
+        var als = AtomLocalStorage;
+        var r = als[method](storage, query, options.data);
+        a.pushValue(r);
+    });
+    return ap;
+};
