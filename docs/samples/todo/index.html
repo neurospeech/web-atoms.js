@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <script src="../../../atoms-debug.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
     <link href="base.css" rel="stylesheet" />
-    <script src="../../../Scripts/jquery-1.8.2.min.js"></script>
-    <script src="../../../atoms.min.js"></script>
-    <link href="../../style/atoms.css" rel="stylesheet" />
     <style>
         input {
             height:auto;
@@ -40,6 +40,7 @@
         <script type="text/javascript/scope">
             ({
                 statusFilter: '',
+                list: JSON.parse(localStorage.getItem("todos-web-atoms") || '[]'),
 
                 /* We dont want following variables to be serialized 
                 in URL so they must begin with underscore, as Global Scope referred as appScope 
@@ -48,19 +49,13 @@
                 /* All counts are cached on scope, since they may be evaluated by property bindings many times, 
                 we do not want to enumerate array all the time. */
 
+                _title: "",
+                _v: 1,
                 _active: 0,
                 _completed: 0,
-                _all: 0,
-                _title: "",
-
-                /* Following methods act as selectAll property methods, such property accessors do not serialize on URL */
-                get_selectAll: function () {
-                    var list = appScope.get_list();
-                    return list.length == appScope._completed;
-                },
 
                 set_selectAll: function (v) {
-                    var list = appScope.get_list();
+                    var list = appScope.list;
                     var ae = new AtomEnumerator(list);
                     while (ae.next()) {
                         var item = ae.current();
@@ -69,34 +64,20 @@
                     appScope.updateStorageCommand();
                 },
 
-                /* This will be called by Items Control in the beginning to load items, we are using localStorage to load items.
-                Since we want to cache counts in scope, we will explicitly call updateCounts method when storage was loaded first time*/
-                get_list: function () {
-                    if (appScope._list)
-                        return appScope._list;
-                    var l = JSON.parse( localStorage.getItem("todos-web-atoms") || '[]' );
-                    appScope._list = l;
-                    appScope.updateCounts();
+                fetchList: function () {
+                    var l = appScope.list;
+                    var a = Atom.query(l).where({ completed: false }).count();
+                    var c = l.length - a;
+                    Atom.set(appScope, '_active', a);
+                    Atom.set(appScope, '_completed', c);
                     return l;
                 },
 
                 /* After every action, we must call this method to save list to local Storage and update counts*/
                 updateStorageCommand: function (scope, sender) {
-                    var l = appScope._list;
+                    var l = appScope.list;
                     localStorage.setItem("todos-web-atoms", JSON.stringify(Atom.clone(l)));
-                    Atom.refresh(appScope, "selectAll");
-                    appScope.updateCounts();
-                },
-
-                /* We will enumerate array and filter the counts, Atom.query accepts JSON query language,
-                description is found on the e-book in download section*/
-                updateCounts: function () {
-                    var l = appScope._list;
-                    Atom.set(appScope, "_all", l.length);
-                    var a = Atom.query(l).count({ completed: false });
-                    var c = l.length - a;
-                    Atom.set(appScope, "_active", a);
-                    Atom.set(appScope, "_completed", c);
+                    appScope.refreshCommand();
                 },
 
                 /* While editing, we actually do not edit the title itself, instead we are editing title stored in scope. 
@@ -113,22 +94,24 @@
                     }
                 },
 
-                /* Will be called by input's keyup event handler, and we will create new item, we will call updateStorageCommand */
+                /* Will be called by input's keyup event handler, and we will create new item, 
+                we will call updateStorageCommand */
                 addCommand: function (scope, sender, evt) {
                     if (evt.keyCode != 13)
                         return;
                     if (!appScope._title)
                         return;
-                    var list = appScope.get_list();
+                    var list = appScope.list;
                     var newItem = { completed: false, title: $.trim(appScope._title) };
                     Atom.set(appScope, "_title", "");
                     Atom.add(list, newItem);
                     appScope.updateStorageCommand();
                 },
 
-                /* We will query for completed items and we will remove it from the list, and we will update the storage. */
+                /* We will query for completed items and we will remove it from the list, 
+                and we will update the storage. */
                 clearCompletedCommand: function (scope, sender, evt) {
-                    var list = appScope.get_list();
+                    var list = appScope.list;
                     var ae = new AtomEnumerator(Atom.query(list).where({ completed: true }).toArray());
                     while (ae.next()) {
                         Atom.remove(list, ae.current());
@@ -151,8 +134,8 @@
         <section 
             id="main"
             atom-type="AtomItemsControl" 
-            atom-items="[$appScope.list]"
-            atom-filter="[ $appScope.statusFilter ? { completed: $appScope.statusFilter == 'completed'  } : {} ]">
+            atom-items="[$appScope.fetchList($appScope._v)]"
+            atom-filter="[ $appScope.statusFilter ? { completed: ($appScope.statusFilter == 'completed')  } : {} ]">
                 <input 
                     id="toggle-all"
                     type="checkbox"
@@ -202,19 +185,25 @@
         </section>
 
 		<footer id="footer" 
-            style-display="[ $appScope._all ? 'block' : 'none' ]">
+            style-display="[ $appScope.list.length ? 'block' : 'none' ]">
 			<span id="todo-count"><strong atom-text="[$appScope._active]"></strong>
 				<span atom-text="[ $appScope._active == 1 ? ' item left' : ' items left' ]"></span>
 			</span>
 			<ul id="filters">
 				<li>
-					<a atom-class="[ { selected: !$appScope.statusFilter  } ]" href="#statusFilter=">All</a>
+					<a 
+                        atom-class="[ { selected: !$appScope.statusFilter  } ]" 
+                        href="#statusFilter=">All</a>
 				</li>
 				<li>
-					<a atom-class="[ { selected: $appScope.statusFilter == 'active' } ]" href="#statusFilter=active">Active</a>
+					<a 
+                        atom-class="[ { selected: $appScope.statusFilter == 'active' } ]" 
+                        href="#statusFilter=active">Active</a>
 				</li>
 				<li>
-					<a atom-class="[ { selected: $appScope.statusFilter == 'completed' } ]" href="#statusFilter=completed">Completed</a>
+					<a 
+                        atom-class="[ { selected: $appScope.statusFilter == 'completed' } ]" 
+                        href="#statusFilter=completed">Completed</a>
 				</li>
 			</ul>
 			<button 
