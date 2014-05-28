@@ -61,7 +61,7 @@ CodeMirror.defineMode("htmlmixed", function (config) {
                 return "web-atom-binding-exp" + bg;
             }
 
-            m = stream.match(/^\$\[[^\]]+\]/i);
+            m = stream.match(/^(\$|\^)\[[^\]]+\]/i);
             if (m) {
                 return "web-atom-two-way-binding";
             }
