@@ -19,7 +19,11 @@
 &nbsp;&nbsp;&nbsp; ({ jConfigValues: jConfigValues&nbsp; })<br />
         &lt;/script&gt;</p>
     <p class="note">Note: Please note the difference here, script shown in previous section is a simple javascript defined in page header. Script shown in this example is an Session Initialization Script which only appears within Atoms.js enabled HTML Elements.</p>
-    <h2>Navigation History</h2>
+    <h2>AppScope</h2>
+    <p>Following example illustrates, how you can access global scope as appScope inside a nested scope. Each item in <span class="inlineCode">AtomItemsControl</span> has its own scope for scope isolation.</p>
+    <p>
+        <img alt="" src="images/app-scope.png" style="max-width: 700px" /></p>
+    <h2>Navigation History (Routing)</h2>
     <p>
         In AJAX applications, saving state of page is very important. As in browser, we need back button functionality to function exactly like the way we get with simple web pages. Atoms.js makes it easy to maintain navigation state by serializing global scope (appScope) values into URL separated by <span class="inlineCode">#</span> token. Scope initialization is ignored if values exists in URL hash and it works without writing any extra scripts.</p>
     <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/scope/samples/app-scope.html" style="height: 409px;">

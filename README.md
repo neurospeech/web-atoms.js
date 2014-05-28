@@ -22,6 +22,11 @@ Features
 Atoms.js (previously known as Web Atoms JS) is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.
 
+Download Free Book
+------------------
+A complete guide for Atoms.js is included in this book, the book is available only for personal use with no redistribution and no print rights.
+[Download Atoms.js eBook](https://s3.amazonaws.com/webatoms/Documentation.pdf)
+
 Build Instructions
 ------------------
 Building Atoms.js project is very easy, you need Visual Studio 2012 onwards and you have to just transform all T4 text templates.

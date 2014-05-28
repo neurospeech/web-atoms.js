@@ -59,7 +59,7 @@ var AtomBinders = {
         ctrl.bind(element, key, value, true, null, events);
     },
     "^[": function (ctrl, key, value, element) {
-        value = value.substr(1, value.length - 2);
+        value = value.substr(2, value.length - 3);
         if (/^(@|\$)/g.test(value)) {
             value = value.substr(1);
         }

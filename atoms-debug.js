@@ -3702,7 +3702,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 58 - 'AtomControl.js' */        ctrl.bind(element, key, value, true, null, events);
 /*Line 59 - 'AtomControl.js' */    },
 /*Line 60 - 'AtomControl.js' */    "^[": function (ctrl, key, value, element) {
-/*Line 61 - 'AtomControl.js' */        value = value.substr(1, value.length - 2);
+/*Line 61 - 'AtomControl.js' */        value = value.substr(2, value.length - 3);
 /*Line 62 - 'AtomControl.js' */        if (/^(@|\$)/g.test(value)) {
 /*Line 63 - 'AtomControl.js' */            value = value.substr(1);
 /*Line 64 - 'AtomControl.js' */        }
