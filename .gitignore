@@ -11,4 +11,5 @@ vwd.webinfo
 nuget/Atoms.js/bin/*
 nuget/Atoms.js/obj/*
 *.nupkg
+*.nupkg.bak
 *.webinfo
