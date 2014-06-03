@@ -21,7 +21,7 @@ var AtomPromise = function () {
     this.error = function () {
         _this.onError.apply(_this, arguments);
     };
-}
+};
 
 window.AtomPromise = AtomPromise;
 
@@ -91,7 +91,7 @@ AtomPromise.prototype = {
         this.promiseTimeout = null;
         if (this._showProgress) {
             atomApplication.setBusy(true);
-            if (this._calls == 0) {
+            if (this._calls === 0) {
                 var f = function () {
                     atomApplication.setBusy(false);
                 };
@@ -152,11 +152,11 @@ AtomPromise.prototype = {
 AtomPromise.getUrl = function (url) {
     var pageUrl = location.href;
     var index = pageUrl.indexOf('#');
-    if (index != -1)
+    if (index !== -1)
         pageUrl = pageUrl.substr(0, index);
     if (url) {
         index = pageUrl.lastIndexOf('/');
-        if (index != -1) {
+        if (index !== -1) {
             pageUrl = pageUrl.substr(0, index + 1);
         }
 
@@ -190,8 +190,8 @@ AtomPromise.parseDates = function (obj) {
     if (!obj)
         return obj;
     var type = typeof (obj);
-    if (type == 'object') {
-        if (typeof (obj.length) != 'undefined') {
+    if (type === 'object') {
+        if (typeof (obj.length) !== 'undefined') {
             for (var i = 0; i < obj.length; i++) {
                 obj[i] = AtomPromise.parseDates(obj[i]);
             }
@@ -206,7 +206,7 @@ AtomPromise.parseDates = function (obj) {
         }
 
     }
-    if (typeof (obj) == 'string' || obj.constructor == String) {
+    if (typeof (obj) === 'string' || obj.constructor === String) {
         if (/^\/date\(/gi.test(obj) && /\)\/$/gi.test(obj)) {
             return AtomDate.parse(obj);
         }
@@ -323,7 +323,7 @@ AtomPromise.ajax = function (url, query, options, type) {
         if (!o.sendRawQueryString) {
             for (var k in query) {
                 var v = query[k];
-                if (v && ((typeof v) == "object")) {
+                if (v && ((typeof v) === "object")) {
                     v = JSON.stringify(AtomBinder.getClone(v));
                     if (v === undefined)
                         continue;
@@ -345,7 +345,7 @@ AtomPromise.ajax = function (url, query, options, type) {
     p.failed(function () {
 
         var res = p.errors[0].responseText;
-        if (!res || p.errors[2] != 'Internal Server Error') {
+        if (!res || p.errors[2] !== 'Internal Server Error') {
             res = p.errors[2];
         }
 
@@ -392,7 +392,7 @@ AtomPromise.json = function (url, query, options) {
     var method = null;
 
     var i = url.indexOf('://');
-    if (i != -1) {
+    if (i !== -1) {
         var plugin = url.substr(0, i);
         if (!/http|https/i.test(plugin)) {
             url = url.substr(i + 3);
@@ -400,7 +400,7 @@ AtomPromise.json = function (url, query, options) {
         }
     }
 
-    method = method | AtomPromise.ajax;
+    method = method || AtomPromise.ajax;
 
     return method(url, query, options, "json");
 };
@@ -446,7 +446,7 @@ AtomPromise.cachedJson = function (url, query, options) {
     var v = AtomConfig.ajax.version;
     var vk = AtomConfig.ajax.versionKey + '=' + v;
 
-    if (url.indexOf('?') == -1) {
+    if (url.indexOf('?') === -1) {
         vk = '?' + vk;
     } else {
         if (!/\&$/.test(url)) {
@@ -534,7 +534,7 @@ AtomPromise.prototype.insertItem = function (index, item, arrayPath) {
         if (arrayPath) {
             v = v[arrayPath];
         }
-        if (index == -1) {
+        if (index === -1) {
             v.push(item);
         } else {
             v.splice(index || 0, 0, item);
