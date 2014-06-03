@@ -2594,7 +2594,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 20 - 'AtomPromise.js' */    this.error = function () {
 /*Line 21 - 'AtomPromise.js' */        _this.onError.apply(_this, arguments);
 /*Line 22 - 'AtomPromise.js' */    };
-/*Line 23 - 'AtomPromise.js' */}
+/*Line 23 - 'AtomPromise.js' */};
 
 /*Line 25 - 'AtomPromise.js' */window.AtomPromise = AtomPromise;
 
@@ -2664,7 +2664,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 90 - 'AtomPromise.js' */        this.promiseTimeout = null;
 /*Line 91 - 'AtomPromise.js' */        if (this._showProgress) {
 /*Line 92 - 'AtomPromise.js' */            atomApplication.setBusy(true);
-/*Line 93 - 'AtomPromise.js' */            if (this._calls == 0) {
+/*Line 93 - 'AtomPromise.js' */            if (this._calls === 0) {
 /*Line 94 - 'AtomPromise.js' */                var f = function () {
 /*Line 95 - 'AtomPromise.js' */                    atomApplication.setBusy(false);
 /*Line 96 - 'AtomPromise.js' */                };
@@ -2725,11 +2725,11 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 151 - 'AtomPromise.js' */AtomPromise.getUrl = function (url) {
 /*Line 152 - 'AtomPromise.js' */    var pageUrl = location.href;
 /*Line 153 - 'AtomPromise.js' */    var index = pageUrl.indexOf('#');
-/*Line 154 - 'AtomPromise.js' */    if (index != -1)
+/*Line 154 - 'AtomPromise.js' */    if (index !== -1)
 /*Line 155 - 'AtomPromise.js' */        pageUrl = pageUrl.substr(0, index);
 /*Line 156 - 'AtomPromise.js' */    if (url) {
 /*Line 157 - 'AtomPromise.js' */        index = pageUrl.lastIndexOf('/');
-/*Line 158 - 'AtomPromise.js' */        if (index != -1) {
+/*Line 158 - 'AtomPromise.js' */        if (index !== -1) {
 /*Line 159 - 'AtomPromise.js' */            pageUrl = pageUrl.substr(0, index + 1);
 /*Line 160 - 'AtomPromise.js' */        }
 
@@ -2763,8 +2763,8 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 189 - 'AtomPromise.js' */    if (!obj)
 /*Line 190 - 'AtomPromise.js' */        return obj;
 /*Line 191 - 'AtomPromise.js' */    var type = typeof (obj);
-/*Line 192 - 'AtomPromise.js' */    if (type == 'object') {
-/*Line 193 - 'AtomPromise.js' */        if (typeof (obj.length) != 'undefined') {
+/*Line 192 - 'AtomPromise.js' */    if (type === 'object') {
+/*Line 193 - 'AtomPromise.js' */        if (typeof (obj.length) !== 'undefined') {
 /*Line 194 - 'AtomPromise.js' */            for (var i = 0; i < obj.length; i++) {
 /*Line 195 - 'AtomPromise.js' */                obj[i] = AtomPromise.parseDates(obj[i]);
 /*Line 196 - 'AtomPromise.js' */            }
@@ -2779,7 +2779,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 205 - 'AtomPromise.js' */        }
 
 /*Line 207 - 'AtomPromise.js' */    }
-/*Line 208 - 'AtomPromise.js' */    if (typeof (obj) == 'string' || obj.constructor == String) {
+/*Line 208 - 'AtomPromise.js' */    if (typeof (obj) === 'string' || obj.constructor === String) {
 /*Line 209 - 'AtomPromise.js' */        if (/^\/date\(/gi.test(obj) && /\)\/$/gi.test(obj)) {
 /*Line 210 - 'AtomPromise.js' */            return AtomDate.parse(obj);
 /*Line 211 - 'AtomPromise.js' */        }
@@ -2896,7 +2896,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 322 - 'AtomPromise.js' */        if (!o.sendRawQueryString) {
 /*Line 323 - 'AtomPromise.js' */            for (var k in query) {
 /*Line 324 - 'AtomPromise.js' */                var v = query[k];
-/*Line 325 - 'AtomPromise.js' */                if (v && ((typeof v) == "object")) {
+/*Line 325 - 'AtomPromise.js' */                if (v && ((typeof v) === "object")) {
 /*Line 326 - 'AtomPromise.js' */                    v = JSON.stringify(AtomBinder.getClone(v));
 /*Line 327 - 'AtomPromise.js' */                    if (v === undefined)
 /*Line 328 - 'AtomPromise.js' */                        continue;
@@ -2918,7 +2918,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 344 - 'AtomPromise.js' */    p.failed(function () {
 
 /*Line 346 - 'AtomPromise.js' */        var res = p.errors[0].responseText;
-/*Line 347 - 'AtomPromise.js' */        if (!res || p.errors[2] != 'Internal Server Error') {
+/*Line 347 - 'AtomPromise.js' */        if (!res || p.errors[2] !== 'Internal Server Error') {
 /*Line 348 - 'AtomPromise.js' */            res = p.errors[2];
 /*Line 349 - 'AtomPromise.js' */        }
 
@@ -2965,7 +2965,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 391 - 'AtomPromise.js' */    var method = null;
 
 /*Line 393 - 'AtomPromise.js' */    var i = url.indexOf('://');
-/*Line 394 - 'AtomPromise.js' */    if (i != -1) {
+/*Line 394 - 'AtomPromise.js' */    if (i !== -1) {
 /*Line 395 - 'AtomPromise.js' */        var plugin = url.substr(0, i);
 /*Line 396 - 'AtomPromise.js' */        if (!/http|https/i.test(plugin)) {
 /*Line 397 - 'AtomPromise.js' */            url = url.substr(i + 3);
@@ -2973,7 +2973,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 399 - 'AtomPromise.js' */        }
 /*Line 400 - 'AtomPromise.js' */    }
 
-/*Line 402 - 'AtomPromise.js' */    method = method | AtomPromise.ajax;
+/*Line 402 - 'AtomPromise.js' */    method = method || AtomPromise.ajax;
 
 /*Line 404 - 'AtomPromise.js' */    return method(url, query, options, "json");
 /*Line 405 - 'AtomPromise.js' */};
@@ -3019,7 +3019,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 445 - 'AtomPromise.js' */    var v = AtomConfig.ajax.version;
 /*Line 446 - 'AtomPromise.js' */    var vk = AtomConfig.ajax.versionKey + '=' + v;
 
-/*Line 448 - 'AtomPromise.js' */    if (url.indexOf('?') == -1) {
+/*Line 448 - 'AtomPromise.js' */    if (url.indexOf('?') === -1) {
 /*Line 449 - 'AtomPromise.js' */        vk = '?' + vk;
 /*Line 450 - 'AtomPromise.js' */    } else {
 /*Line 451 - 'AtomPromise.js' */        if (!/\&$/.test(url)) {
@@ -3107,7 +3107,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 533 - 'AtomPromise.js' */        if (arrayPath) {
 /*Line 534 - 'AtomPromise.js' */            v = v[arrayPath];
 /*Line 535 - 'AtomPromise.js' */        }
-/*Line 536 - 'AtomPromise.js' */        if (index == -1) {
+/*Line 536 - 'AtomPromise.js' */        if (index === -1) {
 /*Line 537 - 'AtomPromise.js' */            v.push(item);
 /*Line 538 - 'AtomPromise.js' */        } else {
 /*Line 539 - 'AtomPromise.js' */            v.splice(index || 0, 0, item);
