@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "atoms.js", "..\atoms.js", "{4BC2B115-AEC2-45DB-981B-7433755D2412}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "atoms.js", ".\", "{4BC2B115-AEC2-45DB-981B-7433755D2412}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/atoms.js"
@@ -19,8 +19,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "atoms.js", "..\atoms.js", "
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "36997"
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atoms.js", "nuget\Atoms.js\Atoms.js.csproj", "{0451BAEF-DF2E-4B98-8644-94EE9415E389}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
