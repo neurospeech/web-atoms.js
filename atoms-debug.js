@@ -395,7 +395,7 @@ Templates.jsonML["WebAtoms.AtomYesNoCustom.template"] =
 ;
 Templates.jsonML["WebAtoms.AtomApplication.busyTemplate"] = 
 [["div",
-{ "style": "position:absolute;left:0px;top:0px;z-index:10000; visibility:hidden", "style-width": "[$owner.appWidth + 'px']", "style-height": "[$owner.appHeight + 'px']", "style-display": "[$owner.isBusy ? 'block' : 'none']" }
+{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "style-width": "[$owner.appWidth + 'px']", "style-height": "[$owner.appHeight + 'px']", "style-display": "[$owner.isBusy ? 'block' : 'none']" }
 ,["div",
 { "class": "atom-busy-window", "style": "position:absolute", "style-left": "[(($owner.appWidth/2)-100) + 'px']", "style-top": "[(($owner.appHeight/2)-25) + 'px']" }
 ,["div",
