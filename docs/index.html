@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Atoms.js</title>
+    <title>Atoms.js - Enterprise Grade JavaScript Framework inspired from Flex &amp; Silverlight</title>
 
 
     <!-- Atoms.js Default Control Styles -->
@@ -31,6 +31,21 @@
 
         .title {
             height:50px;
+        }
+
+        .share {
+            position:absolute;
+            right: 10px;
+            top: 5px;
+        }
+
+        .share a{
+            text-decoration:none;
+            margin-left:5px;
+        }
+
+        .share a img{
+            height:30px;
         }
 
         .toc {
@@ -73,20 +88,41 @@
 
         <script type="text/javascript/scope">
             ({
-                view: 'start/index.html'
+                view: 'start/index.html',
+                share: [
+                    { label: 'Facebook', value: 'facebook', link: Atom.url('http://facebook.com/sharer.php', { u: 'http://atomsjs.neurospeech.com' }) },
+                    { label: 'Twitter', value: 'twitter', link: Atom.url('http://twitter.com/share', { url: 'http://atomsjs.neurospeech.com', text: 'Enterprise Grade JavaScript Framework inspired from Flex & Silverlight' }) },
+                    { label: 'Google+', value: 'google', link: Atom.url('https://plus.google.com/share', { url: 'http://atomsjs.neurospeech.com' }) },
+                    { label: 'Reddit', value: 'reddit', link: Atom.url('http://reddit.com/submit', { url: 'http://atomsjs.neurospeech.com', title: 'Atoms.js' }) },
+                    { label: 'Stumble Upon', value: 'stumbleupon', link: Atom.url('http://www.stumbleupon.com/submit', { url: 'http://atomsjs.neurospeech.com', title: 'Atoms.js' }) },
+                    { label: 'Email', value: 'email', link: Atom.url('mailto:', { body: 'http://atomsjs.neurospeech.com', Subject: 'Atoms.js' }) }
+                ]
             })
         </script>
 
         <div 
             class="title"
             atom-dock="Top">
-            <h1 style="margin-top:5px;margin-bottom:5px;">Atoms.js Documentation</h1>
+            <h1 style="margin-top:5px;margin-bottom:5px;">Atoms.js</h1>
             <div
-                style="position:absolute;right:10px;top:5px;">
+                style="position:absolute;left:160px;top:5px;">
                 <a href="https://github.com/neurospeech/atoms.js/releases" target="_blank"><button>Download</button></a>
                 <a href="http://visualstudiogallery.msdn.microsoft.com/ecd49e57-2348-4e4c-90c8-9d21d1d50a1e" target="_blank"><button>Visual Studio Tools</button></a>
                 <a href="https://chrome.google.com/webstore/detail/atomsjs-properties-pane/mboefdeomkdlbekljcecbfimmecffgje" target="_blank"><button>Chrome Tools</button></a>
                 <a href="https://github.com/neurospeech/atoms.js" target="_blank"><button>View Source on GitHub</button></a>
+            </div>
+            <div
+                atom-type="AtomItemsControl" 
+                class="share"
+                atom-items="{$scope.share}">
+                <a 
+                    atom-template="itemTemplate"
+                    atom-href="{$data.link}"
+                    rel="nofollow"
+                    atom-title="{'Share on ' + $data.label}"
+                    target="_blank"><img 
+                        atom-alt="{'Share on ' + $data.label}"
+                        atom-src="{'../res/share/' + $data.value + '.png'}" /></a>
             </div>
         </div>
         <div
