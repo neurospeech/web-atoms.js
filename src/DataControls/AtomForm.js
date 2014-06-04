@@ -85,7 +85,14 @@
                 if (e.target && e.target.nodeName && /textarea/gi.test(e.target.nodeName))
                     return;
                 if (e.keyCode == 13) {
-                    this.onSubmit();
+                    var _this = this;
+                    // fix for IE 11, IE 11 does not fire Change event on enter
+                    if (/input/gi.test(e.target.nodeName)) {
+                        $(e.target).change();
+                    }
+                    WebAtoms.dispatcher.callLater(function () {
+                        _this.onSubmit();
+                    });
                 }
             },
 
