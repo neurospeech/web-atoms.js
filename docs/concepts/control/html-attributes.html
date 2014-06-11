@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Binding Html Attributes</title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Binding Html Attributes</h1>
+    <p>
+        To bind any attribute on any element, you can simply use binding expression with prefix <span class="inlineCode">atom-</span> that will set corresponding attribute on the element. Different types of binding (One Time, One Way and Two Ways) will be explained in binding chapter.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/html-attributes.html">
+
+    </iframe>
+    <br />
+    Property Inference first checks if any <span class="inlineCode">get_/set_</span> method exists on <span class="inlineCode">AtomControl </span>or not, otherwise it simply sets the attribute. However, both elements <span class="inlineCode">a</span> and <span class="inlineCode">img </span>do not have <span class="inlineCode">AtomControl </span>associated with it, so they will simply have attributes set. First preference is given to <span class="inlineCode">AtomControl </span>properties.<br />
+    <h2>Text Attribute</h2>
+    <p>to set Text of any element (<span class="inlineCode">innerText </span>or <span class="inlineCode">textContent</span>), you can set <span class="inlineCode">atom-text</span> property.</p>
+    <h2>Is Enabled Attribute</h2>
+    <p>To enable or disable any element based on a aboolean condition, you can use <span class="inlineCode">atom-is-enabled</span> attribute on any element for binding as shown below.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/is-enabled.html">
+
+    </iframe>
+    <h2>Checked Attribute</h2>
+    <p>To use checkboxes to perform binding to Boolean data, you can use <span class="inlineCode">atom-checked</span> attribute as shown below. Checked attribute can only be used with input type checkbox.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=controls/samples/atom-check-box.html">
+
+    </iframe>
+
+    <h2>Class Attribute</h2>
+    <p>Class attribute behaves little differently then any other HTML attributes. Class attribute basically toggles between different values.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/class-attribute.html">
+
+    </iframe>
+        <ul>
+            <li>In above example, whichever color was selected, it will be added to element&#39;s class using jQuery&#39;s <span class="inlineCode">addClass </span>method. Previously selected class will be removed first.</li>
+            <li><span class="inlineCode">atom-class</span> attribute is context aware, it will undo its last class before setting new class.</li>
+            <li><span class="inlineCode">atom-class</span> attribute does not override any existing css classes applied with class attribute.</li>
+    </ul>
+    <h2>Class Attribute with Inline Object Definition</h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/inline-object-class.html">
+
+    </iframe>
+        
+    <h2>Html Attribute</h2>
+    <p class="note">
+        Use of atom-html should be avoided as long as possible, this is only available for displaying plain HTML content. This property does not use any Atoms.js functionality and does not do any binding. You should use templates to create bindable html content.</p>
+    <p>
+        We recommended using template mechanism instead of atom-html property, however in sometimes it may be helpful to know that you can set innerHTML by using atom-html property. You must know that atom-html does not initialize any binding within itself, it is pure HTML replacement.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/html-attribute.html">
+
+    </iframe>
+        <h2>Atom Prefix</h2>
+    <p>HTML5 specifications states that any extra attribute on element should be named with <span class="inlineCode">data-</span> prefix. However, since Atoms.js is UI framework and Atoms.js has specific named property called <span class="inlineCode">data </span>which carries data as per English language. Using data prefix causes confusion, as we are talking about UI attributes and not specifically data.</p>
+
+    
+
+    <pre style="font-family: Consolas; font-size: 13; color: black; background: white;"><span style="color:blue;">&lt;</span><span style="color:maroon;">span</span>&nbsp;<span style="color:red;">data-text</span><span style="color:blue;">=</span><span style="color:blue;background:lightgray;">&quot;{</span><span style="font-weight:bold;color:darkgreen;background:lightgray;">$data.FirstName</span><span style="color:blue;background:lightgray;">}&quot;</span><span style="color:blue;">&gt;&lt;/</span><span style="color:maroon;">span</span><span style="color:blue;">&gt;</span></pre>
+    <p>
+        Above code looks confusing. Not only this, Atoms.js has many controls and many properties, each properties are <span class="inlineCode">atom-</span> properties. To make it completely HTML5
+        compliant, we tried following.</p>
+
+    
+
+    
+
+    <pre style="font-family: Consolas; font-size: 13; color: black; background: white;"><span style="color:blue;">&lt;</span><span style="color:maroon;">span</span>&nbsp;<span style="color:red;">data-</span><span style="font-weight:bold;color:purple;">atom-text</span><span style="color:blue;">=</span><span style="color:blue;background:lightgray;">&quot;{</span><span style="font-weight:bold;color:darkgreen;background:lightgray;">$data.FirstName</span><span style="color:blue;background:lightgray;">}&quot;</span><span style="color:blue;">&gt;&lt;/</span><span style="color:maroon;">span</span><span style="color:blue;">&gt;</span></pre>
+    <p>
+        Which is also very confusing, and it gets longer and longer. In our future version, we are planning to write pre-processor for Atoms.js, which will convert your code from Atoms.js to HTML5 compliant HTML+JS by stripping all <span class="inlineCode">atom-</span> attributes and encapsulate them into a separate script initializer which will also help in obfuscating the code.
+    </p>
+    <p>
+        Even for that transition, you will not have to change your code. </p>
+
+    
+
+    
+
+</body>
+</html>

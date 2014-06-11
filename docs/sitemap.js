@@ -27,7 +27,13 @@
                     { label: "Event", value: "concepts/binding/event.html" }
                 ]
             },
-            { label: "Next (Action Set)", value: "concepts/next.html" },
+            { label: "Html Attributes", value: "concepts/control/html-attributes.html"},
+            {
+                label: "Next (Action Set)", value: "concepts/next.html",
+                links: [
+                    { label: "Actions", value: "concepts/next/actions.html" }
+                ]
+            },
             {
                 label: "Scope", value: "concepts/scope/index.html",
                 links: [
