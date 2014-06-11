@@ -191,9 +191,9 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                     var a = _this.editor.getScrollInfo();
                     //console.log(JSON.stringify(a));
                     if (a.height) {
-                        _this.editor.setSize(null, a.height + 80);
+                        _this.editor.setSize(null, a.height);
                         if (window.frameElement) {
-                            window.frameElement.style.height = (a.height + 100) + "px"
+                            window.frameElement.style.height = (a.height ) + "px"
                         }
                     }
                 });
@@ -207,10 +207,10 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                     if (this._resize) {
                         WebAtoms.dispatcher.callLater(function () {
                             var a = _this.editor.getScrollInfo();
-                            //console.log(JSON.stringify(a));
+                            console.log(JSON.stringify(a));
                             if (a.height) {
-                                _this.editor.setSize(null, a.height + 80);
-                                window.frameElement.style.height = (a.height + 100) + "px"
+                                _this.editor.setSize(null, a.height );
+                                window.frameElement.style.height = (a.height ) + "px"
                             }
                         });
                     } else {
