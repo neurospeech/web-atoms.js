@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+<script type="text/javascript">
+    ({
+        model: {
+            index: 5
+        }
+    })
+</script>
+<div atom-type="AtomControl" atom-data="{$scope.model}">
+    <button 
+        atom-event-click="[ { data: { index: $data.index - 1 } } ]"
+        >Down</button>
+    <input type="text" atom-value="$[data.index]" />
+    <button 
+        atom-event-click="[ { data: { index: $data.index + 1 } } ]"
+        >Up</button>
+</div>
+<!-- end-sample -->
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+
+    <style>
+        .box {
+            width: 200px;height:200px;
+            margin:5px;
+        }
+        .red {
+            background-color:red;
+        }
+        .green{
+            background-color:green;
+        }
+        .blue{
+            background-color:blue;
+        }
+    </style>
+
+    <script>
+        ({
+            colors: [
+                { label: "Red", value: "red" },
+                { label: "Green", value: "green" },
+                { label: "Blue", value: "blue" },
+            ]
+        })
+    </script>
+
+    <div atom-type="AtomToggleButtonBar"
+        atom-name="colorsBar"
+        atom-items="{$scope.colors}"></div>
+
+    <div class="box"
+        atom-class="[$scope.colorsBar.value]"></div>
+<!-- end-sample -->
+
+    </div>
+</body>
+</html>
