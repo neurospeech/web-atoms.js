@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <script type="text/javascript">
+            ({
+                model: {
+                    enabled: false,
+                    text: "Description"
+                }
+            })
+        </script>
+<!-- sample -->
+    <div atom-type="AtomControl" 
+        atom-data="{$scope.model}">
+        <h3>
+        <input 
+            type="checkbox" 
+            atom-checked="$[data.enabled]"/> Can Edit?
+        </h3>
+        <div>
+            <input type="text" 
+                atom-is-enabled="[$data.enabled]" 
+                atom-value="$[data.text]"/>
+        </div>
+    </div>
+<!-- end-sample -->
+
+    </div>
+</body>
+</html>

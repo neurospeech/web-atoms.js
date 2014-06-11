@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <script type="text/javascript">
+            ({
+                share: [
+                    { label: 'Facebook', value: 'facebook', link: Atom.url('http://facebook.com/sharer.php', { u: 'http://atomsjs.neurospeech.com' }) },
+                    { label: 'Twitter', value: 'twitter', link: Atom.url('http://twitter.com/share', { url: 'http://atomsjs.neurospeech.com', text: 'Enterprise Grade JavaScript Framework inspired from Flex & Silverlight' }) },
+                    { label: 'Google+', value: 'google', link: Atom.url('https://plus.google.com/share', { url: 'http://atomsjs.neurospeech.com' }) },
+                    { label: 'Reddit', value: 'reddit', link: Atom.url('http://reddit.com/submit', { url: 'http://atomsjs.neurospeech.com', title: 'Atoms.js' }) },
+                    { label: 'Stumble Upon', value: 'stumbleupon', link: Atom.url('http://www.stumbleupon.com/submit', { url: 'http://atomsjs.neurospeech.com', title: 'Atoms.js' }) },
+                    { label: 'Email', value: 'email', link: Atom.url('mailto:', { body: 'http://atomsjs.neurospeech.com', Subject: 'Atoms.js' }) }
+                ]
+            })
+        </script>
+
+<!-- sample -->
+<div 
+    atom-type="AtomItemsControl"
+    atom-items="{$scope.share}">
+    <a 
+        atom-template="itemTemplate"
+        target="_blank"
+        atom-href="{$data.link}"
+        style="text-decoration:none">
+        <img atom-src="{ '../../../../res/share/' + $data.value + '.png'}" />
+    </a>
+</div>
+<!-- end-sample -->
+
+    </div>
+</body>
+</html>

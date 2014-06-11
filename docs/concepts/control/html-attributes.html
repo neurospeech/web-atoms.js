@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Binding Html Attributes</title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Binding Html Attributes</h1>
+    <p>
+        To bind any attribute on any element, you can simply use binding expression with prefix <span class="inlineCode">atom-</span> that will set corresponding attribute on the element. Different types of binding (One Time, One Way and Two Ways) will be explained in binding chapter.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/html-attributes.html">
+
+    </iframe>
+    <br />
+    Property Inference first checks if any <span class="inlineCode">get_/set_</span> method exists on <span class="inlineCode">AtomControl </span>or not, otherwise it simply sets the attribute. However, both elements <span class="inlineCode">a</span> and <span class="inlineCode">img </span>do not have <span class="inlineCode">AtomControl </span>associated with it, so they will simply have attributes set. First preference is given to <span class="inlineCode">AtomControl </span>properties.<br />
+    <h2>Text Attribute</h2>
+    <p>to set Text of any element (<span class="inlineCode">innerText </span>or <span class="inlineCode">textContent</span>), you can set <span class="inlineCode">atom-text</span> property.</p>
+    <h2>Is Enabled Attribute</h2>
+    <p>To enable or disable any element based on a aboolean condition, you can use <span class="inlineCode">atom-is-enabled</span> attribute on any element for binding as shown below.</p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/control/samples/is-enabled.html">
+
+    </iframe>
+    <h2>Checked Attribute</h2>
+    <h2>Class Attribute</h2>
+    <h2>Html Attribute</h2>
+    <h2>Atom Prefix</h2>
+
+</body>
+</html>
