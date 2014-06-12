@@ -207,7 +207,7 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                     if (this._resize) {
                         WebAtoms.dispatcher.callLater(function () {
                             var a = _this.editor.getScrollInfo();
-                            console.log(JSON.stringify(a));
+                            //console.log(JSON.stringify(a));
                             if (a.height) {
                                 _this.editor.setSize(null, a.height );
                                 window.frameElement.style.height = (a.height ) + "px"

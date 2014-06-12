@@ -70,10 +70,13 @@ window.__atom_flash_uploader_event = function (id, json) {
 
 (function (window, baseType) {
 
-    var requiresFlash = (
+    var requiresFlash = false;
+    if (!AtomBrowser.isMobile) {
+        requiresFlash = (
         (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) ||
         (AtomBrowser.isSafari && AtomBrowser.majorVersion < 5)
         );
+    }
 
     return classCreatorEx({
         name: "WebAtoms.AtomUploader",
@@ -172,6 +175,7 @@ window.__atom_flash_uploader_event = function (id, json) {
 
             upload: function (index, url) {
                 var item = this._items[index];
+                Atom.set(item, "scope.status", "uploading");
                 if (this._fpID) {
                     this.get_player().upload(index, item.name, url);
                 } else {
@@ -216,7 +220,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 if (this._maxFileSize != -1) {
                     var bigFiles = Atom.query(v).where({ 'size >': this._maxFileSize });
                     if (bigFiles.any()) {
-                        alert('File has to be less then ' + this._maxFileSize);
+                        alert('File has to be less then ' + AtomFileSize.toFileSize(this._maxFileSize));
                         if (this._filePresenter) {
                             this.createFilePresenter();
                             return;
@@ -275,20 +279,29 @@ window.__atom_flash_uploader_event = function (id, json) {
             onUploadCommand: function () {
                 atomApplication.setBusy(true, "Uploading...");
 
+                if (this._postUrl) {
+
+                }
+
                 var _this = this;
                 var ae = new AtomEnumerator(this._items);
                 while (ae.next()) {
                     var item = ae.current();
                     var index = ae.currentIndex();
-                    var p = AtomPromise.json(this._postUrl, {}, { type: 'POST', data: Atom.merge({ FileName: item.name }, this._postData) });
-                    p.then(function (ap) {
-                        var v = ap.value()[_this._uploadPath];
-                        Atom.set(item.scope, "data", v);
-                        _this.upload(index, v);
-                    });
-                    p.invoke();
+                    this.invokeUploadPromise(_this, item, index);
                 }
             },
+
+            invokeUploadPromise: function (_this, item, index) {
+                var p = AtomPromise.json(this._postUrl, {}, { type: 'POST', data: Atom.merge({ FileName: item.name }, this._postData) });
+                p.then(function (ap) {
+                    var v = ap.value()[_this._uploadPath];
+                    Atom.set(item.scope, "data", v);
+                    _this.upload(index, v);
+                });
+                p.invoke();
+            },
+
 
             get_player: function () {
                 var appName = this._fpID;
@@ -330,6 +343,10 @@ window.__atom_flash_uploader_event = function (id, json) {
                     Atom.set(_this, "items", files);
                 });
 
+                this.bindEvent(this._button, "click", function () {
+                    $(_this._filePresenter).trigger("click");
+                });
+
                 if (this._accept) {
                     this.set_accept(this._accept);
                 }
@@ -349,6 +366,7 @@ window.__atom_flash_uploader_event = function (id, json) {
 
                 $(button).addClass("upload-button");
 
+                this._button = button;
 
                 if (requiresFlash) {
 
@@ -405,15 +423,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                     });*/
 
                 } else {
-
-
                     this.createFilePresenter();
-
-
-                    this.bindEvent(button, "click", function () {
-                        $(_this._filePresenter).trigger("click");
-                    });
-
                 }
             }
         }
