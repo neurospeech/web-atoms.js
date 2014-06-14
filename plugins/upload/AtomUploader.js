@@ -100,6 +100,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             uploadUrl: null,
             postUrl: "",
             postData: {},
+            finished: false,
             maxFileSize: -1,
             uploadPath: null
         },
@@ -165,7 +166,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 var a = Atom.query(this._items).any({ 'scope.status': 'uploading' });
                 if (a || this._finished)
                     return;
-                this._finished = true;
+                AtomBinder.setValue(this, "finished", true);
                 atomApplication.setBusy(false, "Uploading...");
                 this.invokeAction(this.get_next());
                 if (this._filePresenter) {
@@ -277,6 +278,12 @@ window.__atom_flash_uploader_event = function (id, json) {
             },
 
             onUploadCommand: function () {
+
+                if (!(this._items && this._items.length)) {
+                    this.invokeAction(this._next);
+                    return;
+                }
+
                 atomApplication.setBusy(true, "Uploading...");
 
                 if (this._postUrl) {
@@ -295,9 +302,9 @@ window.__atom_flash_uploader_event = function (id, json) {
             invokeUploadPromise: function (_this, item, index) {
                 var p = AtomPromise.json(this._postUrl, {}, { type: 'POST', data: Atom.merge({ FileName: item.name }, this._postData) });
                 p.then(function (ap) {
-                    var v = ap.value()[_this._uploadPath];
+                    var v = ap.value();
                     Atom.set(item.scope, "data", v);
-                    _this.upload(index, v);
+                    _this.upload(index, v[_this._uploadPath]);
                 });
                 p.invoke();
             },
