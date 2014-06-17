@@ -5418,160 +5418,166 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 10 - 'AtomDockPanel.js' */            $(e).addClass("atom-dock-panel");
 /*Line 11 - 'AtomDockPanel.js' */        },
 /*Line 12 - 'AtomDockPanel.js' */        properties: {
-/*Line 13 - 'AtomDockPanel.js' */            resizeOnChildResized: false
-/*Line 14 - 'AtomDockPanel.js' */        },
-/*Line 15 - 'AtomDockPanel.js' */        methods: {
-/*Line 16 - 'AtomDockPanel.js' */            resizeChild: function (item) {
-/*Line 17 - 'AtomDockPanel.js' */                if (item.atomControl) {
-/*Line 18 - 'AtomDockPanel.js' */                    item.atomControl.updateUI();
-/*Line 19 - 'AtomDockPanel.js' */                } else {
-/*Line 20 - 'AtomDockPanel.js' */                    this.updateChildUI(item);
-/*Line 21 - 'AtomDockPanel.js' */                }
-/*Line 22 - 'AtomDockPanel.js' */            },
+/*Line 13 - 'AtomDockPanel.js' */            resizeOnChildResized: false,
+/*Line 14 - 'AtomDockPanel.js' */            contentWidth: 0
+/*Line 15 - 'AtomDockPanel.js' */        },
+/*Line 16 - 'AtomDockPanel.js' */        methods: {
+/*Line 17 - 'AtomDockPanel.js' */            resizeChild: function (item) {
+/*Line 18 - 'AtomDockPanel.js' */                if (item.atomControl) {
+/*Line 19 - 'AtomDockPanel.js' */                    item.atomControl.updateUI();
+/*Line 20 - 'AtomDockPanel.js' */                } else {
+/*Line 21 - 'AtomDockPanel.js' */                    this.updateChildUI(item);
+/*Line 22 - 'AtomDockPanel.js' */                }
+/*Line 23 - 'AtomDockPanel.js' */            },
 
-/*Line 24 - 'AtomDockPanel.js' */            calculateSize: function () {
-/*Line 25 - 'AtomDockPanel.js' */                var element = this.get_element();
+/*Line 25 - 'AtomDockPanel.js' */            calculateSize: function () {
+/*Line 26 - 'AtomDockPanel.js' */                var element = this.get_element();
 
-/*Line 27 - 'AtomDockPanel.js' */                var size = { width: $(element).width(), height: $(element).height() };
+/*Line 28 - 'AtomDockPanel.js' */                var size = { width: $(element).width(), height: $(element).height() };
 
-/*Line 29 - 'AtomDockPanel.js' */                //if (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) {
-/*Line 30 - 'AtomDockPanel.js' */                //    size = { width: element.offsetWidth, height: element.offsetHeight };
-/*Line 31 - 'AtomDockPanel.js' */                //}else {
+/*Line 30 - 'AtomDockPanel.js' */                //if (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) {
+/*Line 31 - 'AtomDockPanel.js' */                //    size = { width: element.offsetWidth, height: element.offsetHeight };
+/*Line 32 - 'AtomDockPanel.js' */                //}else {
 
-/*Line 33 - 'AtomDockPanel.js' */                //var s = AtomUI.getComputedStyle(element);
+/*Line 34 - 'AtomDockPanel.js' */                //var s = AtomUI.getComputedStyle(element);
 
-/*Line 35 - 'AtomDockPanel.js' */                //size = { width: AtomUI.parseStyleNumber(s.width), height: AtomUI.parseStyleNumber(s.height) };
-/*Line 36 - 'AtomDockPanel.js' */                //}
+/*Line 36 - 'AtomDockPanel.js' */                //size = { width: AtomUI.parseStyleNumber(s.width), height: AtomUI.parseStyleNumber(s.height) };
+/*Line 37 - 'AtomDockPanel.js' */                //}
 
-/*Line 38 - 'AtomDockPanel.js' */                if (!this._resizeOnChildResized)
-/*Line 39 - 'AtomDockPanel.js' */                    return size;
+/*Line 39 - 'AtomDockPanel.js' */                if (!this._resizeOnChildResized)
+/*Line 40 - 'AtomDockPanel.js' */                    return size;
 
-/*Line 41 - 'AtomDockPanel.js' */                var desiredHeight = 0;
+/*Line 42 - 'AtomDockPanel.js' */                var desiredHeight = 0;
 
-/*Line 43 - 'AtomDockPanel.js' */                var ae = new ChildEnumerator(element);
-/*Line 44 - 'AtomDockPanel.js' */                while (ae.next()) {
-/*Line 45 - 'AtomDockPanel.js' */                    var child = ae.current();
-/*Line 46 - 'AtomDockPanel.js' */                    var dock = $(child).attr("atom-dock");
-/*Line 47 - 'AtomDockPanel.js' */                    switch (dock) {
-/*Line 48 - 'AtomDockPanel.js' */                        case "Bottom":
-/*Line 49 - 'AtomDockPanel.js' */                        case "Fill":
-/*Line 50 - 'AtomDockPanel.js' */                        case "Top":
-/*Line 51 - 'AtomDockPanel.js' */                            var h;
-/*Line 52 - 'AtomDockPanel.js' */                            if (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) {
-/*Line 53 - 'AtomDockPanel.js' */                                h = child.offsetHeight;
-/*Line 54 - 'AtomDockPanel.js' */                            } else {
-/*Line 55 - 'AtomDockPanel.js' */                                //h = AtomUI.getItemRect(child).height;
-/*Line 56 - 'AtomDockPanel.js' */                                h = $(child).outerHeight(true);
-/*Line 57 - 'AtomDockPanel.js' */                            }
-/*Line 58 - 'AtomDockPanel.js' */                            desiredHeight += h;
-/*Line 59 - 'AtomDockPanel.js' */                            break;
-/*Line 60 - 'AtomDockPanel.js' */                    }
-/*Line 61 - 'AtomDockPanel.js' */                }
+/*Line 44 - 'AtomDockPanel.js' */                var ae = new ChildEnumerator(element);
+/*Line 45 - 'AtomDockPanel.js' */                while (ae.next()) {
+/*Line 46 - 'AtomDockPanel.js' */                    var child = ae.current();
+/*Line 47 - 'AtomDockPanel.js' */                    var dock = $(child).attr("atom-dock");
+/*Line 48 - 'AtomDockPanel.js' */                    switch (dock) {
+/*Line 49 - 'AtomDockPanel.js' */                        case "Bottom":
+/*Line 50 - 'AtomDockPanel.js' */                        case "Fill":
+/*Line 51 - 'AtomDockPanel.js' */                        case "Top":
+/*Line 52 - 'AtomDockPanel.js' */                            var h;
+/*Line 53 - 'AtomDockPanel.js' */                            if (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) {
+/*Line 54 - 'AtomDockPanel.js' */                                h = child.offsetHeight;
+/*Line 55 - 'AtomDockPanel.js' */                            } else {
+/*Line 56 - 'AtomDockPanel.js' */                                //h = AtomUI.getItemRect(child).height;
+/*Line 57 - 'AtomDockPanel.js' */                                h = $(child).outerHeight(true);
+/*Line 58 - 'AtomDockPanel.js' */                            }
+/*Line 59 - 'AtomDockPanel.js' */                            desiredHeight += h;
+/*Line 60 - 'AtomDockPanel.js' */                            break;
+/*Line 61 - 'AtomDockPanel.js' */                    }
+/*Line 62 - 'AtomDockPanel.js' */                }
 
-/*Line 63 - 'AtomDockPanel.js' */                if (size.height < desiredHeight) {
-/*Line 64 - 'AtomDockPanel.js' */                    size.height = desiredHeight;
-/*Line 65 - 'AtomDockPanel.js' */                    $(element).height(size.height);
-/*Line 66 - 'AtomDockPanel.js' */                }
+/*Line 64 - 'AtomDockPanel.js' */                if (size.height < desiredHeight) {
+/*Line 65 - 'AtomDockPanel.js' */                    size.height = desiredHeight;
+/*Line 66 - 'AtomDockPanel.js' */                    $(element).height(size.height);
+/*Line 67 - 'AtomDockPanel.js' */                }
 
-/*Line 68 - 'AtomDockPanel.js' */                return size;
-/*Line 69 - 'AtomDockPanel.js' */            },
+/*Line 69 - 'AtomDockPanel.js' */                return size;
+/*Line 70 - 'AtomDockPanel.js' */            },
 
-/*Line 71 - 'AtomDockPanel.js' */            onUpdateUI: function () {
-
-
-/*Line 74 - 'AtomDockPanel.js' */                var element = this.get_element();
+/*Line 72 - 'AtomDockPanel.js' */            onUpdateUI: function () {
 
 
-/*Line 77 - 'AtomDockPanel.js' */                var i;
-/*Line 78 - 'AtomDockPanel.js' */                var left = 0;
-/*Line 79 - 'AtomDockPanel.js' */                var top = parseInt($(element).css("paddingTop"), 10);
+/*Line 75 - 'AtomDockPanel.js' */                var element = this.get_element();
 
-/*Line 81 - 'AtomDockPanel.js' */                var s = this.calculateSize();
 
-/*Line 83 - 'AtomDockPanel.js' */                // is parent of this is body??
-/*Line 84 - 'AtomDockPanel.js' */                var height = s.height;
-/*Line 85 - 'AtomDockPanel.js' */                var width = s.width;
+/*Line 78 - 'AtomDockPanel.js' */                var i;
+/*Line 79 - 'AtomDockPanel.js' */                var left = 0;
+/*Line 80 - 'AtomDockPanel.js' */                var top = parseInt($(element).css("paddingTop"), 10);
 
-/*Line 87 - 'AtomDockPanel.js' */                var children = [];
-/*Line 88 - 'AtomDockPanel.js' */                var en;
-/*Line 89 - 'AtomDockPanel.js' */                var item;
+/*Line 82 - 'AtomDockPanel.js' */                var s = this.calculateSize();
 
-/*Line 91 - 'AtomDockPanel.js' */                var itemRect;
-/*Line 92 - 'AtomDockPanel.js' */                var clientRect;
+/*Line 84 - 'AtomDockPanel.js' */                // is parent of this is body??
+/*Line 85 - 'AtomDockPanel.js' */                var height = s.height;
+/*Line 86 - 'AtomDockPanel.js' */                var width = s.width;
 
-/*Line 94 - 'AtomDockPanel.js' */                var itemHeight;
-/*Line 95 - 'AtomDockPanel.js' */                var itemWidth;
+/*Line 88 - 'AtomDockPanel.js' */                if (this._contentWidth) {
+/*Line 89 - 'AtomDockPanel.js' */                    left = (width - this._contentWidth) / 2;
+/*Line 90 - 'AtomDockPanel.js' */                    width = this._contentWidth;
+/*Line 91 - 'AtomDockPanel.js' */                }
 
-/*Line 97 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Top']"));
-/*Line 98 - 'AtomDockPanel.js' */                while (en.next()) {
-/*Line 99 - 'AtomDockPanel.js' */                    item = en.current();
+/*Line 93 - 'AtomDockPanel.js' */                var children = [];
+/*Line 94 - 'AtomDockPanel.js' */                var en;
+/*Line 95 - 'AtomDockPanel.js' */                var item;
 
-/*Line 101 - 'AtomDockPanel.js' */                    itemHeight = $(item).outerHeight(true);
+/*Line 97 - 'AtomDockPanel.js' */                var itemRect;
+/*Line 98 - 'AtomDockPanel.js' */                var clientRect;
 
-/*Line 103 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { top: top, left: left, width: width });
+/*Line 100 - 'AtomDockPanel.js' */                var itemHeight;
+/*Line 101 - 'AtomDockPanel.js' */                var itemWidth;
 
-/*Line 105 - 'AtomDockPanel.js' */                    top += itemHeight;
-/*Line 106 - 'AtomDockPanel.js' */                    height -= itemHeight;
+/*Line 103 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Top']"));
+/*Line 104 - 'AtomDockPanel.js' */                while (en.next()) {
+/*Line 105 - 'AtomDockPanel.js' */                    item = en.current();
 
-/*Line 108 - 'AtomDockPanel.js' */                    this.resizeChild(item);
-/*Line 109 - 'AtomDockPanel.js' */                }
+/*Line 107 - 'AtomDockPanel.js' */                    itemHeight = $(item).outerHeight(true);
 
-/*Line 111 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Bottom']").get().reverse());
-/*Line 112 - 'AtomDockPanel.js' */                while (en.next()) {
-/*Line 113 - 'AtomDockPanel.js' */                    item = en.current();
-/*Line 114 - 'AtomDockPanel.js' */                    itemHeight = $(item).outerHeight(true);
+/*Line 109 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { top: top, left: left, width: width });
 
-/*Line 116 - 'AtomDockPanel.js' */                    height -= itemHeight;
+/*Line 111 - 'AtomDockPanel.js' */                    top += itemHeight;
+/*Line 112 - 'AtomDockPanel.js' */                    height -= itemHeight;
 
-/*Line 118 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { top: (top + height), width: width });
+/*Line 114 - 'AtomDockPanel.js' */                    this.resizeChild(item);
+/*Line 115 - 'AtomDockPanel.js' */                }
 
-/*Line 120 - 'AtomDockPanel.js' */                    this.resizeChild(item);
-/*Line 121 - 'AtomDockPanel.js' */                }
+/*Line 117 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Bottom']").get().reverse());
+/*Line 118 - 'AtomDockPanel.js' */                while (en.next()) {
+/*Line 119 - 'AtomDockPanel.js' */                    item = en.current();
+/*Line 120 - 'AtomDockPanel.js' */                    itemHeight = $(item).outerHeight(true);
 
-/*Line 123 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Left']"));
-/*Line 124 - 'AtomDockPanel.js' */                while (en.next()) {
-/*Line 125 - 'AtomDockPanel.js' */                    item = en.current();
+/*Line 122 - 'AtomDockPanel.js' */                    height -= itemHeight;
 
-/*Line 127 - 'AtomDockPanel.js' */                    var itemWidth = $(item).outerWidth(true);
-/*Line 128 - 'AtomDockPanel.js' */                    width -= itemWidth;
+/*Line 124 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { left: left, top: (top + height), width: width });
 
-/*Line 130 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { top: top, left: left, height: height });
-/*Line 131 - 'AtomDockPanel.js' */                    left += itemWidth;
+/*Line 126 - 'AtomDockPanel.js' */                    this.resizeChild(item);
+/*Line 127 - 'AtomDockPanel.js' */                }
 
-/*Line 133 - 'AtomDockPanel.js' */                    this.resizeChild(item);
-/*Line 134 - 'AtomDockPanel.js' */                }
+/*Line 129 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Left']"));
+/*Line 130 - 'AtomDockPanel.js' */                while (en.next()) {
+/*Line 131 - 'AtomDockPanel.js' */                    item = en.current();
 
-/*Line 136 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Right']").get().reverse());
-/*Line 137 - 'AtomDockPanel.js' */                while (en.next()) {
-/*Line 138 - 'AtomDockPanel.js' */                    item = en.current();
-/*Line 139 - 'AtomDockPanel.js' */                    var itemWidth = $(item).outerWidth(true);
-/*Line 140 - 'AtomDockPanel.js' */                    width -= itemWidth;
+/*Line 133 - 'AtomDockPanel.js' */                    var itemWidth = $(item).outerWidth(true);
+/*Line 134 - 'AtomDockPanel.js' */                    width -= itemWidth;
 
-/*Line 142 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { left: (width + left), top: top, height: height });
+/*Line 136 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { top: top, left: left, height: height });
+/*Line 137 - 'AtomDockPanel.js' */                    left += itemWidth;
 
-/*Line 144 - 'AtomDockPanel.js' */                    this.resizeChild(item);
-/*Line 145 - 'AtomDockPanel.js' */                }
+/*Line 139 - 'AtomDockPanel.js' */                    this.resizeChild(item);
+/*Line 140 - 'AtomDockPanel.js' */                }
 
-/*Line 147 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Fill']"));
-/*Line 148 - 'AtomDockPanel.js' */                while (en.next()) {
-/*Line 149 - 'AtomDockPanel.js' */                    item = en.current();
-/*Line 150 - 'AtomDockPanel.js' */                    itemWidth = $(item).css("max-width");
-/*Line 151 - 'AtomDockPanel.js' */                    if (itemWidth) {
-/*Line 152 - 'AtomDockPanel.js' */                        itemWidth = parseFloat(itemWidth);
-/*Line 153 - 'AtomDockPanel.js' */                        if (itemWidth > 0) {
-/*Line 154 - 'AtomDockPanel.js' */                            width = itemWidth;
-/*Line 155 - 'AtomDockPanel.js' */                        }
-/*Line 156 - 'AtomDockPanel.js' */                    }
+/*Line 142 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Right']").get().reverse());
+/*Line 143 - 'AtomDockPanel.js' */                while (en.next()) {
+/*Line 144 - 'AtomDockPanel.js' */                    item = en.current();
+/*Line 145 - 'AtomDockPanel.js' */                    var itemWidth = $(item).outerWidth(true);
+/*Line 146 - 'AtomDockPanel.js' */                    width -= itemWidth;
 
-/*Line 158 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { left: left, top: top, width: width, height: height });
+/*Line 148 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { left: (width + left), top: top, height: height });
 
-/*Line 160 - 'AtomDockPanel.js' */                    this.resizeChild(item);
-/*Line 161 - 'AtomDockPanel.js' */                }
+/*Line 150 - 'AtomDockPanel.js' */                    this.resizeChild(item);
+/*Line 151 - 'AtomDockPanel.js' */                }
 
-/*Line 163 - 'AtomDockPanel.js' */            }
-/*Line 164 - 'AtomDockPanel.js' */        }
-/*Line 165 - 'AtomDockPanel.js' */    });
-/*Line 166 - 'AtomDockPanel.js' */})(window, WebAtoms.AtomControl.prototype);
+/*Line 153 - 'AtomDockPanel.js' */                en = new AtomEnumerator($(element).children("[atom-dock='Fill']"));
+/*Line 154 - 'AtomDockPanel.js' */                while (en.next()) {
+/*Line 155 - 'AtomDockPanel.js' */                    item = en.current();
+/*Line 156 - 'AtomDockPanel.js' */                    itemWidth = $(item).css("max-width");
+/*Line 157 - 'AtomDockPanel.js' */                    if (itemWidth) {
+/*Line 158 - 'AtomDockPanel.js' */                        itemWidth = parseFloat(itemWidth);
+/*Line 159 - 'AtomDockPanel.js' */                        if (itemWidth > 0) {
+/*Line 160 - 'AtomDockPanel.js' */                            width = itemWidth;
+/*Line 161 - 'AtomDockPanel.js' */                        }
+/*Line 162 - 'AtomDockPanel.js' */                    }
+
+/*Line 164 - 'AtomDockPanel.js' */                    AtomUI.setItemRect(item, { left: left, top: top, width: width, height: height });
+
+/*Line 166 - 'AtomDockPanel.js' */                    this.resizeChild(item);
+/*Line 167 - 'AtomDockPanel.js' */                }
+
+/*Line 169 - 'AtomDockPanel.js' */            }
+/*Line 170 - 'AtomDockPanel.js' */        }
+/*Line 171 - 'AtomDockPanel.js' */    });
+/*Line 172 - 'AtomDockPanel.js' */})(window, WebAtoms.AtomControl.prototype);
 
 /*Line 0 - 'AtomListBox.js' */
 
