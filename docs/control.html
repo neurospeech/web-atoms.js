@@ -6,9 +6,21 @@
     <link href="../style/atoms.css" rel="stylesheet" />
 
     <script src="../jquery-1.8.2.min.js"></script>
-    <script src="../atoms.min.js"></script>
+    <script src="../atoms-debug.js"></script>
     <link href="style/docs.min.css" rel="stylesheet" />
 
+    <link href="scripts/codemirror-4.2/lib/codemirror.css" rel="stylesheet" />
+    <script src="scripts/codemirror-4.2/lib/codemirror.js"></script>
+
+
+    <script src="scripts/codemirror-4.2/mode/xml/xml.js"></script>
+    <script src="scripts/codemirror-4.2/mode/javascript/javascript.js"></script>
+    <script src="scripts/codemirror-4.2/mode/css/css.js"></script>
+
+    <script src="scripts/atom-code-view.js"></script>
+    <link href="style/code-mirror.css" rel="stylesheet" />
+
+    
     <style>
         .atom-list-item a {
             color:blue;
@@ -27,7 +39,40 @@
 
             classInfo.load(a);
 
+            Atom.refresh(classInfo, "name");
+
             return classInfo;
+        }
+
+        function prettyPrint(e, i) {
+            if (!i)
+                i = "";
+            var s = i + "<" + e.nodeName.toLowerCase();
+
+            i += "\t";
+            
+            var ae = new AtomEnumerator(e.attributes);
+            while (ae.next()) {
+                var a = ae.current();
+                s += "\r\n" + i + a.nodeName + '="' + a.value + '"';
+            }
+
+
+            if (/img|hr|br/i.test(e.nodeName)) {
+                s += "/>";
+                return s;
+            }
+            s += ">\r\n";
+
+            var ce = new ChildEnumerator(e);
+            while (ce.next()) {
+                s += prettyPrint(ce.current(), i) + "\r\n";
+            }
+
+            i = i.substr(0,i.length-1);
+
+            s += i + "</" + e.nodeName.toLowerCase() + ">";
+            return s;
         }
 
     </script>
@@ -49,7 +94,22 @@
                     { label: "Properties", value: "properties" },
                     { label: "Templates", value: "templates" },
                     { label: "Styles", value: "styles" }
-                ]
+                ],
+                getTemplates: function (name) {
+                    if (!name)
+                        return [];
+                    var r = [];
+                    for (var k in Templates.jsonML) {
+                        if (k.indexOf(name) != -1) {
+                            var ae = new AtomEnumerator(Templates.jsonML[k]);
+                            while (ae.next()) {
+                                var t = Templates.compileElement(ae.current());
+                                r.push({ label: k, value: prettyPrint(t) });
+                            }
+                        }
+                    }
+                    return r;
+                }
             })
         </script>
 
@@ -124,24 +184,14 @@
 
             <div
                 atom-type="AtomItemsControl"
-                atom-items="[$scope.classInfo.templates]"
-                style="overflow:auto"
-                >
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Template</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody
-                        atom-presenter="itemsPresenter">
-                        <tr atom-template="itemTemplate">
-                            <td atom-text="{$data.label}"></td>
-                            <td atom-text="{ $data.description }"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                atom-items="[$appScope.getTemplates($scope.classInfo.name)]"
+                style="overflow:auto">
+                <div atom-template="itemTemplate">
+                    <h4 atom-text="{$data.label}"></h4>
+                    <div
+                        atom-type="AtomCodeView"
+                        atom-code="{$data.value}"></div>
+                </div> 
             </div>
 
             <div

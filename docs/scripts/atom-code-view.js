@@ -193,7 +193,10 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                     if (a.height) {
                         _this.editor.setSize(null, a.height);
                         if (window.frameElement) {
-                            window.frameElement.style.height = (a.height ) + "px"
+                            var h = $(window.frameElement).innerHeight();
+                            if (h < a.height) {
+                                window.frameElement.style.height = (a.height) + "px"
+                            }
                         }
                     }
                 });
@@ -210,7 +213,10 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                             //console.log(JSON.stringify(a));
                             if (a.height) {
                                 _this.editor.setSize(null, a.height );
-                                window.frameElement.style.height = (a.height ) + "px"
+                                var h = $(window.frameElement).innerHeight();
+                                if (h < a.height) {
+                                    window.frameElement.style.height = (a.height) + "px"
+                                }
                             }
                         });
                     } else {

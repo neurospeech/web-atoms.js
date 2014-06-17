@@ -11,7 +11,8 @@
             $(e).addClass("atom-dock-panel");
         },
         properties: {
-            resizeOnChildResized: false
+            resizeOnChildResized: false,
+            contentWidth: 0
         },
         methods: {
             resizeChild: function (item) {
@@ -85,6 +86,11 @@
                 var height = s.height;
                 var width = s.width;
 
+                if (this._contentWidth) {
+                    left = (width - this._contentWidth) / 2;
+                    width = this._contentWidth;
+                }
+
                 var children = [];
                 var en;
                 var item;
@@ -116,7 +122,7 @@
 
                     height -= itemHeight;
 
-                    AtomUI.setItemRect(item, { top: (top + height), width: width });
+                    AtomUI.setItemRect(item, { left: left, top: (top + height), width: width });
 
                     this.resizeChild(item);
                 }
