@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+<!-- sample -->
+    <script type="text/javascript">
+        ({
+            color: 'white'
+        })
+    </script>
+    <button
+        atom-event-click="{ { alert: 'Clicked !!!' } }">Click Me</button>
+
+    <div
+        style="width:200px;height:200px;border: solid 1px gray;"
+        atom-event-mouseenter="{ { scope: { color: 'red' } } }"
+        atom-event-mouseout="{ { scope: { color: 'white' } } }"
+        style-background="[$scope.color]">
+
+    </div>
+
+<!-- end-sample -->
+</div>
+</body>
+</html>
