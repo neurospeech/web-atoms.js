@@ -8,7 +8,7 @@
             this._presenters = ["viewPresenter"];
         },
         properties: {
-            currentStep: 0,
+            currentStep: null,
             nextLabel: "Next",
             nextClass: "",
             buttons: null,
@@ -17,7 +17,6 @@
             canMoveBack: true,
             canMoveNext: true,
             steps: 0,
-            currentStep: null,
             isLastStep: false
         },
         methods: {

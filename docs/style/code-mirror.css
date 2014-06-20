@@ -36,7 +36,8 @@
 
         .code-execute-link{
             text-align:right; position:absolute; bottom:5px;right:25px; 
-            background-color:orange;
+            background-color:#c32e2e;
+            color:white;
             border-radius:5px;
             padding:5px;
             z-index:200;
@@ -44,8 +45,10 @@
 
         .code-execute-link a{
             text-decoration:none;
+            color:white;
         }
 
         .code-execute-link a:hover{
             text-decoration:underline;
+            color:white;
         }
