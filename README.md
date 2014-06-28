@@ -7,17 +7,19 @@ Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight
 Features
 --------
 1. Very little JavaScript
-2. Consistent and Logical Syntax
-3. Extensibility
-4. One Time, One Way and Two Way Bindings
-5. Component Object Model
-6. One Liner AJAX
-7. Powerful State Machine
-8. Customizable Templates
-9. Scalability (Able to manage 1000s of rows of data)
-10. Application State Persistance in URL
-11. Multiple Scopes for Scope Isolation
-12. Ready to use Line of Business Components
+2. Poweful Web Components
+3. Consistent and Logical Syntax
+4. Extensibility
+5. One Time, One Way and Two Way Bindings
+6. Component Object Model
+7. One Liner AJAX
+8. Powerful State Machine
+9. Customizable Templates
+10. Scalability (Able to manage 1000s of rows of data)
+11. Application State Persistance in URL
+12. Multiple Scopes for Scope Isolation
+13. Ready to use Line of Business Components
+14. Works on Internet Explore 8+, Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
 
 Atoms.js (previously known as Web Atoms JS) is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.
