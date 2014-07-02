@@ -52,7 +52,6 @@
             get_name: function () {
                 return this._name;
             },
-
             getTemplate: function (k) {
 
                 var t = this["_" + k];
