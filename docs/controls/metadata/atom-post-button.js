@@ -19,6 +19,13 @@ classInfo.setup({
             url: ""
         },
         {
+            label: "postResult",
+            value: "post-result",
+            readonly: true,
+            description: "Result of last post operation, this is bindable result",
+            url: ""
+        },
+        {
             label: "confirm",
             value: "confirm",
             readonly: false,
