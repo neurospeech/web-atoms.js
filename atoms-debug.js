@@ -3501,146 +3501,145 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 51 - 'AtomUIComponent.js' */            get_name: function () {
 /*Line 52 - 'AtomUIComponent.js' */                return this._name;
 /*Line 53 - 'AtomUIComponent.js' */            },
+/*Line 54 - 'AtomUIComponent.js' */            getTemplate: function (k) {
 
-/*Line 55 - 'AtomUIComponent.js' */            getTemplate: function (k) {
+/*Line 56 - 'AtomUIComponent.js' */                var t = this["_" + k];
+/*Line 57 - 'AtomUIComponent.js' */                if (t !== undefined && t !== null)
+/*Line 58 - 'AtomUIComponent.js' */                    return t;
 
-/*Line 57 - 'AtomUIComponent.js' */                var t = this["_" + k];
-/*Line 58 - 'AtomUIComponent.js' */                if (t !== undefined && t !== null)
-/*Line 59 - 'AtomUIComponent.js' */                    return t;
-
-/*Line 61 - 'AtomUIComponent.js' */                // resolve...
-/*Line 62 - 'AtomUIComponent.js' */                t = Templates.get(this.constructor, k);
-/*Line 63 - 'AtomUIComponent.js' */                if (!t) {
-/*Line 64 - 'AtomUIComponent.js' */                    return null;
-/*Line 65 - 'AtomUIComponent.js' */                }
-/*Line 66 - 'AtomUIComponent.js' */                this["_" + k] = t;
-/*Line 67 - 'AtomUIComponent.js' */                return t;
-/*Line 68 - 'AtomUIComponent.js' */            }
-/*Line 69 - 'AtomUIComponent.js' */        },
-/*Line 70 - 'AtomUIComponent.js' */        {
-/*Line 71 - 'AtomUIComponent.js' */            next: null,
-/*Line 72 - 'AtomUIComponent.js' */            value: undefined
-/*Line 73 - 'AtomUIComponent.js' */        });
-/*Line 74 - 'AtomUIComponent.js' */})(window, "WebAtoms.AtomUIComponent", WebAtoms.AtomComponent.prototype);
+/*Line 60 - 'AtomUIComponent.js' */                // resolve...
+/*Line 61 - 'AtomUIComponent.js' */                t = Templates.get(this.constructor, k);
+/*Line 62 - 'AtomUIComponent.js' */                if (!t) {
+/*Line 63 - 'AtomUIComponent.js' */                    return null;
+/*Line 64 - 'AtomUIComponent.js' */                }
+/*Line 65 - 'AtomUIComponent.js' */                this["_" + k] = t;
+/*Line 66 - 'AtomUIComponent.js' */                return t;
+/*Line 67 - 'AtomUIComponent.js' */            }
+/*Line 68 - 'AtomUIComponent.js' */        },
+/*Line 69 - 'AtomUIComponent.js' */        {
+/*Line 70 - 'AtomUIComponent.js' */            next: null,
+/*Line 71 - 'AtomUIComponent.js' */            value: undefined
+/*Line 72 - 'AtomUIComponent.js' */        });
+/*Line 73 - 'AtomUIComponent.js' */})(window, "WebAtoms.AtomUIComponent", WebAtoms.AtomComponent.prototype);
 
 
-/*Line 77 - 'AtomUIComponent.js' */Templates.compiled = {
-/*Line 78 - 'AtomUIComponent.js' */};
+/*Line 76 - 'AtomUIComponent.js' */Templates.compiled = {
+/*Line 77 - 'AtomUIComponent.js' */};
 
-/*Line 80 - 'AtomUIComponent.js' */var document = window.document;
+/*Line 79 - 'AtomUIComponent.js' */var document = window.document;
 
-/*Line 82 - 'AtomUIComponent.js' */Templates.compileElement = function (e) {
-/*Line 83 - 'AtomUIComponent.js' */    var ae = new AtomEnumerator(e);
-/*Line 84 - 'AtomUIComponent.js' */    ae.next();
-/*Line 85 - 'AtomUIComponent.js' */    var a = ae.current();
-/*Line 86 - 'AtomUIComponent.js' */    var e1 = document.createElement(a);
-/*Line 87 - 'AtomUIComponent.js' */    if (!ae.next())
-/*Line 88 - 'AtomUIComponent.js' */        return e1;
-/*Line 89 - 'AtomUIComponent.js' */    a = ae.current();
-/*Line 90 - 'AtomUIComponent.js' */    if (a) {
-/*Line 91 - 'AtomUIComponent.js' */        for (var k in a) {
-/*Line 92 - 'AtomUIComponent.js' */            e1.setAttribute(k, a[k]);
-/*Line 93 - 'AtomUIComponent.js' */        }
-/*Line 94 - 'AtomUIComponent.js' */    }
+/*Line 81 - 'AtomUIComponent.js' */Templates.compileElement = function (e) {
+/*Line 82 - 'AtomUIComponent.js' */    var ae = new AtomEnumerator(e);
+/*Line 83 - 'AtomUIComponent.js' */    ae.next();
+/*Line 84 - 'AtomUIComponent.js' */    var a = ae.current();
+/*Line 85 - 'AtomUIComponent.js' */    var e1 = document.createElement(a);
+/*Line 86 - 'AtomUIComponent.js' */    if (!ae.next())
+/*Line 87 - 'AtomUIComponent.js' */        return e1;
+/*Line 88 - 'AtomUIComponent.js' */    a = ae.current();
+/*Line 89 - 'AtomUIComponent.js' */    if (a) {
+/*Line 90 - 'AtomUIComponent.js' */        for (var k in a) {
+/*Line 91 - 'AtomUIComponent.js' */            e1.setAttribute(k, a[k]);
+/*Line 92 - 'AtomUIComponent.js' */        }
+/*Line 93 - 'AtomUIComponent.js' */    }
     
-/*Line 96 - 'AtomUIComponent.js' */    while (ae.next()) {
-/*Line 97 - 'AtomUIComponent.js' */        a = ae.current();
-/*Line 98 - 'AtomUIComponent.js' */        if (!a)
-/*Line 99 - 'AtomUIComponent.js' */            break;
-/*Line 100 - 'AtomUIComponent.js' */        if (a.constructor == String) {
-/*Line 101 - 'AtomUIComponent.js' */            e1.appendChild(document.createTextNode(a));
-/*Line 102 - 'AtomUIComponent.js' */        } else {
-/*Line 103 - 'AtomUIComponent.js' */            e1.appendChild(Templates.compileElement(a));
-/*Line 104 - 'AtomUIComponent.js' */        }
-/*Line 105 - 'AtomUIComponent.js' */    }
-/*Line 106 - 'AtomUIComponent.js' */    return e1;
-/*Line 107 - 'AtomUIComponent.js' */};
+/*Line 95 - 'AtomUIComponent.js' */    while (ae.next()) {
+/*Line 96 - 'AtomUIComponent.js' */        a = ae.current();
+/*Line 97 - 'AtomUIComponent.js' */        if (!a)
+/*Line 98 - 'AtomUIComponent.js' */            break;
+/*Line 99 - 'AtomUIComponent.js' */        if (a.constructor == String) {
+/*Line 100 - 'AtomUIComponent.js' */            e1.appendChild(document.createTextNode(a));
+/*Line 101 - 'AtomUIComponent.js' */        } else {
+/*Line 102 - 'AtomUIComponent.js' */            e1.appendChild(Templates.compileElement(a));
+/*Line 103 - 'AtomUIComponent.js' */        }
+/*Line 104 - 'AtomUIComponent.js' */    }
+/*Line 105 - 'AtomUIComponent.js' */    return e1;
+/*Line 106 - 'AtomUIComponent.js' */};
 
-/*Line 109 - 'AtomUIComponent.js' */Templates.compileJsonML = function (j) {
+/*Line 108 - 'AtomUIComponent.js' */Templates.compileJsonML = function (j) {
 
-/*Line 111 - 'AtomUIComponent.js' */    if (j.length == 1)
-/*Line 112 - 'AtomUIComponent.js' */        return Templates.compileElement(j[0]);
+/*Line 110 - 'AtomUIComponent.js' */    if (j.length == 1)
+/*Line 111 - 'AtomUIComponent.js' */        return Templates.compileElement(j[0]);
 
-/*Line 114 - 'AtomUIComponent.js' */    var r = [];
-/*Line 115 - 'AtomUIComponent.js' */    var ae = new AtomEnumerator(j);
-/*Line 116 - 'AtomUIComponent.js' */    while (ae.next()) {
-/*Line 117 - 'AtomUIComponent.js' */        r.push(Templates.compileElement(ae.current()));
-/*Line 118 - 'AtomUIComponent.js' */    }
-/*Line 119 - 'AtomUIComponent.js' */    return r;
-/*Line 120 - 'AtomUIComponent.js' */};
+/*Line 113 - 'AtomUIComponent.js' */    var r = [];
+/*Line 114 - 'AtomUIComponent.js' */    var ae = new AtomEnumerator(j);
+/*Line 115 - 'AtomUIComponent.js' */    while (ae.next()) {
+/*Line 116 - 'AtomUIComponent.js' */        r.push(Templates.compileElement(ae.current()));
+/*Line 117 - 'AtomUIComponent.js' */    }
+/*Line 118 - 'AtomUIComponent.js' */    return r;
+/*Line 119 - 'AtomUIComponent.js' */};
 
-/*Line 122 - 'AtomUIComponent.js' */Templates.compile = function (type, name, t) {
+/*Line 121 - 'AtomUIComponent.js' */Templates.compile = function (type, name, t) {
 
-/*Line 124 - 'AtomUIComponent.js' */    var div = document.createElement("div");
-/*Line 125 - 'AtomUIComponent.js' */    div.innerHTML = t;
+/*Line 123 - 'AtomUIComponent.js' */    var div = document.createElement("div");
+/*Line 124 - 'AtomUIComponent.js' */    div.innerHTML = t;
 
-/*Line 127 - 'AtomUIComponent.js' */    if ($(div).children().length == 1) {
-/*Line 128 - 'AtomUIComponent.js' */        t = AtomUI.cloneNode((div.firstElementChild || div.children[0]));
-/*Line 129 - 'AtomUIComponent.js' */    }
+/*Line 126 - 'AtomUIComponent.js' */    if ($(div).children().length == 1) {
+/*Line 127 - 'AtomUIComponent.js' */        t = AtomUI.cloneNode((div.firstElementChild || div.children[0]));
+/*Line 128 - 'AtomUIComponent.js' */    }
 
-/*Line 131 - 'AtomUIComponent.js' */    return t;
-/*Line 132 - 'AtomUIComponent.js' */};
+/*Line 130 - 'AtomUIComponent.js' */    return t;
+/*Line 131 - 'AtomUIComponent.js' */};
 
-/*Line 134 - 'AtomUIComponent.js' */Templates.get = function (type, k) {
-/*Line 135 - 'AtomUIComponent.js' */    //var x = this.compileType(type);
-/*Line 136 - 'AtomUIComponent.js' */    //return x[k];
+/*Line 133 - 'AtomUIComponent.js' */Templates.get = function (type, k) {
+/*Line 134 - 'AtomUIComponent.js' */    //var x = this.compileType(type);
+/*Line 135 - 'AtomUIComponent.js' */    //return x[k];
 
-/*Line 138 - 'AtomUIComponent.js' */    var name = type.__typeName + "." + k;
-/*Line 139 - 'AtomUIComponent.js' */    var x = this.compiled[name];
-/*Line 140 - 'AtomUIComponent.js' */    if (x)
-/*Line 141 - 'AtomUIComponent.js' */        return x;
-/*Line 142 - 'AtomUIComponent.js' */    x = Templates.jsonML[name];
-/*Line 143 - 'AtomUIComponent.js' */    if (!x) {
-/*Line 144 - 'AtomUIComponent.js' */        if (type.__baseType) {
-/*Line 145 - 'AtomUIComponent.js' */            x = Templates.get(type.__baseType, k);
-/*Line 146 - 'AtomUIComponent.js' */        }
-/*Line 147 - 'AtomUIComponent.js' */    } else {
-/*Line 148 - 'AtomUIComponent.js' */        x = Templates.compileJsonML(x);
-/*Line 149 - 'AtomUIComponent.js' */    }
-/*Line 150 - 'AtomUIComponent.js' */    if (!x)
-/*Line 151 - 'AtomUIComponent.js' */        return null;
-/*Line 152 - 'AtomUIComponent.js' */    this.compiled[name] = x;
-/*Line 153 - 'AtomUIComponent.js' */    return x;
+/*Line 137 - 'AtomUIComponent.js' */    var name = type.__typeName + "." + k;
+/*Line 138 - 'AtomUIComponent.js' */    var x = this.compiled[name];
+/*Line 139 - 'AtomUIComponent.js' */    if (x)
+/*Line 140 - 'AtomUIComponent.js' */        return x;
+/*Line 141 - 'AtomUIComponent.js' */    x = Templates.jsonML[name];
+/*Line 142 - 'AtomUIComponent.js' */    if (!x) {
+/*Line 143 - 'AtomUIComponent.js' */        if (type.__baseType) {
+/*Line 144 - 'AtomUIComponent.js' */            x = Templates.get(type.__baseType, k);
+/*Line 145 - 'AtomUIComponent.js' */        }
+/*Line 146 - 'AtomUIComponent.js' */    } else {
+/*Line 147 - 'AtomUIComponent.js' */        x = Templates.compileJsonML(x);
+/*Line 148 - 'AtomUIComponent.js' */    }
+/*Line 149 - 'AtomUIComponent.js' */    if (!x)
+/*Line 150 - 'AtomUIComponent.js' */        return null;
+/*Line 151 - 'AtomUIComponent.js' */    this.compiled[name] = x;
+/*Line 152 - 'AtomUIComponent.js' */    return x;
 
-/*Line 155 - 'AtomUIComponent.js' */};
+/*Line 154 - 'AtomUIComponent.js' */};
 
-/*Line 157 - 'AtomUIComponent.js' */Templates.compileType = function (type) {
+/*Line 156 - 'AtomUIComponent.js' */Templates.compileType = function (type) {
 
-/*Line 159 - 'AtomUIComponent.js' */    var name = type.__typeName;
-/*Line 160 - 'AtomUIComponent.js' */    var shortName = name.split(".");
-/*Line 161 - 'AtomUIComponent.js' */    shortName = shortName[shortName.length - 1];
+/*Line 158 - 'AtomUIComponent.js' */    var name = type.__typeName;
+/*Line 159 - 'AtomUIComponent.js' */    var shortName = name.split(".");
+/*Line 160 - 'AtomUIComponent.js' */    shortName = shortName[shortName.length - 1];
 
-/*Line 163 - 'AtomUIComponent.js' */    var x = this.compiled[name];
-/*Line 164 - 'AtomUIComponent.js' */    if (x)
-/*Line 165 - 'AtomUIComponent.js' */        return x;
+/*Line 162 - 'AtomUIComponent.js' */    var x = this.compiled[name];
+/*Line 163 - 'AtomUIComponent.js' */    if (x)
+/*Line 164 - 'AtomUIComponent.js' */        return x;
 
-/*Line 167 - 'AtomUIComponent.js' */    x = {
-/*Line 168 - 'AtomUIComponent.js' */    };
+/*Line 166 - 'AtomUIComponent.js' */    x = {
+/*Line 167 - 'AtomUIComponent.js' */    };
 
-/*Line 170 - 'AtomUIComponent.js' */    var tl = this[name] || this[shortName];
-/*Line 171 - 'AtomUIComponent.js' */    if (tl) {
-/*Line 172 - 'AtomUIComponent.js' */        for (var t in tl) {
-/*Line 173 - 'AtomUIComponent.js' */            x[t] = this.compile(type, t, tl[t]);
-/*Line 174 - 'AtomUIComponent.js' */        }
-/*Line 175 - 'AtomUIComponent.js' */    }
+/*Line 169 - 'AtomUIComponent.js' */    var tl = this[name] || this[shortName];
+/*Line 170 - 'AtomUIComponent.js' */    if (tl) {
+/*Line 171 - 'AtomUIComponent.js' */        for (var t in tl) {
+/*Line 172 - 'AtomUIComponent.js' */            x[t] = this.compile(type, t, tl[t]);
+/*Line 173 - 'AtomUIComponent.js' */        }
+/*Line 174 - 'AtomUIComponent.js' */    }
 
-/*Line 177 - 'AtomUIComponent.js' */    if (type.__baseType) {
-/*Line 178 - 'AtomUIComponent.js' */        var y = this.compileType(type.__baseType);
-/*Line 179 - 'AtomUIComponent.js' */        for (var yt in y) {
-/*Line 180 - 'AtomUIComponent.js' */            if (!x[yt]) {
-/*Line 181 - 'AtomUIComponent.js' */                x[yt] = y[yt];
-/*Line 182 - 'AtomUIComponent.js' */            }
-/*Line 183 - 'AtomUIComponent.js' */        }
-/*Line 184 - 'AtomUIComponent.js' */    }
+/*Line 176 - 'AtomUIComponent.js' */    if (type.__baseType) {
+/*Line 177 - 'AtomUIComponent.js' */        var y = this.compileType(type.__baseType);
+/*Line 178 - 'AtomUIComponent.js' */        for (var yt in y) {
+/*Line 179 - 'AtomUIComponent.js' */            if (!x[yt]) {
+/*Line 180 - 'AtomUIComponent.js' */                x[yt] = y[yt];
+/*Line 181 - 'AtomUIComponent.js' */            }
+/*Line 182 - 'AtomUIComponent.js' */        }
+/*Line 183 - 'AtomUIComponent.js' */    }
 
-/*Line 186 - 'AtomUIComponent.js' */    this.compiled[name] = x;
+/*Line 185 - 'AtomUIComponent.js' */    this.compiled[name] = x;
 
-/*Line 188 - 'AtomUIComponent.js' */    var t = this;
-/*Line 189 - 'AtomUIComponent.js' */    delete t[name];
-/*Line 190 - 'AtomUIComponent.js' */    delete t[shortName];
+/*Line 187 - 'AtomUIComponent.js' */    var t = this;
+/*Line 188 - 'AtomUIComponent.js' */    delete t[name];
+/*Line 189 - 'AtomUIComponent.js' */    delete t[shortName];
 
-/*Line 192 - 'AtomUIComponent.js' */    return x;
-/*Line 193 - 'AtomUIComponent.js' */};
+/*Line 191 - 'AtomUIComponent.js' */    return x;
+/*Line 192 - 'AtomUIComponent.js' */};
 /*Line 0 - 'AtomControl.js' */
 /*Line 1 - 'AtomControl.js' */
 /*Line 2 - 'AtomControl.js' */
