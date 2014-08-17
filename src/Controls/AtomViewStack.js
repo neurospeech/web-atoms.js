@@ -1,257 +1,94 @@
-﻿/// <reference path="AtomItemsControl.js" />
-
-var AtomAnimations = {
-    swapLeft: function (elements, width, caller, queue) {
-        var first = elements[0];
-        var last = elements[1];
-        last.style.left = width + "px";
-        last.style.visibility = 'inherit';
-        last.style.zIndex = 0;
-        if (caller) {
-            caller._animating = true;
-        }
-        $(elements).animate(
-            {
-                left: '-=' + width
-            },
-            {
-                easing: 'swing',
-                queue: false,
-                complete: function () {
-                    first.style.visibility = 'hidden';
-                    first.style.zIndex = -5;
-                    if (caller) {
-                        caller._animating = false;
-                    }
-                    if (queue) {
-                        queue.start();
-                    }
-                }
-            }
-        );
-    },
-    swapRight: function (elements, width, caller, queue) {
-        var first = elements[0];
-        var last = elements[1];
-        last.style.left = (-width) + "px";
-        last.style.visibility = 'inherit';
-        last.style.zIndex = 0;
-        if (caller) {
-            caller._animating = true;
-        }
-        $(elements).animate(
-        {
-            left: '+=' + width
-        },
-        {
-            easing: 'swing',
-            queue: false,
-            complete: function () {
-                first.style.visibility = 'hidden';
-                first.style.zIndex = -5;
-                if (caller) {
-                    caller._animating = false;
-                }
-                if (queue) {
-                    queue.start();
-                }
-            }
-        }
-        );
-    },
-    swapUp: function (elements, width, caller, queue) {
-        var first = elements[0];
-        var last = elements[1];
-        last.style.top = width + "px";
-        last.style.visibility = 'inherit';
-        last.style.zIndex = 0;
-        if (caller) {
-            caller._animating = true;
-        }
-        $(elements).animate(
-                {
-                    top: '-=' + width
-                },
-                {
-                    easing: 'swing',
-                    queue: false,
-                    complete: function () {
-                        first.style.visibility = 'hidden';
-                        first.style.zIndex = -5;
-                        if (caller) {
-                            caller._animating = false;
-                        }
-                        if (queue) {
-                            queue.start();
-                        }
-                    }
-                }
-            );
-    },
-    swapDown: function (elements, width, caller, queue) {
-        var first = elements[0];
-        var last = elements[1];
-        last.style.top = (-width) + "px";
-        last.style.visibility = 'inherit';
-        last.style.zIndex = 0;
-        if (caller) {
-            caller._animating = true;
-        }
-        $(elements).animate(
-            {
-                top: '+=' + width
-            },
-            {
-                easing: 'swing',
-                queue: false,
-                complete: function () {
-                    first.style.visibility = 'hidden';
-                    first.style.zIndex = -5;
-                    if (caller) {
-                        caller._animating = false;
-                    }
-                    if (queue) {
-                        queue.start();
-                    }
-                }
-            }
-            );
-    }
-};
-
-window.AtomAnimations = AtomAnimations;
+﻿/// <reference path="AtomControl.js" />
 
 (function (window, baseType) {
 
     return classCreatorEx({
         name: "WebAtoms.AtomViewStack",
         base: baseType,
-        start: function () {
-            this._source = null;
-            this._indexChangedHandler = null;
+        start: function (e) {
             this._swipeDirection = 'left-right';
         },
         properties: {
+            selectedIndex:-1,
             swipeDirection: 'left-right'
         },
         methods: {
             bringSelectionIntoView: function () {
             },
-            onUpdateUI: function () {
-                var element = this.get_element();
-
-                if (!element.parentNode.atomControl) {
-                    // try occupying full height...
-                    var height = $(element.parentNode).height();
-                    var width = $(element.parentNode).width();
-                    element.style.width = width + "px";
-                    element.style.height = height + "px";
+            set_swipeDirection: function (v) {
+                var ov = this._swipeDirection;
+                if (ov) {
+                    $(this._element).removeClass(ov);
                 }
+                this._swipeDirection = v;
+                if (v) {
+                    $(this._element).addClass(v);
+                }
+            },
+            set_selectedIndex: function (v) {
+                this._previousIndex = this._selectedIndex;
+                this._selectedIndex = v;
+                this.updateUI();
+            },
+            onUpdateUI: function () {
 
-                var childEn = new ChildEnumerator(this._element);
+                var element = this._element;
+                var childEn = new ChildEnumerator(element);
 
-                var selectedChild = this.get_selectedChild();
-
-                var oldElement;
-                var oldIndex = -1;
-                var newElement;
-                var newIndex = -1;
-
-                var animate = this._swipeDirection != "none" && this._lastSelectedChild && selectedChild != this._lastSelectedChild;
-
-                var s = $(element).css("visibility");
-                animate = animate && s == "visible";
+                var selectedIndex = this.get_selectedIndex();
 
                 var queue = new WebAtoms.AtomDispatcher();
                 queue.pause();
 
                 var i = -1;
 
+                var self = this;
+
                 while (childEn.next()) {
                     i = i + 1;
                     var item = childEn.current();
 
+                    $(item).addClass("view-stack-child");
 
-                    if (item == selectedChild) {
+                    if (i == selectedIndex) {
 
                         AtomUI.setItemRect(item, { width: $(element).width(), height: $(element).height() });
 
-                        if (animate) {
-                            newElement = item;
-                            newIndex = i;
-                        } else {
-                            if (!this._animating) {
-                                item.style.visibility = "inherit";
-                                item.style.left = "0px";
-                                item.style.top = "0px";
-                                item.style.zIndex = 0;
-                            }
-                        }
+                        $(item).removeClass("hidden");
 
                         this._lastSelectedChild = item;
 
-                        //item.style.width = element.style.width;
-                        //item.style.height = element.style.height;
-
-                        //AtomUI.setItemRect(item, { width: parseInt(element.style.width), height: parseInt(element.style.height) });
-
-                        {
-                            var x = item;
-                            queue.callLater(function () {
-
-                                if (x.atomControl) {
-                                    x.atomControl.updateUI();
-                                }
-                            });
-                        }
-
-                    } else {
-
-
-                        if (item.style.visibility != "hidden") {
-                            if (animate) {
-                                oldElement = item;
-                                oldIndex = i;
-                            } else {
-                                if (!this._animating) {
-                                    item.style.visibility = "hidden";
-                                    item.style.zIndex = -5;
-                                }
+                        queue.callLater(function () {
+                            var ac = self._lastSelectedChild.atomControl;
+                            if (ac) {
+                                ac.updateUI();
                             }
-                        }
+                        });
+
+                    } else {
+
+                        $(item).addClass("hidden");
                     }
                 }
 
-                if (animate) {
-                    //var width = parseInt(element.style.width, 10);
-                    //var height = parseInt(element.style.width, 10);
-                    var width = $(element).width();
-                    var height = $(element).height();
-                    if (this._swipeDirection == 'up-down') {
-                        if (newIndex > oldIndex) {
-                            AtomAnimations.swapUp([oldElement, newElement], height, this, queue);
-                        } else {
-                            AtomAnimations.swapDown([oldElement, newElement], height, this, queue);
-                        }
-                    } else {
-                        if (newIndex > oldIndex) {
-                            AtomAnimations.swapLeft([oldElement, newElement], width, this, queue);
-                        } else {
-                            AtomAnimations.swapRight([oldElement, newElement], width, this, queue);
-                        }
-                    }
-                } else {
-                    queue.start();
-                }
+                queue.start();
 
             },
             init: function () {
                 var element = this.get_element();
                 $(element).addClass("atom-view-stack");
                 baseType.init.call(this);
+
+                var element = this.get_element();
+
+                if (!element.parentNode.atomControl) {
+                    $(element).addClass("atom-view-stack-fill");
+                }
+                $(element).addClass(this._swipeDirection);
+
                 //this.updateUI();
             }
         }
     });
-})(window, WebAtoms.AtomItemsControl.prototype);
+})(window, WebAtoms.AtomControl.prototype);
 

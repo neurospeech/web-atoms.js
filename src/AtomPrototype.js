@@ -31,12 +31,12 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
     if (baseClass) {
         if (classProperties) {
             f = function () {
-                baseClass.apply(this, arguments);
-                this.__typeName = name;
-                //var cp = Atom.clone(classProperties);
                 for (var k in cp) {
                     this["_" + k] = cp[k];
                 }
+                baseClass.apply(this, arguments);
+                this.__typeName = name;
+                //var cp = Atom.clone(classProperties);
                 old.apply(this, arguments);
             };
         } else {

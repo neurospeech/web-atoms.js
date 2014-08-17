@@ -6,211 +6,192 @@
     <script src="../../../atoms-debug.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
     <link href="base.css" rel="stylesheet" />
+    <script src='//atom-test-cloud.azurewebsites.net/app/js/test/4ba25609-f235-44e9-8567-8c667c1ad41c/test.js'></script>
     <style>
         input {
-            height:auto;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div 
-        atom-type="AtomApplication" >
-
+    <div atom-type="AtomApplication">
         <div class="learn" atom-dock="Left" style="width:200px;">
-
         </div>
-
         <div id="todoapp" atom-dock="Fill">
+            <!--
 
-        <!--
+                Atoms.js require to you write Scope members and methods in the same page.
+                Because Atoms.js maintains UI Scope based on script's position within the HTML Element.
+                If scripts are loaded from "src" attribute, we have no way to track it's position in HTML Node Hierarchy.
 
-            Atoms.js require to you write Scope members and methods in the same page. 
-            Because Atoms.js maintains UI Scope based on script's position within the HTML Element.
-            If scripts are loaded from "src" attribute, we have no way to track it's position in HTML Node Hierarchy.
+                Also note, in Atoms.js, we do not recommend using "id" on any HTML element. Infact, you can see that in our code,
+                we have not used any "id". Since we bind every element and its properties to Scope members.
 
-            Also note, in Atoms.js, we do not recommend using "id" on any HTML element. Infact, you can see that in our code, 
-            we have not used any "id". Since we bind every element and its properties to Scope members.
+                In true Atoms.js Application, you must use classes instead of "id" and you must use atom-name.
 
-            In true Atoms.js Application, you must use classes instead of "id" and you must use atom-name.
+                *** Atoms.js has smaller JavaScript if we use AJAX and use Server Side Data Storage. ***
 
-            *** Atoms.js has smaller JavaScript if we use AJAX and use Server Side Data Storage. ***
+                -->
+            <script type="text/javascript/scope">
+                ({
+                    statusFilter: '',
+                    list: JSON.parse(localStorage.getItem("todos-web-atoms") || '[]'),
 
-            -->
+                    /* We dont want following variables to be serialized
+                    in URL so they must begin with underscore, as Global Scope referred as appScope
+                    saves all values on the URL*/
 
-        <script type="text/javascript/scope">
-            ({
-                statusFilter: '',
-                list: JSON.parse(localStorage.getItem("todos-web-atoms") || '[]'),
+                    /* All counts are cached on scope, since they may be evaluated by property bindings many times,
+                    we do not want to enumerate array all the time. */
 
-                /* We dont want following variables to be serialized 
-                in URL so they must begin with underscore, as Global Scope referred as appScope 
-                saves all values on the URL*/
+                    _title: "",
+                    _v: 1,
+                    _active: 0,
+                    _completed: 0,
 
-                /* All counts are cached on scope, since they may be evaluated by property bindings many times, 
-                we do not want to enumerate array all the time. */
-
-                _title: "",
-                _v: 1,
-                _active: 0,
-                _completed: 0,
-
-                set_selectAll: function (v) {
-                    var list = appScope.list;
-                    var ae = new AtomEnumerator(list);
-                    while (ae.next()) {
-                        var item = ae.current();
-                        Atom.set(item, "completed", v || false );
-                    }
-                    appScope.updateStorageCommand();
-                },
-
-                fetchList: function () {
-                    var l = appScope.list;
-                    var a = Atom.query(l).where({ completed: false }).count();
-                    var c = l.length - a;
-                    Atom.set(appScope, '_active', a);
-                    Atom.set(appScope, '_completed', c);
-                    return l;
-                },
-
-                /* After every action, we must call this method to save list to local Storage and update counts*/
-                updateStorageCommand: function (scope, sender) {
-                    var l = appScope.list;
-                    localStorage.setItem("todos-web-atoms", JSON.stringify(Atom.clone(l)));
-                    appScope.refreshCommand();
-                },
-
-                /* While editing, we actually do not edit the title itself, instead we are editing title stored in scope. 
-                So when we want to end editing, we must store title back into data */
-                endEditCommand: function (scope, sender, evt) {
-                    if (evt.keyCode == 13 || evt.keyCode == 27) {
-                        Atom.set(scope, "editing", false);
-                        if (evt.keyCode == 13) {
-                            var data = Atom.get(sender, "data");
-                            var title = Atom.get(scope, "title");
-                            Atom.set(data, "title", title);
-                            appScope.updateStorageCommand();
+                    set_selectAll: function (v) {
+                        var list = appScope.list;
+                        var ae = new AtomEnumerator(list);
+                        while (ae.next()) {
+                            var item = ae.current();
+                            Atom.set(item, "completed", v || false );
                         }
+                        appScope.updateStorageCommand();
+                    },
+
+                    fetchList: function () {
+                        var l = appScope.list;
+                        var a = Atom.query(l).where({ completed: false }).count();
+                        var c = l.length - a;
+                        Atom.set(appScope, '_active', a);
+                        Atom.set(appScope, '_completed', c);
+                        return l;
+                    },
+
+                    /* After every action, we must call this method to save list to local Storage and update counts*/
+                    updateStorageCommand: function (scope, sender) {
+                        var l = appScope.list;
+                        localStorage.setItem("todos-web-atoms", JSON.stringify(Atom.clone(l)));
+                        appScope.refreshCommand();
+                    },
+
+                    /* While editing, we actually do not edit the title itself, instead we are editing title stored in scope.
+                    So when we want to end editing, we must store title back into data */
+                    endEditCommand: function (scope, sender, evt) {
+                        if (evt.keyCode == 13 || evt.keyCode == 27) {
+                            Atom.set(scope, "editing", false);
+                            if (evt.keyCode == 13) {
+                                var data = Atom.get(sender, "data");
+                                var title = Atom.get(scope, "title");
+                                Atom.set(data, "title", title);
+                                appScope.updateStorageCommand();
+                            }
+                        }
+                    },
+
+                    /* Will be called by input's keyup event handler, and we will create new item,
+                    we will call updateStorageCommand */
+                    addCommand: function (scope, sender, evt) {
+                        if(!evt.keyCode){
+                            evt.keyCode = evt.keyIdentifier;
+                        }
+                        if (evt.keyCode != 13)
+                            return;
+                        if (!appScope._title)
+                            return;
+                        var list = appScope.list;
+                        var newItem = { completed: false, title: $.trim(appScope._title) };
+                        Atom.set(appScope, "_title", "");
+                        Atom.add(list, newItem);
+                        appScope.updateStorageCommand();
+                    },
+
+                    /* We will query for completed items and we will remove it from the list,
+                    and we will update the storage. */
+                    clearCompletedCommand: function (scope, sender, evt) {
+                        var list = appScope.list;
+                        var ae = new AtomEnumerator(Atom.query(list).where({ completed: true }).toArray());
+                        while (ae.next()) {
+                            Atom.remove(list, ae.current());
+                        }
+                        appScope.updateStorageCommand();
                     }
-                },
-
-                /* Will be called by input's keyup event handler, and we will create new item, 
-                we will call updateStorageCommand */
-                addCommand: function (scope, sender, evt) {
-                    if (evt.keyCode != 13)
-                        return;
-                    if (!appScope._title)
-                        return;
-                    var list = appScope.list;
-                    var newItem = { completed: false, title: $.trim(appScope._title) };
-                    Atom.set(appScope, "_title", "");
-                    Atom.add(list, newItem);
-                    appScope.updateStorageCommand();
-                },
-
-                /* We will query for completed items and we will remove it from the list, 
-                and we will update the storage. */
-                clearCompletedCommand: function (scope, sender, evt) {
-                    var list = appScope.list;
-                    var ae = new AtomEnumerator(Atom.query(list).where({ completed: true }).toArray());
-                    while (ae.next()) {
-                        Atom.remove(list, ae.current());
-                    }
-                    appScope.updateStorageCommand();
-                }
-            })
-        </script>
-
-        <header id="header">
-            <h1>Todos</h1>
-            <input 
-                id="new-todo"
-                type="text" 
-                placeholder="What needs to be done?" 
-                atom-value="$[appScope._title]"
-                atom-event-keyup="{$appScope.addCommand}"/>
-        </header>
-
-        <section 
-            id="main"
-            atom-type="AtomItemsControl" 
-            atom-items="[$appScope.fetchList($appScope._v)]"
-            atom-filter="[ $appScope.statusFilter ? { completed: ($appScope.statusFilter == 'completed')  } : {} ]">
-                <input 
-                    id="toggle-all"
-                    type="checkbox"
-                    atom-checked="$[appScope.selectAll]"
-                    />
-                <ul id="todo-list" 
+                })
+            </script>
+            <header id="header">
+                <h1>Todos</h1>
+                <input id="new-todo"
+                       type="text"
+                       placeholder="What needs to be done?"
+                       atom-value="$[appScope._title]"
+                       atom-event-keyup="{$appScope.addCommand}" />
+            </header>
+            <section id="main"
+                     atom-type="AtomItemsControl"
+                     atom-items="[$appScope.fetchList($appScope._v)]"
+                     atom-filter="[ $appScope.statusFilter ? { completed: ($appScope.statusFilter == 'completed')  } : {} ]">
+                <input id="toggle-all"
+                       type="checkbox"
+                       atom-checked="$[appScope.selectAll]" />
+                <ul id="todo-list"
                     atom-presenter="itemsPresenter">
-                    <li 
-                        atom-template="itemTemplate"
+                    <li atom-template="itemTemplate"
                         atom-class="[ { editing:$scope.editing , completed:$data.completed  } ]">
-
                         <script type="text/javascript/scope">
                             ({
                                 editing: false,
 
-                                /* This will be set to data.title while turning on editing, and 
+                                /* This will be set to data.title while turning on editing, and
                                 text box will be bound to this title instead of data.title. So that
                                 we can preserve original title*/
                                 title: ''
                             })
                         </script>
-
                         <div class="view">
-                            <input 
-                                class="toggle" 
-                                type="checkbox" 
-                                atom-checked="$[data.completed]" 
-                                atom-event-click="{ { timeOut: [100, $appScope.updateStorageCommand] } }"
-                                />
-                            <label 
-                                atom-text="[$data.title]"
-                                atom-event-dblclick="[ { scope: { editing: true, title: $data.title } } ]"></label>
-                            <button 
-                                class="destroy" 
-                                atom-event-click="{ { confirm: [ 'Are you sure you want to delete?', [$owner.templateParent.removeItemCommand, $appScope.updateStorageCommand]] } }"></button>
+                            <input class="toggle"
+                                   type="checkbox"
+                                   atom-checked="$[data.completed]"
+                                   atom-event-click="{ { timeOut: [100, $appScope.updateStorageCommand] } }" />
+                            <label atom-text="[$data.title]"
+                                   atom-event-dblclick="[ { scope: { editing: true, title: $data.title } } ]"></label>
+                            <button class="destroy"
+                                    atom-event-click="{ { confirm: [ 'Are you sure you want to delete?', [$owner.templateParent.removeItemCommand, $appScope.updateStorageCommand]] } }"></button>
                         </div>
-                        <input 
-                            class="edit"
-                            type="text" 
-                            atom-value="$[scope.title]" 
-                            atom-event-keyup="{$appScope.endEditCommand}"
-                            atom-event-blur="{ { scope: { editing: false } } }"/>
-
+                        <input class="edit"
+                               type="text"
+                               atom-value="$[scope.title]"
+                               atom-event-keyup="{$appScope.endEditCommand}"
+                               atom-event-blur="{ { scope: { editing: false } } }" />
                     </li>
                 </ul>
-            </table>
-        </section>
-
-		<footer id="footer" 
-            style-display="[ $appScope.list.length ? 'block' : 'none' ]">
-			<span id="todo-count"><strong atom-text="[$appScope._active]"></strong>
-				<span atom-text="[ $appScope._active == 1 ? ' item left' : ' items left' ]"></span>
-			</span>
-			<ul id="filters">
-				<li>
-					<a 
-                        atom-class="[ { selected: !$appScope.statusFilter  } ]" 
-                        href="#statusFilter=">All</a>
-				</li>
-				<li>
-					<a 
-                        atom-class="[ { selected: $appScope.statusFilter == 'active' } ]" 
-                        href="#statusFilter=active">Active</a>
-				</li>
-				<li>
-					<a 
-                        atom-class="[ { selected: $appScope.statusFilter == 'completed' } ]" 
-                        href="#statusFilter=completed">Completed</a>
-				</li>
-			</ul>
-			<button 
-                id="clear-completed" 
-                style-display="[$appScope._completed ? '' : 'none' ]"
-                atom-event-click="{$appScope.clearCompletedCommand}">Clear completed (<span atom-text="[$appScope._completed]"></span>)</button>
-		</footer>
+                </table>
+            </section>
+            <footer id="footer"
+                    style-display="[ $appScope.list.length ? 'block' : 'none' ]">
+                <span id="todo-count">
+                    <strong atom-text="[$appScope._active]"></strong>
+                    <span atom-text="[ $appScope._active == 1 ? ' item left' : ' items left' ]"></span>
+                </span>
+                <ul id="filters">
+                    <li>
+                        <a atom-class="[ { selected: !$appScope.statusFilter  } ]"
+                           href="#statusFilter=">All</a>
+                    </li>
+                    <li>
+                        <a atom-class="[ { selected: $appScope.statusFilter == 'active' } ]"
+                           href="#statusFilter=active">Active</a>
+                    </li>
+                    <li>
+                        <a atom-class="[ { selected: $appScope.statusFilter == 'completed' } ]"
+                           href="#statusFilter=completed">Completed</a>
+                    </li>
+                </ul>
+                <button id="clear-completed"
+                        style-display="[$appScope._completed ? '' : 'none' ]"
+                        atom-event-click="{$appScope.clearCompletedCommand}">
+                    Clear completed (<span atom-text="[$appScope._completed]"></span>)
+                </button>
+            </footer>
         </div>
     </div>
 </body>
