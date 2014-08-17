@@ -3,8 +3,23 @@
     position:absolute;
 }
 
-.atom-view-stack > *
-{
-    visibility: hidden;
+.atom-view-stack-fill{
     position:absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    left:0;
+}
+
+.atom-view-stack .view-stack-child
+{
+    position:absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    left:0;
+}
+
+.atom-view-stack .hidden{
+    display:none;
 }

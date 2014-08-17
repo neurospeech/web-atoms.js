@@ -65,6 +65,7 @@
             { label: "AtomForm", value: "control.html#overview=atom-form" },
             { label: "AtomFormLayout", value: "control.html#overview=atom-form-layout" },
             { label: "AtomFormGridLayout", value: "control.html#overview=atom-form-grid-layout" },
+            { label: "AtomFrameView", value: "control.html#overview=atom-frame-view" },
             { label: "AtomItemsControl", value: "control.html#overview=atom-items-control" },
             { label: "AtomListBox", value: "control.html#overview=atom-list-box" },
             { label: "AtomLinkBar", value: "control.html#overview=atom-link-bar" },

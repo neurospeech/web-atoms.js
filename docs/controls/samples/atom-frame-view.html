@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-View-Stack Sample</title>
+    <script src="../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms-debug.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <!-- sample -->
+
+        <script type="text/javascript">
+    ({
+        links: [
+            { label: "Home", value: "home" },
+            { label: "About", value: "about" },
+            { label: "Contact", value: "contact" },
+        ],
+        view: "home"
+    })
+        </script>
+
+        <span atom-dock="Top"
+              atom-type="AtomToggleButtonBar"
+              atom-name="buttonBar"
+              atom-items="{ $scope.links }"
+              atom-value="$[scope.view]"
+              style="height:30px;text-align:center"></span>
+
+        <div atom-dock="Fill"
+             atom-name="frameView"
+             atom-type="AtomFrameView"
+             atom-url="[$appScope.buttonBar.value]">
+        </div>
+
+        <div 
+             atom-template-name="home"
+             style="background-color:lightyellow">
+            This is home page....
+        </div>
+        <div 
+             atom-template-name="about"
+             style="background-color:lightblue">
+            <button atom-event-click="{$appScope.frameView.backCommand}">Back</button>
+            This is About page....
+        </div>
+        <div 
+             atom-template-name="contact"
+             atom-data="{ {title: 'Contact Page'} }"
+             style="background-color:lightgreen">
+            <button atom-event-click="{$appScope.frameView.backCommand}">Back</button>
+            This is Contact page....
+            <span atom-text="{$data.title}"></span>
+        </div>
+
+
+        <!-- end-sample -->
+    </div>
+</body>
+</html>
