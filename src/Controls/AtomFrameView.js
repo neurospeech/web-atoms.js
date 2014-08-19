@@ -59,7 +59,7 @@
                     Atom.add(items, item);
                     this._element.appendChild(t);
 
-                    var c = AtomUI.createControl(t, WebAtoms.AtomControl);
+                    var c = AtomUI.createControl(t);
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();
