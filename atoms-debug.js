@@ -7903,7 +7903,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 58 - 'AtomFrameView.js' */                    Atom.add(items, item);
 /*Line 59 - 'AtomFrameView.js' */                    this._element.appendChild(t);
 
-/*Line 61 - 'AtomFrameView.js' */                    var c = AtomUI.createControl(t, WebAtoms.AtomControl);
+/*Line 61 - 'AtomFrameView.js' */                    var c = AtomUI.createControl(t);
 /*Line 62 - 'AtomFrameView.js' */                    item.control = c;
 /*Line 63 - 'AtomFrameView.js' */                    WebAtoms.dispatcher.callLater(function () {
 /*Line 64 - 'AtomFrameView.js' */                        c.init();
