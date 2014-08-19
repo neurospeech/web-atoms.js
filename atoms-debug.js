@@ -7703,107 +7703,126 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 9 - 'AtomDateField.js' */            $(e).addClass("atom-date-field");
 /*Line 10 - 'AtomDateField.js' */        },
 /*Line 11 - 'AtomDateField.js' */        properties: {
-/*Line 12 - 'AtomDateField.js' */            isOpen: false
-/*Line 13 - 'AtomDateField.js' */        },
-/*Line 14 - 'AtomDateField.js' */        methods: {
-/*Line 15 - 'AtomDateField.js' */            get_offsetLeft: function () {
-/*Line 16 - 'AtomDateField.js' */                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
-/*Line 17 - 'AtomDateField.js' */                return $(this._element).offset().left;
-/*Line 18 - 'AtomDateField.js' */            },
-/*Line 19 - 'AtomDateField.js' */            get_offsetTop: function () {
-/*Line 20 - 'AtomDateField.js' */                return $(this._element).offset().top;
-/*Line 21 - 'AtomDateField.js' */            },
+/*Line 12 - 'AtomDateField.js' */            isOpen: false,
+/*Line 13 - 'AtomDateField.js' */            time: "9:00 AM"
+/*Line 14 - 'AtomDateField.js' */        },
+/*Line 15 - 'AtomDateField.js' */        methods: {
+/*Line 16 - 'AtomDateField.js' */            get_offsetLeft: function () {
+/*Line 17 - 'AtomDateField.js' */                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
+/*Line 18 - 'AtomDateField.js' */                return $(this._element).offset().left;
+/*Line 19 - 'AtomDateField.js' */            },
+/*Line 20 - 'AtomDateField.js' */            get_offsetTop: function () {
+/*Line 21 - 'AtomDateField.js' */                return $(this._element).offset().top;
+/*Line 22 - 'AtomDateField.js' */            },
 
-/*Line 23 - 'AtomDateField.js' */            onPopupRemoved: function (e) {
-/*Line 24 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
-/*Line 25 - 'AtomDateField.js' */            },
+/*Line 24 - 'AtomDateField.js' */            onPopupRemoved: function (e) {
+/*Line 25 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
+/*Line 26 - 'AtomDateField.js' */            },
 
-/*Line 27 - 'AtomDateField.js' */            set_isOpen: function (v) {
-/*Line 28 - 'AtomDateField.js' */                this._isOpen = v;
-/*Line 29 - 'AtomDateField.js' */                if (v) {
-/*Line 30 - 'AtomDateField.js' */                    this.getTemplate("popupTemplate");
+/*Line 28 - 'AtomDateField.js' */            set_isOpen: function (v) {
+/*Line 29 - 'AtomDateField.js' */                this._isOpen = v;
+/*Line 30 - 'AtomDateField.js' */                if (v) {
+/*Line 31 - 'AtomDateField.js' */                    this.getTemplate("popupTemplate");
 
-/*Line 32 - 'AtomDateField.js' */                    this.popup = AtomUI.cloneNode(this._popupTemplate);
-/*Line 33 - 'AtomDateField.js' */                    this.popup._logicalParent = this._element;
-/*Line 34 - 'AtomDateField.js' */                    this.popup._templateParent = this;
-/*Line 35 - 'AtomDateField.js' */                    //this.popup.style.visibility = "hidden";
-/*Line 36 - 'AtomDateField.js' */                    document.body.appendChild(this.popup);
-/*Line 37 - 'AtomDateField.js' */                    this.onCreateChildren(this.popup);
-/*Line 38 - 'AtomDateField.js' */                    this.setProperties(this.popup);
-/*Line 39 - 'AtomDateField.js' */                    this.initChildren(this.popup);
+/*Line 33 - 'AtomDateField.js' */                    this.popup = AtomUI.cloneNode(this._popupTemplate);
+/*Line 34 - 'AtomDateField.js' */                    this.popup._logicalParent = this._element;
+/*Line 35 - 'AtomDateField.js' */                    this.popup._templateParent = this;
+/*Line 36 - 'AtomDateField.js' */                    //this.popup.style.visibility = "hidden";
+/*Line 37 - 'AtomDateField.js' */                    document.body.appendChild(this.popup);
+/*Line 38 - 'AtomDateField.js' */                    this.onCreateChildren(this.popup);
+/*Line 39 - 'AtomDateField.js' */                    this.setProperties(this.popup);
+/*Line 40 - 'AtomDateField.js' */                    this.initChildren(this.popup);
 
-/*Line 41 - 'AtomDateField.js' */                    var _this = this;
-/*Line 42 - 'AtomDateField.js' */                    this._refreshInterval = setInterval(function () {
-/*Line 43 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetLeft");
-/*Line 44 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetTop");
-/*Line 45 - 'AtomDateField.js' */                    });
+/*Line 42 - 'AtomDateField.js' */                    var _this = this;
+/*Line 43 - 'AtomDateField.js' */                    this._refreshInterval = setInterval(function () {
+/*Line 44 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetLeft");
+/*Line 45 - 'AtomDateField.js' */                        AtomBinder.refreshValue(_this, "offsetTop");
+/*Line 46 - 'AtomDateField.js' */                    });
 
-/*Line 47 - 'AtomDateField.js' */                    //var _this = this;
-/*Line 48 - 'AtomDateField.js' */                    //WebAtoms.dispatcher.callLater(function () {
-/*Line 49 - 'AtomDateField.js' */                    //    AtomPopup.show(_this._element, _this.popup, 0, function () {
-/*Line 50 - 'AtomDateField.js' */                    //        _this.onPopupRemoved(_this.popup);
-/*Line 51 - 'AtomDateField.js' */                    //    });
-/*Line 52 - 'AtomDateField.js' */                    //});
-/*Line 53 - 'AtomDateField.js' */                } else {
-/*Line 54 - 'AtomDateField.js' */                    //AtomPopup.hide(this.popup);
-/*Line 55 - 'AtomDateField.js' */                    if (this._refreshInterval) {
-/*Line 56 - 'AtomDateField.js' */                        clearInterval(this._refreshInterval);
-/*Line 57 - 'AtomDateField.js' */                    }
-/*Line 58 - 'AtomDateField.js' */                    this.disposeChildren(this.popup);
-/*Line 59 - 'AtomDateField.js' */                    $(this.popup).remove();
-/*Line 60 - 'AtomDateField.js' */                }
-/*Line 61 - 'AtomDateField.js' */            },
+/*Line 48 - 'AtomDateField.js' */                    //var _this = this;
+/*Line 49 - 'AtomDateField.js' */                    //WebAtoms.dispatcher.callLater(function () {
+/*Line 50 - 'AtomDateField.js' */                    //    AtomPopup.show(_this._element, _this.popup, 0, function () {
+/*Line 51 - 'AtomDateField.js' */                    //        _this.onPopupRemoved(_this.popup);
+/*Line 52 - 'AtomDateField.js' */                    //    });
+/*Line 53 - 'AtomDateField.js' */                    //});
+/*Line 54 - 'AtomDateField.js' */                } else {
+/*Line 55 - 'AtomDateField.js' */                    //AtomPopup.hide(this.popup);
+/*Line 56 - 'AtomDateField.js' */                    if (this._refreshInterval) {
+/*Line 57 - 'AtomDateField.js' */                        clearInterval(this._refreshInterval);
+/*Line 58 - 'AtomDateField.js' */                    }
+/*Line 59 - 'AtomDateField.js' */                    if (this.popup) {
+/*Line 60 - 'AtomDateField.js' */                        this.disposeChildren(this.popup);
+/*Line 61 - 'AtomDateField.js' */                        $(this.popup).remove();
+/*Line 62 - 'AtomDateField.js' */                        this.popup = null;
+/*Line 63 - 'AtomDateField.js' */                    }
+/*Line 64 - 'AtomDateField.js' */                }
+/*Line 65 - 'AtomDateField.js' */            },
 
-/*Line 63 - 'AtomDateField.js' */            dispose: function () {
-/*Line 64 - 'AtomDateField.js' */                this.set_isOpen(false);
-/*Line 65 - 'AtomDateField.js' */                base.dispose.call(this);
-/*Line 66 - 'AtomDateField.js' */            },
-/*Line 67 - 'AtomDateField.js' */            get_isOpen: function () {
-/*Line 68 - 'AtomDateField.js' */                return this._isOpen;
-/*Line 69 - 'AtomDateField.js' */            },
+/*Line 67 - 'AtomDateField.js' */            dispose: function () {
+/*Line 68 - 'AtomDateField.js' */                this.set_isOpen(false);
+/*Line 69 - 'AtomDateField.js' */                base.dispose.call(this);
+/*Line 70 - 'AtomDateField.js' */            },
+/*Line 71 - 'AtomDateField.js' */            get_isOpen: function () {
+/*Line 72 - 'AtomDateField.js' */                return this._isOpen;
+/*Line 73 - 'AtomDateField.js' */            },
 
-/*Line 71 - 'AtomDateField.js' */            get_selectedItem: function () {
-/*Line 72 - 'AtomDateField.js' */                if (this._selectedItems.length)
-/*Line 73 - 'AtomDateField.js' */                    return this._selectedItems[0];
-/*Line 74 - 'AtomDateField.js' */                return null;
-/*Line 75 - 'AtomDateField.js' */            },
+/*Line 75 - 'AtomDateField.js' */            get_selectedItem: function () {
+/*Line 76 - 'AtomDateField.js' */                if (this._selectedItems.length)
+/*Line 77 - 'AtomDateField.js' */                    return this._selectedItems[0];
+/*Line 78 - 'AtomDateField.js' */                return null;
+/*Line 79 - 'AtomDateField.js' */            },
 
-/*Line 77 - 'AtomDateField.js' */            set_value: function (v) {
-/*Line 78 - 'AtomDateField.js' */                v = AtomDate.parse(v);
-/*Line 79 - 'AtomDateField.js' */                this._value = v;
-/*Line 80 - 'AtomDateField.js' */                this._selectedItems.length = 0;
-/*Line 81 - 'AtomDateField.js' */                if (v) {
+/*Line 81 - 'AtomDateField.js' */            set_time: function (v) {
+/*Line 82 - 'AtomDateField.js' */                if (this._set_timeCalled)
+/*Line 83 - 'AtomDateField.js' */                    return;
+/*Line 84 - 'AtomDateField.js' */                this._set_timeCalled = true;
+/*Line 85 - 'AtomDateField.js' */                if (v) {
+/*Line 86 - 'AtomDateField.js' */                    this._time = v;
+/*Line 87 - 'AtomDateField.js' */                    var d = AtomDate.setTime(this.get_value(), v);
+/*Line 88 - 'AtomDateField.js' */                    AtomBinder.setValue(this, "value", d);
+/*Line 89 - 'AtomDateField.js' */                }
+/*Line 90 - 'AtomDateField.js' */                this._set_timeCalled = false;
+/*Line 91 - 'AtomDateField.js' */            },
 
-/*Line 83 - 'AtomDateField.js' */                    this._selectedItems.push({ date: v, dateLabel: AtomDate.toShortDateString(v), value: AtomDate.toMMDDYY(v), label: v.getDate() });
-/*Line 84 - 'AtomDateField.js' */                    this.set_visibleDate(v);
-/*Line 85 - 'AtomDateField.js' */                }
-/*Line 86 - 'AtomDateField.js' */                if (this._created) {
-/*Line 87 - 'AtomDateField.js' */                    AtomBinder.refreshItems(this._selectedItems);
-/*Line 88 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "value");
-/*Line 89 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItem");
-/*Line 90 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItems");
-/*Line 91 - 'AtomDateField.js' */                }
-/*Line 92 - 'AtomDateField.js' */            },
-/*Line 93 - 'AtomDateField.js' */            get_value: function (v) {
-/*Line 94 - 'AtomDateField.js' */                if (this._selectedItems.length)
-/*Line 95 - 'AtomDateField.js' */                    return this._selectedItems[0].date;
-/*Line 96 - 'AtomDateField.js' */                return this._value;
-/*Line 97 - 'AtomDateField.js' */            },
+/*Line 93 - 'AtomDateField.js' */            set_value: function (v) {
+/*Line 94 - 'AtomDateField.js' */                v = AtomDate.parse(v);
+/*Line 95 - 'AtomDateField.js' */                this._value = v;
 
-/*Line 99 - 'AtomDateField.js' */            toggleDate: function (scope, sender) {
-/*Line 100 - 'AtomDateField.js' */                var item = sender.get_data();
-/*Line 101 - 'AtomDateField.js' */                this._selectedItems.length = 0;
-/*Line 102 - 'AtomDateField.js' */                AtomBinder.addItem(this._selectedItems, item);
-/*Line 103 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "value");
-/*Line 104 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItem");
-/*Line 105 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItems");
-/*Line 106 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
-/*Line 107 - 'AtomDateField.js' */            }
+/*Line 97 - 'AtomDateField.js' */                AtomBinder.setValue(this, "time", AtomDate.toTimeString(v));
+
+/*Line 99 - 'AtomDateField.js' */                this._selectedItems.length = 0;
+/*Line 100 - 'AtomDateField.js' */                if (v) {
+
+/*Line 102 - 'AtomDateField.js' */                    this._selectedItems.push({ date: v, dateLabel: AtomDate.toShortDateString(v), value: AtomDate.toMMDDYY(v), label: v.getDate() });
+/*Line 103 - 'AtomDateField.js' */                    this.set_visibleDate(v);
+/*Line 104 - 'AtomDateField.js' */                }
+/*Line 105 - 'AtomDateField.js' */                if (this._created) {
+/*Line 106 - 'AtomDateField.js' */                    AtomBinder.refreshItems(this._selectedItems);
+/*Line 107 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "value");
+/*Line 108 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItem");
+/*Line 109 - 'AtomDateField.js' */                    AtomBinder.refreshValue(this, "selectedItems");
+/*Line 110 - 'AtomDateField.js' */                }
+/*Line 111 - 'AtomDateField.js' */            },
+/*Line 112 - 'AtomDateField.js' */            get_value: function (v) {
+/*Line 113 - 'AtomDateField.js' */                if (this._selectedItems.length)
+/*Line 114 - 'AtomDateField.js' */                    return this._selectedItems[0].date;
+/*Line 115 - 'AtomDateField.js' */                return this._value;
+/*Line 116 - 'AtomDateField.js' */            },
+
+/*Line 118 - 'AtomDateField.js' */            toggleDate: function (scope, sender) {
+/*Line 119 - 'AtomDateField.js' */                var item = sender.get_data();
+/*Line 120 - 'AtomDateField.js' */                this._selectedItems.length = 0;
+/*Line 121 - 'AtomDateField.js' */                AtomBinder.addItem(this._selectedItems, item);
+/*Line 122 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "value");
+/*Line 123 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItem");
+/*Line 124 - 'AtomDateField.js' */                AtomBinder.refreshValue(this, "selectedItems");
+/*Line 125 - 'AtomDateField.js' */                AtomBinder.setValue(this, "isOpen", false);
+/*Line 126 - 'AtomDateField.js' */            }
 
 
-/*Line 110 - 'AtomDateField.js' */        }
-/*Line 111 - 'AtomDateField.js' */    });
-/*Line 112 - 'AtomDateField.js' */})(window, WebAtoms.AtomDateListBox.prototype);
+/*Line 129 - 'AtomDateField.js' */        }
+/*Line 130 - 'AtomDateField.js' */    });
+/*Line 131 - 'AtomDateField.js' */})(window, WebAtoms.AtomDateListBox.prototype);
 /*Line 0 - 'AtomDeleteButton.js' */
 
 /*Line 2 - 'AtomDeleteButton.js' */(function (window, base) {

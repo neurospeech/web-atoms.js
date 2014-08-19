@@ -10,7 +10,8 @@
             $(e).addClass("atom-date-field");
         },
         properties: {
-            isOpen: false
+            isOpen: false,
+            time: "9:00 AM"
         },
         methods: {
             get_offsetLeft: function () {
@@ -56,8 +57,11 @@
                     if (this._refreshInterval) {
                         clearInterval(this._refreshInterval);
                     }
-                    this.disposeChildren(this.popup);
-                    $(this.popup).remove();
+                    if (this.popup) {
+                        this.disposeChildren(this.popup);
+                        $(this.popup).remove();
+                        this.popup = null;
+                    }
                 }
             },
 
@@ -75,9 +79,24 @@
                 return null;
             },
 
+            set_time: function (v) {
+                if (this._set_timeCalled)
+                    return;
+                this._set_timeCalled = true;
+                if (v) {
+                    this._time = v;
+                    var d = AtomDate.setTime(this.get_value(), v);
+                    AtomBinder.setValue(this, "value", d);
+                }
+                this._set_timeCalled = false;
+            },
+
             set_value: function (v) {
                 v = AtomDate.parse(v);
                 this._value = v;
+
+                AtomBinder.setValue(this, "time", AtomDate.toTimeString(v));
+
                 this._selectedItems.length = 0;
                 if (v) {
 
