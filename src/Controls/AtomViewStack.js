@@ -75,7 +75,6 @@
                 if (selectedElement) {
                     var width = $(element).innerWidth();
                     var height = $(element).innerHeight();
-                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
 
                     if (previousElement) {
                         var self = this;
@@ -87,8 +86,13 @@
                             $(selectedElement).css("left", width);
                         }
                         $(ael).removeClass("hidden");
+                        AtomUI.setItemRect(selectedElement, { width: width, height: height });
                         $(ael).addClass("animate-left-property");
-                        setTimeout(function () {
+                        var sac = selectedElement.atomControl;
+                        if (sac) {
+                            sac.updateUI();
+                        }
+                        WebAtoms.dispatcher.callLater(function () {
                             $(selectedElement).css("left", 0);
                             if (selectedIndex < previousIndex) {
                                 $(previousElement).css("left", width);
@@ -100,7 +104,7 @@
                                 $(ael).removeClass("animate-left-property");
                                 $(previousElement).addClass("hidden");
                             }, 600);
-                        }, 10);
+                        });
                     } else {
                         $(selectedElement).removeClass("hidden");
                     }
