@@ -73,14 +73,14 @@
                 }
 
                 if (selectedElement) {
-                    var self = this;
-                    this._isAnimating = true;
                     var width = $(element).innerWidth();
                     var height = $(element).innerHeight();
                     AtomUI.setItemRect(selectedElement, { width: width, height: height });
 
                     if (previousElement) {
-                        var ael = [selectedElement,previousElement];
+                        var self = this;
+                        this._isAnimating = true;
+                        var ael = [selectedElement, previousElement];
                         if (selectedIndex < previousIndex) {
                             $(selectedElement).css("left", -width);
                         } else {
