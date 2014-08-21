@@ -72,7 +72,7 @@
                         location.hash = q;
                     });
                 }
-
+                this._url = v;
             },
             onBackCommand: function () {
                 var index = this._selectedIndex;
@@ -80,7 +80,8 @@
                     var item = Atom.query(this._items).firstOrDefault({ index: index });
                     if (item) {
                         var self = this;
-                        Atom.set(this, "selectedIndex", index -1);
+                        index = index - 1;
+                        Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
                             setTimeout(function () {
                                 item.control.dispose();
@@ -89,7 +90,12 @@
                                 var a = Atom.query(self._items);
                                 var i = 0;
                                 while (a.next()) {
-                                    a.current().index = i++;
+                                    var ci = a.current();
+                                    ci.index = i++;
+                                    if (a.currentIndex() == index) {
+                                        self._url = ci.url;
+                                        Atom.refresh(self, "url");
+                                    }
                                 }
                             }, 1000);
                         }
