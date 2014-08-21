@@ -6441,14 +6441,14 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 72 - 'AtomViewStack.js' */                }
 
 /*Line 74 - 'AtomViewStack.js' */                if (selectedElement) {
-/*Line 75 - 'AtomViewStack.js' */                    var self = this;
-/*Line 76 - 'AtomViewStack.js' */                    this._isAnimating = true;
-/*Line 77 - 'AtomViewStack.js' */                    var width = $(element).innerWidth();
-/*Line 78 - 'AtomViewStack.js' */                    var height = $(element).innerHeight();
-/*Line 79 - 'AtomViewStack.js' */                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
+/*Line 75 - 'AtomViewStack.js' */                    var width = $(element).innerWidth();
+/*Line 76 - 'AtomViewStack.js' */                    var height = $(element).innerHeight();
+/*Line 77 - 'AtomViewStack.js' */                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
 
-/*Line 81 - 'AtomViewStack.js' */                    if (previousElement) {
-/*Line 82 - 'AtomViewStack.js' */                        var ael = [selectedElement,previousElement];
+/*Line 79 - 'AtomViewStack.js' */                    if (previousElement) {
+/*Line 80 - 'AtomViewStack.js' */                        var self = this;
+/*Line 81 - 'AtomViewStack.js' */                        this._isAnimating = true;
+/*Line 82 - 'AtomViewStack.js' */                        var ael = [selectedElement, previousElement];
 /*Line 83 - 'AtomViewStack.js' */                        if (selectedIndex < previousIndex) {
 /*Line 84 - 'AtomViewStack.js' */                            $(selectedElement).css("left", -width);
 /*Line 85 - 'AtomViewStack.js' */                        } else {
