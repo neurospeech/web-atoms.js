@@ -59,7 +59,7 @@
                     Atom.add(items, item);
                     this._element.appendChild(t);
 
-                    var c = AtomUI.createControl(t);
+                    var c = AtomUI.createControl(t, $(t).attr("atom-type") || WebAtoms.AtomControl );
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();
@@ -80,11 +80,9 @@
                     var item = Atom.query(this._items).firstOrDefault({ index: index });
                     if (item) {
                         var self = this;
-                        this._selectedIndex = index - 1;
-                        Atom.refresh(this, "selectedIndex");
-
-                        WebAtoms.dispatcher.callLater(function () {
-                            if (self._removeOnBack) {
+                        Atom.set(this, "selectedIndex", index -1);
+                        if (self._removeOnBack) {
+                            setTimeout(function () {
                                 item.control.dispose();
                                 $(item.element).remove();
                                 Atom.remove(self._items, item);
@@ -93,9 +91,8 @@
                                 while (a.next()) {
                                     a.current().index = i++;
                                 }
-                            }
-                            self.updateUI();
-                        });
+                            }, 1000);
+                        }
 
                     }
                 }
