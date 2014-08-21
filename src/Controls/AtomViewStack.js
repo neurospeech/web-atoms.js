@@ -9,7 +9,8 @@
             this._swipeDirection = 'left-right';
         },
         properties: {
-            selectedIndex:-1,
+            selectedIndex: -1,
+            previousIndex: -1,
             swipeDirection: 'left-right'
         },
         methods: {
@@ -36,6 +37,7 @@
                 var childEn = new ChildEnumerator(element);
 
                 var selectedIndex = this.get_selectedIndex();
+                var previousIndex = this._previousIndex;
 
                 var queue = new WebAtoms.AtomDispatcher();
                 queue.pause();
@@ -44,30 +46,53 @@
 
                 var self = this;
 
+                var selectedElement, previousElement;
+
                 while (childEn.next()) {
                     i = i + 1;
                     var item = childEn.current();
 
                     $(item).addClass("view-stack-child");
-
-                    if (i == selectedIndex) {
-
-                        AtomUI.setItemRect(item, { width: $(element).width(), height: $(element).height() });
-
-                        $(item).removeClass("hidden");
-
-                        this._lastSelectedChild = item;
-
-                        queue.callLater(function () {
-                            var ac = self._lastSelectedChild.atomControl;
-                            if (ac) {
-                                ac.updateUI();
-                            }
-                        });
-
-                    } else {
-
+                    if (previousIndex == -1) {
                         $(item).addClass("hidden");
+                    }
+                    if (i == selectedIndex) {
+                        selectedElement = item;
+                    } else if (i == previousIndex) {
+                        previousElement = item;
+                    } else {
+                        $(item).addClass("hidden");
+                    }
+                }
+
+                if (selectedElement) {
+                    var width = $(element).innerWidth();
+                    var height = $(element).innerHeight();
+                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
+
+                    if (previousElement) {
+                        var ael = [selectedElement,previousElement];
+                        if (selectedIndex < previousIndex) {
+                            $(selectedElement).css("left", -width);
+                        } else {
+                            $(selectedElement).css("left", width);
+                        }
+                        $(ael).removeClass("hidden");
+                        $(ael).addClass("animate-left-property");
+                        setTimeout(function () {
+                            $(selectedElement).css("left", 0);
+                            if (selectedIndex < previousIndex) {
+                                $(previousElement).css("left", width);
+                            } else {
+                                $(previousElement).css("left", -width);
+                            }
+                            setTimeout(function () {
+                                $(ael).removeClass("animate-left-property");
+                                $(previousElement).addClass("hidden");
+                            }, 600);
+                        }, 10);
+                    } else {
+                        $(selectedElement).removeClass("hidden");
                     }
                 }
 

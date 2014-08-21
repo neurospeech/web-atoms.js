@@ -1,7 +1,7 @@
 ﻿var AtomConfig = {
     debug: false,
     baseUrl: "",
-    log: "",
+    log: "",    
     ajax: {
         versionUrl: true,
         versionKey: "__wav",
