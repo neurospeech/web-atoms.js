@@ -27,6 +27,13 @@
                 }
             },
             set_selectedIndex: function (v) {
+                if (this._isAnimating) {
+                    var self = this;
+                    setTimeout(function () {
+                        self.set_selectedIndex(v);
+                    }, 50);
+                    return;
+                }
                 this._previousIndex = this._selectedIndex;
                 this._selectedIndex = v;
                 this.updateUI();
@@ -66,6 +73,8 @@
                 }
 
                 if (selectedElement) {
+                    var self = this;
+                    this._isAnimating = true;
                     var width = $(element).innerWidth();
                     var height = $(element).innerHeight();
                     AtomUI.setItemRect(selectedElement, { width: width, height: height });
@@ -87,6 +96,7 @@
                                 $(previousElement).css("left", -width);
                             }
                             setTimeout(function () {
+                                self._isAnimating = false;
                                 $(ael).removeClass("animate-left-property");
                                 $(previousElement).addClass("hidden");
                             }, 600);
