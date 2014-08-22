@@ -38,6 +38,9 @@
                 this._selectedIndex = v;
                 this.updateUI();
             },
+            get_selectedChild: function () {
+                return this._selectedChild;
+            },
             onUpdateUI: function () {
 
                 var element = this._element;
@@ -75,6 +78,8 @@
                 if (selectedElement) {
                     var width = $(element).innerWidth();
                     var height = $(element).innerHeight();
+
+                    this._selectedChild = selectedElement;
 
                     if (previousElement) {
                         var self = this;
