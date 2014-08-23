@@ -98,7 +98,7 @@ var Atom = {
         if (update) {
             for (var k in c) {
                 //x[k] = c[k];
-                AtomBinder.setValue(x, k, AtomBinder.getValue(c, k));
+                Atom.set(x, k, AtomBinder.getValue(c, k));
             }
         } else {
             for (var k in c) {

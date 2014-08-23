@@ -729,7 +729,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 97 - 'Atom.js' */        if (update) {
 /*Line 98 - 'Atom.js' */            for (var k in c) {
 /*Line 99 - 'Atom.js' */                //x[k] = c[k];
-/*Line 100 - 'Atom.js' */                AtomBinder.setValue(x, k, AtomBinder.getValue(c, k));
+/*Line 100 - 'Atom.js' */                Atom.set(x, k, AtomBinder.getValue(c, k));
 /*Line 101 - 'Atom.js' */            }
 /*Line 102 - 'Atom.js' */        } else {
 /*Line 103 - 'Atom.js' */            for (var k in c) {
