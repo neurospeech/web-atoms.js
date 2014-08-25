@@ -1,5 +1,5 @@
-﻿/// <reference path="../../../jquery-1.8.2.min.js" />
-/// <reference path="../../../atoms-debug.js" />
+﻿/// <reference path="jquery-1.9.1.js" />
+/// <reference path="dummy-web-atoms.js" />
 
 (function (window) {
 
@@ -9,6 +9,9 @@
     var AtomUI = window.AtomUI;
     var AtomBinder = window.AtomBinder;
     var entityContext = window.entityContext;
+    if (!entityContext) {
+        throw new Error("window.entityContext does not exist, please create it before inserting this script");
+    }
 
     Templates.jsonML["WebAtoms.AtomParentBox.template"] = [
         ["div", {
@@ -20,6 +23,13 @@
             "atom-window-width": "{$appScope.owner.appWidth - 100}",
             "atom-window-height": "{$appScope.owner.appHeight - 100}"
         }],
+        ["a",
+            {
+                "class": "link",
+                "atom-text": "[$owner.displayName]",
+                "atom-event-click": "{ [{ owner: { mode: 'view' } }, $localScope.modifyWindow] }",
+                "style-display": "[$owner.displayName ? '' : 'none']"
+            }],
         ["div",
             {
                 "class": "add",
@@ -58,17 +68,6 @@
                 "atom-item-template": "{$owner.templateParent.itemTemplate}"
             }
         ]
-    ];
-
-    Templates.jsonML["WebAtoms.AtomParentBox.itemTemplate"] = [
-        ["a",
-            {
-                "class": "link",
-                "atom-template": "itemTemplate",
-                "atom-text": "[$owner.templateParent.displayName]",
-                "atom-event-click": "{ [{ owner: { 'templateParent.mode': 'view' } }, $localScope.modifyWindow] }",
-                "style-display": "[$owner.templateParent.displayName ? '' : 'none']"
-            }]
     ];
 
 
@@ -316,97 +315,73 @@
                     var e = entityContext.attach(Atom.clone(d), this.getEntityType());
                     var ce = Atom.get(this, "atomParent.data");
                     Atom.set(ce, this._propertyName, d);
-                },
-                init: function () {
-                    baseType.init.call(this);
-                    var t = this.getTemplate("itemTemplate");
-                    t = AtomUI.cloneNode(t);
-                    var c = $(t).attr("atom-type") || WebAtoms.AtomControl;
-                    c = AtomUI.createControl(t, c);
-                    t._templateParent = this;
-                    c.init();
-                    this._element.appendChild(t);
                 }
             }
         });
     })(WebAtoms.AtomControl.prototype);
 
+
     (function (baseType) {
         return classCreatorEx({
-            name: "WebAtoms.AtomChangeButton",
+            name: "WebAtoms.AtomEntityForm",
             base: baseType,
             start: function () { },
-            properties: {},
+            properties: {
+                includeList: ""
+            },
             methods: {
-
-            }
-        });
-    })(WebAtoms.AtomControl.prototype);
-
-
-    (function (baseType) {
-        return classCreatorEx({
-                name: "WebAtoms.AtomEntityForm",
-                base: baseType,
-                start: function () {
-        },
-                properties: {
-                        includeList: ""
-        },
-                methods: {
-                        addInclude: function (n) {
+                addInclude: function (n) {
                     var list = this._includeList.split(',');
                     var ae = new AtomEnumerator(list);
                     while (ae.next()) {
                         var item = ae.current();
                         if (item == n)
                             return;
-                        }
+                    }
                     list.push(n);
                     this._includeList = list.join(',');
                 },
 
-                        findParentBox: function (e) {
+                findParentBox: function (e) {
                     var at = AtomUI.attributeMap(e, /atom\-|(type|property\-name)/gi);
                     var type = at["atom-type"];
                     if (type && type.value == "AtomParentBox") {
                         var n = at["atom-property-name"].value;
                         this.addInclude(n);
                         return;
-                        }
+                    }
                     if (type && (type.value == "AtomChildListBox" || type.value == "AtomWindow"))
-                                return;
+                        return;
                     var ce = new ChildEnumerator(e);
                     while (ce.next()) {
                         this.findParentBox(ce.current());
-                        }
+                    }
                 },
-                        createChildren: function () {
+                createChildren: function () {
 
                     this.findParentBox(this._element);
 
                     baseType.createChildren.apply(this, arguments);
                 }
-        }
+            }
         });
     })(WebAtoms.AtomForm.prototype);
 
     (function (baseType) {
         return classCreatorEx({
-                name: "WebAtoms.AtomEntitySaveButton",
-                base: baseType,
-                start: function () {
-        },
-                properties: {
-        },
-                methods: {
-                        onClickHandler: function () {
+            name: "WebAtoms.AtomEntitySaveButton",
+            base: baseType,
+            start: function () { },
+            properties: {
+            },
+            methods: {
+                onClickHandler: function () {
                     var _this = this;
                     entityContext.saveCommand().then(function () {
                         _this.invokeAction(_this._next);
                     }).invoke();
                 }
-        }
+            }
         });
     })(WebAtoms.AtomButton.prototype);
 
