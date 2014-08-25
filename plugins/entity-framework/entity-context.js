@@ -548,5 +548,3 @@ dbContext.prototype = {
     }
 };
 
-var entityContext = new dbContext("/crm",entityMap);
-
