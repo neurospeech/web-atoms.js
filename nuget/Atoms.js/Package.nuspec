@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.452</version>
+    <version>1.2.459</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -21,7 +21,7 @@
     <licenseUrl>https://github.com/neurospeech/atoms.js/blob/master/License.md</licenseUrl>
     <copyright>Copyright  2014</copyright>
     <dependencies>
-      <dependency id="jQuery" version="1.11.1" />
+      <dependency id="jQuery" version="[1.11.1,2.0)" />
     </dependencies>
     <references></references>
     <tags></tags>
@@ -33,5 +33,10 @@
     <file src="..\..\style\**\*.jpg" target="content\Style\atoms" />
     <file src="..\..\atoms.min.js" target="content\Scripts\atoms.min.js" />
     <file src="..\..\atoms-debug.js" target="content\Scripts\atoms-debug.js" />
- </files>
+    <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\atoms\plugins\entity-framework\entity-context.js"/>
+    <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\atoms\plugins\entity-framework\entity-controls.js"/>
+    <file src="..\..\plugins\entity-framework\entity.css" target="content\Scripts\atoms\plugins\entity-framework\entity.css"/>
+    <file src="..\..\plugins\entity-framework\entity.min.css" target="content\Scripts\atoms\plugins\entity-framework\entity.min.css"/>
+    <file src="..\..\plugins\entity-framework\entity.css.map" target="content\Scripts\atoms\plugins\entity-framework\entity.css.map"/>
+  </files>
 </package>

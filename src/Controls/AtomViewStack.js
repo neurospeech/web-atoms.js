@@ -81,6 +81,12 @@
 
                     this._selectedChild = selectedElement;
 
+                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
+                    var sac = selectedElement.atomControl;
+                    if (sac) {
+                        sac.updateUI();
+                    }
+
                     if (previousElement) {
                         var self = this;
                         this._isAnimating = true;
@@ -91,12 +97,7 @@
                             $(selectedElement).css("left", width);
                         }
                         $(ael).removeClass("hidden");
-                        AtomUI.setItemRect(selectedElement, { width: width, height: height });
                         $(ael).addClass("animate-left-property");
-                        var sac = selectedElement.atomControl;
-                        if (sac) {
-                            sac.updateUI();
-                        }
                         WebAtoms.dispatcher.callLater(function () {
                             $(selectedElement).css("left", 0);
                             if (selectedIndex < previousIndex) {
