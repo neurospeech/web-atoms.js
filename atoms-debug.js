@@ -6449,60 +6449,61 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 /*Line 81 - 'AtomViewStack.js' */                    this._selectedChild = selectedElement;
 
-/*Line 83 - 'AtomViewStack.js' */                    if (previousElement) {
-/*Line 84 - 'AtomViewStack.js' */                        var self = this;
-/*Line 85 - 'AtomViewStack.js' */                        this._isAnimating = true;
-/*Line 86 - 'AtomViewStack.js' */                        var ael = [selectedElement, previousElement];
-/*Line 87 - 'AtomViewStack.js' */                        if (selectedIndex < previousIndex) {
-/*Line 88 - 'AtomViewStack.js' */                            $(selectedElement).css("left", -width);
-/*Line 89 - 'AtomViewStack.js' */                        } else {
-/*Line 90 - 'AtomViewStack.js' */                            $(selectedElement).css("left", width);
-/*Line 91 - 'AtomViewStack.js' */                        }
-/*Line 92 - 'AtomViewStack.js' */                        $(ael).removeClass("hidden");
-/*Line 93 - 'AtomViewStack.js' */                        AtomUI.setItemRect(selectedElement, { width: width, height: height });
-/*Line 94 - 'AtomViewStack.js' */                        $(ael).addClass("animate-left-property");
-/*Line 95 - 'AtomViewStack.js' */                        var sac = selectedElement.atomControl;
-/*Line 96 - 'AtomViewStack.js' */                        if (sac) {
-/*Line 97 - 'AtomViewStack.js' */                            sac.updateUI();
-/*Line 98 - 'AtomViewStack.js' */                        }
-/*Line 99 - 'AtomViewStack.js' */                        WebAtoms.dispatcher.callLater(function () {
-/*Line 100 - 'AtomViewStack.js' */                            $(selectedElement).css("left", 0);
-/*Line 101 - 'AtomViewStack.js' */                            if (selectedIndex < previousIndex) {
-/*Line 102 - 'AtomViewStack.js' */                                $(previousElement).css("left", width);
-/*Line 103 - 'AtomViewStack.js' */                            } else {
-/*Line 104 - 'AtomViewStack.js' */                                $(previousElement).css("left", -width);
-/*Line 105 - 'AtomViewStack.js' */                            }
-/*Line 106 - 'AtomViewStack.js' */                            setTimeout(function () {
-/*Line 107 - 'AtomViewStack.js' */                                self._isAnimating = false;
-/*Line 108 - 'AtomViewStack.js' */                                $(ael).removeClass("animate-left-property");
-/*Line 109 - 'AtomViewStack.js' */                                $(previousElement).addClass("hidden");
-/*Line 110 - 'AtomViewStack.js' */                            }, 600);
-/*Line 111 - 'AtomViewStack.js' */                        });
-/*Line 112 - 'AtomViewStack.js' */                    } else {
-/*Line 113 - 'AtomViewStack.js' */                        $(selectedElement).removeClass("hidden");
-/*Line 114 - 'AtomViewStack.js' */                    }
-/*Line 115 - 'AtomViewStack.js' */                }
+/*Line 83 - 'AtomViewStack.js' */                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
+/*Line 84 - 'AtomViewStack.js' */                    var sac = selectedElement.atomControl;
+/*Line 85 - 'AtomViewStack.js' */                    if (sac) {
+/*Line 86 - 'AtomViewStack.js' */                        sac.updateUI();
+/*Line 87 - 'AtomViewStack.js' */                    }
 
-/*Line 117 - 'AtomViewStack.js' */                queue.start();
+/*Line 89 - 'AtomViewStack.js' */                    if (previousElement) {
+/*Line 90 - 'AtomViewStack.js' */                        var self = this;
+/*Line 91 - 'AtomViewStack.js' */                        this._isAnimating = true;
+/*Line 92 - 'AtomViewStack.js' */                        var ael = [selectedElement, previousElement];
+/*Line 93 - 'AtomViewStack.js' */                        if (selectedIndex < previousIndex) {
+/*Line 94 - 'AtomViewStack.js' */                            $(selectedElement).css("left", -width);
+/*Line 95 - 'AtomViewStack.js' */                        } else {
+/*Line 96 - 'AtomViewStack.js' */                            $(selectedElement).css("left", width);
+/*Line 97 - 'AtomViewStack.js' */                        }
+/*Line 98 - 'AtomViewStack.js' */                        $(ael).removeClass("hidden");
+/*Line 99 - 'AtomViewStack.js' */                        $(ael).addClass("animate-left-property");
+/*Line 100 - 'AtomViewStack.js' */                        WebAtoms.dispatcher.callLater(function () {
+/*Line 101 - 'AtomViewStack.js' */                            $(selectedElement).css("left", 0);
+/*Line 102 - 'AtomViewStack.js' */                            if (selectedIndex < previousIndex) {
+/*Line 103 - 'AtomViewStack.js' */                                $(previousElement).css("left", width);
+/*Line 104 - 'AtomViewStack.js' */                            } else {
+/*Line 105 - 'AtomViewStack.js' */                                $(previousElement).css("left", -width);
+/*Line 106 - 'AtomViewStack.js' */                            }
+/*Line 107 - 'AtomViewStack.js' */                            setTimeout(function () {
+/*Line 108 - 'AtomViewStack.js' */                                self._isAnimating = false;
+/*Line 109 - 'AtomViewStack.js' */                                $(ael).removeClass("animate-left-property");
+/*Line 110 - 'AtomViewStack.js' */                                $(previousElement).addClass("hidden");
+/*Line 111 - 'AtomViewStack.js' */                            }, 600);
+/*Line 112 - 'AtomViewStack.js' */                        });
+/*Line 113 - 'AtomViewStack.js' */                    } else {
+/*Line 114 - 'AtomViewStack.js' */                        $(selectedElement).removeClass("hidden");
+/*Line 115 - 'AtomViewStack.js' */                    }
+/*Line 116 - 'AtomViewStack.js' */                }
 
-/*Line 119 - 'AtomViewStack.js' */            },
-/*Line 120 - 'AtomViewStack.js' */            init: function () {
-/*Line 121 - 'AtomViewStack.js' */                var element = this.get_element();
-/*Line 122 - 'AtomViewStack.js' */                $(element).addClass("atom-view-stack");
-/*Line 123 - 'AtomViewStack.js' */                baseType.init.call(this);
+/*Line 118 - 'AtomViewStack.js' */                queue.start();
 
-/*Line 125 - 'AtomViewStack.js' */                var element = this.get_element();
+/*Line 120 - 'AtomViewStack.js' */            },
+/*Line 121 - 'AtomViewStack.js' */            init: function () {
+/*Line 122 - 'AtomViewStack.js' */                var element = this.get_element();
+/*Line 123 - 'AtomViewStack.js' */                $(element).addClass("atom-view-stack");
+/*Line 124 - 'AtomViewStack.js' */                baseType.init.call(this);
 
-/*Line 127 - 'AtomViewStack.js' */                if (!element.parentNode.atomControl) {
-/*Line 128 - 'AtomViewStack.js' */                    $(element).addClass("atom-view-stack-fill");
-/*Line 129 - 'AtomViewStack.js' */                }
-/*Line 130 - 'AtomViewStack.js' */                $(element).addClass(this._swipeDirection);
+/*Line 126 - 'AtomViewStack.js' */                var element = this.get_element();
 
-/*Line 132 - 'AtomViewStack.js' */                //this.updateUI();
-/*Line 133 - 'AtomViewStack.js' */            }
-/*Line 134 - 'AtomViewStack.js' */        }
-/*Line 135 - 'AtomViewStack.js' */    });
-/*Line 136 - 'AtomViewStack.js' */})(window, WebAtoms.AtomControl.prototype);
+/*Line 128 - 'AtomViewStack.js' */                if (!element.parentNode.atomControl) {
+/*Line 129 - 'AtomViewStack.js' */                    $(element).addClass("atom-view-stack-fill");
+/*Line 130 - 'AtomViewStack.js' */                }
+/*Line 131 - 'AtomViewStack.js' */                $(element).addClass(this._swipeDirection);
+
+/*Line 133 - 'AtomViewStack.js' */                //this.updateUI();
+/*Line 134 - 'AtomViewStack.js' */            }
+/*Line 135 - 'AtomViewStack.js' */        }
+/*Line 136 - 'AtomViewStack.js' */    });
+/*Line 137 - 'AtomViewStack.js' */})(window, WebAtoms.AtomControl.prototype);
 
 /*Line 0 - 'AtomApplication.js' */
 

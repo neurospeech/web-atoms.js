@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.458</version>
+    <version>1.2.459</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -21,7 +21,7 @@
     <licenseUrl>https://github.com/neurospeech/atoms.js/blob/master/License.md</licenseUrl>
     <copyright>Copyright  2014</copyright>
     <dependencies>
-      <dependency id="jQuery" version="1.11.1" />
+      <dependency id="jQuery" version="[1.11.1,2.0)" />
     </dependencies>
     <references></references>
     <tags></tags>
