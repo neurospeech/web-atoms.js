@@ -8,34 +8,42 @@
 
     <h1>AtomUpload Plugin</h1>
     <p>
-        This plugin provides Flash fallback as well as it provides Pre Post to securely create non cookie based upload URL.</p>
+        This plugin provides Flash fallback as well. 
+        Flash fallback uses headers property to send extra items as query string. AtomUpload is derived from AtomItemsControl, items property contains an array of selected files for upload. You can customize itemTemplate property to change look and feel.</p>
     <h2>Properties</h2>
+    <h3>headers</h3>
+    <p>Headers property can contain JavaScript object with key-value pair that will be added as query string in case of flash fallback. As Flash does not tranmit cookies, it is recommended that you can generate temporary Upload tokens that can be verified on server with query string.</p>
     <h3>upload-url</h3>
     <p>
-        When using non-flash mode, you can simply set upload-url to HTTP URL where files will be uploaded.</p>
-    <h3>upload-on-select</h3>
+        HTTP URL where files will be uploaded.</p>
+    <h3>
+        value</h3>
     <p>
-        By default it is true, files are uploaded as soon as they are selected.</p>
-    <h3>post-url</h3>
+        Value field contains comma separated properties of uploaded result specified as value-path property.</p>
+    <h3>
+        value-path</h3>
     <p>
-        When using pre-post method, a JSON payload will be uploaded to specified post-url along with specified post-data. The result must contain a valid upload URL at upload-path specified.</p>
-    <h3>post-data</h3>
+        Path of property to bind for uploaded result.</p>
+    <h2>
+        Sample</h2>
     <p>
-        When using pre-post method, this property must contain JSON payload data. It should not be JSON encoded, it can be any JavaScript object type.</p>
-    <h3>upload-path</h3>
+        Let&#39;s assume, server returns an object representing server&#39;s file storage model. Each item contains property &#39;result&#39; which contains JavaScript object returned from server after successful upload.</p>
+    <pre style="font-family: Consolas; font-size: 13; color: black; background: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">&lt;</span><span style="color:maroon;">div</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-type</span><span style="color:blue;">=&quot;AtomUploader&quot;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-upload-url</span><span style="color:blue;">=&quot;/Upload/UploadTemp&quot;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-value-path</span><span style="color:blue;">=&quot;TempFileID&quot;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-accept</span><span style="color:blue;">=&quot;image/*&quot;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-value</span><span style="color:blue;">=&quot;</span><span style="font-weight: bold; color: darkblue; background: bisque;">$[data.UploadedTempFileIDs]</span><span style="color:blue;">&quot;&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">&lt;/</span><span style="color:maroon;">div</span><span style="color:blue;">&gt;</span>
+</pre>
     <p>
-        When using pre-post method, upload-path will be used to retrive upload url from the resultant JSON data.</p>
-    <h2>Commands</h2>
-    <h3>uploadCommand</h3>
+        &nbsp;</p>
     <p>
-        If upload-on-select is false, this command must be specified as next to any UI operation or any form post.</p>
-    <h2>Modes of Usage</h2>
-    <h3>Pre Upload Post</h3>
+        Let&#39;s assume server returns following,</p>
+    <p class="inlineCode">
+        [{ TempFileID:1, Url: &quot;http://a.b/a&quot; }, { TempFileID:e, Url: &quot;http://a.b/b&quot; } ]</p>
     <p>
-        Since flash does not send cookies along with upload, it is recommended that first we post data and server must send a unique one time usage upload url.</p>
-    <h3>Upload Url</h3>
-    <p>
-        If you are ok with not sending cookies for upload validation, then you can directly bind upload-url property where the files will be uploaded.</p>
-
+        Then <span class="inlineCode">$data.UploadedTempFileIDs</span> will contain <span class="inlineCode">&#39;1,2&#39;</span></p>
+    
 </body>
 </html>
