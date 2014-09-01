@@ -442,13 +442,15 @@ dbContext.prototype = {
         return c;
     },
     setParent: function (child, name, parent) {
+        var mt = this.getMetaDataEntity(child._$_entityName);
+        var prop = mt.parent[name];
+        var parentKey = parent[parent._$_key];
+        var parentEntity = prop.type;
+        parent = this.prepareEntity(parent, parentEntity, true);
         var ceChild = this.getChangeEntry(child);
         var ceParent = this.getChangeEntry(parent);
         Atom.set(child, name, parent);
         ceChild.relAdded.push({ name: name, entity: parent });
-        var mt = this.getMetaDataEntity(child._$_entityName);
-        var prop = mt.parent[name];
-        var parentKey = parent[parent._$_key];
         var col = prop.col;
         child[col] = parentKey;
         Atom.refresh(child, col);
