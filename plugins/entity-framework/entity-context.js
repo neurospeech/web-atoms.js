@@ -119,7 +119,7 @@ dbContext.prototype = {
 
         var obj = {
             entities: [],
-            associations:[]
+            associations: []
         };
 
         var i = 0;
@@ -129,7 +129,7 @@ dbContext.prototype = {
         for (var entry in this.changes) {
             var item = this.changes[entry];
             var key = item.entity._$_uri;
-            var cs = { id: (item.entity._$_id || null), type: item.entity._$_entityName , changes: item.changes };
+            var cs = { id: (item.entity._$_id || null), type: item.entity._$_entityName, changes: item.changes };
             obj.entities.push(cs);
             keyMap[key] = i;
             i++;
@@ -142,10 +142,10 @@ dbContext.prototype = {
             var e = { id: keyMap[item.entity._$_uri], added: [], removed: [] };
             var change = false;
 
-            var ce = new AtomEnumerator( item.relAdded || []);
+            var ce = new AtomEnumerator(item.relAdded || []);
             while (ce.next()) {
                 var cei = ce.current();
-                e.added.push( { id: keyMap[cei.entity._$_uri] , name: cei.name });
+                e.added.push({ id: keyMap[cei.entity._$_uri], name: cei.name });
                 change = true;
             }
 
@@ -165,6 +165,11 @@ dbContext.prototype = {
         var _this = this;
         return AtomPromise.json(this.prefix + '/entity/all/savechanges', null, { type: 'POST', data: obj }).then(function (p) {
             _this.acceptChanges(p.value(), list);
+        }).failed(function (p) {
+            if (console) {
+                console.error("Failed on save changes");
+                console.error(obj);
+            }
         });
 
     },
@@ -177,7 +182,7 @@ dbContext.prototype = {
 
     acceptChanges: function (v, list) {
         this.ignoreChanges = true;
-        try{
+        try {
             for (var i = 0; i < v.length; i++) {
                 var updated = v[i];
 
@@ -215,7 +220,7 @@ dbContext.prototype = {
 
             this.changes = {};
 
-        }finally{
+        } finally {
             this.ignoreChanges = false;
         }
         Atom.set(this, "hasChanges", false);
@@ -224,13 +229,13 @@ dbContext.prototype = {
 
     undoChanges: function () {
         this.ignoreChanges = true;
-        try{
+        try {
             for (var i in this.changes) {
                 var item = this.changes[i];
                 var e = item.entity;
                 var c = item.changes;
                 var o = e._$_original;
-                if(!o){
+                if (!o) {
                     continue;
                 }
                 for (var k in o) {
@@ -331,7 +336,7 @@ dbContext.prototype = {
         var _this = this;
         var t = this.getMetaDataEntity(entityType);
         var orderBy = t.key;
-        var ap = this.search( entityType, { include: includeList, query: { $id: entity._$_id }, orderBy: orderBy });
+        var ap = this.search(entityType, { include: includeList, query: { $id: entity._$_id }, orderBy: orderBy });
         ap.then(function (p) {
             var a = p.value();
             if (a.length) {
@@ -422,6 +427,13 @@ dbContext.prototype = {
         return item;
     },
     getChangeEntry: function (e) {
+        if (!e._$_uri) {
+            if (console) {
+                console.warn('Invalid entity');
+                console.warn(e);
+            }
+            return;
+        }
         var c = this.changes[e._$_uri];
         if (!c) {
             c = { entity: e, changes: {}, relAdded: [], relRemoved: [] };
@@ -430,10 +442,18 @@ dbContext.prototype = {
         return c;
     },
     setParent: function (child, name, parent) {
+        var mt = this.getMetaDataEntity(child._$_entityName);
+        var prop = mt.parent[name];
+        var parentKey = parent[parent._$_key];
+        var parentEntity = prop.type;
+        parent = this.prepareEntity(parent, parentEntity, true);
         var ceChild = this.getChangeEntry(child);
         var ceParent = this.getChangeEntry(parent);
         Atom.set(child, name, parent);
         ceChild.relAdded.push({ name: name, entity: parent });
+        var col = prop.col;
+        child[col] = parentKey;
+        Atom.refresh(child, col);
         Atom.set(this, "hasChanges", true);
     },
     _onRefreshValue: function (t, k) {
@@ -530,7 +550,7 @@ dbContext.prototype = {
         ct = this.getMetaDataEntity(c.type);
         var orderBy = ct.key;
         children._$_loaded = true;
-        var ap = this.search(c.type, { include: includeList, query: q, orderBy: orderBy, size:-1 });
+        var ap = this.search(c.type, { include: includeList, query: q, orderBy: orderBy, size: -1 });
         ap.then(function (p) {
             var a = p.value();
             var ae = new AtomEnumerator(a);
