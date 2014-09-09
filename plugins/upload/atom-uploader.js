@@ -1,5 +1,5 @@
-﻿/// <reference path="../jquery-1.7.1.min.js" />
-/// <reference path="../web-atoms.js" />
+﻿/// <reference path="../../jquery-1.8.2.min.js" />
+/// <reference path="../../atoms-debug.js" />
 
 
 Templates.jsonML["WebAtoms.AtomUploader.template"] = [
@@ -78,7 +78,8 @@ window.__atom_flash_uploader_event = function (id, json) {
             finished: false,
             maxFileSize: -1,
             maxFiles: -1,
-            headers: null
+            headers: null,
+            urlPath: null
         },
         methods: {
 
@@ -164,6 +165,23 @@ window.__atom_flash_uploader_event = function (id, json) {
                 AtomBinder.setValue(this, "finished", true);
                 atomApplication.setBusy(false, "Uploading...");
                 Atom.refresh(this, "value");
+
+                var testFlow = window.testFlow;
+                if (testFlow.state == 'recording') {
+
+                    var up = this.get_urlPath();
+                    if (!up)
+                        throw new Error("url-path not specified for AtomUploader");
+
+                    var step = {
+                        path: testFlow.path(this._element),
+                        action: "atom-upload",
+                        files: this._items.map(function (item) { return { name: item.name, size: item.size, url: item.result[up] } })
+                    };
+
+                    testFlow.pushStep(step);
+                }
+
                 this.invokeAction(this.get_next());
                 if (this._filePresenter) {
                     this.createFilePresenter();
@@ -340,6 +358,8 @@ window.__atom_flash_uploader_event = function (id, json) {
                 $(button).parent().addClass("uploader-button-host");
 
                 $(button).addClass("upload-button");
+
+                $(button).addClass("test-flow-no-record-click");
 
                 this._button = button;
 
