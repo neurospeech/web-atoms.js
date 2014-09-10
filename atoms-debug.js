@@ -6458,12 +6458,12 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 90 - 'AtomViewStack.js' */                        var self = this;
 /*Line 91 - 'AtomViewStack.js' */                        this._isAnimating = true;
 /*Line 92 - 'AtomViewStack.js' */                        var ael = [selectedElement, previousElement];
-/*Line 93 - 'AtomViewStack.js' */                        if (selectedIndex < previousIndex) {
-/*Line 94 - 'AtomViewStack.js' */                            $(selectedElement).css("left", -width);
-/*Line 95 - 'AtomViewStack.js' */                        } else {
-/*Line 96 - 'AtomViewStack.js' */                            $(selectedElement).css("left", width);
-/*Line 97 - 'AtomViewStack.js' */                        }
-/*Line 98 - 'AtomViewStack.js' */                        $(ael).removeClass("hidden");
+/*Line 93 - 'AtomViewStack.js' */                        $(ael).removeClass("hidden");
+/*Line 94 - 'AtomViewStack.js' */                        if (selectedIndex < previousIndex) {
+/*Line 95 - 'AtomViewStack.js' */                            $(selectedElement).css("left", -width);
+/*Line 96 - 'AtomViewStack.js' */                        } else {
+/*Line 97 - 'AtomViewStack.js' */                            $(selectedElement).css("left", width);
+/*Line 98 - 'AtomViewStack.js' */                        }
 /*Line 99 - 'AtomViewStack.js' */                        $(ael).addClass("animate-left-property");
 /*Line 100 - 'AtomViewStack.js' */                        WebAtoms.dispatcher.callLater(function () {
 /*Line 101 - 'AtomViewStack.js' */                            $(selectedElement).css("left", 0);
