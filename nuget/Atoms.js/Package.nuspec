@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.472</version>
+    <version>1.2.473</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -31,10 +31,11 @@
     <file src="..\..\style\**\*.png" target="content\Style\atoms" />
     <file src="..\..\style\**\*.gif" target="content\Style\atoms" />
     <file src="..\..\style\**\*.jpg" target="content\Style\atoms" />
-    
+
+    <file src="..\..\atoms.js" target="content\Scripts\atoms.js" />
     <file src="..\..\atoms.min.js" target="content\Scripts\atoms.min.js" />
-    <file src="..\..\atoms-debug.js" target="content\Scripts\atoms-debug.js" />
-    
+    <file src="..\..\atoms.min.map" target="content\Scripts\atoms.min.map" />
+
     <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\atoms\plugins\entity-framework\entity-context.js"/>
     <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\atoms\plugins\entity-framework\entity-controls.js"/>
     <file src="..\..\plugins\entity-framework\entity.css" target="content\Scripts\atoms\plugins\entity-framework\entity.css"/>
