@@ -1,4 +1,4 @@
-﻿/// <reference path="../../jquery-1.8.2.min.js" />
+﻿/// <reference path="../../Scripts/jquery-1.11.1.min.js" />
 /// <reference path="../../atoms-debug.js" />
 
 
