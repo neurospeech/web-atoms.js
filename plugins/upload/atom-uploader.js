@@ -27,7 +27,7 @@ Templates.jsonML["WebAtoms.AtomUploader.itemTemplate"] = [
         ],
         ["td", {
             "atom-class": "[$data.status]",
-            "atom-text": "[$data.status]"
+            "atom-text": "[$data.error || $data.status]"
         }]
     ]
 ];
@@ -79,7 +79,8 @@ window.__atom_flash_uploader_event = function (id, json) {
             maxFileSize: -1,
             maxFiles: -1,
             headers: null,
-            urlPath: null
+            urlPath: null,
+            flashPath : "/scripts/atoms/plugins/upload/"
         },
         methods: {
 
@@ -146,6 +147,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                         break;
                     case "error":
                         Atom.set(item, "status", "error");
+                        Atom.set(item, "error", evt);
                         WebAtoms.dispatcher.callLater(function () {
                             _this.onUploadComplete();
                         });
@@ -167,7 +169,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 Atom.refresh(this, "value");
 
                 var testFlow = window.testFlow;
-                if (testFlow.state == 'recording') {
+                if (testFlow && testFlow.state == 'recording') {
 
                     var up = this.get_urlPath();
                     if (!up)
@@ -189,7 +191,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             },
 
             upload: function (index, url) {
-
+                this._finished = false;
                 // flash needs absolute url...
                 if ((/^(http|https)\:\/\//i.test(url))) {
                     // do nothing..
@@ -233,7 +235,11 @@ window.__atom_flash_uploader_event = function (id, json) {
                         _this.onItemEvent("error", index, evt);
                     });
                     $(xhr).on("load", function (evt) {
-                        _this.onItemEvent("done", index, { result: evt.target.responseText });
+                        if (evt.target.status != 200) {
+                            _this.onItemEvent("error", index, evt.target.responseText);
+                        } else {
+                            _this.onItemEvent("done", index, { result: evt.target.responseText });
+                        }
                     });
 
                     var fd = new FormData();
@@ -331,7 +337,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                     var ae = new AtomEnumerator(_this._filePresenter.files);
                     while (ae.next()) {
                         var file = ae.current();
-                        files.push({ id: ae.currentIndex(), file: file, name: file.name, size: file.size, type: file.type });
+                        files.push({ id: ae.currentIndex(), file: file, name: file.name, size: file.size, type: file.type, error: '', status:'' });
                     }
                     Atom.set(_this, "items", files);
                 });
@@ -406,7 +412,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                     attributes.name = fpID;
                     attributes.align = "middle";
                     swfobject.embedSWF(
-                                "/scripts/uploader/atom-flash-uploader.swf?112125554", divID,
+                                this._flashPath + "atom-flash-uploader.swf?2014-17-09-04-09", divID,
                                 "100%", "100%",
                                 swfVersionStr, xiSwfUrlStr,
                                 flashvars, params, attributes);
