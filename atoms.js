@@ -137,11 +137,8 @@ var createClass = classCreatorEx;
 // Global...
 var WebAtoms = {};
 
-(function(w){
+(function(window,WebAtoms){
 
-	var WebAtoms = w;
-
-	var window = this;
 	var $ = window.$;
 	var document = window.document;
 	var Templates = { jsonML: {} };
@@ -10052,5 +10049,5 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 11 - 'ZZZZZInitializer.js' */});
 
 
-	}).apply(window, [WebAtoms]);
+	})(window, WebAtoms);
 

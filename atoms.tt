@@ -46,11 +46,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 // Global...
 var WebAtoms = {};
 
-(function(w){
+(function(window,WebAtoms){
 
-	var WebAtoms = w;
-
-	var window = this;
 	var $ = window.$;
 	var document = window.document;
 	var Templates = { jsonML: {} };
@@ -102,7 +99,7 @@ var WebAtoms = {};
 
 #>
 
-	}).apply(window, [WebAtoms]);
+	})(window, WebAtoms);
 
 <#
 
