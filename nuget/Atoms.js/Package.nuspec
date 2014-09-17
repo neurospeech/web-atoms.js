@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.473</version>
+    <version>1.2.474</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -24,7 +24,7 @@
       <dependency id="jQuery" version="[1.11.1,2.0)" />
     </dependencies>
     <references></references>
-    <tags></tags>
+    <tags>JavaScript UI Framework</tags>
   </metadata>
   <files>
     <file src="..\..\style\**\*.css" target="content\Style\atoms" />
@@ -32,6 +32,7 @@
     <file src="..\..\style\**\*.gif" target="content\Style\atoms" />
     <file src="..\..\style\**\*.jpg" target="content\Style\atoms" />
 
+    <file src="..\..\atoms.js" target="content\Scripts\atoms-debug.js" />
     <file src="..\..\atoms.js" target="content\Scripts\atoms.js" />
     <file src="..\..\atoms.min.js" target="content\Scripts\atoms.min.js" />
     <file src="..\..\atoms.min.map" target="content\Scripts\atoms.min.map" />
