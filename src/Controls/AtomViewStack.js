@@ -91,12 +91,12 @@
                         var self = this;
                         this._isAnimating = true;
                         var ael = [selectedElement, previousElement];
+                        $(ael).removeClass("hidden");
                         if (selectedIndex < previousIndex) {
                             $(selectedElement).css("left", -width);
                         } else {
                             $(selectedElement).css("left", width);
                         }
-                        $(ael).removeClass("hidden");
                         $(ael).addClass("animate-left-property");
                         WebAtoms.dispatcher.callLater(function () {
                             $(selectedElement).css("left", 0);

@@ -10053,3 +10053,4 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 
 
 	}).apply(window, [WebAtoms]);
+

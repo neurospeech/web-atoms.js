@@ -52,6 +52,10 @@
   background: url(checked.png) no-repeat left center transparent;
   text-transform: capitalize;
 }
+.atom-uploader .atom-uploader-item .error {
+  background-color: red;
+  color: white;
+}
 .atom-uploader .progress-host {
   position: relative;
   width: 110px;
