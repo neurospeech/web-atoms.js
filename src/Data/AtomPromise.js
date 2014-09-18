@@ -278,13 +278,13 @@ AtomPromise.ajax = function (url, query, options, type) {
     var data = o.data;
 
     if (data) {
-        p.data = AtomBinder.getClone(data);
+        o.data = AtomBinder.getClone(data);
     }
     var e = AtomConfig.ajax.jsonPostEncode;
     if (e) {
         o = e(o);
     } else {
-        o.data = { formModel: JSON.stringify(data) };
+        o.data = { formModel: JSON.stringify(o.data) };
     }
 
     var attachments = o.attachments;

@@ -2852,13 +2852,13 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 277 - 'AtomPromise.js' */    var data = o.data;
 
 /*Line 279 - 'AtomPromise.js' */    if (data) {
-/*Line 280 - 'AtomPromise.js' */        p.data = AtomBinder.getClone(data);
+/*Line 280 - 'AtomPromise.js' */        o.data = AtomBinder.getClone(data);
 /*Line 281 - 'AtomPromise.js' */    }
 /*Line 282 - 'AtomPromise.js' */    var e = AtomConfig.ajax.jsonPostEncode;
 /*Line 283 - 'AtomPromise.js' */    if (e) {
 /*Line 284 - 'AtomPromise.js' */        o = e(o);
 /*Line 285 - 'AtomPromise.js' */    } else {
-/*Line 286 - 'AtomPromise.js' */        o.data = { formModel: JSON.stringify(data) };
+/*Line 286 - 'AtomPromise.js' */        o.data = { formModel: JSON.stringify(o.data) };
 /*Line 287 - 'AtomPromise.js' */    }
 
 /*Line 289 - 'AtomPromise.js' */    var attachments = o.attachments;
