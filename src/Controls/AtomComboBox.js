@@ -2,7 +2,7 @@
 /// <reference path="AtomItemsControl.js" />
 
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx(
     {
         name: "WebAtoms.AtomComboBox",
@@ -76,7 +76,7 @@
             }
         }
     });
-})(window, WebAtoms.AtomItemsControl.prototype);
+})(WebAtoms.AtomItemsControl.prototype);
 
 
 

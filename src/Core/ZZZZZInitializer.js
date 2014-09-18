@@ -3,11 +3,12 @@
 // http://jsfiddle.net/bZcth/33/#update
 
 
-$(window.document).ready(function () {
+$(document).ready(function () {
 
     // commencing Web Atoms...
+    var d = WebAtoms.dispatcher;
 
-    WebAtoms.dispatcher.setupControls();
-    WebAtoms.dispatcher.start();
+    d.setupControls();
+    d.start();
 });
 

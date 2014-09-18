@@ -1,7 +1,7 @@
 ﻿/// <reference path="AtomControl.js" />
 /// <reference path="AtomViewStack.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return createClass({
         name: "WebAtoms.AtomFrameView",
         base: baseType,
@@ -115,4 +115,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomViewStack.prototype);
+})(WebAtoms.AtomViewStack.prototype);

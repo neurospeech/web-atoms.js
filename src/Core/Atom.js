@@ -4,8 +4,8 @@
 /// <reference path="../jquery-1.5.1-vsdoc.js" />
 /// <reference path="AtomBrowser.js" />
 
-var AtomEnumerator = (function (name, base) {
-    return classCreator(name, base,
+var AtomEnumerator = (function () {
+    return classCreator("AtomEnumerator",null,
     function (array) {
         this._array = array;
         this.i = -1;
@@ -31,7 +31,7 @@ var AtomEnumerator = (function (name, base) {
             this.i = -1;
         }
     });
-})("AtomEnumerator", null);
+})();
 
 window.AtomEnumerator = AtomEnumerator;
     

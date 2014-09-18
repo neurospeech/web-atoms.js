@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomControl.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomYesNoCustom",
         base: baseType,
@@ -54,4 +54,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);

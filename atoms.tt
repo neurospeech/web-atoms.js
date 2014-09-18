@@ -43,19 +43,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #>
 <#= System.IO.File.ReadAllText(templateDirectory + "\\AtomPrototype.js") #>
 
-// Global...
-var WebAtoms = {};
 
-(function(w){
+(function(window){
 
-	var WebAtoms = w;
-
-	var window = this;
 	var $ = window.$;
 	var document = window.document;
 	var Templates = { jsonML: {} };
 
+    var WebAtoms = {};
+    window.WebAtoms = WebAtoms;
+
 	window.Templates = Templates;
+
+    var jsonML = Templates.jsonML;
 
 <# 
 	
@@ -102,7 +102,7 @@ var WebAtoms = {};
 
 #>
 
-	}).apply(window, [WebAtoms]);
+	})(window);
 
 <#
 
@@ -156,7 +156,7 @@ var WebAtoms = {};
 			if(string.IsNullOrWhiteSpace(text))
 				return;
 			var h = HtmlElement.Parse(text);
-			WriteLine("Templates.jsonML[\"" + key + "\"] = ");
+			WriteLine("jsonML[\"" + key + "\"] = ");
 			if(h.Name == "container"){
 				// little differently??
 				WriteLine("[");

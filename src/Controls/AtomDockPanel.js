@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomControl.js" />
 
-(function (window, base) {
+(function (base) {
 
     var AtomUI = window.AtomUI;
 
@@ -170,5 +170,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);
 

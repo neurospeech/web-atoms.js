@@ -102,8 +102,8 @@ var AtomArray = {
 window.AtomArray = AtomArray;
 
 //Creating AtomScope Class
-var AtomScope = (function (window,name, base) {
-    return classCreator(name, base,
+var AtomScope = (function () {
+    return classCreator("WebAtoms.AtomScope", null,
         function (owner,parent,app) {
             this.owner = owner;
             this.parent = parent;
@@ -143,4 +143,4 @@ var AtomScope = (function (window,name, base) {
                 this._refreshValue(name);
             }
         });
-})(window,"WebAtoms.AtomScope", null);
+})();

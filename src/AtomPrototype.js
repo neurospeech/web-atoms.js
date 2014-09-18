@@ -110,4 +110,5 @@ function classCreatorEx(objDef) {
     return classCreator(objDef.name, objDef.base, objDef.start, objDef.methods, objDef.properties);
 }
 
-var createClass = classCreatorEx;
+window.createClass = classCreatorEx;
+window.classCreatorEx = classCreatorEx;

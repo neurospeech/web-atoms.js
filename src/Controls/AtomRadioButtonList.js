@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomCheckBoxList.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomRadioButtonList",
         base: baseType,
@@ -83,5 +83,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomCheckBoxList.prototype);
+})(WebAtoms.AtomCheckBoxList.prototype);
 

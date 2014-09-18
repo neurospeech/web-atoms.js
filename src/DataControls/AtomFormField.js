@@ -1,6 +1,6 @@
 ﻿/// <reference path="../controls/AtomControl.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomFormField",
         base: baseType,
@@ -157,4 +157,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);

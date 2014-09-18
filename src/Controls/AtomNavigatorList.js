@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomListBox.js" />
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx({
         name: "WebAtoms.AtomNavigatorList",
         base: base,
@@ -206,5 +206,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomListBox.prototype);
+})(WebAtoms.AtomListBox.prototype);
 

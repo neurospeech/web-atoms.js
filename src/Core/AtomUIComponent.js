@@ -1,7 +1,7 @@
 ﻿/// <reference path="atomcomponent.js" />
 
-(function (window, name, base) {
-    return classCreator(name, base,
+(function (base) {
+    return classCreator("WebAtoms.AtomUIComponent", base,
         function () {
         },
         {
@@ -71,13 +71,11 @@
             next: null,
             value: undefined
         });
-})(window, "WebAtoms.AtomUIComponent", WebAtoms.AtomComponent.prototype);
+})(WebAtoms.AtomComponent.prototype);
 
 
 Templates.compiled = {
 };
-
-var document = window.document;
 
 Templates.compileElement = function (e) {
     var ae = new AtomEnumerator(e);

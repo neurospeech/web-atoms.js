@@ -2,8 +2,8 @@
 /// <reference path="../Data/AtomBindingHelper.js" />
 /// <reference path="AtomPopup.js" />
 
-(function(window,name,base){
-    return classCreator(name,base,
+(function(){
+    return classCreator("WebAtoms.AtomComponent", null,
         function () {
             this._eventHandlers = [];
         },
@@ -108,4 +108,4 @@
                     this.__delegates = null;
             }
         });
-})(this,"WebAtoms.AtomComponent",null);
+})();

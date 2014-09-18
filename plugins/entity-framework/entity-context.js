@@ -463,12 +463,23 @@ dbContext.prototype = {
             return;
         var v = t[k];
         // if we have set reference of something
-        if (v && v._$_entityName) {
+        if (v) {
             // this is a relation...
-            if (!v._$_temp) {
-                this.setParent(t, k, v);
+            if (v._$_entityName) {
+                if (!v._$_temp) {
+                    this.setParent(t, k, v);
+                }
+                return;
             }
-            return;
+            // if it is children navigation property, ignore it..
+            if ($.isArray(v)) {
+                if (t._$_entityName) {
+                    var et = this.getMetaDataEntity(t._$_entityName);
+                    if (et.children[k]) {
+                        return;
+                    }
+                }
+            }
         }
         var o = t._$_original[k];
         if (!o && !v)

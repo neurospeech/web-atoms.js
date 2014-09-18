@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomButton.js" />
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx({
         name: "WebAtoms.AtomPostButton",
         base: base,
@@ -65,4 +65,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomButton.prototype);
+})(WebAtoms.AtomButton.prototype);

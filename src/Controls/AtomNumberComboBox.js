@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomComboBox.js" />
 
-(function (window, base) {
+(function (base) {
 
     var AtomUI = window.AtomUI;
 
@@ -56,5 +56,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomComboBox.prototype);
+})(WebAtoms.AtomComboBox.prototype);
 

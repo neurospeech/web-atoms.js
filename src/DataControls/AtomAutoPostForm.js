@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomForm.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomAutoPostForm",
         base: baseType,
@@ -111,6 +111,6 @@
             }
         }
     });
-})(window, WebAtoms.AtomForm.prototype);
+})(WebAtoms.AtomForm.prototype);
 
 

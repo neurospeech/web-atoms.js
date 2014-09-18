@@ -1,10 +1,10 @@
 ﻿/// <reference path="AtomDockPanel.js" />
 
-(function (window, name, base) {
+(function (base) {
 
     return classCreatorEx(
         {
-            name: name,
+            name: "WebAtoms.AtomDataPager",
             base: base,
             properties:{
                 itemsPath: "items",
@@ -140,4 +140,4 @@
     }
 );
 
-})(window, "WebAtoms.AtomDataPager", WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);

@@ -2,7 +2,7 @@
 
 // http://jsfiddle.net/2yqQF/
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomFormGridLayout",
         base: baseType,
@@ -113,7 +113,7 @@
             }
         }
     });
-})(window, WebAtoms.AtomFormLayout.prototype);
+})(WebAtoms.AtomFormLayout.prototype);
 
 
 (function (baseType) {
