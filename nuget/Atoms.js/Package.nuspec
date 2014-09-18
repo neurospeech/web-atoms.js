@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.516</version>
+    <version>1.2.517</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -49,6 +49,7 @@
     <file src="..\..\plugins\upload\atom-uploader.css.map" target="content\Scripts\atoms\plugins\upload\atom-uploader.css.map"/>
     <file src="..\..\plugins\upload\busy.gif" target="content\Scripts\atoms\plugins\upload\busy.gif"/>
     <file src="..\..\plugins\upload\checked.png" target="content\Scripts\atoms\plugins\upload\checked.png"/>
+    <file src="..\..\plugins\upload\upload.png" target="content\Scripts\atoms\plugins\upload\upload.png"/>
     <file src="..\..\plugins\upload\t.png" target="content\Scripts\atoms\plugins\upload\t.png"/>
     <file src="..\..\plugins\upload\atom-flash-uploader.swf" target="content\Scripts\atoms\plugins\upload\atom-flash-uploader.swf"/>
 
