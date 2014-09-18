@@ -1,7 +1,7 @@
 ﻿/// <reference path="AtomDateListBox.js" />
 /// <reference path="AtomPopup.js" />
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx({
         name: "WebAtoms.AtomDateField",
         base: base,
@@ -129,4 +129,4 @@
 
         }
     });
-})(window, WebAtoms.AtomDateListBox.prototype);
+})(WebAtoms.AtomDateListBox.prototype);

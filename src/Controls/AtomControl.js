@@ -155,11 +155,10 @@ var AtomProperties = {
 
 window.AtomProperties = AtomProperties;
 
-(function (window, name, base) {
-
+(function (base) {
 
     return classCreatorEx({
-        name: name,
+        name: "WebAtoms.AtomControl",
         base: base,
         start: function (element) {
             element.atomControl = this;
@@ -965,4 +964,4 @@ window.AtomProperties = AtomProperties;
             }
         }
     });
-})(window,"WebAtoms.AtomControl",WebAtoms.AtomUIComponent.prototype);
+})(WebAtoms.AtomUIComponent.prototype);

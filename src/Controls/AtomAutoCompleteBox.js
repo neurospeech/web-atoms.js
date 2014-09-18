@@ -1,7 +1,7 @@
 ﻿/// <reference path="atomcontrol.js" />
 /// <reference path="atomlistbox.js" />
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx(
     {
         name: "WebAtoms.AtomAutoCompleteBox",
@@ -279,5 +279,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomListBox.prototype);
+})(WebAtoms.AtomListBox.prototype);
 

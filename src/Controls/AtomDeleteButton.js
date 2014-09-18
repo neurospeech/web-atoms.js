@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomPostButton.js" />
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx({
         name: "WebAtoms.AtomDeleteButton",
         base: base,
@@ -9,11 +9,9 @@
             this._confirmMessage = "Are you sure you want to delete this item?";
         },
         methods: {
-
         },
         properties: {
-
         }
     });
-})(window, WebAtoms.AtomPostButton.prototype);
+})(WebAtoms.AtomPostButton.prototype);
 

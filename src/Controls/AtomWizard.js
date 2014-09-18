@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomDockPanel.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomWizard",
         base: baseType,
@@ -108,5 +108,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomDockPanel.prototype);
+})(WebAtoms.AtomDockPanel.prototype);
 

@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomControl.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomTabControl",
         base: baseType,
@@ -52,5 +52,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);
 

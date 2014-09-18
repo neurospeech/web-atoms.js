@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomAutoCompleteBox.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomTimePicker",
         base: baseType,
@@ -30,4 +30,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomAutoCompleteBox.prototype);
+})(WebAtoms.AtomAutoCompleteBox.prototype);

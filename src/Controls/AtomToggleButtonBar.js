@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomListBox.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomToggleButtonBar",
         base: baseType,
@@ -24,4 +24,4 @@
             }
         }
     });
-})(window, WebAtoms.AtomListBox.prototype);
+})(WebAtoms.AtomListBox.prototype);

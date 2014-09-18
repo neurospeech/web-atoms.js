@@ -1,6 +1,6 @@
 ﻿/// <reference path="AtomControl.js" />
 
-(function (window, baseType) {
+(function (baseType) {
 
     return classCreatorEx({
         name: "WebAtoms.AtomViewStack",
@@ -135,5 +135,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);
 

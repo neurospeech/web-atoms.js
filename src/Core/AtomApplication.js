@@ -4,9 +4,9 @@ this.appScope = null;
 
 this.atomApplication = null;
 
-(function (window, name, base) {
+(function (base) {
 
-    return classCreator(name, base,
+    return classCreator("WebAtoms.AtomApplication", base,
         function (element) {
             $(element).removeClass("atom-dock-panel");
             $(element).addClass("atom-application");
@@ -34,10 +34,10 @@ this.atomApplication = null;
         },
         {
             get_title: function () {
-                return window.document.title;
+                return document.title;
             },
             set_title: function (v) {
-                window.document.title = v;
+                document.title = v;
             },
 
             get_isBusy: function () {
@@ -314,4 +314,4 @@ this.atomApplication = null;
             progress: 0
 
         });
-})(window, "WebAtoms.AtomApplication", WebAtoms.AtomDockPanel.prototype);
+})(WebAtoms.AtomDockPanel.prototype);

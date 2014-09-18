@@ -1,7 +1,7 @@
 ﻿/// <reference path="AtomPromise.js" />
 /// <reference path="../Core/AtomComponent.js" />
 
-(function (window, baseType) {
+(function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomBinding",
         base: baseType,
@@ -184,4 +184,4 @@
 
         }
     });
-})(window, WebAtoms.AtomComponent.prototype);
+})(WebAtoms.AtomComponent.prototype);

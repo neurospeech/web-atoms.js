@@ -2,7 +2,7 @@
 
 // Date Month Year
 
-(function (window, base) {
+(function (base) {
     return classCreatorEx({
         name: "WebAtoms.AtomDateControl",
         base: base,
@@ -142,5 +142,5 @@
             }
         }
     });
-})(window, WebAtoms.AtomControl.prototype);
+})(WebAtoms.AtomControl.prototype);
 

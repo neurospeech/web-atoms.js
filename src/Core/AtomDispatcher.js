@@ -5,8 +5,8 @@ var allControls = {
 
 window.allControls = allControls;
 
-(function (name, base) {
-    return classCreator(name, base,
+(function (base) {
+    return classCreator("WebAtoms.AtomDispatcher", base,
         function () {
             this._paused = false;
             this.queue = [];
@@ -70,7 +70,7 @@ window.allControls = allControls;
             }
         }
         );
-})("WebAtoms.AtomDispatcher",null);
+})();
 
 WebAtoms.dispatcher = new WebAtoms.AtomDispatcher();
 
