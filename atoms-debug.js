@@ -3324,53 +3324,54 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 137 - 'AtomBinding.js' */            },
 
 /*Line 139 - 'AtomBinding.js' */            onValChanged: function () {
-/*Line 140 - 'AtomBinding.js' */                this.onPropChanged(null, null);
-/*Line 141 - 'AtomBinding.js' */            },
-/*Line 142 - 'AtomBinding.js' */            setup: function () {
-/*Line 143 - 'AtomBinding.js' */                if (this.twoWays) {
-/*Line 144 - 'AtomBinding.js' */                    if (this.jq) {
-/*Line 145 - 'AtomBinding.js' */                        this.bindEvent(this.element, "change", "onValChanged");
-/*Line 146 - 'AtomBinding.js' */                        if (this.events) {
-/*Line 147 - 'AtomBinding.js' */                            var list = new AtomEnumerator(this.events.split(","));
-/*Line 148 - 'AtomBinding.js' */                            while (list.next()) {
-/*Line 149 - 'AtomBinding.js' */                                this.bindEvent(this.element, list.current(), "onValChanged");
-/*Line 150 - 'AtomBinding.js' */                            }
-/*Line 151 - 'AtomBinding.js' */                        }
-/*Line 152 - 'AtomBinding.js' */                    } else {
-/*Line 153 - 'AtomBinding.js' */                        this.bindEvent(this.control, "WatchHandler", "onPropChanged", this.key);
-/*Line 154 - 'AtomBinding.js' */                    }
-/*Line 155 - 'AtomBinding.js' */                }
+/*Line 140 - 'AtomBinding.js' */                var self = this;
+/*Line 141 - 'AtomBinding.js' */                setTimeout(function () { self.onPropChanged(null, null); },5);
+/*Line 142 - 'AtomBinding.js' */            },
+/*Line 143 - 'AtomBinding.js' */            setup: function () {
+/*Line 144 - 'AtomBinding.js' */                if (this.twoWays) {
+/*Line 145 - 'AtomBinding.js' */                    if (this.jq) {
+/*Line 146 - 'AtomBinding.js' */                        this.bindEvent(this.element, "change", "onValChanged");
+/*Line 147 - 'AtomBinding.js' */                        if (this.events) {
+/*Line 148 - 'AtomBinding.js' */                            var list = new AtomEnumerator(this.events.split(","));
+/*Line 149 - 'AtomBinding.js' */                            while (list.next()) {
+/*Line 150 - 'AtomBinding.js' */                                this.bindEvent(this.element, list.current(), "onValChanged");
+/*Line 151 - 'AtomBinding.js' */                            }
+/*Line 152 - 'AtomBinding.js' */                        }
+/*Line 153 - 'AtomBinding.js' */                    } else {
+/*Line 154 - 'AtomBinding.js' */                        this.bindEvent(this.control, "WatchHandler", "onPropChanged", this.key);
+/*Line 155 - 'AtomBinding.js' */                    }
+/*Line 156 - 'AtomBinding.js' */                }
 
-/*Line 157 - 'AtomBinding.js' */                this.onDataChanged(this, null);
+/*Line 158 - 'AtomBinding.js' */                this.onDataChanged(this, null);
 
-/*Line 159 - 'AtomBinding.js' */            },
+/*Line 160 - 'AtomBinding.js' */            },
 
-/*Line 161 - 'AtomBinding.js' */            setValue: function (value) {
+/*Line 162 - 'AtomBinding.js' */            setValue: function (value) {
 
-/*Line 163 - 'AtomBinding.js' */                if (!this.pathList && this.vf) {
-/*Line 164 - 'AtomBinding.js' */                    value = [value];
-/*Line 165 - 'AtomBinding.js' */                }
+/*Line 164 - 'AtomBinding.js' */                if (!this.pathList && this.vf) {
+/*Line 165 - 'AtomBinding.js' */                    value = [value];
+/*Line 166 - 'AtomBinding.js' */                }
 
-/*Line 167 - 'AtomBinding.js' */                if (this.vf) {
-/*Line 168 - 'AtomBinding.js' */                    value.push(Atom);
-/*Line 169 - 'AtomBinding.js' */                    value.push(AtomPromise);
-/*Line 170 - 'AtomBinding.js' */                    value = this.vf.apply(this, value);
-/*Line 171 - 'AtomBinding.js' */                }
+/*Line 168 - 'AtomBinding.js' */                if (this.vf) {
+/*Line 169 - 'AtomBinding.js' */                    value.push(Atom);
+/*Line 170 - 'AtomBinding.js' */                    value.push(AtomPromise);
+/*Line 171 - 'AtomBinding.js' */                    value = this.vf.apply(this, value);
+/*Line 172 - 'AtomBinding.js' */                }
 
-/*Line 173 - 'AtomBinding.js' */                if (value instanceof AtomPromise) {
-/*Line 174 - 'AtomBinding.js' */                    value._persist = true;
-/*Line 175 - 'AtomBinding.js' */                }
+/*Line 174 - 'AtomBinding.js' */                if (value instanceof AtomPromise) {
+/*Line 175 - 'AtomBinding.js' */                    value._persist = true;
+/*Line 176 - 'AtomBinding.js' */                }
 
-/*Line 177 - 'AtomBinding.js' */                this._lastValue = value;
-/*Line 178 - 'AtomBinding.js' */                this._isUpdating = true;
-/*Line 179 - 'AtomBinding.js' */                this.control.setLocalValue(this.key, value, this.element, true);
-/*Line 180 - 'AtomBinding.js' */                this._isUpdating = false;
-/*Line 181 - 'AtomBinding.js' */            }
+/*Line 178 - 'AtomBinding.js' */                this._lastValue = value;
+/*Line 179 - 'AtomBinding.js' */                this._isUpdating = true;
+/*Line 180 - 'AtomBinding.js' */                this.control.setLocalValue(this.key, value, this.element, true);
+/*Line 181 - 'AtomBinding.js' */                this._isUpdating = false;
+/*Line 182 - 'AtomBinding.js' */            }
 
 
-/*Line 184 - 'AtomBinding.js' */        }
-/*Line 185 - 'AtomBinding.js' */    });
-/*Line 186 - 'AtomBinding.js' */})(WebAtoms.AtomComponent.prototype);
+/*Line 185 - 'AtomBinding.js' */        }
+/*Line 186 - 'AtomBinding.js' */    });
+/*Line 187 - 'AtomBinding.js' */})(WebAtoms.AtomComponent.prototype);
 /*Line 0 - 'AtomDispatcher.js' */
 
 /*Line 2 - 'AtomDispatcher.js' */var allControls = {
@@ -3703,7 +3704,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 62 - 'AtomControl.js' */        if (/^(@|\$)/g.test(value)) {
 /*Line 63 - 'AtomControl.js' */            value = value.substr(1);
 /*Line 64 - 'AtomControl.js' */        }
-/*Line 65 - 'AtomControl.js' */        ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur");
+/*Line 65 - 'AtomControl.js' */        ctrl.bind(element, key, value, true, null, "keyup,keydown,keypress,blur,click");
 /*Line 66 - 'AtomControl.js' */    }
 /*Line 67 - 'AtomControl.js' */};
 
