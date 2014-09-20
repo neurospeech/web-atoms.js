@@ -208,6 +208,22 @@ window.AtomProperties = AtomProperties;
                 if (d) {
                     Atom.merge(this,d,true);
                 }
+                var action = (v.timeOut || v.timeout);
+                if (action) {
+                    var _this = this;
+                    var tm = 100;
+                    if (action.hasOwnProperty("length")) {
+                        if (action.length > 1) {
+                            tm = action[0];
+                            action = action[1];
+                        }
+                    }
+                    setTimeout(function () {
+                        _this.set_merge(action);
+                    }, tm);
+                    return;
+                }
+
             },
             invokeAction: function (action, evt) {
                 if (!action)
