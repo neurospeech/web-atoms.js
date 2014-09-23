@@ -138,7 +138,8 @@
             },
 
             onValChanged: function () {
-                this.onPropChanged(null, null);
+                var self = this;
+                setTimeout(function () { self.onPropChanged(null, null); },5);
             },
             setup: function () {
                 if (this.twoWays) {
