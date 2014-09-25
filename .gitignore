@@ -14,3 +14,4 @@ nuget/Atoms.js/obj/*
 *.nupkg.bak
 *.webinfo
 *.log
+/packages
