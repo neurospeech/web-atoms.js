@@ -20,17 +20,21 @@ this.atomApplication = null;
             }
 
             window.atomApplication = this;
-            if (location.hash) {
-                var url = location.hash.substring(1);
-                this._urlScope = AtomUI.parseUrl(url);
+            this.busyCount = 0;
+
+            var url = location.hash;
+            url = url ? url.substr(1) : url;
+            if (url) {
+                var s = AtomUI.parseUrl(url);
+                this._hash = location.hash;
+                var ts = this._scope;
+                for (var i in s) {
+                    ts[i] = s[i];
+                }
             } else {
-                this._urlScope = {};
+                this._hash = location.hash;
             }
 
-            // load hash values...
-            this.onHashChanged();
-
-            this.busyCount = 0;
         },
         {
             get_title: function () {
@@ -143,6 +147,10 @@ this.atomApplication = null;
                 if (this._noHashRefresh)
                     return;
 
+                var dest = this._defaultScope;
+                if (!dest)
+                    return;
+
                 var i = key;
                 if (i.indexOf('_') == 0)
                     return;
@@ -157,49 +165,40 @@ this.atomApplication = null;
                 }
 
 
-                var diff = {};
+                var diff = [];
                 var src = this._scope;
-                var dest = this._defaultScopeValues || {};
 
                 for (var k in src) {
                     var v = src[k];
-                    if (!this._urlScope[k]) {
+                    if (dest.hasOwnProperty(k)) {
                         if (v == dest[k])
                             continue;
+                        diff.push({ key: k, value: v });
                     }
-                    diff[k] = v;
                 }
 
-                // update hash !!!
-                var p = Atom.encodeParameters(diff);
-                if (!p) {
-                    if (history && history.pushState) {
-                        history.pushState({}, document.title, location.href.split('#')[0]);
-                    } else {
-                        location.hash = "";
-                    }
+                var p = this._hash;
+                p = p ? (p + "&") : "";
+                p = p + diff.map(function (a) { return a.key + "=" + encodeURIComponent(a.value); }).join("&");
+
+                if (p == location.hash)
                     return;
+
+                if (p.length>1 && !/^\#/.test(p)) {
+                    p = "#" + p;
                 }
-                p = "#" + p;
 
-
-                if (location.hash != p) {
-
-                    this._noHashRefresh = true;
-                    if (history && history.pushState) {
-                        history.pushState({}, document.title, (location.href.split('#')[0]) + p);
-                    } else {
-                        location.href = p;
-                    }
-                    this._noHashRefresh = false;
+                this._noHashRefresh = true;
+                if (history && history.pushState) {
+                    history.pushState({}, document.title, (location.href.split('#')[0]) + p);
+                } else {
+                    location.href = p;
                 }
+                this._noHashRefresh = false;
             },
 
             onInitialized: function () {
 
-                // To save URL persistance of Scope Values
-                // We have to remember default scope values set 
-                // at time of page creation.
                 var d = {};
                 var src = this._scope;
                 for (var k in src) {
@@ -216,14 +215,12 @@ this.atomApplication = null;
                     }
                     d[k] = val;
                 }
-                this._defaultScopeValues = d;
-
-
-                var p = Atom.encodeParameters(this._scope);
-                if (p) {
-                    this._defaultScope = "#" + p;
-                }
+                this._defaultScope = d;
                 base.onInitialized.call(this);
+                if (!this._renderAsPage) {
+                    $(this._element).addClass("atom-dock-application");
+                }
+
             },
 
             createChildren: function () {
@@ -279,13 +276,6 @@ this.atomApplication = null;
             setup: function () {
                 this.createChildren();
                 this.init();
-            },
-
-            onInitialized: function () {
-                base.onInitialized.apply(this, arguments);
-                if (!this._renderAsPage) {
-                    $(this._element).addClass("atom-dock-application");
-                }
             },
 
             init: function () {
