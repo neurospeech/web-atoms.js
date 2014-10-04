@@ -347,6 +347,15 @@ jsonML["WebAtoms.AtomNavigatorList.template"] =
 { "type": "button", "event-click": "[$owner.templateParent.cancelAddCommand]", "value": "Back", "style": "float: left" }
 ]]]]]
 ;
+jsonML["WebAtoms.AtomRadioButtonList.itemTemplate"] = 
+[["span",
+{  }
+,["input",
+{ "type": "radio", "atom-checked": "$[scope.itemSelected]" }
+], ["span",
+{ "atom-text": "{$data.label}" }
+]]]
+;
 jsonML["WebAtoms.AtomSortableColumn.template"] = 
 [["span",
 { "atom-text": "[$owner.label]" }
@@ -5804,27 +5813,6 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 280 - 'AtomAutoCompleteBox.js' */    });
 /*Line 281 - 'AtomAutoCompleteBox.js' */})(WebAtoms.AtomListBox.prototype);
 
-/*Line 0 - 'AtomCheckBoxList.js' */
-
-/*Line 2 - 'AtomCheckBoxList.js' */(function (base) {
-/*Line 3 - 'AtomCheckBoxList.js' */    return classCreatorEx(
-/*Line 4 - 'AtomCheckBoxList.js' */    {
-/*Line 5 - 'AtomCheckBoxList.js' */        name: "WebAtoms.AtomCheckBoxList",
-/*Line 6 - 'AtomCheckBoxList.js' */        base: base,
-/*Line 7 - 'AtomCheckBoxList.js' */        start: function () {
-/*Line 8 - 'AtomCheckBoxList.js' */            this._allowMultipleSelection = true;
-/*Line 9 - 'AtomCheckBoxList.js' */            this._valueSeparator = ", ";
-/*Line 10 - 'AtomCheckBoxList.js' */            this._dataElements = [];
-/*Line 11 - 'AtomCheckBoxList.js' */        },
-/*Line 12 - 'AtomCheckBoxList.js' */        methods: {
-/*Line 13 - 'AtomCheckBoxList.js' */            init: function () {
-/*Line 14 - 'AtomCheckBoxList.js' */                base.init.call(this);
-/*Line 15 - 'AtomCheckBoxList.js' */                $(this._element).addClass("atom-check-box-list");
-/*Line 16 - 'AtomCheckBoxList.js' */            }
-/*Line 17 - 'AtomCheckBoxList.js' */        }
-/*Line 18 - 'AtomCheckBoxList.js' */    });
-/*Line 19 - 'AtomCheckBoxList.js' */})(WebAtoms.AtomItemsControl.prototype);
-
 /*Line 0 - 'AtomComboBox.js' */
 /*Line 1 - 'AtomComboBox.js' */
 
@@ -7144,6 +7132,27 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 44 - 'AtomCheckBox.js' *///};
 
 /*Line 46 - 'AtomCheckBox.js' *///WebAtoms.AtomCheckBox.registerClass("WebAtoms.AtomCheckBox", WebAtoms.AtomControl);
+/*Line 0 - 'AtomCheckBoxList.js' */
+
+/*Line 2 - 'AtomCheckBoxList.js' */(function (base) {
+/*Line 3 - 'AtomCheckBoxList.js' */    return classCreatorEx(
+/*Line 4 - 'AtomCheckBoxList.js' */    {
+/*Line 5 - 'AtomCheckBoxList.js' */        name: "WebAtoms.AtomCheckBoxList",
+/*Line 6 - 'AtomCheckBoxList.js' */        base: base,
+/*Line 7 - 'AtomCheckBoxList.js' */        start: function () {
+/*Line 8 - 'AtomCheckBoxList.js' */            this._allowMultipleSelection = true;
+/*Line 9 - 'AtomCheckBoxList.js' */            this._valueSeparator = ", ";
+/*Line 10 - 'AtomCheckBoxList.js' */            this._dataElements = [];
+/*Line 11 - 'AtomCheckBoxList.js' */        },
+/*Line 12 - 'AtomCheckBoxList.js' */        methods: {
+/*Line 13 - 'AtomCheckBoxList.js' */            init: function () {
+/*Line 14 - 'AtomCheckBoxList.js' */                base.init.call(this);
+/*Line 15 - 'AtomCheckBoxList.js' */                $(this._element).addClass("atom-check-box-list");
+/*Line 16 - 'AtomCheckBoxList.js' */            }
+/*Line 17 - 'AtomCheckBoxList.js' */        }
+/*Line 18 - 'AtomCheckBoxList.js' */    });
+/*Line 19 - 'AtomCheckBoxList.js' */})(WebAtoms.AtomItemsControl.prototype);
+
 /*Line 0 - 'AtomDataPager.js' */
 
 /*Line 2 - 'AtomDataPager.js' */(function (base) {
@@ -8484,82 +8493,16 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 7 - 'AtomRadioButtonList.js' */            this._allowMultipleSelection = false;
 /*Line 8 - 'AtomRadioButtonList.js' */        },
 /*Line 9 - 'AtomRadioButtonList.js' */        properties: {
-
+/*Line 10 - 'AtomRadioButtonList.js' */            groupName:""
 /*Line 11 - 'AtomRadioButtonList.js' */        },
 /*Line 12 - 'AtomRadioButtonList.js' */        methods: {
-/*Line 13 - 'AtomRadioButtonList.js' */            updateChildSelections: function () {
-/*Line 14 - 'AtomRadioButtonList.js' */                var dataItems = this.get_dataItems();
-/*Line 15 - 'AtomRadioButtonList.js' */                var ae = new AtomEnumerator(dataItems);
-/*Line 16 - 'AtomRadioButtonList.js' */                var children = this._dataElements;
-/*Line 17 - 'AtomRadioButtonList.js' */                while (ae.next()) {
-/*Line 18 - 'AtomRadioButtonList.js' */                    var dataItem = ae.current();
-/*Line 19 - 'AtomRadioButtonList.js' */                    var item = children[ae.currentIndex()];
-/*Line 20 - 'AtomRadioButtonList.js' */                    if (this.isSelected(dataItem)) {
-/*Line 21 - 'AtomRadioButtonList.js' */                        $(item).attr("checked", "true");
-/*Line 22 - 'AtomRadioButtonList.js' */                    } else {
-/*Line 23 - 'AtomRadioButtonList.js' */                        $(item).removeAttr("checked");
-/*Line 24 - 'AtomRadioButtonList.js' */                    }
-/*Line 25 - 'AtomRadioButtonList.js' */                }
-/*Line 26 - 'AtomRadioButtonList.js' */            },
-
-
-/*Line 29 - 'AtomRadioButtonList.js' */            onDataChange: function (event) {
-/*Line 30 - 'AtomRadioButtonList.js' */                this._onUIChanged = true;
-
-/*Line 32 - 'AtomRadioButtonList.js' */                var item = event.target;
-/*Line 33 - 'AtomRadioButtonList.js' */                var dataItem = item;
-/*Line 34 - 'AtomRadioButtonList.js' */                if (this.hasItems())
-/*Line 35 - 'AtomRadioButtonList.js' */                    dataItem = $(item).data("atom-data-item");
-/*Line 36 - 'AtomRadioButtonList.js' */                var checked = $(item).attr("checked");
-
-/*Line 38 - 'AtomRadioButtonList.js' */                AtomBinder.clear(this._selectedItems);
-
-/*Line 40 - 'AtomRadioButtonList.js' */                if (this.isSelected(dataItem)) {
-/*Line 41 - 'AtomRadioButtonList.js' */                    if (!checked) {
-/*Line 42 - 'AtomRadioButtonList.js' */                        AtomBinder.removeItem(this._selectedItems, dataItem);
-/*Line 43 - 'AtomRadioButtonList.js' */                    }
-/*Line 44 - 'AtomRadioButtonList.js' */                }
-/*Line 45 - 'AtomRadioButtonList.js' */                else {
-/*Line 46 - 'AtomRadioButtonList.js' */                    if (checked) {
-/*Line 47 - 'AtomRadioButtonList.js' */                        AtomBinder.addItem(this._selectedItems, dataItem);
-/*Line 48 - 'AtomRadioButtonList.js' */                    }
-/*Line 49 - 'AtomRadioButtonList.js' */                }
-
-/*Line 51 - 'AtomRadioButtonList.js' */                this._onUIChanged = false;
-
-/*Line 53 - 'AtomRadioButtonList.js' */            },
-
-/*Line 55 - 'AtomRadioButtonList.js' */            createChildElement: function (parentScope, parentElement, data) {
-/*Line 56 - 'AtomRadioButtonList.js' */                var span = document.createElement("SPAN");
-/*Line 57 - 'AtomRadioButtonList.js' */                var cb = document.createElement("INPUT");
-/*Line 58 - 'AtomRadioButtonList.js' */                $(cb).attr("type", "radio");
-/*Line 59 - 'AtomRadioButtonList.js' */                $(cb).attr("name", this._groupName);
-/*Line 60 - 'AtomRadioButtonList.js' */                var lp = this.get_labelPath();
-/*Line 61 - 'AtomRadioButtonList.js' */                var vp = this.get_valuePath();
-/*Line 62 - 'AtomRadioButtonList.js' */                l = data;
-/*Line 63 - 'AtomRadioButtonList.js' */                v = data;
-/*Line 64 - 'AtomRadioButtonList.js' */                if (lp)
-/*Line 65 - 'AtomRadioButtonList.js' */                    l = data[lp];
-/*Line 66 - 'AtomRadioButtonList.js' */                if (vp)
-/*Line 67 - 'AtomRadioButtonList.js' */                    v = data[vp];
-/*Line 68 - 'AtomRadioButtonList.js' */                $(cb).data("atom-data", v);
-/*Line 69 - 'AtomRadioButtonList.js' */                $(cb).data("atom-data-item", data);
-/*Line 70 - 'AtomRadioButtonList.js' */                $(cb).val(l);
-/*Line 71 - 'AtomRadioButtonList.js' */                span.appendChild(cb);
-/*Line 72 - 'AtomRadioButtonList.js' */                var txt = document.createTextNode(l);
-/*Line 73 - 'AtomRadioButtonList.js' */                span.appendChild(txt);
-/*Line 74 - 'AtomRadioButtonList.js' */                parentElement.appendChild(span);
-/*Line 75 - 'AtomRadioButtonList.js' */                this.bindEvent(cb, "change", "onDataChange");
-/*Line 76 - 'AtomRadioButtonList.js' */                return cb;
-/*Line 77 - 'AtomRadioButtonList.js' */            },
-
-/*Line 79 - 'AtomRadioButtonList.js' */            init: function () {
-/*Line 80 - 'AtomRadioButtonList.js' */                this._groupName = "__g" + AtomUI.getNewIndex();
-/*Line 81 - 'AtomRadioButtonList.js' */                baseType.init.call(this);
-/*Line 82 - 'AtomRadioButtonList.js' */            }
-/*Line 83 - 'AtomRadioButtonList.js' */        }
-/*Line 84 - 'AtomRadioButtonList.js' */    });
-/*Line 85 - 'AtomRadioButtonList.js' */})(WebAtoms.AtomCheckBoxList.prototype);
+/*Line 13 - 'AtomRadioButtonList.js' */            init: function () {
+/*Line 14 - 'AtomRadioButtonList.js' */                this._groupName = "__g" + AtomUI.getNewIndex();
+/*Line 15 - 'AtomRadioButtonList.js' */                baseType.init.call(this);
+/*Line 16 - 'AtomRadioButtonList.js' */            }
+/*Line 17 - 'AtomRadioButtonList.js' */        }
+/*Line 18 - 'AtomRadioButtonList.js' */    });
+/*Line 19 - 'AtomRadioButtonList.js' */})(WebAtoms.AtomItemsControl.prototype);
 
 /*Line 0 - 'AtomSortableColumn.js' */
 
