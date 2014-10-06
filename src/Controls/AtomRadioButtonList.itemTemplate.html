@@ -1,4 +1,6 @@
 ﻿<span>
-    <input type="radio" atom-checked="$[scope.itemSelected]" />
+    <input type="radio"
+           atom-name="{$owner.groupName}"
+           atom-checked="$[scope.itemSelected]" />
     <span atom-text="{$data.label}"></span>
 </span>

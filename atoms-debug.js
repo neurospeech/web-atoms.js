@@ -351,7 +351,7 @@ Templates.jsonML["WebAtoms.AtomRadioButtonList.itemTemplate"] =
 [["span",
 {  }
 ,["input",
-{ "type": "radio", "atom-checked": "$[scope.itemSelected]" }
+{ "type": "radio", "atom-name": "{$owner.groupName}", "atom-checked": "$[scope.itemSelected]" }
 ], ["span",
 { "atom-text": "{$data.label}" }
 ]]]
