@@ -27,6 +27,7 @@
                 }
             },
             set_selectedIndex: function (v) {
+
                 if (this._isAnimating) {
                     var self = this;
                     setTimeout(function () {
@@ -34,6 +35,8 @@
                     }, 50);
                     return;
                 }
+                if (v == this._selectedIndex)
+                    return;
                 this._previousIndex = this._selectedIndex;
                 this._selectedIndex = v;
                 this.updateUI();
@@ -49,7 +52,7 @@
                 var selectedIndex = this.get_selectedIndex();
                 var previousIndex = this._previousIndex;
 
-                var queue = new WebAtoms.AtomDispatcher();
+                var queue = WebAtoms.dispatcher;
                 queue.pause();
 
                 var i = -1;
@@ -87,19 +90,22 @@
                         sac.updateUI();
                     }
 
-                    if (previousElement) {
+                    if (previousElement && previousElement != selectedElement) {
                         var self = this;
                         this._isAnimating = true;
                         var ael = [selectedElement, previousElement];
                         $(ael).removeClass("hidden");
                         if (selectedIndex < previousIndex) {
                             $(selectedElement).css("left", -width);
+                            //log("left: -" + width);
                         } else {
                             $(selectedElement).css("left", width);
+                            //log("left: " + width);
                         }
                         $(ael).addClass("animate-left-property");
-                        WebAtoms.dispatcher.callLater(function () {
+                        setTimeout(function () {
                             $(selectedElement).css("left", 0);
+                            //log("left: 0");
                             if (selectedIndex < previousIndex) {
                                 $(previousElement).css("left", width);
                             } else {
@@ -109,8 +115,8 @@
                                 self._isAnimating = false;
                                 $(ael).removeClass("animate-left-property");
                                 $(previousElement).addClass("hidden");
-                            }, 600);
-                        });
+                            }, 800);
+                        },50);
                     } else {
                         $(selectedElement).removeClass("hidden");
                     }
