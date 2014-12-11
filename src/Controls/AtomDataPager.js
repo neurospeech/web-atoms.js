@@ -46,6 +46,8 @@
                         return;
                     if (!this._total)
                         return;
+                    if (!this._pageSize)
+                        return;
                     var l = this._items.length;
                     var t = this._total;
                     var count = Math.ceil(t / this._pageSize);

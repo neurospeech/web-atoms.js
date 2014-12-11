@@ -7207,101 +7207,103 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 45 - 'AtomDataPager.js' */                        return;
 /*Line 46 - 'AtomDataPager.js' */                    if (!this._total)
 /*Line 47 - 'AtomDataPager.js' */                        return;
-/*Line 48 - 'AtomDataPager.js' */                    var l = this._items.length;
-/*Line 49 - 'AtomDataPager.js' */                    var t = this._total;
-/*Line 50 - 'AtomDataPager.js' */                    var count = Math.ceil(t / this._pageSize);
+/*Line 48 - 'AtomDataPager.js' */                    if (!this._pageSize)
+/*Line 49 - 'AtomDataPager.js' */                        return;
+/*Line 50 - 'AtomDataPager.js' */                    var l = this._items.length;
+/*Line 51 - 'AtomDataPager.js' */                    var t = this._total;
+/*Line 52 - 'AtomDataPager.js' */                    var count = Math.ceil(t / this._pageSize);
 
-/*Line 52 - 'AtomDataPager.js' */                    if (count == this._pages.length)
-/*Line 53 - 'AtomDataPager.js' */                        return;
+/*Line 54 - 'AtomDataPager.js' */                    if (count == this._pages.length)
+/*Line 55 - 'AtomDataPager.js' */                        return;
 
-/*Line 55 - 'AtomDataPager.js' */                    var ps = this._pageSize;
-/*Line 56 - 'AtomDataPager.js' */                    var pages = [];
-/*Line 57 - 'AtomDataPager.js' */                    var i;
-/*Line 58 - 'AtomDataPager.js' */                    for (i = 0; i < count; i++) {
-/*Line 59 - 'AtomDataPager.js' */                        pages.push({
-/*Line 60 - 'AtomDataPager.js' */                            value: i,
-/*Line 61 - 'AtomDataPager.js' */                            label: i + 1
-/*Line 62 - 'AtomDataPager.js' */                        });
-/*Line 63 - 'AtomDataPager.js' */                    }
-/*Line 64 - 'AtomDataPager.js' */                    AtomBinder.setValue(this, "pages", pages);
-/*Line 65 - 'AtomDataPager.js' */                },
+/*Line 57 - 'AtomDataPager.js' */                    var ps = this._pageSize;
+/*Line 58 - 'AtomDataPager.js' */                    var pages = [];
+/*Line 59 - 'AtomDataPager.js' */                    var i;
+/*Line 60 - 'AtomDataPager.js' */                    for (i = 0; i < count; i++) {
+/*Line 61 - 'AtomDataPager.js' */                        pages.push({
+/*Line 62 - 'AtomDataPager.js' */                            value: i,
+/*Line 63 - 'AtomDataPager.js' */                            label: i + 1
+/*Line 64 - 'AtomDataPager.js' */                        });
+/*Line 65 - 'AtomDataPager.js' */                    }
+/*Line 66 - 'AtomDataPager.js' */                    AtomBinder.setValue(this, "pages", pages);
+/*Line 67 - 'AtomDataPager.js' */                },
 
-/*Line 67 - 'AtomDataPager.js' */                set_items: function (v) {
+/*Line 69 - 'AtomDataPager.js' */                set_items: function (v) {
 
-/*Line 69 - 'AtomDataPager.js' */                    if (v != this._items) {
-/*Line 70 - 'AtomDataPager.js' */                        if (this._items) {
-/*Line 71 - 'AtomDataPager.js' */                            this.unbindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
-/*Line 72 - 'AtomDataPager.js' */                        }
-/*Line 73 - 'AtomDataPager.js' */                    }
+/*Line 71 - 'AtomDataPager.js' */                    if (v != this._items) {
+/*Line 72 - 'AtomDataPager.js' */                        if (this._items) {
+/*Line 73 - 'AtomDataPager.js' */                            this.unbindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
+/*Line 74 - 'AtomDataPager.js' */                        }
+/*Line 75 - 'AtomDataPager.js' */                    }
 
-/*Line 75 - 'AtomDataPager.js' */                    if (!v)
-/*Line 76 - 'AtomDataPager.js' */                        return;
-/*Line 77 - 'AtomDataPager.js' */                    this._items = v;
+/*Line 77 - 'AtomDataPager.js' */                    if (!v)
+/*Line 78 - 'AtomDataPager.js' */                        return;
+/*Line 79 - 'AtomDataPager.js' */                    this._items = v;
 
-/*Line 79 - 'AtomDataPager.js' */                    if (v != null && this._created) {
-/*Line 80 - 'AtomDataPager.js' */                        this.bindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
-/*Line 81 - 'AtomDataPager.js' */                        this.onCollectionChangedInternal("refresh", -1, null);
-/*Line 82 - 'AtomDataPager.js' */                    }
+/*Line 81 - 'AtomDataPager.js' */                    if (v != null && this._created) {
+/*Line 82 - 'AtomDataPager.js' */                        this.bindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
+/*Line 83 - 'AtomDataPager.js' */                        this.onCollectionChangedInternal("refresh", -1, null);
+/*Line 84 - 'AtomDataPager.js' */                    }
 
-/*Line 84 - 'AtomDataPager.js' */                },
+/*Line 86 - 'AtomDataPager.js' */                },
 
-/*Line 86 - 'AtomDataPager.js' */                onCollectionChangedInternal: function () {
-/*Line 87 - 'AtomDataPager.js' */                    var v = this._items;
-/*Line 88 - 'AtomDataPager.js' */                    if (v.length === undefined) {
-/*Line 89 - 'AtomDataPager.js' */                        var val = v[this._itemsPath];
+/*Line 88 - 'AtomDataPager.js' */                onCollectionChangedInternal: function () {
+/*Line 89 - 'AtomDataPager.js' */                    var v = this._items;
+/*Line 90 - 'AtomDataPager.js' */                    if (v.length === undefined) {
+/*Line 91 - 'AtomDataPager.js' */                        var val = v[this._itemsPath];
 
-/*Line 91 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "total", v[this._totalPath]);
-/*Line 92 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "value", val);
-/*Line 93 - 'AtomDataPager.js' */                    } else {
-/*Line 94 - 'AtomDataPager.js' */                        if (v.total) {
-/*Line 95 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "total", v.total);
-/*Line 96 - 'AtomDataPager.js' */                        } else {
-/*Line 97 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "pages", []);
-/*Line 98 - 'AtomDataPager.js' */                        }
-/*Line 99 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "value", v);
-/*Line 100 - 'AtomDataPager.js' */                    }
+/*Line 93 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "total", v[this._totalPath]);
+/*Line 94 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "value", val);
+/*Line 95 - 'AtomDataPager.js' */                    } else {
+/*Line 96 - 'AtomDataPager.js' */                        if (v.total) {
+/*Line 97 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "total", v.total);
+/*Line 98 - 'AtomDataPager.js' */                        } else {
+/*Line 99 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "pages", []);
+/*Line 100 - 'AtomDataPager.js' */                        }
+/*Line 101 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "value", v);
+/*Line 102 - 'AtomDataPager.js' */                    }
 
-/*Line 102 - 'AtomDataPager.js' */                    this.preparePages();
-/*Line 103 - 'AtomDataPager.js' */                },
+/*Line 104 - 'AtomDataPager.js' */                    this.preparePages();
+/*Line 105 - 'AtomDataPager.js' */                },
 
-/*Line 105 - 'AtomDataPager.js' */                onCreated: function () {
-/*Line 106 - 'AtomDataPager.js' */                    if (this._items) {
-/*Line 107 - 'AtomDataPager.js' */                        this.bindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
-/*Line 108 - 'AtomDataPager.js' */                        this.onCollectionChangedInternal("refresh", -1, null);
-/*Line 109 - 'AtomDataPager.js' */                    }
-/*Line 110 - 'AtomDataPager.js' */                },
+/*Line 107 - 'AtomDataPager.js' */                onCreated: function () {
+/*Line 108 - 'AtomDataPager.js' */                    if (this._items) {
+/*Line 109 - 'AtomDataPager.js' */                        this.bindEvent(this._items, "CollectionChanged", "onCollectionChangedInternal");
+/*Line 110 - 'AtomDataPager.js' */                        this.onCollectionChangedInternal("refresh", -1, null);
+/*Line 111 - 'AtomDataPager.js' */                    }
+/*Line 112 - 'AtomDataPager.js' */                },
 
 
-/*Line 113 - 'AtomDataPager.js' */                set_currentPage: function (v) {
-/*Line 114 - 'AtomDataPager.js' */                    this._currentPage = v;
-/*Line 115 - 'AtomDataPager.js' */                    AtomBinder.refreshValue(this, "pageStart");
-/*Line 116 - 'AtomDataPager.js' */                },
+/*Line 115 - 'AtomDataPager.js' */                set_currentPage: function (v) {
+/*Line 116 - 'AtomDataPager.js' */                    this._currentPage = v;
+/*Line 117 - 'AtomDataPager.js' */                    AtomBinder.refreshValue(this, "pageStart");
+/*Line 118 - 'AtomDataPager.js' */                },
 
-/*Line 118 - 'AtomDataPager.js' */                get_pageStart: function () {
-/*Line 119 - 'AtomDataPager.js' */                    return this._currentPage * this._pageSize;
-/*Line 120 - 'AtomDataPager.js' */                },
+/*Line 120 - 'AtomDataPager.js' */                get_pageStart: function () {
+/*Line 121 - 'AtomDataPager.js' */                    return this._currentPage * this._pageSize;
+/*Line 122 - 'AtomDataPager.js' */                },
 
-/*Line 122 - 'AtomDataPager.js' */                set_pageSize: function (v) {
-/*Line 123 - 'AtomDataPager.js' */                    this._pageSize = v;
-/*Line 124 - 'AtomDataPager.js' */                    this.preparePages();
-/*Line 125 - 'AtomDataPager.js' */                },
-/*Line 126 - 'AtomDataPager.js' */                set_total: function (v) {
-/*Line 127 - 'AtomDataPager.js' */                    if (this._total == v)
-/*Line 128 - 'AtomDataPager.js' */                        return;
-/*Line 129 - 'AtomDataPager.js' */                    this._total = v;
-/*Line 130 - 'AtomDataPager.js' */                },
-/*Line 131 - 'AtomDataPager.js' */                init: function () {
+/*Line 124 - 'AtomDataPager.js' */                set_pageSize: function (v) {
+/*Line 125 - 'AtomDataPager.js' */                    this._pageSize = v;
+/*Line 126 - 'AtomDataPager.js' */                    this.preparePages();
+/*Line 127 - 'AtomDataPager.js' */                },
+/*Line 128 - 'AtomDataPager.js' */                set_total: function (v) {
+/*Line 129 - 'AtomDataPager.js' */                    if (this._total == v)
+/*Line 130 - 'AtomDataPager.js' */                        return;
+/*Line 131 - 'AtomDataPager.js' */                    this._total = v;
+/*Line 132 - 'AtomDataPager.js' */                },
+/*Line 133 - 'AtomDataPager.js' */                init: function () {
 
-/*Line 133 - 'AtomDataPager.js' */                    $(this._element).addClass("atom-data-pager");
+/*Line 135 - 'AtomDataPager.js' */                    $(this._element).addClass("atom-data-pager");
 
-/*Line 135 - 'AtomDataPager.js' */                    base.init.apply(this, arguments);
-/*Line 136 - 'AtomDataPager.js' */                }
-/*Line 137 - 'AtomDataPager.js' */            }
+/*Line 137 - 'AtomDataPager.js' */                    base.init.apply(this, arguments);
+/*Line 138 - 'AtomDataPager.js' */                }
+/*Line 139 - 'AtomDataPager.js' */            }
 
-/*Line 139 - 'AtomDataPager.js' */    }
-/*Line 140 - 'AtomDataPager.js' */);
+/*Line 141 - 'AtomDataPager.js' */    }
+/*Line 142 - 'AtomDataPager.js' */);
 
-/*Line 142 - 'AtomDataPager.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 144 - 'AtomDataPager.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomDateControl.js' */
 
 /*Line 2 - 'AtomDateControl.js' */// Date Month Year
