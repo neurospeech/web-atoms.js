@@ -161,7 +161,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             },
 
             onUploadComplete: function () {
-                var a = Atom.query(this._items).any({ 'status': 'uploading' });
+                var a = Atom.query(this._items).any({ 'status !==': 'done' });
                 if (a || this._finished)
                     return;
                 AtomBinder.setValue(this, "finished", true);
