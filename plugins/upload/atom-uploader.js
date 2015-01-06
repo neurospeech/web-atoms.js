@@ -19,16 +19,16 @@ Templates.jsonML["WebAtoms.AtomUploader.itemTemplate"] = [
     ["tr", {
         "class": "atom-uploader-item"
     },
-        ["td", { "atom-text": "{$scope.itemIndex + ') ' + $data.name }" }],
         ["td",
             { "class": "progress-host" },
-            ["span", { "class": "progress", "style-width": "[$data.progress + 'px']" }],
-            ["span", { "atom-text": "['(' + $data.progress + ' %)']" }]
-        ],
-        ["td", {
-            "atom-class": "[$data.status]",
-            "atom-text": "[$data.error || $data.status]"
-        }]
+            ["span", { "class": "progress", "style-width": "[$data.progress + '%']" }],
+            ["span", { "atom-text": "[$data.name]" }],
+            ["button",
+                {
+                    "atom-class": "[$data.status]",
+                    "atom-event-click":"[ !$data.error || { alert: $data.error } ]"
+                }]
+        ]
     ]
 ];
 
@@ -119,7 +119,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                         alert(JSON.stringify(evt.e));
                         break;
                     case "select":
-                        Atom.set(this, "items", evt.files);
+                        this.add_items(evt.files);
                         break;
                 }
                 if (evt.id !== undefined) {
@@ -257,7 +257,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 }
             },
 
-            set_items: function (v) {
+            add_items: function (v) {
                 if (!v)
                     return;
 
@@ -272,7 +272,21 @@ window.__atom_flash_uploader_event = function (id, json) {
                     }
                 }
 
-                baseType.set_items.call(this, v);
+                //baseType.set_items.call(this, v);
+
+                var na = [];
+
+                var f = this._items;
+                var ae = new AtomEnumerator(f);
+                while (ae.next()) {
+                    na.push(ae.current());
+                }
+                ae = new AtomEnumerator(v);
+                while (ae.next()) {
+                    na.push(ae.current());
+                }
+
+                this.set_items(na);
 
                 var _this = this;
                 WebAtoms.dispatcher.callLater(function () {
@@ -295,6 +309,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 var ae = new AtomEnumerator(this._items);
                 while (ae.next()) {
                     var item = ae.current();
+                    if (item.status === "done") continue;
                     var index = ae.currentIndex();
 
                     this.upload(index, this._uploadUrl);
@@ -339,7 +354,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                         var file = ae.current();
                         files.push({ id: ae.currentIndex(), file: file, name: file.name, size: file.size, type: file.type, error: '', status:'' });
                     }
-                    Atom.set(_this, "items", files);
+                    _this.add_items(files);
                 });
 
                 this.bindEvent(this._button, "click", function () {

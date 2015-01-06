@@ -101,8 +101,8 @@
                 while (ae.next()) {
                     var item = ae.current();
                     var dataItem = $(item).val();
-                    var checked = $(item).attr("checked");
-                    if (checked) {
+                    //var checked = $(item).attr("checked");
+                    if (item.checked) {
                         add.push(dataItem);
                     }
                 }

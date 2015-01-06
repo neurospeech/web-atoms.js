@@ -58,18 +58,31 @@ div.atom-uploader {
 }
 .atom-uploader .progress-host {
   position: relative;
-  width: 110px;
+  width: 150px;
+  height: 25px;
   text-transform: capitalize;
+  border: solid 1px lightgray;
+}
+.atom-uploader .progress-host button {
+  position: absolute;
+  right: 5px;
+  width: 16px;
+  border: none;
+  height: 18px;
+  margin: 0;
+  padding: 0;
 }
 .atom-uploader .progress-host span {
   position: relative;
+  padding: 2px;
 }
 .atom-uploader .progress-host .progress {
   display: inline-block;
   position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 18px;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  height: 2px;
   background-color: yellowgreen;
 }
 /*# sourceMappingURL=atom-uploader.css.map */

@@ -7961,8 +7961,8 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 100 - 'AtomMultiButtonList.js' */                while (ae.next()) {
 /*Line 101 - 'AtomMultiButtonList.js' */                    var item = ae.current();
 /*Line 102 - 'AtomMultiButtonList.js' */                    var dataItem = $(item).val();
-/*Line 103 - 'AtomMultiButtonList.js' */                    var checked = $(item).attr("checked");
-/*Line 104 - 'AtomMultiButtonList.js' */                    if (checked) {
+/*Line 103 - 'AtomMultiButtonList.js' */                    //var checked = $(item).attr("checked");
+/*Line 104 - 'AtomMultiButtonList.js' */                    if (item.checked) {
 /*Line 105 - 'AtomMultiButtonList.js' */                        add.push(dataItem);
 /*Line 106 - 'AtomMultiButtonList.js' */                    }
 /*Line 107 - 'AtomMultiButtonList.js' */                }
