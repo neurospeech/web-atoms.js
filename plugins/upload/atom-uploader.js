@@ -76,7 +76,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             uploadUrl: null,
             postData: {},
             finished: false,
-            maxFileSize: -1,
+            maxFileSize: 104857600,
             maxFiles: -1,
             headers: null,
             urlPath: null,
