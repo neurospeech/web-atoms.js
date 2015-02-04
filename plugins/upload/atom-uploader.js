@@ -78,6 +78,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             finished: false,
             maxFileSize: 104857600,
             maxFiles: -1,
+            maxFilesErrorMessage: null,
             headers: null,
             urlPath: null,
             flashPath : "/scripts/atoms/plugins/upload/"
@@ -161,11 +162,14 @@ window.__atom_flash_uploader_event = function (id, json) {
             },
 
             onUploadComplete: function () {
+                if (!Atom.query(this._items).any({ status: 'uploading' })) {
+                    atomApplication.setBusy(false, "Uploading...");
+                }
+
                 var a = Atom.query(this._items).any({ 'status !==': 'done' });
                 if (a || this._finished)
                     return;
                 AtomBinder.setValue(this, "finished", true);
-                atomApplication.setBusy(false, "Uploading...");
                 Atom.refresh(this, "value");
 
                 var testFlow = window.testFlow;
@@ -274,7 +278,9 @@ window.__atom_flash_uploader_event = function (id, json) {
 
                 if (this._maxFiles != -1) {
                     if (v.length > this._maxFiles) {
-                        alert("You cannot choose more than " + this._maxFiles + " files");
+                        var msg = this._maxFilesErrorMessage ;
+                        if (!msg) { msg = "You cannot choose more than " + this._maxFiles + " files"; }
+                        alert(msg);
                         if (this._filePresenter) {
                             this.createFilePresenter();
                             return;
