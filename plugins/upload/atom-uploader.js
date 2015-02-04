@@ -272,6 +272,17 @@ window.__atom_flash_uploader_event = function (id, json) {
                     }
                 }
 
+                if (this._maxFiles != -1) {
+                    if (v.length > this._maxFiles) {
+                        alert("You cannot choose more than " + this._maxFiles + " files");
+                        if (this._filePresenter) {
+                            this.createFilePresenter();
+                            return;
+                        }
+                        return;
+                    }
+                }
+
                 //baseType.set_items.call(this, v);
 
                 var na = [];
