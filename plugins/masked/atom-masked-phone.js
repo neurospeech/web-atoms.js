@@ -1,19 +1,49 @@
-﻿/// <reference path="AtomControl.js" />
+﻿/// <reference path="../../jquery-1.8.2.min.js" />
+/// <reference path="../../atoms-debug.js" />
+/// <reference path="jquery.maskedinput.js" />
+
+
 
 (function (base) {
 
     var document = window.document;
     var $ = window.$;
 
+    var phoneConfig = [
+        {
+            label: "(US +1)",
+            code: 1,
+            country: "US",
+            format: "999-999-9999"
+        },
+        {
+            label: "(CA +1)",
+            code: 1,
+            country: "CA",
+            format: "999-999-9999"
+        },
+        {
+            label: "(IN +91)",
+            code: 91,
+            country: "IN",
+            format: "99-99-999999"
+        },
+        {
+            label: "(UK +44)",
+            code: 44,
+            country: "UK",
+            format: "999-999-9999"
+        },
+    ];
+
     return classCreatorEx({
-        name: "WebAtoms.AtomPhoneControl",
+        name: "WebAtoms.AtomMaskedPhone",
         base: base,
         start: function () {
             this._value = "";
-            log("AtomPhoneControl is depricated, please use AtomMaskedPhone from masked plugin");
         },
         properties: {
-
+            countries: phoneConfig
         },
         methods: {
             set_value: function (v) {
@@ -71,25 +101,8 @@
                 AtomBinder.refreshValue(this, "value");
             },
 
-            setCountries: function (r) {
+            set_countries: function (r) {
                 this._countries = r;
-                var options = this.cs.options;
-                options.length = 0;
-                var ae = new AtomEnumerator(r);
-                while (ae.next()) {
-                    var ci = ae.current();
-                    if (!ci.valueIndex) {
-                        ci.label = ci.label;
-                        ci.valueIndex = ae.currentIndex();
-                        var obj = eval("(" + ci.value + ")");
-                        ci.country = obj.country;
-                        ci.code = obj.code;
-                        ci.format = obj.format;
-                    }
-                    options[ae.currentIndex()] = new Option(ci.label, ci.valueIndex, false, false);
-                }
-
-                this.setupValues();
                 this.onFormat();
             },
 
@@ -100,36 +113,37 @@
             },
 
             onFormat: function () {
+                if (this._isFormatting) return;
+                this._isFormatting = true;
+
+                var r = this._countries;
+                var options = this.cs.options;
+                options.length = 0;
+                var ae = new AtomEnumerator(r);
+                while (ae.next()) {
+                    var ci = ae.current();
+                    if (!ci.valueIndex) {
+                        ci.label = ci.label;
+                        ci.valueIndex = ae.currentIndex();
+                    }
+                    options[ae.currentIndex()] = new Option(ci.label, ci.valueIndex, false, false);
+                }
+
+                this.setupValues();
+
                 var cs = this.cs;
                 if (cs.selectedIndex == -1)
                     return;
                 var ci = this._countries[cs.selectedIndex];
 
-                if (ci.format && ci.format.length && ci.format.length > 0) {
-                    this._currentFormat = [];
-                    var last = 0;
-                    var ae = new AtomEnumerator(ci.format);
-                    while (ae.next()) {
-                        last += ae.current();
-                        this._currentFormat.push(last);
-                    }
+                if (ci.format) {
+                    $(this.num).mask(ci.format);
+                } else {
+                    $(this.num).unmask();
                 }
+                this._isFormatting = false;
             },
 
-            onKeyUp: function (eventObject) {
-                if (!this._currentFormat)
-                    return;
-                var s = this.num.value;
-                s = s.replace(/\D/g, '');
-                var ns = "";
-                for (var i = 0; i < s.length; i++) {
-                    ns += s[i];
-                    if (i < s.length - 1 && ($.inArray(i + 1, this._currentFormat) != -1)) {
-                        ns += "-";
-                    }
-                }
-                this.num.value = ns;
-            },
 
             init: function () {
                 this.cs = document.createElement("SELECT");
@@ -164,7 +178,6 @@
 
                 this.onKeyUpLater = function (e) {
                     var evt = e;
-                    caller.onKeyUp(evt);
                     caller.onDataChange(evt);
                 };
 
@@ -175,21 +188,20 @@
                 this.bindEvent(this.ext, "change", "onDataChange");
                 this.bindEvent(this.msg, "change", "onDataChange");
 
-                $(this._element).addClass("atom-phone-control");
+                $(this._element).addClass("atom-masked-phone");
                 $(this.num).addClass("atom-pc-num");
                 $(this.msg).addClass("atom-pc-msg");
                 $(this.cs).addClass("atom-pc-cs");
                 $(this.ext).addClass("atom-pc-ext");
 
 
+                base.init.call(this);
                 var phone = this;
 
-                AtomPromise.cachedJson("/config/phonecountries").then(function (r) {
-                    phone.setCountries(r.value());
-                }).invoke();
+                WebAtoms.dispatcher.callLater(function () {
+                    phone.onFormat();
+                });
 
-
-                base.init.call(this);
             }
         }
     });
