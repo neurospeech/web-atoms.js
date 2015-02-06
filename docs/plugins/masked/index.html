@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>Masked Plugin</h1>
+    <p>
+        Masked plugin provides AtomPhoneControl created with jquery.maskedinput.js file.</p>
+    <h2>Properties</h2>
+    <h3>countries</h3>
+    <p>Headers property can contain JavaScript object with key-value pair that will be added as query string in case of flash fallback. As Flash does not tranmit cookies, it is recommended that you can generate temporary Upload tokens that can be verified on server with query string.</p>
+    <h3>value</h3>
+    <p>
+        Value field contains phone number in V2:<a href="CID:CC:NUM:EXT:MSG%20format%20where,%20CID%20stands%20for%20Country%20ID%20(US,%20UK%20etc">CID:ISD:NUM:EXT:MSG format where, CID stands for Country ID (US, UK etc</a>), ISD stands for ISD code (numeric), NUM stands for actual number formated, EXT stands for extension and MSG stands for any extra message or note in text.</p>
+    <h2>
+        Sample</h2>
+    <p>
+        Let&#39;s assume, server returns an object representing server&#39;s file storage model. Each item contains property &#39;result&#39; which contains JavaScript object returned from server after successful upload.</p>
+    <pre style="font-family: Consolas; font-size: 13; color: black; background: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">&lt;</span><span style="color:maroon;">div</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-type</span><span style="color:blue;">=&quot;AtomPhoneControl&quot;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold;color:purple;">atom-value</span><span style="color:blue;">=&quot;</span><span style="font-weight: bold; color: darkblue; background: bisque;">$[data.PhoneNumber]</span><span style="color:blue;">&quot;&gt;</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">&lt;/</span><span style="color:maroon;">div</span><span style="color:blue;">&gt;</span>
+</pre>
+        
+</body>
+</html>

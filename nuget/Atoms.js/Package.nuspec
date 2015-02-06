@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.539</version>
+    <version>1.2.545</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -42,6 +42,10 @@
     <file src="..\..\plugins\entity-framework\entity.css" target="content\Scripts\atoms\plugins\entity-framework\entity.css"/>
     <file src="..\..\plugins\entity-framework\entity.min.css" target="content\Scripts\atoms\plugins\entity-framework\entity.min.css"/>
     <file src="..\..\plugins\entity-framework\entity.css.map" target="content\Scripts\atoms\plugins\entity-framework\entity.css.map"/>
+
+    <file src="..\..\plugins\masked\jquery.maskedinput.js" target="content\Scripts\atoms\plugins\masked\jquery.maskedinput.js"/>
+    <file src="..\..\plugins\masked\atom-masked-phone.js" target="content\Scripts\atoms\plugins\masked\atom-masked-phone.js"/>
+    <file src="..\..\plugins\masked\atom-masked-phone.css" target="content\Scripts\atoms\plugins\masked\atom-masked-phone.css"/>
     
     <file src="..\..\plugins\upload\atom-uploader.js" target="content\Scripts\atoms\plugins\upload\atom-uploader.js"/>
     <file src="..\..\plugins\upload\atom-uploader.css" target="content\Scripts\atoms\plugins\upload\atom-uploader.css"/>
