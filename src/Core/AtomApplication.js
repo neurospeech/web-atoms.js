@@ -174,6 +174,11 @@ this.atomApplication = null;
                         if (v == dest[k])
                             continue;
                         diff.push({ key: k, value: v });
+                    } else {
+                        if (k.indexOf('_') == 0) continue;
+                        if (v === undefined || v === null) continue;
+                        if (!/string|number|boolean/i.test(typeof (v))) continue;
+                        diff.push({ key:k, value: v });
                     }
                 }
 
