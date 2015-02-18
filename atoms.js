@@ -1563,7 +1563,7 @@ jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 154 - 'AtomQuery.js' */        var el = QueryCompiler.compileList(q, "item", "q");
 
 /*Line 156 - 'AtomQuery.js' */        var ej = el.join(" && ");
-/*Line 157 - 'AtomQuery.js' */        log(ej);
+/*Line 157 - 'AtomQuery.js' */        if (AtomConfig.debug) { log(ej); }
 /*Line 158 - 'AtomQuery.js' */        var f = new Function(["item", "q"], " return " + ej + ";");
 /*Line 159 - 'AtomQuery.js' */        qsc = function (item) {
 /*Line 160 - 'AtomQuery.js' */            return f(item, q);

@@ -155,7 +155,7 @@ var QueryCompiler = {
         var el = QueryCompiler.compileList(q, "item", "q");
 
         var ej = el.join(" && ");
-        log(ej);
+        if (AtomConfig.debug) { log(ej); }
         var f = new Function(["item", "q"], " return " + ej + ";");
         qsc = function (item) {
             return f(item, q);
