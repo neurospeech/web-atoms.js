@@ -1,4 +1,17 @@
-﻿/*
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 The MIT License (MIT)
 
@@ -20,6 +33,7 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 */
+
 function mapLibrary(n, p, v) {
     var index = n.indexOf('.');
     if (index == -1) {
@@ -494,6 +508,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 { "class": "atom-window-frame", "atom-presenter": "iframe", "atom-src": "{$owner.templateParent.url}" }
 ]]
 ;
+
 
 		/*Line 0 - 'AtomBrowser.js' */var AtomConfig = {
 /*Line 1 - 'AtomBrowser.js' */    debug: false,
@@ -1563,7 +1578,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 154 - 'AtomQuery.js' */        var el = QueryCompiler.compileList(q, "item", "q");
 
 /*Line 156 - 'AtomQuery.js' */        var ej = el.join(" && ");
-/*Line 157 - 'AtomQuery.js' */        log(ej);
+/*Line 157 - 'AtomQuery.js' */        if (AtomConfig.debug) { log(ej); }
 /*Line 158 - 'AtomQuery.js' */        var f = new Function(["item", "q"], " return " + ej + ";");
 /*Line 159 - 'AtomQuery.js' */        qsc = function (item) {
 /*Line 160 - 'AtomQuery.js' */            return f(item, q);
@@ -9954,6 +9969,7 @@ Templates.jsonML["WebAtoms.AtomWindow.windowTemplate"] =
 /*Line 10 - 'ZZZZZInitializer.js' */    d.setupControls();
 /*Line 11 - 'ZZZZZInitializer.js' */    d.start();
 /*Line 12 - 'ZZZZZInitializer.js' */});
+
 
 
 	}).apply(window, [WebAtoms]);
