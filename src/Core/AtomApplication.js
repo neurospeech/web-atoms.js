@@ -182,16 +182,10 @@ this.atomApplication = null;
                     }
                 }
 
-                var p = this._hash;
-                p = p ? (p + "&") : "";
-                p = p + diff.map(function (a) { return a.key + "=" + encodeURIComponent(a.value); }).join("&");
+                var p = "#" + diff.map(function (a) { return a.key + "=" + encodeURIComponent(a.value); }).join("&");
 
                 if (p == location.hash)
                     return;
-
-                if (p.length>1 && !/^\#/.test(p)) {
-                    p = "#" + p;
-                }
 
                 this._noHashRefresh = true;
                 if (history && history.pushState) {

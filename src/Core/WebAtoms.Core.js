@@ -1,7 +1,4 @@
 ﻿/// <reference path="../JSON.js" />
-/// <reference path="../linq-vsdoc.js" />
-/// <reference path="../FlashPlayer.js" />
-/// <reference path="../jquery-1.5.1-vsdoc.js" />
 /// <reference path="../atomprototype.js" />
 /// <reference path="Atom.js" />
 /// <reference path="atombrowser.js" />
