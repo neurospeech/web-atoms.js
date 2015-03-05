@@ -7,7 +7,7 @@ docs/obj/*
 docs/bin/*
 NeuroSpeech.Atoms.dll
 NeuroSpeech.Atoms.pdb
-vwd.webinfo
+*.webinfo
 nuget/Atoms.js/bin/*
 nuget/Atoms.js/obj/*
 *.nupkg
