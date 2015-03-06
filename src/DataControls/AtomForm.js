@@ -193,7 +193,9 @@
                 };
 
                 this._submit = function () {
-                    _this.onSubmit.apply(_this, arguments);
+                    WebAtoms.dispatcher.callLater(function () {
+                        _this.onSubmit.apply(_this, arguments);
+                    });
                 };
 
                 var element = this.get_element();
