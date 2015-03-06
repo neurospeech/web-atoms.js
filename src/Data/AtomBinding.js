@@ -139,12 +139,13 @@
 
             onValChanged: function () {
                 var self = this;
-                setTimeout(function () { self.onPropChanged(null, null); },5);
+                WebAtoms.dispatcher.callLater(function () { self.onPropChanged(null, null); });
             },
             setup: function () {
                 if (this.twoWays) {
                     if (this.jq) {
                         this.bindEvent(this.element, "change", "onValChanged");
+                        this.bindEvent(this.element, "blur", "onValChanged");
                         if (this.events) {
                             var list = new AtomEnumerator(this.events.split(","));
                             while (list.next()) {
