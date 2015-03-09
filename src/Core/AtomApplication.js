@@ -28,9 +28,12 @@ this.atomApplication = null;
                 var s = AtomUI.parseUrl(url);
                 this._hash = location.hash;
                 var ts = this._scope;
+                this._defaultHash = s;
                 for (var i in s) {
-                    ts[i] = s[i];
+                    var v = s[i];
+                    ts[i] = v;
                 }
+                
             } else {
                 this._hash = location.hash;
             }
@@ -165,7 +168,8 @@ this.atomApplication = null;
                 }
 
 
-                var diff = [];
+                var diff =  AtomBinder.getClone(this._defaultHash || {});
+                
                 var src = this._scope;
 
                 for (var k in src) {
@@ -173,16 +177,23 @@ this.atomApplication = null;
                     if (dest.hasOwnProperty(k)) {
                         if (v == dest[k])
                             continue;
-                        diff.push({ key: k, value: v });
+                        //diff.push({ key: k, value: v });
+                        diff[k]=v;
                     } else {
                         if (k.indexOf('_') == 0) continue;
                         if (v === undefined || v === null) continue;
                         if (!/string|number|boolean/i.test(typeof (v))) continue;
-                        diff.push({ key:k, value: v });
+                        //diff.push({ key:k, value: v });
+                        diff[k]=v;
                     }
                 }
 
-                var p = "#" + diff.map(function (a) { return a.key + "=" + encodeURIComponent(a.value); }).join("&");
+                var da = [];
+                for(var k in diff){
+                    var v = diff[k];
+                    da.push({ key:k, value:v });
+                }
+                var p = "#" + da.map(function (a) { return a.key + "=" + encodeURIComponent(a.value); }).join("&");
 
                 if (p == location.hash)
                     return;
