@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../jquery-1.8.2.min.js"></script>
+    <script src="../atoms.js"></script>
+    <script src="../plugins/ckeditor/atom-ckeditor.js"></script>
+    <script src="../plugins/upload/atom-uploader.js"></script>
+    <script src="../plugins/videojs/AtomVideo.js"></script>
+    <script src="../plugins/masked/atom-masked-phone.js"></script>
+    <script src="../plugins/entity-framework/entity-controls.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <script type="text/javascript/scope">
+    ({
+        createJson: function () {
+            var a = [];
+            var w = window.WebAtoms;
+
+            function sortByName(l,r) { return l.name.localeCompare(r.name); };
+
+            for (var k in w) {
+                var v = w[k];
+                var av = [];
+                for (var p in v.prototype) {
+                    if (/set_/gi.test(p)) {
+                        p = p.substr(4);
+                        if (/scope|isvisible/i.test(p))
+                            continue;
+                        av.push({ name:"atom-" + p.replace(/([A-Z])/g, function (a) { return "-" + a.toLowerCase(); })});
+                    }
+                }
+                av.sort(sortByName);
+                //a[k] = av;
+                a.push({ name:k, properties:av })
+            }
+
+            a.sort(sortByName);
+
+            return JSON.stringify(a, undefined, 2);
+        }
+    })
+    </script>
+
+        <textarea atom-text="{ $scope.createJson() }"></textarea>
+    </div>
+</body>
+</html>

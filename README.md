@@ -4,6 +4,11 @@ Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight
 
 ![Atoms.js](https://github.com/atoms-js/atoms.js/raw/master/res/atoms-promo.png)
 
+Visual Studio Auto Intellisense - Atoms.js Power Tools 2013
+-----------------------------------------------------------
+![Atoms JS Power Tools 2013](res/atoms-js-vs-power-tools-small.png)
+Download: https://visualstudiogallery.msdn.microsoft.com/6956fdb0-174b-4e4c-9bef-e2ed76f1a199
+
 Features
 --------
 1. Very little JavaScript
