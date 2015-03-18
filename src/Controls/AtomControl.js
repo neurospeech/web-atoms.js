@@ -573,6 +573,8 @@ window.AtomProperties = AtomProperties;
 
                 var bindList = {};
 
+                var compiledFunc = null;
+
                 while (ae.next()) {
                     at = ae.current();
                     key = at.nodeName;
@@ -583,6 +585,9 @@ window.AtomProperties = AtomProperties;
                     if (/^atom\-type$/.test(key)) {
                         remove.push(at);
                         continue;
+                    }
+                    if (key === "data-atom-init") {
+                        compiledFunc = value;
                     }
                     if (!(/^(atom|bind|style|event)\-/g.test(key)))
                         continue;
@@ -601,6 +606,11 @@ window.AtomProperties = AtomProperties;
 
                     bindList[key] = value;
 
+                }
+
+                if (compiledFunc) {
+                    var f = WebAtoms.PageSetup[compiledFunc];
+                    f.call(this, element);
                 }
 
                 // Since setValue may add up new attributes
