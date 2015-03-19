@@ -15,3 +15,4 @@ nuget/Atoms.js/obj/*
 *.webinfo
 *.log
 /packages
+/Bin
