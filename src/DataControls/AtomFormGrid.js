@@ -50,7 +50,7 @@
                 while (ae.next()) {
                     var item = ae.current();
 
-                    var at = AtomUI.attributeMap(item, /^(atom\-type)$/gi)["atom-type"];
+                    var at = AtomUI.getAtomType(item);
                     if (at && at.value == "AtomFormRow") {
                         var table = document.createElement("TABLE");
                         container.appendChild(table);

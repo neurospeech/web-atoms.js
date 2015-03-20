@@ -58,8 +58,7 @@
                     };
                     Atom.add(items, item);
                     this._element.appendChild(t);
-
-                    var c = AtomUI.createControl(t, $(t).attr("atom-type") || WebAtoms.AtomControl );
+                    var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl );
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();

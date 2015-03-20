@@ -472,7 +472,7 @@
 
                 var et = this.getTemplate("itemTemplate");
                 if (et) {
-                    et = $(et).attr("atom-type");
+                    et = AtomUI.getAtomType(et);
                     if (et) {
                         this._childItemType = et;
                     }

@@ -16,3 +16,4 @@ nuget/Atoms.js/obj/*
 *.log
 /packages
 /Bin
+/atoms.min.js.map

@@ -1,6 +1,10 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ output extension=".js" #>
+<#@ assembly name="Microsoft.CSharp" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
 <#@ assembly name="System.Data" #>
+<#@ assembly name="System.Data.DataSetExtensions" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Linq" #>
 <#@ assembly name="System.Core" #>
@@ -12,6 +16,7 @@
 <#@ import namespace="System.Xaml" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.IO" #>
+
 /*
 
 The MIT License (MIT)
@@ -35,7 +40,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 */
 <#
-    string currentDirectory= Path.GetDirectoryName(Host.TemplateFile);
+    currentDirectory= Path.GetDirectoryName(Host.TemplateFile);
 
 		string templateDirectory = currentDirectory + "\\src";
 	
@@ -59,16 +64,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 <# 
 	
-		//TemplateDictionary dictionary = new TemplateDictionary();	
-		WriteTemplates(templateDirectory);
+
+        PreCompiler = new DynamicCompiler(currentDirectory);
+
+		var templates =  WriteTemplates(templateDirectory).ToList();
+
+        foreach(var t in templates){
+            WriteLine(t.Template);
+        }
+
+
 		#>
+
+        WebAtoms.PageSetup = WebAtoms.PageSetup || {};
+
+    (function(window,WebAtoms){
+
+        <#    foreach(var t in templates){ 
+        WriteLine(t.Script);
+        }#>              
+
+
+    }).call(WebAtoms.PageSetup,window,WebAtoms);
 
 		<#
 
-		// load all files.. of type .js...
+		/* load all files.. of type .js...*/
 		JSCodeList codeList = new JSCodeList();
 		ParseDirectory(templateDirectory,codeList, false);
-		//codeList.Sort(codeList.Comparer);
+		/* codeList.Sort(codeList.Comparer);*/
 		foreach(JSCode code in codeList){
 			code.AssignParentReferences(codeList);
 		}
@@ -108,6 +132,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 		string txt = this.GenerationEnvironment.ToString();
 
+    System.IO.File.WriteAllText(currentDirectory + "\\atoms-debug.js" , txt);
+
 		
     Action[] actions= new Action[]{
         ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),
@@ -118,6 +144,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
         
 
 #><#+
+
+    public string currentDirectory {get;set;}
 
     private void Minify(string currentDirectory,string code, string mode, string fileName){
         var form = new System.Collections.Specialized.NameValueCollection();
@@ -132,75 +160,51 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
         }
     }
 
-		private void WriteTemplates(string dir){
+
+
+    public DynamicCompiler PreCompiler { get; set;}
+
+
+		private IEnumerable<TemplateResult> WriteTemplates(string dir){
+
+
 			foreach(string file in System.IO.Directory.EnumerateFiles(dir,"*.html")){
 				string name = System.IO.Path.GetFileNameWithoutExtension(file);
 				string[] tokens = name.Split('.');
 				string templateType = tokens[1];
 				name = tokens[0];
-				string text = string.Join("\n",System.IO.File.ReadAllLines(file).Select(x=>x.Trim()).Where(x=> !string.IsNullOrWhiteSpace(x) ));
-				//var d = td[name]; 
-				//d[templateType] = encode(text);
-				try{
-				WriteTemplate("WebAtoms." + name + "." + templateType, text);
-                }catch(Exception ex){
-					throw new Exception("Failed to parse " + name + "." + templateType, ex);
-				}
+                string text = string.Join("\n",System.IO.File.ReadAllLines(file).Select(x=>x.Trim()).Where(x=> !string.IsNullOrWhiteSpace(x) ));
+                if(string.IsNullOrWhiteSpace(text)){
+                    continue;
+                }
+				yield return WriteTemplate("WebAtoms." + name + "." + templateType, text);
 			}
 			foreach(string child in System.IO.Directory.EnumerateDirectories(dir)){
-				WriteTemplates(child);
+
+				foreach(var t in WriteTemplates(child))
+                {
+                    yield return t;
+                }
 			}
 		}
 
-		private void WriteTemplate(string key, string text){
-			if(string.IsNullOrWhiteSpace(text))
-				return;
-			var h = HtmlElement.Parse(text);
-			WriteLine("jsonML[\"" + key + "\"] = ");
-			if(h.Name == "container"){
-				// little differently??
-				WriteLine("[");
-				List<string> list = new List<string>();
-				foreach(HtmlElement c in h.Children){
-					list.Add(WriteElement(c));
-				}
-				WriteLine(string.Join(", ", list));
-				WriteLine("]");
-			}else{
-				WriteLine("[" + WriteElement(h) + "]");
-			}
-			WriteLine(";");
+		private TemplateResult WriteTemplate(string key, string text){
+
+        try{
+        var result = PreCompiler.Compile(text);
+
+
+        return new TemplateResult{ 
+                Script = result.Script ,
+                Template = "jsonML[\"" + key + "\"] = \r\n" + result.JsonMLDocument + "\r\n" + ";"
+                };                  
+            }catch(Exception ex){
+            throw new Exception("failed to parse " + key , ex);
+            }
 
 		}
 
-		private string WriteElement(HtmlElement e, string postFix = ""){
-			StringBuilder sb = new StringBuilder();
-			sb.AppendFormat("[\"{0}\",\r\n",e.Name);
-			List<string> list = new List<string>();
-            foreach (HtmlAttribute a in e.Attributes)
-            {
-				list.Add(string.Format("\"{0}\": \"{1}\"", a.Name, encode( a.Value)));
-            }
-			sb.AppendFormat("{{ {0} }}\r\n", string.Join(", ", list));
-			list.Clear();
-			if(e.Children.Any()){
-				foreach (HtmlNode child in e.Children)
-				{
-					if(child is HtmlText){
-						list.Add(string.Format( "\"{0}\"", encode((child as HtmlText).Text) ));
-					}else{
-						list.Add(WriteElement((HtmlElement)child));
-					}
-				}
-				sb.AppendFormat(",{0}", string.Join(", ", list));
-            }
-			sb.AppendFormat("]");
-			return sb.ToString();
-		}
 		
-		private string encode(string txt){
-			return txt.Replace("\"","\\\"").Replace("\n","\\n").Replace("\r","\\r");
-		}
 		
 		public void ParseDirectory(string parent, List<JSCode> codeList , bool parseFiles = true){
 			if(parseFiles){
@@ -226,73 +230,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 		}
 		
 
-    public class HtmlAttribute {
-
-        public HtmlAttribute(string name, string value)
-        {
-            this.Name = name;
-            this.Value = value;
-        }
-
-        public string Name { get; set; }
-        public string Value { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("{0}=\"{1}\"", Name, Value);
-        }
-    }
-
-    public class HtmlNode {
-        public List<HtmlNode> Children { get; private set; }
-
-        public HtmlNode()
-        {
-            Children = new List<HtmlNode>();
-        }
-    }
-
-    public class HtmlText : HtmlNode {
-
-        public HtmlText(XText t)
-        {
-            Text = t.Value;
-        }
-
-        public string Text { get; set; }
-    }
-
-    public class HtmlElement : HtmlNode {
-        public string Name { get; set; }
-        public List<HtmlAttribute> Attributes { get; private set; }
-
-        public HtmlElement(XElement e)
-        {
-            this.Name = e.Name.LocalName;
-
-            Attributes = new List<HtmlAttribute>();
-            
-            foreach (var a in e.Attributes())
-            {
-                Attributes.Add(new HtmlAttribute(a.Name.LocalName,a.Value));
-            }
-            foreach (var item in e.Nodes())
-            {
-                if (item is XText) {
-                    Children.Add(new HtmlText(item as XText));
-                }
-                if (item is XElement) {
-                    Children.Add(new HtmlElement(item as XElement));
-                }
-            }
-        }
-
-        public static HtmlElement Parse(string text) {
-            var doc = XDocument.Parse(text);
-            return new HtmlElement(doc.Root);
-        }
-    }
-
 	public class GrowingDictionary<T> 
 		where T:class
 	{
@@ -316,24 +253,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 		}
 	}
 	
-	/*public class TemplateDictionary: GrowingDictionary<Dictionary<string,string>>
-	{
-		public override string ToString(){
-			
-			List<string> tvalues = new List<string>();
-			foreach(var item in Values){
-				List<string> tlist = new List<string>();
-				foreach(var t in item.Value){
-					tlist.Add("\t" + t.Key + ": \"" + t.Value + "\"\r\n");
-				}
-				tvalues.Add(item.Key + ":{" + String.Join(",", tlist) + "}\r\n");
-			}
-			
-			return "{" + String.Join("," , tvalues) + "}";
-		}	
-	}*/
 
-	
 		
 	public class JSCodeList : List<JSCode> {
 
@@ -437,6 +357,84 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 		}
 
 	}
+
+
+           public class DynamicCompiler {
+
+        public object DObject { get; set; }
+
+        public DynamicCompiler(string path)
+        {
+
+            string typeName = "NeuroSpeech.AtomsPreCompiler.HtmlCompiler";
+
+            string[] dependencies = new string[] { 
+                "HtmlAgilityPack.dll",
+                "NeuroSpeech.AtomsPreCompiler.dll"
+            };
+
+            System.Reflection.Assembly a = null;
+            foreach (var item in dependencies)
+            {
+
+                if (!TryLoad(item, out a, path))
+                    throw new System.IO.FileLoadException("Unable to load " + item);
+            }
+
+            var t = a.GetExportedTypes().FirstOrDefault(x => x.Namespace + "." + x.Name == typeName);
+
+            DObject = Activator.CreateInstance(t);
+
+            DObject.GetType().GetProperty("Prefix").SetValue(DObject,"t");
+        }
+
+        public Result Compile(string html)
+        {
+            object r =  DObject.GetType().GetMethod("Compile").Invoke(DObject, new object[] { html });
+
+            Type t = r.GetType();
+            var result = new Result { };
+
+            result.Document = (string)t.GetProperty("Document").GetValue(r);
+            result.Script = (string)t.GetProperty("Script").GetValue(r);
+            result.JsonMLDocument = (string)t.GetProperty("JsonMLDocument").GetValue(r);
+
+            return result;
+        }
+
+        public class Result {
+            public string Document { get; set; }
+            public string Script { get; set; }
+            public string JsonMLDocument {get; set;}
+        }
+
+        private bool TryLoad(string item, out System.Reflection.Assembly a, string root = null)
+        {
+            foreach (var f in System.IO.Directory.EnumerateFiles(root,"*.dll")) {
+                if (f.EndsWith(item, StringComparison.OrdinalIgnoreCase)) {
+                    a = System.Reflection.Assembly.LoadFrom(f);
+                    return true;
+                }
+            }
+
+            foreach (var d in System.IO.Directory.EnumerateDirectories(root))
+            {
+                if (TryLoad(item, out a, d)) { 
+                    return true;
+                }
+            }
+            a = null;
+            return false;
+        }
+
+    }
+
+
+    public class TemplateResult{
+        public string Script {get; set;}
+        public string Template {get; set;}
+    }
+
 		
 		
 		#>

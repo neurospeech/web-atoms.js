@@ -14,9 +14,13 @@ var AtomUI =
         if (r) {
             while (ae.next()) {
                 item = ae.current();
-                if (r.test(item.nodeName)) {
+                var name = item.nodeName;
+                if (/^data-/i.test(name)) {
+                    name = name.substr(5);
+                }
+                if (r.test(name)) {
                     r.lastIndex = 0;
-                    map[item.nodeName] = { value: item[AtomUI.nodeValue], node: item };
+                    map[name] = { value: item[AtomUI.nodeValue], node: item };
                 }
             }
             return map;
@@ -24,9 +28,19 @@ var AtomUI =
 
         while (ae.next()) {
             item = ae.current();
-            map[item.nodeName] = { value: item[AtomUI.nodeValue], node: item };
+            var name = item.nodeName;
+            if (/^data-/i.test(name)) {
+                name = name.substr(5);
+            }
+            map[name] = { value: item[AtomUI.nodeValue], node: item };
         }
         return map;
+    },
+
+    getAtomType: function (e) {
+        var amap = AtomUI.attributeMap(e, /^atom\-type/);
+        var a = amap["atom-type"];
+        return a ? a.value : null;
     },
 
     cloneNode: ((AtomBrowser.isIE && AtomBrowser.majorVersion < 8) ? (function (e) {
@@ -333,7 +347,7 @@ var AtomUI =
         if (element.atomControl)
             return;
         if (!type) {
-            type = $(element).attr("atom-type");
+            type = AtomUI.getAtomType(element);
             type = WebAtoms[type];
         } else {
             if (type.constructor == String) {

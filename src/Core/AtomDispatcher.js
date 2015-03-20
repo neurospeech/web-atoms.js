@@ -59,11 +59,12 @@ window.allControls = allControls;
                 //    window.console.log("Starting Web Atoms");
                 //}
 
-                var a = $('[atom-type]').first()[0];
+                var a = $('[data-atom-type],[atom-type]').first()[0];
                 if (a.atomControl != undefined && a.atomControl != null)
                     return;
-                var ct = $(a).attr("atom-type");
+                var ct = AtomUI.getAtomType(a);
                 $(a).removeAttr("atom-type");
+                $(a).removeAttr("data-atom-type");
                 var ctrl = new (WebAtoms[ct])(a);
                 ctrl.setup();
 

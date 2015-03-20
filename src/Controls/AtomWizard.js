@@ -77,15 +77,15 @@
                     var item = ae.current();
                     //$(vs).append(item);
                     vs.appendChild(item);
-                    var type = $(item).attr("atom-type");
+                    var type = AtomUI.getAtomType(item);
                     if (!type) {
                         type = "AtomViewBox";
-                        $(item).attr("atom-type", type);
+                        $(item).attr("data-atom-type", type);
                     }
 
                     //var s = new AtomScope(this, this.get_scope(), atomApplication);
 
-                    var ct = $(item).attr("atom-type") || WebAtoms.AtomControl;
+                    var ct = AtomUI.getAtomType(item) || WebAtoms.AtomControl;
                     var cc = AtomUI.createControl(item, ct);
                     cc.init();
                 }
