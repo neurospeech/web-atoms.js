@@ -45,7 +45,7 @@
                 var ae = new ChildEnumerator(element);
                 while (ae.next()) {
                     var child = ae.current();
-                    var dock = AtomUI.attr("atom-dock");
+                    var dock = AtomUI.attr(child, "atom-dock");
                     switch (dock) {
                         case "Bottom":
                         case "Fill":

@@ -7001,7 +7001,7 @@ this.t105= function(e){
 /*Line 44 - 'AtomDockPanel.js' */                var ae = new ChildEnumerator(element);
 /*Line 45 - 'AtomDockPanel.js' */                while (ae.next()) {
 /*Line 46 - 'AtomDockPanel.js' */                    var child = ae.current();
-/*Line 47 - 'AtomDockPanel.js' */                    var dock = AtomUI.attr("atom-dock");
+/*Line 47 - 'AtomDockPanel.js' */                    var dock = AtomUI.attr(child, "atom-dock");
 /*Line 48 - 'AtomDockPanel.js' */                    switch (dock) {
 /*Line 49 - 'AtomDockPanel.js' */                        case "Bottom":
 /*Line 50 - 'AtomDockPanel.js' */                        case "Fill":
