@@ -43,15 +43,15 @@
 
                 element.appendChild(container);
 
-                var minLabelWidth = $(this._element).attr("atom-min-label-width");
+                var minLabelWidth = AtomUI.attr(this._element, "atom-min-label-width");
 
                 this.getTemplate("fieldTemplate");
 
                 while (ae.next()) {
                     var item = ae.current();
 
-                    var at = AtomUI.getAtomType(item);
-                    if (at && at.value == "AtomFormRow") {
+                    var at = AtomUI.attr(item,"atom-type");
+                    if (at == "AtomFormRow") {
                         var table = document.createElement("TABLE");
                         container.appendChild(table);
                         $(table).addClass("atom-form-grid-row");
@@ -71,7 +71,7 @@
 
                         continue;
                     }
-                    if (at && (at.value == "AtomFormTabControl" || at.value == "AtomTabControl")) {
+                    if (at == "AtomFormTabControl" || at == "AtomTabControl") {
 
 
                         var tabBar = document.createElement("DIV");

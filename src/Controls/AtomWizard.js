@@ -80,7 +80,7 @@
                     var type = AtomUI.getAtomType(item);
                     if (!type) {
                         type = "AtomViewBox";
-                        $(item).attr("data-atom-type", type);
+                        AtomUI.attr(item, "data-atom-type", type);
                     }
 
                     //var s = new AtomScope(this, this.get_scope(), atomApplication);

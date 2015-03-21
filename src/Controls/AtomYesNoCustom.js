@@ -37,7 +37,7 @@
             onUpdateUI: function () {
                 $(this._input).addClass("atom-yes-no-custom-input");
                 if (this._placeholder) {
-                    $(this._input).attr(this._placeholder);
+                    AtomUI.attr(this._input, "placeholder", this._placeholder);
                     placeHolderFixer.refresh();
                 }
             },

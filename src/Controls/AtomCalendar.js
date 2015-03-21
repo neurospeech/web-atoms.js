@@ -26,16 +26,17 @@
             },
 
             applyItemStyle: function (item, data, first, last) {
-                $(item).removeClass("other weekend today");
-                $(item).addClass("calendar-item");
+                var $item = $(item);
+                $item.removeClass("other weekend today");
+                $item.addClass("calendar-item");
                 if (data.IsOtherMonth) {
-                    $(item).addClass("other");
+                    $item.addClass("other");
                 }
                 if (data.IsWeekEnd) {
-                    $(item).addClass("weekend");
+                    $item.addClass("weekend");
                 }
                 if (data.IsToday) {
-                    $(item).addClass("today");
+                    $item.addClass("today");
                 }
             },
 

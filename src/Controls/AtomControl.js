@@ -70,14 +70,13 @@ var AtomBinders = {
 // Property Handlers
 var AtomProperties = {
     any: function (e, v, k) {
-        //$(e).attr(k, v);
-        e.setAttribute(k, v);
+        AtomUI.attr(e, k, v);
     },
     isEnabled: function(element,value){
         if (value) {
-            $(element).removeAttr("disabled");
+            AtomUI.removeAttr(element,"disabled");
         } else {
-            $(element).attr("disabled", "disabled");
+            AtomUI.attr(element,"disabled", "disabled");
         }
     },
     checked: function (element, value) {
@@ -579,15 +578,22 @@ window.AtomProperties = AtomProperties;
                     at = ae.current();
                     key = at.nodeName;
                     value = at[nodeValue];
+
+                    if (key === "data-atom-init") {
+                        compiledFunc = value;
+                        remove.push(at);
+                        continue;
+                    }
+                    if (/^data\-atom/.test(key)) {
+                        key = key.substr(5);
+                    }
+
                     if (/^atomControl$/g.test(key)) {
                         continue;
                     }
                     if (/^atom\-type$/.test(key)) {
                         remove.push(at);
                         continue;
-                    }
-                    if (key === "data-atom-init") {
-                        compiledFunc = value;
                     }
                     if (!(/^(atom|bind|style|event)\-/g.test(key)))
                         continue;

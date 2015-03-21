@@ -145,13 +145,13 @@
                 //this.ext.style.width = "30px";
                 //this.ext.style['float'] = "left";
                 //this.ext.style.marginLeft = "2px";
-                $(this.ext).attr("placeholder", "Ext.");
+                AtomUI.attr(this.ext, "placeholder", "Ext.");
                 this.msg = document.createElement("INPUT");
                 this.msg.type = "text";
                 //this.msg.style.width = "100px";
                 //this.msg.style['float'] = "left";
                 //this.msg.style.marginLeft = "2px";
-                $(this.msg).attr("placeholder", "Message");
+                AtomUI.attr(this.msg, "placeholder", "Message");
 
                 var element = this.get_element();
                 //element.style.width = "450px";

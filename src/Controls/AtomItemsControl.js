@@ -528,8 +528,9 @@
 
                     if (this._itemsPresenter == this._element) {
                         var d = document.createElement("DIV");
-                        $(d).addClass("atom-virtual-container");
-                        $(d).css("width", "100%");
+                        var $d = $(d);
+                        $d.addClass("atom-virtual-container");
+                        $d.css("width", "100%");
                         this._element.innerHTML = "";
                         this._element.appendChild(d);
                         this._itemsPresenter = d;
@@ -548,8 +549,9 @@
 
 
                     var t = this.getTemplate("itemTemplate");
-                    var h = $(t).outerHeight(true);
-                    var w = $(t).outerWidth(true);
+                    var $t = $(t);
+                    var h = $t.outerHeight(true);
+                    var w = $t.outerWidth(true);
 
                     var cols = Math.floor(presenterWidth / w);
                     var rows = Math.ceil(n / cols);

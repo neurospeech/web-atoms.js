@@ -25,8 +25,8 @@
 
             calculateSize: function () {
                 var element = this.get_element();
-
-                var size = { width: $(element).width(), height: $(element).height() };
+                var $element = $(element);
+                var size = { width: $element.width(), height: $element.height() };
 
                 //if (AtomBrowser.isIE && AtomBrowser.majorVersion < 10) {
                 //    size = { width: element.offsetWidth, height: element.offsetHeight };
@@ -45,7 +45,7 @@
                 var ae = new ChildEnumerator(element);
                 while (ae.next()) {
                     var child = ae.current();
-                    var dock = AtomUI.attributeMap(child,/^atom-dock/)["atom-dock"];
+                    var dock = AtomUI.attr("atom-dock");
                     switch (dock) {
                         case "Bottom":
                         case "Fill":
@@ -64,7 +64,7 @@
 
                 if (size.height < desiredHeight) {
                     size.height = desiredHeight;
-                    $(element).height(size.height);
+                    $element.height(size.height);
                 }
 
                 return size;
@@ -74,7 +74,7 @@
 
 
                 var element = this.get_element();
-
+                var $element = $(element);
 
                 var i;
                 var left = 0;
@@ -101,7 +101,7 @@
                 var itemHeight;
                 var itemWidth;
 
-                en = new AtomEnumerator($(element).children("[atom-dock='Top']"));
+                en = new AtomEnumerator($element.children("[dock$='Top']"));
                 while (en.next()) {
                     item = en.current();
 
@@ -115,7 +115,7 @@
                     this.resizeChild(item);
                 }
 
-                en = new AtomEnumerator($(element).children("[atom-dock='Bottom']").get().reverse());
+                en = new AtomEnumerator($element.children("[dock$='Bottom']").get().reverse());
                 while (en.next()) {
                     item = en.current();
                     itemHeight = $(item).outerHeight(true);
@@ -127,7 +127,7 @@
                     this.resizeChild(item);
                 }
 
-                en = new AtomEnumerator($(element).children("[atom-dock='Left']"));
+                en = new AtomEnumerator($element.children("[dock$='Left']"));
                 while (en.next()) {
                     item = en.current();
 
@@ -140,7 +140,7 @@
                     this.resizeChild(item);
                 }
 
-                en = new AtomEnumerator($(element).children("[atom-dock='Right']").get().reverse());
+                en = new AtomEnumerator($element.children("[dock$='Right']").get().reverse());
                 while (en.next()) {
                     item = en.current();
                     var itemWidth = $(item).outerWidth(true);
@@ -151,7 +151,7 @@
                     this.resizeChild(item);
                 }
 
-                en = new AtomEnumerator($(element).children("[atom-dock='Fill']"));
+                en = new AtomEnumerator($element.children("[dock$='Fill']"));
                 while (en.next()) {
                     item = en.current();
                     itemWidth = $(item).css("max-width");

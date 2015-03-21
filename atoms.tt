@@ -51,7 +51,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 (function(window){
 
-	var $ = window.$;
+	//var $old = window.$;
+//
+    //var $ = function(o){
+        //if(typeof HTMLElement === "object" ? o instanceof HTMLElement : o 
+            //&& typeof o === "object" 
+            //&& o !== null 
+            //&& o.nodeType === 1 
+            //&& typeof o.nodeName==="string"){
+            //o.__$ = o.__$ || $old(o);
+            //return o.__$;
+        //}
+        //return $old(o);
+    //};
+//
+    //$.prototype = $old;
+
+    var $ = window.$;
+
 	var document = window.document;
 	var Templates = { jsonML: {} };
 

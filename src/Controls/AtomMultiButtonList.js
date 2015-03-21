@@ -68,7 +68,7 @@
 
                 ace = new AtomEnumerator(this._dataElements);
                 while (ace.next()) {
-                    $(ace.current()).attr("checked", false);
+                    AtomUI.attr(ace.current() ,"checked", false);
                 }
 
                 if (!this._value)
@@ -89,7 +89,7 @@
                         item = ae.current();
                         item = $.trim(item);
                         if ($(cb).val() == item) {
-                            $(cb).attr("checked", "true");
+                            AtomUI.attr(cb, "checked", "checked");
                         }
                     }
                 }
@@ -144,10 +144,10 @@
 
                     var cb = document.createElement("INPUT");
                     if (this._isRadio) {
-                        $(cb).attr("type", "radio");
-                        $(cb).attr("name", gpName);
+                        AtomUI.attr(cb, "type", "radio");
+                        AtomUI.attr(cb, "name", gpName);
                     } else {
-                        $(cb).attr("type", "checkbox");
+                        AtomUI.attr(cb, "type", "checkbox");
                     }
                     $(cb).val(val);
                     span.appendChild(cb);

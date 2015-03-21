@@ -159,8 +159,9 @@
                 var g = AtomUI.cloneNode(this._gridTemplate);
                 this.addTemplate(this._gridPresenter, g);
 
-                if (!($(this._detailTemplate).attr("atom-dock"))) {
-                    $(this._detailTemplate).attr("atom-dock", "Fill");
+                var dt = this._detailTemplate;
+                if (!(AtomUI.attr(dt,"atom-dock"))) {
+                    AtomUI.attr(dt, "atom-dock", "Fill");
                 }
 
                 if (this._headerTemplate) {
@@ -174,7 +175,7 @@
                 if (this._footerTemplate) {
                     var fd = AtomUI.cloneNode(this._footerTemplate);
                     fd.setAttribute("atom-dock", "Bottom");
-                    $(hd).addClass("atom-navigator-list-footer");
+                    $(fd).addClass("atom-navigator-list-footer");
                     this.addTemplate(this._gridPanel, fd);
                 }
             },

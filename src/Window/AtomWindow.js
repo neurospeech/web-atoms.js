@@ -51,15 +51,17 @@
 
                 tt = AtomUI.cloneNode(tt);
 
-                var wdiv = $(tt).find("[atom-presenter=windowDiv]").get(0);
-                var wtitle = $(tt).find("[atom-presenter=windowTitleDiv]").get(0);
+                var tt$ = $(tt);
+
+                var wdiv = tt$.find("[data-atom-presenter=windowDiv],[atom-presenter=windowDiv]").get(0);
+                var wtitle = tt$.find("[data-atom-presenter=windowTitleDiv],[atom-presenter=windowTitleDiv]").get(0);
 
                 var wt = this.getTemplate("windowTemplate");
 
                 $(wt).addClass("atom-window-template");
 
-                if (!($(wt).attr("atom-dock"))) {
-                    $(wt).attr("atom-dock", "Fill");
+                if (!(AtomUI.attr(wt, "atom-dock"))) {
+                    AtomUI.attr(wt, "atom-dock", "Fill");
                 }
 
                 if (wt.length) {
@@ -72,7 +74,7 @@
 
                 var wct = this.getTemplate("commandTemplate");
                 if (wct) {
-                    wct.setAttribute("atom-dock", "Bottom");
+                    AtomUI.attr(wct, "atom-dock", "Bottom");
                     wct.setAttribute("class", "atom-wizard-command-bar");
                     wdiv.appendChild(wct);
                 }

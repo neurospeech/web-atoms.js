@@ -5,16 +5,18 @@
         name: "WebAtoms.AtomUploadButton",
         base: baseType,
         start: function (e) {
-            if (/input/gi.test(e.nodeName) && /file/gi.test($(e).attr("type"))) {
+            if (/input/gi.test(e.nodeName) && /file/gi.test(AtomUI.attr(e,"type"))) {
                 this._filePresenter = e;
                 return;
             }
 
-            this._filePresenter = document.createElement("input");
-            $(this._filePresenter).attr("type", "file");
-            $(this._filePresenter).css("left", "-500px");
-            $(this._filePresenter).css("position", "absolute");
-            $(this._filePresenter).css("top", "-0px");
+            var fp = this._filePresenter = document.createElement("input");
+            AtomUI.attr(fp, "type", "file");
+            $(fp).css({
+                left: "-500px",
+                position: "absolute",
+                top: "0"
+            });
             document.body.appendChild(this._filePresenter);
         },
         properties: {
@@ -27,8 +29,9 @@
             set_accept: function (v) {
                 this._accept = v;
                 if (v) {
-                    if (this._filePresenter) {
-                        $(this._filePresenter).attr("accept", v);
+                    var fp = this._filePresenter;
+                    if (fp) {
+                        AtomUI.attr(fp, "accept", v);
                     }
                 }
             },
@@ -36,8 +39,9 @@
             set_capture: function (v) {
                 this._capture = v;
                 if (v) {
-                    if (this._filePresenter) {
-                        $(this._filePresenter).attr("capture", v);
+                    var fp = this._filePresenter;
+                    if (fp) {
+                        AtomUI.attr(fp, "capture", v);
                     }
                 }
             },

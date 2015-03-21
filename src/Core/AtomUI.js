@@ -3,19 +3,21 @@
 /// <reference path="AtomEvaluator.js" />
 /// <reference path="ChildEnumerator.js" />
 
+
 var AtomUI =
 {
     nodeValue: (AtomBrowser.isIE && AtomBrowser.majorVersion < 9) ? "nodeValue" : "value",
 
     attributeMap: function (e, r) {
         var item;
+        var name;
         var map = {};
         var ae = new AtomEnumerator(e.attributes);
         if (r) {
             while (ae.next()) {
                 item = ae.current();
-                var name = item.nodeName;
-                if (/^data-/i.test(name)) {
+                name = item.nodeName;
+                if (/^data\-/i.test(name)) {
                     name = name.substr(5);
                 }
                 if (r.test(name)) {
@@ -28,8 +30,8 @@ var AtomUI =
 
         while (ae.next()) {
             item = ae.current();
-            var name = item.nodeName;
-            if (/^data-/i.test(name)) {
+            name = item.nodeName;
+            if (/^data\-/i.test(name)) {
                 name = name.substr(5);
             }
             map[name] = { value: item[AtomUI.nodeValue], node: item };
@@ -37,10 +39,25 @@ var AtomUI =
         return map;
     },
 
+    attr: function (e, n, sv) {
+        if (sv !== undefined) {
+            if (/^(atom|style)\-/.test(n)) {
+                n = "data-" + n;
+            }
+            //e[n] = sv;
+            e.setAttribute(n, sv);
+            return sv;
+        }
+        var v = e.getAttribute("data-" + n) || e.getAttribute(n);
+        return v;
+    },
+    removeAttr: function (e, n) {
+        e.removeAttribute(n);
+        e.removeAttribute("data-" + n);
+    },
+
     getAtomType: function (e) {
-        var amap = AtomUI.attributeMap(e, /^atom\-type/);
-        var a = amap["atom-type"];
-        return a ? a.value : null;
+        return AtomUI.attr(e,"atom-type");
     },
 
     cloneNode: ((AtomBrowser.isIE && AtomBrowser.majorVersion < 8) ? (function (e) {
@@ -84,7 +101,7 @@ var AtomUI =
         var ae = new ChildEnumerator(e);
         while (ae.next()) {
             var item = ae.current();
-            var ap = $(item).attr("atom-presenter");
+            var ap = AtomUI.attr(item,"atom-presenter");
             if (ap)
                 return item;
             var c = AtomUI.findPresenter(item);
@@ -273,7 +290,7 @@ var AtomUI =
     },
 
     isWeirdControl: function (e) {
-        return e.nodeName == "BUTTON" || e.nodeName == "SELECT" || (e.nodeName == "INPUT" && $(e).attr("type") == "submit");
+        return e.nodeName == "BUTTON" || e.nodeName == "SELECT" || (e.nodeName == "INPUT" && e.getAttribute('type') == "submit");
     },
 
     parseCSS: function (e, a) {
