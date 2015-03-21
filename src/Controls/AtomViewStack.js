@@ -64,17 +64,17 @@
                 while (childEn.next()) {
                     i = i + 1;
                     var item = childEn.current();
-
-                    $(item).addClass("view-stack-child");
+                    var $item = $(item);
+                    $item.addClass("view-stack-child");
                     if (previousIndex == -1) {
-                        $(item).addClass("hidden");
+                        $item.addClass("hidden");
                     }
                     if (i == selectedIndex) {
                         selectedElement = item;
                     } else if (i == previousIndex) {
                         previousElement = item;
                     } else {
-                        $(item).addClass("hidden");
+                        $item.addClass("hidden");
                     }
                 }
 

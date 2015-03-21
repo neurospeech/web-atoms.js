@@ -137,18 +137,18 @@
 
                 if (!skip) {
 
-                    var req = $(e).attr("atom-required");
+                    var req = AtomUI.attr(e,"atom-required");
                     if (req && !val) {
                         // error...
-                        $(ef).text("Required");
+                        AtomProperties.text(ef, "Required");
                         $(e).addClass("atom-data-error");
                         return false;
                     }
 
 
-                    var re = $(e).attr("atom-regex");
+                    var re = AtomUI.attr(e, "atom-regex");
                     if (!re) {
-                        var dt = $(e).attr("atom-data-type");
+                        var dt = AtomUI.attr(e, "atom-data-type");
                         if (dt) {
                             switch (dt) {
                                 case "email":

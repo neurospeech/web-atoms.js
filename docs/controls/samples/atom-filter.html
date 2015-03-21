@@ -24,7 +24,7 @@
 
 <div
     atom-type="AtomListBox"
-    atom-items="{ AtomPromise.json('/controls/samples/movie-list.json') }"
+    atom-items="{ AtomPromise.json('movie-list.json') }"
     atom-filter="[ { 'MovieName:startsWith': ($scope.name || undefined) , 'Actors:any': { 'Name:startsWith': ($scope.actor || undefined) } } ]"
     atom-name="movieList"
     >

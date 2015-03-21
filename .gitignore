@@ -15,3 +15,5 @@ nuget/Atoms.js/obj/*
 *.webinfo
 *.log
 /packages
+/Bin
+/atoms.min.js.map

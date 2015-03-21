@@ -55,8 +55,7 @@
                     menu.style.position = "absolute";
                     //menu.style.zOrder = 
                     document.body.appendChild(menu);
-
-                    var mt = $(menu).attr("atom-type") || WebAtoms.AtomControl;
+                    var mt = AtomUI.getAtomType(mt) || WebAtoms.AtomControl;
 
                     menu = AtomUI.createControl(menu, mt, data);
 

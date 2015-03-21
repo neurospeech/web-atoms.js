@@ -15,10 +15,10 @@
         methods: {
             set_direction: function (v) {
                 this._direction = v;
-                $(this._element).removeClass("atom-sort-asc");
-                $(this._element).removeClass("atom-sort-desc");
+                var $e = $(this._element);
+                $e.removeClass("atom-sort-asc atom-sort-desc");
                 if (v) {
-                    $(this._element).addClass("atom-sort-" + v.toLowerCase());
+                    $e.addClass("atom-sort-" + v.toLowerCase());
                 }
             },
 

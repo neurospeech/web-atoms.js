@@ -70,14 +70,13 @@ var AtomBinders = {
 // Property Handlers
 var AtomProperties = {
     any: function (e, v, k) {
-        //$(e).attr(k, v);
-        e.setAttribute(k, v);
+        AtomUI.attr(e, k, v);
     },
     isEnabled: function(element,value){
         if (value) {
-            $(element).removeAttr("disabled");
+            AtomUI.removeAttr(element,"disabled");
         } else {
-            $(element).attr("disabled", "disabled");
+            AtomUI.attr(element,"disabled", "disabled");
         }
     },
     checked: function (element, value) {
@@ -573,10 +572,22 @@ window.AtomProperties = AtomProperties;
 
                 var bindList = {};
 
+                var compiledFunc = null;
+
                 while (ae.next()) {
                     at = ae.current();
                     key = at.nodeName;
                     value = at[nodeValue];
+
+                    if (key === "data-atom-init") {
+                        compiledFunc = value;
+                        remove.push(at);
+                        continue;
+                    }
+                    if (/^data\-atom/.test(key)) {
+                        key = key.substr(5);
+                    }
+
                     if (/^atomControl$/g.test(key)) {
                         continue;
                     }
@@ -601,6 +612,11 @@ window.AtomProperties = AtomProperties;
 
                     bindList[key] = value;
 
+                }
+
+                if (compiledFunc) {
+                    var f = WebAtoms.PageSetup[compiledFunc];
+                    f.call(this, element);
                 }
 
                 // Since setValue may add up new attributes

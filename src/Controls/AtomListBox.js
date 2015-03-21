@@ -33,21 +33,22 @@
             },
 
             applyItemStyle: function (item, dataItem, first, last) {
-                $(item).removeClass("selected-item list-item first-item last-item");
+                var $item = $(item);
+                $item.removeClass("selected-item list-item first-item last-item");
                 //$(item).removeClass("list-item");
                 //$(item).removeClass("first-item");
                 //$(item).removeClass("last-item");
                 if (!dataItem)
                     return;
-                $(item).addClass("list-item");
+                $item.addClass("list-item");
                 if (first) {
-                    $(item).addClass("first-item");
+                    $item.addClass("first-item");
                 }
                 if (last) {
-                    $(item).addClass("last-item");
+                    $item.addClass("last-item");
                 }
                 if (this.isSelected(dataItem)) {
-                    $(item).addClass("selected-item");
+                    $item.addClass("selected-item");
                 }
             },
 

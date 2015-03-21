@@ -12,18 +12,27 @@
             this.key = key;
             this.events = events;
 
-            if (path && path.constructor != String) {
+            if ($.isArray(path)) {
                 this.pathList = [];
-                this.path = null;
-
+                this.path = [];
                 var ae = new AtomEnumerator(path);
                 while (ae.next()) {
-                    var pe = new AtomEnumerator(ae.current());
+                    var item = ae.current();
+                    if (!$.isArray(item)) {
+                        this.path.push({ path: item, value: null });
+                        continue;
+                    }
+                    var pe = new AtomEnumerator(item);
                     var p = [];
                     while (pe.next()) {
                         p.push({ path: pe.current(), value: null });
                     }
                     this.pathList.push(p);
+                }
+                if (this.path.length) {
+                    this.pathList = null;
+                } else {
+                    this.path = null;
                 }
 
             } else {

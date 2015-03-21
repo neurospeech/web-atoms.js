@@ -37,7 +37,7 @@
                 var cp = AtomUI.findPresenter(field);
                 if (cp) {
                     cp.appendChild(child);
-                    $(cp).removeAttr("atom-presenter");
+                    AtomUI.removeAttr(cp, "atom-presenter");
                 } else {
                     field.contentElement = child;
                 }
@@ -55,7 +55,7 @@
                 amap = AtomUI.attributeMap(field, /^atom\-(field\-value|is\-valid)$/i);
 
                 if (!(amap["atom-field-value"] || amap["atom-is-valid"])) {
-                    var v = $(child).attr("atom-value");
+                    var v = AtomUI.attr(child, "atom-value");
                     if (v && /^\$\[/gi.test(v)) {
                         // must be a two way binding..
                         v = v.substr(2);
@@ -65,7 +65,7 @@
                         v = "[" + v;
                         var ind = v.indexOf(']');
                         v = v.substr(0, ind + 1);
-                        $(field).attr("atom-field-value", v);
+                        AtomUI.attr(field, "atom-field-value", v);
                     }
                 }
 

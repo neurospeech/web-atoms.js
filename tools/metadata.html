@@ -30,7 +30,7 @@
                         p = p.substr(4);
                         if (/scope|isvisible/i.test(p))
                             continue;
-                        av.push({ name:"atom-" + p.replace(/([A-Z])/g, function (a) { return "-" + a.toLowerCase(); })});
+                        av.push({ camelName: p, name:"atom-" + p.replace(/([A-Z])/g, function (a) { return "-" + a.toLowerCase(); })});
                     }
                 }
                 av.sort(sortByName);
