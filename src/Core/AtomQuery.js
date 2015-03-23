@@ -2,51 +2,42 @@
 /// <reference path="atom-filter.js" />
 
 // rewire get...
-AtomFilter.get = Atom.get;
+$f.get = Atom.get;
 
-var selectCompiler = {
+$f.compileSelect = function (s) {
+    if (!s) {
+        return function (item) {
+            return item;
+        };
+    }
 
-    compileSelect: function(s){
-        if (!s) {
-            return function (item) {
-                return item;
-            };
-        }
+    if (s.constructor == String) {
+        return function (item) {
+            return Atom.get(item, s);
+        };
+    }
 
-        if (s.constructor == String) {
-            return function (item) {
-                return Atom.get(item,s);
-            };
-        }
+    return function (item) {
 
-        var js = JSON.stringify(s);
-        var jsq = QueryCompiler.selectCompiled[js];
-        if (jsq)
-            return jsq;
-
-        var list = [];
+        var r = {};
         for (var i in s) {
-            var item = s[i];
+            var v = s[i];
             i = JSON.stringify(i);
-            if (!item) {
-                list.push( i + ": Atom.get(item," + i + ")" );
+            if (!v) {
+                r[i] = Atom.get(item, i);
             } else {
-                item = JSON.stringify(item);
-                list.push(i + ":Atom.get(item," + item + ")");
+                r[i] = Atom.get(item, v);
             }
         }
-
-        var rs = "return {" + list.join(",") + "};";
-        jsq = new Function("item", rs);
-        QueryCompiler.selectCompiled[js] = jsq;
-        return jsq;
-    }
+        return r;
+    };
 };
+
 
 var AtomQuery = {
 
     firstOrDefault:function (q) {
-        var f = AtomFilter.filter(q);
+        var f = $f(q);
         while (this.next()) {
             var item = this.current();
             if (f(item)) {
@@ -57,7 +48,7 @@ var AtomQuery = {
     },
 
     first: function (q) {
-        var f = AtomFilter.filter(q);
+        var f = $f(q);
         while (this.next()) {
             var item = this.current();
             if (f(item)) {
@@ -68,7 +59,7 @@ var AtomQuery = {
     },
 
     where: function (q) {
-        var f = AtomFilter.filter(q);
+        var f = $f(q);
         var r = [];
         while (this.next()) {
             var item = this.current();
@@ -95,7 +86,7 @@ var AtomQuery = {
 
     select: function (q) {
 
-        var f = QueryCompiler.compileSelect(q);
+        var f = $f.compileSelect(q);
         var r = [];
         while (this.next()) {
             var item = this.current();
@@ -135,7 +126,7 @@ var AtomQuery = {
     },
 
     groupBy: function (s) {
-        var fs = QueryCompiler.compileSelect(s);
+        var fs = $f.compileSelect(s);
         var ae = this;
         var g = {};
         var r = [];
@@ -156,8 +147,6 @@ var AtomQuery = {
 };
 
 window.AtomQuery = AtomQuery;
-
-window.QueryCompiler = QueryCompiler;
 
 
 for (var i in AtomQuery) {

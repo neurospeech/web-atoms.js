@@ -1,4 +1,4 @@
-﻿on (window) {
+﻿(function (window) {
 
     var AtomEnumerator = function (a) {
         this.a = a;
@@ -73,7 +73,7 @@
                         return l >= r[0] && l <= r[1];
                     };
                 case "equals":
-                    r = AtomFilter.escapeRegex("^",r, "$", "i");
+                    r = AtomFilter.escapeRegex("^", r, "$", "i");
                     return function (l) {
                         if (!l)
                             return !r;
@@ -191,10 +191,10 @@
             // compiles json object into function
             // that accepts object and returns true/false
 
-            if (q === true)
-                return AtomFilter.truef;
-            if (q === false || q === null || q === undefined)
+            if (q === false)
                 return AtomFilter.falsef;
+            if (!q)
+                return AtomFilter.truef;
 
             var ae = [];
 
@@ -295,7 +295,7 @@
 
     Array.prototype.filter = function (i) {
         if (i instanceof Function || typeof i == 'function') {
-            return af.call(this,i);
+            return af.call(this, i);
         }
         return af.call(this, $f(i));
     };
