@@ -1,173 +1,10 @@
 ﻿/// <reference path="Atom.js" />
+/// <reference path="atom-filter.js" />
 
-var QueryCompiler = {
+// rewire get...
+AtomFilter.get = Atom.get;
 
-    helpers: {
-        any: function (lv, v) {
-            if (!lv)
-                return false;
-            return Atom.query(lv).any(v);
-        },
-        "between": function (lv, v) {
-            if (!lv)
-                if (!v)
-                    return true;
-            if (!v)
-                return false;
-            var s = v[0];
-            var e = v[1];
-            return s <= lv && lv <= e;
-        },
-        "in" : function (lv, v) {
-            var ae = new AtomEnumerator(v);
-            while (ae.next()) {
-                if (lv == ae.current())
-                    return true;
-            }
-            return false;
-        },
-        equals: function (lv, v) {
-            if (!lv) {
-                if (!v)
-                    return true;
-                return false;
-            }
-            return lv.toLowerCase() == v.toLowerCase();
-        },
-        contains: function (lv, v) {
-            if (!lv)
-                return false;
-            if (!v)
-                return false;
-            return lv.toLowerCase().indexOf(v.toLowerCase()) != -1;
-        },
-        startswith: function (lv, v) {
-            if (!lv)
-                return false;
-            if (!v)
-                return false;
-            return lv.toLowerCase().indexOf(v.toLowerCase()) == 0;
-        },
-        endswith: function (lv, v) {
-            if (!lv)
-                return false;
-            if (!v)
-                return false;
-            return lv.toLowerCase().lastIndexOf(v.toLowerCase()) == (lv.length - v.length);
-        },
-        containscs: function (lv, v) {
-            if (!lv)
-                return false;
-            return lv.indexOf(v) != -1;
-        },
-        startswithcs: function (lv, v) {
-            if (!lv)
-                return false;
-            return lv.indexOf(v) == 0;
-        },
-        endswithcs: function (lv, v) {
-            if (!lv)
-                return false;
-            return lv.lastIndexOf(v) == (lv.length - v.length);
-        }
-    },
-
-
-    compileList: function (qseg, q, sep) {
-        if (!sep)
-            sep = " && ";
-        var list = [];
-        for (var i in qseg) {
-            var v = qseg[i];
-            // skip condition 
-            // if value is undefined
-            if (v === undefined)
-                continue;
-            v = JSON.stringify(v);
-
-            switch (v) {
-                case "$and":
-                    list.push(QueryCompiler.compileList(v, q, " && "));
-                    break;
-                case "$or":
-                    list.push( QueryCompiler.compileList(v, q, " || " ));
-                    break;
-                case "$not":
-                    list.push("!(" + QueryCompiler.compileList(v, q, sep ) + ")");
-                    break;
-                default:
-            }
-
-
-            var opi = i.indexOf(':');
-            if (opi == -1)
-                opi = i.lastIndexOf(' ');
-            var p = i;
-            var op = "==";
-            if (opi != -1) {
-                p = i.substr(0, opi);
-                op = i.substr(opi + 1).toLowerCase();
-            }
-            var n1 = "";
-            if (/^\!/gi.test(op)) {
-                n1 = "!";
-                op = op.substr(1);
-            }
-            p = JSON.stringify(p);
-            var subq = null;
-            var opq = QueryCompiler.helpers[op];
-            if (op === "any") {
-
-                if (v == "{}")
-                    continue;
-                subq = n1 + " QueryCompiler.helpers.any(Atom.get(item, " + p + " ), " + v + ")";
-            }else{
-                if (opq) {
-                    subq = n1 + "QueryCompiler.helpers['" + op +"'](Atom.get(item," + p + "), " + v + ")";
-                } else {
-                    subq = "Atom.get(item," + p + ") " + n1 + op + " " + v + "";
-                }
-            }
-            list.push(subq);
-        }
-        if (list.length > 0) {
-            return list;
-        }
-        return [ "true" ];
-    },
-
-    compiled: {
-
-    },
-
-    compile: function(q){
-        if(!q){
-            return function(item) { 
-                return true;
-            };
-        }
-
-        var qs = JSON.stringify(q);
-        var qsc = QueryCompiler.compiled[qs];
-        if (qsc)
-            return qsc;
-
-        var el = QueryCompiler.compileList(q, "item", "q");
-
-        var ej = el.join(" && ");
-        if (AtomConfig.debug) { log(ej); }
-        var f = new Function(["item", "q"], " return " + ej + ";");
-        qsc = function (item) {
-            return f(item, q);
-        };
-
-        QueryCompiler.compiled[qs] = qsc;
-        return qsc;
-    },
-
-    selectCompiled: {
-
-    },
+var selectCompiler = {
 
     compileSelect: function(s){
         if (!s) {
@@ -209,7 +46,7 @@ var QueryCompiler = {
 var AtomQuery = {
 
     firstOrDefault:function (q) {
-        var f = QueryCompiler.compile(q);
+        var f = AtomFilter.filter(q);
         while (this.next()) {
             var item = this.current();
             if (f(item)) {
@@ -220,7 +57,7 @@ var AtomQuery = {
     },
 
     first: function (q) {
-        var f = QueryCompiler.compile(q);
+        var f = AtomFilter.filter(q);
         while (this.next()) {
             var item = this.current();
             if (f(item)) {
@@ -231,7 +68,7 @@ var AtomQuery = {
     },
 
     where: function (q) {
-        var f = QueryCompiler.compile(q);
+        var f = AtomFilter.filter(q);
         var r = [];
         while (this.next()) {
             var item = this.current();
