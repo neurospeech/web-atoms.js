@@ -174,15 +174,9 @@
                     return;
                 this._filter = f;
                 this._filteredItems = null;
-                this.applyFilter();
-            },
-
-            applyFilter: function () {
-
-                if (this._filter && this.hasItems()) {
+                if (this.hasItems()) {
                     this.onCollectionChangedInternal("refresh", -1, null);
                 }
-
             },
 
             isSelected: function (item) {
