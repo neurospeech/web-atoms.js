@@ -440,7 +440,9 @@ window.AtomProperties = AtomProperties;
                 var t = this.getTemplate("template");
 
                 if (t) {
-                    if ($(this._element).children().length == 0) {
+                    var ce = new ChildEnumerator(this._element);
+                    // check if there is any children or not..
+                    if (!ce.next()) {
                         if (t.constructor == String) {
                             this._element.innerHTML = t;
                             var caller = this;
