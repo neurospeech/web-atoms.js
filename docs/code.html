@@ -36,6 +36,7 @@
             code = code.substr(0, index);
 
             code = $.trim(code);
+            return code;
         }
 
         function saveCode(p) {
@@ -48,7 +49,7 @@
 
             var header = extract(code, "<!-- Pre compiled script start -->", "<!-- Pre compiled script end -->");
 
-            p.value(code);
+            p.value(header + "\r\n" + body);
 
         }
 
