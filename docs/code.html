@@ -20,25 +20,33 @@
 
     <script type="text/javascript">
 
-        function saveCode(p) {
-
-            var code = p.value();
-
-            var t = "<!-- sample -->";
-
-            var index = code.indexOf(t);
+        function extract(code, start, end) {
+            if (!code)
+                return "";
+            var index = code.indexOf(start);
             if (index == -1)
-                return;
+                return code;
 
             code = code.substr(index + t.length);
 
             code = $.trim(code);
 
-            index = code.lastIndexOf("<!-- end-sample -->");
+            index = code.lastIndexOf(end);
 
             code = code.substr(0, index);
 
             code = $.trim(code);
+        }
+
+        function saveCode(p) {
+
+            var code = p.value();
+
+            var body = extract(code,
+                "<!-- sample -->",
+                "<!-- end-sample -->");
+
+            var header = extract(code, "<!-- Pre compiled script start -->", "<!-- Pre compiled script end -->");
 
             p.value(code);
 
@@ -74,7 +82,7 @@
         <div 
             atom-dock="Fill"
             atom-type="AtomCodeView"
-            atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile': ($scope.mode.value ? 'no' : 'yes') } )).then(saveCode)]"
+            atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile-mode':'debug', 'atoms-pre-compile': ($scope.mode.value ? 'no' : 'yes') } )).then(saveCode)]"
             >
         </div>
 
