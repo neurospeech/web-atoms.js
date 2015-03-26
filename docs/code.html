@@ -62,8 +62,9 @@
         </script>
 
         <div atom-dock="Top"
-             style="height:30px;">
+             style="height:40px;">
             <span 
+                  style="position:absolute; right:10px; top:4px;"
                   atom-name="mode"
                   atom-type="AtomToggleButtonBar"
                   atom-items="{$scope.modes}"
@@ -73,7 +74,7 @@
         <div 
             atom-dock="Fill"
             atom-type="AtomCodeView"
-            atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile': ($scope.model.value ? 'no' : 'yes') } )).then(saveCode)]"
+            atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile': ($scope.mode.value ? 'no' : 'yes') } )).then(saveCode)]"
             >
         </div>
 
