@@ -1,0 +1,1046 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{10D4B7A1-3021-4D94-9822-A34C4596E204}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Atoms.Web</RootNamespace>
+    <AssemblyName>Atoms.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NeuroSpeech.AtomsPreCompiler">
+      <HintPath>packages\Atoms.PreCompiler.1.1.147\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\atoms.js\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\atoms.js\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="atoms.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms.tt</DependentUpon>
+    </Content>
+    <Content Include="docs\code.html" />
+    <Content Include="docs\concepts\atom-control.html" />
+    <Content Include="docs\concepts\atom-promise.html" />
+    <Content Include="docs\concepts\binding.html" />
+    <Content Include="docs\concepts\binding\event.html" />
+    <Content Include="docs\concepts\binding\one-time.html" />
+    <Content Include="docs\concepts\binding\one-way.html" />
+    <Content Include="docs\concepts\binding\samples\event.html" />
+    <Content Include="docs\concepts\binding\samples\one-time.html" />
+    <Content Include="docs\concepts\binding\samples\one-way.html" />
+    <Content Include="docs\concepts\binding\samples\style.html" />
+    <Content Include="docs\concepts\binding\samples\two-way.html" />
+    <Content Include="docs\concepts\binding\style.html" />
+    <Content Include="docs\concepts\binding\two-way.html" />
+    <Content Include="docs\concepts\control\html-attributes.html" />
+    <Content Include="docs\concepts\control\samples\class-attribute.html" />
+    <Content Include="docs\concepts\control\samples\html-attribute.html" />
+    <Content Include="docs\concepts\control\samples\html-attributes.html" />
+    <Content Include="docs\concepts\control\samples\inline-object-class.html" />
+    <Content Include="docs\concepts\control\samples\is-enabled.html" />
+    <Content Include="docs\concepts\element.html" />
+    <Content Include="docs\concepts\index.html" />
+    <Content Include="docs\concepts\json-filter.html" />
+    <Content Include="docs\concepts\next.html" />
+    <Content Include="docs\concepts\next\actions.html" />
+    <Content Include="docs\concepts\next\samples\alert-action.html" />
+    <Content Include="docs\concepts\next\samples\array-action.html" />
+    <Content Include="docs\concepts\next\samples\confirm-action.html" />
+    <Content Include="docs\concepts\next\samples\data-action.html" />
+    <Content Include="docs\concepts\next\samples\function-action.html" />
+    <Content Include="docs\concepts\next\samples\scope-action.html" />
+    <Content Include="docs\concepts\next\samples\string-action.html" />
+    <Content Include="docs\concepts\next\samples\timeout-action.html" />
+    <Content Include="docs\concepts\samples\atom-promise.html" />
+    <Content Include="docs\concepts\samples\control.html" />
+    <Content Include="docs\concepts\samples\json-list.html" />
+    <Content Include="docs\concepts\samples\model-view.html" />
+    <Content Include="docs\concepts\samples\templates.html" />
+    <Content Include="docs\concepts\scope\app-scope.html" />
+    <Content Include="docs\concepts\scope\images\app-scope.png" />
+    <Content Include="docs\concepts\scope\images\local-scope.png" />
+    <Content Include="docs\concepts\scope\index.html" />
+    <Content Include="docs\concepts\scope\local-scope.html" />
+    <Content Include="docs\concepts\scope\samples\app-scope.html" />
+    <Content Include="docs\concepts\scope\samples\local-scope.html" />
+    <Content Include="docs\concepts\scope\samples\template.html" />
+    <Content Include="docs\concepts\scope\template.html" />
+    <Content Include="docs\concepts\templates.html" />
+    <Content Include="docs\control.html" />
+    <Content Include="docs\controls\atom-application.html" />
+    <Content Include="docs\controls\atom-button.html" />
+    <Content Include="docs\controls\atom-check-box-list.html" />
+    <Content Include="docs\controls\atom-check-box.html" />
+    <Content Include="docs\controls\atom-combo-box.html" />
+    <Content Include="docs\controls\atom-control.html" />
+    <Content Include="docs\controls\atom-data-pager.html" />
+    <Content Include="docs\controls\atom-date-control.html" />
+    <Content Include="docs\controls\atom-date-field.html" />
+    <Content Include="docs\controls\atom-date-list-box.html" />
+    <Content Include="docs\controls\atom-dock-panel.html" />
+    <Content Include="docs\controls\atom-form-grid-layout.html" />
+    <Content Include="docs\controls\atom-form-layout.html" />
+    <Content Include="docs\controls\atom-form.html" />
+    <Content Include="docs\controls\atom-frame-view.html" />
+    <Content Include="docs\controls\atom-items-control.html" />
+    <Content Include="docs\controls\atom-link-bar.html" />
+    <Content Include="docs\controls\atom-list-box.html" />
+    <Content Include="docs\controls\atom-navigator-list.html" />
+    <Content Include="docs\controls\atom-post-button.html" />
+    <Content Include="docs\controls\atom-radio-button-list.html" />
+    <Content Include="docs\controls\atom-time-picker.html" />
+    <Content Include="docs\controls\atom-toggle-button-bar.html" />
+    <Content Include="docs\controls\atom-view-stack.html" />
+    <Content Include="docs\controls\atom-window.html" />
+    <Content Include="docs\controls\atom-wizard.html" />
+    <Content Include="docs\controls\atom-yes-no-control.html" />
+    <Content Include="docs\controls\images\navigator-list-detal.png" />
+    <Content Include="docs\controls\images\navigator-list.png" />
+    <Content Include="docs\controls\index.html" />
+    <Content Include="docs\controls\layout.html" />
+    <Content Include="docs\controls\metadata\atom-application.js" />
+    <Content Include="docs\controls\metadata\atom-auto-complete-box.js" />
+    <Content Include="docs\controls\metadata\atom-button.js" />
+    <Content Include="docs\controls\metadata\atom-check-box-list.js" />
+    <Content Include="docs\controls\metadata\atom-combo-box.js" />
+    <Content Include="docs\controls\metadata\atom-control.js" />
+    <Content Include="docs\controls\metadata\atom-data-pager.js" />
+    <Content Include="docs\controls\metadata\atom-date-control.js" />
+    <Content Include="docs\controls\metadata\atom-date-list-box.js" />
+    <Content Include="docs\controls\metadata\atom-delete-button.js" />
+    <Content Include="docs\controls\metadata\atom-dock-panel.js" />
+    <Content Include="docs\controls\metadata\atom-file-uploader.js" />
+    <Content Include="docs\controls\metadata\atom-form-grid-layout.js" />
+    <Content Include="docs\controls\metadata\atom-form-layout.js" />
+    <Content Include="docs\controls\metadata\atom-form.js" />
+    <Content Include="docs\controls\metadata\atom-frame-view.js" />
+    <Content Include="docs\controls\metadata\atom-item-selector.js" />
+    <Content Include="docs\controls\metadata\atom-items-control.js" />
+    <Content Include="docs\controls\metadata\atom-label.js" />
+    <Content Include="docs\controls\metadata\atom-link-bar.js" />
+    <Content Include="docs\controls\metadata\atom-list-box.js" />
+    <Content Include="docs\controls\metadata\atom-navigator-list.js" />
+    <Content Include="docs\controls\metadata\atom-number-combo-box.js" />
+    <Content Include="docs\controls\metadata\atom-phone-control.js" />
+    <Content Include="docs\controls\metadata\atom-post-button.js" />
+    <Content Include="docs\controls\metadata\atom-radio-button-list.js" />
+    <Content Include="docs\controls\metadata\atom-sortable-column.js" />
+    <Content Include="docs\controls\metadata\atom-tab-button-bar.js" />
+    <Content Include="docs\controls\metadata\atom-tab-control.js" />
+    <Content Include="docs\controls\metadata\atom-toggle-button-bar.js" />
+    <Content Include="docs\controls\metadata\atom-view-stack.js" />
+    <Content Include="docs\controls\metadata\atom-window.js" />
+    <Content Include="docs\controls\metadata\atom-wizard.js" />
+    <Content Include="docs\controls\metadata\atom-yes-no-control.js" />
+    <Content Include="docs\controls\metadata\class-info.js" />
+    <Content Include="docs\controls\samples\atom-application.html" />
+    <Content Include="docs\controls\samples\atom-button.html" />
+    <Content Include="docs\controls\samples\atom-check-box-list.html" />
+    <Content Include="docs\controls\samples\atom-check-box.html" />
+    <Content Include="docs\controls\samples\atom-control.html" />
+    <Content Include="docs\controls\samples\atom-data-pager-customized.html" />
+    <Content Include="docs\controls\samples\atom-data-pager.html" />
+    <Content Include="docs\controls\samples\atom-date-control.html" />
+    <Content Include="docs\controls\samples\atom-date-field.html" />
+    <Content Include="docs\controls\samples\atom-date-list-box.html" />
+    <Content Include="docs\controls\samples\atom-dock-panel.html" />
+    <Content Include="docs\controls\samples\atom-filter.html" />
+    <Content Include="docs\controls\samples\atom-form-grid-layout.html" />
+    <Content Include="docs\controls\samples\atom-form-grid-tabs.html" />
+    <Content Include="docs\controls\samples\atom-form-layout.html" />
+    <Content Include="docs\controls\samples\atom-form.html" />
+    <Content Include="docs\controls\samples\atom-frame-view.html" />
+    <Content Include="docs\controls\samples\atom-items-control-search.html" />
+    <Content Include="docs\controls\samples\atom-items-control-table.html" />
+    <Content Include="docs\controls\samples\atom-items-control.html" />
+    <Content Include="docs\controls\samples\atom-link-bar.html" />
+    <Content Include="docs\controls\samples\atom-list-box-button.html" />
+    <Content Include="docs\controls\samples\atom-list-box-checkbox.html" />
+    <Content Include="docs\controls\samples\atom-list-box-table-sort.html" />
+    <Content Include="docs\controls\samples\atom-list-box-table.html" />
+    <Content Include="docs\controls\samples\atom-list-box.html" />
+    <Content Include="docs\controls\samples\atom-navigator-list.html" />
+    <Content Include="docs\controls\samples\atom-post-button.html" />
+    <Content Include="docs\controls\samples\atom-radio-button-list.html" />
+    <Content Include="docs\controls\samples\atom-time-picker.html" />
+    <Content Include="docs\controls\samples\atom-view-stack.html" />
+    <Content Include="docs\controls\samples\atom-window-command-template.html" />
+    <Content Include="docs\controls\samples\atom-window-iframe.html" />
+    <Content Include="docs\controls\samples\atom-window.html" />
+    <Content Include="docs\controls\samples\atom-wizard.html" />
+    <Content Include="docs\controls\samples\atom-yes-no-control.html" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\plugins\ckeditor\index.html" />
+    <Content Include="docs\plugins\index.html" />
+    <Content Include="docs\plugins\masked\index.html" />
+    <Content Include="docs\plugins\masked\sample.html" />
+    <Content Include="docs\plugins\samples\atom-clock.css" />
+    <Content Include="docs\plugins\samples\atom-clock.html" />
+    <Content Include="docs\plugins\samples\atom-clock.js" />
+    <Content Include="docs\plugins\upload\index.html" />
+    <Content Include="docs\plugins\videojs\index.html" />
+    <Content Include="docs\samples\todo\base.css" />
+    <Content Include="docs\samples\todo\index.html" />
+    <Content Include="docs\scripts\atom-code-view.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\comment\comment.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\comment\continuecomment.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\dialog\dialog.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\dialog\dialog.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\display\fullscreen.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\display\fullscreen.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\display\placeholder.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\display\rulers.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\closebrackets.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\closetag.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\continuelist.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\matchbrackets.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\matchtags.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\edit\trailingspace.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\brace-fold.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\comment-fold.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\foldcode.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\foldgutter.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\foldgutter.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\indent-fold.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\markdown-fold.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\fold\xml-fold.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\anyword-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\css-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\html-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\javascript-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\python-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\show-hint.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\show-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\sql-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\hint\xml-hint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\coffeescript-lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\css-lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\javascript-lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\json-lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\lint.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\lint\yaml-lint.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\merge\merge.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\merge\merge.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\mode\loadmode.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\mode\multiplex.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\mode\multiplex_test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\mode\overlay.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\runmode\colorize.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\runmode\runmode-standalone.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\runmode\runmode.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\runmode\runmode.node.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\scroll\scrollpastend.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\search\match-highlighter.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\search\search.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\search\searchcursor.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\selection\active-line.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\selection\mark-selection.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\tern\tern.css" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\tern\tern.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\tern\worker.js" />
+    <Content Include="docs\scripts\codemirror-4.2\addon\wrap\hardwrap.js" />
+    <Content Include="docs\scripts\codemirror-4.2\keymap\emacs.js" />
+    <Content Include="docs\scripts\codemirror-4.2\keymap\sublime.js" />
+    <Content Include="docs\scripts\codemirror-4.2\keymap\vim.js" />
+    <Content Include="docs\scripts\codemirror-4.2\lib\codemirror.css" />
+    <Content Include="docs\scripts\codemirror-4.2\lib\codemirror.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\apl\apl.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\apl\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\asterisk\asterisk.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\asterisk\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\clike\clike.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\clike\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\clike\scala.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\clojure\clojure.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\clojure\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\cobol\cobol.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\cobol\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\coffeescript\coffeescript.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\coffeescript\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\commonlisp\commonlisp.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\commonlisp\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\css.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\less.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\less_test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\scss.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\scss_test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\css\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\cypher\cypher.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\cypher\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\diff\diff.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\diff\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\django\django.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\django\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\dtd\dtd.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\dtd\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\dylan\dylan.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\dylan\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\d\d.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\d\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ecl\ecl.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ecl\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\eiffel\eiffel.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\eiffel\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\erlang\erlang.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\erlang\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\fortran\fortran.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\fortran\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gas\gas.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gas\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gfm\gfm.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gfm\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gfm\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gherkin\gherkin.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\gherkin\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\go\go.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\go\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\groovy\groovy.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\groovy\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haml\haml.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haml\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haml\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haskell\haskell.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haskell\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haxe\haxe.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\haxe\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\htmlembedded\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\htmlmixed\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\http\http.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\http\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\jade\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\jade\jade.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\javascript\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\javascript\javascript.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\javascript\json-ld.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\javascript\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\javascript\typescript.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\jinja2\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\jinja2\jinja2.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\julia\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\julia\julia.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\livescript\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\livescript\livescript.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\lua\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\lua\lua.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\markdown\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\markdown\markdown.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\markdown\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\meta.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\mirc\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\mirc\mirc.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\mllike\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\mllike\mllike.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\nginx\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\nginx\nginx.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ntriples\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ntriples\ntriples.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\octave\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\octave\octave.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pascal\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pascal\pascal.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pegjs\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pegjs\pegjs.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\perl\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\perl\perl.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\php\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\php\php.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\php\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pig\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\pig\pig.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\properties\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\properties\properties.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\puppet\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\puppet\puppet.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\python\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\python\python.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\q\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\q\q.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rpm\changes\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rpm\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rpm\rpm.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rst\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rst\rst.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ruby\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ruby\ruby.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\ruby\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rust\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\rust\rust.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\r\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\r\r.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sass\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sass\sass.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\scheme\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\scheme\scheme.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\shell\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\shell\shell.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\shell\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sieve\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sieve\sieve.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smalltalk\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smalltalk\smalltalk.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smartymixed\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smartymixed\smartymixed.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smarty\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\smarty\smarty.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\solr\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\solr\solr.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sparql\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sparql\sparql.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sql\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\sql\sql.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\stex\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\stex\stex.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\stex\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tcl\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tcl\tcl.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiddlywiki\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiki\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiki\tiki.css" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\tiki\tiki.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\toml\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\toml\toml.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\turtle\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\turtle\turtle.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\vbscript\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\vbscript\vbscript.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\vb\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\vb\vb.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\velocity\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\velocity\velocity.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\verilog\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\verilog\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\verilog\verilog.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xml\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xml\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xml\xml.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xquery\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xquery\test.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\xquery\xquery.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\yaml\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\yaml\yaml.js" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\z80\index.html" />
+    <Content Include="docs\scripts\codemirror-4.2\mode\z80\z80.js" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\3024-day.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\3024-night.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\ambiance-mobile.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\ambiance.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\base16-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\base16-light.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\blackboard.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\cobalt.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\eclipse.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\elegant.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\erlang-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\lesser-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\mbo.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\mdn-like.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\midnight.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\monokai.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\neat.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\neo.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\night.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\paraiso-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\paraiso-light.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\pastel-on-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\rubyblue.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\solarized.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\the-matrix.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\tomorrow-night-eighties.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\twilight.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\vibrant-ink.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\xq-dark.css" />
+    <Content Include="docs\scripts\codemirror-4.2\theme\xq-light.css" />
+    <Content Include="docs\sitemap.js" />
+    <Content Include="docs\start\app.html" />
+    <Content Include="docs\start\index.html" />
+    <Content Include="docs\start\install.html" />
+    <Content Include="docs\start\license.html" />
+    <Content Include="docs\start\updates.html" />
+    <Content Include="docs\style\code-mirror.css" />
+    <Content Include="docs\style\docs.css" />
+    <Content Include="docs\style\docs.min.css" />
+    <Content Include="docs\walkthroughs\index.html" />
+    <Content Include="Global.asax" />
+    <Content Include="plugins\ckeditor\adapters\jquery.js" />
+    <Content Include="plugins\ckeditor\atom-ckeditor.js" />
+    <Content Include="plugins\ckeditor\build-config.js" />
+    <Content Include="plugins\ckeditor\ckeditor.js" />
+    <Content Include="plugins\ckeditor\config.js" />
+    <Content Include="plugins\ckeditor\contents.css" />
+    <Content Include="plugins\ckeditor\lang\en.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="plugins\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="plugins\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="plugins\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="plugins\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="plugins\ckeditor\plugins\backgrounds\docs\install.html" />
+    <Content Include="plugins\ckeditor\plugins\backgrounds\docs\styles.css" />
+    <Content Include="plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\css\codemirror.min.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\beautify.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.addons.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.addons.search.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.mode.htmlmixed.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.mode.javascript.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\js\codemirror.mode.php.min.js" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\3024-day.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\3024-night.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\ambiance-mobile.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\ambiance.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\base16-dark.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\base16-light.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\blackboard.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\cobalt.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\eclipse.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\elegant.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\erlang-dark.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\lesser-dark.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\mbo.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\midnight.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\monokai.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\neat.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\night.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\paraiso-dark.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\paraiso-light.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\rubyblue.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\solarized.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\the-matrix.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\tomorrow-night-eighties.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\twilight.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\vibrant-ink.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\xq-dark.css" />
+    <Content Include="plugins\ckeditor\plugins\codemirror\theme\xq-light.css" />
+    <Content Include="plugins\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="plugins\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="plugins\ckeditor\plugins\icons.png" />
+    <Content Include="plugins\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="plugins\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="plugins\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="plugins\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="plugins\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="plugins\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="plugins\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="plugins\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="plugins\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="plugins\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="plugins\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="plugins\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="plugins\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="plugins\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="plugins\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="plugins\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="plugins\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\dialogs\uicolor.js" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\assets\hue_bg.png" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\assets\hue_thumb.png" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\assets\picker_mask.png" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\assets\picker_thumb.png" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\assets\yui.css" />
+    <Content Include="plugins\ckeditor\plugins\uicolor\yui\yui.js" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="plugins\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog.css" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="plugins\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="plugins\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="plugins\ckeditor\skins\moono\icons.png" />
+    <Content Include="plugins\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\close.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="plugins\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="plugins\ckeditor\styles.js" />
+    <Content Include="plugins\entity-framework\entity-context.js" />
+    <Content Include="plugins\entity-framework\entity-controls.js" />
+    <Content Include="plugins\entity-framework\entity.css" />
+    <Content Include="plugins\entity-framework\entity.min.css" />
+    <Content Include="plugins\masked\atom-masked-phone.css" />
+    <Content Include="plugins\masked\atom-masked-phone.js" />
+    <Content Include="plugins\masked\jquery.maskedinput.js" />
+    <Content Include="plugins\upload\atom-flash-uploader.swf" />
+    <Content Include="plugins\upload\atom-uploader.css" />
+    <Content Include="plugins\upload\atom-uploader.js" />
+    <Content Include="plugins\upload\atom-uploader.min.css" />
+    <Content Include="plugins\upload\busy.gif" />
+    <Content Include="plugins\upload\checked.png" />
+    <Content Include="plugins\upload\t.png" />
+    <Content Include="plugins\upload\upload.png" />
+    <Content Include="plugins\videojs\AtomVideo.js" />
+    <Content Include="plugins\videojs\demo.html" />
+    <Content Include="plugins\videojs\font\vjs.svg" />
+    <Content Include="plugins\videojs\video-js.css" />
+    <Content Include="plugins\videojs\video-js.min.css" />
+    <Content Include="plugins\videojs\video-js.swf" />
+    <Content Include="plugins\videojs\video.dev.js" />
+    <Content Include="plugins\videojs\video.js" />
+    <Content Include="res\atoms-js-vs-power-tools-small.png" />
+    <Content Include="res\atoms-js-vs-power-tools.png" />
+    <Content Include="res\atoms-promo.png" />
+    <Content Include="res\chrome-atoms-inspector.png" />
+    <Content Include="res\features\best-of-all-ui-frameworks.png" />
+    <Content Include="res\features\model-view.png" />
+    <Content Include="res\features\scope-isolation.png" />
+    <Content Include="res\share\email.png" />
+    <Content Include="res\share\facebook.png" />
+    <Content Include="res\share\google.png" />
+    <Content Include="res\share\reddit.png" />
+    <Content Include="res\share\stumbleupon.png" />
+    <Content Include="res\share\tumblr.png" />
+    <Content Include="res\share\twitter.png" />
+    <Content Include="atoms.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms.js</LastGenOutput>
+    </Content>
+    <None Include="Scripts\jquery-1.11.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="src\AtomPrototype.js" />
+    <Content Include="src\Controls\AtomAutoCompleteBox.css" />
+    <Content Include="src\Controls\AtomAutoCompleteBox.js" />
+    <Content Include="src\Controls\AtomAutoCompleteBox.template.html" />
+    <Content Include="src\Controls\AtomButton.css" />
+    <Content Include="src\Controls\AtomButton.js" />
+    <Content Include="src\Controls\AtomCalendar.js" />
+    <Content Include="src\Controls\AtomCalendar.template.html" />
+    <Content Include="src\Controls\AtomCheckBoxList.css" />
+    <Content Include="src\Controls\AtomCheckBoxList.itemTemplate.html" />
+    <Content Include="src\Controls\AtomCheckBoxList.js" />
+    <Content Include="src\Controls\AtomComboBox.js" />
+    <Content Include="src\Controls\AtomControl.css" />
+    <Content Include="src\Controls\AtomControl.js" />
+    <Content Include="src\Controls\AtomDataPager.css" />
+    <Content Include="src\Controls\AtomDataPager.js" />
+    <Content Include="src\Controls\AtomDataPager.template.html" />
+    <Content Include="src\Controls\AtomDateControl.js" />
+    <Content Include="src\Controls\AtomDateField.css" />
+    <Content Include="src\Controls\AtomDateField.js" />
+    <Content Include="src\Controls\AtomDateField.popupTemplate.html" />
+    <Content Include="src\Controls\AtomDateField.template.html" />
+    <Content Include="src\Controls\AtomDateListBox.css" />
+    <Content Include="src\Controls\AtomDateListBox.js" />
+    <Content Include="src\Controls\AtomDateListBox.template.html" />
+    <Content Include="src\Controls\AtomDeleteButton.js" />
+    <Content Include="src\Controls\AtomDockPanel.css" />
+    <Content Include="src\Controls\AtomDockPanel.js" />
+    <Content Include="src\Controls\AtomFrameView.js" />
+    <Content Include="src\Controls\AtomItemsControl.itemTemplate.html" />
+    <Content Include="src\Controls\AtomItemsControl.js" />
+    <Content Include="src\Controls\AtomLinkBar.css" />
+    <Content Include="src\Controls\AtomLinkBar.itemTemplate.html" />
+    <Content Include="src\Controls\AtomLinkBar.js" />
+    <Content Include="src\Controls\AtomLinkBar.menuTemplate.html" />
+    <Content Include="src\Controls\AtomListBox.css" />
+    <Content Include="src\Controls\AtomListBox.js" />
+    <Content Include="src\Controls\AtomMasterDetailList.js" />
+    <Content Include="src\Controls\AtomMasterDetailList.template.html" />
+    <Content Include="src\Controls\AtomMultiButtonList.js" />
+    <Content Include="src\Controls\AtomNavigatorList.css" />
+    <Content Include="src\Controls\AtomNavigatorList.detailTemplate.html" />
+    <Content Include="src\Controls\AtomNavigatorList.js" />
+    <Content Include="src\Controls\AtomNavigatorList.template.html" />
+    <Content Include="src\Controls\AtomNumberComboBox.js" />
+    <Content Include="src\Controls\AtomPhoneControl.css" />
+    <Content Include="src\Controls\AtomPhoneControl.js" />
+    <Content Include="src\Controls\AtomPostButton.js" />
+    <Content Include="src\Controls\AtomRadioButtonList.itemTemplate.html" />
+    <Content Include="src\Controls\AtomRadioButtonList.js" />
+    <Content Include="src\Controls\AtomSortableColumn.css" />
+    <Content Include="src\Controls\AtomSortableColumn.js" />
+    <Content Include="src\Controls\AtomSortableColumn.template.html" />
+    <Content Include="src\Controls\AtomTabButtonBar.css" />
+    <Content Include="src\Controls\AtomTabButtonBar.js" />
+    <Content Include="src\Controls\AtomTabControl.js" />
+    <Content Include="src\Controls\AtomTabControl.template.html" />
+    <Content Include="src\Controls\AtomTimePicker.js" />
+    <Content Include="src\Controls\AtomToggleButtonBar.css" />
+    <Content Include="src\Controls\AtomToggleButtonBar.js" />
+    <Content Include="src\Controls\AtomToggleButtonBar.template.html" />
+    <Content Include="src\Controls\AtomUploadButton.js" />
+    <Content Include="src\Controls\AtomViewBox.js" />
+    <Content Include="src\Controls\AtomViewStack.css" />
+    <Content Include="src\Controls\AtomViewStack.js" />
+    <Content Include="src\Controls\AtomWizard.css" />
+    <Content Include="src\Controls\AtomWizard.js" />
+    <Content Include="src\Controls\AtomWizard.template.html" />
+    <Content Include="src\Controls\AtomYesNoControl.js" />
+    <Content Include="src\Controls\AtomYesNoCustom.css" />
+    <Content Include="src\Controls\AtomYesNoCustom.js" />
+    <Content Include="src\Controls\AtomYesNoCustom.template.html" />
+    <Content Include="src\Core\atom-filter.js" />
+    <Content Include="src\Core\Atom.js" />
+    <Content Include="src\Core\AtomApplication.busyTemplate.html" />
+    <Content Include="src\Core\AtomApplication.css" />
+    <Content Include="src\Core\AtomApplication.js" />
+    <Content Include="src\Core\AtomBrowser.js" />
+    <Content Include="src\Core\AtomComponent.js" />
+    <Content Include="src\Core\AtomDispatcher.js" />
+    <Content Include="src\Core\AtomEvaluator.js" />
+    <Content Include="src\Core\AtomPopup.js" />
+    <Content Include="src\Core\AtomQuery.js" />
+    <Content Include="src\Core\AtomUI.js" />
+    <Content Include="src\Core\AtomUIComponent.js" />
+    <Content Include="src\Core\ChildEnumerator.js" />
+    <Content Include="src\Core\WebAtoms.Core.js" />
+    <Content Include="src\Core\ZZZZZInitializer.js" />
+    <Content Include="src\DataControls\AtomAutoPostForm.js" />
+    <Content Include="src\DataControls\AtomDataGrid.js" />
+    <Content Include="src\DataControls\AtomForm.js" />
+    <Content Include="src\DataControls\AtomFormField.js" />
+    <Content Include="src\DataControls\AtomFormGrid.css" />
+    <Content Include="src\DataControls\AtomFormGrid.js" />
+    <Content Include="src\DataControls\AtomFormGridLayout.fieldTemplate.html" />
+    <Content Include="src\DataControls\AtomFormLayout.css" />
+    <Content Include="src\DataControls\AtomFormLayout.fieldTemplate.html" />
+    <Content Include="src\DataControls\AtomFormLayout.js" />
+    <Content Include="src\DataControls\AtomFormNoLayout.js" />
+    <Content Include="src\DataControls\AtomFormVerticalLayout.fieldTemplate.html" />
+    <Content Include="src\DataControls\AtomFormVerticalLayout.js" />
+    <Content Include="src\Data\AtomBinding.js" />
+    <Content Include="src\Data\AtomBindingHelper.js" />
+    <Content Include="src\Data\AtomPromise.js" />
+    <Content Include="src\ie9-placeholder-fix.js" />
+    <None Include="src\jquery-1.5.1-vsdoc.js" />
+    <Content Include="src\jquery-1.8.2.min.js" />
+    <Content Include="src\JSON.js" />
+    <Content Include="src\Layouts\AtomLayout.js" />
+    <Content Include="src\Layouts\AtomTableLayout.js" />
+    <Content Include="src\Layouts\AtomViewBoxLayout.js" />
+    <Content Include="src\Window\AtomAlert.js" />
+    <Content Include="src\Window\AtomWindow.alertTemplate.html" />
+    <Content Include="src\Window\AtomWindow.css" />
+    <Content Include="src\Window\AtomWindow.frameTemplate.html" />
+    <Content Include="src\Window\AtomWindow.js" />
+    <Content Include="src\Window\AtomWindow.windowTemplate.html" />
+    <Content Include="style\atoms.css" />
+    <Content Include="style\atoms1.css">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms.tt</DependentUpon>
+    </Content>
+    <Content Include="style\busy.gif" />
+    <Content Include="style\buttons\delete.png" />
+    <Content Include="style\buttons\down.png" />
+    <Content Include="style\buttons\up.png" />
+    <Content Include="tools\metadata.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="docs\concepts\samples\country-list.json" />
+    <Content Include="docs\controls\samples\movie-list.json" />
+    <Content Include="docs\style\docs.less" />
+    <Content Include="plugins\ckeditor\CHANGES.md" />
+    <Content Include="plugins\ckeditor\LICENSE.md" />
+    <Content Include="plugins\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="plugins\ckeditor\plugins\scayt\README.md" />
+    <Content Include="plugins\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="plugins\ckeditor\plugins\wsc\README.md" />
+    <Content Include="plugins\ckeditor\README.md" />
+    <Content Include="plugins\ckeditor\skins\moono\readme.md" />
+    <Content Include="plugins\entity-framework\entity.css.map" />
+    <Content Include="plugins\entity-framework\entity.less" />
+    <Content Include="plugins\upload\atom-uploader.css.map" />
+    <Content Include="plugins\upload\atom-uploader.less" />
+    <Content Include="plugins\videojs\demo.captions.vtt" />
+    <Content Include="plugins\videojs\font\vjs.eot" />
+    <Content Include="plugins\videojs\font\vjs.ttf" />
+    <Content Include="plugins\videojs\font\vjs.woff" />
+    <Content Include="plugins\videojs\video-js.less" />
+    <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <Content Include="style\atoms.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms1.css</LastGenOutput>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57254</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:57254/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
