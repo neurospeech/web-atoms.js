@@ -82,7 +82,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 <# 
 	
 
-        PreCompiler = new DynamicCompiler(currentDirectory);
+        PreCompiler = new DynamicCompiler(currentDirectory + "\\bin");
 
 		var templates =  WriteTemplates(templateDirectory).ToList();
 
@@ -98,6 +98,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
     (function(window,WebAtoms){
 
         <#    foreach(var t in templates){ 
+        WriteLine("/* {0} */",t.Name);
         WriteLine(t.Script);
         }#>              
 
@@ -213,6 +214,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
         return new TemplateResult{ 
                 Script = result.Script ,
+                    Name = key,
                 Template = "jsonML[\"" + key + "\"] = \r\n" + result.JsonMLDocument + "\r\n" + ";"
                 };                  
             }catch(Exception ex){
@@ -448,8 +450,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 
     public class TemplateResult{
-        public string Script {get; set;}
-        public string Template {get; set;}
+        public string Name { get; set; }
+        public string Script { get; set; }
+        public string Template { get; set; }
     }
 
 		

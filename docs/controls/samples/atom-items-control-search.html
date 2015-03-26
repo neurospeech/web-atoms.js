@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <!-- sample -->
+
+        <script type="text/javascript">
+            ({
+                search: ""
+            })
+        </script>
+
+        <div atom-type="AtomItemsControl"
+             atom-filter="[ $appScope.search ? { 'MovieName contains': $appScope.search  } : {} ]"
+             atom-items="{ AtomPromise.json('movie-list.json') }">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Movie</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th> <input 
+                                    type="search"
+                                    placeholder="=Search..."
+                                    atom-value="^[$scope.search]"/> </th>
+                    </tr>
+                </thead>
+                <tbody atom-presenter="itemsPresenter">
+                    <tr atom-template="itemTemplate">
+                        <td atom-text="{($scope.itemIndex + 1) + ')'}"></td>
+                        <td atom-text="{$data.MovieName}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- end-sample -->
+    </div>
+</body>
+</html>

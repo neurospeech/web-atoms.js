@@ -24,6 +24,14 @@
             isValidSet: false
         },
         methods: {
+            set_fieldVisible: function (v) {
+                this._fieldVisible = v;
+                $(this._element).css("display", v ? '' : 'none');
+            },
+            set_fieldClass: function (v) {
+                this._fieldClass = v;
+                this.setLocalValue('class', v, this._element);
+            },
             set_dataType: function (v) {
                 this._dataType = v;
                 this.setup();

@@ -1,3 +1,10 @@
+*.nupkg
+*.nupkg.bak
+*.webinfo
+*.log
+*.dll
+*.obj
+*.pdb
 *.user
 *.suo
 *.cache
@@ -8,12 +15,9 @@ docs/bin/*
 NeuroSpeech.Atoms.dll
 NeuroSpeech.Atoms.pdb
 *.webinfo
-nuget/Atoms.js/bin/*
-nuget/Atoms.js/obj/*
-*.nupkg
-*.nupkg.bak
-*.webinfo
-*.log
+nuget/Atoms.js/bin
+nuget/Atoms.js/obj
 /packages
 /Bin
 /atoms.min.js.map
+/obj

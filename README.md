@@ -1,6 +1,10 @@
 Atoms.js
 ========
-Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight
+Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight.
+
+Atoms.js is the only JavaScript framework with precompiler [Atoms.js PreCompiler](https://github.com/neurospeech/atoms-pre-compiler).
+AtomsPreCompiler compiles atoms markup into valid HTML5 by breaking up inline expressions into
+generated JavaScript. This pre-compiled document runs in strict mode without using `eval` without compromising speed.
 
 ![Atoms.js](https://github.com/atoms-js/atoms.js/raw/master/res/atoms-promo.png)
 
@@ -11,20 +15,21 @@ Download: https://visualstudiogallery.msdn.microsoft.com/6956fdb0-174b-4e4c-9bef
 
 Features
 --------
-1. Very little JavaScript
+1. Less JavaScript - More HTML
 2. Poweful Web Components
-3. Consistent and Logical Syntax
-4. Extensibility
-5. One Time, One Way and Two Way Bindings
-6. Component Object Model
-7. One Liner AJAX
-8. Powerful State Machine
-9. Customizable Templates
-10. Scalability (Able to manage 1000s of rows of data)
-11. Application State Persistance in URL
-12. Multiple Scopes for Scope Isolation
-13. Ready to use Line of Business Components
-14. Works on Internet Explore 8+, Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
+3. Compilation to JavaScript with valid HTML5 markup
+4. Consistent and Logical Syntax
+5. Extensibility
+6. One Time, One Way and Two Way Bindings
+7. Component Object Model
+8. One Liner AJAX
+9. Powerful State Machine
+10. Customizable Templates
+11. Scalability (Able to manage 1000s of rows of data)
+12. Application State Persistance in URL
+13. Multiple Scopes for Scope Isolation
+14. Ready to use Line of Business Components
+15. Works on Internet Explore 8+, Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
 
 Atoms.js (previously known as Web Atoms JS) is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.

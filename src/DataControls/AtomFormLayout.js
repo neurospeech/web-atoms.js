@@ -15,14 +15,17 @@
         methods: {
             createField: function (parent, child) {
 
+                var isChildField = false;
 
-
-                var amap = AtomUI.attributeMap(child, /^(atom\-(type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
+                var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
 
                 var at = amap["atom-type"];
                 if (at) {
                     amap["atom-type"] = null;
                     switch (at.value) {
+                        case "AtomFormField":
+                            isChildField = true;
+                            break;
                         case "AtomFormGridLayout":
                         case "AtomFormTab":
                             parent.appendChild(child);
@@ -32,11 +35,19 @@
                     }
                 }
 
+
                 var field = AtomUI.cloneNode(this._fieldTemplate);
 
                 var cp = AtomUI.findPresenter(field);
                 if (cp) {
-                    cp.appendChild(child);
+                    if (isChildField) {
+                        var ce = new ChildEnumerator(child);
+                        while (ce.next()) {
+                            cp.appendChild(ce.current());
+                        }
+                    } else {
+                        cp.appendChild(child);
+                    }
                     AtomUI.removeAttr(cp, "atom-presenter");
                 } else {
                     field.contentElement = child;
