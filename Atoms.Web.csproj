@@ -42,8 +42,9 @@
       <HintPath>packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NeuroSpeech.AtomsPreCompiler">
-      <HintPath>packages\Atoms.PreCompiler.1.1.147\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
+    <Reference Include="NeuroSpeech.AtomsPreCompiler, Version=1.1.151.26414, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Atoms.PreCompiler.1.1.151\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -837,6 +838,7 @@
       <LastGenOutput>atoms.js</LastGenOutput>
     </Content>
     <Content Include="atoms.min.map" />
+    <Content Include="README.md" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -967,7 +969,9 @@
     <Content Include="style\buttons\down.png" />
     <Content Include="style\buttons\up.png" />
     <Content Include="tools\metadata.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
