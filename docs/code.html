@@ -53,14 +53,27 @@
 
         <script type="text/javascript">
             ({
-                codeFile: ''
+                codeFile: '',
+                modes: [
+                    { label: "Normal", value: 0 },
+                    { label: "Compiled", value: 1 }
+                ]
             })
         </script>
+
+        <div atom-dock="Top"
+             style="height:30px;">
+            <span 
+                  atom-name="mode"
+                  atom-type="AtomToggleButtonBar"
+                  atom-items="{$scope.modes}"
+                  ></span>
+        </div>
 
         <div 
             atom-dock="Fill"
             atom-type="AtomCodeView"
-            atom-code="[AtomPromise.get($scope.codeFile).then(saveCode)]"
+            atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile': ($scope.model.value ? 'no' : 'yes') } )).then(saveCode)]"
             >
         </div>
 

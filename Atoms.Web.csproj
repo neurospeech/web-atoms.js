@@ -46,9 +46,9 @@
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="NeuroSpeech.AtomsPreCompiler, Version=1.1.151.26414, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NeuroSpeech.AtomsPreCompiler, Version=1.1.152.28902, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Atoms.PreCompiler.1.1.151\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
+      <HintPath>packages\Atoms.PreCompiler.1.1.152\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
