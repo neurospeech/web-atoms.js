@@ -86,11 +86,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="atoms-debug.js" />
     <Content Include="atoms.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
+    <Content Include="atoms.min.js" />
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -541,6 +543,8 @@
     <Content Include="docs\style\docs.min.css" />
     <Content Include="docs\walkthroughs\index.html" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="jquery-1.8.2.min.js" />
     <Content Include="plugins\ckeditor\adapters\jquery.js" />
     <Content Include="plugins\ckeditor\atom-ckeditor.js" />
     <Content Include="plugins\ckeditor\build-config.js" />
@@ -832,6 +836,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>atoms.js</LastGenOutput>
     </Content>
+    <Content Include="atoms.min.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -952,8 +957,7 @@
     <Content Include="src\Window\AtomWindow.frameTemplate.html" />
     <Content Include="src\Window\AtomWindow.js" />
     <Content Include="src\Window\AtomWindow.windowTemplate.html" />
-    <Content Include="style\atoms.css" />
-    <Content Include="style\atoms1.css">
+    <Content Include="style\atoms.css">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
@@ -996,7 +1000,7 @@
     <Content Include="Scripts\jquery-1.11.1.min.map" />
     <Content Include="style\atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms1.css</LastGenOutput>
+      <LastGenOutput>atoms.css</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
