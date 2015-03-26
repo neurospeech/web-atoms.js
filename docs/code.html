@@ -25,9 +25,9 @@
                 return "";
             var index = code.indexOf(start);
             if (index == -1)
-                return code;
+                return "";
 
-            code = code.substr(index + t.length);
+            code = code.substr(index + start.length);
 
             code = $.trim(code);
 
@@ -45,11 +45,15 @@
 
             var body = extract(code,
                 "<!-- sample -->",
-                "<!-- end-sample -->");
+                "<!-- end-sample -->") || code;
 
             var header = extract(code, "<!-- Pre compiled script start -->", "<!-- Pre compiled script end -->");
 
-            p.value(header + "\r\n" + body);
+            var code = header + "\r\n" + body;
+
+            code = $.trim(code);
+
+            p.value(code);
 
         }
 
@@ -70,7 +74,7 @@
             })
         </script>
 
-        <div atom-dock="Top"
+        <!--<div atom-dock="Top"
              style="height:40px;">
             <span 
                   style="position:absolute; right:10px; top:4px;"
@@ -78,14 +82,20 @@
                   atom-type="AtomToggleButtonBar"
                   atom-items="{$scope.modes}"
                   ></span>
-        </div>
+        </div>-->
 
-        <div 
+        <!--<div 
             atom-dock="Fill"
             atom-type="AtomCodeView"
             atom-code="[AtomPromise.get(Atom.url($scope.codeFile , {'atoms-pre-compile-mode':'debug', 'atoms-pre-compile': ($scope.mode.value ? 'no' : 'yes') } )).then(saveCode)]"
             >
+        </div>-->
+
+        <div atom-dock="Fill"
+             atom-type="AtomCodeView"
+             atom-code="[AtomPromise.get($scope.codeFile + '?atoms-pre-compile=no').then(saveCode)]">
         </div>
+
 
         <div
             class="code-execute-link"
