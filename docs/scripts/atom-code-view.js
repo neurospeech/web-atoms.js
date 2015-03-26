@@ -220,10 +220,12 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                             var a = _this.editor.getScrollInfo();
                             //console.log(JSON.stringify(a));
                             if (a.height) {
-                                _this.editor.setSize(null, a.height );
-                                var h = $(window.frameElement).innerHeight();
-                                if (h < a.height) {
-                                    window.frameElement.style.height = (a.height) + "px"
+                                _this.editor.setSize(null, a.height);
+                                if (window.frameElement) {
+                                    var h = $(window.frameElement).innerHeight();
+                                    if (h < a.height) {
+                                        window.frameElement.style.height = (a.height) + "px"
+                                    }
                                 }
                             }
                         });
