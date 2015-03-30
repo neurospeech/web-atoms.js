@@ -969,6 +969,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
+    <Content Include="style\basic.css">
+      <DependentUpon>basic.less</DependentUpon>
+    </Content>
+    <Content Include="style\basic.min.css">
+      <DependentUpon>basic.css</DependentUpon>
+    </Content>
     <Content Include="style\busy.gif" />
     <Content Include="style\buttons\delete.png" />
     <Content Include="style\buttons\down.png" />
@@ -1010,6 +1016,10 @@
     <Content Include="style\atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>atoms.css</LastGenOutput>
+    </Content>
+    <Content Include="style\basic.less" />
+    <Content Include="style\basic.css.map">
+      <DependentUpon>basic.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
