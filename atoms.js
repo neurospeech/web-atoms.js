@@ -237,7 +237,7 @@ jsonML["WebAtoms.AtomDataPager.template"] =
 ;
 jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
-{ "class": "atom-date-field-popup", "data-atom-init": "t17" }
+{ "class": "popup", "data-atom-init": "t17" }
 ,"\n", ["div",
 { "class": "atom-date-list-box", "data-atom-init": "t18" }
 ,"\n", ["div",
@@ -386,74 +386,69 @@ jsonML["WebAtoms.AtomTabControl.template"] =
 { "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t56" }
 ,"\n"], "\n"]]
 ;
-jsonML["WebAtoms.AtomToggleButtonBar.template"] = 
-[["span",
-{ "class": "items-presenter", "data-atom-presenter": "itemsPresenter" }
-]]
-;
 jsonML["WebAtoms.AtomWizard.template"] = 
 [["div",
-{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t58" }
+{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t57" }
 ,"\n"], ["div",
 { "data-atom-dock": "Bottom", "class": "atom-wizard-command-bar" }
 ,"\n", ["button",
-{ "class": "atom-wizard-back-button", "data-atom-init": "t60" }
+{ "class": "atom-wizard-back-button", "data-atom-init": "t59" }
 ,"\n", ["span",
-{ "data-atom-init": "t61" }
+{ "data-atom-init": "t60" }
 ], "\n"], "\n", ["button",
-{ "class": "atom-wizard-next-button", "data-atom-init": "t62" }
+{ "class": "atom-wizard-next-button", "data-atom-init": "t61" }
 ,"\n", ["span",
-{ "data-atom-init": "t63" }
+{ "data-atom-init": "t62" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomYesNoCustom.template"] = 
 [["span",
-{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t64" }
+{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t63" }
 ], ["input",
-{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t65" }
+{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t64" }
 ]]
 ;
 jsonML["WebAtoms.AtomApplication.busyTemplate"] = 
 [["div",
-{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t66" }
+{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t65" }
 ,"\n", ["div",
-{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t67" }
+{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t66" }
 ,"\n", ["div",
-{ "class": "atom-busy-image", "data-atom-init": "t68" }
+{ "class": "atom-busy-image", "data-atom-init": "t67" }
 ], "\n", ["div",
-{ "data-atom-init": "t69" }
+{ "data-atom-init": "t68" }
 ], "\n", ["div",
-{ "style": "height:3px; background-color:green", "data-atom-init": "t70" }
+{ "style": "height:3px; background-color:green", "data-atom-init": "t69" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormGridLayout.fieldTemplate"] = 
 [["table",
-{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t71" }
+{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t70" }
 ,"\n", ["tbody",
 {  }
 ,"\n", ["tr",
 {  }
 ,"\n", ["td",
-{ "class": "atom-form-grid-label", "data-atom-init": "t72" }
+{ "class": "atom-form-grid-label", "data-atom-init": "t71" }
 ], "\n", ["td",
-{ "class": "atom-form-grid-required", "data-atom-init": "t73" }
+{ "class": "atom-form-grid-required", "data-atom-init": "t72" }
 ,"*"], "\n", ["td",
-{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t74" }
+{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t73" }
 ,"\n"], "\n", ["td",
-{ "data-atom-init": "t75" }
+{ "data-atom-init": "t74" }
 ,"\n"], "\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormLayout.fieldTemplate"] = 
 [["tr",
 { "data-atom-type": "AtomFormField" }
 ,"\n", ["td",
-{ "class": "atom-form-label", "data-atom-init": "t77" }
+{ "class": "atom-form-label", "data-atom-init": "t76" }
 ], "\n", ["td",
-{ "class": "atom-form-required", "data-atom-init": "t78" }
+{ "class": "atom-form-required", "data-atom-init": "t77" }
 ,"\n"], "\n", ["td",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t79" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t78" }
 ,"\n", ["span",
-{ "class": "atom-form-error", "data-atom-init": "t80" }
+{ "class": "atom-form-error", "data-atom-init": "t79" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] = 
@@ -464,44 +459,44 @@ jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] =
 ,"\n", ["div",
 {  }
 ,"\n", ["span",
-{ "class": "atom-form-label", "data-atom-init": "t82" }
+{ "class": "atom-form-label", "data-atom-init": "t81" }
 ], "\n", ["span",
-{ "class": "atom-form-required", "data-atom-init": "t83" }
+{ "class": "atom-form-required", "data-atom-init": "t82" }
 ], "\n"], "\n", ["div",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t84" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t83" }
 ], "\n", ["div",
-{ "class": "atom-form-error", "data-atom-init": "t85" }
+{ "class": "atom-form-error", "data-atom-init": "t84" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.alertTemplate"] = 
 [["div",
 { "class": "atom-alert", "data-atom-dock": "Fill" }
 ,"\n", ["pre",
-{ "data-atom-init": "t87" }
+{ "data-atom-init": "t86" }
 ,"\n"], "\n", ["div",
-{ "class": "buttons", "data-atom-init": "t88" }
+{ "class": "buttons", "data-atom-init": "t87" }
 ,"\n", ["button",
-{ "class": "ok", "data-atom-init": "t89" }
+{ "class": "ok", "data-atom-init": "t88" }
 ,"Ok"], "\n", ["button",
-{ "class": "yes", "data-atom-init": "t90" }
+{ "class": "yes", "data-atom-init": "t89" }
 ,"Yes"], "\n", ["button",
-{ "class": "no", "data-atom-init": "t91" }
+{ "class": "no", "data-atom-init": "t90" }
 ,"No"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.frameTemplate"] = 
 [["div",
-{ "class": "atom-window-background", "data-atom-init": "t92" }
+{ "class": "atom-window-background", "data-atom-init": "t91" }
 ,"\n", ["div",
-{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t93" }
+{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t92" }
 ,"\n", ["div",
-{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t94" }
+{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t93" }
 ], "\n", ["div",
-{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t95" }
+{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t94" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.windowTemplate"] = 
 [["iframe",
-{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t96" }
+{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t95" }
 ,"\n"]]
 ;
 
@@ -760,8 +755,8 @@ this.bind(e,'text',
 this.t31= function(e){
 this.bind(e,'items',
 	['templateParent', 'selectedItems']);
-	this.setLocalValue('labelPath', 'dateLabel', e);
-	this.setLocalValue('valuePath', 'date', e);
+	this.setLocalValue('labelPath', "dateLabel", e);
+	this.setLocalValue('valuePath', "date", e);
 	this.bind(e,'value',['templateParent', 'visibleDate'],true)
 };
 
@@ -783,7 +778,7 @@ this.bind(e,'text',[
 this.t34= function(e){
 this.setLocalValue('href', Atom.get(this,'data')[Atom.get(this,'atomParent.valuePath')], e);
 	this.setLocalValue('target', Atom.get(this,'data')[Atom.get(this,'atomParent.targetPath')], e);
-	this.setLocalValue('class', Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')] ? ((Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')]).length ? 'atom-link-bar-down-image' : '' ) : '' , e);
+	this.setLocalValue('class', Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')] ? ((Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')]).length ? 'sub-menu' : '' ) : '' , e);
 };
 
 this.t35= function(e){
@@ -799,7 +794,7 @@ this.bind(e,'items',[
 				 return v1[v2]; 
 			});
 	this.setLocalValue('menuTemplate', Atom.get(this,'templateParent.menuTemplate'), e);
-	this.setLocalValue('menuDirection', 'vertical', e);
+	this.setLocalValue('menuDirection', "vertical", e);
 };
 
 this.t39= function(e){
@@ -881,14 +876,12 @@ this.bind(e,'selectedIndex',
 	['templateParent', 'selectedIndex']);
 };
 
-/* WebAtoms.AtomToggleButtonBar.template */
-
 /* WebAtoms.AtomWizard.template */
-this.t58= function(e){
+this.t57= function(e){
 this.bind(e,'selectedIndex',['templateParent', 'currentStep'],true)
 };
 
-this.t60= function(e){
+this.t59= function(e){
 this.bind(e,'isEnabled',
 	['canMoveBack']);
 	this.setLocalValue('eventClick', Atom.get(this,'goPrevCommand'), e);
@@ -899,12 +892,12 @@ this.bind(e,'isEnabled',
 			});
 };
 
-this.t61= function(e){
+this.t60= function(e){
 this.bind(e,'text',
 	['prevLabel']);
 };
 
-this.t62= function(e){
+this.t61= function(e){
 this.bind(e,'class',[
 	['nextClass'],
 	['isLastStep']],
@@ -916,7 +909,7 @@ this.bind(e,'class',[
 	['nextCommand']);
 };
 
-this.t63= function(e){
+this.t62= function(e){
 this.bind(e,'text',[
 	['isLastStep'],
 	['finishLabel'],
@@ -927,11 +920,11 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomYesNoCustom.template */
-this.t64= function(e){
+this.t63= function(e){
 this.bind(e,'value',['templateParent', 'hasValue'],true)
 };
 
-this.t65= function(e){
+this.t64= function(e){
 this.bind(e,'isEnabled',
 	['hasValue']);
 	this.bind(e,'placeholder',
@@ -939,7 +932,7 @@ this.bind(e,'isEnabled',
 };
 
 /* WebAtoms.AtomApplication.busyTemplate */
-this.t66= function(e){
+this.t65= function(e){
 this.bind(e,'styleWidth',[
 	['appWidth']],
 			0, function(v1){
@@ -957,7 +950,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t67= function(e){
+this.t66= function(e){
 this.bind(e,'styleLeft',[
 	['appWidth']],
 			0, function(v1){
@@ -970,12 +963,12 @@ this.bind(e,'styleLeft',[
 			});
 };
 
-this.t68= function(e){
-AtomProperties.absPos(e,'12,12,36,36');
+this.t67= function(e){
+AtomProperties.absPos(e,"12,12,36,36");
 };
 
-this.t69= function(e){
-AtomProperties.absPos(e,'56,24,145,null');
+this.t68= function(e){
+AtomProperties.absPos(e,"56,24,145,null");
 	this.bind(e,'text',[
 	['busyMessage']],
 			0, function(v1){
@@ -983,8 +976,8 @@ AtomProperties.absPos(e,'56,24,145,null');
 			});
 };
 
-this.t70= function(e){
-AtomProperties.absPos(e,'0,48');
+this.t69= function(e){
+AtomProperties.absPos(e,"0,48");
 	this.bind(e,'styleDisplay',[
 	['isBusy'],
 	['progress']],
@@ -999,7 +992,7 @@ AtomProperties.absPos(e,'0,48');
 };
 
 /* WebAtoms.AtomFormGridLayout.fieldTemplate */
-this.t71= function(e){
+this.t70= function(e){
 this.bind(e,'class',
 	['fieldClass']);
 	this.bind(e,'styleDisplay',[
@@ -1009,7 +1002,7 @@ this.bind(e,'class',
 			});
 };
 
-this.t72= function(e){
+this.t71= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1020,7 +1013,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t73= function(e){
+this.t72= function(e){
 this.bind(e,'class',[
 	['required']],
 			0, function(v1){
@@ -1028,7 +1021,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t74= function(e){
+this.t73= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1036,7 +1029,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t75= function(e){
+this.t74= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1055,7 +1048,7 @@ this.bind(e,'class',[
 };
 
 /* WebAtoms.AtomFormLayout.fieldTemplate */
-this.t77= function(e){
+this.t76= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1065,7 +1058,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t78= function(e){
+this.t77= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1073,7 +1066,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t79= function(e){
+this.t78= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1081,7 +1074,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t80= function(e){
+this.t79= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1090,12 +1083,12 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomFormVerticalLayout.fieldTemplate */
-this.t82= function(e){
+this.t81= function(e){
 this.bind(e,'text',
 	['label']);
 };
 
-this.t83= function(e){
+this.t82= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1103,7 +1096,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t84= function(e){
+this.t83= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1111,7 +1104,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t85= function(e){
+this.t84= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1120,28 +1113,28 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomWindow.alertTemplate */
-this.t87= function(e){
+this.t86= function(e){
 this.setLocalValue('text', Atom.get(this,'data.Message'), e);
 };
 
-this.t88= function(e){
+this.t87= function(e){
 this.setLocalValue('class',  Atom.get(this,'data.Confirm') ? 'confirm-buttons' : 'alert-buttons' , e);
 };
 
-this.t89= function(e){
+this.t88= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
-this.t90= function(e){
+this.t89= function(e){
 this.setLocalValue('eventClick',  [ { data: { ConfirmValue: true } } , Atom.get(this,'templateParent.closeCommand') ] , e);
 };
 
-this.t91= function(e){
+this.t90= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.frameTemplate */
-this.t92= function(e){
+this.t91= function(e){
 this.bind(e,'styleWidth',[
 	['appScope', 'owner', 'bodyWidth']],
 			0, function(v1){
@@ -1159,7 +1152,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t93= function(e){
+this.t92= function(e){
 this.bind(e,'styleWidth',[
 	['atomParent', 'windowWidth']],
 			0, function(v1){
@@ -1184,17 +1177,17 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t94= function(e){
+this.t93= function(e){
 this.bind(e,'text',
 	['atomParent', 'title']);
 };
 
-this.t95= function(e){
+this.t94= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'atomParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.windowTemplate */
-this.t96= function(e){
+this.t95= function(e){
 this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 };
 
@@ -6663,7 +6656,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 242 - 'AtomAutoCompleteBox.js' */                document.body.appendChild(this._itemsPresenter);
 
-/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("atom-auto-complete-popup");
+/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("popup");
 
 /*Line 246 - 'AtomAutoCompleteBox.js' */                base.onCreated.apply(this, arguments);
 /*Line 247 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");

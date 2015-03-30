@@ -46,7 +46,7 @@ span.atom-auto-complete-box{
     margin:0px;
 }
 
-.atom-auto-complete-popup
+.atom-auto-complete-box .popup
 {
     max-height:200px; 
     overflow-y:auto;

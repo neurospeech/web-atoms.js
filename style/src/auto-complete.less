@@ -1,0 +1,57 @@
+﻿.atom-auto-complete-box{
+    position:relative;
+    
+    width:100px;
+    padding:1px;
+    margin:1px;
+    border:1px solid lightgray;
+    background:white;
+    height:23px;
+
+    span&{
+        display:inline-block;
+    }
+
+    input{
+        border:none;
+        position:absolute;
+        left:0;
+        top:0;
+        background:transparent;
+        margin:0;
+        width:100%;
+
+        &:active{
+            border:none;
+            margin:0;
+        }
+         
+        &:disabled{
+            border:none;
+            margin:0;
+            color:lightgray;
+        }
+
+        &:focus{
+            border:none;
+            margin:0;
+        }
+
+        &:hover{
+            border:none;
+            margin:0;
+        }
+    }
+
+
+    .popup
+    {
+        max-height:200px; 
+        overflow-y:auto;
+        overflow-x:hidden;
+        border: solid 1px #808080;
+        padding:2px;
+        background-color:white;
+    }
+
+}

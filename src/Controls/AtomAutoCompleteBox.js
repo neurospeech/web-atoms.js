@@ -242,7 +242,7 @@
 
                 document.body.appendChild(this._itemsPresenter);
 
-                $(this._itemsPresenter).addClass("atom-auto-complete-popup");
+                $(this._itemsPresenter).addClass("popup");
 
                 base.onCreated.apply(this, arguments);
                 this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
