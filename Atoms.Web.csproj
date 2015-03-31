@@ -1030,6 +1030,12 @@
     <Content Include="style\src\view-stack.min.css">
       <DependentUpon>view-stack.css</DependentUpon>
     </Content>
+    <Content Include="style\src\window.css">
+      <DependentUpon>window.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\window.min.css">
+      <DependentUpon>window.css</DependentUpon>
+    </Content>
     <Content Include="tools\metadata.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1103,6 +1109,10 @@
     </Content>
     <Content Include="style\src\view-stack.css.map">
       <DependentUpon>view-stack.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\window.less" />
+    <Content Include="style\src\window.css.map">
+      <DependentUpon>window.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
