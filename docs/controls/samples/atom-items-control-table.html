@@ -42,12 +42,12 @@
                 <td atom-text="{($scope.itemIndex + 1) + ')'}"></td>
                 <td atom-text="{$data.MovieName}"></td>
                 <td>
-                    <span 
+                    <ul 
                         atom-type="AtomToggleButtonBar"
                         atom-name="categoryList"
                         atom-items="{$appScope.categories}"
                         atom-value="$[data.MovieCategory]"
-                        ></span>
+                        ></ul>
                 </td>
                 <td
                     atom-text="['Category is ' + $scope.categoryList.value ]">

@@ -1,0 +1,27 @@
+﻿.atom-view-stack {
+  position: absolute;
+}
+.atom-view-stack .view-stack-child {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+.atom-view-stack .animate-left-property {
+  -moz-transition: left 0.5s ease-in-out;
+  -o-transition: left 0.5s ease-in-out;
+  -webkit-transition: left 0.5s ease-in-out;
+  transition: left 0.5s ease-in-out;
+}
+.atom-view-stack .hidden {
+  display: none;
+}
+.atom-view-stack-fill {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+/*# sourceMappingURL=view-stack.css.map */

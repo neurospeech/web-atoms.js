@@ -1,0 +1,61 @@
+﻿ul.atom-link-bar
+{
+    display:inline-block;
+    vertical-align:middle;
+    margin:0;
+    padding-left:5px;
+
+    > li.list-item
+    {
+        cursor:pointer;
+        text-align:center;
+        list-style-type:none;
+
+        padding:5px;
+
+        a{
+            text-decoration:none;
+            &:hover{
+                text-decoration:underline;
+            }
+        }
+
+
+        &:hover
+        {
+            text-decoration:underline;
+        }
+
+        &.sub-menu{
+            display:inline-block;
+            padding-right:18px;
+            background-image: url('../buttons/down.png');
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+        &.selected-item {
+            font-weight:bold;
+        }
+
+    }
+
+    &.vertical{
+
+        border:solid 1px lightgray;
+
+        > li.list-item{
+            float:none;
+            clear:both;
+            text-align:left;
+        }
+    }
+
+    &.horizontal{
+        > li.list-item{
+            float:left;
+            clear:none;
+        }
+    }
+
+}

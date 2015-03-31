@@ -844,6 +844,9 @@
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />
+    <Content Include="atoms.min.js.map">
+      <DependentUpon>atoms.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -906,8 +909,8 @@
     <Content Include="src\Controls\AtomTabControl.template.html" />
     <Content Include="src\Controls\AtomTimePicker.js" />
     <Content Include="src\Controls\AtomToggleButtonBar.css" />
+    <Content Include="src\Controls\AtomToggleButtonBar.itemTemplate.html" />
     <Content Include="src\Controls\AtomToggleButtonBar.js" />
-    <Content Include="src\Controls\AtomToggleButtonBar.template.html" />
     <Content Include="src\Controls\AtomUploadButton.js" />
     <Content Include="src\Controls\AtomViewBox.js" />
     <Content Include="src\Controls\AtomViewStack.css" />
@@ -964,15 +967,69 @@
     <Content Include="src\Window\AtomWindow.frameTemplate.html" />
     <Content Include="src\Window\AtomWindow.js" />
     <Content Include="src\Window\AtomWindow.windowTemplate.html" />
-    <Content Include="style\atoms.css">
+    <Content Include="style\old-atoms.css">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>atoms.tt</DependentUpon>
+      <DependentUpon>old-atoms.tt</DependentUpon>
+    </Content>
+    <Content Include="style\atoms.css">
+      <DependentUpon>atoms.less</DependentUpon>
+    </Content>
+    <Content Include="style\atoms.min.css">
+      <DependentUpon>atoms.css</DependentUpon>
     </Content>
     <Content Include="style\busy.gif" />
     <Content Include="style\buttons\delete.png" />
     <Content Include="style\buttons\down.png" />
     <Content Include="style\buttons\up.png" />
+    <Content Include="style\src\auto-complete.css">
+      <DependentUpon>auto-complete.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\auto-complete.min.css">
+      <DependentUpon>auto-complete.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-field.css">
+      <DependentUpon>date-field.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-field.min.css">
+      <DependentUpon>date-field.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-list-box.css">
+      <DependentUpon>date-list-box.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-list-box.min.css">
+      <DependentUpon>date-list-box.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\dock-panel.css">
+      <DependentUpon>dock-panel.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\dock-panel.min.css">
+      <DependentUpon>dock-panel.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\link-bar.css">
+      <DependentUpon>link-bar.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\link-bar.min.css">
+      <DependentUpon>link-bar.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\list-box.css">
+      <DependentUpon>list-box.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\list-box.min.css">
+      <DependentUpon>list-box.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\toggle-button-bar.css">
+      <DependentUpon>toggle-button-bar.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\toggle-button-bar.min.css">
+      <DependentUpon>toggle-button-bar.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\view-stack.css">
+      <DependentUpon>view-stack.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\view-stack.min.css">
+      <DependentUpon>view-stack.css</DependentUpon>
+    </Content>
     <Content Include="tools\metadata.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1007,9 +1064,45 @@
     <Content Include="plugins\videojs\font\vjs.woff" />
     <Content Include="plugins\videojs\video-js.less" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
-    <Content Include="style\atoms.tt">
+    <Content Include="style\old-atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms.css</LastGenOutput>
+      <LastGenOutput>old-atoms1.css</LastGenOutput>
+    </Content>
+    <Content Include="style\atoms.less" />
+    <Content Include="style\atoms.css.map">
+      <DependentUpon>atoms.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\auto-complete.less" />
+    <Content Include="style\src\dock-panel.less" />
+    <Content Include="style\src\view-stack.less" />
+    <Content Include="style\src\auto-complete.css.map">
+      <DependentUpon>auto-complete.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-field.less" />
+    <Content Include="style\src\date-field.css.map">
+      <DependentUpon>date-field.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\date-list-box.less" />
+    <Content Include="style\src\date-list-box.css.map">
+      <DependentUpon>date-list-box.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\dock-panel.css.map">
+      <DependentUpon>dock-panel.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\link-bar.less" />
+    <Content Include="style\src\link-bar.css.map">
+      <DependentUpon>link-bar.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\toggle-button-bar.less" />
+    <Content Include="style\src\toggle-button-bar.css.map">
+      <DependentUpon>toggle-button-bar.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\list-box.less" />
+    <Content Include="style\src\list-box.css.map">
+      <DependentUpon>list-box.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\view-stack.css.map">
+      <DependentUpon>view-stack.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

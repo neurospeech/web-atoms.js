@@ -11,6 +11,12 @@
             this._autoScrollToSelection = false;
 
             $(e).removeClass("atom-list-box");
+
+            if (! /ul/i.test(e.tagName)) {
+                //throw new Error("Button bar can only support UL style");
+                log("Button bar can only support UL style");
+            }
+
         },
         properties: {
             showTabs: false
@@ -19,8 +25,13 @@
             init: function () {
 
                 baseType.init.call(this);
-
-                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
+                this.bind(this._element,
+                    'class',
+                    ['showTabs'], 0,
+                    function (v) {
+                        return v ? 'atom-tab-bar' : 'atom-toggle-button-bar'
+                    });
+                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
             }
         }
     });

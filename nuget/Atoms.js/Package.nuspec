@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.2.566</version>
+    <version>1.2.569</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -28,6 +28,7 @@
   </metadata>
   <files>
     <file src="..\..\style\**\*.css" target="content\Style\atoms" />
+    <file src="..\..\style\**\*.map" target="content\Style\atoms" />
     <file src="..\..\style\**\*.png" target="content\Style\atoms" />
     <file src="..\..\style\**\*.gif" target="content\Style\atoms" />
     <file src="..\..\style\**\*.jpg" target="content\Style\atoms" />

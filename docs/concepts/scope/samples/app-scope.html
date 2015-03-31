@@ -26,16 +26,16 @@
     })
 </script>
 
-<div
+<ul
     atom-name="buttonBar"
     atom-type="AtomToggleButtonBar"
     atom-items="{ $scope.list }"
     atom-value="$[scope.view]"
     >
-    <span 
+    <li 
         atom-template="itemTemplate" 
-        atom-text="[$data.label]"></span>
-</div>
+        atom-text="[$data.label]"></li>
+</ul>
 
 <span atom-text="[$scope.display($scope.buttonBar.selectedItem)]" ></span>
 

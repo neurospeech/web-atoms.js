@@ -115,18 +115,19 @@
 
         <div
             atom-dock="Top"
-            style="height:20px;padding:5px"
+            style="height:30px;vertical-align:top; position:relative"
             >
 
-                <span 
+                <ul 
                     atom-name="view"
                     atom-items="{$scope.views}"
-                    atom-type="AtomToggleButtonBar"></span>
+                    atom-type="AtomToggleButtonBar"></ul>
 
                 <span
                     atom-name="tree"
                     atom-type="AtomItemsControl"
                     atom-items="[$scope.classInfo.baseTypes]"
+                      style="position:absolute;top:9px; margin-left:250px"
                     >
                     <a 
                         atom-template="itemTemplate"
