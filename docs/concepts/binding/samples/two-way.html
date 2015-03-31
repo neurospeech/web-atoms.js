@@ -19,16 +19,13 @@
     })
 </script>
 
-<div
+<ul
     atom-type="AtomToggleButtonBar"
     atom-items="[$scope.list]"
-    atom-selected-item="$[scope.selection]"
-    >
-    <span 
-        atom-template="itemTemplate"
-        atom-text="{$data.label}"
-        ></span>
-</div>
+    atom-selected-item="$[scope.selection]">
+    <li atom-template="itemTemplate"
+        atom-text="{$data.label}"></li>
+</ul>
 
 <div
     atom-type="AtomControl"

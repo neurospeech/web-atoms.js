@@ -1,5 +1,5 @@
 ﻿<div atom-type="AtomDockPanel">
-	<span 
+	<ul 
 		atom-dock="Top" 
 		atom-type="AtomToggleButtonBar" 
 		atom-label-path="[$owner.templateParent.labelPath]"
@@ -7,7 +7,7 @@
 		atom-selected-index="$[owner.templateParent.selectedIndex]"
 		style="height: 30px; text-align:center; display:inline-block">
 		<span atom-template="itemTemplate" atom-text="[$data]"></span>
-	</span>
+	</ul>
 	<div 
 		atom-dock="Fill" 
 		atom-type="AtomViewStack"

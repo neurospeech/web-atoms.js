@@ -11,6 +11,11 @@
             this._autoScrollToSelection = false;
 
             $(e).removeClass("atom-list-box");
+
+            if (! /ul/i.test(e.tagName)) {
+                throw new Error("Button bar can only support UL style");
+            }
+
         },
         properties: {
             showTabs: false

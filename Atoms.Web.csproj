@@ -844,6 +844,9 @@
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />
+    <Content Include="atoms.min.js.map">
+      <DependentUpon>atoms.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -906,6 +909,7 @@
     <Content Include="src\Controls\AtomTabControl.template.html" />
     <Content Include="src\Controls\AtomTimePicker.js" />
     <Content Include="src\Controls\AtomToggleButtonBar.css" />
+    <Content Include="src\Controls\AtomToggleButtonBar.itemTemplate.html" />
     <Content Include="src\Controls\AtomToggleButtonBar.js" />
     <Content Include="src\Controls\AtomUploadButton.js" />
     <Content Include="src\Controls\AtomViewBox.js" />

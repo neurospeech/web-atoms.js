@@ -1,8 +1,4 @@
-﻿.atom-list-box > .list-item {
-  display: block;
-  float: none;
-}
-.atom-list-box > .selected-item {
+﻿.atom-list-box .selected-item {
   background-color: darkblue;
   color: white;
 }

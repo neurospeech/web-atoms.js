@@ -1,1 +1,1 @@
-﻿.atom-toggle-button-bar>.list-item{float:left;display:inline-block}.atom-toggle-button-bar>.selected-item{background-color:#00008b;color:#fff}
+﻿ul.atom-toggle-button-bar{display:inline-block;padding:5px;margin:0}ul.atom-toggle-button-bar>li.list-item{float:left;list-style-type:none;padding:5px;cursor:pointer}ul.atom-toggle-button-bar>li.list-item.selected-item{background-color:#00008b;color:#fff}

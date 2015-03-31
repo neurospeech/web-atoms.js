@@ -1,11 +1,21 @@
-﻿.atom-toggle-button-bar{
-    > .list-item{
-        float:left;
-        display:inline-block;
-    }
+﻿ul.atom-toggle-button-bar{
+    display:inline-block;
+    padding:5px;
+    margin:0;
+    > li{
 
-    > .selected-item{
-        background-color:darkblue;
-        color:white;
+        &.list-item{
+
+            float:left;
+            list-style-type:none;
+            padding:5px;
+            cursor:pointer;
+
+            &.selected-item{
+                background-color:darkblue;
+                color:white;
+
+            }
+        }
     }
 }

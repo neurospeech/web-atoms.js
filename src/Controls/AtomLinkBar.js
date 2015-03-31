@@ -22,6 +22,13 @@
         },
         methods: {
 
+            set_menuDirection: function (v) {
+                var $e = $(this._element);
+                $e.removeClass("vertical horizontal");
+                $e.addClass(v);
+                this._menuDirection = v;
+            },
+
             onClick: function () {
             },
 
@@ -131,7 +138,8 @@
 
                 //this.bindEvent(this._element, "mouseover", "openMenuCommand");
                 this.bindEvent(this._element, "click", "openMenuCommand");
-                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-link-bar']", true, this._element);
+                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
+                this.set_menuDirection('horizontal');
             }
 
         }
