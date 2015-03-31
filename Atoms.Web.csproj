@@ -967,11 +967,6 @@
     <Content Include="src\Window\AtomWindow.frameTemplate.html" />
     <Content Include="src\Window\AtomWindow.js" />
     <Content Include="src\Window\AtomWindow.windowTemplate.html" />
-    <Content Include="style\old-atoms.css">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>old-atoms.tt</DependentUpon>
-    </Content>
     <Content Include="style\atoms.css">
       <DependentUpon>atoms.less</DependentUpon>
     </Content>
@@ -1018,6 +1013,12 @@
     <Content Include="style\src\list-box.min.css">
       <DependentUpon>list-box.css</DependentUpon>
     </Content>
+    <Content Include="style\src\pending.css">
+      <DependentUpon>pending.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\pending.min.css">
+      <DependentUpon>pending.css</DependentUpon>
+    </Content>
     <Content Include="style\src\toggle-button-bar.css">
       <DependentUpon>toggle-button-bar.less</DependentUpon>
     </Content>
@@ -1029,12 +1030,6 @@
     </Content>
     <Content Include="style\src\view-stack.min.css">
       <DependentUpon>view-stack.css</DependentUpon>
-    </Content>
-    <Content Include="style\src\window.css">
-      <DependentUpon>window.less</DependentUpon>
-    </Content>
-    <Content Include="style\src\window.min.css">
-      <DependentUpon>window.css</DependentUpon>
     </Content>
     <Content Include="tools\metadata.html" />
     <Content Include="Web.config">
@@ -1070,10 +1065,6 @@
     <Content Include="plugins\videojs\font\vjs.woff" />
     <Content Include="plugins\videojs\video-js.less" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
-    <Content Include="style\old-atoms.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>old-atoms1.css</LastGenOutput>
-    </Content>
     <Content Include="style\atoms.less" />
     <Content Include="style\atoms.css.map">
       <DependentUpon>atoms.css</DependentUpon>
@@ -1110,9 +1101,9 @@
     <Content Include="style\src\view-stack.css.map">
       <DependentUpon>view-stack.css</DependentUpon>
     </Content>
-    <Content Include="style\src\window.less" />
-    <Content Include="style\src\window.css.map">
-      <DependentUpon>window.css</DependentUpon>
+    <Content Include="style\src\pending.less" />
+    <Content Include="style\src\pending.css.map">
+      <DependentUpon>pending.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -9,8 +9,14 @@ ul.atom-toggle-button-bar > li.list-item {
   padding: 5px;
   cursor: pointer;
 }
+ul.atom-toggle-button-bar > li.list-item > a {
+  color: blue;
+}
 ul.atom-toggle-button-bar > li.list-item.selected-item {
   background-color: darkblue;
+  color: white;
+}
+ul.atom-toggle-button-bar > li.list-item.selected-item > a {
   color: white;
 }
 ul.atom-tab-bar {
@@ -24,8 +30,14 @@ ul.atom-tab-bar > li.list-item {
   padding: 5px;
   cursor: pointer;
 }
+ul.atom-tab-bar > li.list-item > a {
+  color: blue;
+}
 ul.atom-tab-bar > li.list-item.selected-item {
   background-color: darkblue;
+  color: white;
+}
+ul.atom-tab-bar > li.list-item.selected-item a {
   color: white;
 }
 /*# sourceMappingURL=toggle-button-bar.css.map */

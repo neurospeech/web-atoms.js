@@ -1,0 +1,331 @@
+﻿/*#region application */
+.atom-application {
+  margin-left: auto;
+  margin-right: auto;
+}
+.atom-dock-application {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.atom-dock-application > * {
+  position: absolute;
+}
+.atom-busy-window {
+  position: absolute;
+  visibility: inherit;
+  width: 200px;
+  height: 50px;
+  background-color: #fff;
+  border-style: solid 2px #DA3535;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.atom-busy-image {
+  background-image: url('../busy.gif');
+}
+/*#endregion */
+/*#region phone-control */
+.atom-phone-control {
+  width: 450px;
+  height: 25px;
+}
+.atom-pc-cs {
+  float: left;
+}
+.atom-pc-num {
+  float: left;
+  width: 100px;
+  margin-left: 2px;
+}
+.atom-pc-ext {
+  float: left;
+  width: 30px;
+  margin-left: 2px;
+}
+.atom-pc-msg {
+  float: left;
+  width: 100px;
+  margin-left: 2px;
+}
+/*#endregion */
+/*#region window */
+.atom-window-placeholder {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.atom-window-background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(80, 80, 80, 0.5);
+}
+.atom-window {
+  opacity: 1;
+  background: transparent;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  z-index: 10;
+  position: absolute;
+  background-color: #fff;
+  border: none;
+  padding: 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px;
+}
+.atom-window-title {
+  background-color: #404040;
+  text-align: left;
+  height: 24px;
+  padding-left: 9px;
+  padding-top: 7px;
+  font-size: 13px;
+  border: 1px solid #404040;
+  border-bottom: none;
+  color: white;
+}
+.atom-window-close-button {
+  text-align: right;
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  cursor: pointer;
+  z-index: 5;
+  width: 16px;
+  height: 16px;
+  background-image: url('../buttons/delete.png');
+}
+.atom-window-template {
+  background-color: white;
+  overflow: auto;
+  border-top-width: 2px;
+  padding: 0px;
+}
+.atom-window-template .atom-view-stack {
+  margin: 2px 2px 2px 5px;
+}
+.atom-alert pre {
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 30px;
+  margin: 5px;
+  position: absolute;
+  padding: 5px 0 0 11px;
+}
+.atom-alert .buttons {
+  /*margin-left: auto;
+    margin-right: auto;*/
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 5px;
+  /*text-align: center;*/
+  text-align: right;
+  margin-right: 20px;
+}
+.atom-alert button {
+  width: 100px;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 2px;
+}
+.atom-alert button:hover {
+  border-color: #404040;
+}
+.atom-alert .confirm-buttons .ok {
+  display: none;
+}
+.atom-alert .alert-buttons .yes {
+  display: none;
+}
+.atom-alert .alert-buttons .no {
+  display: none;
+}
+/*#endregion */
+/*#region form-layout */
+.atom-form {
+  padding: 0px;
+  margin: 0px;
+}
+.atom-form-label {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+}
+.atom-form-label-left {
+  text-align: left;
+  vertical-align: top;
+  font-size: smaller;
+}
+.atom-form-content {
+  text-align: left;
+  vertical-align: top;
+}
+.atom-error-span {
+  color: #ff0000;
+}
+.atom-form-error {
+  border-color: #f00;
+  color: #ffffff;
+  float: right;
+}
+.atom-data-error {
+  background-color: #f00;
+  color: white;
+}
+.atom-form-required {
+  color: #f00;
+  vertical-align: top;
+  font-size: larger;
+}
+/*#endregion */
+/*#region form-grid */
+.atom-form-grid {
+  width: 100%;
+}
+.atom-form-grid-container {
+  overflow-y: auto;
+}
+.atom-form-grid-label {
+  text-align: right;
+  font-weight: bold;
+}
+.atom-form-grid-required {
+  width: 5px;
+  color: red;
+}
+.atom-form-grid-not-required {
+  width: 5px;
+  color: white;
+  color: transparent;
+}
+.atom-form-grid-content {
+  width: 100%;
+}
+.atom-form-grid-content > * {
+  width: 100%;
+}
+.atom-form-grid-content > div {
+  width: auto;
+  display: block;
+}
+.atom-form-grid-content > .atom-date-field {
+  display: block;
+  width: auto;
+}
+.atom-form-grid-content > input[type="password"] {
+  width: auto;
+}
+.atom-form-grid-content > input[type="button"] {
+  width: auto;
+}
+.atom-form-grid-content > input[type="submit"] {
+  width: auto;
+}
+.atom-form-grid-content > button {
+  width: auto;
+}
+.atom-form-grid-content > span {
+  display: inline-block;
+}
+.atom-form-grid-row {
+  width: 100%;
+}
+.atom-form-grid-error {
+  color: red;
+  background-color: red;
+  float: right;
+}
+/*#endregion */
+/*#region wizard */
+.atom-wizard {
+  padding: 4px;
+}
+.atom-wizard-command-bar {
+  height: 40px;
+  background: #e2e2e2;
+  border-top: 1px solid #cfcfcf;
+}
+.atom-wizard-back-button {
+  left: 5px;
+  position: absolute;
+  /*top:5px;*/
+  margin-top: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #eee;
+  border: 1px solid #999;
+  border-bottom-color: #888;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  margin-left: 6px;
+  height: 27px;
+  min-width: 54px;
+  outline: 0;
+  padding: 0 8px;
+}
+.atom-wizard-back-button:hover {
+  border: 1px solid #000;
+  border-bottom-color: #111;
+}
+.atom-wizard-command-bar button {
+  float: right;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #4d90fe;
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+  border: 1px solid #3079ed;
+  border-bottom-color: #3079ed;
+  color: white;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  margin-right: 6px;
+  height: 27px;
+  min-width: 54px;
+  outline: 0;
+  padding: 0 8px;
+  margin-top: 5px;
+}
+.atom-wizard-next-button {
+  right: 5px;
+  position: absolute;
+  /*top:5px;*/
+  margin-top: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #4d90fe;
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+  border: 1px solid #3079ed;
+  border-bottom-color: #3079ed;
+  color: white;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  margin-right: 6px;
+  height: 27px;
+  min-width: 54px;
+  outline: 0;
+  padding: 0 8px;
+}
+.atom-wizard-next-button:hover {
+  background-color: #357ae8;
+  border: 1px solid #255bb7;
+  border-bottom-color: #2f5bb7;
+}
+.atom-wizard-next-button:active {
+  background-color: #357ae8;
+  border: 1px solid #255bb7;
+  border-bottom-color: #2f5bb7;
+}
+/*# sourceMappingURL=pending.css.map */
