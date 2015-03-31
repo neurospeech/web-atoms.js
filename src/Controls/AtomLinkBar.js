@@ -138,7 +138,14 @@
 
                 //this.bindEvent(this._element, "mouseover", "openMenuCommand");
                 this.bindEvent(this._element, "click", "openMenuCommand");
-                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
+                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
+                this.bind(this._element,
+                    'class',
+                    ['showTabs'], 0,
+                    function (v) {
+                        return v ? 'atom-tab-bar' : 'atom-link-bar'
+                    });
+
                 this.set_menuDirection('horizontal');
             }
 

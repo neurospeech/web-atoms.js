@@ -376,7 +376,7 @@ jsonML["WebAtoms.AtomSortableColumn.template"] =
 jsonML["WebAtoms.AtomTabControl.template"] = 
 [["div",
 { "data-atom-type": "AtomDockPanel" }
-,"\n", ["span",
+,"\n", ["ul",
 { "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "style": "height: 30px; text-align:center; display:inline-block", "data-atom-init": "t53" }
 ,"\n", ["span",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t54" }
@@ -7246,23 +7246,29 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 12 - 'AtomToggleButtonBar.js' */            $(e).removeClass("atom-list-box");
 
 /*Line 14 - 'AtomToggleButtonBar.js' */            if (! /ul/i.test(e.tagName)) {
-/*Line 15 - 'AtomToggleButtonBar.js' */                throw new Error("Button bar can only support UL style");
-/*Line 16 - 'AtomToggleButtonBar.js' */            }
+/*Line 15 - 'AtomToggleButtonBar.js' */                //throw new Error("Button bar can only support UL style");
+/*Line 16 - 'AtomToggleButtonBar.js' */                log("Button bar can only support UL style");
+/*Line 17 - 'AtomToggleButtonBar.js' */            }
 
-/*Line 18 - 'AtomToggleButtonBar.js' */        },
-/*Line 19 - 'AtomToggleButtonBar.js' */        properties: {
-/*Line 20 - 'AtomToggleButtonBar.js' */            showTabs: false
-/*Line 21 - 'AtomToggleButtonBar.js' */        },
-/*Line 22 - 'AtomToggleButtonBar.js' */        methods: {
-/*Line 23 - 'AtomToggleButtonBar.js' */            init: function () {
+/*Line 19 - 'AtomToggleButtonBar.js' */        },
+/*Line 20 - 'AtomToggleButtonBar.js' */        properties: {
+/*Line 21 - 'AtomToggleButtonBar.js' */            showTabs: false
+/*Line 22 - 'AtomToggleButtonBar.js' */        },
+/*Line 23 - 'AtomToggleButtonBar.js' */        methods: {
+/*Line 24 - 'AtomToggleButtonBar.js' */            init: function () {
 
-/*Line 25 - 'AtomToggleButtonBar.js' */                baseType.init.call(this);
-
-/*Line 27 - 'AtomToggleButtonBar.js' */                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
-/*Line 28 - 'AtomToggleButtonBar.js' */            }
-/*Line 29 - 'AtomToggleButtonBar.js' */        }
-/*Line 30 - 'AtomToggleButtonBar.js' */    });
-/*Line 31 - 'AtomToggleButtonBar.js' */})(WebAtoms.AtomListBox.prototype);
+/*Line 26 - 'AtomToggleButtonBar.js' */                baseType.init.call(this);
+/*Line 27 - 'AtomToggleButtonBar.js' */                this.bind(this._element,
+/*Line 28 - 'AtomToggleButtonBar.js' */                    'class',
+/*Line 29 - 'AtomToggleButtonBar.js' */                    ['showTabs'], 0,
+/*Line 30 - 'AtomToggleButtonBar.js' */                    function (v) {
+/*Line 31 - 'AtomToggleButtonBar.js' */                        return v ? 'atom-tab-bar' : 'atom-toggle-button-bar'
+/*Line 32 - 'AtomToggleButtonBar.js' */                    });
+/*Line 33 - 'AtomToggleButtonBar.js' */                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
+/*Line 34 - 'AtomToggleButtonBar.js' */            }
+/*Line 35 - 'AtomToggleButtonBar.js' */        }
+/*Line 36 - 'AtomToggleButtonBar.js' */    });
+/*Line 37 - 'AtomToggleButtonBar.js' */})(WebAtoms.AtomListBox.prototype);
 /*Line 0 - 'AtomViewStack.js' */
 
 /*Line 2 - 'AtomViewStack.js' */(function (baseType) {
@@ -8720,13 +8726,20 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 138 - 'AtomLinkBar.js' */                //this.bindEvent(this._element, "mouseover", "openMenuCommand");
 /*Line 139 - 'AtomLinkBar.js' */                this.bindEvent(this._element, "click", "openMenuCommand");
-/*Line 140 - 'AtomLinkBar.js' */                this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
-/*Line 141 - 'AtomLinkBar.js' */                this.set_menuDirection('horizontal');
-/*Line 142 - 'AtomLinkBar.js' */            }
+/*Line 140 - 'AtomLinkBar.js' */                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
+/*Line 141 - 'AtomLinkBar.js' */                this.bind(this._element,
+/*Line 142 - 'AtomLinkBar.js' */                    'class',
+/*Line 143 - 'AtomLinkBar.js' */                    ['showTabs'], 0,
+/*Line 144 - 'AtomLinkBar.js' */                    function (v) {
+/*Line 145 - 'AtomLinkBar.js' */                        return v ? 'atom-tab-bar' : 'atom-link-bar'
+/*Line 146 - 'AtomLinkBar.js' */                    });
 
-/*Line 144 - 'AtomLinkBar.js' */        }
-/*Line 145 - 'AtomLinkBar.js' */    });
-/*Line 146 - 'AtomLinkBar.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
+/*Line 148 - 'AtomLinkBar.js' */                this.set_menuDirection('horizontal');
+/*Line 149 - 'AtomLinkBar.js' */            }
+
+/*Line 151 - 'AtomLinkBar.js' */        }
+/*Line 152 - 'AtomLinkBar.js' */    });
+/*Line 153 - 'AtomLinkBar.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
 
 /*Line 0 - 'AtomMultiButtonList.js' */
 
