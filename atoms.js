@@ -405,7 +405,7 @@ jsonML["WebAtoms.AtomWizard.template"] =
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomYesNoCustom.template"] = 
-[["span",
+[["ul",
 { "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t63" }
 ], ["input",
 { "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t64" }

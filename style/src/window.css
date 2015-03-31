@@ -42,7 +42,7 @@
   z-index: 5;
   width: 16px;
   height: 16px;
-  background-image: url('buttons/delete.png');
+  background-image: url('../buttons/delete.png');
 }
 .atom-window-template {
   background-color: white;

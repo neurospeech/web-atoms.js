@@ -967,11 +967,6 @@
     <Content Include="src\Window\AtomWindow.frameTemplate.html" />
     <Content Include="src\Window\AtomWindow.js" />
     <Content Include="src\Window\AtomWindow.windowTemplate.html" />
-    <Content Include="style\old-atoms.css">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>old-atoms.tt</DependentUpon>
-    </Content>
     <Content Include="style\atoms.css">
       <DependentUpon>atoms.less</DependentUpon>
     </Content>
@@ -982,6 +977,12 @@
     <Content Include="style\buttons\delete.png" />
     <Content Include="style\buttons\down.png" />
     <Content Include="style\buttons\up.png" />
+    <Content Include="style\src\application.css">
+      <DependentUpon>application.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\application.min.css">
+      <DependentUpon>application.css</DependentUpon>
+    </Content>
     <Content Include="style\src\auto-complete.css">
       <DependentUpon>auto-complete.less</DependentUpon>
     </Content>
@@ -1006,6 +1007,18 @@
     <Content Include="style\src\dock-panel.min.css">
       <DependentUpon>dock-panel.css</DependentUpon>
     </Content>
+    <Content Include="style\src\form-grid.css">
+      <DependentUpon>form-grid.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\form-grid.min.css">
+      <DependentUpon>form-grid.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\form-layout.css">
+      <DependentUpon>form-layout.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\form-layout.min.css">
+      <DependentUpon>form-layout.css</DependentUpon>
+    </Content>
     <Content Include="style\src\link-bar.css">
       <DependentUpon>link-bar.less</DependentUpon>
     </Content>
@@ -1017,6 +1030,12 @@
     </Content>
     <Content Include="style\src\list-box.min.css">
       <DependentUpon>list-box.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\phone-control.css">
+      <DependentUpon>phone-control.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\phone-control.min.css">
+      <DependentUpon>phone-control.css</DependentUpon>
     </Content>
     <Content Include="style\src\toggle-button-bar.css">
       <DependentUpon>toggle-button-bar.less</DependentUpon>
@@ -1035,6 +1054,12 @@
     </Content>
     <Content Include="style\src\window.min.css">
       <DependentUpon>window.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\wizard.css">
+      <DependentUpon>wizard.less</DependentUpon>
+    </Content>
+    <Content Include="style\src\wizard.min.css">
+      <DependentUpon>wizard.css</DependentUpon>
     </Content>
     <Content Include="tools\metadata.html" />
     <Content Include="Web.config">
@@ -1070,10 +1095,6 @@
     <Content Include="plugins\videojs\font\vjs.woff" />
     <Content Include="plugins\videojs\video-js.less" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
-    <Content Include="style\old-atoms.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>old-atoms1.css</LastGenOutput>
-    </Content>
     <Content Include="style\atoms.less" />
     <Content Include="style\atoms.css.map">
       <DependentUpon>atoms.css</DependentUpon>
@@ -1113,6 +1134,26 @@
     <Content Include="style\src\window.less" />
     <Content Include="style\src\window.css.map">
       <DependentUpon>window.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\application.less" />
+    <Content Include="style\src\application.css.map">
+      <DependentUpon>application.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\wizard.less" />
+    <Content Include="style\src\wizard.css.map">
+      <DependentUpon>wizard.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\phone-control.less" />
+    <Content Include="style\src\phone-control.css.map">
+      <DependentUpon>phone-control.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\form-layout.less" />
+    <Content Include="style\src\form-layout.css.map">
+      <DependentUpon>form-layout.css</DependentUpon>
+    </Content>
+    <Content Include="style\src\form-grid.less" />
+    <Content Include="style\src\form-grid.css.map">
+      <DependentUpon>form-grid.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
