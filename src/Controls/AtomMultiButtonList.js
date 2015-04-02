@@ -68,7 +68,8 @@
 
                 ace = new AtomEnumerator(this._dataElements);
                 while (ace.next()) {
-                    AtomUI.attr(ace.current() ,"checked", false);
+                    var ce = ace.current();
+                    ce.checked = false;
                 }
 
                 if (!this._value)
@@ -88,8 +89,8 @@
                     while (ae.next()) {
                         item = ae.current();
                         item = $.trim(item);
-                        if ($(cb).val() == item) {
-                            AtomUI.attr(cb, "checked", "checked");
+                        if (cb.value == item) {
+                            cb.checked = true;
                         }
                     }
                 }
