@@ -8811,104 +8811,105 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 68 - 'AtomMultiButtonList.js' */                ace = new AtomEnumerator(this._dataElements);
 /*Line 69 - 'AtomMultiButtonList.js' */                while (ace.next()) {
-/*Line 70 - 'AtomMultiButtonList.js' */                    AtomUI.attr(ace.current() ,"checked", false);
-/*Line 71 - 'AtomMultiButtonList.js' */                }
+/*Line 70 - 'AtomMultiButtonList.js' */                    var ce = ace.current();
+/*Line 71 - 'AtomMultiButtonList.js' */                    ce.checked = false;
+/*Line 72 - 'AtomMultiButtonList.js' */                }
 
-/*Line 73 - 'AtomMultiButtonList.js' */                if (!this._value)
-/*Line 74 - 'AtomMultiButtonList.js' */                    return;
+/*Line 74 - 'AtomMultiButtonList.js' */                if (!this._value)
+/*Line 75 - 'AtomMultiButtonList.js' */                    return;
 
-/*Line 76 - 'AtomMultiButtonList.js' */                var ae;
-/*Line 77 - 'AtomMultiButtonList.js' */                var ace;
-/*Line 78 - 'AtomMultiButtonList.js' */                var item;
-/*Line 79 - 'AtomMultiButtonList.js' */                var selections = this._value.split(",");
+/*Line 77 - 'AtomMultiButtonList.js' */                var ae;
+/*Line 78 - 'AtomMultiButtonList.js' */                var ace;
+/*Line 79 - 'AtomMultiButtonList.js' */                var item;
+/*Line 80 - 'AtomMultiButtonList.js' */                var selections = this._value.split(",");
 
-/*Line 81 - 'AtomMultiButtonList.js' */                ace.reset();
+/*Line 82 - 'AtomMultiButtonList.js' */                ace.reset();
 
-/*Line 83 - 'AtomMultiButtonList.js' */                var cb;
-/*Line 84 - 'AtomMultiButtonList.js' */                while (ace.next()) {
-/*Line 85 - 'AtomMultiButtonList.js' */                    cb = ace.current();
-/*Line 86 - 'AtomMultiButtonList.js' */                    ae = new AtomEnumerator(selections);
-/*Line 87 - 'AtomMultiButtonList.js' */                    while (ae.next()) {
-/*Line 88 - 'AtomMultiButtonList.js' */                        item = ae.current();
-/*Line 89 - 'AtomMultiButtonList.js' */                        item = $.trim(item);
-/*Line 90 - 'AtomMultiButtonList.js' */                        if ($(cb).val() == item) {
-/*Line 91 - 'AtomMultiButtonList.js' */                            AtomUI.attr(cb, "checked", "checked");
-/*Line 92 - 'AtomMultiButtonList.js' */                        }
-/*Line 93 - 'AtomMultiButtonList.js' */                    }
-/*Line 94 - 'AtomMultiButtonList.js' */                }
-/*Line 95 - 'AtomMultiButtonList.js' */            },
+/*Line 84 - 'AtomMultiButtonList.js' */                var cb;
+/*Line 85 - 'AtomMultiButtonList.js' */                while (ace.next()) {
+/*Line 86 - 'AtomMultiButtonList.js' */                    cb = ace.current();
+/*Line 87 - 'AtomMultiButtonList.js' */                    ae = new AtomEnumerator(selections);
+/*Line 88 - 'AtomMultiButtonList.js' */                    while (ae.next()) {
+/*Line 89 - 'AtomMultiButtonList.js' */                        item = ae.current();
+/*Line 90 - 'AtomMultiButtonList.js' */                        item = $.trim(item);
+/*Line 91 - 'AtomMultiButtonList.js' */                        if (cb.value == item) {
+/*Line 92 - 'AtomMultiButtonList.js' */                            cb.checked = true;
+/*Line 93 - 'AtomMultiButtonList.js' */                        }
+/*Line 94 - 'AtomMultiButtonList.js' */                    }
+/*Line 95 - 'AtomMultiButtonList.js' */                }
+/*Line 96 - 'AtomMultiButtonList.js' */            },
 
-/*Line 97 - 'AtomMultiButtonList.js' */            onDataChange: function () {
-/*Line 98 - 'AtomMultiButtonList.js' */                var ae = new AtomEnumerator(this._dataElements);
-/*Line 99 - 'AtomMultiButtonList.js' */                var add = [];
-/*Line 100 - 'AtomMultiButtonList.js' */                while (ae.next()) {
-/*Line 101 - 'AtomMultiButtonList.js' */                    var item = ae.current();
-/*Line 102 - 'AtomMultiButtonList.js' */                    var dataItem = $(item).val();
-/*Line 103 - 'AtomMultiButtonList.js' */                    //var checked = $(item).attr("checked");
-/*Line 104 - 'AtomMultiButtonList.js' */                    if (item.checked) {
-/*Line 105 - 'AtomMultiButtonList.js' */                        add.push(dataItem);
-/*Line 106 - 'AtomMultiButtonList.js' */                    }
-/*Line 107 - 'AtomMultiButtonList.js' */                }
-/*Line 108 - 'AtomMultiButtonList.js' */                this._value = add.join(", ");
-/*Line 109 - 'AtomMultiButtonList.js' */                AtomBinder.refreshValue(this, "value");
-/*Line 110 - 'AtomMultiButtonList.js' */            },
+/*Line 98 - 'AtomMultiButtonList.js' */            onDataChange: function () {
+/*Line 99 - 'AtomMultiButtonList.js' */                var ae = new AtomEnumerator(this._dataElements);
+/*Line 100 - 'AtomMultiButtonList.js' */                var add = [];
+/*Line 101 - 'AtomMultiButtonList.js' */                while (ae.next()) {
+/*Line 102 - 'AtomMultiButtonList.js' */                    var item = ae.current();
+/*Line 103 - 'AtomMultiButtonList.js' */                    var dataItem = $(item).val();
+/*Line 104 - 'AtomMultiButtonList.js' */                    //var checked = $(item).attr("checked");
+/*Line 105 - 'AtomMultiButtonList.js' */                    if (item.checked) {
+/*Line 106 - 'AtomMultiButtonList.js' */                        add.push(dataItem);
+/*Line 107 - 'AtomMultiButtonList.js' */                    }
+/*Line 108 - 'AtomMultiButtonList.js' */                }
+/*Line 109 - 'AtomMultiButtonList.js' */                this._value = add.join(", ");
+/*Line 110 - 'AtomMultiButtonList.js' */                AtomBinder.refreshValue(this, "value");
+/*Line 111 - 'AtomMultiButtonList.js' */            },
 
-/*Line 112 - 'AtomMultiButtonList.js' */            createChildElement: function (parentScope, parentElement, data) {
-/*Line 113 - 'AtomMultiButtonList.js' */                var span = document.createElement("SPAN");
-/*Line 114 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
+/*Line 113 - 'AtomMultiButtonList.js' */            createChildElement: function (parentScope, parentElement, data) {
+/*Line 114 - 'AtomMultiButtonList.js' */                var span = document.createElement("SPAN");
+/*Line 115 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
 
-/*Line 116 - 'AtomMultiButtonList.js' */                parentElement = span;
-/*Line 117 - 'AtomMultiButtonList.js' */                span = document.createElement("SPAN");
-/*Line 118 - 'AtomMultiButtonList.js' */                var lp = this.get_labelPath();
-/*Line 119 - 'AtomMultiButtonList.js' */                var vp = this.get_valuePath();
-/*Line 120 - 'AtomMultiButtonList.js' */                l = data;
-/*Line 121 - 'AtomMultiButtonList.js' */                v = data;
-/*Line 122 - 'AtomMultiButtonList.js' */                if (lp)
-/*Line 123 - 'AtomMultiButtonList.js' */                    l = data[lp];
-/*Line 124 - 'AtomMultiButtonList.js' */                if (vp)
-/*Line 125 - 'AtomMultiButtonList.js' */                    v = data[vp];
+/*Line 117 - 'AtomMultiButtonList.js' */                parentElement = span;
+/*Line 118 - 'AtomMultiButtonList.js' */                span = document.createElement("SPAN");
+/*Line 119 - 'AtomMultiButtonList.js' */                var lp = this.get_labelPath();
+/*Line 120 - 'AtomMultiButtonList.js' */                var vp = this.get_valuePath();
+/*Line 121 - 'AtomMultiButtonList.js' */                l = data;
+/*Line 122 - 'AtomMultiButtonList.js' */                v = data;
+/*Line 123 - 'AtomMultiButtonList.js' */                if (lp)
+/*Line 124 - 'AtomMultiButtonList.js' */                    l = data[lp];
+/*Line 125 - 'AtomMultiButtonList.js' */                if (vp)
+/*Line 126 - 'AtomMultiButtonList.js' */                    v = data[vp];
 
 
-/*Line 128 - 'AtomMultiButtonList.js' */                var gpName = null;
-/*Line 129 - 'AtomMultiButtonList.js' */                if (this._isRadio) {
-/*Line 130 - 'AtomMultiButtonList.js' */                    gpName = "_g" + AtomUI.getNewIndex();
-/*Line 131 - 'AtomMultiButtonList.js' */                }
+/*Line 129 - 'AtomMultiButtonList.js' */                var gpName = null;
+/*Line 130 - 'AtomMultiButtonList.js' */                if (this._isRadio) {
+/*Line 131 - 'AtomMultiButtonList.js' */                    gpName = "_g" + AtomUI.getNewIndex();
+/*Line 132 - 'AtomMultiButtonList.js' */                }
 
-/*Line 133 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
+/*Line 134 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
 
-/*Line 135 - 'AtomMultiButtonList.js' */                var options = new AtomEnumerator(this._options);
-/*Line 136 - 'AtomMultiButtonList.js' */                while (options.next()) {
-/*Line 137 - 'AtomMultiButtonList.js' */                    var op = options.current();
-/*Line 138 - 'AtomMultiButtonList.js' */                    if (vp) {
-/*Line 139 - 'AtomMultiButtonList.js' */                        op = op[vp];
-/*Line 140 - 'AtomMultiButtonList.js' */                    }
+/*Line 136 - 'AtomMultiButtonList.js' */                var options = new AtomEnumerator(this._options);
+/*Line 137 - 'AtomMultiButtonList.js' */                while (options.next()) {
+/*Line 138 - 'AtomMultiButtonList.js' */                    var op = options.current();
+/*Line 139 - 'AtomMultiButtonList.js' */                    if (vp) {
+/*Line 140 - 'AtomMultiButtonList.js' */                        op = op[vp];
+/*Line 141 - 'AtomMultiButtonList.js' */                    }
 
-/*Line 142 - 'AtomMultiButtonList.js' */                    var val = v + "." + op;
+/*Line 143 - 'AtomMultiButtonList.js' */                    var val = v + "." + op;
 
-/*Line 144 - 'AtomMultiButtonList.js' */                    var cb = document.createElement("INPUT");
-/*Line 145 - 'AtomMultiButtonList.js' */                    if (this._isRadio) {
-/*Line 146 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "type", "radio");
-/*Line 147 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "name", gpName);
-/*Line 148 - 'AtomMultiButtonList.js' */                    } else {
-/*Line 149 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "type", "checkbox");
-/*Line 150 - 'AtomMultiButtonList.js' */                    }
-/*Line 151 - 'AtomMultiButtonList.js' */                    $(cb).val(val);
-/*Line 152 - 'AtomMultiButtonList.js' */                    span.appendChild(cb);
-/*Line 153 - 'AtomMultiButtonList.js' */                    this.bindEvent(cb, "change", "onDataChange");
-/*Line 154 - 'AtomMultiButtonList.js' */                    this._dataElements.push(cb);
-/*Line 155 - 'AtomMultiButtonList.js' */                }
+/*Line 145 - 'AtomMultiButtonList.js' */                    var cb = document.createElement("INPUT");
+/*Line 146 - 'AtomMultiButtonList.js' */                    if (this._isRadio) {
+/*Line 147 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "type", "radio");
+/*Line 148 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "name", gpName);
+/*Line 149 - 'AtomMultiButtonList.js' */                    } else {
+/*Line 150 - 'AtomMultiButtonList.js' */                        AtomUI.attr(cb, "type", "checkbox");
+/*Line 151 - 'AtomMultiButtonList.js' */                    }
+/*Line 152 - 'AtomMultiButtonList.js' */                    $(cb).val(val);
+/*Line 153 - 'AtomMultiButtonList.js' */                    span.appendChild(cb);
+/*Line 154 - 'AtomMultiButtonList.js' */                    this.bindEvent(cb, "change", "onDataChange");
+/*Line 155 - 'AtomMultiButtonList.js' */                    this._dataElements.push(cb);
+/*Line 156 - 'AtomMultiButtonList.js' */                }
 
-/*Line 157 - 'AtomMultiButtonList.js' */                span = document.createElement("SPAN");
-/*Line 158 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
-/*Line 159 - 'AtomMultiButtonList.js' */                // Create Label First..
-/*Line 160 - 'AtomMultiButtonList.js' */                var txt = document.createTextNode(l);
-/*Line 161 - 'AtomMultiButtonList.js' */                span.appendChild(txt);
-/*Line 162 - 'AtomMultiButtonList.js' */                //span.style.float = "left";
+/*Line 158 - 'AtomMultiButtonList.js' */                span = document.createElement("SPAN");
+/*Line 159 - 'AtomMultiButtonList.js' */                parentElement.appendChild(span);
+/*Line 160 - 'AtomMultiButtonList.js' */                // Create Label First..
+/*Line 161 - 'AtomMultiButtonList.js' */                var txt = document.createTextNode(l);
+/*Line 162 - 'AtomMultiButtonList.js' */                span.appendChild(txt);
+/*Line 163 - 'AtomMultiButtonList.js' */                //span.style.float = "left";
 
-/*Line 164 - 'AtomMultiButtonList.js' */            }
-/*Line 165 - 'AtomMultiButtonList.js' */        }
-/*Line 166 - 'AtomMultiButtonList.js' */    });
-/*Line 167 - 'AtomMultiButtonList.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 165 - 'AtomMultiButtonList.js' */            }
+/*Line 166 - 'AtomMultiButtonList.js' */        }
+/*Line 167 - 'AtomMultiButtonList.js' */    });
+/*Line 168 - 'AtomMultiButtonList.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomNavigatorList.js' */
 
 /*Line 2 - 'AtomNavigatorList.js' */(function (base) {
