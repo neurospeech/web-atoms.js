@@ -378,7 +378,7 @@ jsonML["WebAtoms.AtomTabControl.template"] =
 { "data-atom-type": "AtomDockPanel" }
 ,"\n", ["ul",
 { "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "style": "height: 30px; text-align:center; display:inline-block", "data-atom-init": "t53" }
-,"\n", ["span",
+,"\n", ["li",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t54" }
 ], "\n"], "\n", ["div",
 { "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t55" }
