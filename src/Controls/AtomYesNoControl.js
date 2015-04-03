@@ -12,10 +12,6 @@
             ];
         },
         methods: {
-            init: function () {
-                this._element.style.height = "26px";
-                baseType.init.call(this);
-            }
         }
     });
 })(WebAtoms.AtomToggleButtonBar.prototype);
