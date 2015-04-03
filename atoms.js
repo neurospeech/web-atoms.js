@@ -862,7 +862,8 @@ this.bind(e,'text',
 
 /* WebAtoms.AtomTabControl.template */
 this.t53= function(e){
-this.bind(e,'labelPath',
+this.setLocalValue('showTabs', "true", e);
+	this.bind(e,'labelPath',
 	['templateParent', 'labelPath']);
 	this.bind(e,'items',
 	['templateParent', 'items']);
@@ -6664,7 +6665,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 242 - 'AtomAutoCompleteBox.js' */                document.body.appendChild(this._itemsPresenter);
 
-/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("popup");
+/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("auto-complete-popup");
 
 /*Line 246 - 'AtomAutoCompleteBox.js' */                base.onCreated.apply(this, arguments);
 /*Line 247 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
