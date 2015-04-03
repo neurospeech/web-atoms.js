@@ -4,15 +4,13 @@
 		atom-type="AtomToggleButtonBar" 
 		atom-label-path="[$owner.templateParent.labelPath]"
 		atom-items="[$owner.templateParent.items]"
-		atom-selected-index="$[owner.templateParent.selectedIndex]"
-		style="height: 30px; text-align:center; display:inline-block">
+		atom-selected-index="$[owner.templateParent.selectedIndex]">
 		<li atom-template="itemTemplate" atom-text="[$data]"></li>
 	</ul>
 	<div 
 		atom-dock="Fill" 
 		atom-type="AtomViewStack"
 		atom-selected-index="[$owner.templateParent.selectedIndex]"
-		atom-presenter="itemsPresenter"
-		>
+		atom-presenter="itemsPresenter">
 	</div>
 </div>
