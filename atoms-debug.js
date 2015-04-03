@@ -9881,13 +9881,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 11 - 'AtomYesNoControl.js' */            ];
 /*Line 12 - 'AtomYesNoControl.js' */        },
 /*Line 13 - 'AtomYesNoControl.js' */        methods: {
-/*Line 14 - 'AtomYesNoControl.js' */            init: function () {
-/*Line 15 - 'AtomYesNoControl.js' */                this._element.style.height = "26px";
-/*Line 16 - 'AtomYesNoControl.js' */                baseType.init.call(this);
-/*Line 17 - 'AtomYesNoControl.js' */            }
-/*Line 18 - 'AtomYesNoControl.js' */        }
-/*Line 19 - 'AtomYesNoControl.js' */    });
-/*Line 20 - 'AtomYesNoControl.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
+/*Line 14 - 'AtomYesNoControl.js' */        }
+/*Line 15 - 'AtomYesNoControl.js' */    });
+/*Line 16 - 'AtomYesNoControl.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
 /*Line 0 - 'AtomYesNoCustom.js' */
 
 /*Line 2 - 'AtomYesNoCustom.js' */(function (baseType) {
