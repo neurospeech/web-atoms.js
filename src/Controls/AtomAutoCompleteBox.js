@@ -242,7 +242,7 @@
 
                 document.body.appendChild(this._itemsPresenter);
 
-                $(this._itemsPresenter).addClass("popup");
+                $(this._itemsPresenter).addClass("auto-complete-popup");
 
                 base.onCreated.apply(this, arguments);
                 this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");

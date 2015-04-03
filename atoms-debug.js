@@ -377,7 +377,7 @@ jsonML["WebAtoms.AtomTabControl.template"] =
 [["div",
 { "data-atom-type": "AtomDockPanel" }
 ,"\n", ["ul",
-{ "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "style": "height: 30px; text-align:center; display:inline-block", "data-atom-init": "t53" }
+{ "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t53" }
 ,"\n", ["li",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t54" }
 ], "\n"], "\n", ["div",
@@ -862,7 +862,8 @@ this.bind(e,'text',
 
 /* WebAtoms.AtomTabControl.template */
 this.t53= function(e){
-this.bind(e,'labelPath',
+this.setLocalValue('showTabs', "true", e);
+	this.bind(e,'labelPath',
 	['templateParent', 'labelPath']);
 	this.bind(e,'items',
 	['templateParent', 'items']);
@@ -6664,7 +6665,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 242 - 'AtomAutoCompleteBox.js' */                document.body.appendChild(this._itemsPresenter);
 
-/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("popup");
+/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("auto-complete-popup");
 
 /*Line 246 - 'AtomAutoCompleteBox.js' */                base.onCreated.apply(this, arguments);
 /*Line 247 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
@@ -9924,23 +9925,24 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'AtomYesNoCustom.js' */                $(this._input).addClass("atom-yes-no-custom-input");
 /*Line 38 - 'AtomYesNoCustom.js' */                if (this._placeholder) {
 /*Line 39 - 'AtomYesNoCustom.js' */                    AtomUI.attr(this._input, "placeholder", this._placeholder);
-/*Line 40 - 'AtomYesNoCustom.js' */                    placeHolderFixer.refresh();
-/*Line 41 - 'AtomYesNoCustom.js' */                }
-/*Line 42 - 'AtomYesNoCustom.js' */            },
+/*Line 40 - 'AtomYesNoCustom.js' */                    var pf = window.placeHolderFixer;
+/*Line 41 - 'AtomYesNoCustom.js' */                    if(pf) pf.refresh();
+/*Line 42 - 'AtomYesNoCustom.js' */                }
+/*Line 43 - 'AtomYesNoCustom.js' */            },
 
-/*Line 44 - 'AtomYesNoCustom.js' */            init: function () {
+/*Line 45 - 'AtomYesNoCustom.js' */            init: function () {
 
-/*Line 46 - 'AtomYesNoCustom.js' */                baseType.init.call(this);
+/*Line 47 - 'AtomYesNoCustom.js' */                baseType.init.call(this);
 
-/*Line 48 - 'AtomYesNoCustom.js' */                this._yesNo = this._yesNo.atomControl;
+/*Line 49 - 'AtomYesNoCustom.js' */                this._yesNo = this._yesNo.atomControl;
 
-/*Line 50 - 'AtomYesNoCustom.js' */                var input = this._input;
-/*Line 51 - 'AtomYesNoCustom.js' */                this.bindEvent(input, "change", "onValueChange");
-/*Line 52 - 'AtomYesNoCustom.js' */                //this.bindEvent(this._yesNo, "selectionChanged", "onSelectionChanged");
-/*Line 53 - 'AtomYesNoCustom.js' */            }
-/*Line 54 - 'AtomYesNoCustom.js' */        }
-/*Line 55 - 'AtomYesNoCustom.js' */    });
-/*Line 56 - 'AtomYesNoCustom.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 51 - 'AtomYesNoCustom.js' */                var input = this._input;
+/*Line 52 - 'AtomYesNoCustom.js' */                this.bindEvent(input, "change", "onValueChange");
+/*Line 53 - 'AtomYesNoCustom.js' */                //this.bindEvent(this._yesNo, "selectionChanged", "onSelectionChanged");
+/*Line 54 - 'AtomYesNoCustom.js' */            }
+/*Line 55 - 'AtomYesNoCustom.js' */        }
+/*Line 56 - 'AtomYesNoCustom.js' */    });
+/*Line 57 - 'AtomYesNoCustom.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomApplication.js' */
 
 /*Line 2 - 'AtomApplication.js' */this.appScope = null;

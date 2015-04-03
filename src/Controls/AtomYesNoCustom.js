@@ -38,7 +38,8 @@
                 $(this._input).addClass("atom-yes-no-custom-input");
                 if (this._placeholder) {
                     AtomUI.attr(this._input, "placeholder", this._placeholder);
-                    placeHolderFixer.refresh();
+                    var pf = window.placeHolderFixer;
+                    if(pf) pf.refresh();
                 }
             },
 

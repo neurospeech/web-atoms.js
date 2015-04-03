@@ -50,6 +50,14 @@ span.atom-auto-complete-box {
   padding: 2px;
   background-color: white;
 }
+.auto-complete-popup {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: solid 1px #808080;
+  padding: 2px;
+  background-color: white;
+}
 .atom-date-field {
   position: relative;
   border: 1px solid lightgray;
