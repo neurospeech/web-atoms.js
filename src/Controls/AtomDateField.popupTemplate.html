@@ -1,27 +1,20 @@
 ﻿<div class="atom-date-popup"
-    style-left="[($owner.offsetLeft ) + 'px']"
-    style-top="[($owner.offsetTop + 25) + 'px']">
-    <div 
-        class="atom-date-list-box" 
-        atom-class="[$owner.isOpen ? 'popup-open' : 'popup-closed' ]">
-        <div 
-            class="calendar"
-            atom-presenter="calendarPresenter">
-            <select
-                atom-type="AtomComboBox"
-                class="month"
-                atom-items="{AtomDate.monthList}"
-                atom-value="$[owner.templateParent.month]"
-                ></select>
-            <select
-                atom-type="AtomNumberComboBox"
-                class="year"
-                atom-start-number="[ $owner.templateParent.currentYear + $owner.templateParent.startYear]"
-                atom-end-number="[ $owner.templateParent.currentYear + $owner.templateParent.endYear]"
-                atom-value="$[owner.templateParent.year]"
-                ></select>
-            <div
-                class="days">
+     style-left="[($owner.offsetLeft ) + 'px']"
+     style-top="[($owner.offsetTop + 25) + 'px']"
+     atom-class="[$owner.isOpen ? 'popup-open' : 'popup-closed' ]">
+    <div class="atom-date-list-box">
+        <div class="calendar"
+             atom-presenter="calendarPresenter">
+            <select atom-type="AtomComboBox"
+                    class="month"
+                    atom-items="{AtomDate.monthList}"
+                    atom-value="$[owner.templateParent.month]"></select>
+            <select atom-type="AtomNumberComboBox"
+                    class="year"
+                    atom-start-number="[ $owner.templateParent.currentYear + $owner.templateParent.startYear]"
+                    atom-end-number="[ $owner.templateParent.currentYear + $owner.templateParent.endYear]"
+                    atom-value="$[owner.templateParent.year]"></select>
+            <div class="days">
                 <span class="weekend-header">S</span>
                 <span>M</span>
                 <span>T</span>
@@ -30,20 +23,18 @@
                 <span>F</span>
                 <span class="weekend-header">S</span>
             </div>
-            <div
-                class="day-list"
-                atom-type="AtomItemsControl"
-                atom-items="[$owner.templateParent.items]"
-                atom-presenter="itemsPresenter">
-                <div
-                    atom-event-click="{ $owner.templateParent.templateParent.toggleDateCommand }"
-                    atom-class="[ { 
-                        'list-item':true, 
-                        'weekend': $data.isWeekEnd, 
-                        other: $data.isOtherMonth, 
+            <div class="day-list"
+                 atom-type="AtomItemsControl"
+                 atom-items="[$owner.templateParent.items]"
+                 atom-presenter="itemsPresenter">
+                <div atom-event-click="{ $owner.templateParent.templateParent.toggleDateCommand }"
+                     atom-class="[ {
+                        'list-item':true,
+                        'weekend': $data.isWeekEnd,
+                        other: $data.isOtherMonth,
                         today: $data.isToday,
                         'selected': Atom.query($owner.templateParent.templateParent.selectedItems).any({ value: $data.value}) } ]"
-                    atom-template="itemTemplate">
+                     atom-template="itemTemplate">
                     <span atom-text="[$data.label]"></span>
                 </div>
             </div>
