@@ -237,7 +237,7 @@ jsonML["WebAtoms.AtomDataPager.template"] =
 ;
 jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
-{ "class": "popup", "data-atom-init": "t17" }
+{ "class": "atom-date-popup", "data-atom-init": "t17" }
 ,"\n", ["div",
 { "class": "atom-date-list-box", "data-atom-init": "t18" }
 ,"\n", ["div",
