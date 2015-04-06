@@ -81,16 +81,6 @@ span.atom-auto-complete-box {
 .atom-date-field .atom-date-list-box {
   position: absolute;
 }
-.atom-date-field .popup {
-  margin-left: -2px;
-  position: absolute;
-  display: none;
-  width: 198px;
-  height: 200px;
-  background-color: white;
-  left: -1px;
-  z-index: 11;
-}
 .atom-date-field .popup-open {
   display: block;
 }
@@ -102,6 +92,21 @@ span.atom-auto-complete-box {
   top: 0;
   border: 1px solid lightgray;
   border-top-style: none;
+}
+.atom-date-popup {
+  margin-left: -2px;
+  position: absolute;
+  width: 198px;
+  height: 200px;
+  background-color: white;
+  left: -1px;
+  z-index: 11;
+}
+.atom-date-popup.popup-open {
+  display: block;
+}
+.atom-date-popup.popup-closed {
+  display: none;
 }
 .atom-date-list-box {
   width: 300px;

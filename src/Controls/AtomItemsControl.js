@@ -634,12 +634,15 @@
                 this.getTemplate("itemTemplate");
 
                 var elementChild = AtomUI.cloneNode(this._itemTemplate);
+                elementChild._logicalParent = parentElement;
                 elementChild._templateParent = this;
-                if (before) {
-                    parentElement.insertBefore(elementChild, before);
-                } else {
-                    parentElement.appendChild(elementChild);
-                }
+                WebAtoms.dispatcher.callLater(function () {
+                    if (before) {
+                        parentElement.insertBefore(elementChild, before);
+                    } else {
+                        parentElement.appendChild(elementChild);
+                    }
+                });
 
                 var scope = new AtomScope(this, parentScope, parentScope.__application);
                 if (ae) {

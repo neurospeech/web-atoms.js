@@ -29,16 +29,6 @@
         position:absolute;
     }
 
-    .popup{
-        margin-left:-2px;
-        position:absolute;
-        display:none;
-        width:198px;
-        height:200px;
-        background-color:white;
-        left:-1px;
-        z-index:11;
-    }
 
     .popup-open{
         display:block;
@@ -55,4 +45,25 @@
         border: 1px solid lightgray;
         border-top-style:none;
     }
+}
+
+.atom-date-popup
+{
+
+    margin-left:-2px;
+    position:absolute;
+    width:198px;
+    height:200px;
+    background-color:white;
+    left:-1px;
+    z-index:11;
+
+    &.popup-open{
+        display:block;
+    }
+
+    &.popup-closed{
+        display:none;
+    }
+
 }
