@@ -37,11 +37,14 @@ window.AtomEnumerator = AtomEnumerator;
 var Atom = {
 
     refreshWindowCommand: function () {
-        var q = location.search || "?";
-        var tq = q.split('&').filter(function (p) {
-            return !(/^\_v\=/i.test(p));
-        }).join("&");
-        location.href = location.pathname + q + "_v=" + (new Date()).getTime() + location.hash;
+        location.reload(true);
+        //var q = location.search || "?";
+        //var tq = q.split('&').filter(function (p) {
+        //    return !(/^\_v\=/i.test(p));
+        //}).join("&");
+        //var url = location.pathname + tq + "_v=" + (new Date()).getTime() + location.hash;
+        //if (window.console) window.console.log("Refreshing: " + url);
+        //location.href = url;
     },
 
     time: function () {
