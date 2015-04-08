@@ -37,7 +37,11 @@ window.AtomEnumerator = AtomEnumerator;
 var Atom = {
 
     refreshWindowCommand: function () {
-        location.href = location.pathname + "?_v=" + (new Date()).getTime() + location.hash;
+        var q = location.search || "?";
+        var tq = q.split('&').filter(function (p) {
+            return !(/^\_v\=/i.test(p));
+        }).join("&");
+        location.href = location.pathname + q + "_v=" + (new Date()).getTime() + location.hash;
     },
 
     time: function () {
