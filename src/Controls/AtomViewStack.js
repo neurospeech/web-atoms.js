@@ -92,31 +92,40 @@
 
                     if (previousElement && previousElement != selectedElement) {
                         var self = this;
-                        this._isAnimating = true;
-                        var ael = [selectedElement, previousElement];
-                        $(ael).removeClass("hidden");
-                        if (selectedIndex < previousIndex) {
-                            $(selectedElement).css("left", -width);
-                            //log("left: -" + width);
+
+
+                        var sd = this._swipeDirection;
+                        if (sd != null && /none/i.test(sd)) {
+                            $(previousElement).addClass("hidden");
+                            $(selectedElement).removeClass("hidden");
                         } else {
-                            $(selectedElement).css("left", width);
-                            //log("left: " + width);
-                        }
-                        $(ael).addClass("animate-left-property");
-                        setTimeout(function () {
-                            $(selectedElement).css("left", 0);
-                            //log("left: 0");
+                            // animate...
+                            var ael = [selectedElement, previousElement];
+                            $(ael).removeClass("hidden");
+                            this._isAnimating = true;
                             if (selectedIndex < previousIndex) {
-                                $(previousElement).css("left", width);
+                                $(selectedElement).css("left", -width);
+                                //log("left: -" + width);
                             } else {
-                                $(previousElement).css("left", -width);
+                                $(selectedElement).css("left", width);
+                                //log("left: " + width);
                             }
+                            $(ael).addClass("animate-left-property");
                             setTimeout(function () {
-                                self._isAnimating = false;
-                                $(ael).removeClass("animate-left-property");
-                                $(previousElement).addClass("hidden");
-                            }, 800);
-                        },50);
+                                $(selectedElement).css("left", 0);
+                                //log("left: 0");
+                                if (selectedIndex < previousIndex) {
+                                    $(previousElement).css("left", width);
+                                } else {
+                                    $(previousElement).css("left", -width);
+                                }
+                                setTimeout(function () {
+                                    self._isAnimating = false;
+                                    $(ael).removeClass("animate-left-property");
+                                    $(previousElement).addClass("hidden");
+                                }, 800);
+                            }, 50);
+                        }
                     } else {
                         $(selectedElement).removeClass("hidden");
                     }
