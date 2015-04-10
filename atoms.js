@@ -179,73 +179,77 @@ jsonML["WebAtoms.AtomAutoCompleteBox.template"] =
 ], "\n"]]
 ;
 jsonML["WebAtoms.AtomCalendar.template"] = 
-[["div",
+[["header",
 {  }
-,"\n", ["div",
-{ "class": "title" }
 ,"\n", ["button",
-{ "class": "atom-prev-button", "data-atom-init": "t5" }
-,"Previous"], "\n", ["span",
-{ "data-atom-init": "t6" }
+{ "class": "prev", "data-atom-init": "t5" }
+], "\n", ["select",
+{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t6" }
+], "\n", ["select",
+{ "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t7" }
 ], "\n", ["button",
-{ "class": "atom-next-button", "data-atom-init": "t7" }
-,"Next"], "\n"], "\n", ["div",
-{ "class": "day-headers" }
+{ "class": "next", "data-atom-init": "t8" }
+], "\n"], ["ul",
+{ "class": "days" }
+,"\n", ["li",
+{ "class": "weekend" }
+,"S"], "\n", ["li",
+{  }
+,"M"], "\n", ["li",
+{  }
+,"T"], "\n", ["li",
+{  }
+,"W"], "\n", ["li",
+{  }
+,"T"], "\n", ["li",
+{  }
+,"F"], "\n", ["li",
+{ "class": "weekend" }
+,"S"], "\n"], ["section",
+{ "class": "day-list", "data-atom-presenter": "itemsPresenter" }
+,"\n", ["div",
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t10" }
 ,"\n", ["span",
-{ "class": "weekend" }
-,"Sunday"], "\n", ["span",
-{  }
-,"Monday"], "\n", ["span",
-{  }
-,"Tuesday"], "\n", ["span",
-{  }
-,"Wednesday"], "\n", ["span",
-{  }
-,"Thursday"], "\n", ["span",
-{  }
-,"Friday"], "\n", ["span",
-{ "class": "weekend" }
-,"Saturday"], "\n"], "\n", ["div",
-{ "class": "days", "data-atom-presenter": "itemsPresenter" }
-,"\n"], "\n"]]
+{ "data-atom-init": "t11" }
+], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomCheckBoxList.itemTemplate"] = 
 [["div",
 { "data-atom-template": "itemTemplate" }
 ,"\n", ["input",
-{ "type": "checkbox", "data-atom-init": "t10" }
+{ "type": "checkbox", "data-atom-init": "t13" }
 ], "\n", ["span",
-{ "data-atom-init": "t11" }
+{ "data-atom-init": "t14" }
 ], "\n"]]
 ;
 jsonML["WebAtoms.AtomDataPager.template"] = 
 [["button",
-{ "class": "atom-pager-first-button", "style": "float:left", "data-atom-init": "t12" }
+{ "class": "atom-pager-first-button", "style": "float:left", "data-atom-init": "t15" }
 ,"\nFirst\n"], ["span",
 { "style": "text-align:left" }
 ,"\n", ["button",
-{ "class": "atom-pager-prev-button", "data-atom-init": "t13" }
+{ "class": "atom-pager-prev-button", "data-atom-init": "t16" }
 ,"\nPrev\n"], "\n", ["span",
 {  }
 ,"Goto: Page"], "\n", ["select",
-{ "data-atom-type": "AtomComboBox", "data-atom-init": "t14" }
+{ "data-atom-type": "AtomComboBox", "data-atom-init": "t17" }
 ,"\n"], "\n", ["button",
-{ "class": "atom-pager-next-button", "data-atom-init": "t15" }
+{ "class": "atom-pager-next-button", "data-atom-init": "t18" }
 ,"\nNext\n"], "\n"], ["button",
-{ "class": "atom-pager-last-button", "style": "float:right", "data-atom-init": "t16" }
+{ "class": "atom-pager-last-button", "style": "float:right", "data-atom-init": "t19" }
 ,"\nLast\n"]]
 ;
 jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
-{ "class": "atom-date-popup", "data-atom-init": "t17" }
+{ "class": "atom-date-popup", "data-atom-init": "t20" }
 ,"\n", ["div",
 { "class": "atom-date-list-box" }
 ,"\n", ["div",
 { "class": "calendar", "data-atom-presenter": "calendarPresenter" }
 ,"\n", ["select",
-{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t19" }
+{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t22" }
 ], "\n", ["select",
-{ "data-atom-type": "AtomNumberComboBox", "class": "year", "data-atom-init": "t20" }
+{ "data-atom-type": "AtomNumberComboBox", "class": "year", "data-atom-init": "t23" }
 ], "\n", ["div",
 { "class": "days" }
 ,"\n", ["span",
@@ -263,16 +267,16 @@ jsonML["WebAtoms.AtomDateField.popupTemplate"] =
 ,"F"], "\n", ["span",
 { "class": "weekend-header" }
 ,"S"], "\n"], "\n", ["div",
-{ "class": "day-list", "data-atom-type": "AtomItemsControl", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t21" }
+{ "class": "day-list", "data-atom-type": "AtomItemsControl", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t24" }
 ,"\n", ["div",
-{ "data-atom-template": "itemTemplate", "data-atom-init": "t22" }
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t25" }
 ,"\n", ["span",
-{ "data-atom-init": "t23" }
+{ "data-atom-init": "t26" }
 ], "\n"], "\n"], "\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomDateField.template"] = 
 [["div",
-{ "class": "date-label", "data-atom-init": "t24" }
+{ "class": "date-label", "data-atom-init": "t27" }
 ]]
 ;
 jsonML["WebAtoms.AtomDateListBox.template"] = 
@@ -281,9 +285,9 @@ jsonML["WebAtoms.AtomDateListBox.template"] =
 ,"\n", ["div",
 { "class": "calendar" }
 ,"\n", ["select",
-{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t25" }
+{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t28" }
 ], "\n", ["select",
-{ "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t26" }
+{ "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t29" }
 ], "\n", ["div",
 { "class": "days" }
 ,"\n", ["span",
@@ -303,155 +307,155 @@ jsonML["WebAtoms.AtomDateListBox.template"] =
 ,"S"], "\n"], "\n", ["div",
 { "class": "day-list", "data-atom-presenter": "itemsPresenter" }
 ,"\n", ["div",
-{ "data-atom-template": "itemTemplate", "data-atom-init": "t28" }
-,"\n", ["span",
-{ "data-atom-init": "t29" }
-], "\n"], "\n"], "\n"], "\n", ["div",
-{ "class": "list", "data-atom-type": "AtomListBox", "data-atom-init": "t30" }
-,"\n", ["div",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t31" }
+,"\n", ["span",
+{ "data-atom-init": "t32" }
+], "\n"], "\n"], "\n"], "\n", ["div",
+{ "class": "list", "data-atom-type": "AtomListBox", "data-atom-init": "t33" }
+,"\n", ["div",
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t34" }
 ,"\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomItemsControl.itemTemplate"] = 
 [["span",
-{ "data-atom-init": "t32" }
+{ "data-atom-init": "t35" }
 ,"Item"]]
 ;
 jsonML["WebAtoms.AtomLinkBar.itemTemplate"] = 
 [["li",
-{ "data-atom-init": "t33" }
+{ "data-atom-init": "t36" }
 ,"\n", ["a",
-{ "data-atom-init": "t34" }
+{ "data-atom-init": "t37" }
 ,"\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomLinkBar.menuTemplate"] = 
 [["ul",
-{ "class": "menu", "data-atom-type": "AtomLinkBar", "data-atom-init": "t35" }
+{ "class": "menu", "data-atom-type": "AtomLinkBar", "data-atom-init": "t38" }
 ,"\n", ["li",
 { "data-atom-template": "itemTemplate" }
 ,"\n", ["a",
-{ "data-atom-init": "t37" }
+{ "data-atom-init": "t40" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomNavigatorList.detailTemplate"] = 
 [["iframe",
-{ "class": "atom-navigator-list-iframe", "data-atom-template": "detailTemplate", "data-atom-init": "t38" }
+{ "class": "atom-navigator-list-iframe", "data-atom-template": "detailTemplate", "data-atom-init": "t41" }
 ]]
 ;
 jsonML["WebAtoms.AtomNavigatorList.template"] = 
 [["div",
-{ "data-atom-type": "AtomViewStack", "data-atom-init": "t39" }
+{ "data-atom-type": "AtomViewStack", "data-atom-init": "t42" }
 ,"\n", ["div",
 { "data-atom-type": "AtomDockPanel", "data-atom-presenter": "gridPanel" }
 ,"\n", ["div",
 { "data-atom-dock": "Fill", "data-atom-presenter": "gridPresenter", "class": "atom-navigator-list-grid" }
 ,"\n"], "\n"], "\n", ["div",
-{ "data-atom-presenter": "detailView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t42" }
+{ "data-atom-presenter": "detailView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t45" }
 ,"\n", ["div",
 { "data-atom-dock": "Top", "data-atom-presenter": "detailHeaderToolbar" }
 ,"\n", ["input",
-{ "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t44" }
+{ "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t47" }
 ], "\n"], "\n"], "\n", ["div",
-{ "data-atom-presenter": "newView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t45" }
+{ "data-atom-presenter": "newView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t48" }
 ,"\n", ["div",
 { "data-atom-dock": "Top", "data-atom-presenter": "newHeaderToolbar" }
 ,"\n", ["input",
-{ "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t47" }
+{ "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t50" }
 ], "\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomRadioButtonList.itemTemplate"] = 
 [["span",
 {  }
 ,"\n", ["input",
-{ "type": "radio", "data-atom-name": "{$owner.groupName}", "data-atom-init": "t48" }
+{ "type": "radio", "data-atom-name": "{$owner.groupName}", "data-atom-init": "t51" }
 ], "\n", ["span",
-{ "data-atom-init": "t49" }
+{ "data-atom-init": "t52" }
 ], "\n"]]
 ;
 jsonML["WebAtoms.AtomSortableColumn.template"] = 
 [["span",
-{ "data-atom-init": "t50" }
+{ "data-atom-init": "t53" }
 ]]
 ;
 jsonML["WebAtoms.AtomTabControl.template"] = 
 [["div",
 { "data-atom-type": "AtomDockPanel" }
 ,"\n", ["ul",
-{ "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t52" }
+{ "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t55" }
 ,"\n", ["li",
-{ "data-atom-template": "itemTemplate", "data-atom-init": "t53" }
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t56" }
 ], "\n"], "\n", ["div",
-{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t54" }
+{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t57" }
 ,"\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomToggleButtonBar.itemTemplate"] = 
 [["li",
-{ "data-atom-init": "t55" }
+{ "data-atom-init": "t58" }
 ,"\n"]]
 ;
 jsonML["WebAtoms.AtomWizard.template"] = 
 [["div",
-{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t56" }
+{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t59" }
 ,"\n"], ["div",
 { "data-atom-dock": "Bottom", "class": "atom-wizard-command-bar" }
 ,"\n", ["button",
-{ "class": "atom-wizard-back-button", "data-atom-init": "t58" }
+{ "class": "atom-wizard-back-button", "data-atom-init": "t61" }
 ,"\n", ["span",
-{ "data-atom-init": "t59" }
+{ "data-atom-init": "t62" }
 ], "\n"], "\n", ["button",
-{ "class": "atom-wizard-next-button", "data-atom-init": "t60" }
+{ "class": "atom-wizard-next-button", "data-atom-init": "t63" }
 ,"\n", ["span",
-{ "data-atom-init": "t61" }
+{ "data-atom-init": "t64" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomYesNoCustom.template"] = 
 [["ul",
-{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t62" }
+{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t65" }
 ], ["input",
-{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t63" }
+{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t66" }
 ]]
 ;
 jsonML["WebAtoms.AtomApplication.busyTemplate"] = 
 [["div",
-{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t64" }
+{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t67" }
 ,"\n", ["div",
-{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t65" }
+{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t68" }
 ,"\n", ["div",
-{ "class": "atom-busy-image", "data-atom-init": "t66" }
+{ "class": "atom-busy-image", "data-atom-init": "t69" }
 ], "\n", ["div",
-{ "data-atom-init": "t67" }
+{ "data-atom-init": "t70" }
 ], "\n", ["div",
-{ "style": "height:3px; background-color:green", "data-atom-init": "t68" }
+{ "style": "height:3px; background-color:green", "data-atom-init": "t71" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormGridLayout.fieldTemplate"] = 
 [["table",
-{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t69" }
+{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t72" }
 ,"\n", ["tbody",
 {  }
 ,"\n", ["tr",
 {  }
 ,"\n", ["td",
-{ "class": "atom-form-grid-label", "data-atom-init": "t70" }
+{ "class": "atom-form-grid-label", "data-atom-init": "t73" }
 ], "\n", ["td",
-{ "class": "atom-form-grid-required", "data-atom-init": "t71" }
+{ "class": "atom-form-grid-required", "data-atom-init": "t74" }
 ,"*"], "\n", ["td",
-{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t72" }
+{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t75" }
 ,"\n"], "\n", ["td",
-{ "data-atom-init": "t73" }
+{ "data-atom-init": "t76" }
 ,"\n"], "\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormLayout.fieldTemplate"] = 
 [["tr",
 { "data-atom-type": "AtomFormField" }
 ,"\n", ["td",
-{ "class": "atom-form-label", "data-atom-init": "t75" }
+{ "class": "atom-form-label", "data-atom-init": "t78" }
 ], "\n", ["td",
-{ "class": "atom-form-required", "data-atom-init": "t76" }
+{ "class": "atom-form-required", "data-atom-init": "t79" }
 ,"\n"], "\n", ["td",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t77" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t80" }
 ,"\n", ["span",
-{ "class": "atom-form-error", "data-atom-init": "t78" }
+{ "class": "atom-form-error", "data-atom-init": "t81" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] = 
@@ -462,44 +466,44 @@ jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] =
 ,"\n", ["div",
 {  }
 ,"\n", ["span",
-{ "class": "atom-form-label", "data-atom-init": "t80" }
+{ "class": "atom-form-label", "data-atom-init": "t83" }
 ], "\n", ["span",
-{ "class": "atom-form-required", "data-atom-init": "t81" }
+{ "class": "atom-form-required", "data-atom-init": "t84" }
 ], "\n"], "\n", ["div",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t82" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t85" }
 ], "\n", ["div",
-{ "class": "atom-form-error", "data-atom-init": "t83" }
+{ "class": "atom-form-error", "data-atom-init": "t86" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.alertTemplate"] = 
 [["div",
 { "class": "atom-alert", "data-atom-dock": "Fill" }
 ,"\n", ["pre",
-{ "data-atom-init": "t85" }
+{ "data-atom-init": "t88" }
 ,"\n"], "\n", ["div",
-{ "class": "buttons", "data-atom-init": "t86" }
+{ "class": "buttons", "data-atom-init": "t89" }
 ,"\n", ["button",
-{ "class": "ok", "data-atom-init": "t87" }
+{ "class": "ok", "data-atom-init": "t90" }
 ,"Ok"], "\n", ["button",
-{ "class": "yes", "data-atom-init": "t88" }
+{ "class": "yes", "data-atom-init": "t91" }
 ,"Yes"], "\n", ["button",
-{ "class": "no", "data-atom-init": "t89" }
+{ "class": "no", "data-atom-init": "t92" }
 ,"No"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.frameTemplate"] = 
 [["div",
-{ "class": "atom-window-background", "data-atom-init": "t90" }
+{ "class": "atom-window-background", "data-atom-init": "t93" }
 ,"\n", ["div",
-{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t91" }
+{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t94" }
 ,"\n", ["div",
-{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t92" }
+{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t95" }
 ], "\n", ["div",
-{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t93" }
+{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t96" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.windowTemplate"] = 
 [["iframe",
-{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t94" }
+{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t97" }
 ,"\n"]]
 ;
 
@@ -548,33 +552,63 @@ this.setLocalValue('text',  Atom.get(this,'data')[Atom.get(this,'templateParent.
 
 /* WebAtoms.AtomCalendar.template */
 this.t5= function(e){
-this.setLocalValue('eventClick', Atom.get(this,'templateParent.prevMonthCommand'), e);
+this.setLocalValue('eventClick', Atom.get(this,'prevMonthCommand'), e);
+	AtomProperties.text(e,"\u003c");
 };
 
 this.t6= function(e){
-this.bind(e,'text',[
-	['templateParent', 'currentMonth'],
-	['templateParent', 'currentYear']],
-			0, function(v1,v2){
-				 return  AtomDate.monthList[v1-1].label + ' ' + v2; 
-			});
+this.setLocalValue('items', AtomDate.monthList, e);
+	this.bind(e,'value',['templateParent', 'month'],true)
 };
 
 this.t7= function(e){
-this.setLocalValue('eventClick', Atom.get(this,'templateParent.nextMonthCommand'), e);
+this.bind(e,'items',[
+	['value'],
+	['templateParent', 'startYear'],
+	['value'],
+	['templateParent', 'endYear']],
+			0, function(v1,v2,v3,v4){
+				 return  Atom.range( v1 + v2, v3 + v4) ; 
+			});
+	this.bind(e,'value',['templateParent', 'year'],true)
 };
 
-/* WebAtoms.AtomCheckBoxList.itemTemplate */
+this.t8= function(e){
+this.setLocalValue('eventClick', Atom.get(this,'nextMonthCommand'), e);
+	AtomProperties.text(e,"\u003e");
+};
+
 this.t10= function(e){
-this.bind(e,'checked',['scope', 'itemSelected'],true)
+this.bind(e,'class',[
+	['data', 'isWeekEnd'],
+	['data', 'isOtherMonth'],
+	['data', 'isToday'],
+	['scope', 'itemSelected']],
+			0, function(v1,v2,v3,v4){
+				 return  {
+'weekend': v1,
+other: v2,
+today: v3,
+'selected': v4 } ; 
+			});
 };
 
 this.t11= function(e){
+this.bind(e,'text',
+	['data', 'label']);
+};
+
+/* WebAtoms.AtomCheckBoxList.itemTemplate */
+this.t13= function(e){
+this.bind(e,'checked',['scope', 'itemSelected'],true)
+};
+
+this.t14= function(e){
 this.setLocalValue('text', Atom.get(this,'data')[Atom.get(this,'templateParent.labelPath')], e);
 };
 
 /* WebAtoms.AtomDataPager.template */
-this.t12= function(e){
+this.t15= function(e){
 this.bind(e,'isEnabled',[
 	['pages', 'length'],
 	['currentPage']],
@@ -584,19 +618,19 @@ this.bind(e,'isEnabled',[
 	this.setLocalValue('eventClick', Atom.get(this,'goFirstCommand'), e);
 };
 
-this.t13= function(e){
+this.t16= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'goPrevCommand'), e);
 	this.bind(e,'isEnabled',
 	['currentPage']);
 };
 
-this.t14= function(e){
+this.t17= function(e){
 this.bind(e,'items',
 	['atomParent', 'pages']);
 	this.bind(e,'value',['atomParent', 'currentPage'],true)
 };
 
-this.t15= function(e){
+this.t18= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'goNextCommand'), e);
 	this.bind(e,'isEnabled',[
 	['currentPage'],
@@ -606,7 +640,7 @@ this.setLocalValue('eventClick', Atom.get(this,'goNextCommand'), e);
 			});
 };
 
-this.t16= function(e){
+this.t19= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'goLastCommand'), e);
 	this.bind(e,'isEnabled',[
 	['pages', 'length'],
@@ -618,7 +652,7 @@ this.setLocalValue('eventClick', Atom.get(this,'goLastCommand'), e);
 };
 
 /* WebAtoms.AtomDateField.popupTemplate */
-this.t17= function(e){
+this.t20= function(e){
 this.bind(e,'styleLeft',[
 	['offsetLeft']],
 			0, function(v1){
@@ -636,12 +670,12 @@ this.bind(e,'styleLeft',[
 			});
 };
 
-this.t19= function(e){
+this.t22= function(e){
 this.setLocalValue('items', AtomDate.monthList, e);
 	this.bind(e,'value',['templateParent', 'month'],true)
 };
 
-this.t20= function(e){
+this.t23= function(e){
 this.bind(e,'startNumber',[
 	['templateParent', 'currentYear'],
 	['templateParent', 'startYear']],
@@ -657,12 +691,12 @@ this.bind(e,'startNumber',[
 	this.bind(e,'value',['templateParent', 'year'],true)
 };
 
-this.t21= function(e){
+this.t24= function(e){
 this.bind(e,'items',
 	['templateParent', 'items']);
 };
 
-this.t22= function(e){
+this.t25= function(e){
 this.setLocalValue('eventClick',  Atom.get(this,'templateParent.templateParent.toggleDateCommand') , e);
 	this.bind(e,'class',[
 	['data', 'isWeekEnd'],
@@ -680,13 +714,13 @@ today: v3,
 			});
 };
 
-this.t23= function(e){
+this.t26= function(e){
 this.bind(e,'text',
 	['data', 'label']);
 };
 
 /* WebAtoms.AtomDateField.template */
-this.t24= function(e){
+this.t27= function(e){
 this.bind(e,'class',[
 	['isOpen']],
 			0, function(v1){
@@ -706,12 +740,12 @@ this.bind(e,'class',[
 };
 
 /* WebAtoms.AtomDateListBox.template */
-this.t25= function(e){
+this.t28= function(e){
 this.setLocalValue('items', AtomDate.monthList, e);
 	this.bind(e,'value',['templateParent', 'month'],true)
 };
 
-this.t26= function(e){
+this.t29= function(e){
 this.bind(e,'items',[
 	['value'],
 	['templateParent', 'startYear'],
@@ -723,7 +757,7 @@ this.bind(e,'items',[
 	this.bind(e,'value',['templateParent', 'year'],true)
 };
 
-this.t28= function(e){
+this.t31= function(e){
 this.setLocalValue('eventClick',  Atom.get(this,'templateParent.toggleDateCommand') , e);
 	this.bind(e,'data',[
 	['templateParent', 'items'],
@@ -747,12 +781,12 @@ today: v3,
 			});
 };
 
-this.t29= function(e){
+this.t32= function(e){
 this.bind(e,'text',
 	['data', 'label']);
 };
 
-this.t30= function(e){
+this.t33= function(e){
 this.bind(e,'items',
 	['templateParent', 'selectedItems']);
 	this.setLocalValue('labelPath', "dateLabel", e);
@@ -760,12 +794,12 @@ this.bind(e,'items',
 	this.bind(e,'value',['templateParent', 'visibleDate'],true)
 };
 
-this.t31= function(e){
+this.t34= function(e){
 this.setLocalValue('text', Atom.get(this,'data.dateLabel'), e);
 };
 
 /* WebAtoms.AtomItemsControl.itemTemplate */
-this.t32= function(e){
+this.t35= function(e){
 this.bind(e,'text',[
 	['data'],
 	['atomParent', 'labelPath']],
@@ -775,18 +809,18 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomLinkBar.itemTemplate */
-this.t33= function(e){
+this.t36= function(e){
 this.setLocalValue('class', Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')] ? ((Atom.get(this,'data')[Atom.get(this,'templateParent.itemsPath')]).length ? 'sub-menu' : '' ) : '' , e);
 };
 
-this.t34= function(e){
+this.t37= function(e){
 this.setLocalValue('href', Atom.get(this,'data')[Atom.get(this,'atomParent.valuePath')], e);
 	this.setLocalValue('target', Atom.get(this,'data')[Atom.get(this,'atomParent.targetPath')], e);
 	this.setLocalValue('text', Atom.get(this,'data')[Atom.get(this,'atomParent.labelPath')], e);
 };
 
 /* WebAtoms.AtomLinkBar.menuTemplate */
-this.t35= function(e){
+this.t38= function(e){
 this.bind(e,'items',[
 	['data'],
 	['templateParent', 'itemsPath']],
@@ -797,7 +831,7 @@ this.bind(e,'items',[
 	this.setLocalValue('menuDirection', "vertical", e);
 };
 
-this.t37= function(e){
+this.t40= function(e){
 this.setLocalValue('href', Atom.get(this,'data')[Atom.get(this,'templateParent.valuePath')], e);
 	this.setLocalValue('text', Atom.get(this,'data')[Atom.get(this,'templateParent.labelPath')], e);
 	this.setLocalValue('target', Atom.get(this,'data.target'), e);
@@ -805,7 +839,7 @@ this.setLocalValue('href', Atom.get(this,'data')[Atom.get(this,'templateParent.v
 };
 
 /* WebAtoms.AtomNavigatorList.detailTemplate */
-this.t38= function(e){
+this.t41= function(e){
 this.bind(e,'src',[
 	['templateParent', 'displayMode'],
 	['templateParent', 'displayMode'],
@@ -817,48 +851,48 @@ this.bind(e,'src',[
 };
 
 /* WebAtoms.AtomNavigatorList.template */
-this.t39= function(e){
+this.t42= function(e){
 this.bind(e,'selectedIndex',
 	['atomParent', 'displayMode']);
 };
 
-this.t42= function(e){
+this.t45= function(e){
 this.bind(e,'data',
 	['templateParent', 'selectedItem']);
 };
 
-this.t44= function(e){
+this.t47= function(e){
 this.bind(e,'eventClick',
 	['templateParent', 'backCommand']);
 };
 
-this.t45= function(e){
+this.t48= function(e){
 this.bind(e,'data',
 	['templateParent', 'newItemCopy']);
 };
 
-this.t47= function(e){
+this.t50= function(e){
 this.bind(e,'eventClick',
 	['templateParent', 'cancelAddCommand']);
 };
 
 /* WebAtoms.AtomRadioButtonList.itemTemplate */
-this.t48= function(e){
+this.t51= function(e){
 this.bind(e,'checked',['scope', 'itemSelected'],true)
 };
 
-this.t49= function(e){
+this.t52= function(e){
 this.setLocalValue('text', Atom.get(this,'data.label'), e);
 };
 
 /* WebAtoms.AtomSortableColumn.template */
-this.t50= function(e){
+this.t53= function(e){
 this.bind(e,'text',
 	['label']);
 };
 
 /* WebAtoms.AtomTabControl.template */
-this.t52= function(e){
+this.t55= function(e){
 this.setLocalValue('showTabs', "true", e);
 	this.bind(e,'labelPath',
 	['templateParent', 'labelPath']);
@@ -867,27 +901,27 @@ this.setLocalValue('showTabs', "true", e);
 	this.bind(e,'selectedIndex',['templateParent', 'selectedIndex'],true)
 };
 
-this.t53= function(e){
+this.t56= function(e){
 this.bind(e,'text',
 	['data']);
 };
 
-this.t54= function(e){
+this.t57= function(e){
 this.bind(e,'selectedIndex',
 	['templateParent', 'selectedIndex']);
 };
 
 /* WebAtoms.AtomToggleButtonBar.itemTemplate */
-this.t55= function(e){
+this.t58= function(e){
 this.setLocalValue('text', Atom.get(this,'data')[Atom.get(this,'atomParent.labelPath')], e);
 };
 
 /* WebAtoms.AtomWizard.template */
-this.t56= function(e){
+this.t59= function(e){
 this.bind(e,'selectedIndex',['templateParent', 'currentStep'],true)
 };
 
-this.t58= function(e){
+this.t61= function(e){
 this.bind(e,'isEnabled',
 	['canMoveBack']);
 	this.setLocalValue('eventClick', Atom.get(this,'goPrevCommand'), e);
@@ -898,12 +932,12 @@ this.bind(e,'isEnabled',
 			});
 };
 
-this.t59= function(e){
+this.t62= function(e){
 this.bind(e,'text',
 	['prevLabel']);
 };
 
-this.t60= function(e){
+this.t63= function(e){
 this.bind(e,'class',[
 	['nextClass'],
 	['isLastStep']],
@@ -915,7 +949,7 @@ this.bind(e,'class',[
 	['nextCommand']);
 };
 
-this.t61= function(e){
+this.t64= function(e){
 this.bind(e,'text',[
 	['isLastStep'],
 	['finishLabel'],
@@ -926,11 +960,11 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomYesNoCustom.template */
-this.t62= function(e){
+this.t65= function(e){
 this.bind(e,'value',['templateParent', 'hasValue'],true)
 };
 
-this.t63= function(e){
+this.t66= function(e){
 this.bind(e,'isEnabled',
 	['hasValue']);
 	this.bind(e,'placeholder',
@@ -938,7 +972,7 @@ this.bind(e,'isEnabled',
 };
 
 /* WebAtoms.AtomApplication.busyTemplate */
-this.t64= function(e){
+this.t67= function(e){
 this.bind(e,'styleWidth',[
 	['appWidth']],
 			0, function(v1){
@@ -956,7 +990,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t65= function(e){
+this.t68= function(e){
 this.bind(e,'styleLeft',[
 	['appWidth']],
 			0, function(v1){
@@ -969,11 +1003,11 @@ this.bind(e,'styleLeft',[
 			});
 };
 
-this.t66= function(e){
+this.t69= function(e){
 AtomProperties.absPos(e,"12,12,36,36");
 };
 
-this.t67= function(e){
+this.t70= function(e){
 AtomProperties.absPos(e,"56,24,145,null");
 	this.bind(e,'text',[
 	['busyMessage']],
@@ -982,7 +1016,7 @@ AtomProperties.absPos(e,"56,24,145,null");
 			});
 };
 
-this.t68= function(e){
+this.t71= function(e){
 AtomProperties.absPos(e,"0,48");
 	this.bind(e,'styleDisplay',[
 	['isBusy'],
@@ -998,7 +1032,7 @@ AtomProperties.absPos(e,"0,48");
 };
 
 /* WebAtoms.AtomFormGridLayout.fieldTemplate */
-this.t69= function(e){
+this.t72= function(e){
 this.bind(e,'class',
 	['fieldClass']);
 	this.bind(e,'styleDisplay',[
@@ -1008,7 +1042,7 @@ this.bind(e,'class',
 			});
 };
 
-this.t70= function(e){
+this.t73= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1019,7 +1053,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t71= function(e){
+this.t74= function(e){
 this.bind(e,'class',[
 	['required']],
 			0, function(v1){
@@ -1027,7 +1061,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t72= function(e){
+this.t75= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1035,7 +1069,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t73= function(e){
+this.t76= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1054,7 +1088,7 @@ this.bind(e,'class',[
 };
 
 /* WebAtoms.AtomFormLayout.fieldTemplate */
-this.t75= function(e){
+this.t78= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1064,7 +1098,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t76= function(e){
+this.t79= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1072,7 +1106,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t77= function(e){
+this.t80= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1080,7 +1114,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t78= function(e){
+this.t81= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1089,12 +1123,12 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomFormVerticalLayout.fieldTemplate */
-this.t80= function(e){
+this.t83= function(e){
 this.bind(e,'text',
 	['label']);
 };
 
-this.t81= function(e){
+this.t84= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1102,7 +1136,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t82= function(e){
+this.t85= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1110,7 +1144,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t83= function(e){
+this.t86= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1119,28 +1153,28 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomWindow.alertTemplate */
-this.t85= function(e){
+this.t88= function(e){
 this.setLocalValue('text', Atom.get(this,'data.Message'), e);
 };
 
-this.t86= function(e){
+this.t89= function(e){
 this.setLocalValue('class',  Atom.get(this,'data.Confirm') ? 'confirm-buttons' : 'alert-buttons' , e);
 };
 
-this.t87= function(e){
+this.t90= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
-this.t88= function(e){
+this.t91= function(e){
 this.setLocalValue('eventClick',  [ { data: { ConfirmValue: true } } , Atom.get(this,'templateParent.closeCommand') ] , e);
 };
 
-this.t89= function(e){
+this.t92= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.frameTemplate */
-this.t90= function(e){
+this.t93= function(e){
 this.bind(e,'styleWidth',[
 	['appScope', 'owner', 'bodyWidth']],
 			0, function(v1){
@@ -1158,7 +1192,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t91= function(e){
+this.t94= function(e){
 this.bind(e,'styleWidth',[
 	['atomParent', 'windowWidth']],
 			0, function(v1){
@@ -1183,17 +1217,17 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t92= function(e){
+this.t95= function(e){
 this.bind(e,'text',
 	['atomParent', 'title']);
 };
 
-this.t93= function(e){
+this.t96= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'atomParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.windowTemplate */
-this.t94= function(e){
+this.t97= function(e){
 this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 };
 
@@ -7966,104 +8000,135 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 2 - 'AtomCalendar.js' */(function (baseType) {
 /*Line 3 - 'AtomCalendar.js' */    return classCreatorEx({
 /*Line 4 - 'AtomCalendar.js' */        name: "WebAtoms.AtomCalendar",
-/*Line 5 - 'AtomCalendar.js' */        start: function () {
-/*Line 6 - 'AtomCalendar.js' */        },
-/*Line 7 - 'AtomCalendar.js' */        properties: {
-/*Line 8 - 'AtomCalendar.js' */            currentMonth: (new Date()).getMonth()+1,
-/*Line 9 - 'AtomCalendar.js' */            currentYear: (new Date()).getFullYear(),
-/*Line 10 - 'AtomCalendar.js' */            startDate: null,
-/*Line 11 - 'AtomCalendar.js' */            endDate: null
-/*Line 12 - 'AtomCalendar.js' */        },
-/*Line 13 - 'AtomCalendar.js' */        methods: {
-/*Line 14 - 'AtomCalendar.js' */            set_currentMonth: function (v) {
-/*Line 15 - 'AtomCalendar.js' */                this._currentMonth = v;
-/*Line 16 - 'AtomCalendar.js' */                this.updateCalendar();
-/*Line 17 - 'AtomCalendar.js' */            },
-/*Line 18 - 'AtomCalendar.js' */            set_currentYear: function (v) {
-/*Line 19 - 'AtomCalendar.js' */                this._currentYear = v;
-/*Line 20 - 'AtomCalendar.js' */                this.updateCalendar();
-/*Line 21 - 'AtomCalendar.js' */            },
-/*Line 22 - 'AtomCalendar.js' */            onCreated: function () {
-/*Line 23 - 'AtomCalendar.js' */                baseType.onCreated.call(this);
-/*Line 24 - 'AtomCalendar.js' */                this.updateCalendar();
-/*Line 25 - 'AtomCalendar.js' */            },
+/*Line 5 - 'AtomCalendar.js' */        base: baseType,
+/*Line 6 - 'AtomCalendar.js' */        start: function (e) {
+/*Line 7 - 'AtomCalendar.js' */            $(e).addClass("atom-calendar");
 
-/*Line 27 - 'AtomCalendar.js' */            applyItemStyle: function (item, data, first, last) {
-/*Line 28 - 'AtomCalendar.js' */                var $item = $(item);
-/*Line 29 - 'AtomCalendar.js' */                $item.removeClass("other weekend today");
-/*Line 30 - 'AtomCalendar.js' */                $item.addClass("calendar-item");
-/*Line 31 - 'AtomCalendar.js' */                if (data.IsOtherMonth) {
-/*Line 32 - 'AtomCalendar.js' */                    $item.addClass("other");
-/*Line 33 - 'AtomCalendar.js' */                }
-/*Line 34 - 'AtomCalendar.js' */                if (data.IsWeekEnd) {
-/*Line 35 - 'AtomCalendar.js' */                    $item.addClass("weekend");
-/*Line 36 - 'AtomCalendar.js' */                }
-/*Line 37 - 'AtomCalendar.js' */                if (data.IsToday) {
-/*Line 38 - 'AtomCalendar.js' */                    $item.addClass("today");
-/*Line 39 - 'AtomCalendar.js' */                }
-/*Line 40 - 'AtomCalendar.js' */            },
+/*Line 9 - 'AtomCalendar.js' */            var today = new Date();
+/*Line 10 - 'AtomCalendar.js' */            this._month = today.getMonth() + 1;
+/*Line 11 - 'AtomCalendar.js' */            this._year = today.getFullYear();
 
-/*Line 42 - 'AtomCalendar.js' */            updateCalendar: function(){
-/*Line 43 - 'AtomCalendar.js' */                if (!this._created)
+/*Line 13 - 'AtomCalendar.js' */            this._startYear = -5;
+/*Line 14 - 'AtomCalendar.js' */            this._endYear = 10;
+
+/*Line 16 - 'AtomCalendar.js' */            this._currentYear = (new Date()).getFullYear();
+/*Line 17 - 'AtomCalendar.js' */            this._value = null;
+
+
+/*Line 20 - 'AtomCalendar.js' */        },
+/*Line 21 - 'AtomCalendar.js' */        properties: {
+/*Line 22 - 'AtomCalendar.js' */            month: 0,
+/*Line 23 - 'AtomCalendar.js' */            year:0,
+/*Line 24 - 'AtomCalendar.js' */            startYear: -5,
+/*Line 25 - 'AtomCalendar.js' */            endYear: 0,
+/*Line 26 - 'AtomCalendar.js' */            currentYear: 0,
+/*Line 27 - 'AtomCalendar.js' */            visibleDate: undefined
+/*Line 28 - 'AtomCalendar.js' */        },
+/*Line 29 - 'AtomCalendar.js' */        methods: {
+/*Line 30 - 'AtomCalendar.js' */            set_month: function (v) {
+/*Line 31 - 'AtomCalendar.js' */                this._month = v;
+/*Line 32 - 'AtomCalendar.js' */                this.updateCalendar();
+/*Line 33 - 'AtomCalendar.js' */            },
+
+/*Line 35 - 'AtomCalendar.js' */            set_year: function (v) {
+/*Line 36 - 'AtomCalendar.js' */                this._year = v;
+/*Line 37 - 'AtomCalendar.js' */                this.updateCalendar();
+/*Line 38 - 'AtomCalendar.js' */            },
+
+/*Line 40 - 'AtomCalendar.js' */            set_visibleDate: function (v) {
+/*Line 41 - 'AtomCalendar.js' */                if (!v)
+/*Line 42 - 'AtomCalendar.js' */                    return;
+/*Line 43 - 'AtomCalendar.js' */                if (v == this._visibleDate)
 /*Line 44 - 'AtomCalendar.js' */                    return;
-/*Line 45 - 'AtomCalendar.js' */                var year = this._currentYear;
-/*Line 46 - 'AtomCalendar.js' */                var month = this._currentMonth-1;
+/*Line 45 - 'AtomCalendar.js' */                this._visibleDate = v;
+/*Line 46 - 'AtomCalendar.js' */                this._year = v.getFullYear();
+/*Line 47 - 'AtomCalendar.js' */                this._month = v.getMonth() + 1;
+/*Line 48 - 'AtomCalendar.js' */                this.updateCalendar();
+/*Line 49 - 'AtomCalendar.js' */                AtomBinder.refreshValue(this, "year");
+/*Line 50 - 'AtomCalendar.js' */                AtomBinder.refreshValue(this, "month");
+/*Line 51 - 'AtomCalendar.js' */            },
 
-/*Line 48 - 'AtomCalendar.js' */                var start = new Date(year, month, 1);
-/*Line 49 - 'AtomCalendar.js' */                while (start.getDay() > 0) {
-/*Line 50 - 'AtomCalendar.js' */                    var nd = new Date(start.getTime());
-/*Line 51 - 'AtomCalendar.js' */                    nd.setDate(start.getDate() - 1);
-/*Line 52 - 'AtomCalendar.js' */                    start = nd;
-/*Line 53 - 'AtomCalendar.js' */                }
-/*Line 54 - 'AtomCalendar.js' */                var dates = [];
-/*Line 55 - 'AtomCalendar.js' */                var end = new Date(start.getTime());
-/*Line 56 - 'AtomCalendar.js' */                end.setDate(end.getDate() + 42);
-/*Line 57 - 'AtomCalendar.js' */                for (var i = start; i.getTime() < end.getTime() ;) {
+/*Line 53 - 'AtomCalendar.js' */            onCreated: function () {
+/*Line 54 - 'AtomCalendar.js' */                baseType.onCreated.call(this);
+/*Line 55 - 'AtomCalendar.js' */                this.updateCalendar();
+/*Line 56 - 'AtomCalendar.js' */            },
 
-/*Line 59 - 'AtomCalendar.js' */                    var nd = new Date(i.getTime());
-/*Line 60 - 'AtomCalendar.js' */                    nd.setDate(i.getDate() + 1);
+/*Line 58 - 'AtomCalendar.js' */            applyItemStyle: function (item, data, first, last) {
+/*Line 59 - 'AtomCalendar.js' */            },
 
-/*Line 62 - 'AtomCalendar.js' */                    dates.push({
-/*Line 63 - 'AtomCalendar.js' */                        value: i,
-/*Line 64 - 'AtomCalendar.js' */                        label: i.getDate(),
-/*Line 65 - 'AtomCalendar.js' */                        next: nd,
-/*Line 66 - 'AtomCalendar.js' */                        IsOtherMonth: i.getMonth() != month,
-/*Line 67 - 'AtomCalendar.js' */                        IsWeekEnd: i.getDay() == 0 || i.getDay() == 6,
-/*Line 68 - 'AtomCalendar.js' */                        IsToday: i.getDate() == now.getDate() && i.getMonth() == now.getMonth()
-/*Line 69 - 'AtomCalendar.js' */                    });
-/*Line 70 - 'AtomCalendar.js' */                    i = nd;
-/*Line 71 - 'AtomCalendar.js' */                }
+/*Line 61 - 'AtomCalendar.js' */            updateCalendar: function(){
+/*Line 62 - 'AtomCalendar.js' */                if (!this._created)
+/*Line 63 - 'AtomCalendar.js' */                    return;
+/*Line 64 - 'AtomCalendar.js' */                var now = new Date();
 
-/*Line 73 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "items", dates);
-/*Line 74 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "startDate", start);
-/*Line 75 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "endDate", end);
-/*Line 76 - 'AtomCalendar.js' */            },
-/*Line 77 - 'AtomCalendar.js' */            changeMonth: function (n) {
-/*Line 78 - 'AtomCalendar.js' */                var m = this._currentMonth;
-/*Line 79 - 'AtomCalendar.js' */                m += n;
-/*Line 80 - 'AtomCalendar.js' */                if (m > 12) {
-/*Line 81 - 'AtomCalendar.js' */                    m = 1;
-/*Line 82 - 'AtomCalendar.js' */                    this._currentYear += 1;
-/*Line 83 - 'AtomCalendar.js' */                }
-/*Line 84 - 'AtomCalendar.js' */                if (m == 0) {
-/*Line 85 - 'AtomCalendar.js' */                    this._currentYear -= 1;
-/*Line 86 - 'AtomCalendar.js' */                    m = 12;
-/*Line 87 - 'AtomCalendar.js' */                }
-/*Line 88 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "currentMonth",m);
-/*Line 89 - 'AtomCalendar.js' */            },
-/*Line 90 - 'AtomCalendar.js' */            init: function () {
-/*Line 91 - 'AtomCalendar.js' */                baseType.init.call(this);
-/*Line 92 - 'AtomCalendar.js' */                var _this = this;
-/*Line 93 - 'AtomCalendar.js' */                this.nextMonthCommand = function () {
-/*Line 94 - 'AtomCalendar.js' */                    _this.changeMonth(1);
-/*Line 95 - 'AtomCalendar.js' */                };
-/*Line 96 - 'AtomCalendar.js' */                this.prevMonthCommand = function () {
-/*Line 97 - 'AtomCalendar.js' */                    _this.changeMonth(-1);
-/*Line 98 - 'AtomCalendar.js' */                }
-/*Line 99 - 'AtomCalendar.js' */            }
-/*Line 100 - 'AtomCalendar.js' */        }
-/*Line 101 - 'AtomCalendar.js' */    });
-/*Line 102 - 'AtomCalendar.js' */})(WebAtoms.AtomListBox.prototype);
+/*Line 66 - 'AtomCalendar.js' */                var d = new Date(this._year, this._month - 1, 1);
+/*Line 67 - 'AtomCalendar.js' */                var first = new Date(this._year, this._month - 1, 1);
+
+/*Line 69 - 'AtomCalendar.js' */                if (first.getDay()) {
+/*Line 70 - 'AtomCalendar.js' */                    // go to first day of the month...
+/*Line 71 - 'AtomCalendar.js' */                    var start = first.getDay() - 1;
+/*Line 72 - 'AtomCalendar.js' */                    start = -start;
+
+/*Line 74 - 'AtomCalendar.js' */                    first.setDate(start);
+/*Line 75 - 'AtomCalendar.js' */                }
+
+/*Line 77 - 'AtomCalendar.js' */                var m = first.getMonth();
+/*Line 78 - 'AtomCalendar.js' */                var y = first.getFullYear();
+
+/*Line 80 - 'AtomCalendar.js' */                var items = [];
+
+/*Line 82 - 'AtomCalendar.js' */                var i = 0;
+
+/*Line 84 - 'AtomCalendar.js' */                var cm = this._month - 1;
+
+/*Line 86 - 'AtomCalendar.js' */                for (i = 0; i < 42; i++) {
+/*Line 87 - 'AtomCalendar.js' */                    var cd = i + first.getDate();
+/*Line 88 - 'AtomCalendar.js' */                    var id = new Date(y, m, cd);
+/*Line 89 - 'AtomCalendar.js' */                    var w = id.getDay();
+/*Line 90 - 'AtomCalendar.js' */                    w = w == 0 || w == 6;
+/*Line 91 - 'AtomCalendar.js' */                    items.push({
+/*Line 92 - 'AtomCalendar.js' */                        label: id.getDate(),
+/*Line 93 - 'AtomCalendar.js' */                        isWeekEnd: w,
+/*Line 94 - 'AtomCalendar.js' */                        isToday:
+/*Line 95 - 'AtomCalendar.js' */                            now.getDate() == id.getDate()
+/*Line 96 - 'AtomCalendar.js' */                            && now.getMonth() == id.getMonth()
+/*Line 97 - 'AtomCalendar.js' */                            && now.getFullYear() == id.getFullYear(),
+/*Line 98 - 'AtomCalendar.js' */                        isOtherMonth: id.getMonth() != cm,
+/*Line 99 - 'AtomCalendar.js' */                        dateLabel: AtomDate.toShortDateString(id),
+/*Line 100 - 'AtomCalendar.js' */                        value: AtomDate.toMMDDYY(id),
+/*Line 101 - 'AtomCalendar.js' */                        date: id
+/*Line 102 - 'AtomCalendar.js' */                    });
+/*Line 103 - 'AtomCalendar.js' */                }
+
+
+/*Line 106 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "items", items);
+/*Line 107 - 'AtomCalendar.js' */            },
+/*Line 108 - 'AtomCalendar.js' */            changeMonth: function (n) {
+/*Line 109 - 'AtomCalendar.js' */                var m = this._month;
+/*Line 110 - 'AtomCalendar.js' */                m += n;
+/*Line 111 - 'AtomCalendar.js' */                if (m > 12) {
+/*Line 112 - 'AtomCalendar.js' */                    m = 1;
+/*Line 113 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year + 1);
+/*Line 114 - 'AtomCalendar.js' */                }
+/*Line 115 - 'AtomCalendar.js' */                if (m == 0) {
+/*Line 116 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year - 1);
+/*Line 117 - 'AtomCalendar.js' */                    m = 12;
+/*Line 118 - 'AtomCalendar.js' */                }
+/*Line 119 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "month",m);
+/*Line 120 - 'AtomCalendar.js' */            },
+/*Line 121 - 'AtomCalendar.js' */            init: function () {
+/*Line 122 - 'AtomCalendar.js' */                baseType.init.call(this);
+/*Line 123 - 'AtomCalendar.js' */                var _this = this;
+/*Line 124 - 'AtomCalendar.js' */                this.nextMonthCommand = function () {
+/*Line 125 - 'AtomCalendar.js' */                    _this.changeMonth(1);
+/*Line 126 - 'AtomCalendar.js' */                };
+/*Line 127 - 'AtomCalendar.js' */                this.prevMonthCommand = function () {
+/*Line 128 - 'AtomCalendar.js' */                    _this.changeMonth(-1);
+/*Line 129 - 'AtomCalendar.js' */                }
+/*Line 130 - 'AtomCalendar.js' */            }
+/*Line 131 - 'AtomCalendar.js' */        }
+/*Line 132 - 'AtomCalendar.js' */    });
+/*Line 133 - 'AtomCalendar.js' */})(WebAtoms.AtomListBox.prototype);
 /*Line 0 - 'AtomCheckBoxList.js' */
 
 /*Line 2 - 'AtomCheckBoxList.js' */(function (base) {
