@@ -102,3 +102,104 @@
         }
     }
 }
+
+.atom-calendar {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding:5px;
+
+    > header {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width:100%;
+        padding:5px;
+        text-align:center;
+        position:relative;
+
+        > button.prev{
+            float:left;
+        }
+
+        > button.next{
+            float:right;
+        }
+
+        > .month {
+        }
+
+        > .year {
+        }
+    }
+
+    > ul.days {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display:block;
+        overflow: hidden;
+        padding: 5px;
+        margin:0;
+        width:100%;
+        >li {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin:0;
+            float:left;
+            display: inline-block;
+            list-style:none;
+            width: 14.28%;
+            padding:5px;
+
+            &.weekend {
+                background-color: lightgray;
+            }
+        }
+    }
+
+    > section.day-list {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display:block;
+        width: 100%;
+        overflow: hidden;
+        margin:0;
+        padding: 5px;
+        > div{
+            margin:0;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            display:inline-block;
+            float:left;
+            padding:5px;
+            width:14.28%;
+
+            &.today{
+                background-color:orange;
+            }
+
+            &.selected{
+                background-color:blue;
+                color:white;
+            }
+
+            &.other{
+                color:gray;
+            }
+
+            &.weekend{
+                background-color:lightgray;
+                &.selected{
+                    background-color:blue;
+                    color:white;
+                }
+            }
+            
+        }
+    }
+}
+

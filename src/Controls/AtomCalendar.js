@@ -3,90 +3,121 @@
 (function (baseType) {
     return classCreatorEx({
         name: "WebAtoms.AtomCalendar",
-        start: function () {
+        base: baseType,
+        start: function (e) {
+            $(e).addClass("atom-calendar");
+
+            var today = new Date();
+            this._month = today.getMonth() + 1;
+            this._year = today.getFullYear();
+
+            this._startYear = -5;
+            this._endYear = 10;
+
+            this._currentYear = (new Date()).getFullYear();
+            this._value = null;
+
+
         },
         properties: {
-            currentMonth: (new Date()).getMonth()+1,
-            currentYear: (new Date()).getFullYear(),
-            startDate: null,
-            endDate: null
+            month: 0,
+            year:0,
+            startYear: -5,
+            endYear: 0,
+            currentYear: 0,
+            visibleDate: undefined
         },
         methods: {
-            set_currentMonth: function (v) {
-                this._currentMonth = v;
+            set_month: function (v) {
+                this._month = v;
                 this.updateCalendar();
             },
-            set_currentYear: function (v) {
-                this._currentYear = v;
+
+            set_year: function (v) {
+                this._year = v;
                 this.updateCalendar();
             },
+
+            set_visibleDate: function (v) {
+                if (!v)
+                    return;
+                if (v == this._visibleDate)
+                    return;
+                this._visibleDate = v;
+                this._year = v.getFullYear();
+                this._month = v.getMonth() + 1;
+                this.updateCalendar();
+                AtomBinder.refreshValue(this, "year");
+                AtomBinder.refreshValue(this, "month");
+            },
+
             onCreated: function () {
                 baseType.onCreated.call(this);
                 this.updateCalendar();
             },
 
             applyItemStyle: function (item, data, first, last) {
-                var $item = $(item);
-                $item.removeClass("other weekend today");
-                $item.addClass("calendar-item");
-                if (data.IsOtherMonth) {
-                    $item.addClass("other");
-                }
-                if (data.IsWeekEnd) {
-                    $item.addClass("weekend");
-                }
-                if (data.IsToday) {
-                    $item.addClass("today");
-                }
             },
 
             updateCalendar: function(){
                 if (!this._created)
                     return;
-                var year = this._currentYear;
-                var month = this._currentMonth-1;
+                var now = new Date();
 
-                var start = new Date(year, month, 1);
-                while (start.getDay() > 0) {
-                    var nd = new Date(start.getTime());
-                    nd.setDate(start.getDate() - 1);
-                    start = nd;
+                var d = new Date(this._year, this._month - 1, 1);
+                var first = new Date(this._year, this._month - 1, 1);
+
+                if (first.getDay()) {
+                    // go to first day of the month...
+                    var start = first.getDay() - 1;
+                    start = -start;
+
+                    first.setDate(start);
                 }
-                var dates = [];
-                var end = new Date(start.getTime());
-                end.setDate(end.getDate() + 42);
-                for (var i = start; i.getTime() < end.getTime() ;) {
 
-                    var nd = new Date(i.getTime());
-                    nd.setDate(i.getDate() + 1);
+                var m = first.getMonth();
+                var y = first.getFullYear();
 
-                    dates.push({
-                        value: i,
-                        label: i.getDate(),
-                        next: nd,
-                        IsOtherMonth: i.getMonth() != month,
-                        IsWeekEnd: i.getDay() == 0 || i.getDay() == 6,
-                        IsToday: i.getDate() == now.getDate() && i.getMonth() == now.getMonth()
+                var items = [];
+
+                var i = 0;
+
+                var cm = this._month - 1;
+
+                for (i = 0; i < 42; i++) {
+                    var cd = i + first.getDate();
+                    var id = new Date(y, m, cd);
+                    var w = id.getDay();
+                    w = w == 0 || w == 6;
+                    items.push({
+                        label: id.getDate(),
+                        isWeekEnd: w,
+                        isToday:
+                            now.getDate() == id.getDate()
+                            && now.getMonth() == id.getMonth()
+                            && now.getFullYear() == id.getFullYear(),
+                        isOtherMonth: id.getMonth() != cm,
+                        dateLabel: AtomDate.toShortDateString(id),
+                        value: AtomDate.toMMDDYY(id),
+                        date: id
                     });
-                    i = nd;
                 }
 
-                AtomBinder.setValue(this, "items", dates);
-                AtomBinder.setValue(this, "startDate", start);
-                AtomBinder.setValue(this, "endDate", end);
+
+                AtomBinder.setValue(this, "items", items);
             },
             changeMonth: function (n) {
-                var m = this._currentMonth;
+                var m = this._month;
                 m += n;
                 if (m > 12) {
                     m = 1;
-                    this._currentYear += 1;
+                    Atom.set(this, "year", this._year + 1);
                 }
                 if (m == 0) {
-                    this._currentYear -= 1;
+                    Atom.set(this, "year", this._year - 1);
                     m = 12;
                 }
-                AtomBinder.setValue(this, "currentMonth",m);
+                AtomBinder.setValue(this, "month",m);
             },
             init: function () {
                 baseType.init.call(this);
