@@ -857,6 +857,7 @@
     <Content Include="src\Controls\AtomAutoCompleteBox.template.html" />
     <Content Include="src\Controls\AtomButton.css" />
     <Content Include="src\Controls\AtomButton.js" />
+    <Content Include="src\Controls\AtomCalendar.itemTemplate.html" />
     <Content Include="src\Controls\AtomCalendar.js" />
     <Content Include="src\Controls\AtomCalendar.template.html" />
     <Content Include="src\Controls\AtomCheckBoxList.css" />

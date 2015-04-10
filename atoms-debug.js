@@ -178,17 +178,24 @@ jsonML["WebAtoms.AtomAutoCompleteBox.template"] =
 { "data-atom-template": "itemTemplate", "style": "min-width:100px;", "data-atom-init": "t4" }
 ], "\n"]]
 ;
+jsonML["WebAtoms.AtomCalendar.itemTemplate"] = 
+[["div",
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t5" }
+,"\n", ["span",
+{ "data-atom-init": "t6" }
+], "\n"]]
+;
 jsonML["WebAtoms.AtomCalendar.template"] = 
 [["header",
 {  }
 ,"\n", ["button",
-{ "class": "prev", "data-atom-init": "t5" }
+{ "class": "prev", "data-atom-init": "t7" }
 ], "\n", ["select",
-{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t6" }
+{ "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t8" }
 ], "\n", ["select",
-{ "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t7" }
+{ "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t9" }
 ], "\n", ["button",
-{ "class": "next", "data-atom-init": "t8" }
+{ "class": "next", "data-atom-init": "t10" }
 ], "\n"], ["ul",
 { "class": "days" }
 ,"\n", ["li",
@@ -207,11 +214,7 @@ jsonML["WebAtoms.AtomCalendar.template"] =
 { "class": "weekend" }
 ,"S"], "\n"], ["section",
 { "class": "day-list", "data-atom-presenter": "itemsPresenter" }
-,"\n", ["div",
-{ "data-atom-template": "itemTemplate", "data-atom-init": "t10" }
-,"\n", ["span",
-{ "data-atom-init": "t11" }
-], "\n"], "\n"]]
+,"\n"]]
 ;
 jsonML["WebAtoms.AtomCheckBoxList.itemTemplate"] = 
 [["div",
@@ -550,35 +553,8 @@ this.t4= function(e){
 this.setLocalValue('text',  Atom.get(this,'data')[Atom.get(this,'templateParent.labelPath')] , e);
 };
 
-/* WebAtoms.AtomCalendar.template */
+/* WebAtoms.AtomCalendar.itemTemplate */
 this.t5= function(e){
-this.setLocalValue('eventClick', Atom.get(this,'prevMonthCommand'), e);
-	AtomProperties.text(e,"\u003c");
-};
-
-this.t6= function(e){
-this.setLocalValue('items', AtomDate.monthList, e);
-	this.bind(e,'value',['templateParent', 'month'],true)
-};
-
-this.t7= function(e){
-this.bind(e,'items',[
-	['value'],
-	['templateParent', 'startYear'],
-	['value'],
-	['templateParent', 'endYear']],
-			0, function(v1,v2,v3,v4){
-				 return  Atom.range( v1 + v2, v3 + v4) ; 
-			});
-	this.bind(e,'value',['templateParent', 'year'],true)
-};
-
-this.t8= function(e){
-this.setLocalValue('eventClick', Atom.get(this,'nextMonthCommand'), e);
-	AtomProperties.text(e,"\u003e");
-};
-
-this.t10= function(e){
 this.bind(e,'class',[
 	['data', 'isWeekEnd'],
 	['data', 'isOtherMonth'],
@@ -593,9 +569,37 @@ today: v3,
 			});
 };
 
-this.t11= function(e){
+this.t6= function(e){
 this.bind(e,'text',
 	['data', 'label']);
+};
+
+/* WebAtoms.AtomCalendar.template */
+this.t7= function(e){
+this.setLocalValue('eventClick', Atom.get(this,'prevMonthCommand'), e);
+	AtomProperties.text(e,"\u003c");
+};
+
+this.t8= function(e){
+this.setLocalValue('items', AtomDate.monthList, e);
+	this.bind(e,'value',['templateParent', 'month'],true)
+};
+
+this.t9= function(e){
+this.bind(e,'items',[
+	['value'],
+	['templateParent', 'startYear'],
+	['value'],
+	['templateParent', 'endYear']],
+			0, function(v1,v2,v3,v4){
+				 return  Atom.range( v1 + v2, v3 + v4) ; 
+			});
+	this.bind(e,'value',['templateParent', 'year'],true)
+};
+
+this.t10= function(e){
+this.setLocalValue('eventClick', Atom.get(this,'nextMonthCommand'), e);
+	AtomProperties.text(e,"\u003e");
 };
 
 /* WebAtoms.AtomCheckBoxList.itemTemplate */
@@ -8050,85 +8054,88 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 53 - 'AtomCalendar.js' */            onCreated: function () {
 /*Line 54 - 'AtomCalendar.js' */                baseType.onCreated.call(this);
-/*Line 55 - 'AtomCalendar.js' */                this.updateCalendar();
-/*Line 56 - 'AtomCalendar.js' */            },
-
-/*Line 58 - 'AtomCalendar.js' */            applyItemStyle: function (item, data, first, last) {
+/*Line 55 - 'AtomCalendar.js' */                var self = this;
+/*Line 56 - 'AtomCalendar.js' */                WebAtoms.dispatcher.callLater(function () {
+/*Line 57 - 'AtomCalendar.js' */                    self.updateCalendar();
+/*Line 58 - 'AtomCalendar.js' */                });
 /*Line 59 - 'AtomCalendar.js' */            },
 
-/*Line 61 - 'AtomCalendar.js' */            updateCalendar: function(){
-/*Line 62 - 'AtomCalendar.js' */                if (!this._created)
-/*Line 63 - 'AtomCalendar.js' */                    return;
-/*Line 64 - 'AtomCalendar.js' */                var now = new Date();
+/*Line 61 - 'AtomCalendar.js' */            applyItemStyle: function (item, data, first, last) {
+/*Line 62 - 'AtomCalendar.js' */            },
 
-/*Line 66 - 'AtomCalendar.js' */                var d = new Date(this._year, this._month - 1, 1);
-/*Line 67 - 'AtomCalendar.js' */                var first = new Date(this._year, this._month - 1, 1);
+/*Line 64 - 'AtomCalendar.js' */            updateCalendar: function(){
+/*Line 65 - 'AtomCalendar.js' */                if (!this._created)
+/*Line 66 - 'AtomCalendar.js' */                    return;
+/*Line 67 - 'AtomCalendar.js' */                var now = new Date();
 
-/*Line 69 - 'AtomCalendar.js' */                if (first.getDay()) {
-/*Line 70 - 'AtomCalendar.js' */                    // go to first day of the month...
-/*Line 71 - 'AtomCalendar.js' */                    var start = first.getDay() - 1;
-/*Line 72 - 'AtomCalendar.js' */                    start = -start;
+/*Line 69 - 'AtomCalendar.js' */                var d = new Date(this._year, this._month - 1, 1);
+/*Line 70 - 'AtomCalendar.js' */                var first = new Date(this._year, this._month - 1, 1);
 
-/*Line 74 - 'AtomCalendar.js' */                    first.setDate(start);
-/*Line 75 - 'AtomCalendar.js' */                }
+/*Line 72 - 'AtomCalendar.js' */                if (first.getDay()) {
+/*Line 73 - 'AtomCalendar.js' */                    // go to first day of the month...
+/*Line 74 - 'AtomCalendar.js' */                    var start = first.getDay() - 1;
+/*Line 75 - 'AtomCalendar.js' */                    start = -start;
 
-/*Line 77 - 'AtomCalendar.js' */                var m = first.getMonth();
-/*Line 78 - 'AtomCalendar.js' */                var y = first.getFullYear();
+/*Line 77 - 'AtomCalendar.js' */                    first.setDate(start);
+/*Line 78 - 'AtomCalendar.js' */                }
 
-/*Line 80 - 'AtomCalendar.js' */                var items = [];
+/*Line 80 - 'AtomCalendar.js' */                var m = first.getMonth();
+/*Line 81 - 'AtomCalendar.js' */                var y = first.getFullYear();
 
-/*Line 82 - 'AtomCalendar.js' */                var i = 0;
+/*Line 83 - 'AtomCalendar.js' */                var items = [];
 
-/*Line 84 - 'AtomCalendar.js' */                var cm = this._month - 1;
+/*Line 85 - 'AtomCalendar.js' */                var i = 0;
 
-/*Line 86 - 'AtomCalendar.js' */                for (i = 0; i < 42; i++) {
-/*Line 87 - 'AtomCalendar.js' */                    var cd = i + first.getDate();
-/*Line 88 - 'AtomCalendar.js' */                    var id = new Date(y, m, cd);
-/*Line 89 - 'AtomCalendar.js' */                    var w = id.getDay();
-/*Line 90 - 'AtomCalendar.js' */                    w = w == 0 || w == 6;
-/*Line 91 - 'AtomCalendar.js' */                    items.push({
-/*Line 92 - 'AtomCalendar.js' */                        label: id.getDate(),
-/*Line 93 - 'AtomCalendar.js' */                        isWeekEnd: w,
-/*Line 94 - 'AtomCalendar.js' */                        isToday:
-/*Line 95 - 'AtomCalendar.js' */                            now.getDate() == id.getDate()
-/*Line 96 - 'AtomCalendar.js' */                            && now.getMonth() == id.getMonth()
-/*Line 97 - 'AtomCalendar.js' */                            && now.getFullYear() == id.getFullYear(),
-/*Line 98 - 'AtomCalendar.js' */                        isOtherMonth: id.getMonth() != cm,
-/*Line 99 - 'AtomCalendar.js' */                        dateLabel: AtomDate.toShortDateString(id),
-/*Line 100 - 'AtomCalendar.js' */                        value: AtomDate.toMMDDYY(id),
-/*Line 101 - 'AtomCalendar.js' */                        date: id
-/*Line 102 - 'AtomCalendar.js' */                    });
-/*Line 103 - 'AtomCalendar.js' */                }
+/*Line 87 - 'AtomCalendar.js' */                var cm = this._month - 1;
+
+/*Line 89 - 'AtomCalendar.js' */                for (i = 0; i < 42; i++) {
+/*Line 90 - 'AtomCalendar.js' */                    var cd = i + first.getDate();
+/*Line 91 - 'AtomCalendar.js' */                    var id = new Date(y, m, cd);
+/*Line 92 - 'AtomCalendar.js' */                    var w = id.getDay();
+/*Line 93 - 'AtomCalendar.js' */                    w = w == 0 || w == 6;
+/*Line 94 - 'AtomCalendar.js' */                    items.push({
+/*Line 95 - 'AtomCalendar.js' */                        label: id.getDate(),
+/*Line 96 - 'AtomCalendar.js' */                        isWeekEnd: w,
+/*Line 97 - 'AtomCalendar.js' */                        isToday:
+/*Line 98 - 'AtomCalendar.js' */                            now.getDate() == id.getDate()
+/*Line 99 - 'AtomCalendar.js' */                            && now.getMonth() == id.getMonth()
+/*Line 100 - 'AtomCalendar.js' */                            && now.getFullYear() == id.getFullYear(),
+/*Line 101 - 'AtomCalendar.js' */                        isOtherMonth: id.getMonth() != cm,
+/*Line 102 - 'AtomCalendar.js' */                        dateLabel: AtomDate.toShortDateString(id),
+/*Line 103 - 'AtomCalendar.js' */                        value: AtomDate.toMMDDYY(id),
+/*Line 104 - 'AtomCalendar.js' */                        date: id
+/*Line 105 - 'AtomCalendar.js' */                    });
+/*Line 106 - 'AtomCalendar.js' */                }
 
 
-/*Line 106 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "items", items);
-/*Line 107 - 'AtomCalendar.js' */            },
-/*Line 108 - 'AtomCalendar.js' */            changeMonth: function (n) {
-/*Line 109 - 'AtomCalendar.js' */                var m = this._month;
-/*Line 110 - 'AtomCalendar.js' */                m += n;
-/*Line 111 - 'AtomCalendar.js' */                if (m > 12) {
-/*Line 112 - 'AtomCalendar.js' */                    m = 1;
-/*Line 113 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year + 1);
-/*Line 114 - 'AtomCalendar.js' */                }
-/*Line 115 - 'AtomCalendar.js' */                if (m == 0) {
-/*Line 116 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year - 1);
-/*Line 117 - 'AtomCalendar.js' */                    m = 12;
-/*Line 118 - 'AtomCalendar.js' */                }
-/*Line 119 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "month",m);
-/*Line 120 - 'AtomCalendar.js' */            },
-/*Line 121 - 'AtomCalendar.js' */            init: function () {
-/*Line 122 - 'AtomCalendar.js' */                baseType.init.call(this);
-/*Line 123 - 'AtomCalendar.js' */                var _this = this;
-/*Line 124 - 'AtomCalendar.js' */                this.nextMonthCommand = function () {
-/*Line 125 - 'AtomCalendar.js' */                    _this.changeMonth(1);
-/*Line 126 - 'AtomCalendar.js' */                };
-/*Line 127 - 'AtomCalendar.js' */                this.prevMonthCommand = function () {
-/*Line 128 - 'AtomCalendar.js' */                    _this.changeMonth(-1);
-/*Line 129 - 'AtomCalendar.js' */                }
-/*Line 130 - 'AtomCalendar.js' */            }
-/*Line 131 - 'AtomCalendar.js' */        }
-/*Line 132 - 'AtomCalendar.js' */    });
-/*Line 133 - 'AtomCalendar.js' */})(WebAtoms.AtomListBox.prototype);
+/*Line 109 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "items", items);
+/*Line 110 - 'AtomCalendar.js' */            },
+/*Line 111 - 'AtomCalendar.js' */            changeMonth: function (n) {
+/*Line 112 - 'AtomCalendar.js' */                var m = this._month;
+/*Line 113 - 'AtomCalendar.js' */                m += n;
+/*Line 114 - 'AtomCalendar.js' */                if (m > 12) {
+/*Line 115 - 'AtomCalendar.js' */                    m = 1;
+/*Line 116 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year + 1);
+/*Line 117 - 'AtomCalendar.js' */                }
+/*Line 118 - 'AtomCalendar.js' */                if (m == 0) {
+/*Line 119 - 'AtomCalendar.js' */                    Atom.set(this, "year", this._year - 1);
+/*Line 120 - 'AtomCalendar.js' */                    m = 12;
+/*Line 121 - 'AtomCalendar.js' */                }
+/*Line 122 - 'AtomCalendar.js' */                AtomBinder.setValue(this, "month",m);
+/*Line 123 - 'AtomCalendar.js' */            },
+/*Line 124 - 'AtomCalendar.js' */            init: function () {
+/*Line 125 - 'AtomCalendar.js' */                baseType.init.call(this);
+/*Line 126 - 'AtomCalendar.js' */                var _this = this;
+/*Line 127 - 'AtomCalendar.js' */                this.nextMonthCommand = function () {
+/*Line 128 - 'AtomCalendar.js' */                    _this.changeMonth(1);
+/*Line 129 - 'AtomCalendar.js' */                };
+/*Line 130 - 'AtomCalendar.js' */                this.prevMonthCommand = function () {
+/*Line 131 - 'AtomCalendar.js' */                    _this.changeMonth(-1);
+/*Line 132 - 'AtomCalendar.js' */                }
+/*Line 133 - 'AtomCalendar.js' */            }
+/*Line 134 - 'AtomCalendar.js' */        }
+/*Line 135 - 'AtomCalendar.js' */    });
+/*Line 136 - 'AtomCalendar.js' */})(WebAtoms.AtomListBox.prototype);
 /*Line 0 - 'AtomCheckBoxList.js' */
 
 /*Line 2 - 'AtomCheckBoxList.js' */(function (base) {
