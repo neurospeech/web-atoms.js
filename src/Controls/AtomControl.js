@@ -312,6 +312,26 @@ window.AtomProperties = AtomProperties;
                                 if (action) {
                                     allControls[action].refresh();
                                 }
+                                action = f.window;
+                                if (action) {
+                                    WebAtoms.AtomWindow.openNewWindow({
+                                        url: action[0],
+                                        next: action[1],
+                                        localScope: false,
+                                        opener: this,
+                                        scope: this.get_scope()
+                                    });
+                                }
+                                action = f.localWindow;
+                                if (action) {
+                                    WebAtoms.AtomWindow.openNewWindow({
+                                        url: action[0],
+                                        next: action[1],
+                                        localScope: true,
+                                        opener: this,
+                                        scope: this.get_scope()
+                                    });
+                                }
 
                             }
                         }

@@ -53,7 +53,10 @@
 
             onCreated: function () {
                 baseType.onCreated.call(this);
-                this.updateCalendar();
+                var self = this;
+                WebAtoms.dispatcher.callLater(function () {
+                    self.updateCalendar();
+                });
             },
 
             applyItemStyle: function (item, data, first, last) {
