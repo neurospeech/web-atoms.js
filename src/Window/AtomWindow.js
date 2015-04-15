@@ -15,7 +15,8 @@
             windowHeight: 300,
             windowWidth: 500,
             url: undefined,
-            title: undefined
+            title: undefined,
+            windowUrl: undefined
         },
         methods: {
 
@@ -33,12 +34,11 @@
                 var caller = this;
                 this._value = null;
 
-                this.disposeChildren(this._element);
-
-                setTimeout(function () {
+                WebAtoms.dispatcher.callLater(function () {
                     AtomBinder.setValue(caller, "value", val);
                     caller.invokeAction(caller._next);
-                }, 1);
+                    caller.disposeChildren(caller._element);
+                });
             },
 
             refresh: function (scope, sender) {
@@ -124,11 +124,76 @@
                 };
 
                 WebAtoms.dispatcher.callLater(function () {
-                    _this._element._logicalParent = _this._element.parentNode;
-                    $(_this._element).remove();
-                    document.body.appendChild(_this._element);
+                    var e = _this._element;
+                    if (!e._logicalParent) {
+                        e._logicalParent = e.parentNode;
+                        $(e).remove();
+                        document.body.appendChild(e);
+                    }
                 });
             }
         }
     });
 })(WebAtoms.AtomControl.prototype);
+
+
+WebAtoms.AtomWindow.openNewWindow = function (c) {
+    var e1 = document.createElement("DIV");
+    var id = AtomUI.assignID(e1);
+    if (c.localScope) {
+        e1.setAttribute("data-atom-local-scope", "true");
+    }
+    e1._logicalParent = c.opener;
+    document.body.appendChild(e1);
+
+    var w = AtomUI.createControl(e1, WebAtoms.AtomWindow);
+
+    w._next = [c.next || {}, function () {
+        WebAtoms.dispatcher.callLater(function () {
+            w.dispose();
+            $(e1).remove();
+        });
+    }];
+
+    var url = new AtomUri(c.url);
+
+    var wt = Atom.get(c.scope, url.path);
+
+    var $wt = $( AtomUI.cloneNode(wt));
+    var ct = $wt.children("[atom-template=commandTemplate],[data-atom-template=commandTemplate]").get(0);
+    if (ct) {
+        AtomUI.removeAttr(ct, "atom-template");
+        w._commandTemplate = ct;
+        $(ct).remove();
+    }
+
+    ct = $wt.children("[atom-template=windowTemplate],[data-atom-template=windowTemplate]").get(0);
+    if (ct) {
+        AtomUI.removeAttr(ct, "atom-template");
+        w._windowTemplate = ct;
+    } else {
+        AtomUI.removeAttr(wt, "atom-template");
+        w._windowTemplate = wt;
+    }
+
+
+    w.init();
+
+    WebAtoms.dispatcher.callLater(function () { 
+        var scope = w.get_scope();
+
+        var hash = url.hash;
+        for (var i in hash) {
+            if (hash.hasOwnProperty(i))
+                Atom.set(scope, i, hash[i]);
+        }
+
+        var query = url.query;
+        for (var i in query) {
+            if (query.hasOwnProperty(i))
+                Atom.set(w, i, query[i]);
+        }
+
+        w.openWindow(c.scope, c.opener);
+    });
+};

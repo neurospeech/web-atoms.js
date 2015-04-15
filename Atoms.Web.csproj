@@ -129,6 +129,7 @@
     <Content Include="docs\concepts\next\samples\confirm-action.html" />
     <Content Include="docs\concepts\next\samples\data-action.html" />
     <Content Include="docs\concepts\next\samples\function-action.html" />
+    <Content Include="docs\concepts\next\samples\local-window-action.html" />
     <Content Include="docs\concepts\next\samples\scope-action.html" />
     <Content Include="docs\concepts\next\samples\string-action.html" />
     <Content Include="docs\concepts\next\samples\timeout-action.html" />
@@ -246,6 +247,7 @@
     <Content Include="docs\controls\samples\atom-radio-button-list.html" />
     <Content Include="docs\controls\samples\atom-time-picker.html" />
     <Content Include="docs\controls\samples\atom-view-stack.html" />
+    <Content Include="docs\concepts\next\samples\window-action.html" />
     <Content Include="docs\controls\samples\atom-window-command-template.html" />
     <Content Include="docs\controls\samples\atom-window-iframe.html" />
     <Content Include="docs\controls\samples\atom-window.html" />

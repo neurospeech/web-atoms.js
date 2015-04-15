@@ -401,3 +401,17 @@ window.AtomUI = AtomUI;
 
 AtomUI.isIE7 = window.navigator.userAgent.indexOf("MSIE 7.0") != -1;
 AtomUI.isIE8 = window.navigator.userAgent.indexOf("MSIE 8.0") != -1;
+
+window.AtomUri = function (url) {
+    var path, query, hash;
+    var t = url.split('?');
+    path = t[0];
+    query = t[1] || "";
+    t = query.split('#');
+    query = t[0];
+    hash = t[1] || "";
+
+    this.path = path;
+    this.query = AtomUI.parseUrl(query);
+    this.hash = AtomUI.parseUrl(hash);
+}
