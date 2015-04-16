@@ -18,7 +18,7 @@
                 atom-next="{ 
                 { 
                     localWindow: {
-                        path:'label-window', 
+                        path:$scope.labelWindow, 
                         prop:{ 
                             title:'Open Window' },  
                         scope:{ 
@@ -29,7 +29,7 @@
         </button>
 
 
-        <div atom-template-name="label-window">
+        <div atom-template-name="labelWindow">
             This is inside the window.
             <div atom-text="[ 'Opener Data: ' + $localScope.label ]"></div>
 

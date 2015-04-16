@@ -173,7 +173,10 @@ WebAtoms.AtomWindow.openNewWindow = function (c) {
         });
     }];
 
-    var wt = Atom.get(c.scope, url.path);
+    var wt = url.path;
+    if (!AtomUI.isNode(wt)) {
+        wt = Atom.get(c.scope, url.path);
+    }
 
     var $wt = $( AtomUI.cloneNode(wt));
     var ct = $wt.children("[atom-template=commandTemplate],[data-atom-template=commandTemplate]").get(0);
