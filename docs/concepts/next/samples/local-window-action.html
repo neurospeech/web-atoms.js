@@ -15,22 +15,28 @@
             one-time binding will not work for controls defined later
             in the visual hierarchy -->
         <button atom-type="AtomButton"
-                atom-next="{ { localWindow: [Atom.url('label-window', { title:'Open Window' },  { label: 'Window Label' }), { alert: 'Done' }] } }">
+                atom-next="{ 
+                { 
+                    localWindow: {
+                        path:'label-window', 
+                        prop:{ 
+                            title:'Open Window' },  
+                        scope:{ 
+                            label: 'Window Label' }
+                        ,next: { 
+                            alert: 'Done' } }  } }">
             Open Window
         </button>
 
 
         <div atom-template-name="label-window">
-            <div atom-template="windowTemplate">
-                This is inside the window.
-                <div atom-text="[ 'Opener Data: ' + $localScope.label ]"></div>
+            This is inside the window.
+            <div atom-text="[ 'Opener Data: ' + $localScope.label ]"></div>
 
 
-            </div>
             <!-- To host buttons -->
             <div atom-template="commandTemplate">
-                <button atom-type="AtomButton"
-                        atom-next="{$scope.theWindow.closeCommand}">
+                <button atom-event-click="{$owner.templateParent.closeCommand}">
                     Close
                 </button>
             </div>

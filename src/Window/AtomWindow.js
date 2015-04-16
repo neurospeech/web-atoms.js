@@ -148,14 +148,30 @@ WebAtoms.AtomWindow.openNewWindow = function (c) {
 
     var w = AtomUI.createControl(e1, WebAtoms.AtomWindow);
 
+
+    var url = c.url;
+
+    if (url.length !== undefined) {
+        c.next = url[1];
+        c.url = url[0];
+        url = new AtomUri(c.url);
+    } else {
+        url = {
+            path: url.path,
+            query: url.prop,
+            hash: url.scope
+        };
+        if (c.url.next) {
+            c.next = c.url.next;
+        }
+    }
+
     w._next = [c.next || {}, function () {
         WebAtoms.dispatcher.callLater(function () {
             w.dispose();
             $(e1).remove();
         });
     }];
-
-    var url = new AtomUri(c.url);
 
     var wt = Atom.get(c.scope, url.path);
 
