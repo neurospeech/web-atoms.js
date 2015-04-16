@@ -15,13 +15,13 @@
             one-time binding will not work for controls defined later
             in the visual hierarchy -->
         <button atom-type="AtomButton"
-                atom-next="{ { window: {path:'label-window', prop:{ title:'Open Window' },  scope:{ label: 'Window Label' },next: { alert: 'Done' } }  } }">
+                atom-next="{ { window: {path: $scope.labelWindow, prop:{ title:'Open Window' },  scope:{ label: 'Window Label' },next: { alert: 'Done' } }  } }">
             Open Window
         </button>
 
 
-        <div atom-template-name="label-window"
-                atom-template="windowTemplate">
+        <div atom-template-name="labelWindow"
+             atom-template="windowTemplate">
             This is inside the window.
             <div atom-text="[ 'Opener Data: ' + $scope.label ]"></div>
 

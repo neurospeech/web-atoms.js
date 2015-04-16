@@ -8072,46 +8072,49 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 172 - 'AtomWindow.js' */        });
 /*Line 173 - 'AtomWindow.js' */    }];
 
-/*Line 175 - 'AtomWindow.js' */    var wt = Atom.get(c.scope, url.path);
+/*Line 175 - 'AtomWindow.js' */    var wt = url.path;
+/*Line 176 - 'AtomWindow.js' */    if (!AtomUI.isNode(wt)) {
+/*Line 177 - 'AtomWindow.js' */        wt = Atom.get(c.scope, url.path);
+/*Line 178 - 'AtomWindow.js' */    }
 
-/*Line 177 - 'AtomWindow.js' */    var $wt = $( AtomUI.cloneNode(wt));
-/*Line 178 - 'AtomWindow.js' */    var ct = $wt.children("[atom-template=commandTemplate],[data-atom-template=commandTemplate]").get(0);
-/*Line 179 - 'AtomWindow.js' */    if (ct) {
-/*Line 180 - 'AtomWindow.js' */        AtomUI.removeAttr(ct, "atom-template");
-/*Line 181 - 'AtomWindow.js' */        w._commandTemplate = ct;
-/*Line 182 - 'AtomWindow.js' */        $(ct).remove();
-/*Line 183 - 'AtomWindow.js' */    }
+/*Line 180 - 'AtomWindow.js' */    var $wt = $( AtomUI.cloneNode(wt));
+/*Line 181 - 'AtomWindow.js' */    var ct = $wt.children("[atom-template=commandTemplate],[data-atom-template=commandTemplate]").get(0);
+/*Line 182 - 'AtomWindow.js' */    if (ct) {
+/*Line 183 - 'AtomWindow.js' */        AtomUI.removeAttr(ct, "atom-template");
+/*Line 184 - 'AtomWindow.js' */        w._commandTemplate = ct;
+/*Line 185 - 'AtomWindow.js' */        $(ct).remove();
+/*Line 186 - 'AtomWindow.js' */    }
 
-/*Line 185 - 'AtomWindow.js' */    ct = $wt.children("[atom-template=windowTemplate],[data-atom-template=windowTemplate]").get(0);
-/*Line 186 - 'AtomWindow.js' */    if (ct) {
-/*Line 187 - 'AtomWindow.js' */        AtomUI.removeAttr(ct, "atom-template");
-/*Line 188 - 'AtomWindow.js' */        w._windowTemplate = ct;
-/*Line 189 - 'AtomWindow.js' */    } else {
-/*Line 190 - 'AtomWindow.js' */        AtomUI.removeAttr(wt, "atom-template");
-/*Line 191 - 'AtomWindow.js' */        w._windowTemplate = wt;
-/*Line 192 - 'AtomWindow.js' */    }
+/*Line 188 - 'AtomWindow.js' */    ct = $wt.children("[atom-template=windowTemplate],[data-atom-template=windowTemplate]").get(0);
+/*Line 189 - 'AtomWindow.js' */    if (ct) {
+/*Line 190 - 'AtomWindow.js' */        AtomUI.removeAttr(ct, "atom-template");
+/*Line 191 - 'AtomWindow.js' */        w._windowTemplate = ct;
+/*Line 192 - 'AtomWindow.js' */    } else {
+/*Line 193 - 'AtomWindow.js' */        AtomUI.removeAttr(wt, "atom-template");
+/*Line 194 - 'AtomWindow.js' */        w._windowTemplate = wt;
+/*Line 195 - 'AtomWindow.js' */    }
 
 
-/*Line 195 - 'AtomWindow.js' */    w.init();
+/*Line 198 - 'AtomWindow.js' */    w.init();
 
-/*Line 197 - 'AtomWindow.js' */    WebAtoms.dispatcher.callLater(function () { 
-/*Line 198 - 'AtomWindow.js' */        var scope = w.get_scope();
+/*Line 200 - 'AtomWindow.js' */    WebAtoms.dispatcher.callLater(function () { 
+/*Line 201 - 'AtomWindow.js' */        var scope = w.get_scope();
 
-/*Line 200 - 'AtomWindow.js' */        var hash = url.hash;
-/*Line 201 - 'AtomWindow.js' */        for (var i in hash) {
-/*Line 202 - 'AtomWindow.js' */            if (hash.hasOwnProperty(i))
-/*Line 203 - 'AtomWindow.js' */                Atom.set(scope, i, hash[i]);
-/*Line 204 - 'AtomWindow.js' */        }
+/*Line 203 - 'AtomWindow.js' */        var hash = url.hash;
+/*Line 204 - 'AtomWindow.js' */        for (var i in hash) {
+/*Line 205 - 'AtomWindow.js' */            if (hash.hasOwnProperty(i))
+/*Line 206 - 'AtomWindow.js' */                Atom.set(scope, i, hash[i]);
+/*Line 207 - 'AtomWindow.js' */        }
 
-/*Line 206 - 'AtomWindow.js' */        var query = url.query;
-/*Line 207 - 'AtomWindow.js' */        for (var i in query) {
-/*Line 208 - 'AtomWindow.js' */            if (query.hasOwnProperty(i))
-/*Line 209 - 'AtomWindow.js' */                Atom.set(w, i, query[i]);
-/*Line 210 - 'AtomWindow.js' */        }
+/*Line 209 - 'AtomWindow.js' */        var query = url.query;
+/*Line 210 - 'AtomWindow.js' */        for (var i in query) {
+/*Line 211 - 'AtomWindow.js' */            if (query.hasOwnProperty(i))
+/*Line 212 - 'AtomWindow.js' */                Atom.set(w, i, query[i]);
+/*Line 213 - 'AtomWindow.js' */        }
 
-/*Line 212 - 'AtomWindow.js' */        w.openWindow(c.scope, c.opener);
-/*Line 213 - 'AtomWindow.js' */    });
-/*Line 214 - 'AtomWindow.js' */};
+/*Line 215 - 'AtomWindow.js' */        w.openWindow(c.scope, c.opener);
+/*Line 216 - 'AtomWindow.js' */    });
+/*Line 217 - 'AtomWindow.js' */};
 /*Line 0 - 'AtomCalendar.js' */
 
 /*Line 2 - 'AtomCalendar.js' */(function (baseType) {
