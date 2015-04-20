@@ -2449,16 +2449,35 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 74 - 'AtomPopup.js' */        if (pk.removeHandler) {
 /*Line 75 - 'AtomPopup.js' */            pk.removeHandler(pk.element);
 /*Line 76 - 'AtomPopup.js' */        }
-/*Line 77 - 'AtomPopup.js' */    }
+
+/*Line 78 - 'AtomPopup.js' */        window.simulateParentClick();
+
+/*Line 80 - 'AtomPopup.js' */    }
 
 
-/*Line 80 - 'AtomPopup.js' */};
+/*Line 83 - 'AtomPopup.js' */};
 
-/*Line 82 - 'AtomPopup.js' */window.AtomPopup = AtomPopup;
+/*Line 85 - 'AtomPopup.js' */window.AtomPopup = AtomPopup;
 
-/*Line 84 - 'AtomPopup.js' */$(window).click(function (e) {
-/*Line 85 - 'AtomPopup.js' */    AtomPopup.clicked(e);
-/*Line 86 - 'AtomPopup.js' */});
+/*Line 87 - 'AtomPopup.js' */window.simulateParentClick = function () {
+
+/*Line 89 - 'AtomPopup.js' */    var p = window.parent;
+/*Line 90 - 'AtomPopup.js' */    if (!p)
+/*Line 91 - 'AtomPopup.js' */        return;
+
+/*Line 93 - 'AtomPopup.js' */    var $ = parent.$;
+
+/*Line 95 - 'AtomPopup.js' */    $("#" + frameElement.id).click();
+
+/*Line 97 - 'AtomPopup.js' */    if (p.simulateParentClick) {
+/*Line 98 - 'AtomPopup.js' */        p.simulateParentClick();
+/*Line 99 - 'AtomPopup.js' */    }
+/*Line 100 - 'AtomPopup.js' */}
+
+
+/*Line 103 - 'AtomPopup.js' */$(window).click(function (e) {
+/*Line 104 - 'AtomPopup.js' */    AtomPopup.clicked(e);
+/*Line 105 - 'AtomPopup.js' */});
 /*Line 0 - 'AtomQuery.js' */
 /*Line 1 - 'AtomQuery.js' */
 

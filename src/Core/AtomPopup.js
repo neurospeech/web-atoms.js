@@ -75,12 +75,31 @@ var AtomPopup = {
         if (pk.removeHandler) {
             pk.removeHandler(pk.element);
         }
+
+        window.simulateParentClick();
+
     }
 
 
 };
 
 window.AtomPopup = AtomPopup;
+
+window.simulateParentClick = function () {
+
+    var p = window.parent;
+    if (!p)
+        return;
+
+    var $ = parent.$;
+
+    $("#" + frameElement.id).click();
+
+    if (p.simulateParentClick) {
+        p.simulateParentClick();
+    }
+}
+
 
 $(window).click(function (e) {
     AtomPopup.clicked(e);
