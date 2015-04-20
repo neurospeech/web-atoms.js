@@ -411,7 +411,36 @@ window.AtomUri = function (url) {
     query = t[0];
     hash = t[1] || "";
 
+    // extract protocol and domain...
+
+    var scheme = location.protocol;
+    var host = location.host;
+    var port = location.port;
+
+    var i = path.indexOf('//');
+    if (i !== -1) {
+        scheme = path.substr(0, i);
+        path = path.substr(i + 2);
+
+
+        i = path.indexOf('/');
+        if (i !== -1) {
+            host = path.substr(0, i);
+            path = path.substr(i + 1);
+            t = host.split(':');
+            if (t.length > 1) {
+                host = t[0];
+                port = t[1];
+            }
+        }
+    }
+    this.host = host;
+    this.protocol = scheme;
+    this.port = port;
     this.path = path;
+
+
+
     this.query = AtomUI.parseUrl(query);
     this.hash = AtomUI.parseUrl(hash);
 }
