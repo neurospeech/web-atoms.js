@@ -836,14 +836,19 @@ window.AtomProperties = AtomProperties;
 
                 var amap = AtomUI.attributeMap(element, /^atom\-(name|local\-scope)$/gi);
 
-                var ls = amap["atom-name"];
-                if (ls) {
-                    if (/^(app|window|owner|scope|localScope|parent)$/gi.test(ls.value))
-                        throw new Error("Invalid Control Name '" + ls.value + "'");
+                var aname = amap["atom-name"];
+                if (!aname) {
+                    aname = element.id;
+                } else {
+                    element.removeAttributeNode(aname.node);
+                    aname = aname.value;
+                }
+                if (aname) {
+                    if (/^(app|window|owner|scope|localScope|parent)$/gi.test(aname))
+                        throw new Error("Invalid Control Name '" + aname + "'");
                     var s = this.get_scope();
-                    AtomBinder.setValue(s, ls.value, this);
-                    this._name = ls.value;
-                    element.removeAttributeNode(ls.node);
+                    AtomBinder.setValue(s, aname, this);
+                    this._name = aname;
                 }
 
 
