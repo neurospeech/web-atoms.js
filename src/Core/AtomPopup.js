@@ -75,6 +75,8 @@ var AtomPopup = {
         if (pk.removeHandler) {
             pk.removeHandler(pk.element);
         }
+
+
     }
 
 
@@ -82,6 +84,27 @@ var AtomPopup = {
 
 window.AtomPopup = AtomPopup;
 
+window.simulateParentClick = function () {
+
+    var p = frameElement;
+    if (!p)
+        return;
+    if (!parent)
+        return;
+
+    var $ = parent.$;
+
+    $(frameElement).click();
+
+    if (p.simulateParentClick) {
+        p.simulateParentClick();
+    }
+}
+
+
 $(window).click(function (e) {
     AtomPopup.clicked(e);
+
+    window.simulateParentClick();
+
 });

@@ -2449,16 +2449,39 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 74 - 'AtomPopup.js' */        if (pk.removeHandler) {
 /*Line 75 - 'AtomPopup.js' */            pk.removeHandler(pk.element);
 /*Line 76 - 'AtomPopup.js' */        }
-/*Line 77 - 'AtomPopup.js' */    }
 
 
-/*Line 80 - 'AtomPopup.js' */};
+/*Line 79 - 'AtomPopup.js' */    }
 
-/*Line 82 - 'AtomPopup.js' */window.AtomPopup = AtomPopup;
 
-/*Line 84 - 'AtomPopup.js' */$(window).click(function (e) {
-/*Line 85 - 'AtomPopup.js' */    AtomPopup.clicked(e);
-/*Line 86 - 'AtomPopup.js' */});
+/*Line 82 - 'AtomPopup.js' */};
+
+/*Line 84 - 'AtomPopup.js' */window.AtomPopup = AtomPopup;
+
+/*Line 86 - 'AtomPopup.js' */window.simulateParentClick = function () {
+
+/*Line 88 - 'AtomPopup.js' */    var p = frameElement;
+/*Line 89 - 'AtomPopup.js' */    if (!p)
+/*Line 90 - 'AtomPopup.js' */        return;
+/*Line 91 - 'AtomPopup.js' */    if (!parent)
+/*Line 92 - 'AtomPopup.js' */        return;
+
+/*Line 94 - 'AtomPopup.js' */    var $ = parent.$;
+
+/*Line 96 - 'AtomPopup.js' */    $(frameElement).click();
+
+/*Line 98 - 'AtomPopup.js' */    if (p.simulateParentClick) {
+/*Line 99 - 'AtomPopup.js' */        p.simulateParentClick();
+/*Line 100 - 'AtomPopup.js' */    }
+/*Line 101 - 'AtomPopup.js' */}
+
+
+/*Line 104 - 'AtomPopup.js' */$(window).click(function (e) {
+/*Line 105 - 'AtomPopup.js' */    AtomPopup.clicked(e);
+
+/*Line 107 - 'AtomPopup.js' */    window.simulateParentClick();
+
+/*Line 109 - 'AtomPopup.js' */});
 /*Line 0 - 'AtomQuery.js' */
 /*Line 1 - 'AtomQuery.js' */
 
@@ -3035,10 +3058,39 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 410 - 'AtomUI.js' */    query = t[0];
 /*Line 411 - 'AtomUI.js' */    hash = t[1] || "";
 
-/*Line 413 - 'AtomUI.js' */    this.path = path;
-/*Line 414 - 'AtomUI.js' */    this.query = AtomUI.parseUrl(query);
-/*Line 415 - 'AtomUI.js' */    this.hash = AtomUI.parseUrl(hash);
-/*Line 416 - 'AtomUI.js' */}
+/*Line 413 - 'AtomUI.js' */    // extract protocol and domain...
+
+/*Line 415 - 'AtomUI.js' */    var scheme = location.protocol;
+/*Line 416 - 'AtomUI.js' */    var host = location.host;
+/*Line 417 - 'AtomUI.js' */    var port = location.port;
+
+/*Line 419 - 'AtomUI.js' */    var i = path.indexOf('//');
+/*Line 420 - 'AtomUI.js' */    if (i !== -1) {
+/*Line 421 - 'AtomUI.js' */        scheme = path.substr(0, i);
+/*Line 422 - 'AtomUI.js' */        path = path.substr(i + 2);
+
+
+/*Line 425 - 'AtomUI.js' */        i = path.indexOf('/');
+/*Line 426 - 'AtomUI.js' */        if (i !== -1) {
+/*Line 427 - 'AtomUI.js' */            host = path.substr(0, i);
+/*Line 428 - 'AtomUI.js' */            path = path.substr(i + 1);
+/*Line 429 - 'AtomUI.js' */            t = host.split(':');
+/*Line 430 - 'AtomUI.js' */            if (t.length > 1) {
+/*Line 431 - 'AtomUI.js' */                host = t[0];
+/*Line 432 - 'AtomUI.js' */                port = t[1];
+/*Line 433 - 'AtomUI.js' */            }
+/*Line 434 - 'AtomUI.js' */        }
+/*Line 435 - 'AtomUI.js' */    }
+/*Line 436 - 'AtomUI.js' */    this.host = host;
+/*Line 437 - 'AtomUI.js' */    this.protocol = scheme;
+/*Line 438 - 'AtomUI.js' */    this.port = port;
+/*Line 439 - 'AtomUI.js' */    this.path = path;
+
+
+
+/*Line 443 - 'AtomUI.js' */    this.query = AtomUI.parseUrl(query);
+/*Line 444 - 'AtomUI.js' */    this.hash = AtomUI.parseUrl(hash);
+/*Line 445 - 'AtomUI.js' */}
 /*Line 0 - 'AtomBindingHelper.js' */
 
 
