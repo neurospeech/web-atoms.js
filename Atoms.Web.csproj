@@ -217,6 +217,7 @@
     <Content Include="docs\controls\metadata\class-info.js" />
     <Content Include="docs\controls\samples\atom-application.html" />
     <Content Include="docs\controls\samples\atom-button.html" />
+    <Content Include="docs\controls\samples\atom-calendar-list-box.html" />
     <Content Include="docs\controls\samples\atom-calendar.html" />
     <Content Include="docs\controls\samples\atom-check-box-list.html" />
     <Content Include="docs\controls\samples\atom-check-box.html" />

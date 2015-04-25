@@ -186,7 +186,9 @@ jsonML["WebAtoms.AtomCalendar.itemTemplate"] =
 ], "\n"]]
 ;
 jsonML["WebAtoms.AtomCalendar.template"] = 
-[["header",
+[["section",
+{ "class": "calendar" }
+,"\n", ["header",
 {  }
 ,"\n", ["button",
 { "class": "prev", "data-atom-init": "t7" }
@@ -196,7 +198,7 @@ jsonML["WebAtoms.AtomCalendar.template"] =
 { "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t9" }
 ], "\n", ["button",
 { "class": "next", "data-atom-init": "t10" }
-], "\n"], ["ul",
+], "\n"], "\n", ["ul",
 { "class": "days" }
 ,"\n", ["li",
 { "class": "weekend" }
@@ -212,9 +214,9 @@ jsonML["WebAtoms.AtomCalendar.template"] =
 {  }
 ,"F"], "\n", ["li",
 { "class": "weekend" }
-,"S"], "\n"], ["section",
+,"S"], "\n"], "\n", ["section",
 { "class": "day-list", "data-atom-presenter": "itemsPresenter" }
-,"\n"]]
+,"\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomCheckBoxList.itemTemplate"] = 
 [["div",
