@@ -257,8 +257,6 @@
     <Content Include="docs\index.html" />
     <Content Include="docs\plugins\ckeditor\index.html" />
     <Content Include="docs\plugins\index.html" />
-    <Content Include="docs\plugins\masked\index.html" />
-    <Content Include="docs\plugins\masked\sample.html" />
     <Content Include="docs\plugins\samples\atom-clock.css" />
     <Content Include="docs\plugins\samples\atom-clock.html" />
     <Content Include="docs\plugins\samples\atom-clock.js" />
@@ -959,10 +957,7 @@
     <Content Include="src\Data\AtomBinding.js" />
     <Content Include="src\Data\AtomBindingHelper.js" />
     <Content Include="src\Data\AtomPromise.js" />
-    <Content Include="src\ie9-placeholder-fix.js" />
-    <None Include="src\jquery-1.5.1-vsdoc.js" />
-    <Content Include="src\jquery-1.8.2.min.js" />
-    <Content Include="src\JSON.js" />
+    <Content Include="src\jquery.maskedinput.js" />
     <Content Include="src\Layouts\AtomLayout.js" />
     <Content Include="src\Layouts\AtomTableLayout.js" />
     <Content Include="src\Layouts\AtomViewBoxLayout.js" />

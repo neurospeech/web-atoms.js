@@ -1,5 +1,5 @@
-﻿/// <reference path="../JSON.js" />
-/// <reference path="../../Scripts/jquery-1.11.1.js" />
+﻿/// <reference path="../../Scripts/jquery-1.11.1.js" />
+/// <reference path="../jquery.maskedinput.js" />
 /// <reference path="AtomBrowser.js" />
 
 var AtomEnumerator = (function () {
