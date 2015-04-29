@@ -100,7 +100,6 @@
                 this._selectedItems.length = 0;
                 var ae = new AtomEnumerator(items);
                 while (ae.next()) {
-                    //AtomBinder.addItem(this._selectedItems, ae.current());
                     this._selectedItems.push(ae.current());
                 }
                 AtomBinder.refreshItems(this._selectedItems);

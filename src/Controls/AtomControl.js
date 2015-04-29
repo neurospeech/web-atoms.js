@@ -100,6 +100,17 @@ var AtomProperties = {
         var a = document.createTextNode(value);
         element.appendChild(a);
     },
+    mask: function (element, value) {
+        if (value) {
+            if (value.constructor === String) {
+                $(element).mask(value);
+            } else {
+                $(element).mask(value.mask, value.settings);
+            }
+        } else {
+            $(element).unmask();
+        }
+    },
     html: function (element, value) {
         element.innerHTML = value;
     },

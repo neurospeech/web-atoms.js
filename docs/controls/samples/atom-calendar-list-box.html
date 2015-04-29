@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <!-- sample -->
+        <script type="text/javascript">
+            ({
+                dates: [],
+                toggleDate: function (scope, sender) {
+                    var data = Atom.get(sender, "data");
+                    var d = Atom.query(appScope.dates).firstOrDefault({ value: data.value });
+                    if (d) {
+                        Atom.remove(appScope.dates, d);
+                    } else {
+                        Atom.add(appScope.dates, data);
+                    }
+                    Atom.refresh(appScope, "dates");
+                }
+            })
+        </script>
+
+
+        <section id="calendar"
+                 atom-type="AtomCalendar"
+                 atom-auto-select-on-click="{false}"
+                 atom-allow-multiple-selection="true"
+                 atom-value-separator=","
+                 atom-value="[Atom.csv($appScope.dates,'value')]">
+            <div atom-template="itemTemplate"
+                 atom-class="[ {
+            'weekend': $data.isWeekEnd,
+            other: $data.isOtherMonth,
+            today: $data.isToday,
+            'selected': $scope.itemSelected } ]"
+                 atom-event-click="{ $appScope.toggleDate }">
+                <span atom-text="{$data.label}"></span>
+            </div>
+        </section>
+
+        <div atom-dock="Right" style="width:200px"
+             id="dateGroupList"
+             atom-type="AtomListBox"
+             atom-value="$[appScope.calendar.visibleDate]"
+             atom-value-path="date"
+             atom-items="{$scope.dates}">
+            <div atom-template="itemTemplate" atom-text="{$data.dateLabel}"></div>
+        </div>
+
+        <!-- end-sample -->
+    </div>
+</body>
+</html>

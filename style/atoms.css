@@ -200,7 +200,15 @@ span.atom-auto-complete-box {
   box-sizing: border-box;
   padding: 5px;
 }
-.atom-calendar > header {
+.atom-calendar > section.calendar {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.atom-calendar > section.calendar > header {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -209,13 +217,13 @@ span.atom-auto-complete-box {
   text-align: center;
   position: relative;
 }
-.atom-calendar > header > button.prev {
+.atom-calendar > section.calendar > header > button.prev {
   float: left;
 }
-.atom-calendar > header > button.next {
+.atom-calendar > section.calendar > header > button.next {
   float: right;
 }
-.atom-calendar > ul.days {
+.atom-calendar > section.calendar > ul.days {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -225,7 +233,7 @@ span.atom-auto-complete-box {
   margin: 0;
   width: 100%;
 }
-.atom-calendar > ul.days > li {
+.atom-calendar > section.calendar > ul.days > li {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -236,10 +244,10 @@ span.atom-auto-complete-box {
   width: 14.28%;
   padding: 5px;
 }
-.atom-calendar > ul.days > li.weekend {
+.atom-calendar > section.calendar > ul.days > li.weekend {
   background-color: lightgray;
 }
-.atom-calendar > section.day-list {
+.atom-calendar > section.calendar > section.day-list {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -249,7 +257,7 @@ span.atom-auto-complete-box {
   margin: 0;
   padding: 5px;
 }
-.atom-calendar > section.day-list > div {
+.atom-calendar > section.calendar > section.day-list > div {
   margin: 0;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -259,20 +267,20 @@ span.atom-auto-complete-box {
   padding: 5px;
   width: 14.28%;
 }
-.atom-calendar > section.day-list > div.today {
+.atom-calendar > section.calendar > section.day-list > div.today {
   background-color: orange;
 }
-.atom-calendar > section.day-list > div.selected {
+.atom-calendar > section.calendar > section.day-list > div.selected {
   background-color: blue;
   color: white;
 }
-.atom-calendar > section.day-list > div.other {
+.atom-calendar > section.calendar > section.day-list > div.other {
   color: gray;
 }
-.atom-calendar > section.day-list > div.weekend {
+.atom-calendar > section.calendar > section.day-list > div.weekend {
   background-color: lightgray;
 }
-.atom-calendar > section.day-list > div.weekend.selected {
+.atom-calendar > section.calendar > section.day-list > div.weekend.selected {
   background-color: blue;
   color: white;
 }
