@@ -594,6 +594,8 @@
 
                 } else {
 
+                    this.getTemplate("itemTemplate");
+
                     while (ae.next()) {
                         var data = ae.current();
                         var elementChild = this.createChildElement(parentScope, element, data, ae);
@@ -608,7 +610,22 @@
                 //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                 //}
 
+                WebAtoms.dispatcher.callLater(function () {
+                    var dirty = [];
+                    var ce = new ChildEnumerator(element);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        if (item._isDirty) {
+                            dirty.push(item);
+                        }
+                    }
+                    ce = new AtomEnumerator(dirty);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        $(item).remove();
+                    }
 
+                });
 
                 WebAtoms.dispatcher.start();
 
@@ -627,20 +644,20 @@
             },
 
             createChildElement: function (parentScope, parentElement, data, ae, before) {
-                //if (!this._template)
-                //    return null;
-
-                this.getTemplate("itemTemplate");
 
                 var elementChild = AtomUI.cloneNode(this._itemTemplate);
                 elementChild._logicalParent = parentElement;
                 elementChild._templateParent = this;
+                elementChild._isDirty = true;
+
                 WebAtoms.dispatcher.callLater(function () {
                     if (before) {
                         parentElement.insertBefore(elementChild, before);
                     } else {
                         parentElement.appendChild(elementChild);
                     }
+                    elementChild._isDirty = null;
+                    delete elementChild._isDirty;
                 });
 
                 var scope = new AtomScope(this, parentScope, parentScope.__application);
