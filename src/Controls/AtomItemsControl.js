@@ -513,6 +513,7 @@
 
                 var items = this.get_dataItems(true);
 
+                var added = [];
 
                 var ae = new AtomEnumerator(items);
 
@@ -581,6 +582,7 @@
                         } else {
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, element, data, ae);
+                            added.push(elementChild);
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                         }
                     }
@@ -599,6 +601,7 @@
                     while (ae.next()) {
                         var data = ae.current();
                         var elementChild = this.createChildElement(parentScope, element, data, ae);
+                        added.push(elementChild);
                         this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                     }
                 }
@@ -609,19 +612,21 @@
                 //    var elementChild = this.createChildElement(parentScope, element, data, ae);
                 //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                 //}
-
+                var self = this;
                 WebAtoms.dispatcher.callLater(function () {
                     var dirty = [];
                     var ce = new ChildEnumerator(element);
                     while (ce.next()) {
                         var item = ce.current();
-                        if (item._isDirty) {
+                        var f = added.filter(function (fx) { return item == fx; });
+                        if (f.pop() != item) {
                             dirty.push(item);
                         }
                     }
                     ce = new AtomEnumerator(dirty);
                     while (ce.next()) {
                         var item = ce.current();
+                        self.dispose(item);
                         $(item).remove();
                     }
 
@@ -656,8 +661,6 @@
                     } else {
                         parentElement.appendChild(elementChild);
                     }
-                    elementChild._isDirty = null;
-                    delete elementChild._isDirty;
                 });
 
                 var scope = new AtomScope(this, parentScope, parentScope.__application);
