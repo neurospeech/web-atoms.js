@@ -46,6 +46,10 @@
                         AtomBinder.refreshValue(_this, "offsetTop");
                     });
 
+                    AtomPopup.show(this._element, this.popup, -1, function () {
+                        Atom.set(_this, "isOpen", false);
+                    });
+
                     //var _this = this;
                     //WebAtoms.dispatcher.callLater(function () {
                     //    AtomPopup.show(_this._element, _this.popup, 0, function () {
