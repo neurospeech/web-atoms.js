@@ -605,7 +605,7 @@ jsonML["WebAtoms.AtomAutoCompleteBox.template"] =
 [["input",
 { "data-atom-presenter": "selectionBox", "disabled": "disabled", "type": "text", "data-atom-init": "t1" }
 ], ["input",
-{ "data-atom-presenter": "inputBox", "type": "text", "data-atom-init": "t2" }
+{ "data-atom-presenter": "inputBox", "type": "text", "autocomplete": "off", "autocorrect": "off", "data-atom-init": "t2" }
 ], ["div",
 { "data-atom-presenter": "itemsPresenter", "class": "atom-list-box", "style": "position: absolute; z-index: 100;", "data-atom-init": "t3" }
 ,"\n", ["div",
