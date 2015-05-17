@@ -6983,97 +6983,103 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 10 - 'AtomListBox.js' */            this._autoScrollToSelection = false;
 
-/*Line 12 - 'AtomListBox.js' */            $(e).addClass("atom-list-box");
-/*Line 13 - 'AtomListBox.js' */        },
-/*Line 14 - 'AtomListBox.js' */        properties: {
-/*Line 15 - 'AtomListBox.js' */            autoSelectOnClick: true
-/*Line 16 - 'AtomListBox.js' */        },
-/*Line 17 - 'AtomListBox.js' */        methods: {
-/*Line 18 - 'AtomListBox.js' */            onClick: function (event) {
+/*Line 12 - 'AtomListBox.js' */        },
+/*Line 13 - 'AtomListBox.js' */        properties: {
+/*Line 14 - 'AtomListBox.js' */            autoSelectOnClick: true
+/*Line 15 - 'AtomListBox.js' */        },
+/*Line 16 - 'AtomListBox.js' */        methods: {
 
-/*Line 20 - 'AtomListBox.js' */                if (!this._autoSelectOnClick)
-/*Line 21 - 'AtomListBox.js' */                    return;
+/*Line 18 - 'AtomListBox.js' */            setClass: function () {
+/*Line 19 - 'AtomListBox.js' */                var $e = $(this._element);
+/*Line 20 - 'AtomListBox.js' */                $e.addClass("atom-list-box");
+/*Line 21 - 'AtomListBox.js' */            },
 
-/*Line 23 - 'AtomListBox.js' */                this.onSelectItem(null, null, event);
-/*Line 24 - 'AtomListBox.js' */                //return AtomUI.cancelEvent(event);
-/*Line 25 - 'AtomListBox.js' */            },
+/*Line 23 - 'AtomListBox.js' */            onClick: function (event) {
 
-/*Line 27 - 'AtomListBox.js' */            get_itemWidth: function () {
-/*Line 28 - 'AtomListBox.js' */                if (!this._items || !this._items.length)
-/*Line 29 - 'AtomListBox.js' */                    return 0;
-/*Line 30 - 'AtomListBox.js' */                var w = $(this._element).innerWidth();
-/*Line 31 - 'AtomListBox.js' */                return w / this._items.length;
-/*Line 32 - 'AtomListBox.js' */            },
+/*Line 25 - 'AtomListBox.js' */                if (!this._autoSelectOnClick)
+/*Line 26 - 'AtomListBox.js' */                    return;
 
-/*Line 34 - 'AtomListBox.js' */            applyItemStyle: function (item, dataItem, first, last) {
-/*Line 35 - 'AtomListBox.js' */                var $item = $(item);
-/*Line 36 - 'AtomListBox.js' */                $item.removeClass("selected-item list-item first-item last-item");
-/*Line 37 - 'AtomListBox.js' */                //$(item).removeClass("list-item");
-/*Line 38 - 'AtomListBox.js' */                //$(item).removeClass("first-item");
-/*Line 39 - 'AtomListBox.js' */                //$(item).removeClass("last-item");
-/*Line 40 - 'AtomListBox.js' */                if (!dataItem)
-/*Line 41 - 'AtomListBox.js' */                    return;
-/*Line 42 - 'AtomListBox.js' */                $item.addClass("list-item");
-/*Line 43 - 'AtomListBox.js' */                if (first) {
-/*Line 44 - 'AtomListBox.js' */                    $item.addClass("first-item");
-/*Line 45 - 'AtomListBox.js' */                }
-/*Line 46 - 'AtomListBox.js' */                if (last) {
-/*Line 47 - 'AtomListBox.js' */                    $item.addClass("last-item");
-/*Line 48 - 'AtomListBox.js' */                }
-/*Line 49 - 'AtomListBox.js' */                if (this.isSelected(dataItem)) {
-/*Line 50 - 'AtomListBox.js' */                    $item.addClass("selected-item");
-/*Line 51 - 'AtomListBox.js' */                }
-/*Line 52 - 'AtomListBox.js' */            },
+/*Line 28 - 'AtomListBox.js' */                this.onSelectItem(null, null, event);
+/*Line 29 - 'AtomListBox.js' */                //return AtomUI.cancelEvent(event);
+/*Line 30 - 'AtomListBox.js' */            },
 
-/*Line 54 - 'AtomListBox.js' */            onCreated: function () {
-/*Line 55 - 'AtomListBox.js' */                this.bindEvent(this._itemsPresenter, "click", "onClick");
-/*Line 56 - 'AtomListBox.js' */                baseType.onCreated.call(this);
+/*Line 32 - 'AtomListBox.js' */            get_itemWidth: function () {
+/*Line 33 - 'AtomListBox.js' */                if (!this._items || !this._items.length)
+/*Line 34 - 'AtomListBox.js' */                    return 0;
+/*Line 35 - 'AtomListBox.js' */                var w = $(this._element).innerWidth();
+/*Line 36 - 'AtomListBox.js' */                return w / this._items.length;
+/*Line 37 - 'AtomListBox.js' */            },
+
+/*Line 39 - 'AtomListBox.js' */            applyItemStyle: function (item, dataItem, first, last) {
+/*Line 40 - 'AtomListBox.js' */                var $item = $(item);
+/*Line 41 - 'AtomListBox.js' */                $item.removeClass("selected-item list-item first-item last-item");
+/*Line 42 - 'AtomListBox.js' */                //$(item).removeClass("list-item");
+/*Line 43 - 'AtomListBox.js' */                //$(item).removeClass("first-item");
+/*Line 44 - 'AtomListBox.js' */                //$(item).removeClass("last-item");
+/*Line 45 - 'AtomListBox.js' */                if (!dataItem)
+/*Line 46 - 'AtomListBox.js' */                    return;
+/*Line 47 - 'AtomListBox.js' */                $item.addClass("list-item");
+/*Line 48 - 'AtomListBox.js' */                if (first) {
+/*Line 49 - 'AtomListBox.js' */                    $item.addClass("first-item");
+/*Line 50 - 'AtomListBox.js' */                }
+/*Line 51 - 'AtomListBox.js' */                if (last) {
+/*Line 52 - 'AtomListBox.js' */                    $item.addClass("last-item");
+/*Line 53 - 'AtomListBox.js' */                }
+/*Line 54 - 'AtomListBox.js' */                if (this.isSelected(dataItem)) {
+/*Line 55 - 'AtomListBox.js' */                    $item.addClass("selected-item");
+/*Line 56 - 'AtomListBox.js' */                }
 /*Line 57 - 'AtomListBox.js' */            },
 
-/*Line 59 - 'AtomListBox.js' */            invokePost: function () {
-/*Line 60 - 'AtomListBox.js' */                if (this.get_selectedIndex() != -1) {
-/*Line 61 - 'AtomListBox.js' */                    baseType.invokePost.apply(this, arguments);
-/*Line 62 - 'AtomListBox.js' */                }
-/*Line 63 - 'AtomListBox.js' */            },
+/*Line 59 - 'AtomListBox.js' */            onCreated: function () {
+/*Line 60 - 'AtomListBox.js' */                this.bindEvent(this._itemsPresenter, "click", "onClick");
+/*Line 61 - 'AtomListBox.js' */                baseType.onCreated.call(this);
+/*Line 62 - 'AtomListBox.js' */            },
 
-/*Line 65 - 'AtomListBox.js' */            onSelectItem: function (scope, sender, event) {
-/*Line 66 - 'AtomListBox.js' */                var target = event ? event.target : null;
-/*Line 67 - 'AtomListBox.js' */                var element = this._itemsPresenter;
-/*Line 68 - 'AtomListBox.js' */                var childElement = target || sender._element;
-/*Line 69 - 'AtomListBox.js' */                while (childElement.parentNode != null && childElement.parentNode != element)
-/*Line 70 - 'AtomListBox.js' */                    childElement = childElement.parentNode;
-/*Line 71 - 'AtomListBox.js' */                if (childElement == document) {
-/*Line 72 - 'AtomListBox.js' */                    //console.log("listbox clicked outside");
-/*Line 73 - 'AtomListBox.js' */                    return;
-/*Line 74 - 'AtomListBox.js' */                }
-/*Line 75 - 'AtomListBox.js' */                var dataItem = childElement;
-/*Line 76 - 'AtomListBox.js' */                if (this.hasItems()) {
-/*Line 77 - 'AtomListBox.js' */                    dataItem = childElement.atomControl.get_data();
-/*Line 78 - 'AtomListBox.js' */                }
+/*Line 64 - 'AtomListBox.js' */            invokePost: function () {
+/*Line 65 - 'AtomListBox.js' */                if (this.get_selectedIndex() != -1) {
+/*Line 66 - 'AtomListBox.js' */                    baseType.invokePost.apply(this, arguments);
+/*Line 67 - 'AtomListBox.js' */                }
+/*Line 68 - 'AtomListBox.js' */            },
 
-/*Line 80 - 'AtomListBox.js' */                this.toggleSelection(dataItem);
+/*Line 70 - 'AtomListBox.js' */            onSelectItem: function (scope, sender, event) {
+/*Line 71 - 'AtomListBox.js' */                var target = event ? event.target : null;
+/*Line 72 - 'AtomListBox.js' */                var element = this._itemsPresenter;
+/*Line 73 - 'AtomListBox.js' */                var childElement = target || sender._element;
+/*Line 74 - 'AtomListBox.js' */                while (childElement.parentNode != null && childElement.parentNode != element)
+/*Line 75 - 'AtomListBox.js' */                    childElement = childElement.parentNode;
+/*Line 76 - 'AtomListBox.js' */                if (childElement == document) {
+/*Line 77 - 'AtomListBox.js' */                    //console.log("listbox clicked outside");
+/*Line 78 - 'AtomListBox.js' */                    return;
+/*Line 79 - 'AtomListBox.js' */                }
+/*Line 80 - 'AtomListBox.js' */                var dataItem = childElement;
+/*Line 81 - 'AtomListBox.js' */                if (this.hasItems()) {
+/*Line 82 - 'AtomListBox.js' */                    dataItem = childElement.atomControl.get_data();
+/*Line 83 - 'AtomListBox.js' */                }
 
-/*Line 82 - 'AtomListBox.js' */            },
+/*Line 85 - 'AtomListBox.js' */                this.toggleSelection(dataItem);
 
-/*Line 84 - 'AtomListBox.js' */            init: function () {
+/*Line 87 - 'AtomListBox.js' */            },
 
+/*Line 89 - 'AtomListBox.js' */            init: function () {
 
-/*Line 87 - 'AtomListBox.js' */                baseType.init.call(this);
-/*Line 88 - 'AtomListBox.js' */                var _this = this;
+/*Line 91 - 'AtomListBox.js' */                this.setClass();
 
-/*Line 90 - 'AtomListBox.js' */                this.selectCommand = function () {
-/*Line 91 - 'AtomListBox.js' */                    _this.onSelectItem.apply(_this, arguments);
-/*Line 92 - 'AtomListBox.js' */                };
-/*Line 93 - 'AtomListBox.js' */                this.selectAllCommand = function () {
-/*Line 94 - 'AtomListBox.js' */                    _this.set_selectAll(true);
-/*Line 95 - 'AtomListBox.js' */                };
-/*Line 96 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
-/*Line 97 - 'AtomListBox.js' */                    _this.set_selectedIndex(-1);
+/*Line 93 - 'AtomListBox.js' */                baseType.init.call(this);
+/*Line 94 - 'AtomListBox.js' */                var _this = this;
+
+/*Line 96 - 'AtomListBox.js' */                this.selectCommand = function () {
+/*Line 97 - 'AtomListBox.js' */                    _this.onSelectItem.apply(_this, arguments);
 /*Line 98 - 'AtomListBox.js' */                };
-/*Line 99 - 'AtomListBox.js' */            }
-/*Line 100 - 'AtomListBox.js' */        }
-/*Line 101 - 'AtomListBox.js' */    });
-/*Line 102 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
+/*Line 99 - 'AtomListBox.js' */                this.selectAllCommand = function () {
+/*Line 100 - 'AtomListBox.js' */                    _this.set_selectAll(true);
+/*Line 101 - 'AtomListBox.js' */                };
+/*Line 102 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
+/*Line 103 - 'AtomListBox.js' */                    _this.set_selectedIndex(-1);
+/*Line 104 - 'AtomListBox.js' */                };
+/*Line 105 - 'AtomListBox.js' */            }
+/*Line 106 - 'AtomListBox.js' */        }
+/*Line 107 - 'AtomListBox.js' */    });
+/*Line 108 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
 
 /*Line 0 - 'AtomAutoCompleteBox.js' */
 /*Line 1 - 'AtomAutoCompleteBox.js' */
@@ -7937,28 +7943,28 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 9 - 'AtomToggleButtonBar.js' */            this._showTabs = false;
 /*Line 10 - 'AtomToggleButtonBar.js' */            this._autoScrollToSelection = false;
 
-/*Line 12 - 'AtomToggleButtonBar.js' */            $(e).removeClass("atom-list-box");
+/*Line 12 - 'AtomToggleButtonBar.js' */            //$(e).removeClass("atom-list-box");
 
-/*Line 14 - 'AtomToggleButtonBar.js' */            if (! /ul/i.test(e.tagName)) {
-/*Line 15 - 'AtomToggleButtonBar.js' */                //throw new Error("Button bar can only support UL style");
-/*Line 16 - 'AtomToggleButtonBar.js' */                log("Button bar can only support UL style");
-/*Line 17 - 'AtomToggleButtonBar.js' */            }
+/*Line 14 - 'AtomToggleButtonBar.js' */            //if (! /ul/i.test(e.tagName)) {
+/*Line 15 - 'AtomToggleButtonBar.js' */            //    //throw new Error("Button bar can only support UL style");
+/*Line 16 - 'AtomToggleButtonBar.js' */            //    log("Button bar can only support UL style");
+/*Line 17 - 'AtomToggleButtonBar.js' */            //}
 
 /*Line 19 - 'AtomToggleButtonBar.js' */        },
 /*Line 20 - 'AtomToggleButtonBar.js' */        properties: {
 /*Line 21 - 'AtomToggleButtonBar.js' */            showTabs: false
 /*Line 22 - 'AtomToggleButtonBar.js' */        },
 /*Line 23 - 'AtomToggleButtonBar.js' */        methods: {
-/*Line 24 - 'AtomToggleButtonBar.js' */            init: function () {
 
-/*Line 26 - 'AtomToggleButtonBar.js' */                baseType.init.call(this);
-/*Line 27 - 'AtomToggleButtonBar.js' */                this.bind(this._element,
-/*Line 28 - 'AtomToggleButtonBar.js' */                    'class',
-/*Line 29 - 'AtomToggleButtonBar.js' */                    ['showTabs'], 0,
-/*Line 30 - 'AtomToggleButtonBar.js' */                    function (v) {
-/*Line 31 - 'AtomToggleButtonBar.js' */                        return v ? 'atom-tab-bar' : 'atom-toggle-button-bar'
-/*Line 32 - 'AtomToggleButtonBar.js' */                    });
-/*Line 33 - 'AtomToggleButtonBar.js' */                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
+/*Line 25 - 'AtomToggleButtonBar.js' */            setClass: function () {
+/*Line 26 - 'AtomToggleButtonBar.js' */                var $e = $(this._element);
+/*Line 27 - 'AtomToggleButtonBar.js' */                $e.removeClass("atom-tab-bar atom-toggle-button-bar");
+/*Line 28 - 'AtomToggleButtonBar.js' */                $e.addClass(this._showTabs ? 'atom-tab-bar' : 'atom-toggle-button-bar');
+/*Line 29 - 'AtomToggleButtonBar.js' */            },
+
+/*Line 31 - 'AtomToggleButtonBar.js' */            set_showTabs: function (v) {
+/*Line 32 - 'AtomToggleButtonBar.js' */                this._showTabs = v;
+/*Line 33 - 'AtomToggleButtonBar.js' */                this.setClass();
 /*Line 34 - 'AtomToggleButtonBar.js' */            }
 /*Line 35 - 'AtomToggleButtonBar.js' */        }
 /*Line 36 - 'AtomToggleButtonBar.js' */    });
@@ -9435,136 +9441,142 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 21 - 'AtomLinkBar.js' */        },
 /*Line 22 - 'AtomLinkBar.js' */        methods: {
 
-/*Line 24 - 'AtomLinkBar.js' */            set_menuDirection: function (v) {
+/*Line 24 - 'AtomLinkBar.js' */            setClass: function () {
 /*Line 25 - 'AtomLinkBar.js' */                var $e = $(this._element);
-/*Line 26 - 'AtomLinkBar.js' */                $e.removeClass("vertical horizontal");
-/*Line 27 - 'AtomLinkBar.js' */                $e.addClass(v);
-/*Line 28 - 'AtomLinkBar.js' */                this._menuDirection = v;
-/*Line 29 - 'AtomLinkBar.js' */            },
+/*Line 26 - 'AtomLinkBar.js' */                $e.removeClass("atom-tab-bar atom-link-bar");
+/*Line 27 - 'AtomLinkBar.js' */                $e.addClass(this._showTabs ? 'atom-tab-bar' : 'atom-link-bar');
+/*Line 28 - 'AtomLinkBar.js' */            },
 
-/*Line 31 - 'AtomLinkBar.js' */            onClick: function () {
-/*Line 32 - 'AtomLinkBar.js' */            },
+/*Line 30 - 'AtomLinkBar.js' */            set_menuDirection: function (v) {
+/*Line 31 - 'AtomLinkBar.js' */                var $e = $(this._element);
+/*Line 32 - 'AtomLinkBar.js' */                $e.removeClass("vertical horizontal");
+/*Line 33 - 'AtomLinkBar.js' */                $e.addClass(v);
+/*Line 34 - 'AtomLinkBar.js' */                this._menuDirection = v;
+/*Line 35 - 'AtomLinkBar.js' */            },
 
-
-
-/*Line 36 - 'AtomLinkBar.js' */            openMenu: function (e) {
-
-/*Line 38 - 'AtomLinkBar.js' */                var target = e.target;
-
-/*Line 40 - 'AtomLinkBar.js' */                var ap = this.get_atomParent(target);
-
-/*Line 42 - 'AtomLinkBar.js' */                if (ap == null)
-/*Line 43 - 'AtomLinkBar.js' */                    return;
-
-/*Line 45 - 'AtomLinkBar.js' */                var data = ap.get_data();
-
-/*Line 47 - 'AtomLinkBar.js' */                if (!data[this._itemsPath])
-/*Line 48 - 'AtomLinkBar.js' */                    return;
-
-/*Line 50 - 'AtomLinkBar.js' */                var menu = this._subMenu;
-
-/*Line 52 - 'AtomLinkBar.js' */                if (menu) {
-/*Line 53 - 'AtomLinkBar.js' */                    AtomPopup.hide(menu._element);
-/*Line 54 - 'AtomLinkBar.js' */                }
-/*Line 55 - 'AtomLinkBar.js' */                else {
-
-/*Line 57 - 'AtomLinkBar.js' */                    var mt = this.getTemplate("menuTemplate");
-
-/*Line 59 - 'AtomLinkBar.js' */                    menu = AtomUI.cloneNode(mt);
-/*Line 60 - 'AtomLinkBar.js' */                    menu._templateParent = this;
-/*Line 61 - 'AtomLinkBar.js' */                    menu.style.position = "absolute";
-/*Line 62 - 'AtomLinkBar.js' */                    //menu.style.zOrder = 
-/*Line 63 - 'AtomLinkBar.js' */                    document.body.appendChild(menu);
-/*Line 64 - 'AtomLinkBar.js' */                    var mt = AtomUI.getAtomType(mt) || WebAtoms.AtomControl;
-
-/*Line 66 - 'AtomLinkBar.js' */                    menu = AtomUI.createControl(menu, mt, data);
-
-/*Line 68 - 'AtomLinkBar.js' */                    this._subMenu = menu;
-/*Line 69 - 'AtomLinkBar.js' */                }
-
-/*Line 71 - 'AtomLinkBar.js' */                AtomBinder.setValue(menu, "data", data);
-
-/*Line 73 - 'AtomLinkBar.js' */                AtomPopup.show(ap._element, menu._element, 0);
-
-/*Line 75 - 'AtomLinkBar.js' */                AtomUI.cancelEvent(e);
-/*Line 76 - 'AtomLinkBar.js' */            },
+/*Line 37 - 'AtomLinkBar.js' */            onClick: function () {
+/*Line 38 - 'AtomLinkBar.js' */            },
 
 
-/*Line 79 - 'AtomLinkBar.js' */            selectDefault: function () {
-/*Line 80 - 'AtomLinkBar.js' */                if (!this._items)
-/*Line 81 - 'AtomLinkBar.js' */                    return;
 
-/*Line 83 - 'AtomLinkBar.js' */                if (!this._selectCurrent)
-/*Line 84 - 'AtomLinkBar.js' */                    return;
+/*Line 42 - 'AtomLinkBar.js' */            openMenu: function (e) {
 
-/*Line 86 - 'AtomLinkBar.js' */                if (this._value) {
+/*Line 44 - 'AtomLinkBar.js' */                var target = e.target;
+
+/*Line 46 - 'AtomLinkBar.js' */                var ap = this.get_atomParent(target);
+
+/*Line 48 - 'AtomLinkBar.js' */                if (ap == null)
+/*Line 49 - 'AtomLinkBar.js' */                    return;
+
+/*Line 51 - 'AtomLinkBar.js' */                var data = ap.get_data();
+
+/*Line 53 - 'AtomLinkBar.js' */                if (!data[this._itemsPath])
+/*Line 54 - 'AtomLinkBar.js' */                    return;
+
+/*Line 56 - 'AtomLinkBar.js' */                var menu = this._subMenu;
+
+/*Line 58 - 'AtomLinkBar.js' */                if (menu) {
+/*Line 59 - 'AtomLinkBar.js' */                    AtomPopup.hide(menu._element);
+/*Line 60 - 'AtomLinkBar.js' */                }
+/*Line 61 - 'AtomLinkBar.js' */                else {
+
+/*Line 63 - 'AtomLinkBar.js' */                    var mt = this.getTemplate("menuTemplate");
+
+/*Line 65 - 'AtomLinkBar.js' */                    menu = AtomUI.cloneNode(mt);
+/*Line 66 - 'AtomLinkBar.js' */                    menu._templateParent = this;
+/*Line 67 - 'AtomLinkBar.js' */                    menu.style.position = "absolute";
+/*Line 68 - 'AtomLinkBar.js' */                    //menu.style.zOrder = 
+/*Line 69 - 'AtomLinkBar.js' */                    document.body.appendChild(menu);
+/*Line 70 - 'AtomLinkBar.js' */                    var mt = AtomUI.getAtomType(mt) || WebAtoms.AtomControl;
+
+/*Line 72 - 'AtomLinkBar.js' */                    menu = AtomUI.createControl(menu, mt, data);
+
+/*Line 74 - 'AtomLinkBar.js' */                    this._subMenu = menu;
+/*Line 75 - 'AtomLinkBar.js' */                }
+
+/*Line 77 - 'AtomLinkBar.js' */                AtomBinder.setValue(menu, "data", data);
+
+/*Line 79 - 'AtomLinkBar.js' */                AtomPopup.show(ap._element, menu._element, 0);
+
+/*Line 81 - 'AtomLinkBar.js' */                AtomUI.cancelEvent(e);
+/*Line 82 - 'AtomLinkBar.js' */            },
+
+
+/*Line 85 - 'AtomLinkBar.js' */            selectDefault: function () {
+/*Line 86 - 'AtomLinkBar.js' */                if (!this._items)
 /*Line 87 - 'AtomLinkBar.js' */                    return;
-/*Line 88 - 'AtomLinkBar.js' */                }
-/*Line 89 - 'AtomLinkBar.js' */                AtomBinder.setValue(this, "value", location.pathname);
 
-/*Line 91 - 'AtomLinkBar.js' */                if (this.get_selectedIndex() == -1) {
-/*Line 92 - 'AtomLinkBar.js' */                    this.selectItem(this._items);
-/*Line 93 - 'AtomLinkBar.js' */                }
+/*Line 89 - 'AtomLinkBar.js' */                if (!this._selectCurrent)
+/*Line 90 - 'AtomLinkBar.js' */                    return;
 
-/*Line 95 - 'AtomLinkBar.js' */                this.updateSelectionBindings();
-/*Line 96 - 'AtomLinkBar.js' */            },
+/*Line 92 - 'AtomLinkBar.js' */                if (this._value) {
+/*Line 93 - 'AtomLinkBar.js' */                    return;
+/*Line 94 - 'AtomLinkBar.js' */                }
+/*Line 95 - 'AtomLinkBar.js' */                AtomBinder.setValue(this, "value", location.pathname);
 
-/*Line 98 - 'AtomLinkBar.js' */            selectItem: function (a, t) {
-/*Line 99 - 'AtomLinkBar.js' */                var ae = new AtomEnumerator(a);
-/*Line 100 - 'AtomLinkBar.js' */                var vp = this._valuePath;
-/*Line 101 - 'AtomLinkBar.js' */                var lp = location.pathname.toLowerCase();
-/*Line 102 - 'AtomLinkBar.js' */                while (ae.next()) {
-/*Line 103 - 'AtomLinkBar.js' */                    var item = ae.current();
-/*Line 104 - 'AtomLinkBar.js' */                    var l = item;
-/*Line 105 - 'AtomLinkBar.js' */                    if (vp)
-/*Line 106 - 'AtomLinkBar.js' */                        l = l[vp];
-/*Line 107 - 'AtomLinkBar.js' */                    if (!l)
-/*Line 108 - 'AtomLinkBar.js' */                        continue;
-/*Line 109 - 'AtomLinkBar.js' */                    if (lp == l.toLowerCase()) {
-/*Line 110 - 'AtomLinkBar.js' */                        if (!t) {
-/*Line 111 - 'AtomLinkBar.js' */                            AtomBinder.setValue(this, "selectedItem", item);
-/*Line 112 - 'AtomLinkBar.js' */                        }
-/*Line 113 - 'AtomLinkBar.js' */                        return true;
-/*Line 114 - 'AtomLinkBar.js' */                    }
+/*Line 97 - 'AtomLinkBar.js' */                if (this.get_selectedIndex() == -1) {
+/*Line 98 - 'AtomLinkBar.js' */                    this.selectItem(this._items);
+/*Line 99 - 'AtomLinkBar.js' */                }
 
-/*Line 116 - 'AtomLinkBar.js' */                    if (item.links) {
-/*Line 117 - 'AtomLinkBar.js' */                        if (this.selectItem(item.links, true)) {
-/*Line 118 - 'AtomLinkBar.js' */                            AtomBinder.setValue(this, "selectedItem", item);
-/*Line 119 - 'AtomLinkBar.js' */                            return true;
-/*Line 120 - 'AtomLinkBar.js' */                        }
-/*Line 121 - 'AtomLinkBar.js' */                    }
-/*Line 122 - 'AtomLinkBar.js' */                }
-/*Line 123 - 'AtomLinkBar.js' */                return false;
-/*Line 124 - 'AtomLinkBar.js' */            },
+/*Line 101 - 'AtomLinkBar.js' */                this.updateSelectionBindings();
+/*Line 102 - 'AtomLinkBar.js' */            },
 
-/*Line 126 - 'AtomLinkBar.js' */            dispose: function () {
+/*Line 104 - 'AtomLinkBar.js' */            selectItem: function (a, t) {
+/*Line 105 - 'AtomLinkBar.js' */                var ae = new AtomEnumerator(a);
+/*Line 106 - 'AtomLinkBar.js' */                var vp = this._valuePath;
+/*Line 107 - 'AtomLinkBar.js' */                var lp = location.pathname.toLowerCase();
+/*Line 108 - 'AtomLinkBar.js' */                while (ae.next()) {
+/*Line 109 - 'AtomLinkBar.js' */                    var item = ae.current();
+/*Line 110 - 'AtomLinkBar.js' */                    var l = item;
+/*Line 111 - 'AtomLinkBar.js' */                    if (vp)
+/*Line 112 - 'AtomLinkBar.js' */                        l = l[vp];
+/*Line 113 - 'AtomLinkBar.js' */                    if (!l)
+/*Line 114 - 'AtomLinkBar.js' */                        continue;
+/*Line 115 - 'AtomLinkBar.js' */                    if (lp == l.toLowerCase()) {
+/*Line 116 - 'AtomLinkBar.js' */                        if (!t) {
+/*Line 117 - 'AtomLinkBar.js' */                            AtomBinder.setValue(this, "selectedItem", item);
+/*Line 118 - 'AtomLinkBar.js' */                        }
+/*Line 119 - 'AtomLinkBar.js' */                        return true;
+/*Line 120 - 'AtomLinkBar.js' */                    }
 
-/*Line 128 - 'AtomLinkBar.js' */                if (this._subMenu) {
-/*Line 129 - 'AtomLinkBar.js' */                    this._subMenu.dispose();
-/*Line 130 - 'AtomLinkBar.js' */                    this._subMenu = null;
-/*Line 131 - 'AtomLinkBar.js' */                }
-/*Line 132 - 'AtomLinkBar.js' */                base.dispose.apply(this, arguments);
-/*Line 133 - 'AtomLinkBar.js' */            },
+/*Line 122 - 'AtomLinkBar.js' */                    if (item.links) {
+/*Line 123 - 'AtomLinkBar.js' */                        if (this.selectItem(item.links, true)) {
+/*Line 124 - 'AtomLinkBar.js' */                            AtomBinder.setValue(this, "selectedItem", item);
+/*Line 125 - 'AtomLinkBar.js' */                            return true;
+/*Line 126 - 'AtomLinkBar.js' */                        }
+/*Line 127 - 'AtomLinkBar.js' */                    }
+/*Line 128 - 'AtomLinkBar.js' */                }
+/*Line 129 - 'AtomLinkBar.js' */                return false;
+/*Line 130 - 'AtomLinkBar.js' */            },
 
-/*Line 135 - 'AtomLinkBar.js' */            init: function () {
-/*Line 136 - 'AtomLinkBar.js' */                base.init.apply(this, arguments);
+/*Line 132 - 'AtomLinkBar.js' */            dispose: function () {
 
-/*Line 138 - 'AtomLinkBar.js' */                //this.bindEvent(this._element, "mouseover", "openMenuCommand");
-/*Line 139 - 'AtomLinkBar.js' */                this.bindEvent(this._element, "click", "openMenuCommand");
-/*Line 140 - 'AtomLinkBar.js' */                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
-/*Line 141 - 'AtomLinkBar.js' */                this.bind(this._element,
-/*Line 142 - 'AtomLinkBar.js' */                    'class',
-/*Line 143 - 'AtomLinkBar.js' */                    ['showTabs'], 0,
-/*Line 144 - 'AtomLinkBar.js' */                    function (v) {
-/*Line 145 - 'AtomLinkBar.js' */                        return v ? 'atom-tab-bar' : 'atom-link-bar'
-/*Line 146 - 'AtomLinkBar.js' */                    });
+/*Line 134 - 'AtomLinkBar.js' */                if (this._subMenu) {
+/*Line 135 - 'AtomLinkBar.js' */                    this._subMenu.dispose();
+/*Line 136 - 'AtomLinkBar.js' */                    this._subMenu = null;
+/*Line 137 - 'AtomLinkBar.js' */                }
+/*Line 138 - 'AtomLinkBar.js' */                base.dispose.apply(this, arguments);
+/*Line 139 - 'AtomLinkBar.js' */            },
 
-/*Line 148 - 'AtomLinkBar.js' */                this.set_menuDirection('horizontal');
-/*Line 149 - 'AtomLinkBar.js' */            }
+/*Line 141 - 'AtomLinkBar.js' */            init: function () {
+/*Line 142 - 'AtomLinkBar.js' */                base.init.apply(this, arguments);
 
-/*Line 151 - 'AtomLinkBar.js' */        }
-/*Line 152 - 'AtomLinkBar.js' */    });
-/*Line 153 - 'AtomLinkBar.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
+/*Line 144 - 'AtomLinkBar.js' */                //this.bindEvent(this._element, "mouseover", "openMenuCommand");
+/*Line 145 - 'AtomLinkBar.js' */                this.bindEvent(this._element, "click", "openMenuCommand");
+/*Line 146 - 'AtomLinkBar.js' */                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
+/*Line 147 - 'AtomLinkBar.js' */                //this.bind(this._element,
+/*Line 148 - 'AtomLinkBar.js' */                //    'class',
+/*Line 149 - 'AtomLinkBar.js' */                //    ['showTabs'], 0,
+/*Line 150 - 'AtomLinkBar.js' */                //    function (v) {
+/*Line 151 - 'AtomLinkBar.js' */                //        return v ? 'atom-tab-bar' : 'atom-link-bar'
+/*Line 152 - 'AtomLinkBar.js' */                //    });
+
+/*Line 154 - 'AtomLinkBar.js' */                this.set_menuDirection('horizontal');
+/*Line 155 - 'AtomLinkBar.js' */            }
+
+/*Line 157 - 'AtomLinkBar.js' */        }
+/*Line 158 - 'AtomLinkBar.js' */    });
+/*Line 159 - 'AtomLinkBar.js' */})(WebAtoms.AtomToggleButtonBar.prototype);
 
 /*Line 0 - 'AtomMultiButtonList.js' */
 

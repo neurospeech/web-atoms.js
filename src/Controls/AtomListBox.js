@@ -10,12 +10,17 @@
 
             this._autoScrollToSelection = false;
 
-            $(e).addClass("atom-list-box");
         },
         properties: {
             autoSelectOnClick: true
         },
         methods: {
+
+            setClass: function () {
+                var $e = $(this._element);
+                $e.addClass("atom-list-box");
+            },
+
             onClick: function (event) {
 
                 if (!this._autoSelectOnClick)
@@ -84,6 +89,7 @@
 
             init: function () {
 
+                this.setClass();
 
                 baseType.init.call(this);
                 var _this = this;
