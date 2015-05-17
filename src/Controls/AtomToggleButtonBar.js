@@ -10,28 +10,28 @@
             this._showTabs = false;
             this._autoScrollToSelection = false;
 
-            $(e).removeClass("atom-list-box");
+            //$(e).removeClass("atom-list-box");
 
-            if (! /ul/i.test(e.tagName)) {
-                //throw new Error("Button bar can only support UL style");
-                log("Button bar can only support UL style");
-            }
+            //if (! /ul/i.test(e.tagName)) {
+            //    //throw new Error("Button bar can only support UL style");
+            //    log("Button bar can only support UL style");
+            //}
 
         },
         properties: {
             showTabs: false
         },
         methods: {
-            init: function () {
 
-                baseType.init.call(this);
-                this.bind(this._element,
-                    'class',
-                    ['showTabs'], 0,
-                    function (v) {
-                        return v ? 'atom-tab-bar' : 'atom-toggle-button-bar'
-                    });
-                //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'atom-toggle-button-bar']", true, this._element);
+            setClass: function () {
+                var $e = $(this._element);
+                $e.removeClass("atom-tab-bar atom-toggle-button-bar");
+                $e.addClass(this._showTabs ? 'atom-tab-bar' : 'atom-toggle-button-bar');
+            },
+
+            set_showTabs: function (v) {
+                this._showTabs = v;
+                this.setClass();
             }
         }
     });

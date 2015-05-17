@@ -215,25 +215,7 @@
 
                     var sp = this._sortPath;
                     if (sp) {
-                        if (sp.constructor == String) {
-
-                            var desc = false;
-                            var index = sp.indexOf(' ');
-                            if (index != -1) {
-                                var d = sp.substr(index + 1);
-                                sp = sp.substr(0, index);
-                                desc = /desc/gi.test(d);
-                            }
-
-                            var f = desc ? (function (a, b) {
-                                return b[sp].localeCompare(a[sp]);
-                            }) : (function (a, b) {
-                                return a[sp].localeCompare(b[sp]);
-                            });
-                            r = r.sort(f);
-                        } else {
-                            r = r.sort(sp);
-                        }
+                        r = r.sort(sp);
                     }
                     return r;
                 }

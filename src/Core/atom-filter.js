@@ -187,6 +187,71 @@
             }
         },
 
+        isString: function (a) {
+            return typeof a == 'string' || a instanceof String;
+        },
+
+        sort: function (orderBy) {
+
+            if (!AtomFilter.isString(orderBy)) {
+                return orderBy;
+            }
+
+            var fields = orderBy.split(',');
+            fields = fields.map(function (item) {
+                var tokens = item.split(' ');
+                var desc = tokens[1] || 'asc';
+                return {
+                    field: tokens[0],
+                    desc: /desc/i.test(desc),
+                    cs: /^cs/i.test(desc)
+                }
+            });
+
+            return function (a, b) {
+
+                if (a == null || a == undefined) {
+                    return b == null || b == undefined ? 0 : 1;
+                }
+                if (b == null || b == undefined) {
+                    return 1;
+                }
+
+                for (var i = 0; i < fields.length; i++) {
+                    var f = fields[i];
+                    var field = f.field;
+                    var af = a[field];
+                    var bf = b[field];
+                    if (f.desc) {
+                        var t = af;
+                        af = bf;
+                        bf = t;
+                    }
+                    if (af == bf)
+                        continue;
+                    if (!af) {
+                        return !bf ? 0 : -1;
+                    }
+                    if (!bf) {
+                        return !af ? 0 : 1;
+                    }
+                    if (AtomFilter.isString(af)) {
+                        if (f.cs) {
+                            return af.localeCompare(bf);
+                        } else {
+                            af = af.toLowerCase();
+                            bf = bf.toLowerCase();
+                            if (af == bf)
+                                continue;
+                            return af.localeCompare(bf);
+                        }
+                    }
+
+                }
+                return 0;
+            }
+        },
+
         filter: function (q, cor) {
             // compiles json object into function
             // that accepts object and returns true/false
@@ -298,6 +363,13 @@
             return af.call(this, i);
         }
         return af.call(this, $f(i));
+    };
+
+    var aps = Array.prototype.sort;
+
+    Array.prototype.sort = function (s) {
+        var f = AtomFilter.sort(s);
+        return aps.call(this, f);
     };
 
 })(window);

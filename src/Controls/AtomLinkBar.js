@@ -22,6 +22,12 @@
         },
         methods: {
 
+            setClass: function () {
+                var $e = $(this._element);
+                $e.removeClass("atom-tab-bar atom-link-bar");
+                $e.addClass(this._showTabs ? 'atom-tab-bar' : 'atom-link-bar');
+            },
+
             set_menuDirection: function (v) {
                 var $e = $(this._element);
                 $e.removeClass("vertical horizontal");
@@ -139,12 +145,12 @@
                 //this.bindEvent(this._element, "mouseover", "openMenuCommand");
                 this.bindEvent(this._element, "click", "openMenuCommand");
                 //this.setValue("class", "[$owner.showTabs ? 'atom-tab-button-bar' : 'menu atom-link-bar']", true, this._element);
-                this.bind(this._element,
-                    'class',
-                    ['showTabs'], 0,
-                    function (v) {
-                        return v ? 'atom-tab-bar' : 'atom-link-bar'
-                    });
+                //this.bind(this._element,
+                //    'class',
+                //    ['showTabs'], 0,
+                //    function (v) {
+                //        return v ? 'atom-tab-bar' : 'atom-link-bar'
+                //    });
 
                 this.set_menuDirection('horizontal');
             }
