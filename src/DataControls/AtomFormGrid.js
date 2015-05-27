@@ -74,12 +74,12 @@
                     if (at == "AtomFormTabControl" || at == "AtomTabControl") {
 
 
-                        var tabBar = document.createElement("DIV");
+                        var tabBar = document.createElement("ul");
                         tabBar.setAttribute("atom-type", "AtomToggleButtonBar");
                         var tabBarID = AtomUI.assignID(tabBar);
                         tabBar.setAttribute("atom-name", tabBarID);
                         tabBar.setAttribute("atom-show-tabs", "true");
-                        var te = document.createElement("SPAN");
+                        var te = document.createElement("li");
                         tabBar.appendChild(te);
                         te.setAttribute("atom-text", "{$data.label}");
                         te.setAttribute("atom-template", "itemTemplate");

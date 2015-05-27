@@ -267,6 +267,7 @@
                         return "";
                     var q = {};
                     q[d._$_key] = d._$_id;
+                    q['id'] = d._$_id;
                     return Atom.url(entityContext.prefix + '/entity/' + d._$_entityName + '/search?window=1&edit=true', null, q);
                 },
 

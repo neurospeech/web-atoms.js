@@ -11495,12 +11495,12 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 73 - 'AtomFormGrid.js' */                    if (at == "AtomFormTabControl" || at == "AtomTabControl") {
 
 
-/*Line 76 - 'AtomFormGrid.js' */                        var tabBar = document.createElement("DIV");
+/*Line 76 - 'AtomFormGrid.js' */                        var tabBar = document.createElement("ul");
 /*Line 77 - 'AtomFormGrid.js' */                        tabBar.setAttribute("atom-type", "AtomToggleButtonBar");
 /*Line 78 - 'AtomFormGrid.js' */                        var tabBarID = AtomUI.assignID(tabBar);
 /*Line 79 - 'AtomFormGrid.js' */                        tabBar.setAttribute("atom-name", tabBarID);
 /*Line 80 - 'AtomFormGrid.js' */                        tabBar.setAttribute("atom-show-tabs", "true");
-/*Line 81 - 'AtomFormGrid.js' */                        var te = document.createElement("SPAN");
+/*Line 81 - 'AtomFormGrid.js' */                        var te = document.createElement("li");
 /*Line 82 - 'AtomFormGrid.js' */                        tabBar.appendChild(te);
 /*Line 83 - 'AtomFormGrid.js' */                        te.setAttribute("atom-text", "{$data.label}");
 /*Line 84 - 'AtomFormGrid.js' */                        te.setAttribute("atom-template", "itemTemplate");
