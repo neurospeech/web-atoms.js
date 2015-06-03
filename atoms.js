@@ -3110,7 +3110,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 117 - 'AtomQuery.js' */        while (ae.next()) {
 /*Line 118 - 'AtomQuery.js' */            var item = ae.current();
 /*Line 119 - 'AtomQuery.js' */            if (s) {
-/*Line 120 - 'AtomQuery.js' */                item = AtomBinder.getValue(item,s);
+/*Line 120 - 'AtomQuery.js' */                item = Atom.get(item,s);
 /*Line 121 - 'AtomQuery.js' */            }
 /*Line 122 - 'AtomQuery.js' */            n += +(item || 0);
 /*Line 123 - 'AtomQuery.js' */        }
