@@ -118,7 +118,7 @@ var AtomQuery = {
         while (ae.next()) {
             var item = ae.current();
             if (s) {
-                item = AtomBinder.getValue(item,s);
+                item = Atom.get(item,s);
             }
             n += +(item || 0);
         }

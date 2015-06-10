@@ -252,6 +252,61 @@
             }
         },
 
+        build: function (ae, i, v, q, cor) {
+            if (i === '$or') {
+                var orf = AtomFilter.filter(v, true);
+                ae.push(function (item) {
+                    return orf(item);
+                });
+                return;
+            }
+            if (i === '$and') {
+                var orf = AtomFilter.filter(v, false);
+                ae.push(function (item) {
+                    return orf(item);
+                });
+                return;
+            }
+            if (i === '$not') {
+                var fn = AtomFilter.filter(v, cor);
+                ae.push(function (item) {
+                    return !fn(item);
+                });
+                return;
+            }
+            var args = i.split(' ');
+            if (args.length === 1) {
+                args = i.split(':');
+            }
+
+            var n = args[0];
+            var cond = "==";
+            if (args.length === 2) {
+                cond = args[1];
+            }
+
+            var left = function (item) {
+                return AtomFilter.get(item, n);
+            };
+            if (cond.indexOf('!') !== 0) {
+                var compF = AtomFilter.compare(cond, v);
+                var fx = function (item) {
+                    var l = left(item);
+                    return compF(l);
+                };
+                ae.push(fx);
+
+            } else {
+                cond = cond.substr(1);
+                var compF = AtomFilter.compare(cond, v);
+                var fx = function (item) {
+                    var l = left(item);
+                    return !compF(l);
+                };
+                ae.push(fx);
+            }
+        },
+
         filter: function (q, cor) {
             // compiles json object into function
             // that accepts object and returns true/false
@@ -267,67 +322,18 @@
                 if (!q.hasOwnProperty(i))
                     continue;
                 var v = q[i];
-                if (i === '$or') {
-                    var orf = AtomFilter.filter(v, true);
-                    ae.push(function (item) {
-                        return orf(item);
-                    });
-                    continue;
-                }
-                if (i === '$and') {
-                    var orf = AtomFilter.filter(v, false);
-                    ae.push(function (item) {
-                        return orf(item);
-                    });
-                    continue;
-                }
-                if (i === '$not') {
-                    var fn = AtomFilter.filter(v, cor);
-                    ae.push(function (item) {
-                        return !fn(item);
-                    });
-                    continue;
-                }
-                var args = i.split(' ');
-                if (args.length === 1) {
-                    args = i.split(':');
-                }
-
-                var n = args[0];
-                var cond = "==";
-                if (args.length === 2) {
-                    cond = args[1];
-                }
-
-                var left = function (item) {
-                    return AtomFilter.get(item, n);
-                };
-                var filter = null;
-                if (cond.indexOf('!') !== 0) {
-                    var compF = AtomFilter.compare(cond, v);
-                    filter = function (item) {
-                        var l = left(item);
-                        return compF(l);
-                    };
-
-                } else {
-                    cond = cond.substr(1);
-                    var compF = AtomFilter.compare(cond, v);
-                    filter = function (item) {
-                        var l = left(item);
-                        return !compF(l);
-                    };
-                }
-                ae.push(filter);
-
+                AtomFilter.build(ae, i, v, q, cor);
             }
 
             return function (item) {
 
                 var e = new AtomEnumerator(ae);
+                var a = [];
                 while (e.next()) {
                     var ec = e.current();
-                    if (ec(item)) {
+                    var r = ec(item);
+                    a.push(r);
+                    if (r) {
                         if (cor) {
                             return true;
                         }
@@ -336,6 +342,13 @@
                             return false;
                     }
                 }
+
+                e = new AtomEnumerator(a);
+                while (e.next()) {
+                    if (!e.current())
+                        return false;
+                }
+
                 return true;
             };
 

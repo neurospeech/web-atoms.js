@@ -1930,127 +1930,140 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 251 - 'atom-filter.js' */            }
 /*Line 252 - 'atom-filter.js' */        },
 
-/*Line 254 - 'atom-filter.js' */        filter: function (q, cor) {
-/*Line 255 - 'atom-filter.js' */            // compiles json object into function
-/*Line 256 - 'atom-filter.js' */            // that accepts object and returns true/false
+/*Line 254 - 'atom-filter.js' */        build: function (ae, i, v, q, cor) {
+/*Line 255 - 'atom-filter.js' */            if (i === '$or') {
+/*Line 256 - 'atom-filter.js' */                var orf = AtomFilter.filter(v, true);
+/*Line 257 - 'atom-filter.js' */                ae.push(function (item) {
+/*Line 258 - 'atom-filter.js' */                    return orf(item);
+/*Line 259 - 'atom-filter.js' */                });
+/*Line 260 - 'atom-filter.js' */                return;
+/*Line 261 - 'atom-filter.js' */            }
+/*Line 262 - 'atom-filter.js' */            if (i === '$and') {
+/*Line 263 - 'atom-filter.js' */                var orf = AtomFilter.filter(v, false);
+/*Line 264 - 'atom-filter.js' */                ae.push(function (item) {
+/*Line 265 - 'atom-filter.js' */                    return orf(item);
+/*Line 266 - 'atom-filter.js' */                });
+/*Line 267 - 'atom-filter.js' */                return;
+/*Line 268 - 'atom-filter.js' */            }
+/*Line 269 - 'atom-filter.js' */            if (i === '$not') {
+/*Line 270 - 'atom-filter.js' */                var fn = AtomFilter.filter(v, cor);
+/*Line 271 - 'atom-filter.js' */                ae.push(function (item) {
+/*Line 272 - 'atom-filter.js' */                    return !fn(item);
+/*Line 273 - 'atom-filter.js' */                });
+/*Line 274 - 'atom-filter.js' */                return;
+/*Line 275 - 'atom-filter.js' */            }
+/*Line 276 - 'atom-filter.js' */            var args = i.split(' ');
+/*Line 277 - 'atom-filter.js' */            if (args.length === 1) {
+/*Line 278 - 'atom-filter.js' */                args = i.split(':');
+/*Line 279 - 'atom-filter.js' */            }
 
-/*Line 258 - 'atom-filter.js' */            if (q === false)
-/*Line 259 - 'atom-filter.js' */                return AtomFilter.falsef;
-/*Line 260 - 'atom-filter.js' */            if (!q)
-/*Line 261 - 'atom-filter.js' */                return AtomFilter.truef;
+/*Line 281 - 'atom-filter.js' */            var n = args[0];
+/*Line 282 - 'atom-filter.js' */            var cond = "==";
+/*Line 283 - 'atom-filter.js' */            if (args.length === 2) {
+/*Line 284 - 'atom-filter.js' */                cond = args[1];
+/*Line 285 - 'atom-filter.js' */            }
 
-/*Line 263 - 'atom-filter.js' */            var ae = [];
+/*Line 287 - 'atom-filter.js' */            var left = function (item) {
+/*Line 288 - 'atom-filter.js' */                return AtomFilter.get(item, n);
+/*Line 289 - 'atom-filter.js' */            };
+/*Line 290 - 'atom-filter.js' */            if (cond.indexOf('!') !== 0) {
+/*Line 291 - 'atom-filter.js' */                var compF = AtomFilter.compare(cond, v);
+/*Line 292 - 'atom-filter.js' */                var fx = function (item) {
+/*Line 293 - 'atom-filter.js' */                    var l = left(item);
+/*Line 294 - 'atom-filter.js' */                    return compF(l);
+/*Line 295 - 'atom-filter.js' */                };
+/*Line 296 - 'atom-filter.js' */                ae.push(fx);
 
-/*Line 265 - 'atom-filter.js' */            for (var i in q) {
-/*Line 266 - 'atom-filter.js' */                if (!q.hasOwnProperty(i))
-/*Line 267 - 'atom-filter.js' */                    continue;
-/*Line 268 - 'atom-filter.js' */                var v = q[i];
-/*Line 269 - 'atom-filter.js' */                if (i === '$or') {
-/*Line 270 - 'atom-filter.js' */                    var orf = AtomFilter.filter(v, true);
-/*Line 271 - 'atom-filter.js' */                    ae.push(function (item) {
-/*Line 272 - 'atom-filter.js' */                        return orf(item);
-/*Line 273 - 'atom-filter.js' */                    });
-/*Line 274 - 'atom-filter.js' */                    continue;
-/*Line 275 - 'atom-filter.js' */                }
-/*Line 276 - 'atom-filter.js' */                if (i === '$and') {
-/*Line 277 - 'atom-filter.js' */                    var orf = AtomFilter.filter(v, false);
-/*Line 278 - 'atom-filter.js' */                    ae.push(function (item) {
-/*Line 279 - 'atom-filter.js' */                        return orf(item);
-/*Line 280 - 'atom-filter.js' */                    });
-/*Line 281 - 'atom-filter.js' */                    continue;
-/*Line 282 - 'atom-filter.js' */                }
-/*Line 283 - 'atom-filter.js' */                if (i === '$not') {
-/*Line 284 - 'atom-filter.js' */                    var fn = AtomFilter.filter(v, cor);
-/*Line 285 - 'atom-filter.js' */                    ae.push(function (item) {
-/*Line 286 - 'atom-filter.js' */                        return !fn(item);
-/*Line 287 - 'atom-filter.js' */                    });
-/*Line 288 - 'atom-filter.js' */                    continue;
-/*Line 289 - 'atom-filter.js' */                }
-/*Line 290 - 'atom-filter.js' */                var args = i.split(' ');
-/*Line 291 - 'atom-filter.js' */                if (args.length === 1) {
-/*Line 292 - 'atom-filter.js' */                    args = i.split(':');
-/*Line 293 - 'atom-filter.js' */                }
+/*Line 298 - 'atom-filter.js' */            } else {
+/*Line 299 - 'atom-filter.js' */                cond = cond.substr(1);
+/*Line 300 - 'atom-filter.js' */                var compF = AtomFilter.compare(cond, v);
+/*Line 301 - 'atom-filter.js' */                var fx = function (item) {
+/*Line 302 - 'atom-filter.js' */                    var l = left(item);
+/*Line 303 - 'atom-filter.js' */                    return !compF(l);
+/*Line 304 - 'atom-filter.js' */                };
+/*Line 305 - 'atom-filter.js' */                ae.push(fx);
+/*Line 306 - 'atom-filter.js' */            }
+/*Line 307 - 'atom-filter.js' */        },
 
-/*Line 295 - 'atom-filter.js' */                var n = args[0];
-/*Line 296 - 'atom-filter.js' */                var cond = "==";
-/*Line 297 - 'atom-filter.js' */                if (args.length === 2) {
-/*Line 298 - 'atom-filter.js' */                    cond = args[1];
-/*Line 299 - 'atom-filter.js' */                }
+/*Line 309 - 'atom-filter.js' */        filter: function (q, cor) {
+/*Line 310 - 'atom-filter.js' */            // compiles json object into function
+/*Line 311 - 'atom-filter.js' */            // that accepts object and returns true/false
 
-/*Line 301 - 'atom-filter.js' */                var left = function (item) {
-/*Line 302 - 'atom-filter.js' */                    return AtomFilter.get(item, n);
-/*Line 303 - 'atom-filter.js' */                };
-/*Line 304 - 'atom-filter.js' */                var filter = null;
-/*Line 305 - 'atom-filter.js' */                if (cond.indexOf('!') !== 0) {
-/*Line 306 - 'atom-filter.js' */                    var compF = AtomFilter.compare(cond, v);
-/*Line 307 - 'atom-filter.js' */                    filter = function (item) {
-/*Line 308 - 'atom-filter.js' */                        var l = left(item);
-/*Line 309 - 'atom-filter.js' */                        return compF(l);
-/*Line 310 - 'atom-filter.js' */                    };
+/*Line 313 - 'atom-filter.js' */            if (q === false)
+/*Line 314 - 'atom-filter.js' */                return AtomFilter.falsef;
+/*Line 315 - 'atom-filter.js' */            if (!q)
+/*Line 316 - 'atom-filter.js' */                return AtomFilter.truef;
 
-/*Line 312 - 'atom-filter.js' */                } else {
-/*Line 313 - 'atom-filter.js' */                    cond = cond.substr(1);
-/*Line 314 - 'atom-filter.js' */                    var compF = AtomFilter.compare(cond, v);
-/*Line 315 - 'atom-filter.js' */                    filter = function (item) {
-/*Line 316 - 'atom-filter.js' */                        var l = left(item);
-/*Line 317 - 'atom-filter.js' */                        return !compF(l);
-/*Line 318 - 'atom-filter.js' */                    };
-/*Line 319 - 'atom-filter.js' */                }
-/*Line 320 - 'atom-filter.js' */                ae.push(filter);
+/*Line 318 - 'atom-filter.js' */            var ae = [];
 
-/*Line 322 - 'atom-filter.js' */            }
+/*Line 320 - 'atom-filter.js' */            for (var i in q) {
+/*Line 321 - 'atom-filter.js' */                if (!q.hasOwnProperty(i))
+/*Line 322 - 'atom-filter.js' */                    continue;
+/*Line 323 - 'atom-filter.js' */                var v = q[i];
+/*Line 324 - 'atom-filter.js' */                AtomFilter.build(ae, i, v, q, cor);
+/*Line 325 - 'atom-filter.js' */            }
 
-/*Line 324 - 'atom-filter.js' */            return function (item) {
+/*Line 327 - 'atom-filter.js' */            return function (item) {
 
-/*Line 326 - 'atom-filter.js' */                var e = new AtomEnumerator(ae);
-/*Line 327 - 'atom-filter.js' */                while (e.next()) {
-/*Line 328 - 'atom-filter.js' */                    var ec = e.current();
-/*Line 329 - 'atom-filter.js' */                    if (ec(item)) {
-/*Line 330 - 'atom-filter.js' */                        if (cor) {
-/*Line 331 - 'atom-filter.js' */                            return true;
-/*Line 332 - 'atom-filter.js' */                        }
-/*Line 333 - 'atom-filter.js' */                    } else {
-/*Line 334 - 'atom-filter.js' */                        if (!cor)
-/*Line 335 - 'atom-filter.js' */                            return false;
-/*Line 336 - 'atom-filter.js' */                    }
-/*Line 337 - 'atom-filter.js' */                }
-/*Line 338 - 'atom-filter.js' */                return true;
-/*Line 339 - 'atom-filter.js' */            };
+/*Line 329 - 'atom-filter.js' */                var e = new AtomEnumerator(ae);
+/*Line 330 - 'atom-filter.js' */                var a = [];
+/*Line 331 - 'atom-filter.js' */                while (e.next()) {
+/*Line 332 - 'atom-filter.js' */                    var ec = e.current();
+/*Line 333 - 'atom-filter.js' */                    var r = ec(item);
+/*Line 334 - 'atom-filter.js' */                    a.push(r);
+/*Line 335 - 'atom-filter.js' */                    if (r) {
+/*Line 336 - 'atom-filter.js' */                        if (cor) {
+/*Line 337 - 'atom-filter.js' */                            return true;
+/*Line 338 - 'atom-filter.js' */                        }
+/*Line 339 - 'atom-filter.js' */                    } else {
+/*Line 340 - 'atom-filter.js' */                        if (!cor)
+/*Line 341 - 'atom-filter.js' */                            return false;
+/*Line 342 - 'atom-filter.js' */                    }
+/*Line 343 - 'atom-filter.js' */                }
 
-/*Line 341 - 'atom-filter.js' */        }
+/*Line 345 - 'atom-filter.js' */                e = new AtomEnumerator(a);
+/*Line 346 - 'atom-filter.js' */                while (e.next()) {
+/*Line 347 - 'atom-filter.js' */                    if (!e.current())
+/*Line 348 - 'atom-filter.js' */                        return false;
+/*Line 349 - 'atom-filter.js' */                }
 
-/*Line 343 - 'atom-filter.js' */    };
+/*Line 351 - 'atom-filter.js' */                return true;
+/*Line 352 - 'atom-filter.js' */            };
 
-/*Line 345 - 'atom-filter.js' */    window.$f = AtomFilter.filter;
+/*Line 354 - 'atom-filter.js' */        }
 
-/*Line 347 - 'atom-filter.js' */    if (!Array.prototype.filter) {
-/*Line 348 - 'atom-filter.js' */        Array.prototype.filter = function (f) {
-/*Line 349 - 'atom-filter.js' */            var r = [];
-/*Line 350 - 'atom-filter.js' */            for (var i = 0; i < this.length; i++) {
-/*Line 351 - 'atom-filter.js' */                var v = this[i];
-/*Line 352 - 'atom-filter.js' */                if (f(v, i)) r.push(v);
-/*Line 353 - 'atom-filter.js' */            }
-/*Line 354 - 'atom-filter.js' */            return r;
-/*Line 355 - 'atom-filter.js' */        };
-/*Line 356 - 'atom-filter.js' */    }
+/*Line 356 - 'atom-filter.js' */    };
 
-/*Line 358 - 'atom-filter.js' */    var af = Array.prototype.filter;
+/*Line 358 - 'atom-filter.js' */    window.$f = AtomFilter.filter;
 
-/*Line 360 - 'atom-filter.js' */    Array.prototype.filter = function (i) {
-/*Line 361 - 'atom-filter.js' */        if (i instanceof Function || typeof i == 'function') {
-/*Line 362 - 'atom-filter.js' */            return af.call(this, i);
-/*Line 363 - 'atom-filter.js' */        }
-/*Line 364 - 'atom-filter.js' */        return af.call(this, $f(i));
-/*Line 365 - 'atom-filter.js' */    };
+/*Line 360 - 'atom-filter.js' */    if (!Array.prototype.filter) {
+/*Line 361 - 'atom-filter.js' */        Array.prototype.filter = function (f) {
+/*Line 362 - 'atom-filter.js' */            var r = [];
+/*Line 363 - 'atom-filter.js' */            for (var i = 0; i < this.length; i++) {
+/*Line 364 - 'atom-filter.js' */                var v = this[i];
+/*Line 365 - 'atom-filter.js' */                if (f(v, i)) r.push(v);
+/*Line 366 - 'atom-filter.js' */            }
+/*Line 367 - 'atom-filter.js' */            return r;
+/*Line 368 - 'atom-filter.js' */        };
+/*Line 369 - 'atom-filter.js' */    }
 
-/*Line 367 - 'atom-filter.js' */    var aps = Array.prototype.sort;
+/*Line 371 - 'atom-filter.js' */    var af = Array.prototype.filter;
 
-/*Line 369 - 'atom-filter.js' */    Array.prototype.sort = function (s) {
-/*Line 370 - 'atom-filter.js' */        var f = AtomFilter.sort(s);
-/*Line 371 - 'atom-filter.js' */        return aps.call(this, f);
-/*Line 372 - 'atom-filter.js' */    };
+/*Line 373 - 'atom-filter.js' */    Array.prototype.filter = function (i) {
+/*Line 374 - 'atom-filter.js' */        if (i instanceof Function || typeof i == 'function') {
+/*Line 375 - 'atom-filter.js' */            return af.call(this, i);
+/*Line 376 - 'atom-filter.js' */        }
+/*Line 377 - 'atom-filter.js' */        return af.call(this, $f(i));
+/*Line 378 - 'atom-filter.js' */    };
 
-/*Line 374 - 'atom-filter.js' */})(window);
+/*Line 380 - 'atom-filter.js' */    var aps = Array.prototype.sort;
+
+/*Line 382 - 'atom-filter.js' */    Array.prototype.sort = function (s) {
+/*Line 383 - 'atom-filter.js' */        var f = AtomFilter.sort(s);
+/*Line 384 - 'atom-filter.js' */        return aps.call(this, f);
+/*Line 385 - 'atom-filter.js' */    };
+
+/*Line 387 - 'atom-filter.js' */})(window);
 /*Line 0 - 'AtomBrowser.js' */var AtomConfig = {
 /*Line 1 - 'AtomBrowser.js' */    debug: false,
 /*Line 2 - 'AtomBrowser.js' */    baseUrl: "",
@@ -3110,7 +3123,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 117 - 'AtomQuery.js' */        while (ae.next()) {
 /*Line 118 - 'AtomQuery.js' */            var item = ae.current();
 /*Line 119 - 'AtomQuery.js' */            if (s) {
-/*Line 120 - 'AtomQuery.js' */                item = AtomBinder.getValue(item,s);
+/*Line 120 - 'AtomQuery.js' */                item = Atom.get(item,s);
 /*Line 121 - 'AtomQuery.js' */            }
 /*Line 122 - 'AtomQuery.js' */            n += +(item || 0);
 /*Line 123 - 'AtomQuery.js' */        }
