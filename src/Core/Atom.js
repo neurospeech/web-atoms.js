@@ -305,7 +305,7 @@ window.Atom = Atom;
 })();
 
 var AtomDate = {
-
+    zoneOffsetMinutes: (new Date()).getTimezoneOffset(),
     zoneOffset: (new Date()).getTimezoneOffset() * 60 * 1000,
 
     toLocalTime: function (d) {
@@ -421,6 +421,19 @@ var AtomDate = {
 
     smartDateUTC: function (v) {
         return AtomDate.smartDate(v);
+    },
+
+    jsonDate: function (v) {
+        var d = AtomDate.parse(v);
+        return {
+            Year: d.getFullYear(),
+            Month: d.getMonth() + 1,
+            Date: d.getDate(),
+            Hours: d.getHours(),
+            Minutes: d.getMinutes(),
+            Seconds: d.getSeconds(),
+            Offset: AtomDate.zoneOffsetMinutes
+        };
     },
 
     parse: function (v) {

@@ -2515,7 +2515,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 304 - 'Atom.js' */})();
 
 /*Line 306 - 'Atom.js' */var AtomDate = {
-
+/*Line 307 - 'Atom.js' */    zoneOffsetMinutes: (new Date()).getTimezoneOffset(),
 /*Line 308 - 'Atom.js' */    zoneOffset: (new Date()).getTimezoneOffset() * 60 * 1000,
 
 /*Line 310 - 'Atom.js' */    toLocalTime: function (d) {
@@ -2633,110 +2633,123 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 422 - 'Atom.js' */        return AtomDate.smartDate(v);
 /*Line 423 - 'Atom.js' */    },
 
-/*Line 425 - 'Atom.js' */    parse: function (v) {
-/*Line 426 - 'Atom.js' */        if (!v)
-/*Line 427 - 'Atom.js' */            return null;
-/*Line 428 - 'Atom.js' */        if (v.constructor !== String)
-/*Line 429 - 'Atom.js' */            return v;
-/*Line 430 - 'Atom.js' */        if (/^\/date\([\-0-9]+\)\//gi.test(v)) {
-/*Line 431 - 'Atom.js' */            v = new Date(parseInt(v.substr(6),10));
-/*Line 432 - 'Atom.js' */        } else {
-/*Line 433 - 'Atom.js' */            if (/^\/dateiso/gi.test(v)) {
-/*Line 434 - 'Atom.js' */                v = v.substr(9);
-/*Line 435 - 'Atom.js' */                v = v.substr(0, v.length - 1);
-/*Line 436 - 'Atom.js' */                var tokens = v.split('T');
-/*Line 437 - 'Atom.js' */                var date = tokens[0];
-/*Line 438 - 'Atom.js' */                var time = tokens[1];
-/*Line 439 - 'Atom.js' */                date = date.split('-');
-/*Line 440 - 'Atom.js' */                time = time.split(':');
-/*Line 441 - 'Atom.js' */                var d = new Date(date[0], parseInt(date[1]) - 1, date[2], time[0], time[1], parseFloat(time[2]));
-/*Line 442 - 'Atom.js' */                d = new Date(d.getTime() + AtomDate.zoneOffset);
-/*Line 443 - 'Atom.js' */                return d;
-/*Line 444 - 'Atom.js' */            } else {
-/*Line 445 - 'Atom.js' */                v = Date.parse(v);
-/*Line 446 - 'Atom.js' */            }
-/*Line 447 - 'Atom.js' */        }
-/*Line 448 - 'Atom.js' */        return v;
-/*Line 449 - 'Atom.js' */        //var i = v.getTime();
-/*Line 450 - 'Atom.js' */        //var z = v.getTimezoneOffset() * 60 * 1000;
-/*Line 451 - 'Atom.js' */        //i = i - z;
-/*Line 452 - 'Atom.js' */        //return new Date(i);
-/*Line 453 - 'Atom.js' */    }
-/*Line 454 - 'Atom.js' */};
+/*Line 425 - 'Atom.js' */    jsonDate: function (v) {
+/*Line 426 - 'Atom.js' */        var d = AtomDate.parse(v);
+/*Line 427 - 'Atom.js' */        return {
+/*Line 428 - 'Atom.js' */            Year: d.getFullYear(),
+/*Line 429 - 'Atom.js' */            Month: d.getMonth() + 1,
+/*Line 430 - 'Atom.js' */            Date: d.getDate(),
+/*Line 431 - 'Atom.js' */            Hours: d.getHours(),
+/*Line 432 - 'Atom.js' */            Minutes: d.getMinutes(),
+/*Line 433 - 'Atom.js' */            Seconds: d.getSeconds(),
+/*Line 434 - 'Atom.js' */            Offset: AtomDate.zoneOffsetMinutes
+/*Line 435 - 'Atom.js' */        };
+/*Line 436 - 'Atom.js' */    },
 
-/*Line 456 - 'Atom.js' */window.AtomDate = AtomDate;
+/*Line 438 - 'Atom.js' */    parse: function (v) {
+/*Line 439 - 'Atom.js' */        if (!v)
+/*Line 440 - 'Atom.js' */            return null;
+/*Line 441 - 'Atom.js' */        if (v.constructor !== String)
+/*Line 442 - 'Atom.js' */            return v;
+/*Line 443 - 'Atom.js' */        if (/^\/date\([\-0-9]+\)\//gi.test(v)) {
+/*Line 444 - 'Atom.js' */            v = new Date(parseInt(v.substr(6),10));
+/*Line 445 - 'Atom.js' */        } else {
+/*Line 446 - 'Atom.js' */            if (/^\/dateiso/gi.test(v)) {
+/*Line 447 - 'Atom.js' */                v = v.substr(9);
+/*Line 448 - 'Atom.js' */                v = v.substr(0, v.length - 1);
+/*Line 449 - 'Atom.js' */                var tokens = v.split('T');
+/*Line 450 - 'Atom.js' */                var date = tokens[0];
+/*Line 451 - 'Atom.js' */                var time = tokens[1];
+/*Line 452 - 'Atom.js' */                date = date.split('-');
+/*Line 453 - 'Atom.js' */                time = time.split(':');
+/*Line 454 - 'Atom.js' */                var d = new Date(date[0], parseInt(date[1]) - 1, date[2], time[0], time[1], parseFloat(time[2]));
+/*Line 455 - 'Atom.js' */                d = new Date(d.getTime() + AtomDate.zoneOffset);
+/*Line 456 - 'Atom.js' */                return d;
+/*Line 457 - 'Atom.js' */            } else {
+/*Line 458 - 'Atom.js' */                v = Date.parse(v);
+/*Line 459 - 'Atom.js' */            }
+/*Line 460 - 'Atom.js' */        }
+/*Line 461 - 'Atom.js' */        return v;
+/*Line 462 - 'Atom.js' */        //var i = v.getTime();
+/*Line 463 - 'Atom.js' */        //var z = v.getTimezoneOffset() * 60 * 1000;
+/*Line 464 - 'Atom.js' */        //i = i - z;
+/*Line 465 - 'Atom.js' */        //return new Date(i);
+/*Line 466 - 'Atom.js' */    }
+/*Line 467 - 'Atom.js' */};
 
-/*Line 458 - 'Atom.js' */AtomDate.monthList = [
-/*Line 459 - 'Atom.js' */    { label: "January", value: 1 },
-/*Line 460 - 'Atom.js' */    { label: "February", value: 2 },
-/*Line 461 - 'Atom.js' */    { label: "March", value: 3 },
-/*Line 462 - 'Atom.js' */    { label: "April", value: 4 },
-/*Line 463 - 'Atom.js' */    { label: "May", value: 5 },
-/*Line 464 - 'Atom.js' */    { label: "June", value: 6 },
-/*Line 465 - 'Atom.js' */    { label: "July", value: 7 },
-/*Line 466 - 'Atom.js' */    { label: "August", value: 8 },
-/*Line 467 - 'Atom.js' */    { label: "September", value: 9 },
-/*Line 468 - 'Atom.js' */    { label: "October", value: 10 },
-/*Line 469 - 'Atom.js' */    { label: "November", value: 11 },
-/*Line 470 - 'Atom.js' */    { label: "December", value: 12 }
-/*Line 471 - 'Atom.js' */];
+/*Line 469 - 'Atom.js' */window.AtomDate = AtomDate;
+
+/*Line 471 - 'Atom.js' */AtomDate.monthList = [
+/*Line 472 - 'Atom.js' */    { label: "January", value: 1 },
+/*Line 473 - 'Atom.js' */    { label: "February", value: 2 },
+/*Line 474 - 'Atom.js' */    { label: "March", value: 3 },
+/*Line 475 - 'Atom.js' */    { label: "April", value: 4 },
+/*Line 476 - 'Atom.js' */    { label: "May", value: 5 },
+/*Line 477 - 'Atom.js' */    { label: "June", value: 6 },
+/*Line 478 - 'Atom.js' */    { label: "July", value: 7 },
+/*Line 479 - 'Atom.js' */    { label: "August", value: 8 },
+/*Line 480 - 'Atom.js' */    { label: "September", value: 9 },
+/*Line 481 - 'Atom.js' */    { label: "October", value: 10 },
+/*Line 482 - 'Atom.js' */    { label: "November", value: 11 },
+/*Line 483 - 'Atom.js' */    { label: "December", value: 12 }
+/*Line 484 - 'Atom.js' */];
 
 
-/*Line 474 - 'Atom.js' */var AtomFileSize = {
-/*Line 475 - 'Atom.js' */    toFileSize: function (val) {
-/*Line 476 - 'Atom.js' */        if (!val)
-/*Line 477 - 'Atom.js' */            return "";
-/*Line 478 - 'Atom.js' */        if (val.constructor == String)
-/*Line 479 - 'Atom.js' */            val = parseInt(val, 10);
-/*Line 480 - 'Atom.js' */        if (val > 1073741824) {
-/*Line 481 - 'Atom.js' */            return Math.round(val / 1073741824) + " GB";
-/*Line 482 - 'Atom.js' */        }
-/*Line 483 - 'Atom.js' */        if (val > 1048576) {
-/*Line 484 - 'Atom.js' */            return Math.round(val / 1048576) + " MB";
-/*Line 485 - 'Atom.js' */        }
-/*Line 486 - 'Atom.js' */        if (val > 1024) {
-/*Line 487 - 'Atom.js' */            return Math.round(val / 1024) + " KB";
-/*Line 488 - 'Atom.js' */        }
-/*Line 489 - 'Atom.js' */        return val + " B";
-/*Line 490 - 'Atom.js' */    }
-/*Line 491 - 'Atom.js' */};
+/*Line 487 - 'Atom.js' */var AtomFileSize = {
+/*Line 488 - 'Atom.js' */    toFileSize: function (val) {
+/*Line 489 - 'Atom.js' */        if (!val)
+/*Line 490 - 'Atom.js' */            return "";
+/*Line 491 - 'Atom.js' */        if (val.constructor == String)
+/*Line 492 - 'Atom.js' */            val = parseInt(val, 10);
+/*Line 493 - 'Atom.js' */        if (val > 1073741824) {
+/*Line 494 - 'Atom.js' */            return Math.round(val / 1073741824) + " GB";
+/*Line 495 - 'Atom.js' */        }
+/*Line 496 - 'Atom.js' */        if (val > 1048576) {
+/*Line 497 - 'Atom.js' */            return Math.round(val / 1048576) + " MB";
+/*Line 498 - 'Atom.js' */        }
+/*Line 499 - 'Atom.js' */        if (val > 1024) {
+/*Line 500 - 'Atom.js' */            return Math.round(val / 1024) + " KB";
+/*Line 501 - 'Atom.js' */        }
+/*Line 502 - 'Atom.js' */        return val + " B";
+/*Line 503 - 'Atom.js' */    }
+/*Line 504 - 'Atom.js' */};
 
-/*Line 493 - 'Atom.js' */window.AtomFileSize = AtomFileSize;
+/*Line 506 - 'Atom.js' */window.AtomFileSize = AtomFileSize;
 
-/*Line 495 - 'Atom.js' */var AtomPhone = {
-/*Line 496 - 'Atom.js' */    toSmallPhoneString: function (val) {
-/*Line 497 - 'Atom.js' */        if (!val)
-/*Line 498 - 'Atom.js' */            return "";
-/*Line 499 - 'Atom.js' */        var tokens = val.split(":", 6);
-/*Line 500 - 'Atom.js' */        var cc = tokens[2];
-/*Line 501 - 'Atom.js' */        cc = "(" + (/^\+/.test(cc) ? '' : '+') + tokens[2] + ") ";
-/*Line 502 - 'Atom.js' */        var phone = tokens[3];
-/*Line 503 - 'Atom.js' */        var ext = tokens[4];
-/*Line 504 - 'Atom.js' */        var msg = tokens[5];
-/*Line 505 - 'Atom.js' */        if (!phone)
-/*Line 506 - 'Atom.js' */            return "";
-/*Line 507 - 'Atom.js' */        return cc + phone;
-/*Line 508 - 'Atom.js' */    },
-/*Line 509 - 'Atom.js' */    toPhoneString: function (val) {
+/*Line 508 - 'Atom.js' */var AtomPhone = {
+/*Line 509 - 'Atom.js' */    toSmallPhoneString: function (val) {
 /*Line 510 - 'Atom.js' */        if (!val)
 /*Line 511 - 'Atom.js' */            return "";
 /*Line 512 - 'Atom.js' */        var tokens = val.split(":", 6);
-/*Line 513 - 'Atom.js' */        var cc = "(+" + tokens[2] + ") ";
-/*Line 514 - 'Atom.js' */        var phone = tokens[3];
-/*Line 515 - 'Atom.js' */        var ext = tokens[4];
-/*Line 516 - 'Atom.js' */        var msg = tokens[5];
-/*Line 517 - 'Atom.js' */        if (!phone)
-/*Line 518 - 'Atom.js' */            return "";
-/*Line 519 - 'Atom.js' */        var txt = cc + phone;
-/*Line 520 - 'Atom.js' */        if (ext)
-/*Line 521 - 'Atom.js' */            txt += " (ext: " + ext + ")";
-/*Line 522 - 'Atom.js' */        if (msg)
-/*Line 523 - 'Atom.js' */            txt += " (" + msg + ")";
-/*Line 524 - 'Atom.js' */        return txt;
-/*Line 525 - 'Atom.js' */    }
-/*Line 526 - 'Atom.js' */};
+/*Line 513 - 'Atom.js' */        var cc = tokens[2];
+/*Line 514 - 'Atom.js' */        cc = "(" + (/^\+/.test(cc) ? '' : '+') + tokens[2] + ") ";
+/*Line 515 - 'Atom.js' */        var phone = tokens[3];
+/*Line 516 - 'Atom.js' */        var ext = tokens[4];
+/*Line 517 - 'Atom.js' */        var msg = tokens[5];
+/*Line 518 - 'Atom.js' */        if (!phone)
+/*Line 519 - 'Atom.js' */            return "";
+/*Line 520 - 'Atom.js' */        return cc + phone;
+/*Line 521 - 'Atom.js' */    },
+/*Line 522 - 'Atom.js' */    toPhoneString: function (val) {
+/*Line 523 - 'Atom.js' */        if (!val)
+/*Line 524 - 'Atom.js' */            return "";
+/*Line 525 - 'Atom.js' */        var tokens = val.split(":", 6);
+/*Line 526 - 'Atom.js' */        var cc = "(+" + tokens[2] + ") ";
+/*Line 527 - 'Atom.js' */        var phone = tokens[3];
+/*Line 528 - 'Atom.js' */        var ext = tokens[4];
+/*Line 529 - 'Atom.js' */        var msg = tokens[5];
+/*Line 530 - 'Atom.js' */        if (!phone)
+/*Line 531 - 'Atom.js' */            return "";
+/*Line 532 - 'Atom.js' */        var txt = cc + phone;
+/*Line 533 - 'Atom.js' */        if (ext)
+/*Line 534 - 'Atom.js' */            txt += " (ext: " + ext + ")";
+/*Line 535 - 'Atom.js' */        if (msg)
+/*Line 536 - 'Atom.js' */            txt += " (" + msg + ")";
+/*Line 537 - 'Atom.js' */        return txt;
+/*Line 538 - 'Atom.js' */    }
+/*Line 539 - 'Atom.js' */};
 
-/*Line 528 - 'Atom.js' */window.AtomPhone = AtomPhone;
+/*Line 541 - 'Atom.js' */window.AtomPhone = AtomPhone;
 
 
 /*Line 2 - 'AtomEvaluator.js' */var AtomEvaluator = {
