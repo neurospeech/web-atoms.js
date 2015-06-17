@@ -164,7 +164,6 @@ window.__atom_flash_uploader_event = function (id, json) {
             onUploadComplete: function () {
                 if (!Atom.query(this._items).any({ status: 'uploading' })) {
                     if (!this._finished) {
-                        this._finished = true;
                         atomApplication.setBusy(false, "Uploading...");
                     }
                 }
