@@ -2681,7 +2681,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 439 - 'Atom.js' */        if (!v)
 /*Line 440 - 'Atom.js' */            return "";
 /*Line 441 - 'Atom.js' */        v = AtomDate.parse(v);
-/*Line 442 - 'Atom.js' */        var d = new Date(v.getTime() - AtomDate.zoneOffset);
+/*Line 442 - 'Atom.js' */        var d = new Date(v.getTime() + AtomDate.zoneOffset);
 /*Line 443 - 'Atom.js' */        return d;
 /*Line 444 - 'Atom.js' */    },
 

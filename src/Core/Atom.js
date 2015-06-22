@@ -440,7 +440,7 @@ var AtomDate = {
         if (!v)
             return "";
         v = AtomDate.parse(v);
-        var d = new Date(v.getTime() - AtomDate.zoneOffset);
+        var d = new Date(v.getTime() + AtomDate.zoneOffset);
         return d;
     },
 
