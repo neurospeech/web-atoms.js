@@ -163,7 +163,9 @@ window.__atom_flash_uploader_event = function (id, json) {
 
             onUploadComplete: function () {
                 if (!Atom.query(this._items).any({ status: 'uploading' })) {
-                    atomApplication.setBusy(false, "Uploading...");
+                    if (!this._finished) {
+                        atomApplication.setBusy(false, "Uploading...");
+                    }
                 }
 
                 var a = Atom.query(this._items).any({ 'status !==': 'done' });
@@ -232,10 +234,22 @@ window.__atom_flash_uploader_event = function (id, json) {
                         _this.onItemEvent("progress", index, evt.originalEvent);
                     });
 
-                    $(upload).on("timeout error", function (evt) {
+                    $(upload).on("timeout", function (evt) {
                         _this.onItemEvent("error", index, evt);
                     });
-                    $(xhr).on("timeout error", function (evt) {
+                    $(xhr).on("timeout", function (evt) {
+                        _this.onItemEvent("error", index, evt);
+                    });
+                    $(upload).on("error", function (evt) {
+                        _this.onItemEvent("error", index, evt);
+                    });
+                    $(xhr).on("error", function (evt) {
+                        _this.onItemEvent("error", index, evt);
+                    });
+                    $(upload).on("abort", function (evt) {
+                        _this.onItemEvent("error", index, evt);
+                    });
+                    $(xhr).on("abort", function (evt) {
                         _this.onItemEvent("error", index, evt);
                     });
                     $(xhr).on("load", function (evt) {

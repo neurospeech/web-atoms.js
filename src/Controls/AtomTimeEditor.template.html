@@ -1,0 +1,13 @@
+﻿<container>
+    <input type="text"
+           atom-value="$[owner.hours]" />
+    <span>:</span>
+    <input type="text"
+           atom-value="$[owner.minutes]" />
+    <ul atom-type="AtomToggleButtonBar"
+        atom-items="{ [ { label:'AM', value:'AM'},{ label:'PM', value:'PM'}] }"
+        atom-value="$[owner.templateParent.ap]">
+        <li atom-template="itemTemplate"
+            atom-text="{$data.label}"></li>
+    </ul>
+</container>
