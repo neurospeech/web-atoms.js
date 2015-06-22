@@ -827,74 +827,87 @@ jsonML["WebAtoms.AtomTabControl.template"] =
 { "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t57" }
 ,"\n"], "\n"]]
 ;
+jsonML["WebAtoms.AtomTimeEditor.template"] = 
+[["input",
+{ "type": "text", "data-atom-init": "t58" }
+], ["span",
+{  }
+,":"], ["input",
+{ "type": "text", "data-atom-init": "t59" }
+], ["ul",
+{ "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t60" }
+,"\n", ["li",
+{ "data-atom-template": "itemTemplate", "data-atom-init": "t61" }
+], "\n"]]
+;
 jsonML["WebAtoms.AtomToggleButtonBar.itemTemplate"] = 
 [["li",
-{ "data-atom-init": "t58" }
+{ "data-atom-init": "t62" }
 ,"\n"]]
 ;
 jsonML["WebAtoms.AtomWizard.template"] = 
 [["div",
-{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t59" }
+{ "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t63" }
 ,"\n"], ["div",
 { "data-atom-dock": "Bottom", "class": "atom-wizard-command-bar" }
 ,"\n", ["button",
-{ "class": "atom-wizard-back-button", "data-atom-init": "t61" }
+{ "class": "atom-wizard-back-button", "data-atom-init": "t65" }
 ,"\n", ["span",
-{ "data-atom-init": "t62" }
+{ "data-atom-init": "t66" }
 ], "\n"], "\n", ["button",
-{ "class": "atom-wizard-next-button", "data-atom-init": "t63" }
+{ "class": "atom-wizard-next-button", "data-atom-init": "t67" }
 ,"\n", ["span",
-{ "data-atom-init": "t64" }
+{ "data-atom-init": "t68" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomYesNoCustom.template"] = 
 [["ul",
-{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t65" }
+{ "data-atom-type": "AtomYesNoControl", "data-atom-presenter": "yesNo", "data-atom-init": "t69" }
 ], ["input",
-{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t66" }
+{ "style": "vertical-align:top", "type": "text", "data-atom-presenter": "input", "data-atom-init": "t70" }
 ]]
 ;
 jsonML["WebAtoms.AtomApplication.busyTemplate"] = 
 [["div",
-{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t67" }
+{ "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t71" }
 ,"\n", ["div",
-{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t68" }
+{ "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t72" }
 ,"\n", ["div",
-{ "class": "atom-busy-image", "data-atom-init": "t69" }
+{ "class": "atom-busy-image", "data-atom-init": "t73" }
 ], "\n", ["div",
-{ "data-atom-init": "t70" }
+{ "data-atom-init": "t74" }
 ], "\n", ["div",
-{ "style": "height:3px; background-color:green", "data-atom-init": "t71" }
+{ "style": "height:3px; background-color:green", "data-atom-init": "t75" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormGridLayout.fieldTemplate"] = 
 [["table",
-{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t72" }
+{ "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t76" }
 ,"\n", ["tbody",
 {  }
 ,"\n", ["tr",
 {  }
 ,"\n", ["td",
-{ "class": "atom-form-grid-label", "data-atom-init": "t73" }
+{ "class": "atom-form-grid-label", "data-atom-init": "t77" }
 ], "\n", ["td",
-{ "class": "atom-form-grid-required", "data-atom-init": "t74" }
+{ "class": "atom-form-grid-required", "data-atom-init": "t78" }
 ,"*"], "\n", ["td",
-{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t75" }
+{ "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t79" }
 ,"\n"], "\n", ["td",
-{ "data-atom-init": "t76" }
+{ "data-atom-init": "t80" }
 ,"\n"], "\n"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormLayout.fieldTemplate"] = 
 [["tr",
 { "data-atom-type": "AtomFormField" }
 ,"\n", ["td",
-{ "class": "atom-form-label", "data-atom-init": "t78" }
+{ "class": "atom-form-label", "data-atom-init": "t82" }
 ], "\n", ["td",
-{ "class": "atom-form-required", "data-atom-init": "t79" }
+{ "class": "atom-form-required", "data-atom-init": "t83" }
 ,"\n"], "\n", ["td",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t80" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t84" }
 ,"\n", ["span",
-{ "class": "atom-form-error", "data-atom-init": "t81" }
+{ "class": "atom-form-error", "data-atom-init": "t85" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] = 
@@ -905,44 +918,44 @@ jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] =
 ,"\n", ["div",
 {  }
 ,"\n", ["span",
-{ "class": "atom-form-label", "data-atom-init": "t83" }
+{ "class": "atom-form-label", "data-atom-init": "t87" }
 ], "\n", ["span",
-{ "class": "atom-form-required", "data-atom-init": "t84" }
+{ "class": "atom-form-required", "data-atom-init": "t88" }
 ], "\n"], "\n", ["div",
-{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t85" }
+{ "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t89" }
 ], "\n", ["div",
-{ "class": "atom-form-error", "data-atom-init": "t86" }
+{ "class": "atom-form-error", "data-atom-init": "t90" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.alertTemplate"] = 
 [["div",
 { "class": "atom-alert", "data-atom-dock": "Fill" }
 ,"\n", ["pre",
-{ "data-atom-init": "t88" }
+{ "data-atom-init": "t92" }
 ,"\n"], "\n", ["div",
-{ "class": "buttons", "data-atom-init": "t89" }
+{ "class": "buttons", "data-atom-init": "t93" }
 ,"\n", ["button",
-{ "class": "ok", "data-atom-init": "t90" }
+{ "class": "ok", "data-atom-init": "t94" }
 ,"Ok"], "\n", ["button",
-{ "class": "yes", "data-atom-init": "t91" }
+{ "class": "yes", "data-atom-init": "t95" }
 ,"Yes"], "\n", ["button",
-{ "class": "no", "data-atom-init": "t92" }
+{ "class": "no", "data-atom-init": "t96" }
 ,"No"], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.frameTemplate"] = 
 [["div",
-{ "class": "atom-window-background", "data-atom-init": "t93" }
+{ "class": "atom-window-background", "data-atom-init": "t97" }
 ,"\n", ["div",
-{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t94" }
+{ "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t98" }
 ,"\n", ["div",
-{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t95" }
+{ "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t99" }
 ], "\n", ["div",
-{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t96" }
+{ "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t100" }
 ], "\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomWindow.windowTemplate"] = 
 [["iframe",
-{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t97" }
+{ "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t101" }
 ,"\n"]]
 ;
 
@@ -1351,17 +1364,35 @@ this.bind(e,'selectedIndex',
 	['templateParent', 'selectedIndex']);
 };
 
-/* WebAtoms.AtomToggleButtonBar.itemTemplate */
+/* WebAtoms.AtomTimeEditor.template */
 this.t58= function(e){
+this.bind(e,'value',['hours'],true)
+};
+
+this.t59= function(e){
+this.bind(e,'value',['minutes'],true)
+};
+
+this.t60= function(e){
+this.setLocalValue('items',  [ { label:'AM', value:'AM'},{ label:'PM', value:'PM'}] , e);
+	this.bind(e,'value',['templateParent', 'ap'],true)
+};
+
+this.t61= function(e){
+this.setLocalValue('text', Atom.get(this,'data.label'), e);
+};
+
+/* WebAtoms.AtomToggleButtonBar.itemTemplate */
+this.t62= function(e){
 this.setLocalValue('text', Atom.get(this,'data')[Atom.get(this,'atomParent.labelPath')], e);
 };
 
 /* WebAtoms.AtomWizard.template */
-this.t59= function(e){
+this.t63= function(e){
 this.bind(e,'selectedIndex',['templateParent', 'currentStep'],true)
 };
 
-this.t61= function(e){
+this.t65= function(e){
 this.bind(e,'isEnabled',
 	['canMoveBack']);
 	this.setLocalValue('eventClick', Atom.get(this,'goPrevCommand'), e);
@@ -1372,12 +1403,12 @@ this.bind(e,'isEnabled',
 			});
 };
 
-this.t62= function(e){
+this.t66= function(e){
 this.bind(e,'text',
 	['prevLabel']);
 };
 
-this.t63= function(e){
+this.t67= function(e){
 this.bind(e,'class',[
 	['nextClass'],
 	['isLastStep']],
@@ -1389,7 +1420,7 @@ this.bind(e,'class',[
 	['nextCommand']);
 };
 
-this.t64= function(e){
+this.t68= function(e){
 this.bind(e,'text',[
 	['isLastStep'],
 	['finishLabel'],
@@ -1400,11 +1431,11 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomYesNoCustom.template */
-this.t65= function(e){
+this.t69= function(e){
 this.bind(e,'value',['templateParent', 'hasValue'],true)
 };
 
-this.t66= function(e){
+this.t70= function(e){
 this.bind(e,'isEnabled',
 	['hasValue']);
 	this.bind(e,'placeholder',
@@ -1412,7 +1443,7 @@ this.bind(e,'isEnabled',
 };
 
 /* WebAtoms.AtomApplication.busyTemplate */
-this.t67= function(e){
+this.t71= function(e){
 this.bind(e,'styleWidth',[
 	['appWidth']],
 			0, function(v1){
@@ -1430,7 +1461,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t68= function(e){
+this.t72= function(e){
 this.bind(e,'styleLeft',[
 	['appWidth']],
 			0, function(v1){
@@ -1443,11 +1474,11 @@ this.bind(e,'styleLeft',[
 			});
 };
 
-this.t69= function(e){
+this.t73= function(e){
 AtomProperties.absPos(e,"12,12,36,36");
 };
 
-this.t70= function(e){
+this.t74= function(e){
 AtomProperties.absPos(e,"56,24,145,null");
 	this.bind(e,'text',[
 	['busyMessage']],
@@ -1456,7 +1487,7 @@ AtomProperties.absPos(e,"56,24,145,null");
 			});
 };
 
-this.t71= function(e){
+this.t75= function(e){
 AtomProperties.absPos(e,"0,48");
 	this.bind(e,'styleDisplay',[
 	['isBusy'],
@@ -1472,7 +1503,7 @@ AtomProperties.absPos(e,"0,48");
 };
 
 /* WebAtoms.AtomFormGridLayout.fieldTemplate */
-this.t72= function(e){
+this.t76= function(e){
 this.bind(e,'class',
 	['fieldClass']);
 	this.bind(e,'styleDisplay',[
@@ -1482,7 +1513,7 @@ this.bind(e,'class',
 			});
 };
 
-this.t73= function(e){
+this.t77= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1493,7 +1524,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t74= function(e){
+this.t78= function(e){
 this.bind(e,'class',[
 	['required']],
 			0, function(v1){
@@ -1501,7 +1532,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t75= function(e){
+this.t79= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1509,7 +1540,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t76= function(e){
+this.t80= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1528,7 +1559,7 @@ this.bind(e,'class',[
 };
 
 /* WebAtoms.AtomFormLayout.fieldTemplate */
-this.t78= function(e){
+this.t82= function(e){
 this.bind(e,'text',
 	['label']);
 	this.bind(e,'styleMinWidth',[
@@ -1538,7 +1569,7 @@ this.bind(e,'text',
 			});
 };
 
-this.t79= function(e){
+this.t83= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1546,7 +1577,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t80= function(e){
+this.t84= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1554,7 +1585,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t81= function(e){
+this.t85= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1563,12 +1594,12 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomFormVerticalLayout.fieldTemplate */
-this.t83= function(e){
+this.t87= function(e){
 this.bind(e,'text',
 	['label']);
 };
 
-this.t84= function(e){
+this.t88= function(e){
 this.bind(e,'text',[
 	['required']],
 			0, function(v1){
@@ -1576,7 +1607,7 @@ this.bind(e,'text',[
 			});
 };
 
-this.t85= function(e){
+this.t89= function(e){
 this.bind(e,'class',[
 	['error']],
 			0, function(v1){
@@ -1584,7 +1615,7 @@ this.bind(e,'class',[
 			});
 };
 
-this.t86= function(e){
+this.t90= function(e){
 this.bind(e,'text',[
 	['error']],
 			0, function(v1){
@@ -1593,28 +1624,28 @@ this.bind(e,'text',[
 };
 
 /* WebAtoms.AtomWindow.alertTemplate */
-this.t88= function(e){
+this.t92= function(e){
 this.setLocalValue('text', Atom.get(this,'data.Message'), e);
 };
 
-this.t89= function(e){
+this.t93= function(e){
 this.setLocalValue('class',  Atom.get(this,'data.Confirm') ? 'confirm-buttons' : 'alert-buttons' , e);
 };
 
-this.t90= function(e){
+this.t94= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
-this.t91= function(e){
+this.t95= function(e){
 this.setLocalValue('eventClick',  [ { data: { ConfirmValue: true } } , Atom.get(this,'templateParent.closeCommand') ] , e);
 };
 
-this.t92= function(e){
+this.t96= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'templateParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.frameTemplate */
-this.t93= function(e){
+this.t97= function(e){
 this.bind(e,'styleWidth',[
 	['appScope', 'owner', 'bodyWidth']],
 			0, function(v1){
@@ -1632,7 +1663,7 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t94= function(e){
+this.t98= function(e){
 this.bind(e,'styleWidth',[
 	['atomParent', 'windowWidth']],
 			0, function(v1){
@@ -1657,17 +1688,17 @@ this.bind(e,'styleWidth',[
 			});
 };
 
-this.t95= function(e){
+this.t99= function(e){
 this.bind(e,'text',
 	['atomParent', 'title']);
 };
 
-this.t96= function(e){
+this.t100= function(e){
 this.setLocalValue('eventClick', Atom.get(this,'atomParent.closeCommand'), e);
 };
 
 /* WebAtoms.AtomWindow.windowTemplate */
-this.t97= function(e){
+this.t101= function(e){
 this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 };
 
@@ -10451,6 +10482,114 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 33 - 'AtomTimePicker.js' */        }
 /*Line 34 - 'AtomTimePicker.js' */    });
 /*Line 35 - 'AtomTimePicker.js' */})(WebAtoms.AtomAutoCompleteBox.prototype);
+
+/*Line 37 - 'AtomTimePicker.js' */var AtomicUpdator = function (self) {
+/*Line 38 - 'AtomTimePicker.js' */    this._self = self;
+/*Line 39 - 'AtomTimePicker.js' */    this._updating = false;
+/*Line 40 - 'AtomTimePicker.js' */    this.update = function (f) {
+/*Line 41 - 'AtomTimePicker.js' */        if (this._updating)
+/*Line 42 - 'AtomTimePicker.js' */            return;
+/*Line 43 - 'AtomTimePicker.js' */        try{
+/*Line 44 - 'AtomTimePicker.js' */            this._updating = true;
+/*Line 45 - 'AtomTimePicker.js' */            f.apply(this._self);
+/*Line 46 - 'AtomTimePicker.js' */        } finally {
+/*Line 47 - 'AtomTimePicker.js' */            this._updating = false;
+/*Line 48 - 'AtomTimePicker.js' */        }
+/*Line 49 - 'AtomTimePicker.js' */    };
+/*Line 50 - 'AtomTimePicker.js' */};
+
+/*Line 52 - 'AtomTimePicker.js' */(function (baseType) {
+
+/*Line 54 - 'AtomTimePicker.js' */    var timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9] [ap][m]$/i;
+
+/*Line 56 - 'AtomTimePicker.js' */    return classCreatorEx({
+/*Line 57 - 'AtomTimePicker.js' */        name: "WebAtoms.AtomTimeEditor",
+/*Line 58 - 'AtomTimePicker.js' */        base: baseType,
+/*Line 59 - 'AtomTimePicker.js' */        start: function (e) {
+/*Line 60 - 'AtomTimePicker.js' */            $(e).addClass("atom-time-editor");
+/*Line 61 - 'AtomTimePicker.js' */            this._updater = new AtomicUpdator(this);
+/*Line 62 - 'AtomTimePicker.js' */        },
+/*Line 63 - 'AtomTimePicker.js' */        properties: {
+/*Line 64 - 'AtomTimePicker.js' */            time: "10:00",
+/*Line 65 - 'AtomTimePicker.js' */            ap: "AM",
+/*Line 66 - 'AtomTimePicker.js' */            value: "10:00 AM"
+/*Line 67 - 'AtomTimePicker.js' */        },
+/*Line 68 - 'AtomTimePicker.js' */        methods: {
+/*Line 69 - 'AtomTimePicker.js' */            get_hours24: function () {
+/*Line 70 - 'AtomTimePicker.js' */                var t = this._time.split(':');
+/*Line 71 - 'AtomTimePicker.js' */                var h = parseInt(t[0] || '0');
+/*Line 72 - 'AtomTimePicker.js' */                if (this._ap == 'PM') {
+/*Line 73 - 'AtomTimePicker.js' */                    if (h != 12) {
+/*Line 74 - 'AtomTimePicker.js' */                        h += 12;
+/*Line 75 - 'AtomTimePicker.js' */                    }
+/*Line 76 - 'AtomTimePicker.js' */                }
+/*Line 77 - 'AtomTimePicker.js' */                return h;
+/*Line 78 - 'AtomTimePicker.js' */            },
+/*Line 79 - 'AtomTimePicker.js' */            get_hours: function () {
+/*Line 80 - 'AtomTimePicker.js' */                var t = this._time.split(':');
+/*Line 81 - 'AtomTimePicker.js' */                var h = parseInt(t[0] || '0');
+/*Line 82 - 'AtomTimePicker.js' */                return h;
+/*Line 83 - 'AtomTimePicker.js' */            },
+/*Line 84 - 'AtomTimePicker.js' */            get_minutes: function () {
+/*Line 85 - 'AtomTimePicker.js' */                var t = this._time.split(':');
+/*Line 86 - 'AtomTimePicker.js' */                return parseInt(t[1] || '0');
+/*Line 87 - 'AtomTimePicker.js' */            },
+/*Line 88 - 'AtomTimePicker.js' */            setTime: function (h, m) {
+/*Line 89 - 'AtomTimePicker.js' */                var ap = 'AM';
+/*Line 90 - 'AtomTimePicker.js' */                if (h > 12) {
+/*Line 91 - 'AtomTimePicker.js' */                    h -= 12;
+/*Line 92 - 'AtomTimePicker.js' */                    ap = "PM";
+/*Line 93 - 'AtomTimePicker.js' */                }
+/*Line 94 - 'AtomTimePicker.js' */                h = "" + h;
+/*Line 95 - 'AtomTimePicker.js' */                if (h.length == 1) {
+/*Line 96 - 'AtomTimePicker.js' */                    h = "0" + h;
+/*Line 97 - 'AtomTimePicker.js' */                }
+/*Line 98 - 'AtomTimePicker.js' */                m = m + "";
+/*Line 99 - 'AtomTimePicker.js' */                if (m.length == 1) {
+/*Line 100 - 'AtomTimePicker.js' */                    m = "0" + m;
+/*Line 101 - 'AtomTimePicker.js' */                }
+/*Line 102 - 'AtomTimePicker.js' */                AtomBinder.setValue(this, "value", h + ":" + m + " " + ap);
+/*Line 103 - 'AtomTimePicker.js' */            },
+/*Line 104 - 'AtomTimePicker.js' */            set_hours: function (v) {
+/*Line 105 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
+/*Line 106 - 'AtomTimePicker.js' */            },
+/*Line 107 - 'AtomTimePicker.js' */            set_minutes: function (v) {
+/*Line 108 - 'AtomTimePicker.js' */                this.setTime(this.get_hours(), v);
+/*Line 109 - 'AtomTimePicker.js' */            },
+/*Line 110 - 'AtomTimePicker.js' */            set_value: function (v) {
+/*Line 111 - 'AtomTimePicker.js' */                this._updater.update(function () {
+/*Line 112 - 'AtomTimePicker.js' */                    if (this._value == v)
+/*Line 113 - 'AtomTimePicker.js' */                        return;
+/*Line 114 - 'AtomTimePicker.js' */                    if (!timeRegex.test(v)) {
+/*Line 115 - 'AtomTimePicker.js' */                        throw new Error("Unknown time format, expecting ##:## AM");
+/*Line 116 - 'AtomTimePicker.js' */                    }
+/*Line 117 - 'AtomTimePicker.js' */                    this._value = v;
+/*Line 118 - 'AtomTimePicker.js' */                    v = v.split(' ');
+/*Line 119 - 'AtomTimePicker.js' */                    this._time = v[0];
+/*Line 120 - 'AtomTimePicker.js' */                    this._ap = (v[1]).toUpperCase();
+/*Line 121 - 'AtomTimePicker.js' */                    this.refreshProperties();
+/*Line 122 - 'AtomTimePicker.js' */                });
+/*Line 123 - 'AtomTimePicker.js' */            },
+/*Line 124 - 'AtomTimePicker.js' */            refreshProperties: function () {
+/*Line 125 - 'AtomTimePicker.js' */                Atom.refresh(this, "value");
+/*Line 126 - 'AtomTimePicker.js' */                Atom.refresh(this, "time");
+/*Line 127 - 'AtomTimePicker.js' */                Atom.refresh(this, "ap");
+/*Line 128 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours");
+/*Line 129 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours24");
+/*Line 130 - 'AtomTimePicker.js' */                Atom.refresh(this, "minutes");
+/*Line 131 - 'AtomTimePicker.js' */            },
+/*Line 132 - 'AtomTimePicker.js' */            set_time: function (v) {
+/*Line 133 - 'AtomTimePicker.js' */                this.set_value(v + " " + this._ap);
+/*Line 134 - 'AtomTimePicker.js' */            },
+/*Line 135 - 'AtomTimePicker.js' */            set_ap: function (v) {
+/*Line 136 - 'AtomTimePicker.js' */                this.set_value(this._time + " " + v);
+/*Line 137 - 'AtomTimePicker.js' */            },
+/*Line 138 - 'AtomTimePicker.js' */            get_value: function () {
+/*Line 139 - 'AtomTimePicker.js' */                return this._time + " " + this._ap;
+/*Line 140 - 'AtomTimePicker.js' */            }
+/*Line 141 - 'AtomTimePicker.js' */        }
+/*Line 142 - 'AtomTimePicker.js' */    });
+/*Line 143 - 'AtomTimePicker.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomUploadButton.js' */
 
 /*Line 2 - 'AtomUploadButton.js' */(function (baseType) {

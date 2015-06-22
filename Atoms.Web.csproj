@@ -910,6 +910,8 @@
     <Content Include="src\Controls\AtomTabButtonBar.js" />
     <Content Include="src\Controls\AtomTabControl.js" />
     <Content Include="src\Controls\AtomTabControl.template.html" />
+    <Content Include="src\Controls\AtomTimeEditor.template.html" />
+    <Content Include="src\Controls\AtomTimePicker.css" />
     <Content Include="src\Controls\AtomTimePicker.js" />
     <Content Include="src\Controls\AtomToggleButtonBar.css" />
     <Content Include="src\Controls\AtomToggleButtonBar.itemTemplate.html" />

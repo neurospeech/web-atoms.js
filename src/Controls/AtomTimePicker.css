@@ -1,0 +1,6 @@
+﻿span.atom-time-editor > ul.atom-toggle-button-bar{
+    display:inline-block;
+}
+span.atom-time-editor > input[type=text]{
+    width: 50px;
+}
