@@ -436,6 +436,14 @@ var AtomDate = {
         };
     },
 
+    toUTC: function (v) {
+        if (!v)
+            return "";
+        v = AtomDate.parse(v);
+        var d = new Date(v.getTime() - AtomDate.zoneOffset);
+        return d;
+    },
+
     parse: function (v) {
         if (!v)
             return null;

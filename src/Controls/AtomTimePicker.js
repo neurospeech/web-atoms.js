@@ -5,7 +5,7 @@
         name: "WebAtoms.AtomTimePicker",
         base: baseType,
         start: function (e) {
-            log("AtomTimePicker is Depricated !!!, use mask on input");
+            log("AtomTimePicker is Depricated !!!, use AtomTimeEditor");
         },
         properties: {
             displayLabel: "9:00 AM"
