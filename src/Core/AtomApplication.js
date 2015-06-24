@@ -225,7 +225,21 @@ this.atomApplication = null;
                     }
                     d[k] = val;
                 }
+
+                //var src = this._defaultHash;
+                //for (var k in src) {
+                //    if (!src.hasOwnProperty(k))
+                //        continue;
+                //    var v = src[k];
+                //    if (d[k] == v)
+                //        continue;
+                //    this._scope[k] = v;
+                //    AtomBinder.refreshValue(this._scope, k);
+                //}
+
                 this._defaultScope = d;
+
+                // reset url values... enforce again...
                 base.onInitialized.call(this);
                 if (!this._renderAsPage) {
                     $(this._element).addClass("atom-dock-application");
