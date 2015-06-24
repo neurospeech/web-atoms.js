@@ -11195,16 +11195,16 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 225 - 'AtomApplication.js' */                    d[k] = val;
 /*Line 226 - 'AtomApplication.js' */                }
 
-/*Line 228 - 'AtomApplication.js' */                //var src = this._defaultHash;
-/*Line 229 - 'AtomApplication.js' */                //for (var k in src) {
-/*Line 230 - 'AtomApplication.js' */                //    if (!src.hasOwnProperty(k))
-/*Line 231 - 'AtomApplication.js' */                //        continue;
-/*Line 232 - 'AtomApplication.js' */                //    var v = src[k];
-/*Line 233 - 'AtomApplication.js' */                //    if (d[k] == v)
-/*Line 234 - 'AtomApplication.js' */                //        continue;
-/*Line 235 - 'AtomApplication.js' */                //    this._scope[k] = v;
-/*Line 236 - 'AtomApplication.js' */                //    AtomBinder.refreshValue(this._scope, k);
-/*Line 237 - 'AtomApplication.js' */                //}
+/*Line 228 - 'AtomApplication.js' */                var src = this._defaultHash;
+/*Line 229 - 'AtomApplication.js' */                for (var k in src) {
+/*Line 230 - 'AtomApplication.js' */                    if (!src.hasOwnProperty(k))
+/*Line 231 - 'AtomApplication.js' */                        continue;
+/*Line 232 - 'AtomApplication.js' */                    var v = src[k];
+/*Line 233 - 'AtomApplication.js' */                    if (d[k] == v)
+/*Line 234 - 'AtomApplication.js' */                        continue;
+/*Line 235 - 'AtomApplication.js' */                    this._scope[k] = v;
+/*Line 236 - 'AtomApplication.js' */                    AtomBinder.refreshValue(this._scope, k);
+/*Line 237 - 'AtomApplication.js' */                }
 
 /*Line 239 - 'AtomApplication.js' */                this._defaultScope = d;
 
