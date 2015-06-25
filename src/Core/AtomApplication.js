@@ -38,6 +38,8 @@ this.atomApplication = null;
                 this._hash = location.hash;
             }
 
+            this._defaultScope = {};
+
         },
         {
             get_title: function () {
@@ -150,7 +152,7 @@ this.atomApplication = null;
                 if (this._noHashRefresh)
                     return;
 
-                var dest = this._defaultScope;
+                var dest = this._ready;
                 if (!dest)
                     return;
 
@@ -209,35 +211,7 @@ this.atomApplication = null;
 
             onInitialized: function () {
 
-                var d = {};
-                var src = this._scope;
-                for (var k in src) {
-                    if (k.indexOf('_') == 0)
-                        continue;
-                    var val = src[k];
-                    if (val === undefined)
-                        continue;
-                    if (val === null)
-                        continue;
-                    var t = typeof (val);
-                    if (t != 'string' && t != 'number' && t != 'boolean') {
-                        continue;
-                    }
-                    d[k] = val;
-                }
-
-                var src = this._defaultHash;
-                for (var k in src) {
-                    if (!src.hasOwnProperty(k))
-                        continue;
-                    var v = src[k];
-                    if (d[k] == v)
-                        continue;
-                    this._scope[k] = v;
-                    AtomBinder.refreshValue(this._scope, k);
-                }
-
-                this._defaultScope = d;
+                this._ready = true;
 
                 // reset url values... enforce again...
                 base.onInitialized.call(this);

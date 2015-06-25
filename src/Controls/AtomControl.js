@@ -1002,7 +1002,13 @@ window.AtomProperties = AtomProperties;
                                 //this.set_scope(s);
                                 var scope = this._localScope || this.get_scope();
                                 for (var k in s) {
-                                    if (scope[k])
+                                    if (!s.hasOwnProperty(k))
+                                        continue;
+                                    var v = s[k];
+                                    if (scope == window.appScope && !window.atomApplication._ready) {
+                                        atomApplication._defaultScope[k] = s[v];
+                                    }
+                                    if (scope[k] !== undefined)
                                         continue;
                                     scope[k] = s[k];
                                 }
