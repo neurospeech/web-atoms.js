@@ -994,24 +994,11 @@ window.AtomProperties = AtomProperties;
 
                     if (item.nodeName == "SCRIPT") {
 
-                        // evalute and set scope...
                         var s = $.trim(item.innerHTML);
                         if (/^\(\{/.test(s) && /\}\)$/.test(s)) {
                             try {
                                 s = (new Function("return " + s + ";"))()
-                                //this.set_scope(s);
-                                var scope = this._localScope || this.get_scope();
-                                for (var k in s) {
-                                    if (!s.hasOwnProperty(k))
-                                        continue;
-                                    var v = s[k];
-                                    if (scope == window.appScope && !window.atomApplication._ready) {
-                                        atomApplication._defaultScope[k] = s[v];
-                                    }
-                                    if (scope[k] !== undefined)
-                                        continue;
-                                    scope[k] = s[k];
-                                }
+                                this.set_scope(s);
                             } catch (ex) {
                                 log(JSON.stringify(ex));
                                 alert(JSON.stringify(ex));
