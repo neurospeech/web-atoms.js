@@ -45,7 +45,11 @@
                     // if value is already set...
                     var v = s[k];
                     if (scope == window.appScope && !window.atomApplication._ready) {
-                        atomApplication._defaultScope[k] = s[v];
+                        if ((k.indexOf('_') != 0)
+                            && (v !== undefined && v !== null)
+                            && (/string|number|boolean/i.test(typeof (v)))){
+                                atomApplication._defaultScope[k] = v;
+                            }
                     }
                     if (scope[k] !== undefined)
                         continue;

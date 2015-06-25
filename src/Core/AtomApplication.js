@@ -152,9 +152,10 @@ this.atomApplication = null;
                 if (this._noHashRefresh)
                     return;
 
-                var dest = this._ready;
-                if (!dest)
+                if (!this._ready)
                     return;
+
+                var dest = this._defaultScope;
 
                 var i = key;
                 if (i.indexOf('_') == 0)
@@ -219,6 +220,19 @@ this.atomApplication = null;
                     $(this._element).addClass("atom-dock-application");
                 }
 
+
+                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
+                    // setup timer...
+                    var _this = this;
+                    setInterval(function () {
+                        _this.onCheckHash();
+                    }, 1000);
+                    this._lastHash = location.hash;
+                } else {
+                    var eventName = window.onhashchange ? "onhashchange" : "hashchange";
+                    this.bindEvent(window, eventName, "onHashChanged");
+                }
+
             },
 
             createChildren: function () {
@@ -234,19 +248,6 @@ this.atomApplication = null;
 
             onCreated: function () {
                 base.onCreated.call(this);
-
-
-                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
-                    // setup timer...
-                    var _this = this;
-                    setInterval(function () {
-                        _this.onCheckHash();
-                    }, 1000);
-                    this._lastHash = location.hash;
-                } else {
-                    var eventName = window.onhashchange ? "onhashchange" : "hashchange";
-                    this.bindEvent(window, eventName, "onHashChanged");
-                }
 
                 if (this._next) {
                     WebAtoms.dispatcher.callLater(function () {
