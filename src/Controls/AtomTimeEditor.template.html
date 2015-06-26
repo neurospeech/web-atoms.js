@@ -1,8 +1,9 @@
 ﻿<container>
-    <input type="text"
+    <span>Hour:</span>
+    <input type="number"
            atom-value="$[owner.hours]" />
-    <span>:</span>
-    <input type="text"
+    <span>Minute:</span>
+    <input type="number"
            atom-value="$[owner.minutes]" />
     <ul atom-type="AtomToggleButtonBar"
         atom-items="{ [ { label:'AM', value:'AM'},{ label:'PM', value:'PM'}] }"

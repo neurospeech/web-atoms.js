@@ -828,12 +828,14 @@ jsonML["WebAtoms.AtomTabControl.template"] =
 ,"\n"], "\n"]]
 ;
 jsonML["WebAtoms.AtomTimeEditor.template"] = 
-[["input",
-{ "type": "text", "data-atom-init": "t58" }
+[["span",
+{  }
+,"Hour:"], ["input",
+{ "type": "number", "data-atom-init": "t58" }
 ], ["span",
 {  }
-,":"], ["input",
-{ "type": "text", "data-atom-init": "t59" }
+,"Minute:"], ["input",
+{ "type": "number", "data-atom-init": "t59" }
 ], ["ul",
 { "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t60" }
 ,"\n", ["li",
