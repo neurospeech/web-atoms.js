@@ -37,15 +37,23 @@
                 }
                 return this._localScope;
             },
-            set_scope: function (v) {
-                var scope = this.get_scope();
-                for (var k in v) {
+            set_scope: function (s) {
+                var scope = this._localScope || this.get_scope();
+                for (var k in s) {
                     if (/^(application|owner|app|parent)$/gi.test(k))
                         throw new Error("Invalid name for the scope property");
                     // if value is already set...
-                    if (scope[k])
+                    var v = s[k];
+                    if (scope == window.appScope && !window.atomApplication._ready) {
+                        if ((k.indexOf('_') != 0)
+                            && (v !== undefined && v !== null)
+                            && (/string|number|boolean/i.test(typeof (v)))){
+                                atomApplication._defaultScope[k] = v;
+                            }
+                    }
+                    if (scope[k] !== undefined)
                         continue;
-                    scope[k] = v[k];
+                    scope[k] = v;
                 }
             },
 

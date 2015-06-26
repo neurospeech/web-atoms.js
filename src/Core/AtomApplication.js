@@ -38,6 +38,8 @@ this.atomApplication = null;
                 this._hash = location.hash;
             }
 
+            this._defaultScope = {};
+
         },
         {
             get_title: function () {
@@ -150,9 +152,10 @@ this.atomApplication = null;
                 if (this._noHashRefresh)
                     return;
 
-                var dest = this._defaultScope;
-                if (!dest)
+                if (!this._ready)
                     return;
+
+                var dest = this._defaultScope;
 
                 var i = key;
                 if (i.indexOf('_') == 0)
@@ -209,26 +212,25 @@ this.atomApplication = null;
 
             onInitialized: function () {
 
-                var d = {};
-                var src = this._scope;
-                for (var k in src) {
-                    if (k.indexOf('_') == 0)
-                        continue;
-                    var val = src[k];
-                    if (val === undefined)
-                        continue;
-                    if (val === null)
-                        continue;
-                    var t = typeof (val);
-                    if (t != 'string' && t != 'number' && t != 'boolean') {
-                        continue;
-                    }
-                    d[k] = val;
-                }
-                this._defaultScope = d;
+                this._ready = true;
+
+                // reset url values... enforce again...
                 base.onInitialized.call(this);
                 if (!this._renderAsPage) {
                     $(this._element).addClass("atom-dock-application");
+                }
+
+
+                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
+                    // setup timer...
+                    var _this = this;
+                    setInterval(function () {
+                        _this.onCheckHash();
+                    }, 1000);
+                    this._lastHash = location.hash;
+                } else {
+                    var eventName = window.onhashchange ? "onhashchange" : "hashchange";
+                    this.bindEvent(window, eventName, "onHashChanged");
                 }
 
             },
@@ -246,19 +248,6 @@ this.atomApplication = null;
 
             onCreated: function () {
                 base.onCreated.call(this);
-
-
-                if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
-                    // setup timer...
-                    var _this = this;
-                    setInterval(function () {
-                        _this.onCheckHash();
-                    }, 1000);
-                    this._lastHash = location.hash;
-                } else {
-                    var eventName = window.onhashchange ? "onhashchange" : "hashchange";
-                    this.bindEvent(window, eventName, "onHashChanged");
-                }
 
                 if (this._next) {
                     WebAtoms.dispatcher.callLater(function () {
