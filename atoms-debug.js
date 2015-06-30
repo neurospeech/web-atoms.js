@@ -831,11 +831,11 @@ jsonML["WebAtoms.AtomTimeEditor.template"] =
 [["span",
 {  }
 ,"Hour:"], ["input",
-{ "type": "number", "data-atom-init": "t58" }
+{ "type": "number", "min": "0", "max": "12", "data-atom-init": "t58" }
 ], ["span",
 {  }
 ,"Minute:"], ["input",
-{ "type": "number", "data-atom-init": "t59" }
+{ "type": "number", "min": "0", "max": "59", "data-atom-init": "t59" }
 ], ["ul",
 { "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t60" }
 ,"\n", ["li",

@@ -1,9 +1,13 @@
 ﻿<container>
     <span>Hour:</span>
     <input type="number"
+           min="0"
+           max="12"
            atom-value="$[owner.hours]" />
     <span>Minute:</span>
     <input type="number"
+           min="0"
+           max="59"
            atom-value="$[owner.minutes]" />
     <ul atom-type="AtomToggleButtonBar"
         atom-items="{ [ { label:'AM', value:'AM'},{ label:'PM', value:'PM'}] }"
