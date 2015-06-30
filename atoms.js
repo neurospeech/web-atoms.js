@@ -608,110 +608,110 @@ jsonML["WebAtoms.AtomAutoCompleteBox.template"] =
 { "data-atom-presenter": "inputBox", "type": "text", "autocomplete": "off", "autocorrect": "off", "data-atom-init": "t2" }
 ], ["div",
 { "data-atom-presenter": "itemsPresenter", "class": "atom-list-box", "style": "position: absolute; z-index: 100;", "data-atom-init": "t3" }
-,"\n", ["div",
+,["div",
 { "data-atom-template": "itemTemplate", "style": "min-width:100px;", "data-atom-init": "t4" }
-], "\n"]]
+]]]
 ;
 jsonML["WebAtoms.AtomCalendar.itemTemplate"] = 
 [["div",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t5" }
-,"\n", ["span",
+,["span",
 { "data-atom-init": "t6" }
-], "\n"]]
+]]]
 ;
 jsonML["WebAtoms.AtomCalendar.template"] = 
 [["section",
 { "class": "calendar" }
-,"\n", ["header",
+,["header",
 {  }
-,"\n", ["button",
+,["button",
 { "class": "prev", "data-atom-init": "t7" }
-], "\n", ["select",
+], ["select",
 { "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t8" }
-], "\n", ["select",
+], ["select",
 { "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t9" }
-], "\n", ["button",
+], ["button",
 { "class": "next", "data-atom-init": "t10" }
-], "\n"], "\n", ["ul",
+]], ["ul",
 { "class": "days" }
-,"\n", ["li",
+,["li",
 { "class": "weekend" }
-,"S"], "\n", ["li",
+,"S"], ["li",
 {  }
-,"M"], "\n", ["li",
+,"M"], ["li",
 {  }
-,"T"], "\n", ["li",
+,"T"], ["li",
 {  }
-,"W"], "\n", ["li",
+,"W"], ["li",
 {  }
-,"T"], "\n", ["li",
+,"T"], ["li",
 {  }
-,"F"], "\n", ["li",
+,"F"], ["li",
 { "class": "weekend" }
-,"S"], "\n"], "\n", ["section",
+,"S"]], ["section",
 { "class": "day-list", "data-atom-presenter": "itemsPresenter" }
-,"\n"], "\n"]]
+,]]]
 ;
 jsonML["WebAtoms.AtomCheckBoxList.itemTemplate"] = 
 [["div",
 { "data-atom-template": "itemTemplate" }
-,"\n", ["input",
+,["input",
 { "type": "checkbox", "data-atom-init": "t13" }
-], "\n", ["span",
+], ["span",
 { "data-atom-init": "t14" }
-], "\n"]]
+]]]
 ;
 jsonML["WebAtoms.AtomDataPager.template"] = 
 [["button",
 { "class": "atom-pager-first-button", "style": "float:left", "data-atom-init": "t15" }
-,"\nFirst\n"], ["span",
+,"First"], ["span",
 { "style": "text-align:left" }
-,"\n", ["button",
+,["button",
 { "class": "atom-pager-prev-button", "data-atom-init": "t16" }
-,"\nPrev\n"], "\n", ["span",
+,"Prev"], ["span",
 {  }
-,"Goto: Page"], "\n", ["select",
+,"Goto: Page"], ["select",
 { "data-atom-type": "AtomComboBox", "data-atom-init": "t17" }
-,"\n"], "\n", ["button",
+,], ["button",
 { "class": "atom-pager-next-button", "data-atom-init": "t18" }
-,"\nNext\n"], "\n"], ["button",
+,"Next"]], ["button",
 { "class": "atom-pager-last-button", "style": "float:right", "data-atom-init": "t19" }
-,"\nLast\n"]]
+,"Last"]]
 ;
 jsonML["WebAtoms.AtomDateField.popupTemplate"] = 
 [["div",
 { "class": "atom-date-popup", "data-atom-init": "t20" }
-,"\n", ["div",
+,["div",
 { "class": "atom-date-list-box" }
-,"\n", ["div",
+,["div",
 { "class": "calendar", "data-atom-presenter": "calendarPresenter" }
-,"\n", ["select",
+,["select",
 { "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t22" }
-], "\n", ["select",
+], ["select",
 { "data-atom-type": "AtomNumberComboBox", "class": "year", "data-atom-init": "t23" }
-], "\n", ["div",
+], ["div",
 { "class": "days" }
-,"\n", ["span",
+,["span",
 { "class": "weekend-header" }
-,"S"], "\n", ["span",
+,"S"], ["span",
 {  }
-,"M"], "\n", ["span",
+,"M"], ["span",
 {  }
-,"T"], "\n", ["span",
+,"T"], ["span",
 {  }
-,"W"], "\n", ["span",
+,"W"], ["span",
 {  }
-,"T"], "\n", ["span",
+,"T"], ["span",
 {  }
-,"F"], "\n", ["span",
+,"F"], ["span",
 { "class": "weekend-header" }
-,"S"], "\n"], "\n", ["div",
+,"S"]], ["div",
 { "class": "day-list", "data-atom-type": "AtomItemsControl", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t24" }
-,"\n", ["div",
+,["div",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t25" }
-,"\n", ["span",
+,["span",
 { "data-atom-init": "t26" }
-], "\n"], "\n"], "\n"], "\n"], "\n"]]
+]]]]]]]
 ;
 jsonML["WebAtoms.AtomDateField.template"] = 
 [["div",
@@ -721,39 +721,39 @@ jsonML["WebAtoms.AtomDateField.template"] =
 jsonML["WebAtoms.AtomDateListBox.template"] = 
 [["div",
 { "class": "atom-date-list-box" }
-,"\n", ["div",
+,["div",
 { "class": "calendar" }
-,"\n", ["select",
+,["select",
 { "data-atom-type": "AtomComboBox", "class": "month", "data-atom-init": "t28" }
-], "\n", ["select",
+], ["select",
 { "data-atom-type": "AtomComboBox", "class": "year", "data-atom-init": "t29" }
-], "\n", ["div",
+], ["div",
 { "class": "days" }
-,"\n", ["span",
+,["span",
 { "class": "weekend-header" }
-,"S"], "\n", ["span",
+,"S"], ["span",
 {  }
-,"M"], "\n", ["span",
+,"M"], ["span",
 {  }
-,"T"], "\n", ["span",
+,"T"], ["span",
 {  }
-,"W"], "\n", ["span",
+,"W"], ["span",
 {  }
-,"T"], "\n", ["span",
+,"T"], ["span",
 {  }
-,"F"], "\n", ["span",
+,"F"], ["span",
 { "class": "weekend-header" }
-,"S"], "\n"], "\n", ["div",
+,"S"]], ["div",
 { "class": "day-list", "data-atom-presenter": "itemsPresenter" }
-,"\n", ["div",
+,["div",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t31" }
-,"\n", ["span",
+,["span",
 { "data-atom-init": "t32" }
-], "\n"], "\n"], "\n"], "\n", ["div",
+]]]], ["div",
 { "class": "list", "data-atom-type": "AtomListBox", "data-atom-init": "t33" }
-,"\n", ["div",
+,["div",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t34" }
-,"\n"], "\n"], "\n"]]
+,]]]]
 ;
 jsonML["WebAtoms.AtomItemsControl.itemTemplate"] = 
 [["span",
@@ -763,18 +763,18 @@ jsonML["WebAtoms.AtomItemsControl.itemTemplate"] =
 jsonML["WebAtoms.AtomLinkBar.itemTemplate"] = 
 [["li",
 { "data-atom-init": "t36" }
-,"\n", ["a",
+,["a",
 { "data-atom-init": "t37" }
-,"\n"], "\n"]]
+,]]]
 ;
 jsonML["WebAtoms.AtomLinkBar.menuTemplate"] = 
 [["ul",
 { "class": "menu", "data-atom-type": "AtomLinkBar", "data-atom-init": "t38" }
-,"\n", ["li",
+,["li",
 { "data-atom-template": "itemTemplate" }
-,"\n", ["a",
+,["a",
 { "data-atom-init": "t40" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomNavigatorList.detailTemplate"] = 
 [["iframe",
@@ -784,32 +784,32 @@ jsonML["WebAtoms.AtomNavigatorList.detailTemplate"] =
 jsonML["WebAtoms.AtomNavigatorList.template"] = 
 [["div",
 { "data-atom-type": "AtomViewStack", "data-atom-init": "t42" }
-,"\n", ["div",
+,["div",
 { "data-atom-type": "AtomDockPanel", "data-atom-presenter": "gridPanel" }
-,"\n", ["div",
+,["div",
 { "data-atom-dock": "Fill", "data-atom-presenter": "gridPresenter", "class": "atom-navigator-list-grid" }
-,"\n"], "\n"], "\n", ["div",
+,]], ["div",
 { "data-atom-presenter": "detailView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t45" }
-,"\n", ["div",
+,["div",
 { "data-atom-dock": "Top", "data-atom-presenter": "detailHeaderToolbar" }
-,"\n", ["input",
+,["input",
 { "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t47" }
-], "\n"], "\n"], "\n", ["div",
+]]], ["div",
 { "data-atom-presenter": "newView", "data-atom-type": "AtomDockPanel", "data-atom-init": "t48" }
-,"\n", ["div",
+,["div",
 { "data-atom-dock": "Top", "data-atom-presenter": "newHeaderToolbar" }
-,"\n", ["input",
+,["input",
 { "type": "button", "value": "Back", "style": "float: left", "data-atom-init": "t50" }
-], "\n"], "\n"], "\n"]]
+]]]]]
 ;
 jsonML["WebAtoms.AtomRadioButtonList.itemTemplate"] = 
 [["span",
 {  }
-,"\n", ["input",
+,["input",
 { "type": "radio", "data-atom-name": "{$owner.groupName}", "data-atom-init": "t51" }
-], "\n", ["span",
+], ["span",
 { "data-atom-init": "t52" }
-], "\n"]]
+]]]
 ;
 jsonML["WebAtoms.AtomSortableColumn.template"] = 
 [["span",
@@ -819,13 +819,13 @@ jsonML["WebAtoms.AtomSortableColumn.template"] =
 jsonML["WebAtoms.AtomTabControl.template"] = 
 [["div",
 { "data-atom-type": "AtomDockPanel" }
-,"\n", ["ul",
+,["ul",
 { "data-atom-dock": "Top", "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t55" }
-,"\n", ["li",
+,["li",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t56" }
-], "\n"], "\n", ["div",
+]], ["div",
 { "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "itemsPresenter", "data-atom-init": "t57" }
-,"\n"], "\n"]]
+,]]]
 ;
 jsonML["WebAtoms.AtomTimeEditor.template"] = 
 [["span",
@@ -838,29 +838,29 @@ jsonML["WebAtoms.AtomTimeEditor.template"] =
 { "type": "number", "min": "0", "max": "59", "data-atom-init": "t59" }
 ], ["ul",
 { "data-atom-type": "AtomToggleButtonBar", "data-atom-init": "t60" }
-,"\n", ["li",
+,["li",
 { "data-atom-template": "itemTemplate", "data-atom-init": "t61" }
-], "\n"]]
+]]]
 ;
 jsonML["WebAtoms.AtomToggleButtonBar.itemTemplate"] = 
 [["li",
 { "data-atom-init": "t62" }
-,"\n"]]
+,]]
 ;
 jsonML["WebAtoms.AtomWizard.template"] = 
 [["div",
 { "data-atom-dock": "Fill", "data-atom-type": "AtomViewStack", "data-atom-presenter": "viewPresenter", "data-atom-init": "t63" }
-,"\n"], ["div",
+,], ["div",
 { "data-atom-dock": "Bottom", "class": "atom-wizard-command-bar" }
-,"\n", ["button",
+,["button",
 { "class": "atom-wizard-back-button", "data-atom-init": "t65" }
-,"\n", ["span",
+,["span",
 { "data-atom-init": "t66" }
-], "\n"], "\n", ["button",
+]], ["button",
 { "class": "atom-wizard-next-button", "data-atom-init": "t67" }
-,"\n", ["span",
+,["span",
 { "data-atom-init": "t68" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomYesNoCustom.template"] = 
 [["ul",
@@ -872,93 +872,93 @@ jsonML["WebAtoms.AtomYesNoCustom.template"] =
 jsonML["WebAtoms.AtomApplication.busyTemplate"] = 
 [["div",
 { "style": "position:absolute;left:0px;top:0px;z-index:10000; display:none", "data-atom-init": "t71" }
-,"\n", ["div",
+,["div",
 { "class": "atom-busy-window", "style": "position:absolute", "data-atom-init": "t72" }
-,"\n", ["div",
+,["div",
 { "class": "atom-busy-image", "data-atom-init": "t73" }
-], "\n", ["div",
+], ["div",
 { "data-atom-init": "t74" }
-], "\n", ["div",
+], ["div",
 { "style": "height:3px; background-color:green", "data-atom-init": "t75" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomFormGridLayout.fieldTemplate"] = 
 [["table",
 { "class": "atom-form-grid-row", "data-atom-type": "AtomFormField", "data-atom-init": "t76" }
-,"\n", ["tbody",
+,["tbody",
 {  }
-,"\n", ["tr",
+,["tr",
 {  }
-,"\n", ["td",
+,["td",
 { "class": "atom-form-grid-label", "data-atom-init": "t77" }
-], "\n", ["td",
+], ["td",
 { "class": "atom-form-grid-required", "data-atom-init": "t78" }
-,"*"], "\n", ["td",
+,"*"], ["td",
 { "class": "atom-form-grid-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t79" }
-,"\n"], "\n", ["td",
+,], ["td",
 { "data-atom-init": "t80" }
-,"\n"], "\n"], "\n"], "\n"]]
+,]]]]]
 ;
 jsonML["WebAtoms.AtomFormLayout.fieldTemplate"] = 
 [["tr",
 { "data-atom-type": "AtomFormField" }
-,"\n", ["td",
+,["td",
 { "class": "atom-form-label", "data-atom-init": "t82" }
-], "\n", ["td",
+], ["td",
 { "class": "atom-form-required", "data-atom-init": "t83" }
-,"\n"], "\n", ["td",
+,], ["td",
 { "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t84" }
-,"\n", ["span",
+,["span",
 { "class": "atom-form-error", "data-atom-init": "t85" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] = 
 [["tr",
 { "data-atom-type": "AtomFormField" }
-,"\n", ["td",
+,["td",
 {  }
-,"\n", ["div",
+,["div",
 {  }
-,"\n", ["span",
+,["span",
 { "class": "atom-form-label", "data-atom-init": "t87" }
-], "\n", ["span",
+], ["span",
 { "class": "atom-form-required", "data-atom-init": "t88" }
-], "\n"], "\n", ["div",
+]], ["div",
 { "class": "atom-form-content", "data-atom-presenter": "contentPresenter", "data-atom-init": "t89" }
-], "\n", ["div",
+], ["div",
 { "class": "atom-form-error", "data-atom-init": "t90" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomWindow.alertTemplate"] = 
 [["div",
 { "class": "atom-alert", "data-atom-dock": "Fill" }
-,"\n", ["pre",
+,["pre",
 { "data-atom-init": "t92" }
-,"\n"], "\n", ["div",
+,], ["div",
 { "class": "buttons", "data-atom-init": "t93" }
-,"\n", ["button",
+,["button",
 { "class": "ok", "data-atom-init": "t94" }
-,"Ok"], "\n", ["button",
+,"Ok"], ["button",
 { "class": "yes", "data-atom-init": "t95" }
-,"Yes"], "\n", ["button",
+,"Yes"], ["button",
 { "class": "no", "data-atom-init": "t96" }
-,"No"], "\n"], "\n"]]
+,"No"]]]]
 ;
 jsonML["WebAtoms.AtomWindow.frameTemplate"] = 
 [["div",
 { "class": "atom-window-background", "data-atom-init": "t97" }
-,"\n", ["div",
+,["div",
 { "class": "atom-window", "data-atom-presenter": "windowDiv", "style": "position:absolute", "data-atom-type": "AtomDockPanel", "data-atom-init": "t98" }
-,"\n", ["div",
+,["div",
 { "class": "atom-window-title", "data-atom-dock": "Top", "data-atom-presenter": "windowTitleDiv", "data-atom-init": "t99" }
-], "\n", ["div",
+], ["div",
 { "class": "atom-window-close-button", "data-atom-presenter": "windowCloseButton", "data-atom-init": "t100" }
-], "\n"], "\n"]]
+]]]]
 ;
 jsonML["WebAtoms.AtomWindow.windowTemplate"] = 
 [["iframe",
 { "class": "atom-window-frame", "data-atom-presenter": "iframe", "data-atom-init": "t101" }
-,"\n"]]
+,]]
 ;
 
         WebAtoms.PageSetup = WebAtoms.PageSetup || {};
