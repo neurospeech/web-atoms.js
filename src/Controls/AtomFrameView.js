@@ -54,6 +54,7 @@
                     item = {
                         url: u,
                         index: items.length,
+                        opener: this._url,
                         element: t
                     };
                     Atom.add(items, item);
@@ -86,16 +87,17 @@
                                 item.control.dispose();
                                 $(item.element).remove();
                                 Atom.remove(self._items, item);
-                                var a = Atom.query(self._items);
-                                var i = 0;
-                                while (a.next()) {
-                                    var ci = a.current();
-                                    ci.index = i++;
-                                    if (a.currentIndex() == index) {
-                                        self._url = ci.url;
-                                        Atom.refresh(self, "url");
-                                    }
-                                }
+                                self.set_url(item.opener);
+                                //var a = Atom.query(self._items);
+                                //var i = 0;
+                                //while (a.next()) {
+                                //    var ci = a.current();
+                                //    ci.index = i++;
+                                //    if (a.currentIndex() == index) {
+                                //        self._url = ci.url;
+                                //        Atom.refresh(self, "url");
+                                //    }
+                                //}
                             }, 1000);
                         }
 
