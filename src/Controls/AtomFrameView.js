@@ -16,11 +16,17 @@
         },
         properties: {
             url: '',
+            replaceUrl: '',
             layout: null,
             items: [],
             removeOnBack: true
         },
         methods: {
+            set_replaceUrl: function (v) {
+                var item = Atom.query(this._items).firstOrDefault({ index: this._selectedIndex });
+                this.replaceItemWithUrl(item, v);
+            },
+
             set_url: function (v) {
                 if (!v) {
                     return;
@@ -50,7 +56,7 @@
                     }
 
                     t = AtomUI.cloneNode(t);
-
+                    t._logicalParent = this;
                     item = {
                         url: u,
                         index: items.length,
@@ -58,11 +64,11 @@
                         element: t
                     };
                     Atom.add(items, item);
-                    this._element.appendChild(t);
                     var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl );
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();
+                        self._element.appendChild(t);
                     });
                 }
                 Atom.set(this, "selectedIndex", item.index);
@@ -74,6 +80,18 @@
                 }
                 this._url = v;
             },
+
+            replaceItemWithUrl: function (item,url) {
+                if (item) {
+                    item.control.dispose();
+                    $(item.element).remove();
+                    Atom.remove(this._items, item);
+                }
+                if (url) {
+                    this.set_url(url);
+                }
+            },
+
             onBackCommand: function () {
                 var index = this._selectedIndex;
                 if (index) {
@@ -84,21 +102,26 @@
                         Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
                             setTimeout(function () {
-                                item.control.dispose();
-                                $(item.element).remove();
-                                Atom.remove(self._items, item);
-                                self.set_url(item.opener);
-                                //var a = Atom.query(self._items);
-                                //var i = 0;
-                                //while (a.next()) {
-                                //    var ci = a.current();
-                                //    ci.index = i++;
-                                //    if (a.currentIndex() == index) {
-                                //        self._url = ci.url;
-                                //        Atom.refresh(self, "url");
-                                //    }
-                                //}
+                                self.replaceUrl(item, item.opener);
                             }, 1000);
+                            //setTimeout(function () {
+                            //    item.control.dispose();
+                            //    $(item.element).remove();
+                            //    Atom.remove(self._items, item);
+                            //    if (item.opener) {
+                            //        self.set_url(item.opener);
+                            //    }
+                            //    //var a = Atom.query(self._items);
+                            //    //var i = 0;
+                            //    //while (a.next()) {
+                            //    //    var ci = a.current();
+                            //    //    ci.index = i++;
+                            //    //    if (a.currentIndex() == index) {
+                            //    //        self._url = ci.url;
+                            //    //        Atom.refresh(self, "url");
+                            //    //    }
+                            //    //}
+                            //}, 1000);
                         }
 
                     }
