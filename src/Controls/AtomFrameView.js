@@ -34,6 +34,7 @@
 
                 if (/replace\:/.test(v)) {
                     this.set_replaceUrl(v.substr(8));
+                    this._url = v;
                     return;
                 }
 
@@ -80,9 +81,10 @@
                 Atom.set(this, "selectedIndex", item.index);
 
                 if (q) {
-                    WebAtoms.dispatcher.callLater(function () {
-                        location.hash = q;
-                    });
+                    //WebAtoms.dispatcher.callLater(function () {
+                    //    location.hash = q;
+                    //});
+                    this.invokeAction({ appScope: AtomUI.parseUrl(q) });
                 }
                 this._url = v;
             },
