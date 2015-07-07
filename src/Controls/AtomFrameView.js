@@ -31,6 +31,12 @@
                 if (!v) {
                     return;
                 }
+
+                if (/replace\:/.test(v)) {
+                    this.set_replaceUrl(v.substr(8));
+                    return;
+                }
+
                 var i = v.indexOf('?');
                 var u = v;
                 var q = "";
@@ -102,7 +108,7 @@
                         Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
                             setTimeout(function () {
-                                self.replaceUrl(item, item.opener);
+                                self.replaceItemWithUrl(item, item.opener);
                             }, 1000);
                             //setTimeout(function () {
                             //    item.control.dispose();
