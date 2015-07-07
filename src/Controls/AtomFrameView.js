@@ -71,14 +71,16 @@
                         element: t
                     };
                     Atom.add(items, item);
-                    var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl );
+                    var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl);
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();
                         self._element.appendChild(t);
+                        Atom.set(self, "selectedIndex", item.index);
                     });
+                } else {
+                    Atom.set(this, "selectedIndex", item.index);
                 }
-                Atom.set(this, "selectedIndex", item.index);
 
                 if (q) {
                     //WebAtoms.dispatcher.callLater(function () {
@@ -90,14 +92,18 @@
             },
 
             replaceItemWithUrl: function (item,url) {
-                if (item) {
-                    item.control.dispose();
-                    $(item.element).remove();
-                    Atom.remove(this._items, item);
-                }
                 if (url) {
                     this.set_url(url);
                 }
+                if (item) {
+                    var self = this;
+                    setTimeout(function () {
+                        item.control.dispose();
+                        $(item.element).remove();
+                        Atom.remove(self._items, item);
+                    }, 1000);
+                }
+
             },
 
             onBackCommand: function () {
@@ -109,9 +115,7 @@
                         index = index - 1;
                         Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
-                            setTimeout(function () {
-                                self.replaceItemWithUrl(item, item.opener);
-                            }, 1000);
+                            this.replaceItemWithUrl(item, item.opener);
                             //setTimeout(function () {
                             //    item.control.dispose();
                             //    $(item.element).remove();
