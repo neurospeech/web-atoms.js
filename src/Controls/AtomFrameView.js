@@ -23,8 +23,22 @@
         },
         methods: {
             set_replaceUrl: function (v) {
-                var item = Atom.query(this._items).firstOrDefault({ index: this._selectedIndex });
-                this.replaceItemWithUrl(item, v);
+                //var item = Atom.query(this._items).firstOrDefault({ index: this._selectedIndex });
+                //this.replaceItemWithUrl(item, v);
+                var ae = new AtomEnumerator(this._items);
+
+                var remove = [];
+
+                this.set_url(v);
+
+                while (ae.next()) {
+                    var item = ae.current();
+                    if (item.url != v) {
+                        this.replaceItemWithUrl(item);
+                    }
+                }
+
+
             },
 
             set_url: function (v) {
@@ -63,7 +77,7 @@
                     }
 
                     t = AtomUI.cloneNode(t);
-                    t._logicalParent = this;
+                    t._logicalParent = this._element;
                     item = {
                         url: u,
                         index: items.length,
@@ -77,6 +91,7 @@
                         c.init();
                         self._element.appendChild(t);
                         Atom.set(self, "selectedIndex", item.index);
+                        self.updateUI();
                     });
                 } else {
                     Atom.set(this, "selectedIndex", item.index);
@@ -98,9 +113,9 @@
                 if (item) {
                     var self = this;
                     setTimeout(function () {
+                        Atom.remove(self._items, item);
                         item.control.dispose();
                         $(item.element).remove();
-                        Atom.remove(self._items, item);
                     }, 1000);
                 }
 
