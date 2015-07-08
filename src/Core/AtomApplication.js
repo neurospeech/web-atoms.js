@@ -113,9 +113,10 @@ this.atomApplication = null;
                     return;
                 var scope = this._scope;
 
-                var url = location.hash ? location.hash : this._defaultScope;
+                var url = location.hash;
                 if (!url) {
-                    return;
+                    //return;
+                    url = "#";
                 }
 
                 //log("#changed:" + url);
@@ -126,6 +127,14 @@ this.atomApplication = null;
                 var s = AtomUI.parseUrl(url);
 
                 if (this._created) {
+                    var ds = this._defaultScope;
+                    for (var key in ds) {
+                        var v = ds[key];
+                        if (s[key] === undefined) {
+                            s[key] = v;
+                        }
+                    }
+
                     for (var key in s) {
                         var val = s[key];
                         if (scope[key] != val) {
