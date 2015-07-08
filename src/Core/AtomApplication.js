@@ -157,7 +157,7 @@ this.atomApplication = null;
                 }, 5);
             },
 
-            onRefreshValue: function (target, key) {
+            onRefreshValue: function () {
                 if (this._noHashRefresh)
                     return;
 
@@ -166,18 +166,18 @@ this.atomApplication = null;
 
                 var dest = this._defaultScope;
 
-                var i = key;
-                if (i.indexOf('_') == 0)
-                    return;
-                var val = this._scope[i];
-                if (val === undefined)
-                    return;
-                if (val === null)
-                    return;
-                var t = typeof (val);
-                if (t != 'string' && t != 'number' && t != 'boolean') {
-                    return;
-                }
+                //var i = key;
+                //if (i.indexOf('_') == 0)
+                //    return;
+                //var val = this._scope[i];
+                //if (val === undefined)
+                //    return;
+                //if (val === null)
+                //    return;
+                //var t = typeof (val);
+                //if (t != 'string' && t != 'number' && t != 'boolean') {
+                //    return;
+                //}
 
 
                 var diff =  AtomBinder.getClone(this._defaultHash || {});
@@ -229,18 +229,17 @@ this.atomApplication = null;
                     $(this._element).addClass("atom-dock-application");
                 }
 
-                var self = this;
 
                 if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
                     // setup timer...
+                    var _this = this;
                     setInterval(function () {
-                        self.onCheckHash();
+                        _this.onCheckHash();
                     }, 1000);
                     this._lastHash = location.hash;
                 } else {
                     var eventName = window.onhashchange ? "onhashchange" : "hashchange";
-                    var self = this;
-                    this.bindEvent(window, eventName, aggregateHandler(function () { self.onHashChanged(); }) );
+                    this.bindEvent(window, eventName, "onHashChanged");
                 }
 
             },
@@ -291,10 +290,13 @@ this.atomApplication = null;
 
                 this.bindEvent(window, "resize", "invokeUpdateUI");
 
-                var _this = this;
-                this._onRefreshValue = function () {
-                    _this.onRefreshValue.apply(_this, arguments);
-                };
+                var self = this;
+                //this._onRefreshValue = function () {
+                //    self.onRefreshValue.apply(self, arguments);
+                //};
+                this._onRefreshValue = aggregateHandler(function () {
+                    self.onRefreshValue.apply(self, arguments);
+                });
 
                 this._scope._$_watcher = this;
 
@@ -302,7 +304,7 @@ this.atomApplication = null;
 
 
                 this.closeCommand = function () {
-                    _this.onCloseCommand.apply(_this, arguments);
+                    self.onCloseCommand.apply(self, arguments);
                 };
 
             }

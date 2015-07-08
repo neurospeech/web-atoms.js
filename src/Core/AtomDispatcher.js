@@ -81,14 +81,27 @@ function aggregateHandler(f,i) {
         this._handler = fx;
 
         var self = this;
-        this.handler = function () {
-            self.onEvent.apply(this, arguments);
-        }
+
         this.invoke = function () {
-            self._handler.apply(self, [self.args]);
+            try {
+                self._handler.apply(self, self.args);
+            }
+            catch (e) {
+                if (console) {
+                    console.log(e);
+                }
+            }
+            finally {
+                self.timeout = 0;
+                self.pending = false;
+            }
         }
-        this.onEvent = function (e) {
-            self.args = e;
+
+        this.handler = function () {
+            if (self.pending)
+                return;
+            self.pending = true;
+            self.args = arguments;
             if (self.timeout) {
                 clearTimeout(self.timeout);
             }
@@ -96,6 +109,7 @@ function aggregateHandler(f,i) {
         }
     }
 
-    return new ah(f);
+    var n = new ah(f);
+    return n.handler;
 }
 
