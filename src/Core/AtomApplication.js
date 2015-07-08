@@ -229,17 +229,18 @@ this.atomApplication = null;
                     $(this._element).addClass("atom-dock-application");
                 }
 
+                var self = this;
 
                 if (AtomBrowser.isIE && AtomBrowser.majorVersion < 8) {
                     // setup timer...
-                    var _this = this;
                     setInterval(function () {
-                        _this.onCheckHash();
+                        self.onCheckHash();
                     }, 1000);
                     this._lastHash = location.hash;
                 } else {
                     var eventName = window.onhashchange ? "onhashchange" : "hashchange";
-                    this.bindEvent(window, eventName, "onHashChanged");
+                    var self = this;
+                    this.bindEvent(window, eventName, aggregateHandler(function () { self.onHashChanged(); }) );
                 }
 
             },

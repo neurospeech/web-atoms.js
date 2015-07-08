@@ -75,3 +75,27 @@ window.allControls = allControls;
 
 WebAtoms.dispatcher = new WebAtoms.AtomDispatcher();
 
+function aggregateHandler(f,i) {
+
+    function ah(fx) {
+        this._handler = fx;
+
+        var self = this;
+        this.handler = function () {
+            self.onEvent.apply(this, arguments);
+        }
+        this.invoke = function () {
+            self._handler.apply(self, [self.args]);
+        }
+        this.onEvent = function (e) {
+            self.args = e;
+            if (self.timeout) {
+                clearTimeout(self.timeout);
+            }
+            self.timeout = setTimeout(self.invoke, i || 500);
+        }
+    }
+
+    return new ah(f);
+}
+
