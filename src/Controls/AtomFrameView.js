@@ -95,6 +95,7 @@
                     });
                 } else {
                     Atom.set(this, "selectedIndex", item.index);
+                    this.updateUI();
                 }
 
                 if (q) {
@@ -106,19 +107,29 @@
                 this._url = v;
             },
 
-            replaceItemWithUrl: function (item,url) {
+            replaceItemWithUrl: function (item, url) {
                 if (url) {
                     this.set_url(url);
                 }
                 if (item) {
                     var self = this;
                     setTimeout(function () {
-                        Atom.remove(self._items, item);
-                        item.control.dispose();
-                        $(item.element).remove();
+                        self.removeItem(item);
                     }, 1000);
                 }
 
+            },
+
+            removeItem: function (item) {
+                Atom.remove(this._items, item);
+                item.control.dispose();
+                $(item.element).remove();
+
+                var ae = new AtomEnumerator(this._items);
+                while (ae.next()) {
+                    item = ae.current();
+                    item.index = ae.currentIndex();
+                }
             },
 
             onBackCommand: function () {
@@ -131,24 +142,6 @@
                         Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
                             this.replaceItemWithUrl(item, item.opener);
-                            //setTimeout(function () {
-                            //    item.control.dispose();
-                            //    $(item.element).remove();
-                            //    Atom.remove(self._items, item);
-                            //    if (item.opener) {
-                            //        self.set_url(item.opener);
-                            //    }
-                            //    //var a = Atom.query(self._items);
-                            //    //var i = 0;
-                            //    //while (a.next()) {
-                            //    //    var ci = a.current();
-                            //    //    ci.index = i++;
-                            //    //    if (a.currentIndex() == index) {
-                            //    //        self._url = ci.url;
-                            //    //        Atom.refresh(self, "url");
-                            //    //    }
-                            //    //}
-                            //}, 1000);
                         }
 
                     }
