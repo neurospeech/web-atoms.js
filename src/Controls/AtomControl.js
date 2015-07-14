@@ -178,12 +178,15 @@ window.AtomProperties = AtomProperties;
             this.bindings = [];
             this._isVisible = true;
 
-            if (element.id && appScope) {
-                appScope[element.id] = this;
+            var eid = element.id;
+            if (eid && appScope) {
+                if (!/^\_\_waID/.test(eid)) {
+                    appScope[eid] = this;
+                }
             }
             AtomUI.assignID(element);
 
-            allControls[element.id] = this;
+            allControls[eid] = this;
         },
         properties: {
             layout: null,
@@ -849,7 +852,10 @@ window.AtomProperties = AtomProperties;
 
                 var aname = amap["atom-name"];
                 if (!aname) {
-                    aname = element.id;
+                    var eid = element.id;
+                    if (!/^\_\_waID/.test(eid)) {
+                        aname = element.id;
+                    }
                 } else {
                     element.removeAttributeNode(aname.node);
                     aname = aname.value;
