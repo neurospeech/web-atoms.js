@@ -113,9 +113,10 @@ this.atomApplication = null;
                     return;
                 var scope = this._scope;
 
-                var url = location.hash ? location.hash : this._defaultScope;
+                var url = location.hash;
                 if (!url) {
-                    return;
+                    //return;
+                    url = "#";
                 }
 
                 //log("#changed:" + url);
@@ -126,6 +127,14 @@ this.atomApplication = null;
                 var s = AtomUI.parseUrl(url);
 
                 if (this._created) {
+                    var ds = this._defaultScope;
+                    for (var key in ds) {
+                        var v = ds[key];
+                        if (s[key] === undefined) {
+                            s[key] = v;
+                        }
+                    }
+
                     for (var key in s) {
                         var val = s[key];
                         if (scope[key] != val) {
@@ -148,7 +157,7 @@ this.atomApplication = null;
                 }, 5);
             },
 
-            onRefreshValue: function (target, key) {
+            onRefreshValue: function () {
                 if (this._noHashRefresh)
                     return;
 
@@ -157,18 +166,18 @@ this.atomApplication = null;
 
                 var dest = this._defaultScope;
 
-                var i = key;
-                if (i.indexOf('_') == 0)
-                    return;
-                var val = this._scope[i];
-                if (val === undefined)
-                    return;
-                if (val === null)
-                    return;
-                var t = typeof (val);
-                if (t != 'string' && t != 'number' && t != 'boolean') {
-                    return;
-                }
+                //var i = key;
+                //if (i.indexOf('_') == 0)
+                //    return;
+                //var val = this._scope[i];
+                //if (val === undefined)
+                //    return;
+                //if (val === null)
+                //    return;
+                //var t = typeof (val);
+                //if (t != 'string' && t != 'number' && t != 'boolean') {
+                //    return;
+                //}
 
 
                 var diff =  AtomBinder.getClone(this._defaultHash || {});
@@ -281,10 +290,13 @@ this.atomApplication = null;
 
                 this.bindEvent(window, "resize", "invokeUpdateUI");
 
-                var _this = this;
-                this._onRefreshValue = function () {
-                    _this.onRefreshValue.apply(_this, arguments);
-                };
+                var self = this;
+                //this._onRefreshValue = function () {
+                //    self.onRefreshValue.apply(self, arguments);
+                //};
+                this._onRefreshValue = aggregateHandler(function () {
+                    self.onRefreshValue.apply(self, arguments);
+                });
 
                 this._scope._$_watcher = this;
 
@@ -292,7 +304,7 @@ this.atomApplication = null;
 
 
                 this.closeCommand = function () {
-                    _this.onCloseCommand.apply(_this, arguments);
+                    self.onCloseCommand.apply(self, arguments);
                 };
 
             }

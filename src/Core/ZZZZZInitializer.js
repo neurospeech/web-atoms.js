@@ -13,3 +13,19 @@ $(document).ready(function () {
     d.start();
 });
 
+$(window).unload(function () {
+
+    function dispose(e) {
+        if (e.atomControl) {
+            e.atomControl.dispose();
+        } else {
+            var ce = new ChildEnumerator(e);
+            while (ce.next()) {
+                dispose(ce.current());
+            }
+        }
+    }
+
+    dispose(document.body);
+});
+

@@ -16,15 +16,42 @@
         },
         properties: {
             url: '',
+            replaceUrl: '',
             layout: null,
             items: [],
             removeOnBack: true
         },
         methods: {
+            set_replaceUrl: function (v) {
+                //var item = Atom.query(this._items).firstOrDefault({ index: this._selectedIndex });
+                //this.replaceItemWithUrl(item, v);
+                var ae = new AtomEnumerator(this._items);
+
+                var remove = [];
+
+                this.set_url(v);
+
+                while (ae.next()) {
+                    var item = ae.current();
+                    if (item.url != v) {
+                        this.replaceItemWithUrl(item);
+                    }
+                }
+
+
+            },
+
             set_url: function (v) {
                 if (!v) {
                     return;
                 }
+
+                if (/replace\:/.test(v)) {
+                    this.set_replaceUrl(v.substr(8));
+                    this._url = v;
+                    return;
+                }
+
                 var i = v.indexOf('?');
                 var u = v;
                 var q = "";
@@ -50,7 +77,7 @@
                     }
 
                     t = AtomUI.cloneNode(t);
-
+                    t._logicalParent = this._element;
                     item = {
                         url: u,
                         index: items.length,
@@ -58,22 +85,53 @@
                         element: t
                     };
                     Atom.add(items, item);
-                    this._element.appendChild(t);
-                    var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl );
+                    var c = AtomUI.createControl(t, AtomUI.getAtomType(t) || WebAtoms.AtomControl);
                     item.control = c;
                     WebAtoms.dispatcher.callLater(function () {
                         c.init();
+                        self._element.appendChild(t);
+                        Atom.set(self, "selectedIndex", item.index);
+                        self.updateUI();
                     });
+                } else {
+                    Atom.set(this, "selectedIndex", item.index);
+                    this.updateUI();
                 }
-                Atom.set(this, "selectedIndex", item.index);
 
                 if (q) {
-                    WebAtoms.dispatcher.callLater(function () {
-                        location.hash = q;
-                    });
+                    //WebAtoms.dispatcher.callLater(function () {
+                    //    location.hash = q;
+                    //});
+                    this.invokeAction({ appScope: AtomUI.parseUrl(q) });
                 }
                 this._url = v;
             },
+
+            replaceItemWithUrl: function (item, url) {
+                if (url) {
+                    this.set_url(url);
+                }
+                if (item) {
+                    var self = this;
+                    setTimeout(function () {
+                        self.removeItem(item);
+                    }, 1000);
+                }
+
+            },
+
+            removeItem: function (item) {
+                Atom.remove(this._items, item);
+                item.control.dispose();
+                $(item.element).remove();
+
+                var ae = new AtomEnumerator(this._items);
+                while (ae.next()) {
+                    item = ae.current();
+                    item.index = ae.currentIndex();
+                }
+            },
+
             onBackCommand: function () {
                 var index = this._selectedIndex;
                 if (index) {
@@ -83,22 +141,7 @@
                         index = index - 1;
                         Atom.set(this, "selectedIndex", index);
                         if (self._removeOnBack) {
-                            setTimeout(function () {
-                                item.control.dispose();
-                                $(item.element).remove();
-                                Atom.remove(self._items, item);
-                                self.set_url(item.opener);
-                                //var a = Atom.query(self._items);
-                                //var i = 0;
-                                //while (a.next()) {
-                                //    var ci = a.current();
-                                //    ci.index = i++;
-                                //    if (a.currentIndex() == index) {
-                                //        self._url = ci.url;
-                                //        Atom.refresh(self, "url");
-                                //    }
-                                //}
-                            }, 1000);
+                            this.replaceItemWithUrl(item, item.opener);
                         }
 
                     }
