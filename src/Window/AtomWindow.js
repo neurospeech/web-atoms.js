@@ -16,7 +16,8 @@
             windowWidth: 500,
             url: undefined,
             title: undefined,
-            windowUrl: undefined
+            windowUrl: undefined,
+            cancelNext: undefined
         },
         methods: {
 
@@ -31,13 +32,23 @@
             onCloseCommand: function (scope, sender) {
                 AtomBinder.setValue(this, "isOpen", false);
                 var val = this._value;
-                var caller = this;
+                var self = this;
                 this._value = null;
 
                 WebAtoms.dispatcher.callLater(function () {
-                    AtomBinder.setValue(caller, "value", val);
-                    caller.invokeAction(caller._next);
-                    caller.disposeChildren(caller._element);
+                    AtomBinder.setValue(self, "value", val);
+                    self.invokeAction(self._next);
+                    self.disposeChildren(self._element);
+                });
+            },
+
+            onCancelCommand: function(scope,sender){
+                AtomBinder.setValue(this, "isOpen", false);
+                var self = this;
+
+                WebAtoms.dispatcher.callLater(function () {
+                    self.invokeAction(self._cancelNext);
+                    self.disposeChildren(self._element);
                 });
             },
 
@@ -114,17 +125,21 @@
                 $(this._element).addClass("atom-window-placeholder");
                 baseType.init.call(this);
 
-                var _this = this;
+                var self = this;
                 this.closeCommand = function () {
-                    _this.onCloseCommand.apply(_this, arguments);
+                    self.onCloseCommand.apply(self, arguments);
+                };
+
+                this.cancelCommand = function () {
+                    self.onCancelCommand.apply(self, arguments);
                 };
 
                 this.openCommand = function () {
-                    _this.openWindow.apply(_this, arguments);
+                    self.openWindow.apply(self, arguments);
                 };
 
                 WebAtoms.dispatcher.callLater(function () {
-                    var e = _this._element;
+                    var e = self._element;
                     if (!e._logicalParent) {
                         e._logicalParent = e.parentNode;
                         $(e).remove();
