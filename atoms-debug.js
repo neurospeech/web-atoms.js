@@ -11988,6 +11988,22 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 12 - 'ZZZZZInitializer.js' */    d.start();
 /*Line 13 - 'ZZZZZInitializer.js' */});
 
+/*Line 15 - 'ZZZZZInitializer.js' */$(window).unload(function () {
+
+/*Line 17 - 'ZZZZZInitializer.js' */    function dispose(e) {
+/*Line 18 - 'ZZZZZInitializer.js' */        if (e.atomControl) {
+/*Line 19 - 'ZZZZZInitializer.js' */            e.atomControl.dispose();
+/*Line 20 - 'ZZZZZInitializer.js' */        } else {
+/*Line 21 - 'ZZZZZInitializer.js' */            var ce = new ChildEnumerator(e);
+/*Line 22 - 'ZZZZZInitializer.js' */            while (ce.next()) {
+/*Line 23 - 'ZZZZZInitializer.js' */                dispose(ce.current());
+/*Line 24 - 'ZZZZZInitializer.js' */            }
+/*Line 25 - 'ZZZZZInitializer.js' */        }
+/*Line 26 - 'ZZZZZInitializer.js' */    }
+
+/*Line 28 - 'ZZZZZInitializer.js' */    dispose(document.body);
+/*Line 29 - 'ZZZZZInitializer.js' */});
+
 
 	})(window);
 
