@@ -10640,71 +10640,74 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 76 - 'AtomTimePicker.js' */                }
 /*Line 77 - 'AtomTimePicker.js' */                return h;
 /*Line 78 - 'AtomTimePicker.js' */            },
-/*Line 79 - 'AtomTimePicker.js' */            get_hours: function () {
-/*Line 80 - 'AtomTimePicker.js' */                var t = this._time.split(':');
-/*Line 81 - 'AtomTimePicker.js' */                var h = parseInt(t[0] || '0');
-/*Line 82 - 'AtomTimePicker.js' */                return h;
-/*Line 83 - 'AtomTimePicker.js' */            },
-/*Line 84 - 'AtomTimePicker.js' */            get_minutes: function () {
-/*Line 85 - 'AtomTimePicker.js' */                var t = this._time.split(':');
-/*Line 86 - 'AtomTimePicker.js' */                return parseInt(t[1] || '0');
-/*Line 87 - 'AtomTimePicker.js' */            },
-/*Line 88 - 'AtomTimePicker.js' */            setTime: function (h, m) {
-/*Line 89 - 'AtomTimePicker.js' */                var ap = 'AM';
-/*Line 90 - 'AtomTimePicker.js' */                if (h > 12) {
-/*Line 91 - 'AtomTimePicker.js' */                    h -= 12;
-/*Line 92 - 'AtomTimePicker.js' */                    ap = "PM";
-/*Line 93 - 'AtomTimePicker.js' */                }
-/*Line 94 - 'AtomTimePicker.js' */                h = "" + h;
-/*Line 95 - 'AtomTimePicker.js' */                if (h.length == 1) {
-/*Line 96 - 'AtomTimePicker.js' */                    h = "0" + h;
-/*Line 97 - 'AtomTimePicker.js' */                }
-/*Line 98 - 'AtomTimePicker.js' */                m = m + "";
-/*Line 99 - 'AtomTimePicker.js' */                if (m.length == 1) {
-/*Line 100 - 'AtomTimePicker.js' */                    m = "0" + m;
-/*Line 101 - 'AtomTimePicker.js' */                }
-/*Line 102 - 'AtomTimePicker.js' */                AtomBinder.setValue(this, "value", h + ":" + m + " " + ap);
-/*Line 103 - 'AtomTimePicker.js' */            },
-/*Line 104 - 'AtomTimePicker.js' */            set_hours: function (v) {
-/*Line 105 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
+/*Line 79 - 'AtomTimePicker.js' */            set_hours24: function (v) {
+/*Line 80 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
+/*Line 81 - 'AtomTimePicker.js' */            },
+/*Line 82 - 'AtomTimePicker.js' */            get_hours: function () {
+/*Line 83 - 'AtomTimePicker.js' */                var t = this._time.split(':');
+/*Line 84 - 'AtomTimePicker.js' */                var h = parseInt(t[0] || '0');
+/*Line 85 - 'AtomTimePicker.js' */                return h;
+/*Line 86 - 'AtomTimePicker.js' */            },
+/*Line 87 - 'AtomTimePicker.js' */            get_minutes: function () {
+/*Line 88 - 'AtomTimePicker.js' */                var t = this._time.split(':');
+/*Line 89 - 'AtomTimePicker.js' */                return parseInt(t[1] || '0');
+/*Line 90 - 'AtomTimePicker.js' */            },
+/*Line 91 - 'AtomTimePicker.js' */            setTime: function (h, m, is24) {
+/*Line 92 - 'AtomTimePicker.js' */                var ap = this.get_ap();
+/*Line 93 - 'AtomTimePicker.js' */                if ( is24 && (h > 12)) {
+/*Line 94 - 'AtomTimePicker.js' */                    h -= 12;
+/*Line 95 - 'AtomTimePicker.js' */                    ap = "PM";
+/*Line 96 - 'AtomTimePicker.js' */                }
+/*Line 97 - 'AtomTimePicker.js' */                h = "" + h;
+/*Line 98 - 'AtomTimePicker.js' */                if (h.length == 1) {
+/*Line 99 - 'AtomTimePicker.js' */                    h = "0" + h;
+/*Line 100 - 'AtomTimePicker.js' */                }
+/*Line 101 - 'AtomTimePicker.js' */                m = m + "";
+/*Line 102 - 'AtomTimePicker.js' */                if (m.length == 1) {
+/*Line 103 - 'AtomTimePicker.js' */                    m = "0" + m;
+/*Line 104 - 'AtomTimePicker.js' */                }
+/*Line 105 - 'AtomTimePicker.js' */                AtomBinder.setValue(this, "value", h + ":" + m + " " + ap);
 /*Line 106 - 'AtomTimePicker.js' */            },
-/*Line 107 - 'AtomTimePicker.js' */            set_minutes: function (v) {
-/*Line 108 - 'AtomTimePicker.js' */                this.setTime(this.get_hours(), v);
+/*Line 107 - 'AtomTimePicker.js' */            set_hours: function (v) {
+/*Line 108 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
 /*Line 109 - 'AtomTimePicker.js' */            },
-/*Line 110 - 'AtomTimePicker.js' */            set_value: function (v) {
-/*Line 111 - 'AtomTimePicker.js' */                this._updater.update(function () {
-/*Line 112 - 'AtomTimePicker.js' */                    if (this._value == v)
-/*Line 113 - 'AtomTimePicker.js' */                        return;
-/*Line 114 - 'AtomTimePicker.js' */                    if (!timeRegex.test(v)) {
-/*Line 115 - 'AtomTimePicker.js' */                        throw new Error("Unknown time format, expecting ##:## AM");
-/*Line 116 - 'AtomTimePicker.js' */                    }
-/*Line 117 - 'AtomTimePicker.js' */                    this._value = v;
-/*Line 118 - 'AtomTimePicker.js' */                    v = v.split(' ');
-/*Line 119 - 'AtomTimePicker.js' */                    this._time = v[0];
-/*Line 120 - 'AtomTimePicker.js' */                    this._ap = (v[1]).toUpperCase();
-/*Line 121 - 'AtomTimePicker.js' */                    this.refreshProperties();
-/*Line 122 - 'AtomTimePicker.js' */                });
-/*Line 123 - 'AtomTimePicker.js' */            },
-/*Line 124 - 'AtomTimePicker.js' */            refreshProperties: function () {
-/*Line 125 - 'AtomTimePicker.js' */                Atom.refresh(this, "value");
-/*Line 126 - 'AtomTimePicker.js' */                Atom.refresh(this, "time");
-/*Line 127 - 'AtomTimePicker.js' */                Atom.refresh(this, "ap");
-/*Line 128 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours");
-/*Line 129 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours24");
-/*Line 130 - 'AtomTimePicker.js' */                Atom.refresh(this, "minutes");
-/*Line 131 - 'AtomTimePicker.js' */            },
-/*Line 132 - 'AtomTimePicker.js' */            set_time: function (v) {
-/*Line 133 - 'AtomTimePicker.js' */                this.set_value(v + " " + this._ap);
+/*Line 110 - 'AtomTimePicker.js' */            set_minutes: function (v) {
+/*Line 111 - 'AtomTimePicker.js' */                this.setTime(this.get_hours(), v);
+/*Line 112 - 'AtomTimePicker.js' */            },
+/*Line 113 - 'AtomTimePicker.js' */            set_value: function (v) {
+/*Line 114 - 'AtomTimePicker.js' */                this._updater.update(function () {
+/*Line 115 - 'AtomTimePicker.js' */                    if (this._value == v)
+/*Line 116 - 'AtomTimePicker.js' */                        return;
+/*Line 117 - 'AtomTimePicker.js' */                    if (!timeRegex.test(v)) {
+/*Line 118 - 'AtomTimePicker.js' */                        throw new Error("Unknown time format, expecting ##:## AM");
+/*Line 119 - 'AtomTimePicker.js' */                    }
+/*Line 120 - 'AtomTimePicker.js' */                    this._value = v;
+/*Line 121 - 'AtomTimePicker.js' */                    v = v.split(' ');
+/*Line 122 - 'AtomTimePicker.js' */                    this._time = v[0];
+/*Line 123 - 'AtomTimePicker.js' */                    this._ap = (v[1]).toUpperCase();
+/*Line 124 - 'AtomTimePicker.js' */                    this.refreshProperties();
+/*Line 125 - 'AtomTimePicker.js' */                });
+/*Line 126 - 'AtomTimePicker.js' */            },
+/*Line 127 - 'AtomTimePicker.js' */            refreshProperties: function () {
+/*Line 128 - 'AtomTimePicker.js' */                Atom.refresh(this, "value");
+/*Line 129 - 'AtomTimePicker.js' */                Atom.refresh(this, "time");
+/*Line 130 - 'AtomTimePicker.js' */                Atom.refresh(this, "ap");
+/*Line 131 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours");
+/*Line 132 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours24");
+/*Line 133 - 'AtomTimePicker.js' */                Atom.refresh(this, "minutes");
 /*Line 134 - 'AtomTimePicker.js' */            },
-/*Line 135 - 'AtomTimePicker.js' */            set_ap: function (v) {
-/*Line 136 - 'AtomTimePicker.js' */                this.set_value(this._time + " " + v);
+/*Line 135 - 'AtomTimePicker.js' */            set_time: function (v) {
+/*Line 136 - 'AtomTimePicker.js' */                this.set_value(v + " " + this._ap);
 /*Line 137 - 'AtomTimePicker.js' */            },
-/*Line 138 - 'AtomTimePicker.js' */            get_value: function () {
-/*Line 139 - 'AtomTimePicker.js' */                return this._time + " " + this._ap;
-/*Line 140 - 'AtomTimePicker.js' */            }
-/*Line 141 - 'AtomTimePicker.js' */        }
-/*Line 142 - 'AtomTimePicker.js' */    });
-/*Line 143 - 'AtomTimePicker.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 138 - 'AtomTimePicker.js' */            set_ap: function (v) {
+/*Line 139 - 'AtomTimePicker.js' */                this.set_value(this._time + " " + v);
+/*Line 140 - 'AtomTimePicker.js' */            },
+/*Line 141 - 'AtomTimePicker.js' */            get_value: function () {
+/*Line 142 - 'AtomTimePicker.js' */                return this._time + " " + this._ap;
+/*Line 143 - 'AtomTimePicker.js' */            }
+/*Line 144 - 'AtomTimePicker.js' */        }
+/*Line 145 - 'AtomTimePicker.js' */    });
+/*Line 146 - 'AtomTimePicker.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomUploadButton.js' */
 
 /*Line 2 - 'AtomUploadButton.js' */(function (baseType) {
