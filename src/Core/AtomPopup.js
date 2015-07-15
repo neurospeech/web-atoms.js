@@ -86,7 +86,13 @@ window.AtomPopup = AtomPopup;
 
 window.simulateParentClick = function () {
 
-    var p = frameElement;
+    var p = null;
+    try {
+        p = frameElement;
+    } catch (e) {
+        //log(e);
+        return;
+    }
     if (!p)
         return;
     if (!parent)
