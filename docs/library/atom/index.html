@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Atom Module</h1>
+    <p>
+        <h4>get: function(obj,path)</h4>
+        <h5>This method is nullsafe.</h5>
+        Evaluates given path for object, as IE9 did not support properties, we had to introduce get_ accessor function, so this method checks if
+        get_ method exists and then evaluates the method or returns value at path.
+
+        Usage:
+<pre>
+    var v = Atom.get(appScope, "customerList.selectedItem.CustomerID");
+</pre>
+    </p>
+    <p>
+        <h4>set: function(obj,path,value)</h4>
+        <h5>This method is nullsafe.</h5>
+        Sets value at given property path, useful in providing nested property path. This is nullsafe, as it does not throw null exception,
+        it simply stops evaluating property chain.
+
+        <h5>
+            This method will refresh bindings at every property in the chain, if you simply set value in JavaScript, Atoms framework cannot
+            refresh bindings.
+        </h5>
+
+        Usage:
+<pre>
+    Atom.set(appScope, "customerList.selectedItem.CustomerID", 0);
+</pre>
+    </p>
+    <p>
+        <h4>time(): number</h4>
+        Calls (new Date) and returns getTime() value of it.
+    </p>
+    <p>
+        <h4>refreshWindowCommand()</h4>
+        Calls location.reload(true) method which you can set as action set. Note, do not put () after method name when you set it as action set.
+
+        Usage:
+<pre>
+    &lt;button atom-event-click=&quot;{ Atom.refreshWindowCommand }&quot; &gt;Refresh Window &lt;/button&gt;
+</pre>
+    </p>
+    <p>
+        <h4>merge: function(target, source, update, clone)</h4>
+        Merges properties of source into the given target and returns the target.
+        If clone is true, it will create clone of target and then call merge on it.
+        If update is true, it will use Atom.set and that will refresh the bindings.
+    </p>
+    <p>
+        <h4>url: function(url, query, hash)</h4>
+        Combines url fragments, where query and hash are javascript key-value objects, this method will encode key-value pairs as proper query string.
+<pre>
+    var q = Atom.url('/products/search', { name: 'new tv', start: 0, size: 100 });
+    // returns
+    "/products/search?name=new+tv&amp;start=0&amp;size=100"
+</pre>
+        This method is useful for binding url inside promises as well as href/src attributes.
+    </p>
+    <p>
+        <h4>csv: function(array,path,separator = ', ')</h4>
+        Returns comma separator string for property path in given array, this method internally uses Atom.get to evaluate properties. Let's
+        assume that you have loaded list of customers in your Items control and you want all ids of selected customers.
+<pre>
+    var selectedCustomers = Atom.get(appScope,"customerList.selectedItems");
+    var ids = Atom.csv(selectedCustomers, "CustomerID");
+</pre>
+    </p>
+    <p>
+        <h4>resolve(obj)</h4>
+        Returns a promise that will resolve when each promises inside given obj has been resolved successfully.
+<pre>
+    var p = Atom.resolve( { 
+        countries: AtomPromise.json('/countries'),
+        categories: AtomPromise.json('/categories')
+    } );
+    // p is now a promise, which when resolved, will return
+    // {
+    //     countries: [...]
+    //     categories: [...]
+    // }
+</pre>
+    </p>
+</body>
+</html>

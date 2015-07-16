@@ -255,6 +255,16 @@
     <Content Include="docs\controls\samples\atom-wizard.html" />
     <Content Include="docs\controls\samples\atom-yes-no-control.html" />
     <Content Include="docs\index.html" />
+    <Content Include="docs\library\atom-uri\index.html" />
+    <Content Include="docs\library\atom-uri\samples\atom-uri.html" />
+    <Content Include="docs\library\atom\index.html" />
+    <Content Include="docs\library\class-creator\index.html" />
+    <Content Include="docs\library\class-creator\samples\class-creator.html" />
+    <Content Include="docs\library\date-time\index.html" />
+    <Content Include="docs\library\enumerator\index.html" />
+    <Content Include="docs\library\enumerator\samples\enumerator.html" />
+    <Content Include="docs\library\query\index.html" />
+    <Content Include="docs\library\query\samples\query.html" />
     <Content Include="docs\plugins\ckeditor\index.html" />
     <Content Include="docs\plugins\index.html" />
     <Content Include="docs\plugins\samples\atom-clock.css" />
@@ -1115,6 +1125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="docs\library\date-time\samples\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

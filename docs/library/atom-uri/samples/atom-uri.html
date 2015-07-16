@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+
+    <script type="text/javascript">
+
+        var url = new AtomUri("https://google.com:443/query/path/file.ext?a=nothing&b=10");
+
+        console.log(url);
+
+    </script>
+
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+    </div>
+</body>
+</html>

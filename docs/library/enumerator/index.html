@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>new AtomEnumerator (array)</h1>
+    <p>
+        We wanted to follow simple enumeration pattern without overriding "this" as other frameworks do it.
+        Purpose of this is to create good compatibility with people coming from different platforms.
+    </p>
+    <h2>Methods</h2>
+    <div>
+        <h4>next: boolean</h4>
+        <p>
+            Returns true, if there is an item to consume in the given list. Just like Java, C#, you have to call next method in a while loop to check availability of next item in enumeration.             
+        </p>
+        <h4>current: *</h4>
+        <p>
+            Returns current item.
+        </p>
+        <h4>currentIndex: int</h4>
+        <p>
+            Returns current index in enumeration.
+        </p>
+    </div>
+    <h1>ChildEnumerator</h1>
+    <p>
+        We have created DOM Child enumerator, which allows you to enumerate child of dom element in fastest way. This method does not create any array, 
+        instead it simply uses nextSibling to nagivate, which is pretty fast. ChildEnumerator class expects parent element as an argument to constructor.
+    </p>
+    <h2>Example</h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=library/enumerator/samples/enumerator.html"></iframe>
+</body>
+</html>

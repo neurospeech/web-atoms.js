@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>new AtomUri(url)</h1>
+    <p>
+        We often need good Uri parser in JavaScript so we have shipped one.
+    </p>
+    <h2>Properties</h2>
+    <div>
+        <label>scheme: (http|https)</label>
+        <p>Scheme of given URL</p>
+        <label>host: domain name</label>
+        <p>Domain name of given url (does not include port number)</p>
+        <label>port: int</label>
+        <p>
+            Port of given url address
+        </p>
+        <label>path: string</label>
+        <p>
+            File path of url
+        </p>
+        <label>query: object</label>
+        <p>
+            Key-value pair of query string, values are parsed into relevant types, true/false are converted into native boolean
+            and number is converted to native number.
+        </p>
+        <label>hash: object</label>
+        <p>
+            Key-value pair of hash, values are parsed into relevant types, true/false are converted into native boolean
+            and number is converted to native number.
+        </p>
+    </div>
+    <h2>Example</h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=library/atom-uri/samples/atom-uri.html"></iframe>
+</body>
+</html>

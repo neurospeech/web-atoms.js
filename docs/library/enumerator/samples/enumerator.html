@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+
+    <script type="text/javascript">
+
+        var items = ["Apple", "Orange", "Grapes"];
+
+        var ae = new AtomEnumerator(items);
+        while (ae.next()) {
+            var item = ae.current();
+            var itemIndex = ae.currentIndex();
+            console.log( (itemIndex + 1) + ") " +  item )
+        }
+
+    </script>
+
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+</div>
+</body>
+</html>

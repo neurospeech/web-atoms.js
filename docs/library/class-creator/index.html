@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Class Creator</h1>
+    <p>
+        We have introduced a library method to create classes in JavaScript that can be easily inherited and that supports Atoms property system.
+    </p>
+    <h2>createClass</h2>
+    <div>
+        <h4>name: String</h4>
+        <p>
+            Name of class, it is stored as __type in prototype useful for debugging.
+        </p>
+        <h4>baseType: prototype of base class</h4>
+        <p>
+            Prototype of base class, please follow the example given below to correctly create prototype chains.
+        </p>
+        <h4>start: Function</h4>
+        <p>
+            Constructor function that will be called when object is initialized. Before this
+            function is executed, baseType's constructor will be executed first.
+        </p>
+        <h4>properties: Key-Value pairs (Object)</h4>
+        <p>
+            Object with key-value pairs, key determines name of property and values are default values when the object is created.
+            Please note, this will create get_/set_ methods in prototype.
+        </p>
+        <h4>methods: Key-Value pairs (Object)</h4>
+        <p>
+            Object with key-value pairs, key determines name of method and values are functions.
+        </p>
+    </div>
+    <h2>Performance</h2>
+    <div>
+        <p>In order to improve performance, we flatten protoype chain by manually copying baseType's prototype methods to current prototype</p>
+        <p>This results in excellent performance but blocks you from modifying prototype after the class is created.</p>
+    </div>
+    <h2>Example</h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=library/class-creator/samples/class-creator.html"></iframe>
+</body>
+</html>
