@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+
+    <script type="text/javascript">
+
+        var items = [{ name: "John", age: 20 }, { name: "Jessica", age: 18 }];
+
+        var q = Atom.query(items);
+        q = q.where({ 'age <' : 30 });
+        while (q.next()) {
+            console.log(q.current());
+        }
+
+
+        q = Atom.query(items);
+        q = q.where({ 'age >': 0 });
+        var filtereItems = q.toArray();
+
+        // to get just one item..
+
+        q = Atom.query(items);
+        var item = q.firstOrDefault({ age: 20 });
+
+        // to get sum...
+
+        q = Atom.query(items);
+        // sum of all age
+        var sum = q.sum("age");
+
+
+        // count all items
+        q = Atom.query(items);
+        var avg = q.count({ 'age >': 0 });
+
+    </script>
+
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Json Query</h1>
+    <p>
+        Due to unavailability of arrow functions and we needed better form to serialize queries in text form, we created JSON format to represent
+        query that can be used throughout in Atoms.js and also communicate easily with remote services.
+    </p>
+    <h2>AtomQuery class</h2>
+    <p>
+        <h4>toArray() : returns an array</h4>
+        Returns an array after executing query.
+    </p>
+    <p>
+        <h4>where (jsonQuery)</h4>
+        Applies given filter on internal array.
+    </p>
+    <p>
+        <h4>firstOrDefault</h4>
+        Returns first object to satisfy given condition on internal array.
+    </p>
+    <p>
+        <h4>any(jsonQuery) : returns true/false</h4>
+        Returns true if any object satisfies given condition
+    </p>
+    <h2>Examples</h2>
+    <p>
+
+        <iframe class="atom-code-frame" src="../../code.html#codeFile=library/query/samples/query.html"></iframe>
+        <a href="https://github.com/neurospeech/atom-filter.js" target="_blank">
+            Click here for jsonQuery examples
+        </a>
+    </p>
+</body>
+</html>

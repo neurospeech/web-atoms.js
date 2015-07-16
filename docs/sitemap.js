@@ -81,6 +81,32 @@
         ]
     },
     {
+        label : "Library",
+        value : "library/index.html",
+        links: [
+            {
+                label: "Atom",
+                value: "library/atom/index.html"
+            },
+            {
+                label: "ClassCreator",
+                value: "library/class-creator/index.html"
+            },
+            {
+                label: "Enumerator",
+                value: "library/enumerator/index.html"
+            },
+            {
+                label: "Query",
+                value: "library/query/index.html"
+            },
+            {
+                label: "AtomUri",
+                value: "library/atom-uri/index.html"
+            }
+        ]
+    },
+    {
         label: "Plugins",
         value: "plugins/index.html",
         links: [

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../atoms.min.js"></script>
+
+    <script type="text/javascript">
+
+        var Shape = createClass({
+            name: "Shape",
+
+            /*constructor*/
+            start: function (a) {
+                
+            },
+
+            properties: {
+                name: ""
+            },
+
+            methods: {
+                draw: function () {
+                    console.log("Draing shape");
+                }
+            }
+        });
+
+
+        var baseType = Shape.prototype;
+
+        var Circle = createClass({
+
+            name: "Circle",
+
+            /*inheritance*/
+            baseType: baseType,
+
+            /*constructor*/
+            start: function (a) {
+                this._name = "Circle";
+            },
+
+            properties: {
+                radius: 0
+            },
+
+            methods: {
+                set_radius: function (v) {
+                    this._radius = v;
+                },
+                draw: function () {
+                    baseType.draw.apply(this, arguments);
+                    console.log("Draing Circle");
+                }
+            }
+        });
+
+
+        var circleObject = new Circle();
+
+        circleObject.draw();
+
+
+    </script>
+
+</head>
+<body>
+<div atom-type="AtomApplication" atom-render-as-page="true">
+</div>
+</body>
+</html>
