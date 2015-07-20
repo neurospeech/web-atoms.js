@@ -35,7 +35,41 @@
                 return this._currentStep == (this._steps - 1);
             },
 
+            createWizard: function () {
 
+
+                var vs = this._viewPresenter;
+
+                this.disposeChildren(vs);
+
+                var vt = this._viewTemplate;
+
+                var i = 0;
+
+                var ae = new ChildEnumerator(vt);
+                while (ae.next()) {
+                    i++;
+                    var item = AtomUI.cloneNode(ae.current());
+                    //$(vs).append(item);
+                    vs.appendChild(item);
+                    var type = AtomUI.getAtomType(item);
+                    if (!type) {
+                        type = "AtomViewBox";
+                        AtomUI.attr(item, "data-atom-type", type);
+                    }
+
+                    //var s = new AtomScope(this, this.get_scope(), atomApplication);
+
+                    var ct = AtomUI.getAtomType(item) || WebAtoms.AtomControl;
+                    var cc = AtomUI.createControl(item, ct);
+                    cc.init();
+                }
+                AtomBinder.setValue(this, "steps", i);
+
+                if (i) {
+                    AtomBinder.setValue(this, "currentStep", 0);
+                }
+            },
 
             init: function () {
                 $(this._element).addClass('atom-wizard');
@@ -59,41 +93,13 @@
                 };
 
                 this.resetCommand = function () {
+                    _this.createWizard();
                     AtomBinder.setValue(_this, "currentStep", 0);
                     AtomBinder.setValue(_this, "canMoveBack", true);
                 };
 
                 // create children...
-
-                var vs = this._viewPresenter;
-
-                var vt = this._viewTemplate;
-
-                var i = 0;
-
-                var ae = new ChildEnumerator(vt);
-                while (ae.next()) {
-                    i++;
-                    var item = ae.current();
-                    //$(vs).append(item);
-                    vs.appendChild(item);
-                    var type = AtomUI.getAtomType(item);
-                    if (!type) {
-                        type = "AtomViewBox";
-                        AtomUI.attr(item, "data-atom-type", type);
-                    }
-
-                    //var s = new AtomScope(this, this.get_scope(), atomApplication);
-
-                    var ct = AtomUI.getAtomType(item) || WebAtoms.AtomControl;
-                    var cc = AtomUI.createControl(item, ct);
-                    cc.init();
-                }
-                AtomBinder.setValue(this, "steps", i);
-
-                if (i) {
-                    AtomBinder.setValue(this, "currentStep", 0);
-                }
+                this.createWizard();
 
                 this.nextCommand = function (scope, sender, evt) {
                     var child = vs.atomControl.get_selectedChild().atomControl;
