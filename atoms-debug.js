@@ -10976,43 +10976,44 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 78 - 'AtomWizard.js' */                var _this = this;
 
+/*Line 80 - 'AtomWizard.js' */                var vs = this._viewPresenter;
 
-/*Line 81 - 'AtomWizard.js' */                this.goNextCommand = function (scope, sender, evt) {
-/*Line 82 - 'AtomWizard.js' */                    if (_this.get_isLastStep()) {
-/*Line 83 - 'AtomWizard.js' */                        _this.invokeAction(_this._next, evt);
-/*Line 84 - 'AtomWizard.js' */                        AtomBinder.setValue(_this, "canMoveBack", false);
-/*Line 85 - 'AtomWizard.js' */                    } else {
-/*Line 86 - 'AtomWizard.js' */                        AtomBinder.setValue(_this, "currentStep", _this._currentStep + 1);
-/*Line 87 - 'AtomWizard.js' */                    }
-/*Line 88 - 'AtomWizard.js' */                };
+/*Line 82 - 'AtomWizard.js' */                this.goNextCommand = function (scope, sender, evt) {
+/*Line 83 - 'AtomWizard.js' */                    if (_this.get_isLastStep()) {
+/*Line 84 - 'AtomWizard.js' */                        _this.invokeAction(_this._next, evt);
+/*Line 85 - 'AtomWizard.js' */                        AtomBinder.setValue(_this, "canMoveBack", false);
+/*Line 86 - 'AtomWizard.js' */                    } else {
+/*Line 87 - 'AtomWizard.js' */                        AtomBinder.setValue(_this, "currentStep", _this._currentStep + 1);
+/*Line 88 - 'AtomWizard.js' */                    }
+/*Line 89 - 'AtomWizard.js' */                };
 
-/*Line 90 - 'AtomWizard.js' */                this.goPrevCommand = function () {
-/*Line 91 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "currentStep", _this._currentStep - 1);
-/*Line 92 - 'AtomWizard.js' */                };
+/*Line 91 - 'AtomWizard.js' */                this.goPrevCommand = function () {
+/*Line 92 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "currentStep", _this._currentStep - 1);
+/*Line 93 - 'AtomWizard.js' */                };
 
-/*Line 94 - 'AtomWizard.js' */                this.resetCommand = function () {
-/*Line 95 - 'AtomWizard.js' */                    _this.createWizard();
-/*Line 96 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "currentStep", 0);
-/*Line 97 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "canMoveBack", true);
-/*Line 98 - 'AtomWizard.js' */                };
+/*Line 95 - 'AtomWizard.js' */                this.resetCommand = function () {
+/*Line 96 - 'AtomWizard.js' */                    _this.createWizard();
+/*Line 97 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "currentStep", 0);
+/*Line 98 - 'AtomWizard.js' */                    AtomBinder.setValue(_this, "canMoveBack", true);
+/*Line 99 - 'AtomWizard.js' */                };
 
-/*Line 100 - 'AtomWizard.js' */                // create children...
-/*Line 101 - 'AtomWizard.js' */                this.createWizard();
+/*Line 101 - 'AtomWizard.js' */                // create children...
+/*Line 102 - 'AtomWizard.js' */                this.createWizard();
 
-/*Line 103 - 'AtomWizard.js' */                this.nextCommand = function (scope, sender, evt) {
-/*Line 104 - 'AtomWizard.js' */                    var child = vs.atomControl.get_selectedChild().atomControl;
-/*Line 105 - 'AtomWizard.js' */                    if (child._next) {
-/*Line 106 - 'AtomWizard.js' */                        child.invokeAction(child._next);
-/*Line 107 - 'AtomWizard.js' */                        return;
-/*Line 108 - 'AtomWizard.js' */                    } else {
-/*Line 109 - 'AtomWizard.js' */                        _this.goNextCommand(scope, sender, evt);
-/*Line 110 - 'AtomWizard.js' */                    }
-/*Line 111 - 'AtomWizard.js' */                };
+/*Line 104 - 'AtomWizard.js' */                this.nextCommand = function (scope, sender, evt) {
+/*Line 105 - 'AtomWizard.js' */                    var child = vs.atomControl.get_selectedChild().atomControl;
+/*Line 106 - 'AtomWizard.js' */                    if (child._next) {
+/*Line 107 - 'AtomWizard.js' */                        child.invokeAction(child._next);
+/*Line 108 - 'AtomWizard.js' */                        return;
+/*Line 109 - 'AtomWizard.js' */                    } else {
+/*Line 110 - 'AtomWizard.js' */                        _this.goNextCommand(scope, sender, evt);
+/*Line 111 - 'AtomWizard.js' */                    }
+/*Line 112 - 'AtomWizard.js' */                };
 
-/*Line 113 - 'AtomWizard.js' */            }
-/*Line 114 - 'AtomWizard.js' */        }
-/*Line 115 - 'AtomWizard.js' */    });
-/*Line 116 - 'AtomWizard.js' */})(WebAtoms.AtomDockPanel.prototype);
+/*Line 114 - 'AtomWizard.js' */            }
+/*Line 115 - 'AtomWizard.js' */        }
+/*Line 116 - 'AtomWizard.js' */    });
+/*Line 117 - 'AtomWizard.js' */})(WebAtoms.AtomDockPanel.prototype);
 
 /*Line 0 - 'AtomYesNoControl.js' */
 
