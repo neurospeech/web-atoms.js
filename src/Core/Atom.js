@@ -63,6 +63,7 @@ var Atom = {
     },
 
     set: function (obj, path, val) {
+        if (!obj) return;
         var index = path.indexOf('.');
         if (index != -1) {
             var f = path.substr(0, index);
