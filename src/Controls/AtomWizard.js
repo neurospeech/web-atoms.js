@@ -78,6 +78,7 @@
 
                 var _this = this;
 
+                var vs = this._viewPresenter;
 
                 this.goNextCommand = function (scope, sender, evt) {
                     if (_this.get_isLastStep()) {
