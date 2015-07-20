@@ -35,37 +35,12 @@
                 return this._currentStep == (this._steps - 1);
             },
 
+            createWizard: function () {
 
-
-            init: function () {
-                $(this._element).addClass('atom-wizard');
-
-                baseType.init.call(this);
-
-                var _this = this;
-
-
-                this.goNextCommand = function (scope, sender, evt) {
-                    if (_this.get_isLastStep()) {
-                        _this.invokeAction(_this._next, evt);
-                        AtomBinder.setValue(_this, "canMoveBack", false);
-                    } else {
-                        AtomBinder.setValue(_this, "currentStep", _this._currentStep + 1);
-                    }
-                };
-
-                this.goPrevCommand = function () {
-                    AtomBinder.setValue(_this, "currentStep", _this._currentStep - 1);
-                };
-
-                this.resetCommand = function () {
-                    AtomBinder.setValue(_this, "currentStep", 0);
-                    AtomBinder.setValue(_this, "canMoveBack", true);
-                };
-
-                // create children...
 
                 var vs = this._viewPresenter;
+
+                this.disposeChildren(vs);
 
                 var vt = this._viewTemplate;
 
@@ -74,7 +49,7 @@
                 var ae = new ChildEnumerator(vt);
                 while (ae.next()) {
                     i++;
-                    var item = ae.current();
+                    var item = AtomUI.cloneNode(ae.current());
                     //$(vs).append(item);
                     vs.appendChild(item);
                     var type = AtomUI.getAtomType(item);
@@ -94,6 +69,38 @@
                 if (i) {
                     AtomBinder.setValue(this, "currentStep", 0);
                 }
+            },
+
+            init: function () {
+                $(this._element).addClass('atom-wizard');
+
+                baseType.init.call(this);
+
+                var _this = this;
+
+                var vs = this._viewPresenter;
+
+                this.goNextCommand = function (scope, sender, evt) {
+                    if (_this.get_isLastStep()) {
+                        _this.invokeAction(_this._next, evt);
+                        AtomBinder.setValue(_this, "canMoveBack", false);
+                    } else {
+                        AtomBinder.setValue(_this, "currentStep", _this._currentStep + 1);
+                    }
+                };
+
+                this.goPrevCommand = function () {
+                    AtomBinder.setValue(_this, "currentStep", _this._currentStep - 1);
+                };
+
+                this.resetCommand = function () {
+                    _this.createWizard();
+                    AtomBinder.setValue(_this, "currentStep", 0);
+                    AtomBinder.setValue(_this, "canMoveBack", true);
+                };
+
+                // create children...
+                this.createWizard();
 
                 this.nextCommand = function (scope, sender, evt) {
                     var child = vs.atomControl.get_selectedChild().atomControl;

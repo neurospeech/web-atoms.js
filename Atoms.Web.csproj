@@ -852,6 +852,7 @@
     <Content Include="res\share\twitter.png" />
     <Content Include="atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>atoms.js</LastGenOutput>
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />
