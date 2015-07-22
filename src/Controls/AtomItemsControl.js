@@ -358,6 +358,11 @@
                 if (this._items) {
                     this.unbindEvent(this._items, "CollectionChanged", null);
                 }
+
+                if (this._selectedItems.length) {
+                    this._OldValue = this.get_value();
+                }
+
                 this._items = v;
                 this._filteredItems = null;
                 // try starting observing....
@@ -379,7 +384,7 @@
 
                 Atom.refresh(this, "allValues");
 
-                var value = this.get_value();
+                var value = this._OldValue || this.get_value();
 
                 if (this.hasItems()) {
                     this.onCollectionChanged(mode, index, item);
