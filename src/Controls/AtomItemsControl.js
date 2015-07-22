@@ -50,7 +50,7 @@
                 };
                 var ae = Atom.query(this.get_dataItems());
                 while (ae.next()) {
-                    list.push( vfp( ae.current()));                    
+                    list.push(vfp(ae.current()));
                 }
                 return list.join(this._valueSeparator);
             },
@@ -358,11 +358,6 @@
                 if (this._items) {
                     this.unbindEvent(this._items, "CollectionChanged", null);
                 }
-
-                if (this._selectedItems.length) {
-                    this._OldValue = this.get_value();
-                }
-
                 this._items = v;
                 this._filteredItems = null;
                 // try starting observing....
@@ -384,7 +379,7 @@
 
                 Atom.refresh(this, "allValues");
 
-                var value = this._OldValue || this.get_value();
+                var value = this.get_value();
 
                 if (this.hasItems()) {
                     this.onCollectionChanged(mode, index, item);
@@ -549,14 +544,14 @@
                     var sw = $(element).innerWidth();
 
                     var itemsPerLine = Math.ceil(presenterWidth / w);
-                    var hiddenLines = Math.ceil( st / h );
+                    var hiddenLines = Math.ceil(st / h);
                     var visibleLines = Math.ceil(sh / h);
                     var si = hiddenLines * itemsPerLine;
 
                     if (!itemsPerLine) {
                         console.log("itemsPerLine is zero");
                     } else {
-                        console.log(JSON.stringify({ itemsPerLine: itemsPerLine, st: st, sh: sh, si : si }));
+                        console.log(JSON.stringify({ itemsPerLine: itemsPerLine, st: st, sh: sh, si: si }));
                     }
 
                     var ei = (visibleLines + 1) * itemsPerLine;
