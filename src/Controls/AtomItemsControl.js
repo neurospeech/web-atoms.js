@@ -121,6 +121,7 @@
                         this._selectedItems.push(ae.current());
                     }
                 }
+                this._selectAll = true;
                 AtomBinder.refreshItems(this._selectedItems);
             },
             refresh: function () {
@@ -330,6 +331,12 @@
                 AtomBinder.refreshValue(this, "selectedItem");
                 AtomBinder.refreshValue(this, "selectedItems");
                 AtomBinder.refreshValue(this, "selectedIndex");
+                if (!this._selectedItems.length) {
+                    if (this._selectAll === true) {
+                        this._selectAll = false;
+                        AtomBinder.refreshValue(this, "selectAll");
+                    }
+                }
             },
 
             onSelectedItemsChanged: function (type, index, item) {
