@@ -7191,21 +7191,29 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 91 - 'AtomListBox.js' */                this.setClass();
 
 /*Line 93 - 'AtomListBox.js' */                baseType.init.call(this);
-/*Line 94 - 'AtomListBox.js' */                var _this = this;
+/*Line 94 - 'AtomListBox.js' */                var self = this;
 
-/*Line 96 - 'AtomListBox.js' */                this.selectCommand = function () {
-/*Line 97 - 'AtomListBox.js' */                    _this.onSelectItem.apply(_this, arguments);
-/*Line 98 - 'AtomListBox.js' */                };
-/*Line 99 - 'AtomListBox.js' */                this.selectAllCommand = function () {
-/*Line 100 - 'AtomListBox.js' */                    _this.set_selectAll(true);
-/*Line 101 - 'AtomListBox.js' */                };
-/*Line 102 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
-/*Line 103 - 'AtomListBox.js' */                    _this.set_selectedIndex(-1);
-/*Line 104 - 'AtomListBox.js' */                };
-/*Line 105 - 'AtomListBox.js' */            }
-/*Line 106 - 'AtomListBox.js' */        }
-/*Line 107 - 'AtomListBox.js' */    });
-/*Line 108 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
+/*Line 96 - 'AtomListBox.js' */                var e = this._element;
+/*Line 97 - 'AtomListBox.js' */                if (/select/i.test(e.tagName)) {
+/*Line 98 - 'AtomListBox.js' */                    this.set_allowSelectFirst(true);
+/*Line 99 - 'AtomListBox.js' */                    this.bindEvent(e, 'change', function () {
+/*Line 100 - 'AtomListBox.js' */                        AtomBinder.setValue(self, 'selectedIndex', e.selectedIndex);
+/*Line 101 - 'AtomListBox.js' */                    });
+/*Line 102 - 'AtomListBox.js' */                }
+
+/*Line 104 - 'AtomListBox.js' */                this.selectCommand = function () {
+/*Line 105 - 'AtomListBox.js' */                    self.onSelectItem.apply(self, arguments);
+/*Line 106 - 'AtomListBox.js' */                };
+/*Line 107 - 'AtomListBox.js' */                this.selectAllCommand = function () {
+/*Line 108 - 'AtomListBox.js' */                    self.set_selectAll(true);
+/*Line 109 - 'AtomListBox.js' */                };
+/*Line 110 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
+/*Line 111 - 'AtomListBox.js' */                    self.set_selectedIndex(-1);
+/*Line 112 - 'AtomListBox.js' */                };
+/*Line 113 - 'AtomListBox.js' */            }
+/*Line 114 - 'AtomListBox.js' */        }
+/*Line 115 - 'AtomListBox.js' */    });
+/*Line 116 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
 
 /*Line 0 - 'AtomAutoCompleteBox.js' */
 /*Line 1 - 'AtomAutoCompleteBox.js' */
@@ -12015,18 +12023,20 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 15 - 'ZZZZZInitializer.js' */$(window).unload(function () {
 
 /*Line 17 - 'ZZZZZInitializer.js' */    function dispose(e) {
-/*Line 18 - 'ZZZZZInitializer.js' */        if (e.atomControl) {
-/*Line 19 - 'ZZZZZInitializer.js' */            e.atomControl.dispose();
-/*Line 20 - 'ZZZZZInitializer.js' */        } else {
-/*Line 21 - 'ZZZZZInitializer.js' */            var ce = new ChildEnumerator(e);
-/*Line 22 - 'ZZZZZInitializer.js' */            while (ce.next()) {
-/*Line 23 - 'ZZZZZInitializer.js' */                dispose(ce.current());
-/*Line 24 - 'ZZZZZInitializer.js' */            }
-/*Line 25 - 'ZZZZZInitializer.js' */        }
-/*Line 26 - 'ZZZZZInitializer.js' */    }
+/*Line 18 - 'ZZZZZInitializer.js' */        if (!e)
+/*Line 19 - 'ZZZZZInitializer.js' */            return;
+/*Line 20 - 'ZZZZZInitializer.js' */        if (e.atomControl) {
+/*Line 21 - 'ZZZZZInitializer.js' */            e.atomControl.dispose();
+/*Line 22 - 'ZZZZZInitializer.js' */        } else {
+/*Line 23 - 'ZZZZZInitializer.js' */            var ce = new ChildEnumerator(e);
+/*Line 24 - 'ZZZZZInitializer.js' */            while (ce.next()) {
+/*Line 25 - 'ZZZZZInitializer.js' */                dispose(ce.current());
+/*Line 26 - 'ZZZZZInitializer.js' */            }
+/*Line 27 - 'ZZZZZInitializer.js' */        }
+/*Line 28 - 'ZZZZZInitializer.js' */    }
 
-/*Line 28 - 'ZZZZZInitializer.js' */    dispose(document.body);
-/*Line 29 - 'ZZZZZInitializer.js' */});
+/*Line 30 - 'ZZZZZInitializer.js' */    dispose(document.body);
+/*Line 31 - 'ZZZZZInitializer.js' */});
 
 
 	})(window);

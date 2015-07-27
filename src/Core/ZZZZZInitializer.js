@@ -16,6 +16,8 @@ $(document).ready(function () {
 $(window).unload(function () {
 
     function dispose(e) {
+        if (!e)
+            return;
         if (e.atomControl) {
             e.atomControl.dispose();
         } else {

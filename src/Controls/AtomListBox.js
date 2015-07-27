@@ -92,16 +92,24 @@
                 this.setClass();
 
                 baseType.init.call(this);
-                var _this = this;
+                var self = this;
+
+                var e = this._element;
+                if (/select/i.test(e.tagName)) {
+                    this.set_allowSelectFirst(true);
+                    this.bindEvent(e, 'change', function () {
+                        AtomBinder.setValue(self, 'selectedIndex', e.selectedIndex);
+                    });
+                }
 
                 this.selectCommand = function () {
-                    _this.onSelectItem.apply(_this, arguments);
+                    self.onSelectItem.apply(self, arguments);
                 };
                 this.selectAllCommand = function () {
-                    _this.set_selectAll(true);
+                    self.set_selectAll(true);
                 };
                 this.clearSelectionCommand = function () {
-                    _this.set_selectedIndex(-1);
+                    self.set_selectedIndex(-1);
                 };
             }
         }
