@@ -7186,34 +7186,51 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 87 - 'AtomListBox.js' */            },
 
-/*Line 89 - 'AtomListBox.js' */            init: function () {
 
-/*Line 91 - 'AtomListBox.js' */                this.setClass();
+/*Line 90 - 'AtomListBox.js' */            updateChildSelections: function () {
+/*Line 91 - 'AtomListBox.js' */                var e = this._element;
+/*Line 92 - 'AtomListBox.js' */                if (/select/i.test(e.tagName)) {
+/*Line 93 - 'AtomListBox.js' */                    var i = this.get_selectedIndex();
+/*Line 94 - 'AtomListBox.js' */                    if (e.selectedIndex != i) {
+/*Line 95 - 'AtomListBox.js' */                        WebAtoms.dispatcher.callLater(function () {
+/*Line 96 - 'AtomListBox.js' */                            e.selectedIndex = i;
+/*Line 97 - 'AtomListBox.js' */                        });
+/*Line 98 - 'AtomListBox.js' */                    }
+/*Line 99 - 'AtomListBox.js' */                } else {
+/*Line 100 - 'AtomListBox.js' */                    baseType.updateChildSelections.apply(this, arguments);
+/*Line 101 - 'AtomListBox.js' */                }
+/*Line 102 - 'AtomListBox.js' */            },
 
-/*Line 93 - 'AtomListBox.js' */                baseType.init.call(this);
-/*Line 94 - 'AtomListBox.js' */                var self = this;
+/*Line 104 - 'AtomListBox.js' */            init: function () {
 
-/*Line 96 - 'AtomListBox.js' */                var e = this._element;
-/*Line 97 - 'AtomListBox.js' */                if (/select/i.test(e.tagName)) {
-/*Line 98 - 'AtomListBox.js' */                    this.set_allowSelectFirst(true);
-/*Line 99 - 'AtomListBox.js' */                    this.bindEvent(e, 'change', function () {
-/*Line 100 - 'AtomListBox.js' */                        AtomBinder.setValue(self, 'selectedIndex', e.selectedIndex);
-/*Line 101 - 'AtomListBox.js' */                    });
-/*Line 102 - 'AtomListBox.js' */                }
+/*Line 106 - 'AtomListBox.js' */                this.setClass();
 
-/*Line 104 - 'AtomListBox.js' */                this.selectCommand = function () {
-/*Line 105 - 'AtomListBox.js' */                    self.onSelectItem.apply(self, arguments);
-/*Line 106 - 'AtomListBox.js' */                };
-/*Line 107 - 'AtomListBox.js' */                this.selectAllCommand = function () {
-/*Line 108 - 'AtomListBox.js' */                    self.set_selectAll(true);
-/*Line 109 - 'AtomListBox.js' */                };
-/*Line 110 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
-/*Line 111 - 'AtomListBox.js' */                    self.set_selectedIndex(-1);
-/*Line 112 - 'AtomListBox.js' */                };
-/*Line 113 - 'AtomListBox.js' */            }
-/*Line 114 - 'AtomListBox.js' */        }
-/*Line 115 - 'AtomListBox.js' */    });
-/*Line 116 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
+/*Line 108 - 'AtomListBox.js' */                baseType.init.call(this);
+/*Line 109 - 'AtomListBox.js' */                var self = this;
+
+/*Line 111 - 'AtomListBox.js' */                var e = this._element;
+/*Line 112 - 'AtomListBox.js' */                if (/select/i.test(e.tagName)) {
+/*Line 113 - 'AtomListBox.js' */                    this.set_allowSelectFirst(true);
+/*Line 114 - 'AtomListBox.js' */                    this.bindEvent(e, 'change', function () {
+/*Line 115 - 'AtomListBox.js' */                        AtomBinder.setValue(self, 'selectedIndex', e.selectedIndex);
+/*Line 116 - 'AtomListBox.js' */                    });
+/*Line 117 - 'AtomListBox.js' */                }
+
+
+
+/*Line 121 - 'AtomListBox.js' */                this.selectCommand = function () {
+/*Line 122 - 'AtomListBox.js' */                    self.onSelectItem.apply(self, arguments);
+/*Line 123 - 'AtomListBox.js' */                };
+/*Line 124 - 'AtomListBox.js' */                this.selectAllCommand = function () {
+/*Line 125 - 'AtomListBox.js' */                    self.set_selectAll(true);
+/*Line 126 - 'AtomListBox.js' */                };
+/*Line 127 - 'AtomListBox.js' */                this.clearSelectionCommand = function () {
+/*Line 128 - 'AtomListBox.js' */                    self.set_selectedIndex(-1);
+/*Line 129 - 'AtomListBox.js' */                };
+/*Line 130 - 'AtomListBox.js' */            }
+/*Line 131 - 'AtomListBox.js' */        }
+/*Line 132 - 'AtomListBox.js' */    });
+/*Line 133 - 'AtomListBox.js' */})(WebAtoms.AtomItemsControl.prototype);
 
 /*Line 0 - 'AtomAutoCompleteBox.js' */
 /*Line 1 - 'AtomAutoCompleteBox.js' */

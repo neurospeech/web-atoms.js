@@ -87,6 +87,21 @@
 
             },
 
+
+            updateChildSelections: function () {
+                var e = this._element;
+                if (/select/i.test(e.tagName)) {
+                    var i = this.get_selectedIndex();
+                    if (e.selectedIndex != i) {
+                        WebAtoms.dispatcher.callLater(function () {
+                            e.selectedIndex = i;
+                        });
+                    }
+                } else {
+                    baseType.updateChildSelections.apply(this, arguments);
+                }
+            },
+
             init: function () {
 
                 this.setClass();
@@ -101,6 +116,8 @@
                         AtomBinder.setValue(self, 'selectedIndex', e.selectedIndex);
                     });
                 }
+
+
 
                 this.selectCommand = function () {
                     self.onSelectItem.apply(self, arguments);
