@@ -3632,47 +3632,56 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 402 - 'AtomUI.js' */AtomUI.isIE8 = window.navigator.userAgent.indexOf("MSIE 8.0") != -1;
 
 /*Line 404 - 'AtomUI.js' */window.AtomUri = function (url) {
-/*Line 405 - 'AtomUI.js' */    var path, query, hash;
-/*Line 406 - 'AtomUI.js' */    var t = url.split('?');
-/*Line 407 - 'AtomUI.js' */    path = t[0];
-/*Line 408 - 'AtomUI.js' */    query = t[1] || "";
-/*Line 409 - 'AtomUI.js' */    t = query.split('#');
-/*Line 410 - 'AtomUI.js' */    query = t[0];
-/*Line 411 - 'AtomUI.js' */    hash = t[1] || "";
+/*Line 405 - 'AtomUI.js' */    var path;
+/*Line 406 - 'AtomUI.js' */    var query = "";
+/*Line 407 - 'AtomUI.js' */    var hash = "";
+/*Line 408 - 'AtomUI.js' */    var t = url.split('?');
+/*Line 409 - 'AtomUI.js' */    path = t[0];
+/*Line 410 - 'AtomUI.js' */    if (t.length == 2) {
+/*Line 411 - 'AtomUI.js' */        query = t[1] || "";
 
-/*Line 413 - 'AtomUI.js' */    // extract protocol and domain...
+/*Line 413 - 'AtomUI.js' */        t = query.split('#');
+/*Line 414 - 'AtomUI.js' */        query = t[0];
+/*Line 415 - 'AtomUI.js' */        hash = t[1] || "";
+/*Line 416 - 'AtomUI.js' */    } else {
+/*Line 417 - 'AtomUI.js' */        t = path.split('#');
+/*Line 418 - 'AtomUI.js' */        path = t[0];
+/*Line 419 - 'AtomUI.js' */        hash = t[1] || "";
+/*Line 420 - 'AtomUI.js' */    }
 
-/*Line 415 - 'AtomUI.js' */    var scheme = location.protocol;
-/*Line 416 - 'AtomUI.js' */    var host = location.host;
-/*Line 417 - 'AtomUI.js' */    var port = location.port;
+/*Line 422 - 'AtomUI.js' */    // extract protocol and domain...
 
-/*Line 419 - 'AtomUI.js' */    var i = path.indexOf('//');
-/*Line 420 - 'AtomUI.js' */    if (i !== -1) {
-/*Line 421 - 'AtomUI.js' */        scheme = path.substr(0, i);
-/*Line 422 - 'AtomUI.js' */        path = path.substr(i + 2);
+/*Line 424 - 'AtomUI.js' */    var scheme = location.protocol;
+/*Line 425 - 'AtomUI.js' */    var host = location.host;
+/*Line 426 - 'AtomUI.js' */    var port = location.port;
 
-
-/*Line 425 - 'AtomUI.js' */        i = path.indexOf('/');
-/*Line 426 - 'AtomUI.js' */        if (i !== -1) {
-/*Line 427 - 'AtomUI.js' */            host = path.substr(0, i);
-/*Line 428 - 'AtomUI.js' */            path = path.substr(i + 1);
-/*Line 429 - 'AtomUI.js' */            t = host.split(':');
-/*Line 430 - 'AtomUI.js' */            if (t.length > 1) {
-/*Line 431 - 'AtomUI.js' */                host = t[0];
-/*Line 432 - 'AtomUI.js' */                port = t[1];
-/*Line 433 - 'AtomUI.js' */            }
-/*Line 434 - 'AtomUI.js' */        }
-/*Line 435 - 'AtomUI.js' */    }
-/*Line 436 - 'AtomUI.js' */    this.host = host;
-/*Line 437 - 'AtomUI.js' */    this.protocol = scheme;
-/*Line 438 - 'AtomUI.js' */    this.port = port;
-/*Line 439 - 'AtomUI.js' */    this.path = path;
+/*Line 428 - 'AtomUI.js' */    var i = path.indexOf('//');
+/*Line 429 - 'AtomUI.js' */    if (i !== -1) {
+/*Line 430 - 'AtomUI.js' */        scheme = path.substr(0, i);
+/*Line 431 - 'AtomUI.js' */        path = path.substr(i + 2);
 
 
+/*Line 434 - 'AtomUI.js' */        i = path.indexOf('/');
+/*Line 435 - 'AtomUI.js' */        if (i !== -1) {
+/*Line 436 - 'AtomUI.js' */            host = path.substr(0, i);
+/*Line 437 - 'AtomUI.js' */            path = path.substr(i + 1);
+/*Line 438 - 'AtomUI.js' */            t = host.split(':');
+/*Line 439 - 'AtomUI.js' */            if (t.length > 1) {
+/*Line 440 - 'AtomUI.js' */                host = t[0];
+/*Line 441 - 'AtomUI.js' */                port = t[1];
+/*Line 442 - 'AtomUI.js' */            }
+/*Line 443 - 'AtomUI.js' */        }
+/*Line 444 - 'AtomUI.js' */    }
+/*Line 445 - 'AtomUI.js' */    this.host = host;
+/*Line 446 - 'AtomUI.js' */    this.protocol = scheme;
+/*Line 447 - 'AtomUI.js' */    this.port = port;
+/*Line 448 - 'AtomUI.js' */    this.path = path;
 
-/*Line 443 - 'AtomUI.js' */    this.query = AtomUI.parseUrl(query);
-/*Line 444 - 'AtomUI.js' */    this.hash = AtomUI.parseUrl(hash);
-/*Line 445 - 'AtomUI.js' */}
+
+
+/*Line 452 - 'AtomUI.js' */    this.query = AtomUI.parseUrl(query);
+/*Line 453 - 'AtomUI.js' */    this.hash = AtomUI.parseUrl(hash);
+/*Line 454 - 'AtomUI.js' */}
 /*Line 0 - 'AtomBindingHelper.js' */
 
 
