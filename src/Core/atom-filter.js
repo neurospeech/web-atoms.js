@@ -49,6 +49,7 @@
         compare: function (cmp, r) {
             switch (cmp) {
                 case "==":
+                case "=":
                     return function (l) {
                         return l == r;
                     };
