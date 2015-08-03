@@ -48,6 +48,10 @@
 
         compare: function (cmp, r) {
             switch (cmp) {
+                case "!=":
+                    return function (l) {
+                        return l != r;
+                    };
                 case "==":
                     return function (l) {
                         return l == r;
