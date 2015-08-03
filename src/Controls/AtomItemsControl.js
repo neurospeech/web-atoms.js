@@ -399,8 +399,11 @@
 
                 if (value != null) {
                     this.set_value(value);
-                    if (this.get_selectedIndex() != -1)
+                    if (this.get_selectedIndex() != -1) {
                         return;
+                    } else {
+                        this._value = undefined;
+                    }
                 }
 
                 this.selectDefault();
