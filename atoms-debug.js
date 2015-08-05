@@ -9134,7 +9134,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 96 - 'AtomDataPager.js' */                        if (v.total) {
 /*Line 97 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "total", v.total);
 /*Line 98 - 'AtomDataPager.js' */                        } else {
-/*Line 99 - 'AtomDataPager.js' */                            AtomBinder.setValue(this, "pages", []);
+/*Line 99 - 'AtomDataPager.js' */                            //AtomBinder.setValue(this, "pages", []);
 /*Line 100 - 'AtomDataPager.js' */                        }
 /*Line 101 - 'AtomDataPager.js' */                        AtomBinder.setValue(this, "value", v);
 /*Line 102 - 'AtomDataPager.js' */                    }
