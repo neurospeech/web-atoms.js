@@ -97,7 +97,7 @@
                         if (v.total) {
                             AtomBinder.setValue(this, "total", v.total);
                         } else {
-                            AtomBinder.setValue(this, "pages", []);
+                            //AtomBinder.setValue(this, "pages", []);
                         }
                         AtomBinder.setValue(this, "value", v);
                     }

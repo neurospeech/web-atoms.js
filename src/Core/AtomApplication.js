@@ -209,6 +209,8 @@ this.atomApplication = null;
 
                 if (p == location.hash)
                     return;
+                if (p == "#" && !location.hash)
+                    return;
 
                 this._noHashRefresh = true;
                 if (history && history.pushState) {
