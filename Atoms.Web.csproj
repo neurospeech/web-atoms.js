@@ -937,6 +937,7 @@
     <Content Include="src\Controls\AtomYesNoCustom.css" />
     <Content Include="src\Controls\AtomYesNoCustom.js" />
     <Content Include="src\Controls\AtomYesNoCustom.template.html" />
+    <Content Include="src\Core\ActionSet.js" />
     <Content Include="src\Core\atom-filter.js" />
     <Content Include="src\Core\Atom.js" />
     <Content Include="src\Core\AtomApplication.busyTemplate.html" />
@@ -951,6 +952,7 @@
     <Content Include="src\Core\AtomUI.js" />
     <Content Include="src\Core\AtomUIComponent.js" />
     <Content Include="src\Core\ChildEnumerator.js" />
+    <Content Include="src\Core\Stop.js" />
     <Content Include="src\Core\WebAtoms.Core.js" />
     <Content Include="src\Core\ZZZZZInitializer.js" />
     <Content Include="src\DataControls\AtomAutoPostForm.js" />

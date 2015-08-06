@@ -1,6 +1,7 @@
 ﻿/// <reference path="../../Scripts/jquery-1.11.1.js" />
 /// <reference path="../jquery.maskedinput.js" />
 /// <reference path="AtomBrowser.js" />
+/// <reference path="ActionSet.js" />
 
 var AtomEnumerator = (function () {
     return classCreator("AtomEnumerator",null,
