@@ -20,32 +20,36 @@ $x.timeout = function (i, actions) {
     }
 }
 
-$x.data = function (d) {
-    return function () {
-        this.invokeAction({data: d});
+$x.invoke = function(i,d,v){
+    return function(){
+        var a = {};
+        if(v === undefined){
+            var x = {};
+            x[d] = v;
+            a[i] = x;        
+        }else{
+            a[i] = d;
+        }
+        this.invokeAction(a);
     }
 }
 
-$x.scope = function (d) {
-    return function () {
-        this.invokeAction({ scope: d });
-    }
+$x.data = function (d, v) {
+    $x.invoke("data", d, v);
 }
 
-$x.localScope = function (d) {
-    return function () {
-        this.invokeAction({ localScope: d });
-    }
+$x.scope = function (d,v) {
+    $x.invoke("scope", d, v);
 }
 
-$x.appScope = function (d) {
-    return function () {
-        this.invokeAction({ appScope: d });
-    }
+$x.localScope = function (d,v) {
+    $x.invoke("localScope", d, v);
 }
 
-$x.owner = function (d) {
-    return function () {
-        this.invokeAction({ owner: d });
-    }
+$x.appScope = function (d,v) {
+    $x.invoke("appScope", d, v);
+}
+
+$x.owner = function (d,v) {
+    $x.invoke("owner", d, v);
 }

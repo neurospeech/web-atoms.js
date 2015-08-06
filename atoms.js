@@ -1731,35 +1731,39 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 19 - 'Stop.js' */    }
 /*Line 20 - 'Stop.js' */}
 
-/*Line 22 - 'Stop.js' */$x.data = function (d) {
-/*Line 23 - 'Stop.js' */    return function () {
-/*Line 24 - 'Stop.js' */        this.invokeAction({data: d});
-/*Line 25 - 'Stop.js' */    }
-/*Line 26 - 'Stop.js' */}
+/*Line 22 - 'Stop.js' */$x.invoke = function(i,d,v){
+/*Line 23 - 'Stop.js' */    return function(){
+/*Line 24 - 'Stop.js' */        var a = {};
+/*Line 25 - 'Stop.js' */        if(v === undefined){
+/*Line 26 - 'Stop.js' */            var x = {};
+/*Line 27 - 'Stop.js' */            x[d] = v;
+/*Line 28 - 'Stop.js' */            a[i] = x;        
+/*Line 29 - 'Stop.js' */        }else{
+/*Line 30 - 'Stop.js' */            a[i] = d;
+/*Line 31 - 'Stop.js' */        }
+/*Line 32 - 'Stop.js' */        this.invokeAction(a);
+/*Line 33 - 'Stop.js' */    }
+/*Line 34 - 'Stop.js' */}
 
-/*Line 28 - 'Stop.js' */$x.scope = function (d) {
-/*Line 29 - 'Stop.js' */    return function () {
-/*Line 30 - 'Stop.js' */        this.invokeAction({ scope: d });
-/*Line 31 - 'Stop.js' */    }
-/*Line 32 - 'Stop.js' */}
-
-/*Line 34 - 'Stop.js' */$x.localScope = function (d) {
-/*Line 35 - 'Stop.js' */    return function () {
-/*Line 36 - 'Stop.js' */        this.invokeAction({ localScope: d });
-/*Line 37 - 'Stop.js' */    }
+/*Line 36 - 'Stop.js' */$x.data = function (d, v) {
+/*Line 37 - 'Stop.js' */    $x.invoke("data", d, v);
 /*Line 38 - 'Stop.js' */}
 
-/*Line 40 - 'Stop.js' */$x.appScope = function (d) {
-/*Line 41 - 'Stop.js' */    return function () {
-/*Line 42 - 'Stop.js' */        this.invokeAction({ appScope: d });
-/*Line 43 - 'Stop.js' */    }
-/*Line 44 - 'Stop.js' */}
+/*Line 40 - 'Stop.js' */$x.scope = function (d,v) {
+/*Line 41 - 'Stop.js' */    $x.invoke("scope", d, v);
+/*Line 42 - 'Stop.js' */}
 
-/*Line 46 - 'Stop.js' */$x.owner = function (d) {
-/*Line 47 - 'Stop.js' */    return function () {
-/*Line 48 - 'Stop.js' */        this.invokeAction({ owner: d });
-/*Line 49 - 'Stop.js' */    }
+/*Line 44 - 'Stop.js' */$x.localScope = function (d,v) {
+/*Line 45 - 'Stop.js' */    $x.invoke("localScope", d, v);
+/*Line 46 - 'Stop.js' */}
+
+/*Line 48 - 'Stop.js' */$x.appScope = function (d,v) {
+/*Line 49 - 'Stop.js' */    $x.invoke("appScope", d, v);
 /*Line 50 - 'Stop.js' */}
+
+/*Line 52 - 'Stop.js' */$x.owner = function (d,v) {
+/*Line 53 - 'Stop.js' */    $x.invoke("owner", d, v);
+/*Line 54 - 'Stop.js' */}
 /*Line 0 - 'ActionSet.js' */
 
 
