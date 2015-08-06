@@ -1,5 +1,4 @@
-﻿/// <reference path="WebAtoms.Core.js" />
-/// <reference path="Stop.js" />
+﻿/// <reference path="Stop.js" />
 
 
 
