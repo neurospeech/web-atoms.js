@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Controls/AtomDockPanel.js" />
 
-this.appScope = null;
+window.appScope = window.appScope || {};
 
 this.atomApplication = null;
 
@@ -12,12 +12,21 @@ this.atomApplication = null;
             $(element).addClass("atom-application");
 
             this._scope = new AtomScope(this, null, this);
-            window.appScope = this._scope;
+            //window.appScope = this._scope;
 
             if (window.model) {
                 window.appScope.model = window.model;
                 this._data = window.model;
             }
+
+            if (window.appScope) {
+                var d = this._scope;
+                var s = window.appScope;
+                for (var i in s) {
+                    d[i] = s[i];
+                }
+            }
+            window.appScope = this._scope;
 
             window.atomApplication = this;
             this.busyCount = 0;
