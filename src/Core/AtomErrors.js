@@ -24,7 +24,7 @@ window.getInputError = function getInputError(e, a, v) {
 
     k = a["atom-data-type"];
     if (k) {
-        var dt = dt.value;
+        var dt = k.value;
         if (dt == "email") {
             var re = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!re.test(v)) {

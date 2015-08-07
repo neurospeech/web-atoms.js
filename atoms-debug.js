@@ -3628,7 +3628,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 24 - 'AtomErrors.js' */    k = a["atom-data-type"];
 /*Line 25 - 'AtomErrors.js' */    if (k) {
-/*Line 26 - 'AtomErrors.js' */        var dt = dt.value;
+/*Line 26 - 'AtomErrors.js' */        var dt = k.value;
 /*Line 27 - 'AtomErrors.js' */        if (dt == "email") {
 /*Line 28 - 'AtomErrors.js' */            var re = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 /*Line 29 - 'AtomErrors.js' */            if (!re.test(v)) {
@@ -11914,131 +11914,132 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 85 - 'AtomFormField.js' */                        if (!this._isValid) {
 /*Line 86 - 'AtomFormField.js' */                            return [{ label: this.get_invalidMessage(), value: e }];
 /*Line 87 - 'AtomFormField.js' */                        }
-/*Line 88 - 'AtomFormField.js' */                    }
-/*Line 89 - 'AtomFormField.js' */                    var a = {};
-/*Line 90 - 'AtomFormField.js' */                    if (this._required) {
-/*Line 91 - 'AtomFormField.js' */                        a["atom-required"] = { msg: this.get_requiredMessage() };
-/*Line 92 - 'AtomFormField.js' */                    }
-/*Line 93 - 'AtomFormField.js' */                    if (this._dataType) {
-/*Line 94 - 'AtomFormField.js' */                        a["atom-data-type"] = { value: this._dataType, msg: this.get_invalidMessage() };
-/*Line 95 - 'AtomFormField.js' */                    }
-/*Line 96 - 'AtomFormField.js' */                    if (this._regex) {
-/*Line 97 - 'AtomFormField.js' */                        a["atom-regex"] = { value: this._regex, msg: this.get_invalidMessage() };
-/*Line 98 - 'AtomFormField.js' */                    }
-/*Line 99 - 'AtomFormField.js' */                    var error = getInputError(e, a, this._fieldValue);
-/*Line 100 - 'AtomFormField.js' */                    if (error) {
-/*Line 101 - 'AtomFormField.js' */                        this.set_error(error.label);
-/*Line 102 - 'AtomFormField.js' */                        errors.push({ label: error, value: e });
-/*Line 103 - 'AtomFormField.js' */                        this._isValid = false;
-/*Line 104 - 'AtomFormField.js' */                    } else {
-/*Line 105 - 'AtomFormField.js' */                        this._isValid = true;
-/*Line 106 - 'AtomFormField.js' */                    }
-/*Line 107 - 'AtomFormField.js' */                    AtomBinder.refreshValue(this, "isValid");
-/*Line 108 - 'AtomFormField.js' */                }
+/*Line 88 - 'AtomFormField.js' */                        return errors;
+/*Line 89 - 'AtomFormField.js' */                    }
+/*Line 90 - 'AtomFormField.js' */                    var a = {};
+/*Line 91 - 'AtomFormField.js' */                    if (this._required) {
+/*Line 92 - 'AtomFormField.js' */                        a["atom-required"] = { msg: this.get_requiredMessage() };
+/*Line 93 - 'AtomFormField.js' */                    }
+/*Line 94 - 'AtomFormField.js' */                    if (this._dataType) {
+/*Line 95 - 'AtomFormField.js' */                        a["atom-data-type"] = { value: this._dataType, msg: this.get_invalidMessage() };
+/*Line 96 - 'AtomFormField.js' */                    }
+/*Line 97 - 'AtomFormField.js' */                    if (this._regex) {
+/*Line 98 - 'AtomFormField.js' */                        a["atom-regex"] = { value: this._regex, msg: this.get_invalidMessage() };
+/*Line 99 - 'AtomFormField.js' */                    }
+/*Line 100 - 'AtomFormField.js' */                    var error = getInputError(e, a, this._fieldValue);
+/*Line 101 - 'AtomFormField.js' */                    if (error) {
+/*Line 102 - 'AtomFormField.js' */                        this.set_error(error.label);
+/*Line 103 - 'AtomFormField.js' */                        errors.push({ label: error, value: e });
+/*Line 104 - 'AtomFormField.js' */                        this._isValid = false;
+/*Line 105 - 'AtomFormField.js' */                    } else {
+/*Line 106 - 'AtomFormField.js' */                        this._isValid = true;
+/*Line 107 - 'AtomFormField.js' */                    }
+/*Line 108 - 'AtomFormField.js' */                    AtomBinder.refreshValue(this, "isValid");
+/*Line 109 - 'AtomFormField.js' */                }
                 
-/*Line 110 - 'AtomFormField.js' */                if (errors.length)
-/*Line 111 - 'AtomFormField.js' */                    return errors;
-/*Line 112 - 'AtomFormField.js' */                return null;
-/*Line 113 - 'AtomFormField.js' */            },
-/*Line 114 - 'AtomFormField.js' */            clearInputErrors: function () {
-/*Line 115 - 'AtomFormField.js' */                this._error = null;
-/*Line 116 - 'AtomFormField.js' */                this._isValid = true;
-/*Line 117 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "error");
-/*Line 118 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "isValid");
-/*Line 119 - 'AtomFormField.js' */            },
+/*Line 111 - 'AtomFormField.js' */                if (errors.length)
+/*Line 112 - 'AtomFormField.js' */                    return errors;
+/*Line 113 - 'AtomFormField.js' */                return null;
+/*Line 114 - 'AtomFormField.js' */            },
+/*Line 115 - 'AtomFormField.js' */            clearInputErrors: function () {
+/*Line 116 - 'AtomFormField.js' */                this._error = null;
+/*Line 117 - 'AtomFormField.js' */                this._isValid = true;
+/*Line 118 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "error");
+/*Line 119 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "isValid");
+/*Line 120 - 'AtomFormField.js' */            },
 
-/*Line 121 - 'AtomFormField.js' */            validateValue: function (v) {
-/*Line 122 - 'AtomFormField.js' */                if (this._required) {
-/*Line 123 - 'AtomFormField.js' */                    if (!v) {
-/*Line 124 - 'AtomFormField.js' */                        AtomBinder.setValue(this, "error", this._requiredMessage);
-/*Line 125 - 'AtomFormField.js' */                        this._isValid = false;
-/*Line 126 - 'AtomFormField.js' */                        return;
-/*Line 127 - 'AtomFormField.js' */                    }
-/*Line 128 - 'AtomFormField.js' */                } else {
-/*Line 129 - 'AtomFormField.js' */                    // if value is not required
-/*Line 130 - 'AtomFormField.js' */                    // and if value is empty
-/*Line 131 - 'AtomFormField.js' */                    // it is a valid value
-/*Line 132 - 'AtomFormField.js' */                    if (!v) {
-/*Line 133 - 'AtomFormField.js' */                        this._isValid = true;
-/*Line 134 - 'AtomFormField.js' */                        return;
-/*Line 135 - 'AtomFormField.js' */                    }
-/*Line 136 - 'AtomFormField.js' */                }
+/*Line 122 - 'AtomFormField.js' */            validateValue: function (v) {
+/*Line 123 - 'AtomFormField.js' */                if (this._required) {
+/*Line 124 - 'AtomFormField.js' */                    if (!v) {
+/*Line 125 - 'AtomFormField.js' */                        AtomBinder.setValue(this, "error", this._requiredMessage);
+/*Line 126 - 'AtomFormField.js' */                        this._isValid = false;
+/*Line 127 - 'AtomFormField.js' */                        return;
+/*Line 128 - 'AtomFormField.js' */                    }
+/*Line 129 - 'AtomFormField.js' */                } else {
+/*Line 130 - 'AtomFormField.js' */                    // if value is not required
+/*Line 131 - 'AtomFormField.js' */                    // and if value is empty
+/*Line 132 - 'AtomFormField.js' */                    // it is a valid value
+/*Line 133 - 'AtomFormField.js' */                    if (!v) {
+/*Line 134 - 'AtomFormField.js' */                        this._isValid = true;
+/*Line 135 - 'AtomFormField.js' */                        return;
+/*Line 136 - 'AtomFormField.js' */                    }
+/*Line 137 - 'AtomFormField.js' */                }
 
-/*Line 138 - 'AtomFormField.js' */                var re = null;
+/*Line 139 - 'AtomFormField.js' */                var re = null;
 
-/*Line 140 - 'AtomFormField.js' */                if (/email/gi.test(this._dataType)) {
-/*Line 141 - 'AtomFormField.js' */                    re = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-/*Line 142 - 'AtomFormField.js' */                } else {
-/*Line 143 - 'AtomFormField.js' */                    if (this._regex) {
-/*Line 144 - 'AtomFormField.js' */                        re = eval("(" + this._regex + ")");
-/*Line 145 - 'AtomFormField.js' */                    }
-/*Line 146 - 'AtomFormField.js' */                }
+/*Line 141 - 'AtomFormField.js' */                if (/email/gi.test(this._dataType)) {
+/*Line 142 - 'AtomFormField.js' */                    re = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+/*Line 143 - 'AtomFormField.js' */                } else {
+/*Line 144 - 'AtomFormField.js' */                    if (this._regex) {
+/*Line 145 - 'AtomFormField.js' */                        re = eval("(" + this._regex + ")");
+/*Line 146 - 'AtomFormField.js' */                    }
+/*Line 147 - 'AtomFormField.js' */                }
 
-/*Line 148 - 'AtomFormField.js' */                if (re) {
-/*Line 149 - 'AtomFormField.js' */                    if (!re.test(v)) {
-/*Line 150 - 'AtomFormField.js' */                        AtomBinder.setValue(this, "error", this._invalidMessage);
-/*Line 151 - 'AtomFormField.js' */                        this._isValid = false;
-/*Line 152 - 'AtomFormField.js' */                        return;
-/*Line 153 - 'AtomFormField.js' */                    }
-/*Line 154 - 'AtomFormField.js' */                }
-/*Line 155 - 'AtomFormField.js' */            },
-/*Line 156 - 'AtomFormField.js' */            validate: function () {
-/*Line 157 - 'AtomFormField.js' */                this._validate = true;
-/*Line 158 - 'AtomFormField.js' */                if (!(this._required || this._regex || this._dataType))
-/*Line 159 - 'AtomFormField.js' */                    return this._isValid === undefined ? true : this._isValid;
+/*Line 149 - 'AtomFormField.js' */                if (re) {
+/*Line 150 - 'AtomFormField.js' */                    if (!re.test(v)) {
+/*Line 151 - 'AtomFormField.js' */                        AtomBinder.setValue(this, "error", this._invalidMessage);
+/*Line 152 - 'AtomFormField.js' */                        this._isValid = false;
+/*Line 153 - 'AtomFormField.js' */                        return;
+/*Line 154 - 'AtomFormField.js' */                    }
+/*Line 155 - 'AtomFormField.js' */                }
+/*Line 156 - 'AtomFormField.js' */            },
+/*Line 157 - 'AtomFormField.js' */            validate: function () {
+/*Line 158 - 'AtomFormField.js' */                this._validate = true;
+/*Line 159 - 'AtomFormField.js' */                if (!(this._required || this._regex || this._dataType))
+/*Line 160 - 'AtomFormField.js' */                    return this._isValid === undefined ? true : this._isValid;
 
 
 
-/*Line 163 - 'AtomFormField.js' */                if (this._isValid) {
-/*Line 164 - 'AtomFormField.js' */                    AtomBinder.setValue(this, "error", "");
-/*Line 165 - 'AtomFormField.js' */                    if (this._isValidSet) {
-/*Line 166 - 'AtomFormField.js' */                        return true;
-/*Line 167 - 'AtomFormField.js' */                    }
-/*Line 168 - 'AtomFormField.js' */                }
+/*Line 164 - 'AtomFormField.js' */                if (this._isValid) {
+/*Line 165 - 'AtomFormField.js' */                    AtomBinder.setValue(this, "error", "");
+/*Line 166 - 'AtomFormField.js' */                    if (this._isValidSet) {
+/*Line 167 - 'AtomFormField.js' */                        return true;
+/*Line 168 - 'AtomFormField.js' */                    }
+/*Line 169 - 'AtomFormField.js' */                }
 
-/*Line 170 - 'AtomFormField.js' */                this._isValid = true;
+/*Line 171 - 'AtomFormField.js' */                this._isValid = true;
 
-/*Line 172 - 'AtomFormField.js' */                if (this._fieldValue !== undefined) {
-/*Line 173 - 'AtomFormField.js' */                    this.validateValue(this._fieldValue);
-/*Line 174 - 'AtomFormField.js' */                } else {
-/*Line 175 - 'AtomFormField.js' */                    // check validity..
-/*Line 176 - 'AtomFormField.js' */                    this.validateChildren(this._element);
-/*Line 177 - 'AtomFormField.js' */                }
-/*Line 178 - 'AtomFormField.js' */                if (this._isValid) {
-/*Line 179 - 'AtomFormField.js' */                    AtomBinder.setValue(this, "error", "");
-/*Line 180 - 'AtomFormField.js' */                }
-/*Line 181 - 'AtomFormField.js' */                return this._isValid;
-/*Line 182 - 'AtomFormField.js' */            },
-/*Line 183 - 'AtomFormField.js' */            onCreated: function () {
-/*Line 184 - 'AtomFormField.js' */                this.setup();
-/*Line 185 - 'AtomFormField.js' */            },
-/*Line 186 - 'AtomFormField.js' */            onFocusOut: function () {
-/*Line 187 - 'AtomFormField.js' */                this._validate = true;
-/*Line 188 - 'AtomFormField.js' */                this.validate();
-/*Line 189 - 'AtomFormField.js' */            },
-/*Line 190 - 'AtomFormField.js' */            setup: function () {
-/*Line 191 - 'AtomFormField.js' */                if (!this._created)
-/*Line 192 - 'AtomFormField.js' */                    return;
+/*Line 173 - 'AtomFormField.js' */                if (this._fieldValue !== undefined) {
+/*Line 174 - 'AtomFormField.js' */                    this.validateValue(this._fieldValue);
+/*Line 175 - 'AtomFormField.js' */                } else {
+/*Line 176 - 'AtomFormField.js' */                    // check validity..
+/*Line 177 - 'AtomFormField.js' */                    this.validateChildren(this._element);
+/*Line 178 - 'AtomFormField.js' */                }
+/*Line 179 - 'AtomFormField.js' */                if (this._isValid) {
+/*Line 180 - 'AtomFormField.js' */                    AtomBinder.setValue(this, "error", "");
+/*Line 181 - 'AtomFormField.js' */                }
+/*Line 182 - 'AtomFormField.js' */                return this._isValid;
+/*Line 183 - 'AtomFormField.js' */            },
+/*Line 184 - 'AtomFormField.js' */            onCreated: function () {
+/*Line 185 - 'AtomFormField.js' */                this.setup();
+/*Line 186 - 'AtomFormField.js' */            },
+/*Line 187 - 'AtomFormField.js' */            onFocusOut: function () {
+/*Line 188 - 'AtomFormField.js' */                this._validate = true;
+/*Line 189 - 'AtomFormField.js' */                this.validate();
+/*Line 190 - 'AtomFormField.js' */            },
+/*Line 191 - 'AtomFormField.js' */            setup: function () {
+/*Line 192 - 'AtomFormField.js' */                if (!this._created)
+/*Line 193 - 'AtomFormField.js' */                    return;
 
-/*Line 194 - 'AtomFormField.js' */                // find two way bindings...
-/*Line 195 - 'AtomFormField.js' */                var e = this._element;
+/*Line 195 - 'AtomFormField.js' */                // find two way bindings...
+/*Line 196 - 'AtomFormField.js' */                var e = this._element;
 
-/*Line 197 - 'AtomFormField.js' */                if (this._contentPresenter) {
-/*Line 198 - 'AtomFormField.js' */                    this._contentPresenter.appendChild(this._element.contentElement);
-/*Line 199 - 'AtomFormField.js' */                }
+/*Line 198 - 'AtomFormField.js' */                if (this._contentPresenter) {
+/*Line 199 - 'AtomFormField.js' */                    this._contentPresenter.appendChild(this._element.contentElement);
+/*Line 200 - 'AtomFormField.js' */                }
 
-/*Line 201 - 'AtomFormField.js' */                var ae = new AtomEnumerator($(e).find("input,select,textarea"));
-/*Line 202 - 'AtomFormField.js' */                while (ae.next()) {
-/*Line 203 - 'AtomFormField.js' */                    var item = ae.current();
-/*Line 204 - 'AtomFormField.js' */                    this.bindEvent(item, "blur", "onFocusOut");
-/*Line 205 - 'AtomFormField.js' */                    this.bindEvent(item, "change", "onFocusOut");
-/*Line 206 - 'AtomFormField.js' */                }
+/*Line 202 - 'AtomFormField.js' */                var ae = new AtomEnumerator($(e).find("input,select,textarea"));
+/*Line 203 - 'AtomFormField.js' */                while (ae.next()) {
+/*Line 204 - 'AtomFormField.js' */                    var item = ae.current();
+/*Line 205 - 'AtomFormField.js' */                    this.bindEvent(item, "blur", "onFocusOut");
+/*Line 206 - 'AtomFormField.js' */                    this.bindEvent(item, "change", "onFocusOut");
+/*Line 207 - 'AtomFormField.js' */                }
 
-/*Line 208 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "fieldClass");
-/*Line 209 - 'AtomFormField.js' */            }
-/*Line 210 - 'AtomFormField.js' */        }
-/*Line 211 - 'AtomFormField.js' */    });
-/*Line 212 - 'AtomFormField.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 209 - 'AtomFormField.js' */                AtomBinder.refreshValue(this, "fieldClass");
+/*Line 210 - 'AtomFormField.js' */            }
+/*Line 211 - 'AtomFormField.js' */        }
+/*Line 212 - 'AtomFormField.js' */    });
+/*Line 213 - 'AtomFormField.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomFormGrid.js' */
 
 /*Line 2 - 'AtomFormGrid.js' */// http://jsfiddle.net/2yqQF/
