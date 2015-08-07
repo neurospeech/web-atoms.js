@@ -74,6 +74,52 @@
                     }
                 }
             },
+
+            getInputErrors: function () {
+                var errors = [];
+                var e = this._element;
+                if (this._fieldValue === undefined) {
+                    return getInputErrors(e, true);
+                }
+                else {
+                    if (this._isValidSet) {
+                        if (!this._isValid) {
+                            return [{ label: this.get_invalidMessage(), value: e }];
+                        }
+                        return errors;
+                    }
+                    var a = {};
+                    if (this._required) {
+                        a["atom-required"] = { msg: this.get_requiredMessage() };
+                    }
+                    if (this._dataType) {
+                        a["atom-data-type"] = { value: this._dataType, msg: this.get_invalidMessage() };
+                    }
+                    if (this._regex) {
+                        a["atom-regex"] = { value: this._regex, msg: this.get_invalidMessage() };
+                    }
+                    var error = getInputError(e, a, this._fieldValue);
+                    if (error) {
+                        this.set_error(error.label);
+                        errors.push({ label: error, value: e });
+                        this._isValid = false;
+                    } else {
+                        this._isValid = true;
+                    }
+                    AtomBinder.refreshValue(this, "isValid");
+                }
+                
+                if (errors.length)
+                    return errors;
+                return null;
+            },
+            clearInputErrors: function () {
+                this._error = null;
+                this._isValid = true;
+                AtomBinder.refreshValue(this, "error");
+                AtomBinder.refreshValue(this, "isValid");
+            },
+
             validateValue: function (v) {
                 if (this._required) {
                     if (!v) {

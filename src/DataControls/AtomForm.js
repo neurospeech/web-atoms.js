@@ -7,7 +7,7 @@
         start: function () {
             this._success = null;
             this._submit = null;
-            this._error = null;
+            this._errors = null;
             this._attachments = null;
         },
         properties: {
@@ -17,7 +17,8 @@
             postUrl: null,
             postData: null,
             successMessage: null,
-            clearData:false
+            clearData: false,
+            errorTemplate: null
         },
         methods: {
             createFormLayout: function () {
@@ -42,7 +43,21 @@
 
             onSubmit: function () {
 
-                if (!this.isValid()) {
+                //if (!this.isValid()) {
+                //    return;
+                //}
+
+                var errors = getInputErrors(this._element);
+                if (errors.length) {
+                    this.invokeAction({
+                        localWindow: {
+                            path: this.getTemplate("errorTemplate"),
+                            prop: {
+                                data: errors,
+                                title: "Form Errors"
+                            }
+                        }
+                    });
                     return;
                 }
 

@@ -53,3 +53,9 @@ $x.appScope = function (d,v) {
 $x.owner = function (d,v) {
     $x.invoke("owner", d, v);
 }
+
+$x.reveal = function (e) {
+    return function () {
+
+    }
+}

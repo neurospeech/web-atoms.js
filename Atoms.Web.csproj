@@ -946,6 +946,7 @@
     <Content Include="src\Core\AtomBrowser.js" />
     <Content Include="src\Core\AtomComponent.js" />
     <Content Include="src\Core\AtomDispatcher.js" />
+    <Content Include="src\Core\AtomErrors.js" />
     <Content Include="src\Core\AtomEvaluator.js" />
     <Content Include="src\Core\AtomPopup.js" />
     <Content Include="src\Core\AtomQuery.js" />
@@ -957,6 +958,7 @@
     <Content Include="src\Core\ZZZZZInitializer.js" />
     <Content Include="src\DataControls\AtomAutoPostForm.js" />
     <Content Include="src\DataControls\AtomDataGrid.js" />
+    <Content Include="src\DataControls\AtomForm.errorTemplate.html" />
     <Content Include="src\DataControls\AtomForm.js" />
     <Content Include="src\DataControls\AtomFormField.js" />
     <Content Include="src\DataControls\AtomFormGrid.css" />
