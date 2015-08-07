@@ -243,6 +243,9 @@ window.AtomProperties = AtomProperties;
                     runAction.call(this,action, evt);
                 } catch (e) {
                     alert(e);
+                    if (console.error) {
+                        console.error(e);
+                    }
                 }
             },
 
