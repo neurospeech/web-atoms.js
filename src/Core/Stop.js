@@ -2,6 +2,7 @@
 
 window.$x = $x;
 
+
 $x.stop = function stop(test, msg) {
     return function () {
         if (test)

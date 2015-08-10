@@ -44,11 +44,25 @@
                 this.validate();
             },
             set_isValid: function (v) {
+                //this._isValid = v;
+                //this._isValidSet = true;
+                //if (!this._validate)
+                //    return;
+                //this.validate();
+                var self = this;
                 this._isValid = v;
-                this._isValidSet = true;
-                if (!this._validate)
-                    return;
-                this.validate();
+                AtomProperties.validate({
+                    value: !v,
+                    key: "valid",
+                    valueFunction: function () {
+                        return self.get_isValid();
+                    },
+                    validator: function (v) {
+                        return v ? "" : "Invalid";
+                    },
+                    control: this,
+                    element: this._element
+                });
             },
             set_regex: function (v) {
                 this._regex = v;

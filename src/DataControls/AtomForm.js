@@ -47,8 +47,8 @@
                 //    return;
                 //}
 
-                var errors = getInputErrors(this._element);
-                if (errors.length) {
+                var errors = this.get_errors();
+                if (errors && errors.length) {
                     this.invokeAction({
                         localWindow: {
                             path: this.getTemplate("errorTemplate"),

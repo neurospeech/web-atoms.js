@@ -6,7 +6,6 @@
 /// <reference path="childenumerator.js" />
 /// <reference path="AtomQuery.js" />
 /// <reference path="AtomUI.js" />
-/// <reference path="AtomErrors.js" />
 
 Array.prototype.enumerator = function () {
     return new AtomEnumerator(this);

@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Core/WebAtoms.Core.js" />
-/// <reference path="../Data/AtomBinding.js" />
 /// <reference path="../Core/AtomDispatcher.js" />
+/// <reference path="../Data/AtomErrors.js" />
 /// <reference path="../Core/AtomUIComponent.js" />
 
 
@@ -99,6 +99,107 @@ var AtomProperties = {
         element.innerHTML = "";
         var a = document.createTextNode(value);
         element.appendChild(a);
+    },
+    error: function (element, value) {
+        var f = value;
+        if (typeof f != 'function') {
+            f = function () {
+                return value;
+            }
+        }
+
+        errors.set(element, "error",f);
+    },
+    validate: function (p) {
+        var ctrl = p.control;
+        var element = p.element;
+        var key = p.key;
+        var value = p.value;
+        var eventName = p.eventName;
+        var valueFunction = p.valueFunction;
+        var validatorFunction = function () {
+            var v = valueFunction.call(ctrl,element);
+            return p.validator(v)
+        };
+
+        if (value) {
+            errors.set(element, key, validatorFunction);
+            if (eventName) {
+                ctrl.bindEvent(element, eventName, function () {
+                    errors.reset(element);
+                }, key);
+            }
+        } else {
+            errors.set(element, key, null);
+            if (eventName) {
+                ctrl.unbindEvent(element, eventName, null, key);
+            }
+        }
+    },
+    required: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            return v ? "" : "Required";
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            key: "required",
+            value: value,
+            eventName: "change",
+            valueFunction: vf,
+            validator: validator
+        });
+    },
+    regex: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            var r = value;
+            if (typeof r == 'string' || r.constructor == String) {
+                if (!(/^\//.test(r) || /(\/)|(\/i)$/.test(r))) {
+                    r = "/" + r + "/";
+                }
+                r = eval(r);
+            }
+            return r.test(v) ? "" : "Invalid";
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            value: value,
+            key: "regex",
+            eventName: "change",
+            valueFunction: vf,
+            validator: validator
+        });
+
+    },
+    dataType: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            var r = null;
+            var msg = "Invalid";
+            if (/email/i.test(value)) {
+                r = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                msg = "Invalid email";
+            }
+            return r.test(v) ? "" : msg;
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            value: value,
+            key: "dataType",
+            eventName: "change",
+            valueFunction: vf,
+            validator: validator
+        });
     },
     mask: function (element, value) {
         if (value) {
@@ -281,6 +382,10 @@ window.AtomProperties = AtomProperties;
                 var ab = new WebAtoms.AtomBinding(target, element, key, path, twoWays, jq, valueFunction, events);
                 this.bindings.push(ab);
                 ab.setup();
+            },
+
+            get_errors: function () {
+                return window.errors.get(this._element, true);
             },
 
             get_atomParent: function (element) {
@@ -691,7 +796,7 @@ window.AtomProperties = AtomProperties;
 
                 var f = AtomProperties[key] || AtomProperties.any;
                 if (f) {
-                    f(element || this._element, value, key);
+                    f.call(this, element || this._element, value, key);
                 }
 
             },
