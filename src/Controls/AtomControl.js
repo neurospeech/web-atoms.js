@@ -25,6 +25,7 @@ var AtomBinders = {
         }
         value.push(Atom);
         value.push(AtomPromise);
+        value.push($x);
         value = be.method.apply(null, value);
 
         ctrl.setLocalValue(key, value, element);

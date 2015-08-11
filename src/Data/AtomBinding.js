@@ -179,6 +179,7 @@
                 if (this.vf) {
                     value.push(Atom);
                     value.push(AtomPromise);
+                    value.push($x);
                     value = this.vf.apply(this, value);
                 }
 
