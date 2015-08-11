@@ -55,8 +55,59 @@ $x.owner = function (d,v) {
     $x.invoke("owner", d, v);
 }
 
+$x.if = function (c, r) {
+    if (c) return r;
+    return null;
+}
+
+$x.window = function (path, props, data, next) {
+    var a = path;
+    var self = this;
+    if (arguments.length > 1) {
+        a = {
+            path: path,
+            prop: props,
+            next: next
+        };
+        if (data) {
+            var p = a.prop || {};
+            p.data = data;
+            a.prop = p;
+        }
+    }
+    return function () {
+        WebAtoms.AtomWindow.openNewWindow({
+            url: a,
+            scope: this.get_scope(),
+            opener: this
+        });
+    }
+};
+
+
+$x.localWindow = function (path, props, scope, next) {
+    debugger;
+    var a = path;
+    if (arguments.length > 1) {
+        a = {
+            path: path,
+            prop: props,
+            next: next,
+            scope: scope
+        };
+    }
+    return function () {
+        WebAtoms.AtomWindow.openNewWindow({
+            url: a,
+            scope: this.get_scope(),
+            localScope: true,
+            opener: this
+        });
+    }
+};
+
 $x.reveal = function (e) {
     return function () {
 
     }
-}
+};

@@ -35,14 +35,12 @@
             type="password"
             atom-label="(Again) Password:"
             atom-value="$[data.Password2]"
-            atom-is-valid="[$data.Password == $data.Password2]"
-            atom-error="[$owner.isValid ? '' : 'Passwords do not match']"
-            />
+            atom-invalid="[$x.if( $data.Password != $data.Password2 , 'Passwords do not match')]" />
 
         <span 
             atom-label="Name:"
             atom-required="true"
-            atom-is-valid="[$data.FirstName && $data.LastName]">
+            atom-invalid="[$x.if(!$data.FirstName || !$data.LastName, 'Please enter first name and last name')]">
             <input 
                 placeholder="First Name:"
                 type="text" 

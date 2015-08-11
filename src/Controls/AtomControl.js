@@ -119,21 +119,52 @@ var AtomProperties = {
         var valueFunction = p.valueFunction;
         var validatorFunction = function () {
             var v = valueFunction.call(ctrl,element);
-            return p.validator(v)
+            return p.validator(v);
         };
 
         if (value) {
             errors.set(element, key, validatorFunction);
             if (eventName) {
-                ctrl.bindEvent(element, eventName, function () {
-                    errors.reset(element);
-                }, key);
+                var ve = Atom.query(eventName.split(','));
+                while (ve.next()) {
+                    eventName = ve.current();
+                    ctrl.bindEvent(element, eventName, function () {
+                        errors.reset(element);
+                    }, key);
+                }
             }
         } else {
             errors.set(element, key, null);
             if (eventName) {
-                ctrl.unbindEvent(element, eventName, null, key);
+                var ve = Atom.query(eventName.split(','));
+                while (ve.next()) {
+                    eventName = ve.current();
+                    ctrl.unbindEvent(element, eventName, null, key);
+                }
             }
+        }
+    },
+    invalid: function (element, v) {
+        var self = this;
+        AtomProperties.validate({
+            value: v,
+            key: "invalid",
+            valueFunction: function () {
+                return v;
+            },
+            validator: function (v) {
+                if (v) {
+                    if ($.isArray(v)) {
+                        return v.join(",");
+                    }
+                }
+                return v;
+            },
+            control: this,
+            element: element
+        });
+        if (this._created) {
+            errors.reset(element);
         }
     },
     required: function (element, value) {
@@ -141,14 +172,14 @@ var AtomProperties = {
             return $(element).val();
         };
         var validator = function (v) {
-            return v ? "" : "Required";
+            return v ? null : "Required";
         };
         AtomProperties.validate({
             control: this,
             element: element,
             key: "required",
             value: value,
-            eventName: "change",
+            eventName: "change,blur",
             valueFunction: vf,
             validator: validator
         });
@@ -165,14 +196,14 @@ var AtomProperties = {
                 }
                 r = eval(r);
             }
-            return r.test(v) ? "" : "Invalid";
+            return r.test(v) ? null : "Invalid";
         };
         AtomProperties.validate({
             control: this,
             element: element,
             value: value,
             key: "regex",
-            eventName: "change",
+            eventName: "change,blur",
             valueFunction: vf,
             validator: validator
         });
@@ -189,14 +220,14 @@ var AtomProperties = {
                 r = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 msg = "Invalid email";
             }
-            return r.test(v) ? "" : msg;
+            return r.test(v) ? null : msg ;
         };
         AtomProperties.validate({
             control: this,
             element: element,
             value: value,
             key: "dataType",
-            eventName: "change",
+            eventName: "change,blur",
             valueFunction: vf,
             validator: validator
         });
@@ -387,7 +418,7 @@ window.AtomProperties = AtomProperties;
             get_errors: function () {
                 return window.errors.get(this._element, true);
             },
-
+            
             get_atomParent: function (element) {
                 if (element == null) {
                     if (this._element._logicalParent || this._element.parentNode)
@@ -928,10 +959,18 @@ window.AtomProperties = AtomProperties;
                     return;
                 }
 
+                e = this._element;
+
                 this._disposed = true;
-                this.disposeChildren(this._element);
+                this.disposeChildren(e);
                 this.clearBinding();
                 this.bindings.length = 0;
+
+                var v = e.atomValidator;
+                if (v) {
+                    v.dispose();
+                    e.atomValidator = undefined;
+                }
                 base.dispose.apply(this, arguments);
             },
 

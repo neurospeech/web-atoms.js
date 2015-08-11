@@ -1,86 +1,116 @@
 ﻿/// <reference path="AtomBinding.js" />
 
-var AtomError = function (e) {
-    this.value = e;
+var AtomValidator = (function (window) {
+    return createClass({
+        name: "AtomValidator",
+        start: function (e) {
+            this.value = e;
+            this.list = {};
+            this.errors = [];
+        },
+        methods: {
+            dispose: function () {
+                this.value = null;
+                this.errors = null;
+                this.list = null;
+            },
+            set: function (k,v) {
+                this.list[k] = v;
+                //this.errors = null;
+            },
+            reset: function () {
+                this.errors = null;
+                this.invoke(true);
+                this.refresh();
+            },
+            clear: function () {
+                this.errors = [];
+            },
+            invoke: function (force) {
 
-    this.list = {};
+                if (this.refreshing)
+                    return this.errors;
 
-    this.errors = [];
+                if (!force && this.errors)
+                    return this.errors;
 
-    this.set = function (k, v) {
-        this.list[k] = v;
-        this.errors = null;
-    };
+                var e = [];
 
-    this.reset = function () {
-        this.errors = null;
-        this.invoke(true);
-    };
+                var v ;
 
-    this.clear = function () {
-        this.errors = [];
-    };
-
-    this.invoke = function (force) {
-
-        if (!force && this.errors)
-            return this.errors;
-
-        var e = [];
-        for (var i in this.list) {
-            var v = this.list[i];
-            if (!v) continue;
-            v = v();
-            if (v) {
-                e.push(v);
+                var ve = this.list.invalid;
+                if (ve !== undefined) {
+                    if (!ve) {
+                        this.errors = e;
+                        return e;
+                    }
+                    v = ve();
+                    if (v) {
+                        if ($.isArray(v)) {
+                            e = e.concat(v);
+                        } else {
+                            e.push(v);
+                        }
+                    }
+                    this.errors = e;
+                    return e;
+                }
+                else {
+                    for (var i in this.list) {
+                        v = this.list[i];
+                        if (!v) continue;
+                        v = v();
+                        if (v) {
+                            if ($.isArray(v)) {
+                                e = e.concat(v);
+                            } else {
+                                e.push(v);
+                            }
+                        }
+                    }
+                }
+                if (e.length) {
+                    this.errors = e;
+                    return e;
+                }
+                return null;
+            },
+            refresh: function (e) {
+                if (this.refreshing)
+                    return;
+                this.refreshing = true;
+                try {
+                    e = e || this.value;
+                    var ac = e.atomControl;
+                    if (ac) {
+                        AtomBinder.refreshValue(ac, "errors");
+                    }
+                } finally {
+                    this.refreshing = false;
+                }
+                var p = e._logicalParent || e.parentNode;
+                if (p) {
+                    this.refresh(p);
+                }
             }
         }
-        if (e.length) {
-            this.errors = e;
-            this.refresh();
-            return e;
-        }
-        this.refresh();
-        return null;
-    };
-
-    this.refresh = function (e) {
-        if (this.refreshing)
-            return;
-        this.refreshing = true;
-        try {
-            e = e || this.value;
-            var ac = e.atomControl;
-            if (ac) {
-                AtomBinder.refreshValue(ac, "errors");
-            }
-        } finally {
-            this.refreshing = false;
-        }
-        var p = e.parent;
-        if (p) {
-            this.refresh(p);
-        }
-    };
-
-
-};
+    });
+})(window);
 
 
 
 // setup window errors array
 window.errors = {
-    list: [],
     set: function (e, key, error) {
-        var item = Atom.query(this.list).firstOrDefault({value: e});
+        var item = e.atomValidator;
         if (!item) {
-            item = new AtomError(e);
-            this.list.push(item);
+            item = new AtomValidator(e);
+            e.atomValidator = item;
         }
         item.set(key, error);
     },
     clear: function (e, r) {
-        var item = Atom.query(this.list).firstOrDefault({ value: e });
+        var item = e.atomValidator;
         if (item) {
             item.clear();
         }
@@ -94,15 +124,26 @@ window.errors = {
     },
     get: function (e, r) {
         var list = [];
-        var item = Atom.query(this.list).firstOrDefault({ value: e });
+        var item = e.atomValidator;
         if (item) {
             var rv = item.invoke();
             if (rv && rv.length) {
-                list = list.filter(function (a) { return a; }).concat(rv.map(function (a) { return { label:a, value: e  } }) );
+                list = list.concat(
+                    rv.filter(function (a) {
+                        return a;
+                    }).map(function (a) {
+                        return { label: a, value: e }
+                    })
+                );
             }
             if (list && list.length)
                 return list;
         }
+
+        //if (e.checkValidity !== undefined) {
+            
+        //}
+
         if (r) {
             var ce = new ChildEnumerator(e);
             while (ce.next()) {
@@ -112,24 +153,30 @@ window.errors = {
                 }
             }
         }
-        if (list && list.length)
-            return list;
-        return undefined;
+        return list;
     },
     refresh: function (e) {
-        var item = Atom.query(this.list).firstOrDefault({ value: e });
+        var item = e.atomValidator;
         if (item) {
             item.refresh();
         }
     },
     reset: function (e) {
-        var item = Atom.query(this.list).firstOrDefault({ value: e });
+        var item = e.atomValidator;
         if (item) {
             item.reset();
         }
-        var p = e.parent;
-        if (p) {
-            this.reset(p);
+    },
+    validate: function (e) {
+        var item = e.atomValidator;
+        if (item) {
+            item.reset();
+            return;
+        }
+        var ce = new ChildEnumerator(e);
+        while (ce.next()) {
+            var child = ce.current();
+            this.validate(child);
         }
     }
 };
