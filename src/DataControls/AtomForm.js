@@ -102,13 +102,13 @@
                 if (e.target && e.target.nodeName && /textarea/gi.test(e.target.nodeName))
                     return;
                 if (e.keyCode == 13) {
-                    var _this = this;
+                    var self = this;
                     // fix for IE 11, IE 11 does not fire Change event on enter
                     if (/input/gi.test(e.target.nodeName)) {
                         $(e.target).change();
                     }
                     WebAtoms.dispatcher.callLater(function () {
-                        _this.onSubmit();
+                        self.onSubmit();
                     });
                 }
             },
@@ -120,14 +120,14 @@
             init: function () {
                 baseType.init.call(this);
 
-                var _this = this;
+                var self = this;
                 this._success = function () {
-                    _this.onSuccess.apply(_this, arguments);
+                    self.onSuccess.apply(self, arguments);
                 };
 
                 this._submit = function () {
                     WebAtoms.dispatcher.callLater(function () {
-                        _this.onSubmit.apply(_this, arguments);
+                        self.onSubmit.apply(self, arguments);
                     });
                 };
 
@@ -135,10 +135,18 @@
 
                 this.submitCommand = this._submit;
 
-                this.bindEvent(element, "keyup", "onKeyUp");
+                if (/form/i.test(this._element.nodeName)) {
+                    this.bindEvent(element, "submit", function (e) {
+                        if (e) { e.preventDefault(); }
+                        self.submitCommand();
+                        return false;
+                    });
+                }else{
+                    this.bindEvent(element, "keyup", "onKeyUp");
 
-                $(element).find("input[type=submit]").bind("click", null, this._submit);
-                $(element).find("button[type=submit]").bind("click", null, this._submit);
+                    $(element).find("input[type=submit]").bind("click", null, this._submit);
+                    $(element).find("button[type=submit]").bind("click", null, this._submit);
+                }
 
 
 

@@ -2501,9 +2501,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 15 - 'AtomEvaluator.js' */        if (be)
 /*Line 16 - 'AtomEvaluator.js' */            return be;
 
-/*Line 18 - 'AtomEvaluator.js' */        var regex = /(?:(\$)(window|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
+/*Line 18 - 'AtomEvaluator.js' */        var regex = /(?:(\$)(window|appScope|scope|data|owner|localScope|templateParent))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
 
-/*Line 20 - 'AtomEvaluator.js' */        var keywords = /(window|appScope|scope|data|owner|localScope)/gi;
+/*Line 20 - 'AtomEvaluator.js' */        var keywords = /(window|appScope|scope|data|owner|localScope|templateParent)/gi;
 
 /*Line 22 - 'AtomEvaluator.js' */        var path = [];
 /*Line 23 - 'AtomEvaluator.js' */        var vars = [];
@@ -8932,13 +8932,13 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 101 - 'AtomForm.js' */                if (e.target && e.target.nodeName && /textarea/gi.test(e.target.nodeName))
 /*Line 102 - 'AtomForm.js' */                    return;
 /*Line 103 - 'AtomForm.js' */                if (e.keyCode == 13) {
-/*Line 104 - 'AtomForm.js' */                    var _this = this;
+/*Line 104 - 'AtomForm.js' */                    var self = this;
 /*Line 105 - 'AtomForm.js' */                    // fix for IE 11, IE 11 does not fire Change event on enter
 /*Line 106 - 'AtomForm.js' */                    if (/input/gi.test(e.target.nodeName)) {
 /*Line 107 - 'AtomForm.js' */                        $(e.target).change();
 /*Line 108 - 'AtomForm.js' */                    }
 /*Line 109 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
-/*Line 110 - 'AtomForm.js' */                        _this.onSubmit();
+/*Line 110 - 'AtomForm.js' */                        self.onSubmit();
 /*Line 111 - 'AtomForm.js' */                    });
 /*Line 112 - 'AtomForm.js' */                }
 /*Line 113 - 'AtomForm.js' */            },
@@ -8950,14 +8950,14 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 119 - 'AtomForm.js' */            init: function () {
 /*Line 120 - 'AtomForm.js' */                baseType.init.call(this);
 
-/*Line 122 - 'AtomForm.js' */                var _this = this;
+/*Line 122 - 'AtomForm.js' */                var self = this;
 /*Line 123 - 'AtomForm.js' */                this._success = function () {
-/*Line 124 - 'AtomForm.js' */                    _this.onSuccess.apply(_this, arguments);
+/*Line 124 - 'AtomForm.js' */                    self.onSuccess.apply(self, arguments);
 /*Line 125 - 'AtomForm.js' */                };
 
 /*Line 127 - 'AtomForm.js' */                this._submit = function () {
 /*Line 128 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
-/*Line 129 - 'AtomForm.js' */                        _this.onSubmit.apply(_this, arguments);
+/*Line 129 - 'AtomForm.js' */                        self.onSubmit.apply(self, arguments);
 /*Line 130 - 'AtomForm.js' */                    });
 /*Line 131 - 'AtomForm.js' */                };
 
@@ -8965,18 +8965,26 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 135 - 'AtomForm.js' */                this.submitCommand = this._submit;
 
-/*Line 137 - 'AtomForm.js' */                this.bindEvent(element, "keyup", "onKeyUp");
+/*Line 137 - 'AtomForm.js' */                if (/form/i.test(this._element.nodeName)) {
+/*Line 138 - 'AtomForm.js' */                    this.bindEvent(element, "submit", function (e) {
+/*Line 139 - 'AtomForm.js' */                        if (e) { e.preventDefault(); }
+/*Line 140 - 'AtomForm.js' */                        self.submitCommand();
+/*Line 141 - 'AtomForm.js' */                        return false;
+/*Line 142 - 'AtomForm.js' */                    });
+/*Line 143 - 'AtomForm.js' */                }else{
+/*Line 144 - 'AtomForm.js' */                    this.bindEvent(element, "keyup", "onKeyUp");
 
-/*Line 139 - 'AtomForm.js' */                $(element).find("input[type=submit]").bind("click", null, this._submit);
-/*Line 140 - 'AtomForm.js' */                $(element).find("button[type=submit]").bind("click", null, this._submit);
+/*Line 146 - 'AtomForm.js' */                    $(element).find("input[type=submit]").bind("click", null, this._submit);
+/*Line 147 - 'AtomForm.js' */                    $(element).find("button[type=submit]").bind("click", null, this._submit);
+/*Line 148 - 'AtomForm.js' */                }
 
 
 
-/*Line 144 - 'AtomForm.js' */            }
+/*Line 152 - 'AtomForm.js' */            }
 
-/*Line 146 - 'AtomForm.js' */        }
-/*Line 147 - 'AtomForm.js' */    });
-/*Line 148 - 'AtomForm.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 154 - 'AtomForm.js' */        }
+/*Line 155 - 'AtomForm.js' */    });
+/*Line 156 - 'AtomForm.js' */})(WebAtoms.AtomControl.prototype);
 
 /*Line 0 - 'AtomFormLayout.js' */
 
