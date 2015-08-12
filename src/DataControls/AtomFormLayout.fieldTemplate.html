@@ -10,10 +10,10 @@
     </td>
     <td
         class="atom-form-content"
-        atom-class="[$owner.error ? 'atom-data-error' : '']"
+        
         atom-presenter="contentPresenter">
         <span
-            class="atom-form-error"
-            atom-text="[$owner.error || '']"></span>
+            style="background-color:red;color:white; display:inline-block;float:right"
+            atom-text="[Atom.csv($owner.errors,'label') || '']"></span>
     </td>
 </tr>

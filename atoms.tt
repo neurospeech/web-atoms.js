@@ -1,5 +1,5 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
-<#@ output extension=".js" #>
+<#@ output extension=".t.js" #>
 <#@ assembly name="Microsoft.CSharp" #>
 <#@ assembly name="System" #>
 <#@ assembly name="System.Core" #>
@@ -152,14 +152,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 		string txt = this.GenerationEnvironment.ToString();
 
     System.IO.File.WriteAllText(currentDirectory + "\\atoms-debug.js" , txt);
+	System.IO.File.WriteAllText(currentDirectory + "\\atoms.js" , txt);
 
 		
-    Action[] actions= new Action[]{
-        ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),
-        ()=> Minify(currentDirectory, txt,"map", "atoms.min.map")
-    };
+    //Action[] actions= new Action[]{
+    //    ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),
+    //    ()=> Minify(currentDirectory, txt,"map", "atoms.min.map")
+    //};
 
-    System.Threading.Tasks.Parallel.ForEach(actions, a=> a());
+    //System.Threading.Tasks.Parallel.ForEach(actions, a=> a());
         
 
 #><#+

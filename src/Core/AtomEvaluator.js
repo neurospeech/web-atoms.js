@@ -16,9 +16,9 @@ var AtomEvaluator = {
         if (be)
             return be;
 
-        var regex = /(?:(\$)(window|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
+        var regex = /(?:(\$)(window|appScope|scope|data|owner|localScope|templateParent))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
 
-        var keywords = /(window|appScope|scope|data|owner|localScope)/gi;
+        var keywords = /(window|appScope|scope|data|owner|localScope|templateParent)/gi;
 
         var path = [];
         var vars = [];
@@ -66,6 +66,7 @@ var AtomEvaluator = {
 
         vars.push("Atom");
         vars.push("AtomPromise");
+        vars.push("$x");
 
         e = new Function(vars,method);
         this.ecache[k] = e;

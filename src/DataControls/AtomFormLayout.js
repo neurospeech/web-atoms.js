@@ -17,7 +17,8 @@
 
                 var isChildField = false;
 
-                var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
+                //var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
+                var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|field\-(value|visible|class)|error))$/i);
 
                 var at = amap["atom-type"];
                 if (at) {

@@ -93,12 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="atoms-debug.js" />
-    <Content Include="atoms.js">
+    <Content Include="atoms.js" />
+    <Content Include="atoms.min.js">
+      <DependentUpon>atoms.js</DependentUpon>
+    </Content>
+    <Content Include="atoms.t.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
-    <Content Include="atoms.min.js" />
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -852,9 +855,8 @@
     <Content Include="res\share\twitter.png" />
     <Content Include="atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms.js</LastGenOutput>
+      <LastGenOutput>atoms.t.js</LastGenOutput>
     </Content>
-    <Content Include="atoms.min.map" />
     <Content Include="README.md" />
     <Content Include="atoms.min.js.map">
       <DependentUpon>atoms.min.js</DependentUpon>
@@ -957,6 +959,7 @@
     <Content Include="src\Core\ZZZZZInitializer.js" />
     <Content Include="src\DataControls\AtomAutoPostForm.js" />
     <Content Include="src\DataControls\AtomDataGrid.js" />
+    <Content Include="src\DataControls\AtomForm.errorTemplate.html" />
     <Content Include="src\DataControls\AtomForm.js" />
     <Content Include="src\DataControls\AtomFormField.js" />
     <Content Include="src\DataControls\AtomFormGrid.css" />
@@ -970,6 +973,7 @@
     <Content Include="src\DataControls\AtomFormVerticalLayout.js" />
     <Content Include="src\Data\AtomBinding.js" />
     <Content Include="src\Data\AtomBindingHelper.js" />
+    <Content Include="src\Data\AtomErrors.js" />
     <Content Include="src\Data\AtomPromise.js" />
     <Content Include="src\jquery.maskedinput.js" />
     <Content Include="src\Layouts\AtomLayout.js" />

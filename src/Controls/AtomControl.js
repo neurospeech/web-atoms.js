@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Core/WebAtoms.Core.js" />
-/// <reference path="../Data/AtomBinding.js" />
 /// <reference path="../Core/AtomDispatcher.js" />
+/// <reference path="../Data/AtomErrors.js" />
 /// <reference path="../Core/AtomUIComponent.js" />
 
 
@@ -25,6 +25,7 @@ var AtomBinders = {
         }
         value.push(Atom);
         value.push(AtomPromise);
+        value.push($x);
         value = be.method.apply(null, value);
 
         ctrl.setLocalValue(key, value, element);
@@ -99,6 +100,138 @@ var AtomProperties = {
         element.innerHTML = "";
         var a = document.createTextNode(value);
         element.appendChild(a);
+    },
+    error: function (element, value) {
+        var f = value;
+        if (typeof f != 'function') {
+            f = function () {
+                return value;
+            }
+        }
+
+        errors.set(element, "error",f);
+    },
+    validate: function (p) {
+        var ctrl = p.control;
+        var element = p.element;
+        var key = p.key;
+        var value = p.value;
+        var eventName = p.eventName;
+        var valueFunction = p.valueFunction;
+        var validatorFunction = function () {
+            var v = valueFunction.call(ctrl,element);
+            return p.validator(v);
+        };
+
+        if (value) {
+            errors.set(element, key, validatorFunction);
+            if (eventName) {
+                var ve = Atom.query(eventName.split(','));
+                while (ve.next()) {
+                    eventName = ve.current();
+                    ctrl.bindEvent(element, eventName, function () {
+                        errors.reset(element);
+                    }, key);
+                }
+            }
+        } else {
+            errors.set(element, key, null);
+            if (eventName) {
+                var ve = Atom.query(eventName.split(','));
+                while (ve.next()) {
+                    eventName = ve.current();
+                    ctrl.unbindEvent(element, eventName, null, key);
+                }
+            }
+        }
+    },
+    invalid: function (element, v) {
+        var self = this;
+        AtomProperties.validate({
+            value: v,
+            key: "invalid",
+            valueFunction: function () {
+                return v;
+            },
+            validator: function (v) {
+                if (v) {
+                    if ($.isArray(v)) {
+                        return v.join(",");
+                    }
+                }
+                return v;
+            },
+            control: this,
+            element: element
+        });
+        if (this._created) {
+            errors.reset(element);
+        }
+    },
+    required: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            return v ? null : "Required";
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            key: "required",
+            value: value,
+            eventName: "change,blur",
+            valueFunction: vf,
+            validator: validator
+        });
+    },
+    regex: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            var r = value;
+            if (typeof r == 'string' || r.constructor == String) {
+                if (!(/^\//.test(r) || /(\/)|(\/i)$/.test(r))) {
+                    r = "/" + r + "/";
+                }
+                r = eval(r);
+            }
+            return r.test(v) ? null : "Invalid";
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            value: value,
+            key: "regex",
+            eventName: "change,blur",
+            valueFunction: vf,
+            validator: validator
+        });
+
+    },
+    dataType: function (element, value) {
+        var vf = function () {
+            return $(element).val();
+        };
+        var validator = function (v) {
+            var r = null;
+            var msg = "Invalid";
+            if (/email/i.test(value)) {
+                r = /^(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                msg = "Invalid email";
+            }
+            return r.test(v) ? null : msg ;
+        };
+        AtomProperties.validate({
+            control: this,
+            element: element,
+            value: value,
+            key: "dataType",
+            eventName: "change,blur",
+            valueFunction: vf,
+            validator: validator
+        });
     },
     mask: function (element, value) {
         if (value) {
@@ -283,6 +416,10 @@ window.AtomProperties = AtomProperties;
                 ab.setup();
             },
 
+            get_errors: function () {
+                return window.errors.get(this._element, true);
+            },
+            
             get_atomParent: function (element) {
                 if (element == null) {
                     if (this._element._logicalParent || this._element.parentNode)
@@ -691,7 +828,7 @@ window.AtomProperties = AtomProperties;
 
                 var f = AtomProperties[key] || AtomProperties.any;
                 if (f) {
-                    f(element || this._element, value, key);
+                    f.call(this, element || this._element, value, key);
                 }
 
             },
@@ -823,10 +960,18 @@ window.AtomProperties = AtomProperties;
                     return;
                 }
 
+                e = this._element;
+
                 this._disposed = true;
-                this.disposeChildren(this._element);
+                this.disposeChildren(e);
                 this.clearBinding();
                 this.bindings.length = 0;
+
+                var v = e.atomValidator;
+                if (v) {
+                    v.dispose();
+                    e.atomValidator = undefined;
+                }
                 base.dispose.apply(this, arguments);
             },
 
