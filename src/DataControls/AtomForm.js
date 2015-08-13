@@ -51,11 +51,18 @@
 
                 var errors = this.get_errors();
                 if (errors.length) {
+                    var labels = document.getElementsByTagName("label");
                     this.invokeAction({
                         localWindow: {
                             path: this.getTemplate("errorTemplate"),
                             prop: {
-                                data: errors,
+                                data: errors.map(function (i) {
+                                    var l = Atom.query(labels).firstOrDefault({ control: i.value });
+                                    if (l) {
+                                        i.label = $(l).text() + " (" + i.label + ")";
+                                    }
+                                    return i;
+                                }),
                                 title: "Form Errors"
                             }
                         }
