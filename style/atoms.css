@@ -534,7 +534,8 @@ ul.atom-tab-bar > li.list-item.selected-item a {
   background-color: white;
   overflow: auto;
   border-top-width: 2px;
-  padding: 0px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 .atom-window-template .atom-view-stack {
   margin: 2px 2px 2px 5px;

@@ -2,8 +2,11 @@
     atom-type="AtomFormField">
     <td 
         class="atom-form-label"
-        atom-text="[$owner.label]"
-        style-min-width="[$owner.atomParent.minLabelWidth || undefined]"></td>
+        style-min-width="[$owner.atomParent.minLabelWidth || undefined]">
+        <label 
+               atom-for="{$owner.fieldId}"
+               atom-text="[$owner.label]"></label>
+    </td>
     <td
         class="atom-form-required"
         atom-text="[$owner.required ? '*' : '']">
