@@ -253,6 +253,9 @@ this.atomApplication = null;
                     this.bindEvent(window, eventName, "onHashChanged");
                 }
 
+                AtomBinder.refreshValue(this, "appHeight");
+                AtomBinder.refreshValue(this, "bodyHeight");
+
             },
 
             createChildren: function () {

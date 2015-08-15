@@ -447,7 +447,7 @@ ul.atom-tab-bar > li.list-item.selected-item a {
   width: 200px;
   height: 50px;
   background-color: #fff;
-  border-style: solid 2px #DA3535;
+  border: solid 2px rgba(0, 0, 0, 0.2);
   padding: 5px;
   text-align: center;
   vertical-align: middle;
