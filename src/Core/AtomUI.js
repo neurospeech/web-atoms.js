@@ -293,22 +293,31 @@ var AtomUI =
         return e.nodeName == "BUTTON" || e.nodeName == "SELECT" || (e.nodeName == "INPUT" && e.getAttribute('type') == "submit");
     },
 
-    parseCSS: function (e, a) {
-        var p = parseInt($(e).css(a), 10);
+    parseCSS: function ($e, a) {
+        var p = parseInt($e.css(a), 10);
         if (isNaN(p))
             return 0;
         return p;
     },
 
-    setItemRect: function (e, r) {
+    setItemRect: function ($e, e, r) {
+
+        var isBoxSizing = $e.css("box-sizing") == "border-box";
+
+        var marginLeft = this.parseCSS($e,"marginLeft");
+        var marginRight = this.parseCSS($e,"marginRight");
+        var marginTop = this.parseCSS($e, "marginTop");
+        var marginBottom = this.parseCSS($e, "marginBottom");
 
         var isButton = this.isWeirdControl(e);
 
         if (r.width) {
-            r.width -= this.parseCSS(e, "marginLeft") + this.parseCSS(e, "marginRight");
-            if (!isButton) {
-                r.width -= this.parseCSS(e, "borderLeftWidth") + this.parseCSS(e, "borderRightWidth");
-                r.width -= this.parseCSS(e, "paddingLeft") + this.parseCSS(e, "paddingRight");
+            r.width -= marginLeft + marginRight;
+            if (!isBoxSizing) {
+                if (!isButton) {
+                    r.width -= this.parseCSS($e, "borderLeftWidth") + this.parseCSS($e, "borderRightWidth");
+                    r.width -= this.parseCSS($e, "paddingLeft") + this.parseCSS($e, "paddingRight");
+                }
             }
             if (r.width < 0)
                 r.width = 0;
@@ -316,19 +325,23 @@ var AtomUI =
         }
         if (r.height) {
             //r.height -= $(e).outerWidth(true) - $(e).width();
-            r.height -= this.parseCSS(e, "marginTop") + this.parseCSS(e, "marginBottom");
-            if (!isButton) {
-                r.height -= this.parseCSS(e, "borderTopWidth") + this.parseCSS(e, "borderBottomWidth");
-                r.height -= this.parseCSS(e, "paddingTop") + this.parseCSS(e, "paddingBottom");
+            r.height -= marginTop + marginBottom;
+            if (!isBoxSizing) {
+                if (!isButton) {
+                    r.height -= this.parseCSS($e, "borderTopWidth") + this.parseCSS($e, "borderBottomWidth");
+                    r.height -= this.parseCSS($e, "paddingTop") + this.parseCSS($e, "paddingBottom");
+                }
             }
             if (r.height < 0)
                 r.height = 0;
             e.style.height = r.height + "px";
         }
         if (r.left) {
+            r.left += marginLeft;
             e.style.left = r.left + "px";
         }
         if (r.top) {
+            r.top += marginTop;
             e.style.top = r.top + "px";
         }
     },
