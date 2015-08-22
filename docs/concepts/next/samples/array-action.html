@@ -21,7 +21,7 @@
 
 <button
     atom-type="AtomButton"
-    atom-next="[ [ { scope: { v: $scope.v + 1 } } ,  $scope.done ] ]">
+    atom-next="[ [ $x.scope('v',$scope.v + 1),  $scope.done ] ]">
     <span>Click Me</span>
     <span atom-text="[' Version: ' + $scope.v]"></span> </button>
 <!-- end-sample -->

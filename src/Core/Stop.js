@@ -60,6 +60,23 @@ $x.if = function (c, r) {
     return null;
 }
 
+$x.alert = function (msg) {
+    return function () {
+        alert(msg);
+    };
+};
+
+
+
+$x.confirm = function (msg, actions) {
+    return function () {
+        var self = this;
+        return Atom.confirm(msg, function () {
+            self.invokeAction(actions);
+        });
+    }
+}
+
 $x.window = function (path, props, data, next) {
     var a = path;
     var self = this;

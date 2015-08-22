@@ -10,7 +10,7 @@
 <div atom-type="AtomApplication" atom-render-as-page="true">
 <!-- sample -->
 <button
-    atom-event-click="{ { timeout:[2000, { alert:'Clicked !!!' } ] } }"
+    atom-event-click="{ $x.timeout(2000, $x.alert('Clicked !!!') ) }"
     >Click Me</button>
 <!-- end-sample -->
 </div>
