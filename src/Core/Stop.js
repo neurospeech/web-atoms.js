@@ -24,7 +24,7 @@ $x.timeout = function (i, actions) {
 $x.invoke = function(i,d,v){
     return function(){
         var a = {};
-        if(v === undefined){
+        if(v !== undefined){
             var x = {};
             x[d] = v;
             a[i] = x;        
@@ -36,28 +36,45 @@ $x.invoke = function(i,d,v){
 }
 
 $x.data = function (d, v) {
-    $x.invoke("data", d, v);
+    return $x.invoke("data", d, v);
 }
 
 $x.scope = function (d,v) {
-    $x.invoke("scope", d, v);
+    return $x.invoke("scope", d, v);
 }
 
 $x.localScope = function (d,v) {
-    $x.invoke("localScope", d, v);
+    return $x.invoke("localScope", d, v);
 }
 
 $x.appScope = function (d,v) {
-    $x.invoke("appScope", d, v);
+    return $x.invoke("appScope", d, v);
 }
 
 $x.owner = function (d,v) {
-    $x.invoke("owner", d, v);
+    return $x.invoke("owner", d, v);
 }
 
 $x.if = function (c, r) {
     if (c) return r;
     return null;
+}
+
+$x.alert = function (msg) {
+    return function () {
+        alert(msg);
+    };
+};
+
+
+
+$x.confirm = function (msg, actions) {
+    return function () {
+        var self = this;
+        return Atom.confirm(msg, function () {
+            self.invokeAction(actions);
+        });
+    }
 }
 
 $x.window = function (path, props, data, next) {
@@ -86,7 +103,6 @@ $x.window = function (path, props, data, next) {
 
 
 $x.localWindow = function (path, props, scope, next) {
-    debugger;
     var a = path;
     if (arguments.length > 1) {
         a = {

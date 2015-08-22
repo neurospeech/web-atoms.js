@@ -10,7 +10,7 @@
 <div atom-type="AtomApplication" atom-render-as-page="true">
 <!-- sample -->
 <button
-    atom-event-click="{ { confirm:['Are you sure?', { alert:'Clicked !!!' } ] } }"
+    atom-event-click="{ $x.confirm('Are you sure?', $x.alert('Clicked !!!')) }"
     >Click Me</button>
 <!-- end-sample -->
 </div>

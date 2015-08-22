@@ -47,7 +47,7 @@
             <button
                 atom-template="itemTemplate"
                 atom-text="{$data.label}"
-                atom-event-click="{ { appScope: { start: $data.value }} }"
+                atom-event-click="{ $x.appScope({ start: $data.value }) }"
                 style-background-color="[ $data.value == $appScope.start ? 'gray' : 'inherit' ]"></button>
         </span>
 
