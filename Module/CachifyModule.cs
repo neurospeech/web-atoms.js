@@ -96,9 +96,14 @@ namespace Atoms.Web.Module
                         ProcessTag(item, "link", "href");
                     }
 
-                    using (MemoryStream ms = new MemoryStream()) {
-                        doc.Save(ms, e);
-                        p = ms.ToArray();
+                    doc.OptionWriteEmptyNodes = true;
+                    
+
+                    using (StringWriter ms = new StringWriter()) {
+                        
+                        doc.Save(ms);
+                        p = e.GetBytes(ms.GetStringBuilder().ToString());
+                        
                     }
 
                     
@@ -120,6 +125,7 @@ namespace Atoms.Web.Module
                     if (src != null)
                     {
                         item.SetAttributeValue(att, ToAbsolute(src));
+                        
                     }
                 }
             }
