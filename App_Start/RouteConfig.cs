@@ -17,7 +17,7 @@ namespace Atoms.Web
             CachedRoute.Register(routes);
 
             string cdn = System.Web.Configuration.WebConfigurationManager.AppSettings["CDNHost"];
-            if (cdn != null) {
+            if (!string.IsNullOrWhiteSpace(cdn)) {
                 CachedRoute.CDNHost = cdn;
                 CachedRoute.CORSOrigins = "*";
             }
