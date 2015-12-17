@@ -504,6 +504,7 @@
                         }
                         cols = Math.ceil(presenterWidth / w) || 1;
                         rows = Math.ceil(n / cols) || 1;
+                        $scroller.css("overflow-x", "hidden");
                     } else {
                         if (!scrollerHeight)
                             throw new Error("Height must be explicitly specified for wrapping container");
@@ -533,7 +534,7 @@
                     var yindex = Math.floor(index / cols);
                     var xindex = index % cols;
 
-                    if (xindex < visibleX || xindex > visibleX + widthX)
+                    if (xindex < visibleX || xindex > visibleX + 1)
                         continue;
                     if (yindex < visibleY || yindex > visibleY + heightX)
                         continue;

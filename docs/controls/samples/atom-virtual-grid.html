@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <!-- sample -->
+
+        <div atom-type="AtomListBox"
+             atom-items="{ AtomPromise.json('movie-list.json') }"
+             atom-ui-virtualize="{true}"
+             style="height:60px; width:200px;"
+             atom-name="movieList">
+            <div atom-template="itemTemplate" style="height:30px;width:90px; overflow:hidden;">
+                <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
+                <span atom-text="{ $data.MovieName }"></span>
+            </div>
+        </div>
+
+        <div>
+            <span>Selected Movie: </span>
+            <span atom-text="[($scope.movieList.selectedItem.MovieName || '')]">
+            </span>
+            <span atom-text="['('+($scope.movieList.selectedItem.MovieCategory||'')+')']">
+            </span>
+        </div>
+
+        <!-- end-sample -->
+    </div>
+</body>
+</html>
