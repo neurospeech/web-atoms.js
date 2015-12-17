@@ -430,12 +430,147 @@
                 var _this = this;
                 this.scrollTimeout = setTimeout(function () {
                     _this.scrollTimeout = 0;
-                    _this.onCollectionChangedInternal("refresh", -1, null);
-                }, 1000);
+                    _this.onVirtualCollectionChanged();
+                }, 10);
+            },
+
+            onVirtualCollectionChanged: function () {
+                var element = this._itemsPresenter;
+                var items = this.get_dataItems(true);
+
+                var parentScope = this.get_scope();
+
+                var et = this.getTemplate("itemTemplate");
+                if (et) {
+                    et = AtomUI.getAtomType(et);
+                    if (et) {
+                        this._childItemType = et;
+                    }
+                }
+
+                var ae = new AtomEnumerator(items);
+                WebAtoms.dispatcher.pause();
+
+                if (this._itemsPresenter == this._element) {
+                    var d = document.createElement("DIV");
+                    var $d = $(d);
+                    $d.addClass("atom-virtual-container");
+                    $d.css("width", $(this._itemsPresenter).innerWidth());
+                    this._element.innerHTML = "";
+                    this._element.appendChild(d);
+                    this._itemsPresenter = d;
+                    element = this._itemsPresenter;
+                }
+
+
+                this.disposeChildren(element);
+
+
+                var scroller = this._itemsPresenter.parentElement;
+                var $scroller = $(scroller);
+                $scroller.css("overflow", "auto");
+
+                $(element).css("position", "relative");
+
+                var scrollerWidth = $scroller.width();
+                var scrollerHeight = $scroller.height();
+
+
+
+                this.unbindEvent(scroller, "scroll");
+
+                var n = items.length;
+                var presenterWidth = $(this._itemsPresenter).innerWidth();
+
+
+
+                var t = this.getTemplate("itemTemplate");
+                var $t = $(t);
+                var h = $t.outerHeight(true);
+                var w = $t.outerWidth(true);
+
+                if (!(h || w)) {
+                    throw new Error("Either width or height must be explicitly specified for virtualization");
+                }
+
+                var cols = 1;
+                var rows = 1;
+
+                if (h > 0) {
+                    if (w > 0) {
+                        // wrap...
+                        if (presenterWidth <= 0) {
+                            throw new Error("Width must be explicitly defined for wrapping container");
+                        }
+                        cols = Math.ceil(presenterWidth / w) || 1;
+                        rows = Math.ceil(n / cols) || 1;
+                    } else {
+                        if (!scrollerHeight)
+                            throw new Error("Height must be explicitly specified for wrapping container");
+                        rows = n;
+                        $scroller.css("overflow-y", "auto");
+                        $scroller.css("overflow-x", "hidden");
+
+                    }
+                } else {
+
+                }
+
+                if (h > 0) {
+                    $(this._itemsPresenter).height(rows * h);
+                } else {
+                    $(this._itemsPresenter).width(cols * w);
+                }
+
+                var visibleX = Math.floor(scroller.scrollLeft / (w || 1));
+                var visibleY = Math.floor(scroller.scrollTop / (h || 1));
+                var widthX = scroller.offsetWidth / (w || 1);
+                var heightX = scroller.offsetHeight / (h || 1);
+
+                while (ae.next()) {
+
+                    var index = ae.currentIndex();
+                    var yindex = Math.floor(index / cols);
+                    var xindex = index % cols;
+
+                    if (xindex < visibleX || xindex > visibleX + widthX)
+                        continue;
+                    if (yindex < visibleY || yindex > visibleY + heightX)
+                        continue;
+
+                    var data = ae.current();
+                    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                    var $ec = $(elementChild);
+                    $ec.css("position", "absolute");
+                    if (w > 0) {
+                        $ec.css("width", w + "px");
+                        $ec.css("left", (xindex * w) + "px");
+                    }
+                    if (h > 0) {
+                        $ec.css("top", (yindex * h) + "px");
+                    }
+
+                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+
+                }
+
+                var _this = this;
+                this.bindEvent(scroller, "scroll", function () {
+                    _this.onScroll();
+                });
+
+                WebAtoms.dispatcher.start();
+
+                AtomBinder.refreshValue(this, "childAtomControls");
             },
 
             onCollectionChanged: function (mode, index, item) {
 
+
+                if (this._uiVirtualize) {
+                    this.onVirtualCollectionChanged();
+                    return;
+                }
 
                 // just reset for now...
                 if (/remove/gi.test(mode)) {
@@ -509,84 +644,6 @@
 
                 var ae = new AtomEnumerator(items);
 
-                if (false) {
-
-
-                    if (this._itemsPresenter == this._element) {
-                        var d = document.createElement("DIV");
-                        var $d = $(d);
-                        $d.addClass("atom-virtual-container");
-                        $d.css("width", "100%");
-                        this._element.innerHTML = "";
-                        this._element.appendChild(d);
-                        this._itemsPresenter = d;
-                        element = this._itemsPresenter;
-                    }
-
-                    var scroller = this._itemsPresenter.parentElement;
-                    var st = scroller.scrollTop;
-                    var sh = scroller.scrollHeight;
-
-                    this.unbindEvent(scroller, "scroll");
-
-                    var n = items.length;
-                    var presenterWidth = $(this._itemsPresenter).innerWidth();
-
-
-
-                    var t = this.getTemplate("itemTemplate");
-                    var $t = $(t);
-                    var h = $t.outerHeight(true);
-                    var w = $t.outerWidth(true);
-
-                    var cols = Math.floor(presenterWidth / w);
-                    var rows = Math.ceil(n / cols);
-
-                    rows = rows * h + 100;
-
-                    $(this.itemsPresenter).height(rows);
-
-                    var copy = document.createElement("DIV");
-                    copy.style.height = h + "px";
-                    copy.style.width = w + "px";
-
-
-                    var sw = $(element).innerWidth();
-
-                    var itemsPerLine = Math.ceil(presenterWidth / w);
-                    var hiddenLines = Math.ceil(st / h);
-                    var visibleLines = Math.ceil(sh / h);
-                    var si = hiddenLines * itemsPerLine;
-
-                    if (!itemsPerLine) {
-                        console.log("itemsPerLine is zero");
-                    } else {
-                        console.log(JSON.stringify({ itemsPerLine: itemsPerLine, st: st, sh: sh, si: si }));
-                    }
-
-                    var ei = (visibleLines + 1) * itemsPerLine;
-
-                    while (ae.next()) {
-                        var i = ae.currentIndex();
-                        if (i < si || i > ei) {
-                            // add a copy...
-                            element.appendChild(copy.cloneNode(true));
-                        } else {
-                            var data = ae.current();
-                            var elementChild = this.createChildElement(parentScope, element, data, ae);
-                            added.push(elementChild);
-                            this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
-                        }
-                    }
-
-                    scroller.scrollTop = st;
-                    var _this = this;
-                    this.bindEvent(scroller, "scroll", function () {
-                        _this.onScroll();
-                    });
-
-
-                } else {
 
                     this.getTemplate("itemTemplate");
 
@@ -596,33 +653,35 @@
                         added.push(elementChild);
                         this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                     }
-                }
 
-                //var ae = new AtomEnumerator(items);
-                //while (ae.next()) {
-                //    var data = ae.current();
-                //    var elementChild = this.createChildElement(parentScope, element, data, ae);
-                //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
-                //}
-                var self = this;
-                WebAtoms.dispatcher.callLater(function () {
-                    var dirty = [];
-                    var ce = new ChildEnumerator(element);
-                    while (ce.next()) {
-                        var item = ce.current();
-                        var f = added.filter(function (fx) { return item == fx; });
-                        if (f.pop() != item) {
-                            dirty.push(item);
+
+                    //var ae = new AtomEnumerator(items);
+                    //while (ae.next()) {
+                    //    var data = ae.current();
+                    //    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                    //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                    //}
+                    var self = this;
+                    WebAtoms.dispatcher.callLater(function () {
+                        var dirty = [];
+                        var ce = new ChildEnumerator(element);
+                        while (ce.next()) {
+                            var item = ce.current();
+                            var f = added.filter(function (fx) { return item == fx; });
+                            if (f.pop() != item) {
+                                dirty.push(item);
+                            }
                         }
-                    }
-                    ce = new AtomEnumerator(dirty);
-                    while (ce.next()) {
-                        var item = ce.current();
-                        self.dispose(item);
-                        $(item).remove();
-                    }
+                        ce = new AtomEnumerator(dirty);
+                        while (ce.next()) {
+                            var item = ce.current();
+                            self.dispose(item);
+                            $(item).remove();
+                        }
 
-                });
+                    });
+
+                
 
                 WebAtoms.dispatcher.start();
 
@@ -655,7 +714,7 @@
                     }
                 });
 
-                var scope = new AtomScope(this, parentScope, parentScope.__application);
+                var scope =  new AtomScope(this, parentScope, parentScope.__application);
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();
