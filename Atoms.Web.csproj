@@ -254,6 +254,8 @@
     <Content Include="docs\controls\samples\atom-time-picker.html" />
     <Content Include="docs\controls\samples\atom-view-stack.html" />
     <Content Include="docs\concepts\next\samples\window-action.html" />
+    <Content Include="docs\controls\samples\atom-virtual-grid.html" />
+    <Content Include="docs\controls\samples\atom-virtual-list-box.html" />
     <Content Include="docs\controls\samples\atom-window-command-template.html" />
     <Content Include="docs\controls\samples\atom-window-iframe.html" />
     <Content Include="docs\controls\samples\atom-window.html" />
