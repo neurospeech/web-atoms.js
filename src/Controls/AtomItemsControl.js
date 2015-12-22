@@ -465,6 +465,12 @@
 
                 this.disposeChildren(element);
 
+                if (!items.length) {
+                    WebAtoms.dispatcher.start();
+
+                    AtomBinder.refreshValue(this, "childAtomControls");
+                    return;
+                }
 
                 var scroller = this._itemsPresenter.parentElement;
                 var $scroller = $(scroller);
