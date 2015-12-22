@@ -66,7 +66,18 @@ $x.alert = function (msg) {
     };
 };
 
+$x.focus = function (e) {
+    return function () {
+        var el = e._element || e;
+        el.focus();
+    }
+};
 
+$x.clearErrors = function (e) {
+    return function () {
+        window.errors.clear(e._element || e, true);
+    }
+};
 
 $x.confirm = function (msg, actions) {
     return function () {

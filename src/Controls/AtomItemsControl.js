@@ -573,6 +573,9 @@
 
             onCollectionChanged: function (mode, index, item) {
 
+                if (/reset|refresh/i.test(mode)) {
+                    this._scopes = {};
+                }
 
                 if (this._uiVirtualize) {
                     this.onVirtualCollectionChanged();
@@ -721,7 +724,11 @@
                     }
                 });
 
-                var scope =  new AtomScope(this, parentScope, parentScope.__application);
+                var scopes = this._scopes || {};
+                this._scopes = scopes;
+
+                var scope = scopes[ae.currentIndex()] || new AtomScope(this, parentScope, parentScope.__application);
+                scopes[ae.currentIndex()] = scope;
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();
@@ -785,6 +792,12 @@
                     }
                 });
 
+            },
+
+            dispose: function () {
+                base.dispose.call(this);
+                this._selectedItems = null;
+                this._scopes = null;
             },
 
 
