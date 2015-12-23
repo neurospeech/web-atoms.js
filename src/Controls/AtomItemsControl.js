@@ -463,8 +463,14 @@
                 }
 
 
-                this.disposeChildren(element);
+                //this.disposeChildren(element);
 
+                if (!items.length) {
+                    WebAtoms.dispatcher.start();
+
+                    AtomBinder.refreshValue(this, "childAtomControls");
+                    return;
+                }
 
                 var scroller = this._itemsPresenter.parentElement;
                 var $scroller = $(scroller);
@@ -525,8 +531,13 @@
 
                 var visibleX = Math.floor(scroller.scrollLeft / (w || 1));
                 var visibleY = Math.floor(scroller.scrollTop / (h || 1));
-                var widthX = scroller.offsetWidth / (w || 1);
+                var widthX = (( Math.floor( scroller.offsetWidth / (w || 1))) -1) || 1;
                 var heightX = scroller.offsetHeight / (h || 1);
+
+                var cache = this._cachedItems || {};
+                this._cachedItems = cache;
+
+                var removed = [];
 
                 while (ae.next()) {
 
@@ -534,13 +545,30 @@
                     var yindex = Math.floor(index / cols);
                     var xindex = index % cols;
 
-                    if (xindex < visibleX || xindex > visibleX + 1)
+                    var elementChild = cache[index];
+
+                    if (xindex < visibleX || xindex > visibleX + widthX) {
+                        if (elementChild) {
+                            cache[index] = null;
+                            removed.push(elementChild);
+                        }
                         continue;
-                    if (yindex < visibleY || yindex > visibleY + heightX)
+                    }
+                    if (yindex < visibleY || yindex > visibleY + heightX) {
+                        if (elementChild) {
+                            cache[index] = null;
+                            removed.push(elementChild);
+                        }
                         continue;
+                    }
+
+                    if (elementChild) {
+                        continue;
+                    }
 
                     var data = ae.current();
-                    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                    elementChild = this.createChildElement(parentScope, element, data, ae);
+                    cache[index] = elementChild;
                     var $ec = $(elementChild);
                     $ec.css("position", "absolute");
                     if (w > 0) {
@@ -562,11 +590,22 @@
 
                 WebAtoms.dispatcher.start();
 
+                ae = new AtomEnumerator(removed);
+                while (ae.next()) {
+                    var item = ae.current();
+                    item.atomControl.dispose();
+                    $(item).remove();
+                }
+
                 AtomBinder.refreshValue(this, "childAtomControls");
             },
 
             onCollectionChanged: function (mode, index, item) {
 
+                if (/reset|refresh/i.test(mode)) {
+                    this._scopes = {};
+                    this._cachedItems = {};
+                }
 
                 if (this._uiVirtualize) {
                     this.onVirtualCollectionChanged();
@@ -715,7 +754,11 @@
                     }
                 });
 
-                var scope =  new AtomScope(this, parentScope, parentScope.__application);
+                var scopes = this._scopes || {};
+                this._scopes = scopes;
+
+                var scope = scopes[ae.currentIndex()] || new AtomScope(this, parentScope, parentScope.__application);
+                scopes[ae.currentIndex()] = scope;
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();
@@ -779,6 +822,13 @@
                     }
                 });
 
+            },
+
+            dispose: function () {
+                base.dispose.call(this);
+                this._selectedItems = null;
+                this._scopes = null;
+                this._cachedItems = null;
             },
 
 
