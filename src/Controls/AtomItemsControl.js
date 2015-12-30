@@ -455,7 +455,8 @@
                     var d = document.createElement("DIV");
                     var $d = $(d);
                     $d.addClass("atom-virtual-container");
-                    $d.css("width", $(this._itemsPresenter).innerWidth());
+                    //$d.css("width", $(this._itemsPresenter).innerWidth());
+                    $d.css({posiiton:"absolute",width: "100%", height:"100%"});
                     this._element.innerHTML = "";
                     this._element.appendChild(d);
                     this._itemsPresenter = d;
