@@ -506,7 +506,9 @@
                     if (w > 0) {
                         // wrap...
                         if (presenterWidth <= 0) {
-                            throw new Error("Width must be explicitly defined for wrapping container");
+                            if (console) {
+                                console.warn("presenterWidth is 0, you may need to stretch width", this);
+                            }
                         }
                         cols = Math.ceil(presenterWidth / w) || 1;
                         rows = Math.ceil(n / cols) || 1;
@@ -796,6 +798,11 @@
 
             onUpdateUI: function () {
                 base.onUpdateUI.call(this);
+
+                if (this._uiVirtualize) {
+                    this.onVirtualCollectionChanged();
+                }
+
                 var ae = new ChildEnumerator(this._itemsPresenter);
                 while (ae.next()) {
                     var item = ae.current();
