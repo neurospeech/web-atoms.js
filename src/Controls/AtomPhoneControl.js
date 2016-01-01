@@ -62,9 +62,9 @@
                 }
                 this._required = v;
                 if (v) {
-                    AtomProperties.required(this.num, true);
+                    AtomProperties.required.call(this, this.num, true);
                 } else {
-                    AtomProperties.required(this.num, false);
+                    AtomProperties.required.call(this, this.num, false);
                 }
             },
             get_required: function () {

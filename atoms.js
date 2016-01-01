@@ -10969,9 +10969,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 61 - 'AtomPhoneControl.js' */                }
 /*Line 62 - 'AtomPhoneControl.js' */                this._required = v;
 /*Line 63 - 'AtomPhoneControl.js' */                if (v) {
-/*Line 64 - 'AtomPhoneControl.js' */                    AtomProperties.required(this.num, true);
+/*Line 64 - 'AtomPhoneControl.js' */                    AtomProperties.required.call(this, this.num, true);
 /*Line 65 - 'AtomPhoneControl.js' */                } else {
-/*Line 66 - 'AtomPhoneControl.js' */                    AtomProperties.required(this.num, false);
+/*Line 66 - 'AtomPhoneControl.js' */                    AtomProperties.required.call(this, this.num, false);
 /*Line 67 - 'AtomPhoneControl.js' */                }
 /*Line 68 - 'AtomPhoneControl.js' */            },
 /*Line 69 - 'AtomPhoneControl.js' */            get_required: function () {
