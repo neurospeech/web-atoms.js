@@ -52,6 +52,24 @@
                     this.setupValues();
                 }
             },
+            set_required: function (v) {
+                if (!this.num) {
+                    var self = this;
+                    WebAtoms.dispatcher.callLater(function () {
+                        self.set_required(v);
+                    });
+                    return;
+                }
+                this._required = v;
+                if (v) {
+                    AtomProperties.required(this.num, true);
+                } else {
+                    AtomProperties.required(this.num, false);
+                }
+            },
+            get_required: function () {
+                return this._required;
+            },
 
             setupValues: function () {
                 if (!this._value) {

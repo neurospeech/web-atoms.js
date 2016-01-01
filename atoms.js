@@ -10959,160 +10959,178 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 51 - 'AtomPhoneControl.js' */                    this.setupValues();
 /*Line 52 - 'AtomPhoneControl.js' */                }
 /*Line 53 - 'AtomPhoneControl.js' */            },
-
-/*Line 55 - 'AtomPhoneControl.js' */            setupValues: function () {
-/*Line 56 - 'AtomPhoneControl.js' */                if (!this._value) {
-/*Line 57 - 'AtomPhoneControl.js' */                    $(this.num).val("");
-/*Line 58 - 'AtomPhoneControl.js' */                    $(this.ext).val("");
-/*Line 59 - 'AtomPhoneControl.js' */                    $(this.msg).val("");
+/*Line 54 - 'AtomPhoneControl.js' */            set_required: function (v) {
+/*Line 55 - 'AtomPhoneControl.js' */                if (!this.num) {
+/*Line 56 - 'AtomPhoneControl.js' */                    var self = this;
+/*Line 57 - 'AtomPhoneControl.js' */                    WebAtoms.dispatcher.callLater(function () {
+/*Line 58 - 'AtomPhoneControl.js' */                        self.set_required(v);
+/*Line 59 - 'AtomPhoneControl.js' */                    });
 /*Line 60 - 'AtomPhoneControl.js' */                    return;
 /*Line 61 - 'AtomPhoneControl.js' */                }
-/*Line 62 - 'AtomPhoneControl.js' */                var tokens = this._value.split(":", 6);
+/*Line 62 - 'AtomPhoneControl.js' */                this._required = v;
+/*Line 63 - 'AtomPhoneControl.js' */                if (v) {
+/*Line 64 - 'AtomPhoneControl.js' */                    AtomProperties.required(this.num, true);
+/*Line 65 - 'AtomPhoneControl.js' */                } else {
+/*Line 66 - 'AtomPhoneControl.js' */                    AtomProperties.required(this.num, false);
+/*Line 67 - 'AtomPhoneControl.js' */                }
+/*Line 68 - 'AtomPhoneControl.js' */            },
+/*Line 69 - 'AtomPhoneControl.js' */            get_required: function () {
+/*Line 70 - 'AtomPhoneControl.js' */                return this._required;
+/*Line 71 - 'AtomPhoneControl.js' */            },
 
-/*Line 64 - 'AtomPhoneControl.js' */                var cc = tokens[1];
+/*Line 73 - 'AtomPhoneControl.js' */            setupValues: function () {
+/*Line 74 - 'AtomPhoneControl.js' */                if (!this._value) {
+/*Line 75 - 'AtomPhoneControl.js' */                    $(this.num).val("");
+/*Line 76 - 'AtomPhoneControl.js' */                    $(this.ext).val("");
+/*Line 77 - 'AtomPhoneControl.js' */                    $(this.msg).val("");
+/*Line 78 - 'AtomPhoneControl.js' */                    return;
+/*Line 79 - 'AtomPhoneControl.js' */                }
+/*Line 80 - 'AtomPhoneControl.js' */                var tokens = this._value.split(":", 6);
 
-/*Line 66 - 'AtomPhoneControl.js' */                var ae = new AtomEnumerator(this._countries);
-/*Line 67 - 'AtomPhoneControl.js' */                while (ae.next()) {
-/*Line 68 - 'AtomPhoneControl.js' */                    var ci = ae.current();
-/*Line 69 - 'AtomPhoneControl.js' */                    if (ci.country == cc) {
-/*Line 70 - 'AtomPhoneControl.js' */                        this.cs.selectedIndex = ae.currentIndex();
-/*Line 71 - 'AtomPhoneControl.js' */                        break;
-/*Line 72 - 'AtomPhoneControl.js' */                    }
-/*Line 73 - 'AtomPhoneControl.js' */                }
+/*Line 82 - 'AtomPhoneControl.js' */                var cc = tokens[1];
 
-/*Line 75 - 'AtomPhoneControl.js' */                var num = (tokens[3] || "").split(".").join("-");
-/*Line 76 - 'AtomPhoneControl.js' */                if (num == "--")
-/*Line 77 - 'AtomPhoneControl.js' */                    num = "";
-/*Line 78 - 'AtomPhoneControl.js' */                $(this.num).val(num);
-/*Line 79 - 'AtomPhoneControl.js' */                $(this.ext).val(tokens[4]);
-/*Line 80 - 'AtomPhoneControl.js' */                $(this.msg).val(tokens[5]);
-/*Line 81 - 'AtomPhoneControl.js' */                this.onFormat();
-/*Line 82 - 'AtomPhoneControl.js' */            },
+/*Line 84 - 'AtomPhoneControl.js' */                var ae = new AtomEnumerator(this._countries);
+/*Line 85 - 'AtomPhoneControl.js' */                while (ae.next()) {
+/*Line 86 - 'AtomPhoneControl.js' */                    var ci = ae.current();
+/*Line 87 - 'AtomPhoneControl.js' */                    if (ci.country == cc) {
+/*Line 88 - 'AtomPhoneControl.js' */                        this.cs.selectedIndex = ae.currentIndex();
+/*Line 89 - 'AtomPhoneControl.js' */                        break;
+/*Line 90 - 'AtomPhoneControl.js' */                    }
+/*Line 91 - 'AtomPhoneControl.js' */                }
 
-/*Line 84 - 'AtomPhoneControl.js' */            onDataChange: function () {
-/*Line 85 - 'AtomPhoneControl.js' */                var value = "v2:";
-/*Line 86 - 'AtomPhoneControl.js' */                var si = this.cs.selectedIndex;
-/*Line 87 - 'AtomPhoneControl.js' */                var ci = this._countries[si];
-/*Line 88 - 'AtomPhoneControl.js' */                value += ci.country + ":" + ci.code;
-/*Line 89 - 'AtomPhoneControl.js' */                var num = (($(this.num).val()).split("-").join("."));
-/*Line 90 - 'AtomPhoneControl.js' */                value += ":" + num;
-/*Line 91 - 'AtomPhoneControl.js' */                value += ":" + $(this.ext).val();
-/*Line 92 - 'AtomPhoneControl.js' */                value += ":" + $(this.msg).val();
+/*Line 93 - 'AtomPhoneControl.js' */                var num = (tokens[3] || "").split(".").join("-");
+/*Line 94 - 'AtomPhoneControl.js' */                if (num == "--")
+/*Line 95 - 'AtomPhoneControl.js' */                    num = "";
+/*Line 96 - 'AtomPhoneControl.js' */                $(this.num).val(num);
+/*Line 97 - 'AtomPhoneControl.js' */                $(this.ext).val(tokens[4]);
+/*Line 98 - 'AtomPhoneControl.js' */                $(this.msg).val(tokens[5]);
+/*Line 99 - 'AtomPhoneControl.js' */                this.onFormat();
+/*Line 100 - 'AtomPhoneControl.js' */            },
 
-/*Line 94 - 'AtomPhoneControl.js' */                if (num) {
-/*Line 95 - 'AtomPhoneControl.js' */                    this._value = value;
-/*Line 96 - 'AtomPhoneControl.js' */                } else {
-/*Line 97 - 'AtomPhoneControl.js' */                    this._value = "";
-/*Line 98 - 'AtomPhoneControl.js' */                }
+/*Line 102 - 'AtomPhoneControl.js' */            onDataChange: function () {
+/*Line 103 - 'AtomPhoneControl.js' */                var value = "v2:";
+/*Line 104 - 'AtomPhoneControl.js' */                var si = this.cs.selectedIndex;
+/*Line 105 - 'AtomPhoneControl.js' */                var ci = this._countries[si];
+/*Line 106 - 'AtomPhoneControl.js' */                value += ci.country + ":" + ci.code;
+/*Line 107 - 'AtomPhoneControl.js' */                var num = (($(this.num).val()).split("-").join("."));
+/*Line 108 - 'AtomPhoneControl.js' */                value += ":" + num;
+/*Line 109 - 'AtomPhoneControl.js' */                value += ":" + $(this.ext).val();
+/*Line 110 - 'AtomPhoneControl.js' */                value += ":" + $(this.msg).val();
 
-/*Line 100 - 'AtomPhoneControl.js' */                AtomBinder.refreshValue(this, "value");
-/*Line 101 - 'AtomPhoneControl.js' */            },
+/*Line 112 - 'AtomPhoneControl.js' */                if (num) {
+/*Line 113 - 'AtomPhoneControl.js' */                    this._value = value;
+/*Line 114 - 'AtomPhoneControl.js' */                } else {
+/*Line 115 - 'AtomPhoneControl.js' */                    this._value = "";
+/*Line 116 - 'AtomPhoneControl.js' */                }
 
-/*Line 103 - 'AtomPhoneControl.js' */            set_countries: function (r) {
-/*Line 104 - 'AtomPhoneControl.js' */                this._countries = r;
-/*Line 105 - 'AtomPhoneControl.js' */                this.onFormat();
-/*Line 106 - 'AtomPhoneControl.js' */            },
+/*Line 118 - 'AtomPhoneControl.js' */                AtomBinder.refreshValue(this, "value");
+/*Line 119 - 'AtomPhoneControl.js' */            },
 
-
-/*Line 109 - 'AtomPhoneControl.js' */            onCountryChange: function () {
-/*Line 110 - 'AtomPhoneControl.js' */                this.onDataChange();
-/*Line 111 - 'AtomPhoneControl.js' */                this.onFormat();
-/*Line 112 - 'AtomPhoneControl.js' */            },
-
-/*Line 114 - 'AtomPhoneControl.js' */            onFormat: function () {
-/*Line 115 - 'AtomPhoneControl.js' */                if (this._isFormatting) return;
-/*Line 116 - 'AtomPhoneControl.js' */                this._isFormatting = true;
-
-/*Line 118 - 'AtomPhoneControl.js' */                var r = this._countries;
-/*Line 119 - 'AtomPhoneControl.js' */                var options = this.cs.options;
-/*Line 120 - 'AtomPhoneControl.js' */                options.length = 0;
-/*Line 121 - 'AtomPhoneControl.js' */                var ae = new AtomEnumerator(r);
-/*Line 122 - 'AtomPhoneControl.js' */                while (ae.next()) {
-/*Line 123 - 'AtomPhoneControl.js' */                    var ci = ae.current();
-/*Line 124 - 'AtomPhoneControl.js' */                    if (!ci.valueIndex) {
-/*Line 125 - 'AtomPhoneControl.js' */                        ci.label = ci.label;
-/*Line 126 - 'AtomPhoneControl.js' */                        ci.valueIndex = ae.currentIndex();
-/*Line 127 - 'AtomPhoneControl.js' */                    }
-/*Line 128 - 'AtomPhoneControl.js' */                    options[ae.currentIndex()] = new Option(ci.label, ci.valueIndex, false, false);
-/*Line 129 - 'AtomPhoneControl.js' */                }
-
-/*Line 131 - 'AtomPhoneControl.js' */                this.setupValues();
-
-/*Line 133 - 'AtomPhoneControl.js' */                var cs = this.cs;
-/*Line 134 - 'AtomPhoneControl.js' */                if (cs.selectedIndex == -1)
-/*Line 135 - 'AtomPhoneControl.js' */                    return;
-/*Line 136 - 'AtomPhoneControl.js' */                var ci = this._countries[cs.selectedIndex];
-
-/*Line 138 - 'AtomPhoneControl.js' */                if (ci.format) {
-/*Line 139 - 'AtomPhoneControl.js' */                    $(this.num).mask(ci.format);
-/*Line 140 - 'AtomPhoneControl.js' */                } else {
-/*Line 141 - 'AtomPhoneControl.js' */                    $(this.num).unmask();
-/*Line 142 - 'AtomPhoneControl.js' */                }
-/*Line 143 - 'AtomPhoneControl.js' */                this._isFormatting = false;
-/*Line 144 - 'AtomPhoneControl.js' */            },
+/*Line 121 - 'AtomPhoneControl.js' */            set_countries: function (r) {
+/*Line 122 - 'AtomPhoneControl.js' */                this._countries = r;
+/*Line 123 - 'AtomPhoneControl.js' */                this.onFormat();
+/*Line 124 - 'AtomPhoneControl.js' */            },
 
 
-/*Line 147 - 'AtomPhoneControl.js' */            init: function () {
-/*Line 148 - 'AtomPhoneControl.js' */                this.cs = document.createElement("SELECT");
-/*Line 149 - 'AtomPhoneControl.js' */                //this.cs.style['float'] = "left";
-/*Line 150 - 'AtomPhoneControl.js' */                this.num = document.createElement("INPUT");
-/*Line 151 - 'AtomPhoneControl.js' */                this.num.type = "text";
-/*Line 152 - 'AtomPhoneControl.js' */                //this.num.style.width = "150px";
-/*Line 153 - 'AtomPhoneControl.js' */                //this.num.style['float'] = "left";
-/*Line 154 - 'AtomPhoneControl.js' */                //this.num.style.marginLeft = "2px";
-/*Line 155 - 'AtomPhoneControl.js' */                this.ext = document.createElement("INPUT");
-/*Line 156 - 'AtomPhoneControl.js' */                //this.num = [this.num1, this.num2, this.num3, this.ext];
-/*Line 157 - 'AtomPhoneControl.js' */                this.ext.type = "text";
-/*Line 158 - 'AtomPhoneControl.js' */                //this.ext.style.width = "30px";
-/*Line 159 - 'AtomPhoneControl.js' */                //this.ext.style['float'] = "left";
-/*Line 160 - 'AtomPhoneControl.js' */                //this.ext.style.marginLeft = "2px";
-/*Line 161 - 'AtomPhoneControl.js' */                $(this.ext).attr("placeholder", "Ext.");
-/*Line 162 - 'AtomPhoneControl.js' */                this.msg = document.createElement("INPUT");
-/*Line 163 - 'AtomPhoneControl.js' */                this.msg.type = "text";
-/*Line 164 - 'AtomPhoneControl.js' */                //this.msg.style.width = "100px";
-/*Line 165 - 'AtomPhoneControl.js' */                //this.msg.style['float'] = "left";
-/*Line 166 - 'AtomPhoneControl.js' */                //this.msg.style.marginLeft = "2px";
-/*Line 167 - 'AtomPhoneControl.js' */                $(this.msg).attr("placeholder", "Message");
+/*Line 127 - 'AtomPhoneControl.js' */            onCountryChange: function () {
+/*Line 128 - 'AtomPhoneControl.js' */                this.onDataChange();
+/*Line 129 - 'AtomPhoneControl.js' */                this.onFormat();
+/*Line 130 - 'AtomPhoneControl.js' */            },
 
-/*Line 169 - 'AtomPhoneControl.js' */                var element = this.get_element();
-/*Line 170 - 'AtomPhoneControl.js' */                //element.style.width = "450px";
-/*Line 171 - 'AtomPhoneControl.js' */                element.appendChild(this.cs);
-/*Line 172 - 'AtomPhoneControl.js' */                element.appendChild(this.num);
-/*Line 173 - 'AtomPhoneControl.js' */                element.appendChild(this.ext);
-/*Line 174 - 'AtomPhoneControl.js' */                element.appendChild(this.msg);
+/*Line 132 - 'AtomPhoneControl.js' */            onFormat: function () {
+/*Line 133 - 'AtomPhoneControl.js' */                if (this._isFormatting) return;
+/*Line 134 - 'AtomPhoneControl.js' */                this._isFormatting = true;
 
-/*Line 176 - 'AtomPhoneControl.js' */                var caller = this;
+/*Line 136 - 'AtomPhoneControl.js' */                var r = this._countries;
+/*Line 137 - 'AtomPhoneControl.js' */                var options = this.cs.options;
+/*Line 138 - 'AtomPhoneControl.js' */                options.length = 0;
+/*Line 139 - 'AtomPhoneControl.js' */                var ae = new AtomEnumerator(r);
+/*Line 140 - 'AtomPhoneControl.js' */                while (ae.next()) {
+/*Line 141 - 'AtomPhoneControl.js' */                    var ci = ae.current();
+/*Line 142 - 'AtomPhoneControl.js' */                    if (!ci.valueIndex) {
+/*Line 143 - 'AtomPhoneControl.js' */                        ci.label = ci.label;
+/*Line 144 - 'AtomPhoneControl.js' */                        ci.valueIndex = ae.currentIndex();
+/*Line 145 - 'AtomPhoneControl.js' */                    }
+/*Line 146 - 'AtomPhoneControl.js' */                    options[ae.currentIndex()] = new Option(ci.label, ci.valueIndex, false, false);
+/*Line 147 - 'AtomPhoneControl.js' */                }
 
-/*Line 178 - 'AtomPhoneControl.js' */                this.onKeyUpLater = function (e) {
-/*Line 179 - 'AtomPhoneControl.js' */                    var evt = e;
-/*Line 180 - 'AtomPhoneControl.js' */                    caller.onDataChange(evt);
-/*Line 181 - 'AtomPhoneControl.js' */                };
+/*Line 149 - 'AtomPhoneControl.js' */                this.setupValues();
 
-/*Line 183 - 'AtomPhoneControl.js' */                this.bindEvent(this.cs, "change", "onCountryChange");
-/*Line 184 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "change", "onDataChange");
-/*Line 185 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "keyup", "onKeyUpLater");
-/*Line 186 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "keypress", "onKeyUpLater");
-/*Line 187 - 'AtomPhoneControl.js' */                this.bindEvent(this.ext, "change", "onDataChange");
-/*Line 188 - 'AtomPhoneControl.js' */                this.bindEvent(this.msg, "change", "onDataChange");
+/*Line 151 - 'AtomPhoneControl.js' */                var cs = this.cs;
+/*Line 152 - 'AtomPhoneControl.js' */                if (cs.selectedIndex == -1)
+/*Line 153 - 'AtomPhoneControl.js' */                    return;
+/*Line 154 - 'AtomPhoneControl.js' */                var ci = this._countries[cs.selectedIndex];
 
-/*Line 190 - 'AtomPhoneControl.js' */                $(this._element).addClass("atom-phone-control");
-/*Line 191 - 'AtomPhoneControl.js' */                $(this.num).addClass("atom-pc-num");
-/*Line 192 - 'AtomPhoneControl.js' */                $(this.msg).addClass("atom-pc-msg");
-/*Line 193 - 'AtomPhoneControl.js' */                $(this.cs).addClass("atom-pc-cs");
-/*Line 194 - 'AtomPhoneControl.js' */                $(this.ext).addClass("atom-pc-ext");
+/*Line 156 - 'AtomPhoneControl.js' */                if (ci.format) {
+/*Line 157 - 'AtomPhoneControl.js' */                    $(this.num).mask(ci.format);
+/*Line 158 - 'AtomPhoneControl.js' */                } else {
+/*Line 159 - 'AtomPhoneControl.js' */                    $(this.num).unmask();
+/*Line 160 - 'AtomPhoneControl.js' */                }
+/*Line 161 - 'AtomPhoneControl.js' */                this._isFormatting = false;
+/*Line 162 - 'AtomPhoneControl.js' */            },
 
 
-/*Line 197 - 'AtomPhoneControl.js' */                base.init.call(this);
-/*Line 198 - 'AtomPhoneControl.js' */                var phone = this;
+/*Line 165 - 'AtomPhoneControl.js' */            init: function () {
+/*Line 166 - 'AtomPhoneControl.js' */                this.cs = document.createElement("SELECT");
+/*Line 167 - 'AtomPhoneControl.js' */                //this.cs.style['float'] = "left";
+/*Line 168 - 'AtomPhoneControl.js' */                this.num = document.createElement("INPUT");
+/*Line 169 - 'AtomPhoneControl.js' */                this.num.type = "text";
+/*Line 170 - 'AtomPhoneControl.js' */                //this.num.style.width = "150px";
+/*Line 171 - 'AtomPhoneControl.js' */                //this.num.style['float'] = "left";
+/*Line 172 - 'AtomPhoneControl.js' */                //this.num.style.marginLeft = "2px";
+/*Line 173 - 'AtomPhoneControl.js' */                this.ext = document.createElement("INPUT");
+/*Line 174 - 'AtomPhoneControl.js' */                //this.num = [this.num1, this.num2, this.num3, this.ext];
+/*Line 175 - 'AtomPhoneControl.js' */                this.ext.type = "text";
+/*Line 176 - 'AtomPhoneControl.js' */                //this.ext.style.width = "30px";
+/*Line 177 - 'AtomPhoneControl.js' */                //this.ext.style['float'] = "left";
+/*Line 178 - 'AtomPhoneControl.js' */                //this.ext.style.marginLeft = "2px";
+/*Line 179 - 'AtomPhoneControl.js' */                $(this.ext).attr("placeholder", "Ext.");
+/*Line 180 - 'AtomPhoneControl.js' */                this.msg = document.createElement("INPUT");
+/*Line 181 - 'AtomPhoneControl.js' */                this.msg.type = "text";
+/*Line 182 - 'AtomPhoneControl.js' */                //this.msg.style.width = "100px";
+/*Line 183 - 'AtomPhoneControl.js' */                //this.msg.style['float'] = "left";
+/*Line 184 - 'AtomPhoneControl.js' */                //this.msg.style.marginLeft = "2px";
+/*Line 185 - 'AtomPhoneControl.js' */                $(this.msg).attr("placeholder", "Message");
 
-/*Line 200 - 'AtomPhoneControl.js' */                WebAtoms.dispatcher.callLater(function () {
-/*Line 201 - 'AtomPhoneControl.js' */                    phone.onFormat();
-/*Line 202 - 'AtomPhoneControl.js' */                });
+/*Line 187 - 'AtomPhoneControl.js' */                var element = this.get_element();
+/*Line 188 - 'AtomPhoneControl.js' */                //element.style.width = "450px";
+/*Line 189 - 'AtomPhoneControl.js' */                element.appendChild(this.cs);
+/*Line 190 - 'AtomPhoneControl.js' */                element.appendChild(this.num);
+/*Line 191 - 'AtomPhoneControl.js' */                element.appendChild(this.ext);
+/*Line 192 - 'AtomPhoneControl.js' */                element.appendChild(this.msg);
 
-/*Line 204 - 'AtomPhoneControl.js' */            }
-/*Line 205 - 'AtomPhoneControl.js' */        }
-/*Line 206 - 'AtomPhoneControl.js' */    });
-/*Line 207 - 'AtomPhoneControl.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 194 - 'AtomPhoneControl.js' */                var caller = this;
+
+/*Line 196 - 'AtomPhoneControl.js' */                this.onKeyUpLater = function (e) {
+/*Line 197 - 'AtomPhoneControl.js' */                    var evt = e;
+/*Line 198 - 'AtomPhoneControl.js' */                    caller.onDataChange(evt);
+/*Line 199 - 'AtomPhoneControl.js' */                };
+
+/*Line 201 - 'AtomPhoneControl.js' */                this.bindEvent(this.cs, "change", "onCountryChange");
+/*Line 202 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "change", "onDataChange");
+/*Line 203 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "keyup", "onKeyUpLater");
+/*Line 204 - 'AtomPhoneControl.js' */                this.bindEvent(this.num, "keypress", "onKeyUpLater");
+/*Line 205 - 'AtomPhoneControl.js' */                this.bindEvent(this.ext, "change", "onDataChange");
+/*Line 206 - 'AtomPhoneControl.js' */                this.bindEvent(this.msg, "change", "onDataChange");
+
+/*Line 208 - 'AtomPhoneControl.js' */                $(this._element).addClass("atom-phone-control");
+/*Line 209 - 'AtomPhoneControl.js' */                $(this.num).addClass("atom-pc-num");
+/*Line 210 - 'AtomPhoneControl.js' */                $(this.msg).addClass("atom-pc-msg");
+/*Line 211 - 'AtomPhoneControl.js' */                $(this.cs).addClass("atom-pc-cs");
+/*Line 212 - 'AtomPhoneControl.js' */                $(this.ext).addClass("atom-pc-ext");
+
+
+/*Line 215 - 'AtomPhoneControl.js' */                base.init.call(this);
+/*Line 216 - 'AtomPhoneControl.js' */                var phone = this;
+
+/*Line 218 - 'AtomPhoneControl.js' */                WebAtoms.dispatcher.callLater(function () {
+/*Line 219 - 'AtomPhoneControl.js' */                    phone.onFormat();
+/*Line 220 - 'AtomPhoneControl.js' */                });
+
+/*Line 222 - 'AtomPhoneControl.js' */            }
+/*Line 223 - 'AtomPhoneControl.js' */        }
+/*Line 224 - 'AtomPhoneControl.js' */    });
+/*Line 225 - 'AtomPhoneControl.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomRadioButtonList.js' */
 
 /*Line 2 - 'AtomRadioButtonList.js' */(function (baseType) {
