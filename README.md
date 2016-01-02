@@ -26,10 +26,11 @@ Features
 9. Powerful State Machine
 10. Customizable Templates
 11. Scalability (Able to manage 1000s of rows of data)
-12. Application State Persistance in URL
-13. Multiple Scopes for Scope Isolation
-14. Ready to use Line of Business Components
-15. Works on Internet Explore 9+ (IE8 is supported but you may have to rewrite CSS), Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
+12. UI Virtualization (Reusing and minimizing visible HTML Nodes automatically)
+13. Application State Persistance in URL
+14. Multiple Scopes for Scope Isolation
+15. Ready to use Line of Business Components
+16. Works on Internet Explore 9+ (IE8 is supported but you may have to rewrite CSS), Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
 
 Web Atoms is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.

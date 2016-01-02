@@ -15,7 +15,9 @@
              atom-ui-virtualize="{true}"
              style="height:100px; overflow:auto"
              atom-name="movieList">
-            <div atom-template="itemTemplate" style="height:30px;">
+            <!-- Height must be specified for Vertical Layout -->
+            <div atom-template="itemTemplate" 
+                 style="height:30px;">
                 <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
                 <span atom-text="{ $data.MovieName }"></span>
             </div>
