@@ -1,12 +1,12 @@
-Atoms.js
+Web Atoms.js
 ========
 Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight.
 
-Atoms.js is the only JavaScript framework with precompiler [Atoms.js PreCompiler](https://github.com/neurospeech/atoms-pre-compiler).
+Web Atoms.js is the only JavaScript framework with precompiler [Atoms.js PreCompiler](https://github.com/neurospeech/atoms-pre-compiler).
 AtomsPreCompiler compiles atoms markup into valid HTML5 by breaking up inline expressions into
 generated JavaScript. This pre-compiled document runs in strict mode without using `eval` without compromising speed.
 
-![Atoms.js](https://github.com/atoms-js/atoms.js/raw/master/res/atoms-promo.png)
+![Atoms.js](https://github.com/neurospeech/web-atoms.js/raw/master/res/atoms-promo.png)
 
 Visual Studio Auto Intellisense - Atoms.js Power Tools 2013
 -----------------------------------------------------------
@@ -31,7 +31,7 @@ Features
 14. Ready to use Line of Business Components
 15. Works on Internet Explore 9+ (IE8 is supported but you may have to rewrite CSS), Firefox 10+, Chrome 10+, Safari 4+ and any WebKit based Browser
 
-Atoms.js (previously known as Web Atoms JS) is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
+Web Atoms is inspired from Adobe Flex and Microsoft Silverlight and has very small learning curve. 
 The project contains text template defined in Visual Studio C# Project which recreates output JS files and CSS files.
 
 Download Free Book
@@ -54,7 +54,7 @@ Each MVC JavaScript requires you to fully understand JavaScript, where else Atom
 Documentation
 -------------
 
-<a href="http://atoms.azurewebsites.net/docs/index.html" target="_blank">Hosted Documentation</a>
+<a href="http://web-atoms.neurospeech.com/docs/index.html" target="_blank">Hosted Documentation</a>
 
 In order to view documentation with all samples, you can simply run the Visual Studio Project and test each sample along with the documentation.
 
