@@ -80,6 +80,12 @@ namespace Atoms.Web.Module
             protected override byte[] ProcessBuffer(byte[] p)
             {
                 try{
+
+                    var cachify = context.Request.QueryString["cachify"];
+                    if (cachify.EqualsIgnoreCase("no")) {
+                        return p;
+                    }
+
                 Encoding e = context.Response.ContentEncoding;
 
 
