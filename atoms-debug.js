@@ -7986,265 +7986,277 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 20 - 'AtomAutoCompleteBox.js' */            displayLabel: undefined
 /*Line 21 - 'AtomAutoCompleteBox.js' */        },
 /*Line 22 - 'AtomAutoCompleteBox.js' */        methods: {
-/*Line 23 - 'AtomAutoCompleteBox.js' */            get_offsetLeft: function () {
-/*Line 24 - 'AtomAutoCompleteBox.js' */                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
-/*Line 25 - 'AtomAutoCompleteBox.js' */                return $(this._element).offset().left;
-/*Line 26 - 'AtomAutoCompleteBox.js' */            },
-/*Line 27 - 'AtomAutoCompleteBox.js' */            get_offsetTop: function () {
-/*Line 28 - 'AtomAutoCompleteBox.js' */                return $(this._element).offset().top;
-/*Line 29 - 'AtomAutoCompleteBox.js' */            },
+/*Line 23 - 'AtomAutoCompleteBox.js' */            set_required: function (v) {
+/*Line 24 - 'AtomAutoCompleteBox.js' */                this._required = v;
+/*Line 25 - 'AtomAutoCompleteBox.js' */                if (v) {
+/*Line 26 - 'AtomAutoCompleteBox.js' */                    this.bind(this._element, "invalid", [["value"]], false, function (v1) { return v1 ? null : "Required" });
+/*Line 27 - 'AtomAutoCompleteBox.js' */                } else {
+/*Line 28 - 'AtomAutoCompleteBox.js' */                    this.clearBinding(this._element, "invalid");
+/*Line 29 - 'AtomAutoCompleteBox.js' */                }
 
-/*Line 31 - 'AtomAutoCompleteBox.js' */            get_offsetWidth: function () {
-/*Line 32 - 'AtomAutoCompleteBox.js' */                return $(this._inputBox).offset().width;
-/*Line 33 - 'AtomAutoCompleteBox.js' */            },
-
-/*Line 35 - 'AtomAutoCompleteBox.js' */            set_itemsUrl: function (v) {
-/*Line 36 - 'AtomAutoCompleteBox.js' */                var url = "[ !$owner.keyPressed ? undefined : AtomPromise.json('" + v + "').showProgress(false) ]";
-/*Line 37 - 'AtomAutoCompleteBox.js' */                this.setValue("items", url, true, this._element);
+/*Line 31 - 'AtomAutoCompleteBox.js' */            },
+/*Line 32 - 'AtomAutoCompleteBox.js' */            get_required: function () {
+/*Line 33 - 'AtomAutoCompleteBox.js' */                return this._required;
+/*Line 34 - 'AtomAutoCompleteBox.js' */            },
+/*Line 35 - 'AtomAutoCompleteBox.js' */            get_offsetLeft: function () {
+/*Line 36 - 'AtomAutoCompleteBox.js' */                //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
+/*Line 37 - 'AtomAutoCompleteBox.js' */                return $(this._element).offset().left;
 /*Line 38 - 'AtomAutoCompleteBox.js' */            },
+/*Line 39 - 'AtomAutoCompleteBox.js' */            get_offsetTop: function () {
+/*Line 40 - 'AtomAutoCompleteBox.js' */                return $(this._element).offset().top;
+/*Line 41 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 40 - 'AtomAutoCompleteBox.js' */            set_isPopupOpen: function (v) {
-/*Line 41 - 'AtomAutoCompleteBox.js' */                this._isPopupOpen = v;
-/*Line 42 - 'AtomAutoCompleteBox.js' */                if (v) {
-/*Line 43 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetTop");
-/*Line 44 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetLeft");
-/*Line 45 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetWidth");
-/*Line 46 - 'AtomAutoCompleteBox.js' */                    //this.bindEvent(window, "click", "onWindowClick");
-/*Line 47 - 'AtomAutoCompleteBox.js' */                    var _this = this;
-/*Line 48 - 'AtomAutoCompleteBox.js' */                    this.trySelect();
-/*Line 49 - 'AtomAutoCompleteBox.js' */                    this.bindEvent(window, "click", function () {
-/*Line 50 - 'AtomAutoCompleteBox.js' */                        _this.onWindowClick.apply(_this, arguments);
-/*Line 51 - 'AtomAutoCompleteBox.js' */                    });
-/*Line 52 - 'AtomAutoCompleteBox.js' */                } else {
-/*Line 53 - 'AtomAutoCompleteBox.js' */                    //this.unbindEvent(window, "click", "onWindowClick");
-/*Line 54 - 'AtomAutoCompleteBox.js' */                    this.unbindEvent(window, "click");
-/*Line 55 - 'AtomAutoCompleteBox.js' */                }
-/*Line 56 - 'AtomAutoCompleteBox.js' */            },
+/*Line 43 - 'AtomAutoCompleteBox.js' */            get_offsetWidth: function () {
+/*Line 44 - 'AtomAutoCompleteBox.js' */                return $(this._inputBox).offset().width;
+/*Line 45 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 58 - 'AtomAutoCompleteBox.js' */            onSelectedItemsChanged: function () {
-/*Line 59 - 'AtomAutoCompleteBox.js' */                if (this._onUIChanged) {
-/*Line 60 - 'AtomAutoCompleteBox.js' */                    if (this._selectedItems.length > 0) {
-/*Line 61 - 'AtomAutoCompleteBox.js' */                        this.refreshLabel();
-/*Line 62 - 'AtomAutoCompleteBox.js' */                    }
-/*Line 63 - 'AtomAutoCompleteBox.js' */                }
-/*Line 64 - 'AtomAutoCompleteBox.js' */                base.onSelectedItemsChanged.apply(this, arguments);
-/*Line 65 - 'AtomAutoCompleteBox.js' */            },
+/*Line 47 - 'AtomAutoCompleteBox.js' */            set_itemsUrl: function (v) {
+/*Line 48 - 'AtomAutoCompleteBox.js' */                var url = "[ !$owner.keyPressed ? undefined : AtomPromise.json('" + v + "').showProgress(false) ]";
+/*Line 49 - 'AtomAutoCompleteBox.js' */                this.setValue("items", url, true, this._element);
+/*Line 50 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 67 - 'AtomAutoCompleteBox.js' */            onClick: function (e) {
-/*Line 68 - 'AtomAutoCompleteBox.js' */                base.onClick.apply(this, arguments);
-/*Line 69 - 'AtomAutoCompleteBox.js' */                this._backupValue = this.get_value();
-/*Line 70 - 'AtomAutoCompleteBox.js' */                this.refreshLabel();
-/*Line 71 - 'AtomAutoCompleteBox.js' */                this._backupLabel = this.get_displayLabel();
-/*Line 72 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "keyPressed", false);
-/*Line 73 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", false);
-/*Line 74 - 'AtomAutoCompleteBox.js' */            },
+/*Line 52 - 'AtomAutoCompleteBox.js' */            set_isPopupOpen: function (v) {
+/*Line 53 - 'AtomAutoCompleteBox.js' */                this._isPopupOpen = v;
+/*Line 54 - 'AtomAutoCompleteBox.js' */                if (v) {
+/*Line 55 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetTop");
+/*Line 56 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetLeft");
+/*Line 57 - 'AtomAutoCompleteBox.js' */                    AtomBinder.refreshValue(this, "offsetWidth");
+/*Line 58 - 'AtomAutoCompleteBox.js' */                    //this.bindEvent(window, "click", "onWindowClick");
+/*Line 59 - 'AtomAutoCompleteBox.js' */                    var _this = this;
+/*Line 60 - 'AtomAutoCompleteBox.js' */                    this.trySelect();
+/*Line 61 - 'AtomAutoCompleteBox.js' */                    this.bindEvent(window, "click", function () {
+/*Line 62 - 'AtomAutoCompleteBox.js' */                        _this.onWindowClick.apply(_this, arguments);
+/*Line 63 - 'AtomAutoCompleteBox.js' */                    });
+/*Line 64 - 'AtomAutoCompleteBox.js' */                } else {
+/*Line 65 - 'AtomAutoCompleteBox.js' */                    //this.unbindEvent(window, "click", "onWindowClick");
+/*Line 66 - 'AtomAutoCompleteBox.js' */                    this.unbindEvent(window, "click");
+/*Line 67 - 'AtomAutoCompleteBox.js' */                }
+/*Line 68 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 76 - 'AtomAutoCompleteBox.js' */            restoreSelection: function () {
-/*Line 77 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", false);
-/*Line 78 - 'AtomAutoCompleteBox.js' */                if (this._backupValue) {
-/*Line 79 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "value", this._backupValue);
-/*Line 80 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "displayLabel", this._backupLabel);
-/*Line 81 - 'AtomAutoCompleteBox.js' */                    this._backupValue = null;
-/*Line 82 - 'AtomAutoCompleteBox.js' */                } else {
-/*Line 83 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "selectedIndex", -1);
-/*Line 84 - 'AtomAutoCompleteBox.js' */                }
-/*Line 85 - 'AtomAutoCompleteBox.js' */            },
+/*Line 70 - 'AtomAutoCompleteBox.js' */            onSelectedItemsChanged: function () {
+/*Line 71 - 'AtomAutoCompleteBox.js' */                if (this._onUIChanged) {
+/*Line 72 - 'AtomAutoCompleteBox.js' */                    if (this._selectedItems.length > 0) {
+/*Line 73 - 'AtomAutoCompleteBox.js' */                        this.refreshLabel();
+/*Line 74 - 'AtomAutoCompleteBox.js' */                    }
+/*Line 75 - 'AtomAutoCompleteBox.js' */                }
+/*Line 76 - 'AtomAutoCompleteBox.js' */                base.onSelectedItemsChanged.apply(this, arguments);
+/*Line 77 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 87 - 'AtomAutoCompleteBox.js' */            onKeyUp: function (e) {
+/*Line 79 - 'AtomAutoCompleteBox.js' */            onClick: function (e) {
+/*Line 80 - 'AtomAutoCompleteBox.js' */                base.onClick.apply(this, arguments);
+/*Line 81 - 'AtomAutoCompleteBox.js' */                this._backupValue = this.get_value();
+/*Line 82 - 'AtomAutoCompleteBox.js' */                this.refreshLabel();
+/*Line 83 - 'AtomAutoCompleteBox.js' */                this._backupLabel = this.get_displayLabel();
+/*Line 84 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "keyPressed", false);
+/*Line 85 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", false);
+/*Line 86 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 89 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", true);
+/*Line 88 - 'AtomAutoCompleteBox.js' */            restoreSelection: function () {
+/*Line 89 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", false);
+/*Line 90 - 'AtomAutoCompleteBox.js' */                if (this._backupValue) {
+/*Line 91 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "value", this._backupValue);
+/*Line 92 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "displayLabel", this._backupLabel);
+/*Line 93 - 'AtomAutoCompleteBox.js' */                    this._backupValue = null;
+/*Line 94 - 'AtomAutoCompleteBox.js' */                } else {
+/*Line 95 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "selectedIndex", -1);
+/*Line 96 - 'AtomAutoCompleteBox.js' */                }
+/*Line 97 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 91 - 'AtomAutoCompleteBox.js' */                switch (e.keyCode) {
-/*Line 92 - 'AtomAutoCompleteBox.js' */                    case 27:
-/*Line 93 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
-/*Line 94 - 'AtomAutoCompleteBox.js' */                        this.restoreSelection();
-/*Line 95 - 'AtomAutoCompleteBox.js' */                        return;
-/*Line 96 - 'AtomAutoCompleteBox.js' */                    case 13:
-/*Line 97 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
-/*Line 98 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "isPopupOpen", false);
-/*Line 99 - 'AtomAutoCompleteBox.js' */                        this._backupValue = this.get_value();
-/*Line 100 - 'AtomAutoCompleteBox.js' */                        this.refreshLabel();
-/*Line 101 - 'AtomAutoCompleteBox.js' */                        this._backupLabel = this.get_displayLabel();
-/*Line 102 - 'AtomAutoCompleteBox.js' */                        return AtomUI.cancelEvent(e);
-/*Line 103 - 'AtomAutoCompleteBox.js' */                    case 37:
-/*Line 104 - 'AtomAutoCompleteBox.js' */                        // Left
-/*Line 105 - 'AtomAutoCompleteBox.js' */                        break;
-/*Line 106 - 'AtomAutoCompleteBox.js' */                    case 38:
-/*Line 107 - 'AtomAutoCompleteBox.js' */                        // up
-/*Line 108 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
-/*Line 109 - 'AtomAutoCompleteBox.js' */                        this.moveSelection(true);
-/*Line 110 - 'AtomAutoCompleteBox.js' */                        return;
-/*Line 111 - 'AtomAutoCompleteBox.js' */                    case 39:
-/*Line 112 - 'AtomAutoCompleteBox.js' */                        // right
-/*Line 113 - 'AtomAutoCompleteBox.js' */                        break;
-/*Line 114 - 'AtomAutoCompleteBox.js' */                    case 40:
-/*Line 115 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
-/*Line 116 - 'AtomAutoCompleteBox.js' */                        this.moveSelection(false);
-/*Line 117 - 'AtomAutoCompleteBox.js' */                        return;
-/*Line 118 - 'AtomAutoCompleteBox.js' */                    default:
-/*Line 119 - 'AtomAutoCompleteBox.js' */                        // try selecting complete word...
-/*Line 120 - 'AtomAutoCompleteBox.js' */                        var caller = this;
-/*Line 121 - 'AtomAutoCompleteBox.js' */                        this.dispatcher.callLater(function () {
-/*Line 122 - 'AtomAutoCompleteBox.js' */                            caller.trySelect();
-/*Line 123 - 'AtomAutoCompleteBox.js' */                        });
-/*Line 124 - 'AtomAutoCompleteBox.js' */                        break;
-/*Line 125 - 'AtomAutoCompleteBox.js' */                }
+/*Line 99 - 'AtomAutoCompleteBox.js' */            onKeyUp: function (e) {
 
-/*Line 127 - 'AtomAutoCompleteBox.js' */                if (this.oldTimeout) {
-/*Line 128 - 'AtomAutoCompleteBox.js' */                    clearTimeout(this.oldTimeout);
-/*Line 129 - 'AtomAutoCompleteBox.js' */                }
-/*Line 130 - 'AtomAutoCompleteBox.js' */                var _this = this;
-/*Line 131 - 'AtomAutoCompleteBox.js' */                this.oldTimeout = setTimeout(function () {
-/*Line 132 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(_this, "keyPressed", true);
-/*Line 133 - 'AtomAutoCompleteBox.js' */                }, 500);
+/*Line 101 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", true);
 
-/*Line 135 - 'AtomAutoCompleteBox.js' */            },
+/*Line 103 - 'AtomAutoCompleteBox.js' */                switch (e.keyCode) {
+/*Line 104 - 'AtomAutoCompleteBox.js' */                    case 27:
+/*Line 105 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
+/*Line 106 - 'AtomAutoCompleteBox.js' */                        this.restoreSelection();
+/*Line 107 - 'AtomAutoCompleteBox.js' */                        return;
+/*Line 108 - 'AtomAutoCompleteBox.js' */                    case 13:
+/*Line 109 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
+/*Line 110 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "isPopupOpen", false);
+/*Line 111 - 'AtomAutoCompleteBox.js' */                        this._backupValue = this.get_value();
+/*Line 112 - 'AtomAutoCompleteBox.js' */                        this.refreshLabel();
+/*Line 113 - 'AtomAutoCompleteBox.js' */                        this._backupLabel = this.get_displayLabel();
+/*Line 114 - 'AtomAutoCompleteBox.js' */                        return AtomUI.cancelEvent(e);
+/*Line 115 - 'AtomAutoCompleteBox.js' */                    case 37:
+/*Line 116 - 'AtomAutoCompleteBox.js' */                        // Left
+/*Line 117 - 'AtomAutoCompleteBox.js' */                        break;
+/*Line 118 - 'AtomAutoCompleteBox.js' */                    case 38:
+/*Line 119 - 'AtomAutoCompleteBox.js' */                        // up
+/*Line 120 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
+/*Line 121 - 'AtomAutoCompleteBox.js' */                        this.moveSelection(true);
+/*Line 122 - 'AtomAutoCompleteBox.js' */                        return;
+/*Line 123 - 'AtomAutoCompleteBox.js' */                    case 39:
+/*Line 124 - 'AtomAutoCompleteBox.js' */                        // right
+/*Line 125 - 'AtomAutoCompleteBox.js' */                        break;
+/*Line 126 - 'AtomAutoCompleteBox.js' */                    case 40:
+/*Line 127 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "keyPressed", false);
+/*Line 128 - 'AtomAutoCompleteBox.js' */                        this.moveSelection(false);
+/*Line 129 - 'AtomAutoCompleteBox.js' */                        return;
+/*Line 130 - 'AtomAutoCompleteBox.js' */                    default:
+/*Line 131 - 'AtomAutoCompleteBox.js' */                        // try selecting complete word...
+/*Line 132 - 'AtomAutoCompleteBox.js' */                        var caller = this;
+/*Line 133 - 'AtomAutoCompleteBox.js' */                        this.dispatcher.callLater(function () {
+/*Line 134 - 'AtomAutoCompleteBox.js' */                            caller.trySelect();
+/*Line 135 - 'AtomAutoCompleteBox.js' */                        });
+/*Line 136 - 'AtomAutoCompleteBox.js' */                        break;
+/*Line 137 - 'AtomAutoCompleteBox.js' */                }
 
-/*Line 137 - 'AtomAutoCompleteBox.js' */            trySelect: function () {
+/*Line 139 - 'AtomAutoCompleteBox.js' */                if (this.oldTimeout) {
+/*Line 140 - 'AtomAutoCompleteBox.js' */                    clearTimeout(this.oldTimeout);
+/*Line 141 - 'AtomAutoCompleteBox.js' */                }
+/*Line 142 - 'AtomAutoCompleteBox.js' */                var _this = this;
+/*Line 143 - 'AtomAutoCompleteBox.js' */                this.oldTimeout = setTimeout(function () {
+/*Line 144 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(_this, "keyPressed", true);
+/*Line 145 - 'AtomAutoCompleteBox.js' */                }, 500);
 
-/*Line 139 - 'AtomAutoCompleteBox.js' */                if (!this._items || this._items.length == 0)
-/*Line 140 - 'AtomAutoCompleteBox.js' */                    return;
+/*Line 147 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 142 - 'AtomAutoCompleteBox.js' */                //if (this.get_selectedIndex() != -1)
-/*Line 143 - 'AtomAutoCompleteBox.js' */                //    return;
+/*Line 149 - 'AtomAutoCompleteBox.js' */            trySelect: function () {
 
-/*Line 145 - 'AtomAutoCompleteBox.js' */                var ae = new AtomEnumerator(this._items);
-/*Line 146 - 'AtomAutoCompleteBox.js' */                var lp = this._labelPath;
+/*Line 151 - 'AtomAutoCompleteBox.js' */                if (!this._items || this._items.length == 0)
+/*Line 152 - 'AtomAutoCompleteBox.js' */                    return;
 
-/*Line 148 - 'AtomAutoCompleteBox.js' */                var cl = this._displayLabel;
+/*Line 154 - 'AtomAutoCompleteBox.js' */                //if (this.get_selectedIndex() != -1)
+/*Line 155 - 'AtomAutoCompleteBox.js' */                //    return;
 
-/*Line 150 - 'AtomAutoCompleteBox.js' */                if (cl)
-/*Line 151 - 'AtomAutoCompleteBox.js' */                    cl = cl.toLowerCase();
+/*Line 157 - 'AtomAutoCompleteBox.js' */                var ae = new AtomEnumerator(this._items);
+/*Line 158 - 'AtomAutoCompleteBox.js' */                var lp = this._labelPath;
 
-/*Line 153 - 'AtomAutoCompleteBox.js' */                while (ae.next()) {
-/*Line 154 - 'AtomAutoCompleteBox.js' */                    var item = ae.current();
-/*Line 155 - 'AtomAutoCompleteBox.js' */                    var l = item;
-/*Line 156 - 'AtomAutoCompleteBox.js' */                    if (lp)
-/*Line 157 - 'AtomAutoCompleteBox.js' */                        l = l[lp];
-/*Line 158 - 'AtomAutoCompleteBox.js' */                    if (l.toLowerCase().indexOf(cl)==0) {
-/*Line 159 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "selectedItem", item);
-/*Line 160 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "selectedText", l);
-/*Line 161 - 'AtomAutoCompleteBox.js' */                        this.bringSelectionIntoView();
-/*Line 162 - 'AtomAutoCompleteBox.js' */                        return;
-/*Line 163 - 'AtomAutoCompleteBox.js' */                    }
-/*Line 164 - 'AtomAutoCompleteBox.js' */                }
-/*Line 165 - 'AtomAutoCompleteBox.js' */            },
+/*Line 160 - 'AtomAutoCompleteBox.js' */                var cl = this._displayLabel;
 
-/*Line 167 - 'AtomAutoCompleteBox.js' */            moveSelection: function (up) {
-/*Line 168 - 'AtomAutoCompleteBox.js' */                if (!this._items || !this._items.length)
-/*Line 169 - 'AtomAutoCompleteBox.js' */                    return;
-/*Line 170 - 'AtomAutoCompleteBox.js' */                var i = this.get_selectedIndex();
+/*Line 162 - 'AtomAutoCompleteBox.js' */                if (cl)
+/*Line 163 - 'AtomAutoCompleteBox.js' */                    cl = cl.toLowerCase();
 
-/*Line 172 - 'AtomAutoCompleteBox.js' */                if (i == -1) {
-/*Line 173 - 'AtomAutoCompleteBox.js' */                    this.backupLabel = this.get_displayLabel();
-/*Line 174 - 'AtomAutoCompleteBox.js' */                }
+/*Line 165 - 'AtomAutoCompleteBox.js' */                while (ae.next()) {
+/*Line 166 - 'AtomAutoCompleteBox.js' */                    var item = ae.current();
+/*Line 167 - 'AtomAutoCompleteBox.js' */                    var l = item;
+/*Line 168 - 'AtomAutoCompleteBox.js' */                    if (lp)
+/*Line 169 - 'AtomAutoCompleteBox.js' */                        l = l[lp];
+/*Line 170 - 'AtomAutoCompleteBox.js' */                    if (l.toLowerCase().indexOf(cl)==0) {
+/*Line 171 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "selectedItem", item);
+/*Line 172 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(this, "selectedText", l);
+/*Line 173 - 'AtomAutoCompleteBox.js' */                        this.bringSelectionIntoView();
+/*Line 174 - 'AtomAutoCompleteBox.js' */                        return;
+/*Line 175 - 'AtomAutoCompleteBox.js' */                    }
+/*Line 176 - 'AtomAutoCompleteBox.js' */                }
+/*Line 177 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 176 - 'AtomAutoCompleteBox.js' */                i = up ? (i - 1) : (i + 1);
-/*Line 177 - 'AtomAutoCompleteBox.js' */                if (up && i == -2) {
-/*Line 178 - 'AtomAutoCompleteBox.js' */                    i = this._items.length - 1;
-/*Line 179 - 'AtomAutoCompleteBox.js' */                }
-/*Line 180 - 'AtomAutoCompleteBox.js' */                if (!up && i == this._items.length) {
-/*Line 181 - 'AtomAutoCompleteBox.js' */                    i = -1;
-/*Line 182 - 'AtomAutoCompleteBox.js' */                }
+/*Line 179 - 'AtomAutoCompleteBox.js' */            moveSelection: function (up) {
+/*Line 180 - 'AtomAutoCompleteBox.js' */                if (!this._items || !this._items.length)
+/*Line 181 - 'AtomAutoCompleteBox.js' */                    return;
+/*Line 182 - 'AtomAutoCompleteBox.js' */                var i = this.get_selectedIndex();
 
-/*Line 184 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "selectedIndex", i);
-/*Line 185 - 'AtomAutoCompleteBox.js' */                if (i == -1) {
-/*Line 186 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "displayLabel", this.backupLabel || "");
-/*Line 187 - 'AtomAutoCompleteBox.js' */                } else {
-/*Line 188 - 'AtomAutoCompleteBox.js' */                    this.refreshLabel();
-/*Line 189 - 'AtomAutoCompleteBox.js' */                }
-/*Line 190 - 'AtomAutoCompleteBox.js' */            },
+/*Line 184 - 'AtomAutoCompleteBox.js' */                if (i == -1) {
+/*Line 185 - 'AtomAutoCompleteBox.js' */                    this.backupLabel = this.get_displayLabel();
+/*Line 186 - 'AtomAutoCompleteBox.js' */                }
 
-/*Line 192 - 'AtomAutoCompleteBox.js' */            refreshLabel: function () {
-/*Line 193 - 'AtomAutoCompleteBox.js' */                var item = this.get_selectedItem();
-/*Line 194 - 'AtomAutoCompleteBox.js' */                var l = item;
-/*Line 195 - 'AtomAutoCompleteBox.js' */                if (l && this._labelPath) {
-/*Line 196 - 'AtomAutoCompleteBox.js' */                    l = l[this._labelPath];
-/*Line 197 - 'AtomAutoCompleteBox.js' */                }
-/*Line 198 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "displayLabel", l || "");
-/*Line 199 - 'AtomAutoCompleteBox.js' */            },
+/*Line 188 - 'AtomAutoCompleteBox.js' */                i = up ? (i - 1) : (i + 1);
+/*Line 189 - 'AtomAutoCompleteBox.js' */                if (up && i == -2) {
+/*Line 190 - 'AtomAutoCompleteBox.js' */                    i = this._items.length - 1;
+/*Line 191 - 'AtomAutoCompleteBox.js' */                }
+/*Line 192 - 'AtomAutoCompleteBox.js' */                if (!up && i == this._items.length) {
+/*Line 193 - 'AtomAutoCompleteBox.js' */                    i = -1;
+/*Line 194 - 'AtomAutoCompleteBox.js' */                }
 
-/*Line 201 - 'AtomAutoCompleteBox.js' */            onWindowClick: function (e) {
-/*Line 202 - 'AtomAutoCompleteBox.js' */                var se = this._element;
-/*Line 203 - 'AtomAutoCompleteBox.js' */                var p = this._itemsPresenter;
-/*Line 204 - 'AtomAutoCompleteBox.js' */                var childElement = e.target;
-/*Line 205 - 'AtomAutoCompleteBox.js' */                while (childElement.parentNode != null && childElement != se && childElement != p)
-/*Line 206 - 'AtomAutoCompleteBox.js' */                    childElement = childElement.parentNode;
-/*Line 207 - 'AtomAutoCompleteBox.js' */                if (childElement == se || childElement == p)
-/*Line 208 - 'AtomAutoCompleteBox.js' */                    return;
-/*Line 209 - 'AtomAutoCompleteBox.js' */                // close popup....
-/*Line 210 - 'AtomAutoCompleteBox.js' */                this.restoreSelection();
+/*Line 196 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "selectedIndex", i);
+/*Line 197 - 'AtomAutoCompleteBox.js' */                if (i == -1) {
+/*Line 198 - 'AtomAutoCompleteBox.js' */                    AtomBinder.setValue(this, "displayLabel", this.backupLabel || "");
+/*Line 199 - 'AtomAutoCompleteBox.js' */                } else {
+/*Line 200 - 'AtomAutoCompleteBox.js' */                    this.refreshLabel();
+/*Line 201 - 'AtomAutoCompleteBox.js' */                }
+/*Line 202 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 212 - 'AtomAutoCompleteBox.js' */            },
+/*Line 204 - 'AtomAutoCompleteBox.js' */            refreshLabel: function () {
+/*Line 205 - 'AtomAutoCompleteBox.js' */                var item = this.get_selectedItem();
+/*Line 206 - 'AtomAutoCompleteBox.js' */                var l = item;
+/*Line 207 - 'AtomAutoCompleteBox.js' */                if (l && this._labelPath) {
+/*Line 208 - 'AtomAutoCompleteBox.js' */                    l = l[this._labelPath];
+/*Line 209 - 'AtomAutoCompleteBox.js' */                }
+/*Line 210 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "displayLabel", l || "");
+/*Line 211 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 214 - 'AtomAutoCompleteBox.js' */            onInputFocus: function () {
-/*Line 215 - 'AtomAutoCompleteBox.js' */                if (!this._autoOpen)
-/*Line 216 - 'AtomAutoCompleteBox.js' */                    return;
-/*Line 217 - 'AtomAutoCompleteBox.js' */                this._backupValue = this.get_value();
-/*Line 218 - 'AtomAutoCompleteBox.js' */                this._backupLabel = this.get_displayLabel();
-/*Line 219 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", true);
-/*Line 220 - 'AtomAutoCompleteBox.js' */                $(this._inputBox).select();
-/*Line 221 - 'AtomAutoCompleteBox.js' */            },
+/*Line 213 - 'AtomAutoCompleteBox.js' */            onWindowClick: function (e) {
+/*Line 214 - 'AtomAutoCompleteBox.js' */                var se = this._element;
+/*Line 215 - 'AtomAutoCompleteBox.js' */                var p = this._itemsPresenter;
+/*Line 216 - 'AtomAutoCompleteBox.js' */                var childElement = e.target;
+/*Line 217 - 'AtomAutoCompleteBox.js' */                while (childElement.parentNode != null && childElement != se && childElement != p)
+/*Line 218 - 'AtomAutoCompleteBox.js' */                    childElement = childElement.parentNode;
+/*Line 219 - 'AtomAutoCompleteBox.js' */                if (childElement == se || childElement == p)
+/*Line 220 - 'AtomAutoCompleteBox.js' */                    return;
+/*Line 221 - 'AtomAutoCompleteBox.js' */                // close popup....
+/*Line 222 - 'AtomAutoCompleteBox.js' */                this.restoreSelection();
 
-/*Line 223 - 'AtomAutoCompleteBox.js' */            onInputBlur: function () {
-/*Line 224 - 'AtomAutoCompleteBox.js' */                if (this._mouseCapture)
-/*Line 225 - 'AtomAutoCompleteBox.js' */                    return;
-/*Line 226 - 'AtomAutoCompleteBox.js' */                var caller = this;
+/*Line 224 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 228 - 'AtomAutoCompleteBox.js' */                setTimeout(function () {
-/*Line 229 - 'AtomAutoCompleteBox.js' */                    if (caller._isPopupOpen) {
-/*Line 230 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(caller, "isPopupOpen", false);
-/*Line 231 - 'AtomAutoCompleteBox.js' */                        caller.restoreSelection();
-/*Line 232 - 'AtomAutoCompleteBox.js' */                    }
-/*Line 233 - 'AtomAutoCompleteBox.js' */                }, 10);
-/*Line 234 - 'AtomAutoCompleteBox.js' */            },
+/*Line 226 - 'AtomAutoCompleteBox.js' */            onInputFocus: function () {
+/*Line 227 - 'AtomAutoCompleteBox.js' */                if (!this._autoOpen)
+/*Line 228 - 'AtomAutoCompleteBox.js' */                    return;
+/*Line 229 - 'AtomAutoCompleteBox.js' */                this._backupValue = this.get_value();
+/*Line 230 - 'AtomAutoCompleteBox.js' */                this._backupLabel = this.get_displayLabel();
+/*Line 231 - 'AtomAutoCompleteBox.js' */                AtomBinder.setValue(this, "isPopupOpen", true);
+/*Line 232 - 'AtomAutoCompleteBox.js' */                $(this._inputBox).select();
+/*Line 233 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 236 - 'AtomAutoCompleteBox.js' */            onCreated: function () {
+/*Line 235 - 'AtomAutoCompleteBox.js' */            onInputBlur: function () {
+/*Line 236 - 'AtomAutoCompleteBox.js' */                if (this._mouseCapture)
+/*Line 237 - 'AtomAutoCompleteBox.js' */                    return;
+/*Line 238 - 'AtomAutoCompleteBox.js' */                var caller = this;
 
-/*Line 238 - 'AtomAutoCompleteBox.js' */                this._itemsPresenter._logicalParent = this._element;
+/*Line 240 - 'AtomAutoCompleteBox.js' */                setTimeout(function () {
+/*Line 241 - 'AtomAutoCompleteBox.js' */                    if (caller._isPopupOpen) {
+/*Line 242 - 'AtomAutoCompleteBox.js' */                        AtomBinder.setValue(caller, "isPopupOpen", false);
+/*Line 243 - 'AtomAutoCompleteBox.js' */                        caller.restoreSelection();
+/*Line 244 - 'AtomAutoCompleteBox.js' */                    }
+/*Line 245 - 'AtomAutoCompleteBox.js' */                }, 10);
+/*Line 246 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 240 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).remove();
+/*Line 248 - 'AtomAutoCompleteBox.js' */            onCreated: function () {
 
-/*Line 242 - 'AtomAutoCompleteBox.js' */                document.body.appendChild(this._itemsPresenter);
+/*Line 250 - 'AtomAutoCompleteBox.js' */                this._itemsPresenter._logicalParent = this._element;
 
-/*Line 244 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("auto-complete-popup");
+/*Line 252 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).remove();
 
-/*Line 246 - 'AtomAutoCompleteBox.js' */                base.onCreated.apply(this, arguments);
-/*Line 247 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
-/*Line 248 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseout", "onMouseOut");
-/*Line 249 - 'AtomAutoCompleteBox.js' */            },
+/*Line 254 - 'AtomAutoCompleteBox.js' */                document.body.appendChild(this._itemsPresenter);
 
-/*Line 251 - 'AtomAutoCompleteBox.js' */            onMouseOver: function () {
-/*Line 252 - 'AtomAutoCompleteBox.js' */                this._mouseCapture++;
+/*Line 256 - 'AtomAutoCompleteBox.js' */                $(this._itemsPresenter).addClass("auto-complete-popup");
 
-/*Line 254 - 'AtomAutoCompleteBox.js' */            },
+/*Line 258 - 'AtomAutoCompleteBox.js' */                base.onCreated.apply(this, arguments);
+/*Line 259 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseover", "onMouseOver");
+/*Line 260 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._itemsPresenter, "mouseout", "onMouseOut");
+/*Line 261 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 256 - 'AtomAutoCompleteBox.js' */            onMouseOut: function () {
-/*Line 257 - 'AtomAutoCompleteBox.js' */                var _this = this;
-/*Line 258 - 'AtomAutoCompleteBox.js' */                setTimeout(function () {
-/*Line 259 - 'AtomAutoCompleteBox.js' */                    _this._mouseCapture--;
+/*Line 263 - 'AtomAutoCompleteBox.js' */            onMouseOver: function () {
+/*Line 264 - 'AtomAutoCompleteBox.js' */                this._mouseCapture++;
 
-/*Line 261 - 'AtomAutoCompleteBox.js' */                }, 1000);
-/*Line 262 - 'AtomAutoCompleteBox.js' */            },
+/*Line 266 - 'AtomAutoCompleteBox.js' */            },
 
-/*Line 264 - 'AtomAutoCompleteBox.js' */            init: function () {
+/*Line 268 - 'AtomAutoCompleteBox.js' */            onMouseOut: function () {
+/*Line 269 - 'AtomAutoCompleteBox.js' */                var _this = this;
+/*Line 270 - 'AtomAutoCompleteBox.js' */                setTimeout(function () {
+/*Line 271 - 'AtomAutoCompleteBox.js' */                    _this._mouseCapture--;
 
-/*Line 266 - 'AtomAutoCompleteBox.js' */                base.init.apply(this, arguments);
-/*Line 267 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "focus", "onInputFocus");
-/*Line 268 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "blur", "onInputBlur");
-/*Line 269 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "keyup", "onKeyUp");
-/*Line 270 - 'AtomAutoCompleteBox.js' */            },
-/*Line 271 - 'AtomAutoCompleteBox.js' */            dispose: function () {
-/*Line 272 - 'AtomAutoCompleteBox.js' */                if(this._itemsPresenter){
-/*Line 273 - 'AtomAutoCompleteBox.js' */                    this.disposeChildren(this._itemsPresenter);
-/*Line 274 - 'AtomAutoCompleteBox.js' */                    $(this._itemsPresenter).remove();
-/*Line 275 - 'AtomAutoCompleteBox.js' */                    this._itemsPresenter = null;
-/*Line 276 - 'AtomAutoCompleteBox.js' */                }
-/*Line 277 - 'AtomAutoCompleteBox.js' */                base.dispose.call(this);
-/*Line 278 - 'AtomAutoCompleteBox.js' */            }
-/*Line 279 - 'AtomAutoCompleteBox.js' */        }
-/*Line 280 - 'AtomAutoCompleteBox.js' */    });
-/*Line 281 - 'AtomAutoCompleteBox.js' */})(WebAtoms.AtomListBox.prototype);
+/*Line 273 - 'AtomAutoCompleteBox.js' */                }, 1000);
+/*Line 274 - 'AtomAutoCompleteBox.js' */            },
+
+/*Line 276 - 'AtomAutoCompleteBox.js' */            init: function () {
+
+/*Line 278 - 'AtomAutoCompleteBox.js' */                base.init.apply(this, arguments);
+/*Line 279 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "focus", "onInputFocus");
+/*Line 280 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "blur", "onInputBlur");
+/*Line 281 - 'AtomAutoCompleteBox.js' */                this.bindEvent(this._inputBox, "keyup", "onKeyUp");
+/*Line 282 - 'AtomAutoCompleteBox.js' */            },
+/*Line 283 - 'AtomAutoCompleteBox.js' */            dispose: function () {
+/*Line 284 - 'AtomAutoCompleteBox.js' */                if(this._itemsPresenter){
+/*Line 285 - 'AtomAutoCompleteBox.js' */                    this.disposeChildren(this._itemsPresenter);
+/*Line 286 - 'AtomAutoCompleteBox.js' */                    $(this._itemsPresenter).remove();
+/*Line 287 - 'AtomAutoCompleteBox.js' */                    this._itemsPresenter = null;
+/*Line 288 - 'AtomAutoCompleteBox.js' */                }
+/*Line 289 - 'AtomAutoCompleteBox.js' */                base.dispose.call(this);
+/*Line 290 - 'AtomAutoCompleteBox.js' */            }
+/*Line 291 - 'AtomAutoCompleteBox.js' */        }
+/*Line 292 - 'AtomAutoCompleteBox.js' */    });
+/*Line 293 - 'AtomAutoCompleteBox.js' */})(WebAtoms.AtomListBox.prototype);
 
 /*Line 0 - 'AtomComboBox.js' */
 /*Line 1 - 'AtomComboBox.js' */

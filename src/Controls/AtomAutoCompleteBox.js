@@ -21,6 +21,18 @@
             displayLabel: undefined
         },
         methods: {
+            set_required: function (v) {
+                this._required = v;
+                if (v) {
+                    this.bind(this._element, "invalid", [["value"]], false, function (v1) { return v1 ? null : "Required" });
+                } else {
+                    this.clearBinding(this._element, "invalid");
+                }
+
+            },
+            get_required: function () {
+                return this._required;
+            },
             get_offsetLeft: function () {
                 //return $(this._element).offset().left - parseInt( $(atomApplication._element).css("left") , 10);
                 return $(this._element).offset().left;
