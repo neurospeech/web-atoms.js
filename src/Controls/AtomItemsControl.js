@@ -463,6 +463,12 @@
                     element = this._itemsPresenter;
                 }
 
+                var cache = this._cachedItems;
+                if (!cache) {
+                    cache = {};
+                    this.disposeChildren(element);
+                }
+                this._cachedItems = cache;
 
                 //this.disposeChildren(element);
 
@@ -537,8 +543,6 @@
                 var widthX = (( Math.floor( scroller.offsetWidth / (w || 1))) -1) || 1;
                 var heightX = scroller.offsetHeight / (h || 1);
 
-                var cache = this._cachedItems || {};
-                this._cachedItems = cache;
 
                 var removed = [];
 
@@ -607,7 +611,7 @@
 
                 if (/reset|refresh/i.test(mode)) {
                     this._scopes = {};
-                    this._cachedItems = {};
+                    this._cachedItems = null;
                 }
 
                 if (this._uiVirtualize) {
