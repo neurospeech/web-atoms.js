@@ -722,7 +722,10 @@
                         ce = new AtomEnumerator(dirty);
                         while (ce.next()) {
                             var item = ce.current();
-                            self.dispose(item);
+                            //self.dispose(item);
+                            if (item.atomControl) {
+                                item.atomControl.dispose();
+                            }
                             $(item).remove();
                         }
 
