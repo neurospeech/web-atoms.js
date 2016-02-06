@@ -170,11 +170,13 @@ var AtomProperties = {
     },
     required: function (element, value) {
 
-        if (this._element == element) {
-            if (value) {
-                this.bind(this._element, "invalid", [["value"]], false, function (v1) { return v1 ? null : "Required" });
-            } else {
-                this.clearBinding(this._element, "invalid");
+        if (!/input|textarea|select/i.test(element.tagName) && this._element == element) {
+            if (this.get_value) {
+                if (value) {
+                    this.bind(this._element, "invalid", [["value"]], false, function (v1) { return v1 ? null : "Required" });
+                } else {
+                    this.clearBinding(this._element, "invalid");
+                }
             }
             return;
         }
