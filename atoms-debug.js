@@ -5268,120 +5268,121 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 19 - 'AtomDispatcher.js' */                }
 /*Line 20 - 'AtomDispatcher.js' */                var item = this.head;
 /*Line 21 - 'AtomDispatcher.js' */                this.head = item.next;
-/*Line 22 - 'AtomDispatcher.js' */                if (!this.head) {
-/*Line 23 - 'AtomDispatcher.js' */                    // we have reached end...
-/*Line 24 - 'AtomDispatcher.js' */                    this.tail = null;
-/*Line 25 - 'AtomDispatcher.js' */                }
-/*Line 26 - 'AtomDispatcher.js' */                //try{
-/*Line 27 - 'AtomDispatcher.js' */                item();
-/*Line 28 - 'AtomDispatcher.js' */                //} catch (ex) {
+/*Line 22 - 'AtomDispatcher.js' */                item.next = null;
+/*Line 23 - 'AtomDispatcher.js' */                if (!this.head) {
+/*Line 24 - 'AtomDispatcher.js' */                    // we have reached end...
+/*Line 25 - 'AtomDispatcher.js' */                    this.tail = null;
+/*Line 26 - 'AtomDispatcher.js' */                }
+/*Line 27 - 'AtomDispatcher.js' */                //try{
+/*Line 28 - 'AtomDispatcher.js' */                item();
+/*Line 29 - 'AtomDispatcher.js' */                //} catch (ex) {
 
-/*Line 30 - 'AtomDispatcher.js' */                //    if (window.console) {
-/*Line 31 - 'AtomDispatcher.js' */                //        window.console.log(item.toString());
-/*Line 32 - 'AtomDispatcher.js' */                //        window.console.log(JSON.stringify(ex));
-/*Line 33 - 'AtomDispatcher.js' */                //    }
-/*Line 34 - 'AtomDispatcher.js' */                //}
-/*Line 35 - 'AtomDispatcher.js' */                window.setTimeout(this._onTimeout, 1);
-/*Line 36 - 'AtomDispatcher.js' */            };
-/*Line 37 - 'AtomDispatcher.js' */            //this._onTimeout = Function.createDelegate(this, this.onTimeout);
-/*Line 38 - 'AtomDispatcher.js' */            var _this = this;
-/*Line 39 - 'AtomDispatcher.js' */            this._onTimeout = function () {
-/*Line 40 - 'AtomDispatcher.js' */                _this.onTimeout();
-/*Line 41 - 'AtomDispatcher.js' */            };
-/*Line 42 - 'AtomDispatcher.js' */        },
-/*Line 43 - 'AtomDispatcher.js' */        {
-/*Line 44 - 'AtomDispatcher.js' */            pause: function () {
-/*Line 45 - 'AtomDispatcher.js' */                this._paused = true;
-/*Line 46 - 'AtomDispatcher.js' */            },
-/*Line 47 - 'AtomDispatcher.js' */            start: function () {
-/*Line 48 - 'AtomDispatcher.js' */                this._paused = false;
-/*Line 49 - 'AtomDispatcher.js' */                window.setTimeout(this._onTimeout, 1);
-/*Line 50 - 'AtomDispatcher.js' */            },
-/*Line 51 - 'AtomDispatcher.js' */            callLater: function (fn) {
-/*Line 52 - 'AtomDispatcher.js' */                //this.queue.push(fn);
-/*Line 53 - 'AtomDispatcher.js' */                if (this.tail) {
-/*Line 54 - 'AtomDispatcher.js' */                    this.tail.next = fn;
-/*Line 55 - 'AtomDispatcher.js' */                    this.tail = fn;
-/*Line 56 - 'AtomDispatcher.js' */                }
-/*Line 57 - 'AtomDispatcher.js' */                else {
-/*Line 58 - 'AtomDispatcher.js' */                    // queue is empty..
-/*Line 59 - 'AtomDispatcher.js' */                    this.head = fn;
-/*Line 60 - 'AtomDispatcher.js' */                    this.tail = fn;
-/*Line 61 - 'AtomDispatcher.js' */                }
-/*Line 62 - 'AtomDispatcher.js' */                if (!this._paused)
-/*Line 63 - 'AtomDispatcher.js' */                    this.start();
-/*Line 64 - 'AtomDispatcher.js' */            },
-/*Line 65 - 'AtomDispatcher.js' */            setupControls: function () {
+/*Line 31 - 'AtomDispatcher.js' */                //    if (window.console) {
+/*Line 32 - 'AtomDispatcher.js' */                //        window.console.log(item.toString());
+/*Line 33 - 'AtomDispatcher.js' */                //        window.console.log(JSON.stringify(ex));
+/*Line 34 - 'AtomDispatcher.js' */                //    }
+/*Line 35 - 'AtomDispatcher.js' */                //}
+/*Line 36 - 'AtomDispatcher.js' */                window.setTimeout(this._onTimeout, 1);
+/*Line 37 - 'AtomDispatcher.js' */            };
+/*Line 38 - 'AtomDispatcher.js' */            //this._onTimeout = Function.createDelegate(this, this.onTimeout);
+/*Line 39 - 'AtomDispatcher.js' */            var _this = this;
+/*Line 40 - 'AtomDispatcher.js' */            this._onTimeout = function () {
+/*Line 41 - 'AtomDispatcher.js' */                _this.onTimeout();
+/*Line 42 - 'AtomDispatcher.js' */            };
+/*Line 43 - 'AtomDispatcher.js' */        },
+/*Line 44 - 'AtomDispatcher.js' */        {
+/*Line 45 - 'AtomDispatcher.js' */            pause: function () {
+/*Line 46 - 'AtomDispatcher.js' */                this._paused = true;
+/*Line 47 - 'AtomDispatcher.js' */            },
+/*Line 48 - 'AtomDispatcher.js' */            start: function () {
+/*Line 49 - 'AtomDispatcher.js' */                this._paused = false;
+/*Line 50 - 'AtomDispatcher.js' */                window.setTimeout(this._onTimeout, 1);
+/*Line 51 - 'AtomDispatcher.js' */            },
+/*Line 52 - 'AtomDispatcher.js' */            callLater: function (fn) {
+/*Line 53 - 'AtomDispatcher.js' */                //this.queue.push(fn);
+/*Line 54 - 'AtomDispatcher.js' */                if (this.tail) {
+/*Line 55 - 'AtomDispatcher.js' */                    this.tail.next = fn;
+/*Line 56 - 'AtomDispatcher.js' */                    this.tail = fn;
+/*Line 57 - 'AtomDispatcher.js' */                }
+/*Line 58 - 'AtomDispatcher.js' */                else {
+/*Line 59 - 'AtomDispatcher.js' */                    // queue is empty..
+/*Line 60 - 'AtomDispatcher.js' */                    this.head = fn;
+/*Line 61 - 'AtomDispatcher.js' */                    this.tail = fn;
+/*Line 62 - 'AtomDispatcher.js' */                }
+/*Line 63 - 'AtomDispatcher.js' */                if (!this._paused)
+/*Line 64 - 'AtomDispatcher.js' */                    this.start();
+/*Line 65 - 'AtomDispatcher.js' */            },
+/*Line 66 - 'AtomDispatcher.js' */            setupControls: function () {
 
-/*Line 67 - 'AtomDispatcher.js' */                //if (window.console) {
-/*Line 68 - 'AtomDispatcher.js' */                //    window.console.log("Starting Web Atoms");
-/*Line 69 - 'AtomDispatcher.js' */                //}
+/*Line 68 - 'AtomDispatcher.js' */                //if (window.console) {
+/*Line 69 - 'AtomDispatcher.js' */                //    window.console.log("Starting Web Atoms");
+/*Line 70 - 'AtomDispatcher.js' */                //}
 
-/*Line 71 - 'AtomDispatcher.js' */                var a = $('[data-atom-type],[atom-type]').first()[0];
-/*Line 72 - 'AtomDispatcher.js' */                if (a.atomControl != undefined && a.atomControl != null)
-/*Line 73 - 'AtomDispatcher.js' */                    return;
-/*Line 74 - 'AtomDispatcher.js' */                var ct = AtomUI.getAtomType(a);
-/*Line 75 - 'AtomDispatcher.js' */                $(a).removeAttr("atom-type");
-/*Line 76 - 'AtomDispatcher.js' */                $(a).removeAttr("data-atom-type");
-/*Line 77 - 'AtomDispatcher.js' */                var ctrl = new (WebAtoms[ct])(a);
-/*Line 78 - 'AtomDispatcher.js' */                ctrl.setup();
+/*Line 72 - 'AtomDispatcher.js' */                var a = $('[data-atom-type],[atom-type]').first()[0];
+/*Line 73 - 'AtomDispatcher.js' */                if (a.atomControl != undefined && a.atomControl != null)
+/*Line 74 - 'AtomDispatcher.js' */                    return;
+/*Line 75 - 'AtomDispatcher.js' */                var ct = AtomUI.getAtomType(a);
+/*Line 76 - 'AtomDispatcher.js' */                $(a).removeAttr("atom-type");
+/*Line 77 - 'AtomDispatcher.js' */                $(a).removeAttr("data-atom-type");
+/*Line 78 - 'AtomDispatcher.js' */                var ctrl = new (WebAtoms[ct])(a);
+/*Line 79 - 'AtomDispatcher.js' */                ctrl.setup();
 
-/*Line 80 - 'AtomDispatcher.js' */                var self = this;
-/*Line 81 - 'AtomDispatcher.js' */                this.callLater(function () {
-/*Line 82 - 'AtomDispatcher.js' */                    self.callLater(function () {
-/*Line 83 - 'AtomDispatcher.js' */                        var app = atomApplication._element;
-/*Line 84 - 'AtomDispatcher.js' */                        if (app.style.visibility == "hidden" || $(app).css("visibility") == "hidden") {
-/*Line 85 - 'AtomDispatcher.js' */                            app.style.visibility = "visible";
+/*Line 81 - 'AtomDispatcher.js' */                var self = this;
+/*Line 82 - 'AtomDispatcher.js' */                this.callLater(function () {
+/*Line 83 - 'AtomDispatcher.js' */                    self.callLater(function () {
+/*Line 84 - 'AtomDispatcher.js' */                        var app = atomApplication._element;
+/*Line 85 - 'AtomDispatcher.js' */                        if (app.style.visibility == "hidden" || $(app).css("visibility") == "hidden") {
+/*Line 86 - 'AtomDispatcher.js' */                            app.style.visibility = "visible";
 
-/*Line 87 - 'AtomDispatcher.js' */                            app.atomControl.updateUI();
-/*Line 88 - 'AtomDispatcher.js' */                        }
-/*Line 89 - 'AtomDispatcher.js' */                    });
-/*Line 90 - 'AtomDispatcher.js' */                });
+/*Line 88 - 'AtomDispatcher.js' */                            app.atomControl.updateUI();
+/*Line 89 - 'AtomDispatcher.js' */                        }
+/*Line 90 - 'AtomDispatcher.js' */                    });
+/*Line 91 - 'AtomDispatcher.js' */                });
 
-/*Line 92 - 'AtomDispatcher.js' */            }
-/*Line 93 - 'AtomDispatcher.js' */        }
-/*Line 94 - 'AtomDispatcher.js' */        );
-/*Line 95 - 'AtomDispatcher.js' */})();
+/*Line 93 - 'AtomDispatcher.js' */            }
+/*Line 94 - 'AtomDispatcher.js' */        }
+/*Line 95 - 'AtomDispatcher.js' */        );
+/*Line 96 - 'AtomDispatcher.js' */})();
 
-/*Line 97 - 'AtomDispatcher.js' */WebAtoms.dispatcher = new WebAtoms.AtomDispatcher();
+/*Line 98 - 'AtomDispatcher.js' */WebAtoms.dispatcher = new WebAtoms.AtomDispatcher();
 
-/*Line 99 - 'AtomDispatcher.js' */function aggregateHandler(f,i) {
+/*Line 100 - 'AtomDispatcher.js' */function aggregateHandler(f,i) {
 
-/*Line 101 - 'AtomDispatcher.js' */    function ah(fx) {
-/*Line 102 - 'AtomDispatcher.js' */        this._handler = fx;
+/*Line 102 - 'AtomDispatcher.js' */    function ah(fx) {
+/*Line 103 - 'AtomDispatcher.js' */        this._handler = fx;
 
-/*Line 104 - 'AtomDispatcher.js' */        var self = this;
+/*Line 105 - 'AtomDispatcher.js' */        var self = this;
 
-/*Line 106 - 'AtomDispatcher.js' */        this.invoke = function () {
-/*Line 107 - 'AtomDispatcher.js' */            try {
-/*Line 108 - 'AtomDispatcher.js' */                self._handler.apply(self, self.args);
-/*Line 109 - 'AtomDispatcher.js' */            }
-/*Line 110 - 'AtomDispatcher.js' */            catch (e) {
-/*Line 111 - 'AtomDispatcher.js' */                if (console) {
-/*Line 112 - 'AtomDispatcher.js' */                    console.log(e);
-/*Line 113 - 'AtomDispatcher.js' */                }
-/*Line 114 - 'AtomDispatcher.js' */            }
-/*Line 115 - 'AtomDispatcher.js' */            finally {
-/*Line 116 - 'AtomDispatcher.js' */                self.timeout = 0;
-/*Line 117 - 'AtomDispatcher.js' */                self.pending = false;
-/*Line 118 - 'AtomDispatcher.js' */            }
-/*Line 119 - 'AtomDispatcher.js' */        }
+/*Line 107 - 'AtomDispatcher.js' */        this.invoke = function () {
+/*Line 108 - 'AtomDispatcher.js' */            try {
+/*Line 109 - 'AtomDispatcher.js' */                self._handler.apply(self, self.args);
+/*Line 110 - 'AtomDispatcher.js' */            }
+/*Line 111 - 'AtomDispatcher.js' */            catch (e) {
+/*Line 112 - 'AtomDispatcher.js' */                if (console) {
+/*Line 113 - 'AtomDispatcher.js' */                    console.log(e);
+/*Line 114 - 'AtomDispatcher.js' */                }
+/*Line 115 - 'AtomDispatcher.js' */            }
+/*Line 116 - 'AtomDispatcher.js' */            finally {
+/*Line 117 - 'AtomDispatcher.js' */                self.timeout = 0;
+/*Line 118 - 'AtomDispatcher.js' */                self.pending = false;
+/*Line 119 - 'AtomDispatcher.js' */            }
+/*Line 120 - 'AtomDispatcher.js' */        }
 
-/*Line 121 - 'AtomDispatcher.js' */        this.handler = function () {
-/*Line 122 - 'AtomDispatcher.js' */            if (self.pending)
-/*Line 123 - 'AtomDispatcher.js' */                return;
-/*Line 124 - 'AtomDispatcher.js' */            self.pending = true;
-/*Line 125 - 'AtomDispatcher.js' */            self.args = arguments;
-/*Line 126 - 'AtomDispatcher.js' */            if (self.timeout) {
-/*Line 127 - 'AtomDispatcher.js' */                clearTimeout(self.timeout);
-/*Line 128 - 'AtomDispatcher.js' */            }
-/*Line 129 - 'AtomDispatcher.js' */            self.timeout = setTimeout(self.invoke, i || 500);
-/*Line 130 - 'AtomDispatcher.js' */        }
-/*Line 131 - 'AtomDispatcher.js' */    }
+/*Line 122 - 'AtomDispatcher.js' */        this.handler = function () {
+/*Line 123 - 'AtomDispatcher.js' */            if (self.pending)
+/*Line 124 - 'AtomDispatcher.js' */                return;
+/*Line 125 - 'AtomDispatcher.js' */            self.pending = true;
+/*Line 126 - 'AtomDispatcher.js' */            self.args = arguments;
+/*Line 127 - 'AtomDispatcher.js' */            if (self.timeout) {
+/*Line 128 - 'AtomDispatcher.js' */                clearTimeout(self.timeout);
+/*Line 129 - 'AtomDispatcher.js' */            }
+/*Line 130 - 'AtomDispatcher.js' */            self.timeout = setTimeout(self.invoke, i || 500);
+/*Line 131 - 'AtomDispatcher.js' */        }
+/*Line 132 - 'AtomDispatcher.js' */    }
 
-/*Line 133 - 'AtomDispatcher.js' */    var n = new ah(f);
-/*Line 134 - 'AtomDispatcher.js' */    return n.handler;
-/*Line 135 - 'AtomDispatcher.js' */}
+/*Line 134 - 'AtomDispatcher.js' */    var n = new ah(f);
+/*Line 135 - 'AtomDispatcher.js' */    return n.handler;
+/*Line 136 - 'AtomDispatcher.js' */}
 
 /*Line 0 - 'AtomErrors.js' */
 

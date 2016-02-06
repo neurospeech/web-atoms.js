@@ -20,6 +20,7 @@ window.allControls = allControls;
                 }
                 var item = this.head;
                 this.head = item.next;
+                item.next = null;
                 if (!this.head) {
                     // we have reached end...
                     this.tail = null;
