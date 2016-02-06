@@ -9,20 +9,21 @@ window.allControls = allControls;
     return classCreator("WebAtoms.AtomDispatcher", base,
         function () {
             this._paused = false;
-            this.queue = [];
+            //this.queue = [];
+            this.head = null;
+            this.tail = null;
             this.onTimeout = function () {
                 if (this._paused)
                     return;
-                if (this.queue.length == 0) {
-                    var app = atomApplication._element;
-                    if (app.style.visibility == "hidden" || $(app).css("visibility") == "hidden") {
-                        app.style.visibility = "visible";
-
-                        app.atomControl.updateUI();
-                    }
+                if (!this.head) {
                     return;
                 }
-                var item = this.queue.shift();
+                var item = this.head;
+                this.head = item.next;
+                if (!this.head) {
+                    // we have reached end...
+                    this.tail = null;
+                }
                 //try{
                 item();
                 //} catch (ex) {
@@ -49,7 +50,16 @@ window.allControls = allControls;
                 window.setTimeout(this._onTimeout, 1);
             },
             callLater: function (fn) {
-                this.queue.push(fn);
+                //this.queue.push(fn);
+                if (this.tail) {
+                    this.tail.next = fn;
+                    this.tail = fn;
+                }
+                else {
+                    // queue is empty..
+                    this.head = fn;
+                    this.tail = fn;
+                }
                 if (!this._paused)
                     this.start();
             },
@@ -67,6 +77,18 @@ window.allControls = allControls;
                 $(a).removeAttr("data-atom-type");
                 var ctrl = new (WebAtoms[ct])(a);
                 ctrl.setup();
+
+                var self = this;
+                this.callLater(function () {
+                    self.callLater(function () {
+                        var app = atomApplication._element;
+                        if (app.style.visibility == "hidden" || $(app).css("visibility") == "hidden") {
+                            app.style.visibility = "visible";
+
+                            app.atomControl.updateUI();
+                        }
+                    });
+                });
 
             }
         }
