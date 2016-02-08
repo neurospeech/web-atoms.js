@@ -120,10 +120,6 @@
                 }
             },
 
-            validate: function () {
-                errors.validate(this._element);
-            },
-
             init: function () {
                 baseType.init.call(this);
 

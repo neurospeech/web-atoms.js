@@ -15,8 +15,19 @@
             one-time binding will not work for controls defined later
             in the visual hierarchy -->
         <button atom-type="AtomButton"
-                atom-next="{ $x.window( 'labelWindow', 
-                    { title:'Open Window' },  { label: 'Window Label' },{ alert: 'Done' } ) }">
+                atom-next="{ $x.window({
+                        path: 'labelWindow',
+                        title:'Open Window',
+                        data: {
+                            label: 'This Window'
+                        },
+                        windowWidth: 400,
+                        windowHeight: 300,
+                        scope: {
+                            someScopeValue: 1
+                        },
+                        next: $x.alert('Done')
+                    }) }">
             Open Window
         </button>
 

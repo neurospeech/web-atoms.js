@@ -170,17 +170,21 @@ var AtomProperties = {
     },
     required: function (element, value) {
 
-        if (!/input|textarea|select/i.test(element.tagName) && this._element == element) {
+        //if (!/input|textarea|select/i.test(element.tagName) && this._element == element) {
+        if (this._element == element) {
             if (this.get_value) {
                 if (value) {
                     this.bind(this._element, "invalid", [["value"]], false, function (v1) { return v1 ? null : "Required" });
                 } else {
                     this.clearBinding(this._element, "invalid");
                 }
+                return;
             }
-            return;
         }
 
+        if (!/input|textarea|select/i.test(element.tagName)) {
+            return;
+        }
 
         var vf = function () {
             return $(element).val();
@@ -475,6 +479,10 @@ window.AtomProperties = AtomProperties;
                 this.mergeData();
                 // update child references...
                 this.updateChildBindings(this._element);
+            },
+
+            validate: function () {
+                errors.validate(this._element);
             },
 
             mergeData: function () {
