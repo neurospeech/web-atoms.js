@@ -60,6 +60,21 @@ $x.if = function (c, r) {
     return null;
 }
 
+$x.isValid = function (a) {
+    return function () {
+        this.validate();
+        var e = this.get_errors();
+        if (e && e.length) {
+            var msg = e.map(function (m) {
+                return m.label;
+            }).join("\n");
+            alert(msg);
+            return;
+        }
+        this.invokeAction(a);
+    };
+}
+
 $x.alert = function (msg) {
     return function () {
         alert(msg);
@@ -102,6 +117,14 @@ $x.window = function (path, props, data, next) {
             p.data = data;
             a.prop = p;
         }
+    } else {
+        a = {
+            prop: a,
+            path: a.path,
+            next: a.next,
+            scope: a.scope
+
+        };
     }
     return function () {
         WebAtoms.AtomWindow.openNewWindow({

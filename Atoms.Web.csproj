@@ -134,6 +134,7 @@
     <Content Include="docs\concepts\next\samples\confirm-action.html" />
     <Content Include="docs\concepts\next\samples\data-action.html" />
     <Content Include="docs\concepts\next\samples\function-action.html" />
+    <Content Include="docs\concepts\next\samples\is-valid-action.html" />
     <Content Include="docs\concepts\next\samples\local-window-action.html" />
     <Content Include="docs\concepts\next\samples\scope-action.html" />
     <Content Include="docs\concepts\next\samples\string-action.html" />
