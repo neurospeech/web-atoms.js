@@ -20,6 +20,15 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "tools",
+    "res",
+    "Scripts",
+    "Module",
+    "Controllers",
+    "App_Start",
+    "Global.asax.*",
+    "packages.*",
+    "*.config"
   ]
 }
