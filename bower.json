@@ -1,0 +1,34 @@
+{
+  "name": "web-atoms",
+  "homepage": "https://github.com/neurospeech/web-atoms.js",
+  "authors": [
+    "Akash Kava <support@neurospeech.com>"
+  ],
+  "description": "Web Atoms",
+  "main": "docs/index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "web",
+    "atoms"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "tools",
+    "res",
+    "Scripts",
+    "Module",
+    "Controllers",
+    "App_Start",
+    "Global.asax.*",
+    "packages.*",
+    "*.config"
+  ]
+}
