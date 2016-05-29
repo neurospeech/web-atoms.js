@@ -12,6 +12,7 @@
         },
         properties: {
             result: null,
+            errorNext: null,
             mergeData: null,
             mergeResult: true,
             postUrl: null,
@@ -72,7 +73,16 @@
 
                 var data = this.preparePostData();
                 var url = AtomPromise.getUrl(this._postUrl);
-                AtomPromise.json(url, { _tv: Atom.time() }, { type: "POST", data: data }).then(this._success).invoke();
+                var p = AtomPromise.json(url, { _tv: Atom.time() }, { type: "POST", data: data });
+                p.then(this._success);
+                var errorNext = this._errorNext;
+                if (errorNext) {
+                    var self = this;
+                    p.failed(function (pr) {
+                        self.invokeAction(errorNext);
+                    });
+                }
+                p.invoke();
             },
 
             onSuccess: function (p) {

@@ -27,6 +27,7 @@
             sortPath: null,
             valueSeparator: null,
             postData: null,
+            errorNext: null,
             postUrl: null,
             confirm: false,
             confirmMessage: null,
@@ -162,6 +163,12 @@
                 p.then(function () {
                     caller.invokeNext();
                 });
+                var errorNext = this._errorNext;
+                if (errorNext) {
+                    p.failed(function (pr) {
+                        caller.invokeAction(errorNext);
+                    });
+                }
                 p.invoke();
             },
 
