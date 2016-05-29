@@ -8,6 +8,10 @@ generated JavaScript. This pre-compiled document runs in strict mode without usi
 
 ![Atoms.js](https://github.com/neurospeech/web-atoms.js/raw/master/res/atoms-promo.png)
 
+Powerful customizable Scopes
+----------------------------
+![Web Atoms Scopes](https://github.com/neurospeech/web-atoms.js/raw/master/docs/concepts/scope/images/local-scope.png)
+
 Visual Studio Auto Intellisense - Atoms.js Power Tools 2013
 -----------------------------------------------------------
 ![Atoms JS Power Tools 2013](res/atoms-js-vs-power-tools-small.png)
