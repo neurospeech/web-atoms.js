@@ -1,0 +1,9 @@
+[
+  {
+    "sourceMap": true,
+    "outputFileName": "atoms.js",
+    "inputFiles": [
+      "atoms.js"
+    ]
+  }
+]

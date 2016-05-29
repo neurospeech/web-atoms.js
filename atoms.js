@@ -7870,25 +7870,34 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 17 - 'AtomButton.js' */                AtomUI.cancelEvent(e);
 
-/*Line 19 - 'AtomButton.js' */                if (this._next) {
-/*Line 20 - 'AtomButton.js' */                    if (this._sendData && this._next) {
-/*Line 21 - 'AtomButton.js' */                        AtomBinder.setValue(this._next, "data", this.get_data());
-/*Line 22 - 'AtomButton.js' */                    }
-/*Line 23 - 'AtomButton.js' */                    this.invokeAction(this._next);
-/*Line 24 - 'AtomButton.js' */                }
-/*Line 25 - 'AtomButton.js' */                return false;
-/*Line 26 - 'AtomButton.js' */            },
+/*Line 19 - 'AtomButton.js' */                var errors = this.get_errors();
+/*Line 20 - 'AtomButton.js' */                if (errors.length) {
 
-/*Line 28 - 'AtomButton.js' */            init: function () {
+/*Line 22 - 'AtomButton.js' */                    alert(errors.join("\n"));
 
-/*Line 30 - 'AtomButton.js' */                var element = this._element;
-/*Line 31 - 'AtomButton.js' */                this.bindEvent(element, "click", "onClickHandler");
-/*Line 32 - 'AtomButton.js' */                base.init.apply(this);
-/*Line 33 - 'AtomButton.js' */            }
-/*Line 34 - 'AtomButton.js' */        }
+/*Line 24 - 'AtomButton.js' */                    return false;
+/*Line 25 - 'AtomButton.js' */                }
 
-/*Line 36 - 'AtomButton.js' */    });
-/*Line 37 - 'AtomButton.js' */})(WebAtoms.AtomControl.prototype);
+
+/*Line 28 - 'AtomButton.js' */                if (this._next) {
+/*Line 29 - 'AtomButton.js' */                    if (this._sendData && this._next) {
+/*Line 30 - 'AtomButton.js' */                        AtomBinder.setValue(this._next, "data", this.get_data());
+/*Line 31 - 'AtomButton.js' */                    }
+/*Line 32 - 'AtomButton.js' */                    this.invokeAction(this._next);
+/*Line 33 - 'AtomButton.js' */                }
+/*Line 34 - 'AtomButton.js' */                return false;
+/*Line 35 - 'AtomButton.js' */            },
+
+/*Line 37 - 'AtomButton.js' */            init: function () {
+
+/*Line 39 - 'AtomButton.js' */                var element = this._element;
+/*Line 40 - 'AtomButton.js' */                this.bindEvent(element, "click", "onClickHandler");
+/*Line 41 - 'AtomButton.js' */                base.init.apply(this);
+/*Line 42 - 'AtomButton.js' */            }
+/*Line 43 - 'AtomButton.js' */        }
+
+/*Line 45 - 'AtomButton.js' */    });
+/*Line 46 - 'AtomButton.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomListBox.js' */
 
 /*Line 2 - 'AtomListBox.js' */(function (baseType) {

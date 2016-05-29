@@ -17,6 +17,15 @@
 
                 AtomUI.cancelEvent(e);
 
+                var errors = this.get_errors();
+                if (errors.length) {
+
+                    alert(errors.join("\n"));
+
+                    return false;
+                }
+
+
                 if (this._next) {
                     if (this._sendData && this._next) {
                         AtomBinder.setValue(this._next, "data", this.get_data());
