@@ -863,11 +863,12 @@
       <LastGenOutput>atoms.t.js</LastGenOutput>
     </Content>
     <Content Include="README.md" />
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
     <Content Include="atoms.min.js.map">
       <DependentUpon>atoms.min.js</DependentUpon>
     </Content>
-    <Content Include=".bowerrc" />
-    <Content Include="bower.json" />
+    <Content Include="bundleconfig.json" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />

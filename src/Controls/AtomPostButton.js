@@ -9,8 +9,10 @@
         properties: {
             postData: null,
             postResult: null,
+            postError: null,
             postUrl: null,
             next: null,
+            errorNext: null,
             confirm: false,
             confirmMessage: null,
             mergeData: null
@@ -60,7 +62,20 @@
                 };
 
                 //this.invokeAjax(this._postUrl, { type: "POST", data: data, success: invokeNext });
-                AtomPromise.json(this._postUrl, null, { type: "POST", data: data }).then(invokeNext).invoke();
+
+
+                var p = AtomPromise.json(this._postUrl, null, { type: "POST", data: data });
+                p.then(invokeNext);
+
+                var errorNext = this._errorNext;
+                if (errorNext) {
+                    p.failed(function (pr) {
+                        AtomBinder.setValue(caller, "postError", pr);
+                        caller.invokeAction(caller, errorNext);
+                    });
+                }
+
+                p.invoke();
 
             }
         }
