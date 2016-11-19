@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Atoms.js</id>
-    <version>1.6.104</version>
-    <title>Atoms.js</title>
+    <id>Web.Atoms.js</id>
+    <version>1.7.101</version>
+    <title>Web.Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
     <description>
@@ -24,35 +24,34 @@
       <dependency id="jQuery" version="1.11.1" />
     </dependencies>
     <references></references>
-    <tags>JavaScript UI Framework</tags>
+    <tags>web,atoms,web atoms,atoms,javascript,framework,ui,binding,two way</tags>
   </metadata>
   <files>
-    <file src="..\..\style\**\*.css" target="content\Style\atoms" />
-    <file src="..\..\style\**\*.map" target="content\Style\atoms" />
-    <file src="..\..\style\**\*.png" target="content\Style\atoms" />
-    <file src="..\..\style\**\*.gif" target="content\Style\atoms" />
-    <file src="..\..\style\**\*.jpg" target="content\Style\atoms" />
+    <file src="..\..\style\**\*.css" target="content\Scripts\web-atoms" />
+    <file src="..\..\style\**\*.map" target="content\Scripts\web-atoms" />
+    <file src="..\..\style\**\*.png" target="content\Scripts\web-atoms" />
+    <file src="..\..\style\**\*.gif" target="content\Scripts\web-atoms" />
+    <file src="..\..\style\**\*.jpg" target="content\Scripts\web-atoms" />
 
-    <file src="..\..\atoms-debug.js" target="content\Scripts\atoms-debug.js" />
-    <file src="..\..\atoms-debug.js" target="content\Scripts\atoms.js" />
-    <file src="..\..\atoms.min.js" target="content\Scripts\atoms.min.js" />
-    <file src="..\..\atoms.min.js.map" target="content\Scripts\atoms.min.js.map" />
+    <file src="..\..\atoms-debug.js" target="content\Scripts\web-atoms\web-atoms.js" />
+    <file src="..\..\atoms.min.js" target="content\Scripts\web-atoms\web-atoms.min.js" />
+    <file src="..\..\atoms.min.js.map" target="content\Scripts\web-atoms\web-atoms.min.js.map" />
 
-    <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\atoms\plugins\entity-framework\entity-context.js"/>
-    <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\atoms\plugins\entity-framework\entity-controls.js"/>
-    <file src="..\..\plugins\entity-framework\entity.css" target="content\Scripts\atoms\plugins\entity-framework\entity.css"/>
-    <file src="..\..\plugins\entity-framework\entity.min.css" target="content\Scripts\atoms\plugins\entity-framework\entity.min.css"/>
-    <file src="..\..\plugins\entity-framework\entity.css.map" target="content\Scripts\atoms\plugins\entity-framework\entity.css.map"/>
+    <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\web-atoms\plugins\entity-framework\entity-context.js"/>
+    <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\web-atoms\plugins\entity-framework\entity-controls.js"/>
+    <file src="..\..\plugins\entity-framework\entity.css" target="content\Scripts\web-atoms\plugins\entity-framework\entity.css"/>
+    <file src="..\..\plugins\entity-framework\entity.min.css" target="content\Scripts\web-atoms\plugins\entity-framework\entity.min.css"/>
+    <file src="..\..\plugins\entity-framework\entity.css.map" target="content\Scripts\web-atoms\plugins\entity-framework\entity.css.map"/>
     
-    <file src="..\..\plugins\upload\atom-uploader.js" target="content\Scripts\atoms\plugins\upload\atom-uploader.js"/>
-    <file src="..\..\plugins\upload\atom-uploader.css" target="content\Scripts\atoms\plugins\upload\atom-uploader.css"/>
-    <file src="..\..\plugins\upload\atom-uploader.min.css" target="content\Scripts\atoms\plugins\upload\atom-uploader.min.css"/>
-    <file src="..\..\plugins\upload\atom-uploader.css.map" target="content\Scripts\atoms\plugins\upload\atom-uploader.css.map"/>
-    <file src="..\..\plugins\upload\busy.gif" target="content\Scripts\atoms\plugins\upload\busy.gif"/>
-    <file src="..\..\plugins\upload\checked.png" target="content\Scripts\atoms\plugins\upload\checked.png"/>
-    <file src="..\..\plugins\upload\upload.png" target="content\Scripts\atoms\plugins\upload\upload.png"/>
-    <file src="..\..\plugins\upload\t.png" target="content\Scripts\atoms\plugins\upload\t.png"/>
-    <file src="..\..\plugins\upload\atom-flash-uploader.swf" target="content\Scripts\atoms\plugins\upload\atom-flash-uploader.swf"/>
+    <file src="..\..\plugins\upload\atom-uploader.js" target="content\Scripts\web-atoms\plugins\upload\atom-uploader.js"/>
+    <file src="..\..\plugins\upload\atom-uploader.css" target="content\Scripts\web-atoms\plugins\upload\atom-uploader.css"/>
+    <file src="..\..\plugins\upload\atom-uploader.min.css" target="content\Scripts\web-atoms\plugins\upload\atom-uploader.min.css"/>
+    <file src="..\..\plugins\upload\atom-uploader.css.map" target="content\Scripts\web-atoms\plugins\upload\atom-uploader.css.map"/>
+    <file src="..\..\plugins\upload\busy.gif" target="content\Scripts\web-atoms\plugins\upload\busy.gif"/>
+    <file src="..\..\plugins\upload\checked.png" target="content\Scripts\web-atoms\plugins\upload\checked.png"/>
+    <file src="..\..\plugins\upload\upload.png" target="content\Scripts\web-atoms\plugins\upload\upload.png"/>
+    <file src="..\..\plugins\upload\t.png" target="content\Scripts\web-atoms\plugins\upload\t.png"/>
+    <file src="..\..\plugins\upload\atom-flash-uploader.swf" target="content\Scripts\web-atoms\plugins\upload\atom-flash-uploader.swf"/>
 
 
   </files>

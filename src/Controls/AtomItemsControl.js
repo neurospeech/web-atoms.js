@@ -141,6 +141,16 @@
                 if (!this._onUIChanged)
                     return;
 
+
+
+                var errors = this.get_errors();
+                if (errors.length) {
+
+                    alert(errors.join("\n"));
+
+                    return false;
+                }
+
                 if (this._confirm) {
                     if (!confirm(this._confirmMessage))
                         return;
