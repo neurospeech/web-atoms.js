@@ -38,10 +38,10 @@ window.AtomEnumerator = AtomEnumerator;
 var Atom = {
 
     version: {
-        text: "1.7.108",
+        text: "1.7.111",
         major: 1,
         minor: 7,
-        build: 108
+        build: 111
     },
 
     refreshWindowCommand: function () {
@@ -219,10 +219,10 @@ var Atom = {
 Atom.mapJoin = function (list, label, s) {
     if (list && list.length) {
         if (label) {
-            label = $.isFunction(label) ? label : function (a) {
+            var lf = $.isFunction(label) ? label : function (a) {
                 return a[label];
             };
-            list = list.map(label);
+            list = list.map(lf);
         }
         return list.join(s || "\n");
     }
