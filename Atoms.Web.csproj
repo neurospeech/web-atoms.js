@@ -237,6 +237,7 @@
     <Content Include="docs\controls\samples\atom-filter.html" />
     <Content Include="docs\controls\samples\atom-form-grid-layout.html" />
     <Content Include="docs\controls\samples\atom-form-grid-tabs.html" />
+    <Content Include="docs\controls\samples\atom-form-layout-validation.html" />
     <Content Include="docs\controls\samples\atom-form-layout.html" />
     <Content Include="docs\controls\samples\atom-form.html" />
     <Content Include="docs\controls\samples\atom-frame-view.html" />
