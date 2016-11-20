@@ -929,7 +929,7 @@ jsonML["WebAtoms.AtomFormVerticalLayout.fieldTemplate"] =
 ,["td",
 {  }
 ,["div",
-{  }
+{ "class": "atom-field-header" }
 ,["span",
 { "class": "atom-form-label", "data-atom-init": "t91" }
 ], ["span",
@@ -1635,9 +1635,9 @@ this.bind(e,'class',[
 
 this.t94= function(e){
 this.bind(e,'text',[
-	['error']],
+	['errors']],
 			0, function(v1){
-				 return v1 || ''; 
+				 return Atom.csv(v1,'label') || ''; 
 			});
 };
 
@@ -2736,10 +2736,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.7.103",
+/*Line 40 - 'Atom.js' */        text: "1.7.104",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 7,
-/*Line 43 - 'Atom.js' */        build: 103
+/*Line 43 - 'Atom.js' */        build: 104
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
