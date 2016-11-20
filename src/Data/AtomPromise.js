@@ -345,11 +345,13 @@ AtomPromise.ajax = function (url, query, options, type) {
 
         var res = p.errors[0].responseText;
         if (!res || p.errors[2] !== 'Internal Server Error') {
-            res = p.errors[2];
+            var m = p.errors[2];
+            if (m)
+                res = m;
         }
 
         p.error = {
-            msg : res
+            msg: res
         };
 
         if (p._showError) {

@@ -37,6 +37,13 @@ window.AtomEnumerator = AtomEnumerator;
 
 var Atom = {
 
+    version: {
+        text: "1.7.103",
+        major: 1,
+        minor: 7,
+        build: 103
+    },
+
     refreshWindowCommand: function () {
         location.reload(true);
         //var q = location.search || "?";
