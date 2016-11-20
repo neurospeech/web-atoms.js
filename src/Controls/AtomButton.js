@@ -19,7 +19,7 @@
                 AtomUI.cancelEvent(e);
 
 
-                var vr = this._validationRroot;
+                var vr = this._validationRoot;
                 if (vr) {
                     vr.validate();
                     var errors = vr.get_errors();

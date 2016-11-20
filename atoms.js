@@ -2736,10 +2736,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.7.106",
+/*Line 40 - 'Atom.js' */        text: "1.7.107",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 7,
-/*Line 43 - 'Atom.js' */        build: 106
+/*Line 43 - 'Atom.js' */        build: 107
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7898,7 +7898,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 18 - 'AtomButton.js' */                AtomUI.cancelEvent(e);
 
 
-/*Line 21 - 'AtomButton.js' */                var vr = this._validationRroot;
+/*Line 21 - 'AtomButton.js' */                var vr = this._validationRoot;
 /*Line 22 - 'AtomButton.js' */                if (vr) {
 /*Line 23 - 'AtomButton.js' */                    vr.validate();
 /*Line 24 - 'AtomButton.js' */                    var errors = vr.get_errors();
@@ -8929,7 +8929,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 40 - 'AtomPostButton.js' */                    return;
 /*Line 41 - 'AtomPostButton.js' */                }
 
-/*Line 43 - 'AtomPostButton.js' */                var vr = this._validationRroot;
+/*Line 43 - 'AtomPostButton.js' */                var vr = this._validationRoot;
 /*Line 44 - 'AtomPostButton.js' */                if (vr) {
 /*Line 45 - 'AtomPostButton.js' */                    vr.validate();
 /*Line 46 - 'AtomPostButton.js' */                    var errors = vr.get_errors();
