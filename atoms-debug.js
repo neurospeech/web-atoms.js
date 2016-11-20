@@ -2736,10 +2736,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.7.105",
+/*Line 40 - 'Atom.js' */        text: "1.7.106",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 7,
-/*Line 43 - 'Atom.js' */        build: 105
+/*Line 43 - 'Atom.js' */        build: 106
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -8929,46 +8929,66 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 40 - 'AtomPostButton.js' */                    return;
 /*Line 41 - 'AtomPostButton.js' */                }
 
-/*Line 43 - 'AtomPostButton.js' */                var data = this.get_postData();
-
-/*Line 45 - 'AtomPostButton.js' */                if (data === null || data === undefined)
-/*Line 46 - 'AtomPostButton.js' */                    return;
-
-/*Line 48 - 'AtomPostButton.js' */                var m = this._mergeData;
-/*Line 49 - 'AtomPostButton.js' */                if (m) {
-/*Line 50 - 'AtomPostButton.js' */                    for (var i in m) {
-/*Line 51 - 'AtomPostButton.js' */                        data[i] = m[i];
-/*Line 52 - 'AtomPostButton.js' */                    }
-/*Line 53 - 'AtomPostButton.js' */                }
-
-/*Line 55 - 'AtomPostButton.js' */                //data = AtomBinder.getClone(data);
-
-/*Line 57 - 'AtomPostButton.js' */                var caller = this;
-/*Line 58 - 'AtomPostButton.js' */                var invokeNext = function (p) {
-/*Line 59 - 'AtomPostButton.js' */                    AtomBinder.setValue(caller, "postResult", p.value());
-/*Line 60 - 'AtomPostButton.js' */                    caller.invokeAction(caller._next);
-/*Line 61 - 'AtomPostButton.js' */                };
-
-/*Line 63 - 'AtomPostButton.js' */                //this.invokeAjax(this._postUrl, { type: "POST", data: data, success: invokeNext });
+/*Line 43 - 'AtomPostButton.js' */                var vr = this._validationRroot;
+/*Line 44 - 'AtomPostButton.js' */                if (vr) {
+/*Line 45 - 'AtomPostButton.js' */                    vr.validate();
+/*Line 46 - 'AtomPostButton.js' */                    var errors = vr.get_errors();
+/*Line 47 - 'AtomPostButton.js' */                    if (errors.length) {
+/*Line 48 - 'AtomPostButton.js' */                        alert(errors.join("\n"));
+/*Line 49 - 'AtomPostButton.js' */                        return false;
+/*Line 50 - 'AtomPostButton.js' */                    }
+/*Line 51 - 'AtomPostButton.js' */                }
 
 
-/*Line 66 - 'AtomPostButton.js' */                var p = AtomPromise.json(this._postUrl, null, { type: "POST", data: data });
-/*Line 67 - 'AtomPostButton.js' */                p.then(invokeNext);
+/*Line 54 - 'AtomPostButton.js' */                var errors = this.get_errors();
+/*Line 55 - 'AtomPostButton.js' */                if (errors.length) {
 
-/*Line 69 - 'AtomPostButton.js' */                var errorNext = this._errorNext;
-/*Line 70 - 'AtomPostButton.js' */                if (errorNext) {
-/*Line 71 - 'AtomPostButton.js' */                    p.failed(function (pr) {
-/*Line 72 - 'AtomPostButton.js' */                        AtomBinder.setValue(caller, "postError", pr);
-/*Line 73 - 'AtomPostButton.js' */                        caller.invokeAction(caller, errorNext);
-/*Line 74 - 'AtomPostButton.js' */                    });
-/*Line 75 - 'AtomPostButton.js' */                }
+/*Line 57 - 'AtomPostButton.js' */                    alert(errors.join("\n"));
 
-/*Line 77 - 'AtomPostButton.js' */                p.invoke();
+/*Line 59 - 'AtomPostButton.js' */                    return false;
+/*Line 60 - 'AtomPostButton.js' */                }
 
-/*Line 79 - 'AtomPostButton.js' */            }
-/*Line 80 - 'AtomPostButton.js' */        }
-/*Line 81 - 'AtomPostButton.js' */    });
-/*Line 82 - 'AtomPostButton.js' */})(WebAtoms.AtomButton.prototype);
+
+/*Line 63 - 'AtomPostButton.js' */                var data = this.get_postData();
+
+/*Line 65 - 'AtomPostButton.js' */                if (data === null || data === undefined)
+/*Line 66 - 'AtomPostButton.js' */                    return;
+
+/*Line 68 - 'AtomPostButton.js' */                var m = this._mergeData;
+/*Line 69 - 'AtomPostButton.js' */                if (m) {
+/*Line 70 - 'AtomPostButton.js' */                    for (var i in m) {
+/*Line 71 - 'AtomPostButton.js' */                        data[i] = m[i];
+/*Line 72 - 'AtomPostButton.js' */                    }
+/*Line 73 - 'AtomPostButton.js' */                }
+
+/*Line 75 - 'AtomPostButton.js' */                //data = AtomBinder.getClone(data);
+
+/*Line 77 - 'AtomPostButton.js' */                var caller = this;
+/*Line 78 - 'AtomPostButton.js' */                var invokeNext = function (p) {
+/*Line 79 - 'AtomPostButton.js' */                    AtomBinder.setValue(caller, "postResult", p.value());
+/*Line 80 - 'AtomPostButton.js' */                    caller.invokeAction(caller._next);
+/*Line 81 - 'AtomPostButton.js' */                };
+
+/*Line 83 - 'AtomPostButton.js' */                //this.invokeAjax(this._postUrl, { type: "POST", data: data, success: invokeNext });
+
+
+/*Line 86 - 'AtomPostButton.js' */                var p = AtomPromise.json(this._postUrl, null, { type: "POST", data: data });
+/*Line 87 - 'AtomPostButton.js' */                p.then(invokeNext);
+
+/*Line 89 - 'AtomPostButton.js' */                var errorNext = this._errorNext;
+/*Line 90 - 'AtomPostButton.js' */                if (errorNext) {
+/*Line 91 - 'AtomPostButton.js' */                    p.failed(function (pr) {
+/*Line 92 - 'AtomPostButton.js' */                        AtomBinder.setValue(caller, "postError", pr);
+/*Line 93 - 'AtomPostButton.js' */                        caller.invokeAction(caller, errorNext);
+/*Line 94 - 'AtomPostButton.js' */                    });
+/*Line 95 - 'AtomPostButton.js' */                }
+
+/*Line 97 - 'AtomPostButton.js' */                p.invoke();
+
+/*Line 99 - 'AtomPostButton.js' */            }
+/*Line 100 - 'AtomPostButton.js' */        }
+/*Line 101 - 'AtomPostButton.js' */    });
+/*Line 102 - 'AtomPostButton.js' */})(WebAtoms.AtomButton.prototype);
 /*Line 0 - 'AtomToggleButtonBar.js' */
 
 /*Line 2 - 'AtomToggleButtonBar.js' */(function (baseType) {
