@@ -46,7 +46,7 @@
                     vr.validate();
                     var errors = vr.get_errors();
                     if (errors.length) {
-                        alert(errors.join("\n"));
+                        alert(Atom.mapJoin(errors,'label'));
                         return false;
                     }
                 }
@@ -55,7 +55,7 @@
                 var errors = this.get_errors();
                 if (errors.length) {
 
-                    alert(errors.join("\n"));
+                    alert(Atom.mapJoin(errors, 'label'));
 
                     return false;
                 }
