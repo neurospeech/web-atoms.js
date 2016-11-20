@@ -41,6 +41,26 @@
                     return;
                 }
 
+                var vr = this._validationRoot;
+                if (vr) {
+                    vr.validate();
+                    var errors = vr.get_errors();
+                    if (errors.length) {
+                        alert(Atom.mapJoin(errors,'label'));
+                        return false;
+                    }
+                }
+
+
+                var errors = this.get_errors();
+                if (errors.length) {
+
+                    alert(Atom.mapJoin(errors, 'label'));
+
+                    return false;
+                }
+
+
                 var data = this.get_postData();
 
                 if (data === null || data === undefined)

@@ -37,6 +37,13 @@ window.AtomEnumerator = AtomEnumerator;
 
 var Atom = {
 
+    version: {
+        text: "1.7.111",
+        major: 1,
+        minor: 7,
+        build: 111
+    },
+
     refreshWindowCommand: function () {
         location.reload(true);
         //var q = location.search || "?";
@@ -207,6 +214,19 @@ var Atom = {
         }
         return u;
     }
+};
+
+Atom.mapJoin = function (list, label, s) {
+    if (list && list.length) {
+        if (label) {
+            var lf = $.isFunction(label) ? label : function (a) {
+                return a[label];
+            };
+            list = list.map(lf);
+        }
+        return list.join(s || "\n");
+    }
+    return null;
 };
 
 Atom.resolve = function (obj, ap) {

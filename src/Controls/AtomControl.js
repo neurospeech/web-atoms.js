@@ -436,7 +436,7 @@ window.AtomProperties = AtomProperties;
             get_errors: function () {
                 return window.errors.get(this._element, true);
             },
-            
+
             get_atomParent: function (element) {
                 if (element == null) {
                     if (this._element._logicalParent || this._element.parentNode)

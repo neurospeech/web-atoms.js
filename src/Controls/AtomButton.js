@@ -10,17 +10,29 @@
             $(e).addClass("atom-button");
         },
         properties: {
-            sendData: false
+            sendData: false,
+            validationRoot: null
         },
         methods: {
             onClickHandler: function (e) {
 
                 AtomUI.cancelEvent(e);
 
+
+                var vr = this._validationRoot;
+                if (vr) {
+                    vr.validate();
+                    var errors = vr.get_errors();
+                    if (errors.length) {
+                        alert(Atom.mapJoin(errors, 'label'));
+                        return false;
+                    }
+                }
+
                 var errors = this.get_errors();
                 if (errors.length) {
 
-                    alert(errors.join("\n"));
+                    alert(Atom.mapJoin(errors, 'label'));
 
                     return false;
                 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Web.Atoms.js</id>
-    <version>1.7.101</version>
+    <version>1.7.111</version>
     <title>Web.Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -27,11 +27,11 @@
     <tags>web,atoms,web atoms,atoms,javascript,framework,ui,binding,two way</tags>
   </metadata>
   <files>
-    <file src="..\..\style\**\*.css" target="content\Scripts\web-atoms" />
-    <file src="..\..\style\**\*.map" target="content\Scripts\web-atoms" />
-    <file src="..\..\style\**\*.png" target="content\Scripts\web-atoms" />
-    <file src="..\..\style\**\*.gif" target="content\Scripts\web-atoms" />
-    <file src="..\..\style\**\*.jpg" target="content\Scripts\web-atoms" />
+    <file src="..\..\style\**\*.css" target="content\Scripts\web-atoms\style" />
+    <file src="..\..\style\**\*.map" target="content\Scripts\web-atoms\style" />
+    <file src="..\..\style\**\*.png" target="content\Scripts\web-atoms\style" />
+    <file src="..\..\style\**\*.gif" target="content\Scripts\web-atoms\style" />
+    <file src="..\..\style\**\*.jpg" target="content\Scripts\web-atoms\style" />
 
     <file src="..\..\atoms-debug.js" target="content\Scripts\web-atoms\web-atoms.js" />
     <file src="..\..\atoms.min.js" target="content\Scripts\web-atoms\web-atoms.min.js" />
