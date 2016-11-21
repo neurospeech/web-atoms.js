@@ -169,10 +169,12 @@ namespace Atoms.Web.Module
 
             Response.ContentType = MimeMapping.GetMimeMapping(file.FullName);
 
-            using (var fs = file.OpenRead())
+            Response.WriteFile(file.FullName,true);
+
+            /*using (var fs = file.OpenRead())
             {
                 await fs.CopyToAsync(Response.OutputStream);
-            }
+            }*/
         }
 
         IHttpHandler IRouteHandler.GetHttpHandler(RequestContext requestContext)
