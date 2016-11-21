@@ -60,18 +60,20 @@ $x.if = function (c, r) {
     return null;
 }
 
-$x.isValid = function (a) {
+$x.isValid = function (target,action) {
     return function () {
-        this.validate();
+        if (action === undefined) {
+            target = o;
+            target = this;
+        } 
+        target.validate();
+        
         var e = this.get_errors();
         if (e && e.length) {
-            var msg = e.map(function (m) {
-                return m.label;
-            }).join("\n");
-            alert(msg);
+            alert(Atom.mapJoin(e,"label","\n"));
             return;
         }
-        this.invokeAction(a);
+        this.invokeAction(action);
     };
 }
 

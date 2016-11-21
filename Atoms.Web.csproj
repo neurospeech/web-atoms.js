@@ -129,6 +129,7 @@
     <Content Include="docs\concepts\json-filter.html" />
     <Content Include="docs\concepts\next.html" />
     <Content Include="docs\concepts\next\actions.html" />
+    <Content Include="docs\concepts\next\expressions.html" />
     <Content Include="docs\concepts\next\samples\alert-action.html" />
     <Content Include="docs\concepts\next\samples\array-action.html" />
     <Content Include="docs\concepts\next\samples\confirm-action.html" />

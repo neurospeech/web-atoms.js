@@ -31,7 +31,8 @@
             {
                 label: "Next (Action Set)", value: "concepts/next.html",
                 links: [
-                    { label: "Actions", value: "concepts/next/actions.html" }
+                    { label: "Actions", value: "concepts/next/actions.html" },
+                    { label: "Expressions ($x)", value: "concepts/next/expressions.html" }
                 ]
             },
             {
