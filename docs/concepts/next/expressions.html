@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../style/docs.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Expressions</h1>
+    <p>
+        We have provided handy expressions as an alternative to arrow functions for older browsers. The "next" Property expects a function or an arrow function (an action) 
+        which will be executed on that particular event. 
+    </p>
+    <!--<h2>
+        Data Action
+    </h2>-->
+    <pre>
+        $x.alert('Alert message')
+    </pre>
+    <p>
+        This will display an alert message when the event is raised.
+    </p>
+    <pre>
+        $x.appScope("property",value)
+        // OR
+        $x.appScope({ property1: value1, property2:value2 })
+    </pre>
+    <p>
+        This will set given properties and values in application scope.
+    </p>
+    <pre>
+        $x.clearErrors(e)
+    </pre>
+    <p>
+        This will clear all validation errors for given control or element.
+    </p>
+    <pre>
+        $x.confirm(msg,actions)
+    </pre>
+    <p>
+        This will display a confirmation dialog before executing given actions. Actions can be an array of expressions or function.
+    </p>
+    <pre>
+        $x.data("property",value)
+        // OR
+        $x.data({ property1: value1, property2:value2 })
+    </pre>
+    <p>
+        This will set given properties and values in data of current control.
+    </p>
+    <pre>
+        $x.focus(e)
+    </pre>
+    <p>
+        This will set focus to specified control or element after the event.
+    </p>
+    <pre>
+        $x.if(test,actions)
+    </pre>
+    <p>
+        This will execute given actions only if input "test" is true.
+    </p>
+    <pre>
+        $x.isValid(control,actions)
+    </pre>
+    <p>
+        This will execute given actions only if control does not have any validation errors. 
+        If there are any validation errors, an alert with errors will be displayed.
+    </p>
+    <pre>
+        $x.localScope("property",value)
+        // OR
+        $x.localScope({ property1: value1, property2:value2 })
+    </pre>
+    <p>
+        This will set given properties and values in application scope.
+    </p>
+    <pre>
+        $x.localWindow(template,props,scope,next)
+    </pre>
+    <p>
+        This will create a new window from given template. It will set given properties and scope values, since this will
+        create a new window with localScope, scope values will be merged with new scope. On success of window's close method,
+        next will be invoked.
+    </p>
+    <pre>
+        $x.owner("property",value)
+        // OR
+        $x.owner({ property1: value1, property2:value2 })
+    </pre>
+    <p>
+        This will set given properties and values of current control.
+    </p>
+    <pre>
+        $x.scope("property",value)
+        // OR
+        $x.scope({ property1: value1, property2:value2 })
+    </pre>
+    <p>
+        This will set given properties and values of scope of current control.
+    </p>
+    <pre>
+        $x.stop(test,msg)
+    </pre>
+    <p>
+        This will throw an exception with message "msg" if the condition "test" is true, 
+        this will stop processing further actions in current expressions.
+    </p>
+    <pre>
+        $x.timeout(delay,actions)
+    </pre>
+    <p>
+        This will invoke actions after given "delay" in milliseconds.
+    </p>
+    <pre>
+        $x.window(template,props,scope,next)
+    </pre>
+    <p>
+        This will create a new window from given template. It will set given properties and scope values. On success of window's close method,
+        next will be invoked.
+    </p>
+</body>
+</html>
