@@ -1,11 +1,9 @@
 ﻿using HtmlAgilityPack;
 using NeuroSpeech.AtomsPreCompiler;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 //Atoms.Web.Module.CachifyModule
@@ -89,9 +87,10 @@ namespace Atoms.Web.Module
                 Encoding e = context.Response.ContentEncoding;
 
 
-                string text = e.GetString(p);
 
                 if (context.Response.ContentType.EqualsIgnoreCase("text/html")) {
+
+                    string text = e.GetString(p);
                     HtmlDocument doc = new HtmlDocument();
                     doc.LoadHtml(text);
 
@@ -106,7 +105,6 @@ namespace Atoms.Web.Module
                     
 
                     using (StringWriter ms = new StringWriter()) {
-                        
                         doc.Save(ms);
                         p = e.GetBytes(ms.GetStringBuilder().ToString());
                         

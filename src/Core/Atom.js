@@ -38,10 +38,10 @@ window.AtomEnumerator = AtomEnumerator;
 var Atom = {
 
     version: {
-        text: "1.7.112",
+        text: "1.7.115",
         major: 1,
         minor: 7,
-        build: 112
+        build: 115
     },
 
     refreshWindowCommand: function () {
@@ -217,6 +217,7 @@ var Atom = {
 };
 
 Atom.mapJoin = function (list, label, s) {
+    s = s || "\n";
     if (list && list.length) {
         var r = "";
         var lf = null;
@@ -226,10 +227,11 @@ Atom.mapJoin = function (list, label, s) {
             };
         }
         var ae = new AtomEnumerator(list);
-        while (ae.nex()) {
+        while (ae.next()) {
             var item = ae.current();
             if (!item) { continue; }
             if (lf) { item = lf(item); }
+            if (!item) { continue; }
             if (!r) { r += s; }
             r += item;
         }

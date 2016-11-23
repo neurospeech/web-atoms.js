@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Routing;
@@ -169,10 +167,12 @@ namespace Atoms.Web.Module
 
             Response.ContentType = MimeMapping.GetMimeMapping(file.FullName);
 
-            using (var fs = file.OpenRead())
+            Response.WriteFile(file.FullName,true);
+
+            /*using (var fs = file.OpenRead())
             {
                 await fs.CopyToAsync(Response.OutputStream);
-            }
+            }*/
         }
 
         IHttpHandler IRouteHandler.GetHttpHandler(RequestContext requestContext)
