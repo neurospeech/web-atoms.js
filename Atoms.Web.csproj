@@ -99,6 +99,11 @@
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
     <Content Include="atoms.min.js" />
+    <Content Include="atoms1.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms.tt</DependentUpon>
+    </Content>
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -852,7 +857,7 @@
     <Content Include="res\share\twitter.png" />
     <Content Include="atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms.js</LastGenOutput>
+      <LastGenOutput>atoms1.js</LastGenOutput>
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />
@@ -937,6 +942,7 @@
     <Content Include="src\Controls\AtomYesNoCustom.css" />
     <Content Include="src\Controls\AtomYesNoCustom.js" />
     <Content Include="src\Controls\AtomYesNoCustom.template.html" />
+    <Content Include="src\Core\ActionSet.js" />
     <Content Include="src\Core\atom-filter.js" />
     <Content Include="src\Core\Atom.js" />
     <Content Include="src\Core\AtomApplication.busyTemplate.html" />
@@ -951,6 +957,7 @@
     <Content Include="src\Core\AtomUI.js" />
     <Content Include="src\Core\AtomUIComponent.js" />
     <Content Include="src\Core\ChildEnumerator.js" />
+    <Content Include="src\Core\Stop.js" />
     <Content Include="src\Core\WebAtoms.Core.js" />
     <Content Include="src\Core\ZZZZZInitializer.js" />
     <Content Include="src\DataControls\AtomAutoPostForm.js" />

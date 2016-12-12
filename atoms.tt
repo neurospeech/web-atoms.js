@@ -154,12 +154,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
     System.IO.File.WriteAllText(currentDirectory + "\\atoms-debug.js" , txt);
 
 		
-    Action[] actions= new Action[]{
-        ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),
-        ()=> Minify(currentDirectory, txt,"map", "atoms.min.map")
-    };
+    //Action[] actions= new Action[]{
+    //    ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),
+    //    ()=> Minify(currentDirectory, txt,"map", "atoms.min.map")
+    //};
 
-    System.Threading.Tasks.Parallel.ForEach(actions, a=> a());
+    //System.Threading.Tasks.Parallel.ForEach(actions, a=> a());
         
 
 #><#+

@@ -2245,7 +2245,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 0 - 'Atom.js' */
 /*Line 1 - 'Atom.js' */
 /*Line 2 - 'Atom.js' */
-
+/*Line 3 - 'Atom.js' */
 /*Line 4 - 'Atom.js' */var AtomEnumerator = (function () {
 /*Line 5 - 'Atom.js' */    return classCreator("AtomEnumerator",null,
 /*Line 6 - 'Atom.js' */    function (array) {
