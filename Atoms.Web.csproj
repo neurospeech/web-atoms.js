@@ -92,13 +92,21 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="atoms-debug.es5.js">
+      <DependentUpon>atoms-debug.js</DependentUpon>
+    </Content>
+    <Content Include="atoms-debug.es5.min.js">
+      <DependentUpon>atoms-debug.es5.js</DependentUpon>
+    </Content>
     <Content Include="atoms-debug.js" />
     <Content Include="atoms.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
-    <Content Include="atoms.min.js" />
+    <Content Include="atoms.min.js">
+      <DependentUpon>atoms.js</DependentUpon>
+    </Content>
     <Content Include="atoms1.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -864,6 +872,11 @@
     <Content Include="atoms.min.js.map">
       <DependentUpon>atoms.min.js</DependentUpon>
     </Content>
+    <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />

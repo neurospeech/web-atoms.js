@@ -216,6 +216,7 @@
 
                     var sp = this._sortPath;
                     if (sp) {
+                        var spf = window.AtomFilter.sort(sp);
                         r = r.sort(sp);
                     }
                     return r;
