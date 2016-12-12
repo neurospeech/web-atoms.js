@@ -386,4 +386,6 @@
         return aps.call(this, f);
     };
 
+    window.AtomFilter = AtomFilter;
+
 })(window);
