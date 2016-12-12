@@ -6597,7 +6597,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 216 - 'AtomItemsControl.js' */                    var sp = this._sortPath;
 /*Line 217 - 'AtomItemsControl.js' */                    if (sp) {
 /*Line 218 - 'AtomItemsControl.js' */                        var spf = window.AtomFilter.sort(sp);
-/*Line 219 - 'AtomItemsControl.js' */                        r = r.sort(sp);
+/*Line 219 - 'AtomItemsControl.js' */                        r = r.sort(spf);
 /*Line 220 - 'AtomItemsControl.js' */                    }
 /*Line 221 - 'AtomItemsControl.js' */                    return r;
 /*Line 222 - 'AtomItemsControl.js' */                }

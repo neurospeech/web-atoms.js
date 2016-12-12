@@ -92,12 +92,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="atoms-debug.es5.js">
-      <DependentUpon>atoms-debug.js</DependentUpon>
-    </Content>
-    <Content Include="atoms-debug.es5.min.js">
-      <DependentUpon>atoms-debug.es5.js</DependentUpon>
-    </Content>
     <Content Include="atoms-debug.js" />
     <Content Include="atoms.js">
       <AutoGen>True</AutoGen>
