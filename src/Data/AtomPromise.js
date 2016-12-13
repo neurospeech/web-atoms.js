@@ -225,8 +225,7 @@ AtomPromise.ajax = function (url, query, options, type) {
         };
     }
 
-    if (AtomConfig.ajax.versionUrl)
-    {
+    if (AtomConfig.ajax.versionUrl) {
         if (options.versionUrl !== undefined && options.versionUrl) {
             query = query || {};
             query[AtomConfig.ajax.versionKey] = AtomConfig.ajax.version;
@@ -345,11 +344,13 @@ AtomPromise.ajax = function (url, query, options, type) {
 
         var res = p.errors[0].responseText;
         if (!res || p.errors[2] !== 'Internal Server Error') {
-            res = p.errors[2];
+            var m = p.errors[2];
+            if (m)
+                res = m;
         }
 
         p.error = {
-            msg : res
+            msg: res
         };
 
         if (p._showError) {
@@ -372,7 +373,6 @@ AtomPromise.ajax = function (url, query, options, type) {
 
     return p;
 };
-
 AtomPromise.get = function (url, query, options) {
     options = options || {};
     options.type = options.type || "get";
@@ -541,6 +541,23 @@ AtomPromise.prototype.insertItem = function (index, item, arrayPath) {
         v._$_itemInserted = true;        
     });
 };
+
+AtomPromise.prototype.toNativePromise = function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        var ap = self;
+        ap.showProgress(false);
+        ap.invoke();
+        ap.then(function (r) {
+            resolve(r.value());
+            //console.log(r);
+        }).failed(function (r) {
+            reject(r);
+            //console.log(r);
+        });
+    });
+};
+
 //$setValue = AtomBinder.setValue;
 //$getValue = AtomBinder.getValue;
 
@@ -610,3 +627,4 @@ AtomPromise.plugins["local-storage"] = function (url, query, options) {
     });
     return ap;
 };
+

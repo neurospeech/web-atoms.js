@@ -43,6 +43,7 @@
             onSubmit: function () {
 
                 if (!this.isValid()) {
+                    Atom.alert("Please complete all required fields");
                     return;
                 }
 

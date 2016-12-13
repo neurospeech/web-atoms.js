@@ -13,7 +13,8 @@
             next: null,
             confirm: false,
             confirmMessage: null,
-            mergeData: null
+            mergeData: null,
+            errorNext: null
         },
         methods: {
             get_postData: function () {
@@ -39,6 +40,7 @@
                     return;
                 }
 
+
                 var data = this.get_postData();
 
                 if (data === null || data === undefined)
@@ -60,7 +62,12 @@
                 };
 
                 //this.invokeAjax(this._postUrl, { type: "POST", data: data, success: invokeNext });
-                AtomPromise.json(this._postUrl, null, { type: "POST", data: data }).then(invokeNext).invoke();
+                AtomPromise.json(this._postUrl, null, { type: "POST", data: data }).then(invokeNext).failed(function () {
+                    var en = caller.get_errorNext();
+                    if (en) {
+                        caller.invokeAction(en);
+                    }
+                }).invoke();
 
             }
         }

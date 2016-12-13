@@ -10,14 +10,29 @@
             $(e).addClass("atom-button");
         },
         properties: {
-            sendData: false
+            sendData: false,
+            invalid: null
         },
         methods: {
             onClickHandler: function (e) {
 
                 AtomUI.cancelEvent(e);
 
+
+
                 if (this._next) {
+
+                    var inv = this._invalid;
+                    if (inv) {
+                        if ($.isArray(inv)) {
+                            inv = inv.join();
+                        }
+                        if (inv) {
+                            alert(inv);
+                            return;
+                        }
+                    }
+
                     if (this._sendData && this._next) {
                         AtomBinder.setValue(this._next, "data", this.get_data());
                     }

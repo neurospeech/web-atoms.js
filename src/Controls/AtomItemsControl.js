@@ -28,6 +28,7 @@
             valueSeparator: null,
             postData: null,
             postUrl: null,
+            errorNext: null,
             confirm: false,
             confirmMessage: null,
             filter: null,
@@ -161,6 +162,12 @@
                 var p = AtomPromise.json(this._postUrl, null, { type: "POST", data: data });
                 p.then(function () {
                     caller.invokeNext();
+                });
+                p.failed(function () {
+                    var en = caller.get_errorNext();
+                    if (en) {
+                        caller.invokeAction(en);
+                    }
                 });
                 p.invoke();
             },
