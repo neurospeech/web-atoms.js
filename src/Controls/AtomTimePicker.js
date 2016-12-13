@@ -91,9 +91,13 @@ var AtomicUpdator = function (self) {
             },
             setTime: function (h, m, is24) {
                 var ap = this.get_ap();
-                if ( is24 && (h > 12)) {
-                    h -= 12;
-                    ap = "PM";
+                if (is24) {
+                    if (h > 12) {
+                        h -= 12;
+                        ap = "PM";
+                    } else {
+                        ap = "AM";
+                    }
                 }
                 h = "" + h;
                 if (h.length == 1) {
