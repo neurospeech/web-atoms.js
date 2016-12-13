@@ -78,7 +78,7 @@ var AtomicUpdator = function (self) {
                 return h;
             },
             set_hours24: function (v) {
-                this.setTime(v, this.get_minutes());
+                this.setTime(v, this.get_minutes(), true);
             },
             get_hours: function () {
                 var t = this._time.split(':');
