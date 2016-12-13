@@ -78,7 +78,7 @@ var AtomicUpdator = function (self) {
                 return h;
             },
             set_hours24: function (v) {
-                this.setTime(v, this.get_minutes());
+                this.setTime(v, this.get_minutes(), true);
             },
             get_hours: function () {
                 var t = this._time.split(':');
@@ -91,9 +91,13 @@ var AtomicUpdator = function (self) {
             },
             setTime: function (h, m, is24) {
                 var ap = this.get_ap();
-                if ( is24 && (h > 12)) {
-                    h -= 12;
-                    ap = "PM";
+                if (is24) {
+                    if (h > 12) {
+                        h -= 12;
+                        ap = "PM";
+                    } else {
+                        ap = "AM";
+                    }
                 }
                 h = "" + h;
                 if (h.length == 1) {

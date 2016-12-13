@@ -2740,10 +2740,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "2.0.101",
+/*Line 40 - 'Atom.js' */        text: "2.0.103",
 /*Line 41 - 'Atom.js' */        major: 2,
 /*Line 42 - 'Atom.js' */        minor: 0,
-/*Line 43 - 'Atom.js' */        build: 101
+/*Line 43 - 'Atom.js' */        build: 103
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -5038,75 +5038,93 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 542 - 'AtomPromise.js' */        v._$_itemInserted = true;        
 /*Line 543 - 'AtomPromise.js' */    });
 /*Line 544 - 'AtomPromise.js' */};
-/*Line 545 - 'AtomPromise.js' *///$setValue = AtomBinder.setValue;
-/*Line 546 - 'AtomPromise.js' *///$getValue = AtomBinder.getValue;
+
+/*Line 546 - 'AtomPromise.js' */AtomPromise.prototype.toNativePromise = function () {
+/*Line 547 - 'AtomPromise.js' */    var self = this;
+/*Line 548 - 'AtomPromise.js' */    return new Promise(function (resolve, reject) {
+/*Line 549 - 'AtomPromise.js' */        var ap = self;
+/*Line 550 - 'AtomPromise.js' */        ap.showProgress(false);
+/*Line 551 - 'AtomPromise.js' */        ap.invoke();
+/*Line 552 - 'AtomPromise.js' */        ap.then(function (r) {
+/*Line 553 - 'AtomPromise.js' */            resolve(r.value());
+/*Line 554 - 'AtomPromise.js' */            //console.log(r);
+/*Line 555 - 'AtomPromise.js' */        }).failed(function (r) {
+/*Line 556 - 'AtomPromise.js' */            reject(r);
+/*Line 557 - 'AtomPromise.js' */            //console.log(r);
+/*Line 558 - 'AtomPromise.js' */        });
+/*Line 559 - 'AtomPromise.js' */    });
+/*Line 560 - 'AtomPromise.js' */};
 
 
-/*Line 549 - 'AtomPromise.js' *///Object.prototype.setValue = function (key, value) {
-/*Line 550 - 'AtomPromise.js' *///    
-/*Line 551 - 'AtomPromise.js' *///    AtomBinder.setValue(this, key, value);
-/*Line 552 - 'AtomPromise.js' *///};
-
-/*Line 554 - 'AtomPromise.js' *///Object.prototype.getValue = function (key) {
-/*Line 555 - 'AtomPromise.js' *///    return AtomBinder.getValue(this, key);
-/*Line 556 - 'AtomPromise.js' *///};
-
-/*Line 558 - 'AtomPromise.js' *///Object.prototype.add_WatchHandler = function(key,handler){
-/*Line 559 - 'AtomPromise.js' *///    AtomBinder.add_WatchHandler(this,key,handler);
-/*Line 560 - 'AtomPromise.js' *///};
-
-/*Line 562 - 'AtomPromise.js' *///Object.prototype.remove_WatchHandler = function(key,handler){
-/*Line 563 - 'AtomPromise.js' *///    AtomBinder.remove_WatchHandler(this,key,handler);
-/*Line 564 - 'AtomPromise.js' *///};
-
-/*Line 566 - 'AtomPromise.js' *///Array.prototype.add = function (item) {
-/*Line 567 - 'AtomPromise.js' *///    AtomBinder.addItem(this, item);
-/*Line 568 - 'AtomPromise.js' *///};
-
-/*Line 570 - 'AtomPromise.js' *///Array.prototype.remove = function (item) {
-/*Line 571 - 'AtomPromise.js' *///    AtomBinder.removeItem(this, item);
-/*Line 572 - 'AtomPromise.js' *///};
-
-/*Line 574 - 'AtomPromise.js' *///Array.prototype.add_CollectionHandler= function(handler){
-/*Line 575 - 'AtomPromise.js' *///    AtomBinder.add_CollectionHandler(this,handler);
-/*Line 576 - 'AtomPromise.js' *///};
-
-/*Line 578 - 'AtomPromise.js' *///Array.prototype.remove_CollectionHandler= function(handler){
-/*Line 579 - 'AtomPromise.js' *///    AtomBinder.remove_CollectionHandler(this,handler);
-/*Line 580 - 'AtomPromise.js' *///};
+/*Line 563 - 'AtomPromise.js' *///$setValue = AtomBinder.setValue;
+/*Line 564 - 'AtomPromise.js' *///$getValue = AtomBinder.getValue;
 
 
-/*Line 583 - 'AtomPromise.js' */var AtomLocalStorage = {
+/*Line 567 - 'AtomPromise.js' *///Object.prototype.setValue = function (key, value) {
+/*Line 568 - 'AtomPromise.js' *///    
+/*Line 569 - 'AtomPromise.js' *///    AtomBinder.setValue(this, key, value);
+/*Line 570 - 'AtomPromise.js' *///};
 
-/*Line 585 - 'AtomPromise.js' */    list: function (storage, query)
-/*Line 586 - 'AtomPromise.js' */    {
-/*Line 587 - 'AtomPromise.js' */    },
-/*Line 588 - 'AtomPromise.js' */    add: function (storage, query) {
-/*Line 589 - 'AtomPromise.js' */    },
-/*Line 590 - 'AtomPromise.js' */    remove: function (storage, query) {
-/*Line 591 - 'AtomPromise.js' */    },
-/*Line 592 - 'AtomPromise.js' */    clear: function (storage) {
-/*Line 593 - 'AtomPromise.js' */    },
-/*Line 594 - 'AtomPromise.js' */    set: function (storage, query, data) {
-/*Line 595 - 'AtomPromise.js' */    },
-/*Line 596 - 'AtomPromise.js' */    get: function (storage, query) {
-/*Line 597 - 'AtomPromise.js' */    }
+/*Line 572 - 'AtomPromise.js' *///Object.prototype.getValue = function (key) {
+/*Line 573 - 'AtomPromise.js' *///    return AtomBinder.getValue(this, key);
+/*Line 574 - 'AtomPromise.js' *///};
 
-/*Line 599 - 'AtomPromise.js' */};
+/*Line 576 - 'AtomPromise.js' *///Object.prototype.add_WatchHandler = function(key,handler){
+/*Line 577 - 'AtomPromise.js' *///    AtomBinder.add_WatchHandler(this,key,handler);
+/*Line 578 - 'AtomPromise.js' *///};
+
+/*Line 580 - 'AtomPromise.js' *///Object.prototype.remove_WatchHandler = function(key,handler){
+/*Line 581 - 'AtomPromise.js' *///    AtomBinder.remove_WatchHandler(this,key,handler);
+/*Line 582 - 'AtomPromise.js' *///};
+
+/*Line 584 - 'AtomPromise.js' *///Array.prototype.add = function (item) {
+/*Line 585 - 'AtomPromise.js' *///    AtomBinder.addItem(this, item);
+/*Line 586 - 'AtomPromise.js' *///};
+
+/*Line 588 - 'AtomPromise.js' *///Array.prototype.remove = function (item) {
+/*Line 589 - 'AtomPromise.js' *///    AtomBinder.removeItem(this, item);
+/*Line 590 - 'AtomPromise.js' *///};
+
+/*Line 592 - 'AtomPromise.js' *///Array.prototype.add_CollectionHandler= function(handler){
+/*Line 593 - 'AtomPromise.js' *///    AtomBinder.add_CollectionHandler(this,handler);
+/*Line 594 - 'AtomPromise.js' *///};
+
+/*Line 596 - 'AtomPromise.js' *///Array.prototype.remove_CollectionHandler= function(handler){
+/*Line 597 - 'AtomPromise.js' *///    AtomBinder.remove_CollectionHandler(this,handler);
+/*Line 598 - 'AtomPromise.js' *///};
 
 
-/*Line 602 - 'AtomPromise.js' */AtomPromise.plugins["local-storage"] = function (url, query, options) {
-/*Line 603 - 'AtomPromise.js' */    var tokens = url.split('/');
-/*Line 604 - 'AtomPromise.js' */    var storage = tokens[0];
-/*Line 605 - 'AtomPromise.js' */    var method = tokens[1];
-/*Line 606 - 'AtomPromise.js' */    var ap = new AtomPromise();
-/*Line 607 - 'AtomPromise.js' */    ap.onInvoke(function (a) {
-/*Line 608 - 'AtomPromise.js' */        var als = AtomLocalStorage;
-/*Line 609 - 'AtomPromise.js' */        var r = als[method](storage, query, options.data);
-/*Line 610 - 'AtomPromise.js' */        a.pushValue(r);
-/*Line 611 - 'AtomPromise.js' */    });
-/*Line 612 - 'AtomPromise.js' */    return ap;
-/*Line 613 - 'AtomPromise.js' */};
+/*Line 601 - 'AtomPromise.js' */var AtomLocalStorage = {
+
+/*Line 603 - 'AtomPromise.js' */    list: function (storage, query)
+/*Line 604 - 'AtomPromise.js' */    {
+/*Line 605 - 'AtomPromise.js' */    },
+/*Line 606 - 'AtomPromise.js' */    add: function (storage, query) {
+/*Line 607 - 'AtomPromise.js' */    },
+/*Line 608 - 'AtomPromise.js' */    remove: function (storage, query) {
+/*Line 609 - 'AtomPromise.js' */    },
+/*Line 610 - 'AtomPromise.js' */    clear: function (storage) {
+/*Line 611 - 'AtomPromise.js' */    },
+/*Line 612 - 'AtomPromise.js' */    set: function (storage, query, data) {
+/*Line 613 - 'AtomPromise.js' */    },
+/*Line 614 - 'AtomPromise.js' */    get: function (storage, query) {
+/*Line 615 - 'AtomPromise.js' */    }
+
+/*Line 617 - 'AtomPromise.js' */};
+
+
+/*Line 620 - 'AtomPromise.js' */AtomPromise.plugins["local-storage"] = function (url, query, options) {
+/*Line 621 - 'AtomPromise.js' */    var tokens = url.split('/');
+/*Line 622 - 'AtomPromise.js' */    var storage = tokens[0];
+/*Line 623 - 'AtomPromise.js' */    var method = tokens[1];
+/*Line 624 - 'AtomPromise.js' */    var ap = new AtomPromise();
+/*Line 625 - 'AtomPromise.js' */    ap.onInvoke(function (a) {
+/*Line 626 - 'AtomPromise.js' */        var als = AtomLocalStorage;
+/*Line 627 - 'AtomPromise.js' */        var r = als[method](storage, query, options.data);
+/*Line 628 - 'AtomPromise.js' */        a.pushValue(r);
+/*Line 629 - 'AtomPromise.js' */    });
+/*Line 630 - 'AtomPromise.js' */    return ap;
+/*Line 631 - 'AtomPromise.js' */};
 /*Line 0 - 'AtomBinding.js' */
 /*Line 1 - 'AtomBinding.js' */
 
@@ -11577,7 +11595,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 77 - 'AtomTimePicker.js' */                return h;
 /*Line 78 - 'AtomTimePicker.js' */            },
 /*Line 79 - 'AtomTimePicker.js' */            set_hours24: function (v) {
-/*Line 80 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
+/*Line 80 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes(), true);
 /*Line 81 - 'AtomTimePicker.js' */            },
 /*Line 82 - 'AtomTimePicker.js' */            get_hours: function () {
 /*Line 83 - 'AtomTimePicker.js' */                var t = this._time.split(':');
@@ -11590,60 +11608,64 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 90 - 'AtomTimePicker.js' */            },
 /*Line 91 - 'AtomTimePicker.js' */            setTime: function (h, m, is24) {
 /*Line 92 - 'AtomTimePicker.js' */                var ap = this.get_ap();
-/*Line 93 - 'AtomTimePicker.js' */                if ( is24 && (h > 12)) {
-/*Line 94 - 'AtomTimePicker.js' */                    h -= 12;
-/*Line 95 - 'AtomTimePicker.js' */                    ap = "PM";
-/*Line 96 - 'AtomTimePicker.js' */                }
-/*Line 97 - 'AtomTimePicker.js' */                h = "" + h;
-/*Line 98 - 'AtomTimePicker.js' */                if (h.length == 1) {
-/*Line 99 - 'AtomTimePicker.js' */                    h = "0" + h;
+/*Line 93 - 'AtomTimePicker.js' */                if (is24) {
+/*Line 94 - 'AtomTimePicker.js' */                    if (h > 12) {
+/*Line 95 - 'AtomTimePicker.js' */                        h -= 12;
+/*Line 96 - 'AtomTimePicker.js' */                        ap = "PM";
+/*Line 97 - 'AtomTimePicker.js' */                    } else {
+/*Line 98 - 'AtomTimePicker.js' */                        ap = "AM";
+/*Line 99 - 'AtomTimePicker.js' */                    }
 /*Line 100 - 'AtomTimePicker.js' */                }
-/*Line 101 - 'AtomTimePicker.js' */                m = m + "";
-/*Line 102 - 'AtomTimePicker.js' */                if (m.length == 1) {
-/*Line 103 - 'AtomTimePicker.js' */                    m = "0" + m;
+/*Line 101 - 'AtomTimePicker.js' */                h = "" + h;
+/*Line 102 - 'AtomTimePicker.js' */                if (h.length == 1) {
+/*Line 103 - 'AtomTimePicker.js' */                    h = "0" + h;
 /*Line 104 - 'AtomTimePicker.js' */                }
-/*Line 105 - 'AtomTimePicker.js' */                AtomBinder.setValue(this, "value", h + ":" + m + " " + ap);
-/*Line 106 - 'AtomTimePicker.js' */            },
-/*Line 107 - 'AtomTimePicker.js' */            set_hours: function (v) {
-/*Line 108 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
-/*Line 109 - 'AtomTimePicker.js' */            },
-/*Line 110 - 'AtomTimePicker.js' */            set_minutes: function (v) {
-/*Line 111 - 'AtomTimePicker.js' */                this.setTime(this.get_hours(), v);
-/*Line 112 - 'AtomTimePicker.js' */            },
-/*Line 113 - 'AtomTimePicker.js' */            set_value: function (v) {
-/*Line 114 - 'AtomTimePicker.js' */                this._updater.update(function () {
-/*Line 115 - 'AtomTimePicker.js' */                    if (this._value == v)
-/*Line 116 - 'AtomTimePicker.js' */                        return;
-/*Line 117 - 'AtomTimePicker.js' */                    if (!timeRegex.test(v)) {
-/*Line 118 - 'AtomTimePicker.js' */                        throw new Error("Unknown time format, expecting ##:## AM");
-/*Line 119 - 'AtomTimePicker.js' */                    }
-/*Line 120 - 'AtomTimePicker.js' */                    this._value = v;
-/*Line 121 - 'AtomTimePicker.js' */                    v = v.split(' ');
-/*Line 122 - 'AtomTimePicker.js' */                    this._time = v[0];
-/*Line 123 - 'AtomTimePicker.js' */                    this._ap = (v[1]).toUpperCase();
-/*Line 124 - 'AtomTimePicker.js' */                    this.refreshProperties();
-/*Line 125 - 'AtomTimePicker.js' */                });
-/*Line 126 - 'AtomTimePicker.js' */            },
-/*Line 127 - 'AtomTimePicker.js' */            refreshProperties: function () {
-/*Line 128 - 'AtomTimePicker.js' */                Atom.refresh(this, "value");
-/*Line 129 - 'AtomTimePicker.js' */                Atom.refresh(this, "time");
-/*Line 130 - 'AtomTimePicker.js' */                Atom.refresh(this, "ap");
-/*Line 131 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours");
-/*Line 132 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours24");
-/*Line 133 - 'AtomTimePicker.js' */                Atom.refresh(this, "minutes");
-/*Line 134 - 'AtomTimePicker.js' */            },
-/*Line 135 - 'AtomTimePicker.js' */            set_time: function (v) {
-/*Line 136 - 'AtomTimePicker.js' */                this.set_value(v + " " + this._ap);
-/*Line 137 - 'AtomTimePicker.js' */            },
-/*Line 138 - 'AtomTimePicker.js' */            set_ap: function (v) {
-/*Line 139 - 'AtomTimePicker.js' */                this.set_value(this._time + " " + v);
-/*Line 140 - 'AtomTimePicker.js' */            },
-/*Line 141 - 'AtomTimePicker.js' */            get_value: function () {
-/*Line 142 - 'AtomTimePicker.js' */                return this._time + " " + this._ap;
-/*Line 143 - 'AtomTimePicker.js' */            }
-/*Line 144 - 'AtomTimePicker.js' */        }
-/*Line 145 - 'AtomTimePicker.js' */    });
-/*Line 146 - 'AtomTimePicker.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 105 - 'AtomTimePicker.js' */                m = m + "";
+/*Line 106 - 'AtomTimePicker.js' */                if (m.length == 1) {
+/*Line 107 - 'AtomTimePicker.js' */                    m = "0" + m;
+/*Line 108 - 'AtomTimePicker.js' */                }
+/*Line 109 - 'AtomTimePicker.js' */                AtomBinder.setValue(this, "value", h + ":" + m + " " + ap);
+/*Line 110 - 'AtomTimePicker.js' */            },
+/*Line 111 - 'AtomTimePicker.js' */            set_hours: function (v) {
+/*Line 112 - 'AtomTimePicker.js' */                this.setTime(v, this.get_minutes());
+/*Line 113 - 'AtomTimePicker.js' */            },
+/*Line 114 - 'AtomTimePicker.js' */            set_minutes: function (v) {
+/*Line 115 - 'AtomTimePicker.js' */                this.setTime(this.get_hours(), v);
+/*Line 116 - 'AtomTimePicker.js' */            },
+/*Line 117 - 'AtomTimePicker.js' */            set_value: function (v) {
+/*Line 118 - 'AtomTimePicker.js' */                this._updater.update(function () {
+/*Line 119 - 'AtomTimePicker.js' */                    if (this._value == v)
+/*Line 120 - 'AtomTimePicker.js' */                        return;
+/*Line 121 - 'AtomTimePicker.js' */                    if (!timeRegex.test(v)) {
+/*Line 122 - 'AtomTimePicker.js' */                        throw new Error("Unknown time format, expecting ##:## AM");
+/*Line 123 - 'AtomTimePicker.js' */                    }
+/*Line 124 - 'AtomTimePicker.js' */                    this._value = v;
+/*Line 125 - 'AtomTimePicker.js' */                    v = v.split(' ');
+/*Line 126 - 'AtomTimePicker.js' */                    this._time = v[0];
+/*Line 127 - 'AtomTimePicker.js' */                    this._ap = (v[1]).toUpperCase();
+/*Line 128 - 'AtomTimePicker.js' */                    this.refreshProperties();
+/*Line 129 - 'AtomTimePicker.js' */                });
+/*Line 130 - 'AtomTimePicker.js' */            },
+/*Line 131 - 'AtomTimePicker.js' */            refreshProperties: function () {
+/*Line 132 - 'AtomTimePicker.js' */                Atom.refresh(this, "value");
+/*Line 133 - 'AtomTimePicker.js' */                Atom.refresh(this, "time");
+/*Line 134 - 'AtomTimePicker.js' */                Atom.refresh(this, "ap");
+/*Line 135 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours");
+/*Line 136 - 'AtomTimePicker.js' */                Atom.refresh(this, "hours24");
+/*Line 137 - 'AtomTimePicker.js' */                Atom.refresh(this, "minutes");
+/*Line 138 - 'AtomTimePicker.js' */            },
+/*Line 139 - 'AtomTimePicker.js' */            set_time: function (v) {
+/*Line 140 - 'AtomTimePicker.js' */                this.set_value(v + " " + this._ap);
+/*Line 141 - 'AtomTimePicker.js' */            },
+/*Line 142 - 'AtomTimePicker.js' */            set_ap: function (v) {
+/*Line 143 - 'AtomTimePicker.js' */                this.set_value(this._time + " " + v);
+/*Line 144 - 'AtomTimePicker.js' */            },
+/*Line 145 - 'AtomTimePicker.js' */            get_value: function () {
+/*Line 146 - 'AtomTimePicker.js' */                return this._time + " " + this._ap;
+/*Line 147 - 'AtomTimePicker.js' */            }
+/*Line 148 - 'AtomTimePicker.js' */        }
+/*Line 149 - 'AtomTimePicker.js' */    });
+/*Line 150 - 'AtomTimePicker.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomUploadButton.js' */
 
 /*Line 2 - 'AtomUploadButton.js' */(function (baseType) {

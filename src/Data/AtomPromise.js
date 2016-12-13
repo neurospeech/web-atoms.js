@@ -543,6 +543,24 @@ AtomPromise.prototype.insertItem = function (index, item, arrayPath) {
         v._$_itemInserted = true;        
     });
 };
+
+AtomPromise.prototype.toNativePromise = function () {
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        var ap = self;
+        ap.showProgress(false);
+        ap.invoke();
+        ap.then(function (r) {
+            resolve(r.value());
+            //console.log(r);
+        }).failed(function (r) {
+            reject(r);
+            //console.log(r);
+        });
+    });
+};
+
+
 //$setValue = AtomBinder.setValue;
 //$getValue = AtomBinder.getValue;
 
