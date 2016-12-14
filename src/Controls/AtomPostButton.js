@@ -22,6 +22,19 @@
             },
 
             onClickHandler: function (e) {
+
+                var inv = this._invalid;
+                if (inv) {
+                    if ($.isArray(inv)) {
+                        inv = inv.join();
+                    }
+                    if (inv) {
+                        alert(inv);
+                        return;
+                    }
+                }
+
+
                 if (this._confirm) {
                     var _this = this;
                     Atom.confirm(this._confirmMessage, function () {
