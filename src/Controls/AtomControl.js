@@ -92,6 +92,14 @@ var AtomProperties = {
             $(element).val(value);
         }
     },
+    src: function (e, v) {
+        if (v) {
+            if (/http\:\/\//i.test(v)) {
+                v = v.substr(5);
+            }
+        }
+        AtomUI.attr(e, 'src', v);
+    },
     valueAsDate: function (element, value) {
         element.valueAsDate = AtomDate.parse(value);
     },
