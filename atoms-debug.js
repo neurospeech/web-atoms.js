@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.108",
+/*Line 40 - 'Atom.js' */        text: "1.8.109",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 108
+/*Line 43 - 'Atom.js' */        build: 109
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -5570,7 +5570,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 96 - 'AtomControl.js' */                v = v.substr(5);
 /*Line 97 - 'AtomControl.js' */            }
 /*Line 98 - 'AtomControl.js' */        }
-/*Line 99 - 'AtomControl.js' */        AtomUI.attr(e, 'key', v);
+/*Line 99 - 'AtomControl.js' */        AtomUI.attr(e, 'src', v);
 /*Line 100 - 'AtomControl.js' */    },
 /*Line 101 - 'AtomControl.js' */    valueAsDate: function (element, value) {
 /*Line 102 - 'AtomControl.js' */        element.valueAsDate = AtomDate.parse(value);

@@ -97,7 +97,7 @@ var AtomProperties = {
                 v = v.substr(5);
             }
         }
-        AtomUI.attr(e, 'key', v);
+        AtomUI.attr(e, 'src', v);
     },
     valueAsDate: function (element, value) {
         element.valueAsDate = AtomDate.parse(value);
