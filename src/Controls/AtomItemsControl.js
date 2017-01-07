@@ -743,9 +743,9 @@
                     } else {
                         elementChild = this.createChildElement(parentScope, null, data, ae);
                     }
-                    elementChild.before = after.nextSibling;
+                    elementChild.before = after;
                     WebAtoms.dispatcher.callLater(function () { 
-                        ip.insertBefore(elementChild, elementChild.before);
+                        ip.insertBefore(elementChild, elementChild.before.nextElementSibling);
                     });
                     after = elementChild;
                     this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());

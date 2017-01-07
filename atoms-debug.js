@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.211",
+/*Line 40 - 'Atom.js' */        text: "1.8.212",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 211
+/*Line 43 - 'Atom.js' */        build: 212
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7156,9 +7156,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 742 - 'AtomItemsControl.js' */                    } else {
 /*Line 743 - 'AtomItemsControl.js' */                        elementChild = this.createChildElement(parentScope, null, data, ae);
 /*Line 744 - 'AtomItemsControl.js' */                    }
-/*Line 745 - 'AtomItemsControl.js' */                    elementChild.before = after.nextSibling;
+/*Line 745 - 'AtomItemsControl.js' */                    elementChild.before = after;
 /*Line 746 - 'AtomItemsControl.js' */                    WebAtoms.dispatcher.callLater(function () { 
-/*Line 747 - 'AtomItemsControl.js' */                        ip.insertBefore(elementChild, elementChild.before);
+/*Line 747 - 'AtomItemsControl.js' */                        ip.insertBefore(elementChild, elementChild.before.nextElementSibling);
 /*Line 748 - 'AtomItemsControl.js' */                    });
 /*Line 749 - 'AtomItemsControl.js' */                    after = elementChild;
 /*Line 750 - 'AtomItemsControl.js' */                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
