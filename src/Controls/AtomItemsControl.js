@@ -678,17 +678,18 @@
                 var itemIndex = index * itemsInBlock;
                 console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
-                if (itemIndex >= items.length)
+                if (itemIndex >= items.length) {
                     return;
+                }
 
                 var ce = fc.nextElementSibling;
 
-                if (ce == lc)
-                    return;
-                var scopeIndex = ce.atomControl.get_scope().itemIndex;
-                if (scopeIndex == itemIndex) {
-                    console.log("No need to create any item");
-                    return;
+                if (ce != lc) {
+                    var scopeIndex = ce.atomControl.get_scope().itemIndex;
+                    if (scopeIndex == itemIndex) {
+                        console.log("No need to create any item");
+                        return;
+                    }
                 }
 
                 var remove = [];
