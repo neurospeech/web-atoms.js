@@ -670,6 +670,16 @@
 
                 }
 
+                var self = this;
+
+                if (this._isChanging) {
+                    setTimeout(function () {
+                        self.onVirtualCollectionChanged();
+                    }, 100);
+                    return;
+                }
+                this._isChanging = true;
+
                 var block = Math.ceil(vcHeight / avgHeight);
                 var itemsInBlock = block * this._columns;
 
@@ -679,6 +689,7 @@
                 console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
                 if (itemIndex >= items.length) {
+                    this._isChanging = false;
                     return;
                 }
 
@@ -688,6 +699,7 @@
                     var scopeIndex = ce.atomControl.get_scope().itemIndex;
                     if (scopeIndex == itemIndex) {
                         console.log("No need to create any item");
+                        this._isChanging = false;
                         return;
                     }
                 }
@@ -746,8 +758,10 @@
                         continue;
                     var e = cache[i];
                     if (!e) continue;
-                    e.atomControl.dispose();
-                    e.remove();
+                    WebAtoms.dispatcher.callLater(function () {
+                        e.atomControl.dispose();
+                        e.remove();
+                    });
                     cache[i] = null;
                 }
 
@@ -758,6 +772,9 @@
                     height:  h
                 });
 
+                WebAtoms.dispatcher.callLater(function () {
+                    self._isChanging = false;
+                });
                 WebAtoms.dispatcher.start();
 
                 AtomBinder.refreshValue(this, "childAtomControls");
