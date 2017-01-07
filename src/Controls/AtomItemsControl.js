@@ -732,6 +732,9 @@
 
                 var last = null;
 
+                var add = [];
+                var remove = [];
+
                 for (var i = 0; i < itemsInBlock * 3; i++) {
                     if (!ae.next())
                         break;
@@ -744,9 +747,7 @@
                         elementChild = this.createChildElement(parentScope, null, data, ae);
                     }
                     elementChild.before = after;
-                    WebAtoms.dispatcher.callLater(function () { 
-                        ip.insertBefore(elementChild, elementChild.before.nextElementSibling);
-                    });
+                    add.push(elementChild);
                     after = elementChild;
                     this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                     last = index2;
@@ -758,13 +759,24 @@
                         continue;
                     var e = cache[i];
                     if (!e) continue;
-                    WebAtoms.dispatcher.callLater(function () {
-                        e.atomControl.dispose();
-                        e.remove();
-                    });
+                    remove.push(e);
                     cache[i] = null;
                 }
 
+                WebAtoms.dispatcher.callLater(function () {
+                    var a = new AtomEnumerator(add);
+                    while (a.next()) {
+                        var ec = a.current();
+                        ip.insertBefore(ec, ec.before.nextElementSibling);
+                        ec.before = null;
+                    }
+                    a = new AtomEnumerator(remove);
+                    while (a.next()) {
+                        var ec = a.current();
+                        ec.atomControl.dispose();
+                        ec.remove();
+                    }
+                });
                 var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
                 console.log("last child height = " + h);
 
