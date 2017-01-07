@@ -580,8 +580,9 @@
                 var $vc = $(vc);
 
                 var vcHeight = $vc.innerHeight();
+                var vcScrollHeight = vc.scrollHeight;
 
-                if ( isNaN(vcHeight) || vcHeight <= 0) {
+                if ( isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
                     // leave it..
                     var self = this;
                     setTimeout(function () {
@@ -604,7 +605,6 @@
 
                 var ae = new AtomEnumerator(items);
 
-                WebAtoms.dispatcher.pause();
 
                 if (this._training) {
                     if (vcHeight >= itemsHeight/3) {
@@ -621,9 +621,9 @@
                         if (ae.next()) {
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, null, data, ae);
-                            WebAtoms.dispatcher.callLater(function () { 
-                                ip.insertBefore(elementChild,lc);
-                            });
+                            //WebAtoms.dispatcher.callLater(function () { 
+                            ip.insertBefore(elementChild,lc);
+                            //});
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                             this.postVirtualCollectionChanged();
                         }
@@ -666,7 +666,6 @@
                         this._ready = true;
                         this.postVirtualCollectionChanged();
                     }
-                    WebAtoms.dispatcher.start();
                     return;
 
                 }
@@ -731,8 +730,9 @@
                     } else {
                         elementChild = this.createChildElement(parentScope, null, data, ae);
                     }
+                    elementChild.before = after.nextSibling;
                     WebAtoms.dispatcher.callLater(function () { 
-                        ip.insertBefore(elementChild, after.nextElementSibling);
+                        ip.insertBefore(elementChild, elementChild.before);
                     });
                     after = elementChild;
                     this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
