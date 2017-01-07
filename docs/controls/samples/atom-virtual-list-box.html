@@ -5,29 +5,57 @@
     <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
     <script src="../../../atoms.js"></script>
+
+
+    <script>
+        var items = new Array(1000);
+        for (var i = 0; i < 1000; i++) {
+            var n = i;
+            items[i] = {
+                label: "Item (" + (n + 1) + ")",
+                price: (new Date()).getMilliseconds(),
+                value: n
+            };
+        }
+    </script>
+
 </head>
 <body>
     <div atom-type="AtomApplication" atom-render-as-page="true">
         <!-- sample -->
 
         <div atom-type="AtomListBox"
-             atom-items="{ AtomPromise.json('movie-list.json') }"
+             atom-allow-multiple-selection="true"
+             atom-auto-select-on-click="{false}"
+             atom-items="{ items }"
              atom-ui-virtualize="{true}"
-             style="height:100px; overflow:auto"
+             style="height:400px"
              atom-name="movieList">
-            <!-- Height must be specified for Vertical Layout -->
-            <div atom-template="itemTemplate" 
-                 style="height:30px;">
-                <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
-                <span atom-text="{ $data.MovieName }"></span>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Index</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody atom-presenter="itemsPresenter">
+                    <tr atom-template="itemTemplate">
+                        <td><input type="checkbox" atom-checked="$[scope.itemSelected]"/></td>
+                        <td atom-text="{ ($scope.itemIndex + 1) + ') ' }"></td>
+                        <td atom-text="{ $data.label}"></td>
+                        <td atom-text="{ $data.price}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div>
             <span>Selected Movie: </span>
-            <span atom-text="[($scope.movieList.selectedItem.MovieName || '')]">
+            <span atom-text="[($scope.movieList.selectedItem.label || '')]">
             </span>
-            <span atom-text="['('+($scope.movieList.selectedItem.MovieCategory||'')+')']">
+            <span atom-text="['('+($scope.movieList.selectedItem.price||'')+')']">
             </span>
         </div>
 

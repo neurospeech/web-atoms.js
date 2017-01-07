@@ -332,6 +332,31 @@
                 if (this._allowSelectFirst && this.get_selectedIndex() == 0)
                     return;
 
+                if (this._uiVirtualize) {
+                    var index = this.get_selectedIndex();
+                    if (!this._ready) {
+                        var self = this;
+                        setTimeout(function () {
+                            self.bringSelectionIntoView();
+                        }, 1000);
+                        return;
+                    }
+                    var avgHeight = this._avgHeight;
+                    var vc = $(this._virtualContainer);
+
+                    var vcHeight = vc.innerHeight();
+
+                    var block = Math.ceil(vcHeight / avgHeight);
+                    var itemsInBlock = block * this._columns;
+
+                    var scrollTop = Math.floor(index / itemsInBlock);
+                    vc.scrollTop(scrollTop * vcHeight);
+                    
+
+
+                    return;
+                }
+
                 //var children = $(this._itemsPresenter).children();
                 var ae = new ChildEnumerator(this._itemsPresenter);
                 while (ae.next()) {
@@ -452,175 +477,272 @@
                 }, 10);
             },
 
-            onVirtualCollectionChanged: function () {
-                var element = this._itemsPresenter;
-                var items = this.get_dataItems(true);
+            validateScroller: function () {
 
-                var parentScope = this.get_scope();
+                if (this._scrollerSetup)
+                    return;
 
-                var et = this.getTemplate("itemTemplate");
-                if (et) {
-                    et = AtomUI.getAtomType(et);
-                    if (et) {
-                        this._childItemType = et;
+                var ip = this._itemsPresenter;
+                var e = this._element;
+
+
+                var vc = this._virtualContainer;
+                if (!vc) {
+                    if (ip == e || /table/i.test(e.nodeName)) {
+                        throw new Error("virtualContainer presenter not found, you must put itemsPresenter inside a virtualContainer in order for Virtualization to work");
+                    } else {
+                        vc = this._virtualContainer = this._element;
                     }
                 }
 
-                var ae = new AtomEnumerator(items);
-                WebAtoms.dispatcher.pause();
+                var $vc = $(vc);
+                $vc.css({
+                    overflow: "auto"
+                });
 
-                if (this._itemsPresenter == this._element) {
-                    var d = document.createElement("DIV");
-                    var $d = $(d);
-                    $d.addClass("atom-virtual-container");
-                    //$d.css("width", $(this._itemsPresenter).innerWidth());
-                    $d.css({posiiton:"absolute",width: "100%", height:"100%"});
-                    this._element.innerHTML = "";
-                    this._element.appendChild(d);
-                    this._itemsPresenter = d;
-                    element = this._itemsPresenter;
+                this.bindEvent(vc, "scroll","onScroll");
+
+                var $ip = $(ip);
+                $ip.css({
+                    overflow: "hidden"
+                });
+
+                //this.validateScroller = null;
+
+                var isTable = /tbody/i.test(ip.nodeName);
+
+                var fc, lc;
+
+                if (isTable) {
+                    fc = document.createElement("TR");
+                    lc = document.createElement("TR");
+                } else {
+                    fc = document.createElement("DIV");
+                    lc = document.createElement("DIV");
                 }
 
-                var cache = this._cachedItems;
-                if (!cache) {
-                    cache = {};
-                    this.disposeChildren(element);
-                }
-                this._cachedItems = cache;
+                $(fc).addClass("sticky first-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
+                $(lc).addClass("sticky last-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
 
-                //this.disposeChildren(element);
+                this._firstChild = fc;
+                this._lastChild = lc;
 
+                ip.appendChild(fc);
+                ip.appendChild(lc);
+
+                // let us train ourselves to find average height/width
+                this._training = true;
+                this._scrollerSetup = true;
+
+            },
+
+            postVirtualCollectionChanged: function () {
+                var self = this;
+                setTimeout(function () {
+                    self.onVirtualCollectionChanged();
+                }, 1);
+            },
+
+            onVirtualCollectionChanged: function () {
+
+
+
+                var ip = this._itemsPresenter;
+
+                var items = this.get_dataItems();
                 if (!items.length) {
-                    WebAtoms.dispatcher.start();
-
-                    AtomBinder.refreshValue(this, "childAtomControls");
+                    this.disposeChildren(ip);
+                    this._firstChild = null;
+                    this._lastChild = null;
+                    this._scrollerSetup = false;
+                    this._scopes = null;
+                    this.unbindEvent(vc, "scroll");
                     return;
                 }
 
-                var scroller = this._itemsPresenter.parentElement;
-                var $scroller = $(scroller);
-                $scroller.css("overflow", "auto");
-
-                $(element).css("position", "relative");
-
-                var scrollerWidth = $scroller.width();
-                var scrollerHeight = $scroller.height();
 
 
+                this.validateScroller();
 
-                this.unbindEvent(scroller, "scroll");
+                var $ip = $(ip);
 
-                var n = items.length;
-                var presenterWidth = $(this._itemsPresenter).innerWidth();
+                var fc = this._firstChild;
+                var lc = this._lastChild;
 
+                var $fc = $(fc);
+                var $lc = $(lc);
 
+                var vc = this._virtualContainer;
+                var $vc = $(vc);
 
-                var t = this.getTemplate("itemTemplate");
-                var $t = $(t);
-                var h = $t.outerHeight(true);
-                var w = $t.outerWidth(true);
+                var vcHeight = $vc.innerHeight();
 
-                if (!(h || w)) {
-                    throw new Error("Either width or height must be explicitly specified for virtualization");
+                if (vcHeight == 0) {
+                    // leave it..
+                    var self = this;
+                    setTimeout(function () {
+                        self.onVirtualCollectionChanged();
+                    }, 1000);
+                    return;
                 }
 
-                var cols = 1;
-                var rows = 1;
+                var vcWidth = $vc.innerWidth();
 
-                if (h > 0) {
-                    if (w > 0) {
-                        // wrap...
-                        if (presenterWidth <= 0) {
-                            if (console) {
-                                console.warn("presenterWidth is 0, you may need to stretch width", this);
-                            }
+                var avgHeight = this._avgHeight;
+                var avgWidth = this._avgWidth;
+
+                var itemsHeight = vc.scrollHeight - $fc.outerHeight() - $lc.outerHeight();
+                var itemsWidth = $ip.innerWidth();
+
+                var parentScope = this.get_scope();
+
+                var element = this._element;
+
+                var ae = new AtomEnumerator(items);
+
+                if (this._training) {
+                    if (vcHeight >= itemsHeight/3) {
+                        // lets add item...
+                        var ce = lc.previousElementSibling;
+                        var index = 0;
+                        if (ce != fc) {
+                            var data = ce.atomControl.get_data();
+                            while (ae.next()) {
+                                if (ae.current() == data) break;
+                            };
                         }
-                        cols = Math.ceil(presenterWidth / w) || 1;
-                        rows = Math.ceil(n / cols) || 1;
-                        $scroller.css("overflow-x", "hidden");
+
+                        if (ae.next()) {
+                            var data = ae.current();
+                            var elementChild = this.createChildElement(parentScope, null, data, ae);
+                            ip.insertBefore(elementChild,lc);
+                            this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                            this.postVirtualCollectionChanged();
+                        }
                     } else {
-                        if (!scrollerHeight)
-                            throw new Error("Height must be explicitly specified for wrapping container");
-                        rows = n;
-                        $scroller.css("overflow-y", "auto");
-                        $scroller.css("overflow-x", "hidden");
 
-                    }
-                } else {
-
-                }
-
-                if (h > 0) {
-                    $(this._itemsPresenter).height(rows * h);
-                } else {
-                    $(this._itemsPresenter).width(cols * w);
-                }
-
-                var visibleX = Math.floor(scroller.scrollLeft / (w || 1));
-                var visibleY = Math.floor(scroller.scrollTop / (h || 1));
-                var widthX = (( Math.floor( scroller.offsetWidth / (w || 1))) -1) || 1;
-                var heightX = scroller.offsetHeight / (h || 1);
-
-
-                var removed = [];
-
-                while (ae.next()) {
-
-                    var index = ae.currentIndex();
-                    var yindex = Math.floor(index / cols);
-                    var xindex = index % cols;
-
-                    var elementChild = cache[index];
-
-                    if (xindex < visibleX || xindex > visibleX + widthX) {
-                        if (elementChild) {
-                            cache[index] = null;
-                            removed.push(elementChild);
+                        // calculate avg height
+                        var totalVisibleItems = 0;
+                        var ce = fc.nextElementSibling;
+                        var allHeight = 0;
+                        var allWidth = 0;
+                        while (ce != lc) {
+                            totalVisibleItems++;
+                            allHeight += $(ce).outerHeight(true);
+                            allWidth += $(ce).outerWidth(true);
+                            ce = ce.nextElementSibling;
                         }
-                        continue;
-                    }
-                    if (yindex < visibleY || yindex > visibleY + heightX) {
-                        if (elementChild) {
-                            cache[index] = null;
-                            removed.push(elementChild);
-                        }
-                        continue;
-                    }
+                        totalVisibleItems--;
+                        avgHeight = allHeight / totalVisibleItems;
+                        avgWidth = allWidth / totalVisibleItems;
+                        this._avgHeight = avgHeight;
+                        this._avgWidth = avgWidth;
 
-                    if (elementChild) {
-                        continue;
-                    }
+                        var columns = Math.floor(vcWidth / avgWidth);
+                        var allRows = Math.ceil(items.length / columns);
+                        var visibleRows = Math.ceil(totalVisibleItems / columns);
 
-                    var data = ae.current();
-                    elementChild = this.createChildElement(parentScope, element, data, ae);
-                    cache[index] = elementChild;
-                    var $ec = $(elementChild);
-                    $ec.css("position", "absolute");
-                    if (w > 0) {
-                        $ec.css("width", w + "px");
-                        $ec.css("left", (xindex * w) + "px");
-                    }
-                    if (h > 0) {
-                        $ec.css("top", (yindex * h) + "px");
-                    }
+                        //this._visibleBlock = visibleRows * avgHeight;
+                        //this._itemsInBlock = totalVisibleItems;
+                        this._allRows = allRows;
+                        this._columns = columns;
 
-                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                        //this._allRows = allRows;
+                        //this._visibleRows = visibleRows;
+
+                        // set height of last child... to increase padding
+                        $lc.css({
+                            height: ((allRows-visibleRows) * avgHeight) + "px"
+                        });
+                        this._training = false;
+                        this._ready = true;
+                        this.postVirtualCollectionChanged();
+                    }
+                    return;
 
                 }
 
-                var _this = this;
-                this.bindEvent(scroller, "scroll", function () {
-                    _this.onScroll();
+                var block = Math.ceil(vcHeight / avgHeight);
+                var itemsInBlock = block * this._columns;
+
+                // lets simply recreate the view... if we are out of the scroll bounds... 
+                var index = Math.max(0, Math.floor(vc.scrollTop / vcHeight) - 1);
+                var itemIndex = index * itemsInBlock;
+                console.log("First block index is " + index + " item index is " + index * itemsInBlock);
+
+                if (itemIndex >= items.length)
+                    return;
+
+                var ce = fc.nextElementSibling;
+
+                if (ce == lc)
+                    return;
+                var scopeIndex = ce.atomControl.get_scope().itemIndex;
+                if (scopeIndex == itemIndex) {
+                    console.log("No need to create any item");
+                    return;
+                }
+
+                var remove = [];
+                var cache = {};
+
+                while (ce != lc) {
+                    var c = ce;
+                    ce = ce.nextElementSibling;
+                    var s = c.atomControl.get_scope().itemIndex;
+                    cache[s] = c;
+                    //c.atomControl.dispose();
+                    c.remove();
+                }
+
+                $fc.css({
+                    height: index*vcHeight
                 });
 
-                WebAtoms.dispatcher.start();
-
-                ae = new AtomEnumerator(removed);
-                while (ae.next()) {
-                    var item = ae.current();
-                    item.atomControl.dispose();
-                    $(item).remove();
+                var ae = new AtomEnumerator(items);
+                for (var i = 0; i < itemIndex; i++) {
+                    ae.next();
                 }
+
+
+                var after = fc;
+
+                var last = null;
+
+                for (var i = 0; i < itemsInBlock * 3; i++) {
+                    if (!ae.next())
+                        break;
+                    var index2 = ae.currentIndex();
+                    var data = ae.current();
+                    var elementChild = cache[index2];
+                    if (elementChild) {
+                        cache[index2] = null;
+                    } else {
+                        elementChild = this.createChildElement(parentScope, null, data, ae);
+                    }
+                    ip.insertBefore(elementChild, after.nextElementSibling);
+                    after = elementChild;
+                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                    last = index2;
+                }
+
+
+                for (var i in cache) {
+                    if (!cache.hasOwnProperty(i))
+                        continue;
+                    var e = cache[i];
+                    if (!e) continue;
+                    e.atomControl.dispose();
+                    e.remove();
+                    cache[i] = null;
+                }
+
+                var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
+                console.log("last child height = " + h);
+
+                $lc.css({
+                    height:  h
+                });
 
                 AtomBinder.refreshValue(this, "childAtomControls");
             },
@@ -774,28 +896,32 @@
                 elementChild._templateParent = this;
                 elementChild._isDirty = true;
 
-                WebAtoms.dispatcher.callLater(function () {
-                    if (before) {
-                        parentElement.insertBefore(elementChild, before);
-                    } else {
-                        parentElement.appendChild(elementChild);
-                    }
-                });
+                if (parentElement) {
+                    WebAtoms.dispatcher.callLater(function () {
+                        if (before) {
+                            parentElement.insertBefore(elementChild, before);
+                        } else {
+                            parentElement.appendChild(elementChild);
+                        }
+                    });
+                }
 
-                var scopes = this._scopes || {};
+                var scopes = this._scopes || {
+                };
                 this._scopes = scopes;
 
-                var scope = scopes[ae.currentIndex()] || new AtomScope(this, parentScope, parentScope.__application);
-                scopes[ae.currentIndex()] = scope;
+                var index = ae ? ae.currentIndex() : -1;
+                var scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
+                scopes[index] = scope;
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();
-                    scope.itemIndex = ae.currentIndex();
+                    scope.itemIndex = index;
                     scope.itemExpanded = false;
                     scope.data = data;
                     scope.get_itemSelected = function () {
                         return scope.owner.isSelected(data);
-                    };
+                };
                     scope.set_itemSelected = function (v) {
                         scope.owner.toggleSelection(data, true);
                     };
