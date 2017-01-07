@@ -581,7 +581,7 @@
 
                 var vcHeight = $vc.innerHeight();
 
-                if (vcHeight == 0) {
+                if ( isNaN(vcHeight) || vcHeight <= 0) {
                     // leave it..
                     var self = this;
                     setTimeout(function () {
@@ -699,6 +699,8 @@
                     c.remove();
                 }
 
+                WebAtoms.dispatcher.pause();
+
                 $fc.css({
                     height: index*vcHeight
                 });
@@ -747,6 +749,8 @@
                 $lc.css({
                     height:  h
                 });
+
+                WebAtoms.dispatcher.start();
 
                 AtomBinder.refreshValue(this, "childAtomControls");
             },
