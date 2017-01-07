@@ -5,20 +5,35 @@
     <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
     <script src="../../../atoms.js"></script>
+
+    <script>
+        var items = new Array(1000);
+        for (var i = 0; i < 1000; i++) {
+            var n = i;
+            items[i] = {
+                label: "Item (" + (n + 1) + ")",
+                value: n
+            };
+        }
+    </script>
+
 </head>
 <body>
     <div atom-type="AtomApplication" atom-render-as-page="true">
         <!-- sample -->
 
         <div atom-type="AtomListBox"
-             atom-items="{ AtomPromise.json('movie-list.json') }"
+             atom-auto-scroll-to-selection="true"
+             atom-value="$[appScope.value]"
+             atom-items="{ items }"
              atom-ui-virtualize="{true}"
-             style="height:60px; width:200px;"
+             style="height:400px; width:400px;"
              atom-name="movieList">
-            <div atom-template="itemTemplate" 
-                 style="height:30px;width:90px; overflow:hidden;">
-                <span atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
-                <span atom-text="{ $data.MovieName }"></span>
+            <div atom-presenter="itemsPresenter">
+                <div atom-template="itemTemplate" style="width:170px;float:left;display:inline-block">
+                    <span style="display:inline-block;height:20px;padding:5px" atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
+                    <span style="display:inline-block;height:20px;padding:5px" atom-text="{ $data.label }"></span>
+                </div>
             </div>
         </div>
 
