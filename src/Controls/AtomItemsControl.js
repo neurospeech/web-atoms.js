@@ -713,14 +713,12 @@
                     var s = c.atomControl.get_scope().itemIndex;
                     cache[s] = c;
                     //c.atomControl.dispose();
-                    c.remove();
+                    //c.remove();
+                    remove.push(c);
                 }
 
                 WebAtoms.dispatcher.pause();
 
-                $fc.css({
-                    height: index*vcHeight
-                });
 
                 var ae = new AtomEnumerator(items);
                 for (var i = 0; i < itemIndex; i++) {
@@ -733,7 +731,6 @@
                 var last = null;
 
                 var add = [];
-                var remove = [];
 
                 for (var i = 0; i < itemsInBlock * 3; i++) {
                     if (!ae.next())
@@ -754,37 +751,30 @@
                 }
 
 
-                for (var i in cache) {
-                    if (!cache.hasOwnProperty(i))
-                        continue;
-                    var e = cache[i];
-                    if (!e) continue;
-                    remove.push(e);
-                    cache[i] = null;
-                }
+                var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
+                console.log("last child height = " + h);
 
                 WebAtoms.dispatcher.callLater(function () {
-                    var a = new AtomEnumerator(add);
+                    $fc.css({
+                        height: index*vcHeight
+                    });
+                    var a = new AtomEnumerator(remove);
+                    while (a.next()) {
+                        var ec = a.current();
+                        if (!ec.before) {
+                            ec.atomControl.dispose();
+                        }
+                        ec.remove();
+                    }
+                    a = new AtomEnumerator(add);
                     while (a.next()) {
                         var ec = a.current();
                         ip.insertBefore(ec, ec.before.nextElementSibling);
                         ec.before = null;
                     }
-                    a = new AtomEnumerator(remove);
-                    while (a.next()) {
-                        var ec = a.current();
-                        ec.atomControl.dispose();
-                        ec.remove();
-                    }
-                });
-                var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
-                console.log("last child height = " + h);
-
-                $lc.css({
-                    height:  h
-                });
-
-                WebAtoms.dispatcher.callLater(function () {
+                    $lc.css({
+                        height:  h
+                    });
                     self._isChanging = false;
                 });
                 WebAtoms.dispatcher.start();
