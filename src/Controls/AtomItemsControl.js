@@ -11,7 +11,7 @@
             this._onUIChanged = false;
             this._itemsPresenter = null;
             this._itemsPanel = null;
-            this._presenters = ["itemsPresenter"];
+            this._presenters = ["itemsPresenter","virtualContainer"];
             this._childItemType = WebAtoms.AtomControl;
         },
         properties: {
