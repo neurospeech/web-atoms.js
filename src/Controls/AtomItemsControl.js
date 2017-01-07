@@ -538,9 +538,9 @@
 
             postVirtualCollectionChanged: function () {
                 var self = this;
-                setTimeout(function () {
+                WebAtoms.dispatcher.callLater(function () {
                     self.onVirtualCollectionChanged();
-                }, 1);
+                });
             },
 
             resetVirtulContainer: function () {
@@ -604,6 +604,8 @@
 
                 var ae = new AtomEnumerator(items);
 
+                WebAtoms.dispatcher.pause();
+
                 if (this._training) {
                     if (vcHeight >= itemsHeight/3) {
                         // lets add item...
@@ -619,7 +621,9 @@
                         if (ae.next()) {
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, null, data, ae);
-                            ip.insertBefore(elementChild,lc);
+                            WebAtoms.dispatcher.callLater(function () { 
+                                ip.insertBefore(elementChild,lc);
+                            });
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                             this.postVirtualCollectionChanged();
                         }
@@ -662,6 +666,7 @@
                         this._ready = true;
                         this.postVirtualCollectionChanged();
                     }
+                    WebAtoms.dispatcher.start();
                     return;
 
                 }
@@ -726,7 +731,9 @@
                     } else {
                         elementChild = this.createChildElement(parentScope, null, data, ae);
                     }
-                    ip.insertBefore(elementChild, after.nextElementSibling);
+                    WebAtoms.dispatcher.callLater(function () { 
+                        ip.insertBefore(elementChild, after.nextElementSibling);
+                    });
                     after = elementChild;
                     this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                     last = index2;
