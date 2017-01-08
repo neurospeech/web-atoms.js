@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.218",
+/*Line 40 - 'Atom.js' */        text: "1.8.219",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 218
+/*Line 43 - 'Atom.js' */        build: 219
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7174,12 +7174,12 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 761 - 'AtomItemsControl.js' */                    var diff = newHeight - oldHeight;
 /*Line 762 - 'AtomItemsControl.js' */                    var oldScrollTop = vc.scrollTop;
-/*Line 763 - 'AtomItemsControl.js' */                    vc.scrollTop = oldScrollTop + diff;
 
-/*Line 765 - 'AtomItemsControl.js' */                    $fc.css({
-/*Line 766 - 'AtomItemsControl.js' */                        height: newHeight
-/*Line 767 - 'AtomItemsControl.js' */                    });
+/*Line 764 - 'AtomItemsControl.js' */                    $fc.css({
+/*Line 765 - 'AtomItemsControl.js' */                        height: newHeight
+/*Line 766 - 'AtomItemsControl.js' */                    });
 
+/*Line 768 - 'AtomItemsControl.js' */                    vc.scrollTop = oldScrollTop - diff;
 
 
 /*Line 771 - 'AtomItemsControl.js' */                    var a = new AtomEnumerator(remove);

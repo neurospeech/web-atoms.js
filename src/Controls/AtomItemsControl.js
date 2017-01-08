@@ -761,12 +761,12 @@
 
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;
-                    vc.scrollTop = oldScrollTop + diff;
 
                     $fc.css({
                         height: newHeight
                     });
 
+                    vc.scrollTop = oldScrollTop - diff;
 
 
                     var a = new AtomEnumerator(remove);
