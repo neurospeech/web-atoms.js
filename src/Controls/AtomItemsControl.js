@@ -761,7 +761,7 @@
 
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;
-                    vc.scrollTop = oldScrollTop - diff;
+                    vc.scrollTop = oldScrollTop + diff;
 
                     $fc.css({
                         height: newHeight
