@@ -762,11 +762,6 @@
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;
 
-                    $fc.css({
-                        height: newHeight
-                    });
-
-                    vc.scrollTop = oldScrollTop - diff;
 
 
                     var a = new AtomEnumerator(remove);
@@ -783,6 +778,13 @@
                         ip.insertBefore(ec, ec.before.nextElementSibling);
                         ec.before = null;
                     }
+
+                    $fc.css({
+                        height: newHeight
+                    });
+
+                    vc.scrollTop = oldScrollTop - diff;
+
                     $lc.css({
                         height:  h
                     });
