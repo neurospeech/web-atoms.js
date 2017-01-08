@@ -755,9 +755,20 @@
                 console.log("last child height = " + h);
 
                 WebAtoms.dispatcher.callLater(function () {
+
+                    var oldHeight = $fc.height();
+                    var newHeight = index * vcHeight;
+
+                    var diff = newHeight - oldHeight;
+                    var oldScrollTop = vc.scrollTop;
+                    vc.scrollTop = oldScrollTop - diff;
+
                     $fc.css({
-                        height: index*vcHeight
+                        height: newHeight
                     });
+
+
+
                     var a = new AtomEnumerator(remove);
                     while (a.next()) {
                         var ec = a.current();
