@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.219",
+/*Line 40 - 'Atom.js' */        text: "1.8.221",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 219
+/*Line 43 - 'Atom.js' */        build: 221
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7086,9 +7086,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 672 - 'AtomItemsControl.js' */                var self = this;
 
 /*Line 674 - 'AtomItemsControl.js' */                if (this._isChanging) {
-/*Line 675 - 'AtomItemsControl.js' */                    setTimeout(function () {
-/*Line 676 - 'AtomItemsControl.js' */                        self.onVirtualCollectionChanged();
-/*Line 677 - 'AtomItemsControl.js' */                    }, 100);
+/*Line 675 - 'AtomItemsControl.js' */                    //setTimeout(function () {
+/*Line 676 - 'AtomItemsControl.js' */                    //    self.onVirtualCollectionChanged();
+/*Line 677 - 'AtomItemsControl.js' */                    //}, 100);
 /*Line 678 - 'AtomItemsControl.js' */                    return;
 /*Line 679 - 'AtomItemsControl.js' */                }
 /*Line 680 - 'AtomItemsControl.js' */                this._isChanging = true;

@@ -673,9 +673,9 @@
                 var self = this;
 
                 if (this._isChanging) {
-                    setTimeout(function () {
-                        self.onVirtualCollectionChanged();
-                    }, 100);
+                    //setTimeout(function () {
+                    //    self.onVirtualCollectionChanged();
+                    //}, 100);
                     return;
                 }
                 this._isChanging = true;
