@@ -947,7 +947,7 @@
             createChildElement: function (parentScope, parentElement, data, ae, before) {
 
                 var elementChild = AtomUI.cloneNode(this._itemTemplate);
-                elementChild._logicalParent = parentElement;
+                elementChild._logicalParent = parentElement || this._itemsPresenter;
                 elementChild._templateParent = this;
                 elementChild._isDirty = true;
 

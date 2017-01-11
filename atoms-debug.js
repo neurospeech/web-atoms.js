@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.227",
+/*Line 40 - 'Atom.js' */        text: "1.8.228",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 227
+/*Line 43 - 'Atom.js' */        build: 228
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7360,7 +7360,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 946 - 'AtomItemsControl.js' */            createChildElement: function (parentScope, parentElement, data, ae, before) {
 
 /*Line 948 - 'AtomItemsControl.js' */                var elementChild = AtomUI.cloneNode(this._itemTemplate);
-/*Line 949 - 'AtomItemsControl.js' */                elementChild._logicalParent = parentElement;
+/*Line 949 - 'AtomItemsControl.js' */                elementChild._logicalParent = parentElement || this._itemsPresenter;
 /*Line 950 - 'AtomItemsControl.js' */                elementChild._templateParent = this;
 /*Line 951 - 'AtomItemsControl.js' */                elementChild._isDirty = true;
 
