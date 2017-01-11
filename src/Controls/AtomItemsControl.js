@@ -544,7 +544,9 @@
             },
 
             resetVirtulContainer: function () {
-                this.disposeChildren(this._itemsPresenter);
+                if (this._itemsPresenter) {
+                    this.disposeChildren(this._itemsPresenter);
+                }
                 this._firstChild = null;
                 this._lastChild = null;
                 this._scrollerSetup = false;
@@ -680,7 +682,7 @@
                 }
                 this._isChanging = true;
 
-                var block = Math.ceil(vcHeight / avgHeight);
+                var block = Math.floor(vcHeight / avgHeight);
                 var itemsInBlock = block * this._columns;
 
                 // lets simply recreate the view... if we are out of the scroll bounds... 
