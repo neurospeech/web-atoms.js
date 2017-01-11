@@ -538,13 +538,15 @@
 
             postVirtualCollectionChanged: function () {
                 var self = this;
-                setTimeout(function () {
+                WebAtoms.dispatcher.callLater(function () {
                     self.onVirtualCollectionChanged();
-                }, 1);
+                });
             },
 
-            resetVirtulContainer: function () {
-                this.disposeChildren(this._itemsPresenter);
+            resetVirtualContainer: function () {
+                if (this._itemsPresenter) {
+                    this.disposeChildren(this._itemsPresenter);
+                }
                 this._firstChild = null;
                 this._lastChild = null;
                 this._scrollerSetup = false;
@@ -560,7 +562,7 @@
 
                 var items = this.get_dataItems();
                 if (!items.length) {
-                    this.resetVirtulContainer();
+                    this.resetVirtualContainer();
                     return;
                 }
 
@@ -580,8 +582,9 @@
                 var $vc = $(vc);
 
                 var vcHeight = $vc.innerHeight();
+                var vcScrollHeight = vc.scrollHeight;
 
-                if (vcHeight == 0) {
+                if ( isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
                     // leave it..
                     var self = this;
                     setTimeout(function () {
@@ -604,6 +607,7 @@
 
                 var ae = new AtomEnumerator(items);
 
+
                 if (this._training) {
                     if (vcHeight >= itemsHeight/3) {
                         // lets add item...
@@ -619,7 +623,9 @@
                         if (ae.next()) {
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, null, data, ae);
+                            //WebAtoms.dispatcher.callLater(function () { 
                             ip.insertBefore(elementChild,lc);
+                            //});
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                             this.postVirtualCollectionChanged();
                         }
@@ -636,9 +642,9 @@
                             allWidth += $(ce).outerWidth(true);
                             ce = ce.nextElementSibling;
                         }
-                        totalVisibleItems--;
                         avgHeight = allHeight / totalVisibleItems;
                         avgWidth = allWidth / totalVisibleItems;
+                        totalVisibleItems--;
                         this._avgHeight = avgHeight;
                         this._avgWidth = avgWidth;
 
@@ -656,7 +662,7 @@
 
                         // set height of last child... to increase padding
                         $lc.css({
-                            height: ((allRows-visibleRows) * avgHeight) + "px"
+                            height: ((allRows-visibleRows+1) * avgHeight) + "px"
                         });
                         this._training = false;
                         this._ready = true;
@@ -666,7 +672,17 @@
 
                 }
 
-                var block = Math.ceil(vcHeight / avgHeight);
+                var self = this;
+
+                if (this._isChanging) {
+                    //setTimeout(function () {
+                    //    self.onVirtualCollectionChanged();
+                    //}, 100);
+                    return;
+                }
+                this._isChanging = true;
+
+                var block = Math.floor(vcHeight / avgHeight);
                 var itemsInBlock = block * this._columns;
 
                 // lets simply recreate the view... if we are out of the scroll bounds... 
@@ -674,17 +690,20 @@
                 var itemIndex = index * itemsInBlock;
                 console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
-                if (itemIndex >= items.length)
+                if (itemIndex >= items.length) {
+                    this._isChanging = false;
                     return;
+                }
 
                 var ce = fc.nextElementSibling;
 
-                if (ce == lc)
-                    return;
-                var scopeIndex = ce.atomControl.get_scope().itemIndex;
-                if (scopeIndex == itemIndex) {
-                    console.log("No need to create any item");
-                    return;
+                if (ce != lc) {
+                    var scopeIndex = ce.atomControl.get_scope().itemIndex;
+                    if (scopeIndex == itemIndex) {
+                        console.log("No need to create any item");
+                        this._isChanging = false;
+                        return;
+                    }
                 }
 
                 var remove = [];
@@ -696,12 +715,12 @@
                     var s = c.atomControl.get_scope().itemIndex;
                     cache[s] = c;
                     //c.atomControl.dispose();
-                    c.remove();
+                    //c.remove();
+                    remove.push(c);
                 }
 
-                $fc.css({
-                    height: index*vcHeight
-                });
+                WebAtoms.dispatcher.pause();
+
 
                 var ae = new AtomEnumerator(items);
                 for (var i = 0; i < itemIndex; i++) {
@@ -712,6 +731,8 @@
                 var after = fc;
 
                 var last = null;
+
+                var add = [];
 
                 for (var i = 0; i < itemsInBlock * 3; i++) {
                     if (!ae.next())
@@ -724,29 +745,59 @@
                     } else {
                         elementChild = this.createChildElement(parentScope, null, data, ae);
                     }
-                    ip.insertBefore(elementChild, after.nextElementSibling);
+                    elementChild.before = after;
+                    add.push(elementChild);
                     after = elementChild;
                     this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                     last = index2;
                 }
 
 
-                for (var i in cache) {
-                    if (!cache.hasOwnProperty(i))
-                        continue;
-                    var e = cache[i];
-                    if (!e) continue;
-                    e.atomControl.dispose();
-                    e.remove();
-                    cache[i] = null;
-                }
-
                 var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
                 console.log("last child height = " + h);
 
-                $lc.css({
-                    height:  h
+                WebAtoms.dispatcher.callLater(function () {
+
+                    var oldHeight = $fc.height();
+                    var newHeight = index * vcHeight;
+
+                    var diff = newHeight - oldHeight;
+                    var oldScrollTop = vc.scrollTop;
+
+
+
+                    var a = new AtomEnumerator(remove);
+                    while (a.next()) {
+                        var ec = a.current();
+                        if (!ec.before) {
+                            ec.atomControl.dispose();
+                        }
+                        ec.remove();
+                    }
+                    a = new AtomEnumerator(add);
+                    while (a.next()) {
+                        var ec = a.current();
+                        ip.insertBefore(ec, ec.before.nextElementSibling);
+                        ec.before = null;
+                    }
+
+                    $fc.css({
+                        height: newHeight
+                    });
+
+                    //vc.scrollTop = oldScrollTop - diff;
+
+
+                    $lc.css({
+                        height:  h
+                    });
+
+
+                    console.log("Old: " + oldScrollTop + " Diff: " + diff + " Old Height: " + oldHeight + " Height: " + newHeight);
+
+                    self._isChanging = false;
                 });
+                WebAtoms.dispatcher.start();
 
                 AtomBinder.refreshValue(this, "childAtomControls");
             },
@@ -989,10 +1040,9 @@
             },
 
             dispose: function () {
+                this.resetVirtualContainer();
                 base.dispose.call(this);
                 this._selectedItems = null;
-                this._scopes = null;
-                this._cachedItems = null;
             },
 
 
