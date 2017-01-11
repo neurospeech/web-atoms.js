@@ -783,11 +783,16 @@
                         height: newHeight
                     });
 
-                    vc.scrollTop = oldScrollTop - diff;
+                    //vc.scrollTop = oldScrollTop - diff;
+
 
                     $lc.css({
                         height:  h
                     });
+
+
+                    console.log("Old: " + oldScrollTop + " Diff: " + diff + " Old Height: " + oldHeight + " Height: " + newHeight);
+
                     self._isChanging = false;
                 });
                 WebAtoms.dispatcher.start();
