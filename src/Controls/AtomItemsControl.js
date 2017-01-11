@@ -640,9 +640,9 @@
                             allWidth += $(ce).outerWidth(true);
                             ce = ce.nextElementSibling;
                         }
-                        totalVisibleItems--;
                         avgHeight = allHeight / totalVisibleItems;
                         avgWidth = allWidth / totalVisibleItems;
+                        totalVisibleItems--;
                         this._avgHeight = avgHeight;
                         this._avgWidth = avgWidth;
 
@@ -660,7 +660,7 @@
 
                         // set height of last child... to increase padding
                         $lc.css({
-                            height: ((allRows-visibleRows) * avgHeight) + "px"
+                            height: ((allRows-visibleRows+1) * avgHeight) + "px"
                         });
                         this._training = false;
                         this._ready = true;

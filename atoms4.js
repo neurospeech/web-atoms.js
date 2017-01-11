@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.224",
+/*Line 40 - 'Atom.js' */        text: "1.8.225",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 224
+/*Line 43 - 'Atom.js' */        build: 225
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7053,9 +7053,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 639 - 'AtomItemsControl.js' */                            allWidth += $(ce).outerWidth(true);
 /*Line 640 - 'AtomItemsControl.js' */                            ce = ce.nextElementSibling;
 /*Line 641 - 'AtomItemsControl.js' */                        }
-/*Line 642 - 'AtomItemsControl.js' */                        totalVisibleItems--;
-/*Line 643 - 'AtomItemsControl.js' */                        avgHeight = allHeight / totalVisibleItems;
-/*Line 644 - 'AtomItemsControl.js' */                        avgWidth = allWidth / totalVisibleItems;
+/*Line 642 - 'AtomItemsControl.js' */                        avgHeight = allHeight / totalVisibleItems;
+/*Line 643 - 'AtomItemsControl.js' */                        avgWidth = allWidth / totalVisibleItems;
+/*Line 644 - 'AtomItemsControl.js' */                        totalVisibleItems--;
 /*Line 645 - 'AtomItemsControl.js' */                        this._avgHeight = avgHeight;
 /*Line 646 - 'AtomItemsControl.js' */                        this._avgWidth = avgWidth;
 
@@ -7073,7 +7073,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 660 - 'AtomItemsControl.js' */                        // set height of last child... to increase padding
 /*Line 661 - 'AtomItemsControl.js' */                        $lc.css({
-/*Line 662 - 'AtomItemsControl.js' */                            height: ((allRows-visibleRows) * avgHeight) + "px"
+/*Line 662 - 'AtomItemsControl.js' */                            height: ((allRows-visibleRows+1) * avgHeight) + "px"
 /*Line 663 - 'AtomItemsControl.js' */                        });
 /*Line 664 - 'AtomItemsControl.js' */                        this._training = false;
 /*Line 665 - 'AtomItemsControl.js' */                        this._ready = true;
