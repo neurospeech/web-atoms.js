@@ -759,7 +759,7 @@
                 WebAtoms.dispatcher.callLater(function () {
 
                     var oldHeight = $fc.height();
-                    var newHeight = index * vcHeight;
+                    var newHeight = (index ? index+1 : 0) * vcHeight;
 
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;

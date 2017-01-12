@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.231",
+/*Line 40 - 'Atom.js' */        text: "1.8.232",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 231
+/*Line 43 - 'Atom.js' */        build: 232
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7172,7 +7172,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 758 - 'AtomItemsControl.js' */                WebAtoms.dispatcher.callLater(function () {
 
 /*Line 760 - 'AtomItemsControl.js' */                    var oldHeight = $fc.height();
-/*Line 761 - 'AtomItemsControl.js' */                    var newHeight = index * vcHeight;
+/*Line 761 - 'AtomItemsControl.js' */                    var newHeight = (index ? index+1 : 0) * vcHeight;
 
 /*Line 763 - 'AtomItemsControl.js' */                    var diff = newHeight - oldHeight;
 /*Line 764 - 'AtomItemsControl.js' */                    var oldScrollTop = vc.scrollTop;
