@@ -766,15 +766,7 @@
 
 
 
-                    var a = new AtomEnumerator(remove);
-                    while (a.next()) {
-                        var ec = a.current();
-                        if (!ec.before) {
-                            ec.atomControl.dispose();
-                        }
-                        ec.remove();
-                    }
-                    a = new AtomEnumerator(add);
+                    var a = new AtomEnumerator(add);
                     while (a.next()) {
                         var ec = a.current();
                         ip.insertBefore(ec, ec.before.nextElementSibling);
@@ -784,6 +776,16 @@
                     $fc.css({
                         height: newHeight
                     });
+
+                    a = new AtomEnumerator(remove);
+                    while (a.next()) {
+                        var ec = a.current();
+                        if (!ec.before) {
+                            ec.atomControl.dispose();
+                        }
+                        ec.remove();
+                    }
+
 
                     //vc.scrollTop = oldScrollTop - diff;
 
@@ -796,6 +798,7 @@
                     console.log("Old: " + oldScrollTop + " Diff: " + diff + " Old Height: " + oldHeight + " Height: " + newHeight);
 
                     self._isChanging = false;
+
                 });
                 WebAtoms.dispatcher.start();
 
