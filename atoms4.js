@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.235",
+/*Line 40 - 'Atom.js' */        text: "1.8.236",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 235
+/*Line 43 - 'Atom.js' */        build: 236
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7222,9 +7222,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 807 - 'AtomItemsControl.js' */            onCollectionChanged: function (mode, index, item) {
 
-/*Line 809 - 'AtomItemsControl.js' */                if (/reset|refresh/i.test(mode)) {
-/*Line 810 - 'AtomItemsControl.js' */                    this.resetVirtulContainer();
-/*Line 811 - 'AtomItemsControl.js' */                }
+/*Line 809 - 'AtomItemsControl.js' */                //if (/reset|refresh/i.test(mode)) {
+/*Line 810 - 'AtomItemsControl.js' */                //    this.resetVirtulContainer();
+/*Line 811 - 'AtomItemsControl.js' */                //}
 
 
 /*Line 814 - 'AtomItemsControl.js' */                // just reset for now...
@@ -7457,7 +7457,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 1041 - 'AtomItemsControl.js' */            },
 
 /*Line 1043 - 'AtomItemsControl.js' */            dispose: function () {
-/*Line 1044 - 'AtomItemsControl.js' */                this.resetVirtulContainer();
+/*Line 1044 - 'AtomItemsControl.js' */                //this.resetVirtulContainer();
 /*Line 1045 - 'AtomItemsControl.js' */                base.dispose.call(this);
 /*Line 1046 - 'AtomItemsControl.js' */                this._selectedItems = null;
 /*Line 1047 - 'AtomItemsControl.js' */            },

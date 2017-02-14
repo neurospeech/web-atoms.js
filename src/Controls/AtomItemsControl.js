@@ -807,9 +807,9 @@
 
             onCollectionChanged: function (mode, index, item) {
 
-                if (/reset|refresh/i.test(mode)) {
-                    this.resetVirtulContainer();
-                }
+                //if (/reset|refresh/i.test(mode)) {
+                //    this.resetVirtulContainer();
+                //}
 
 
                 // just reset for now...
@@ -1042,7 +1042,7 @@
             },
 
             dispose: function () {
-                this.resetVirtulContainer();
+                //this.resetVirtulContainer();
                 base.dispose.call(this);
                 this._selectedItems = null;
             },
