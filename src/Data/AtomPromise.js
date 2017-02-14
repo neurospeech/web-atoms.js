@@ -343,10 +343,12 @@ AtomPromise.ajax = function (url, query, options, type) {
     p.failed(function () {
 
         var res = p.errors[0].responseText;
-        if (!res || p.errors[2] !== 'Internal Server Error') {
-            var m = p.errors[2];
-            if (m)
-                res = m;
+        if (!res) {
+            if (p.errors[2] !== 'Internal Server Error') {
+                var m = p.errors[2];
+                if (m)
+                    res = m;
+            }
         }
 
         p.error = {

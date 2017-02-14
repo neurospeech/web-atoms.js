@@ -828,10 +828,10 @@
                     return;
                 }
 
-                if (this._uiVirtualize) {
-                    this.onVirtualCollectionChanged();
-                    return;
-                }
+                //if (this._uiVirtualize) {
+                //    this.onVirtualCollectionChanged();
+                //    return;
+                //}
 
                 var parentScope = this.get_scope();
 
