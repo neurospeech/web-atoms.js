@@ -964,13 +964,20 @@
                     });
                 }
 
-                var scopes = this._scopes || {
-                };
-                this._scopes = scopes;
+                var scope = null;
 
-                var index = ae ? ae.currentIndex() : -1;
-                var scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
-                scopes[index] = scope;
+                //if (this._uiVirtualize) {
+                //    var scopes = this._scopes || {
+                //    };
+                //    this._scopes = scopes;
+
+                //    var index = ae ? ae.currentIndex() : -1;
+                //    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
+                //    scopes[index] = scope;
+                //} else {
+                    scope = new AtomScope(this, parentScope, parentScope.__application);
+                //}
+
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();

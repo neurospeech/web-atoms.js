@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.237",
+/*Line 40 - 'Atom.js' */        text: "1.8.238",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 237
+/*Line 43 - 'Atom.js' */        build: 238
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7379,134 +7379,141 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 963 - 'AtomItemsControl.js' */                    });
 /*Line 964 - 'AtomItemsControl.js' */                }
 
-/*Line 966 - 'AtomItemsControl.js' */                var scopes = this._scopes || {
-/*Line 967 - 'AtomItemsControl.js' */                };
-/*Line 968 - 'AtomItemsControl.js' */                this._scopes = scopes;
+/*Line 966 - 'AtomItemsControl.js' */                var scope = null;
 
-/*Line 970 - 'AtomItemsControl.js' */                var index = ae ? ae.currentIndex() : -1;
-/*Line 971 - 'AtomItemsControl.js' */                var scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
-/*Line 972 - 'AtomItemsControl.js' */                scopes[index] = scope;
-/*Line 973 - 'AtomItemsControl.js' */                if (ae) {
-/*Line 974 - 'AtomItemsControl.js' */                    scope.itemIsFirst = ae.isFirst();
-/*Line 975 - 'AtomItemsControl.js' */                    scope.itemIsLast = ae.isLast();
-/*Line 976 - 'AtomItemsControl.js' */                    scope.itemIndex = index;
-/*Line 977 - 'AtomItemsControl.js' */                    scope.itemExpanded = false;
-/*Line 978 - 'AtomItemsControl.js' */                    scope.data = data;
-/*Line 979 - 'AtomItemsControl.js' */                    scope.get_itemSelected = function () {
-/*Line 980 - 'AtomItemsControl.js' */                        return scope.owner.isSelected(data);
-/*Line 981 - 'AtomItemsControl.js' */                };
-/*Line 982 - 'AtomItemsControl.js' */                    scope.set_itemSelected = function (v) {
-/*Line 983 - 'AtomItemsControl.js' */                        scope.owner.toggleSelection(data, true);
-/*Line 984 - 'AtomItemsControl.js' */                    };
-/*Line 985 - 'AtomItemsControl.js' */                }
+/*Line 968 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
+/*Line 969 - 'AtomItemsControl.js' */                //    var scopes = this._scopes || {
+/*Line 970 - 'AtomItemsControl.js' */                //    };
+/*Line 971 - 'AtomItemsControl.js' */                //    this._scopes = scopes;
 
-/*Line 987 - 'AtomItemsControl.js' */                var ac = AtomUI.createControl(elementChild, this._childItemType, data, scope);
-/*Line 988 - 'AtomItemsControl.js' */                return elementChild;
-/*Line 989 - 'AtomItemsControl.js' */            },
+/*Line 973 - 'AtomItemsControl.js' */                //    var index = ae ? ae.currentIndex() : -1;
+/*Line 974 - 'AtomItemsControl.js' */                //    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
+/*Line 975 - 'AtomItemsControl.js' */                //    scopes[index] = scope;
+/*Line 976 - 'AtomItemsControl.js' */                //} else {
+/*Line 977 - 'AtomItemsControl.js' */                    scope = new AtomScope(this, parentScope, parentScope.__application);
+/*Line 978 - 'AtomItemsControl.js' */                //}
 
-/*Line 991 - 'AtomItemsControl.js' */            toggleSelection: function (data) {
-/*Line 992 - 'AtomItemsControl.js' */                this._onUIChanged = true;
-/*Line 993 - 'AtomItemsControl.js' */                this._value = undefined;
-/*Line 994 - 'AtomItemsControl.js' */                if (this._allowMultipleSelection) {
-/*Line 995 - 'AtomItemsControl.js' */                    if (AtomUI.contains(this._selectedItems, data)) {
-/*Line 996 - 'AtomItemsControl.js' */                        AtomBinder.removeItem(this._selectedItems, data);
-/*Line 997 - 'AtomItemsControl.js' */                    } else {
-/*Line 998 - 'AtomItemsControl.js' */                        AtomBinder.addItem(this._selectedItems, data);
-/*Line 999 - 'AtomItemsControl.js' */                    }
-/*Line 1000 - 'AtomItemsControl.js' */                } else {
-/*Line 1001 - 'AtomItemsControl.js' */                    this._selectedItems.length = 1;
-/*Line 1002 - 'AtomItemsControl.js' */                    this._selectedItems[0] = data;
-/*Line 1003 - 'AtomItemsControl.js' */                    AtomBinder.refreshItems(this._selectedItems);
-/*Line 1004 - 'AtomItemsControl.js' */                }
-/*Line 1005 - 'AtomItemsControl.js' */                this._onUIChanged = false;
-/*Line 1006 - 'AtomItemsControl.js' */            },
+/*Line 980 - 'AtomItemsControl.js' */                if (ae) {
+/*Line 981 - 'AtomItemsControl.js' */                    scope.itemIsFirst = ae.isFirst();
+/*Line 982 - 'AtomItemsControl.js' */                    scope.itemIsLast = ae.isLast();
+/*Line 983 - 'AtomItemsControl.js' */                    scope.itemIndex = index;
+/*Line 984 - 'AtomItemsControl.js' */                    scope.itemExpanded = false;
+/*Line 985 - 'AtomItemsControl.js' */                    scope.data = data;
+/*Line 986 - 'AtomItemsControl.js' */                    scope.get_itemSelected = function () {
+/*Line 987 - 'AtomItemsControl.js' */                        return scope.owner.isSelected(data);
+/*Line 988 - 'AtomItemsControl.js' */                };
+/*Line 989 - 'AtomItemsControl.js' */                    scope.set_itemSelected = function (v) {
+/*Line 990 - 'AtomItemsControl.js' */                        scope.owner.toggleSelection(data, true);
+/*Line 991 - 'AtomItemsControl.js' */                    };
+/*Line 992 - 'AtomItemsControl.js' */                }
 
-/*Line 1008 - 'AtomItemsControl.js' */            onUpdateUI: function () {
-/*Line 1009 - 'AtomItemsControl.js' */                base.onUpdateUI.call(this);
+/*Line 994 - 'AtomItemsControl.js' */                var ac = AtomUI.createControl(elementChild, this._childItemType, data, scope);
+/*Line 995 - 'AtomItemsControl.js' */                return elementChild;
+/*Line 996 - 'AtomItemsControl.js' */            },
 
-/*Line 1011 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
-/*Line 1012 - 'AtomItemsControl.js' */                //    this.onVirtualCollectionChanged();
-/*Line 1013 - 'AtomItemsControl.js' */                //}
+/*Line 998 - 'AtomItemsControl.js' */            toggleSelection: function (data) {
+/*Line 999 - 'AtomItemsControl.js' */                this._onUIChanged = true;
+/*Line 1000 - 'AtomItemsControl.js' */                this._value = undefined;
+/*Line 1001 - 'AtomItemsControl.js' */                if (this._allowMultipleSelection) {
+/*Line 1002 - 'AtomItemsControl.js' */                    if (AtomUI.contains(this._selectedItems, data)) {
+/*Line 1003 - 'AtomItemsControl.js' */                        AtomBinder.removeItem(this._selectedItems, data);
+/*Line 1004 - 'AtomItemsControl.js' */                    } else {
+/*Line 1005 - 'AtomItemsControl.js' */                        AtomBinder.addItem(this._selectedItems, data);
+/*Line 1006 - 'AtomItemsControl.js' */                    }
+/*Line 1007 - 'AtomItemsControl.js' */                } else {
+/*Line 1008 - 'AtomItemsControl.js' */                    this._selectedItems.length = 1;
+/*Line 1009 - 'AtomItemsControl.js' */                    this._selectedItems[0] = data;
+/*Line 1010 - 'AtomItemsControl.js' */                    AtomBinder.refreshItems(this._selectedItems);
+/*Line 1011 - 'AtomItemsControl.js' */                }
+/*Line 1012 - 'AtomItemsControl.js' */                this._onUIChanged = false;
+/*Line 1013 - 'AtomItemsControl.js' */            },
 
-/*Line 1015 - 'AtomItemsControl.js' */                var ae = new ChildEnumerator(this._itemsPresenter);
-/*Line 1016 - 'AtomItemsControl.js' */                while (ae.next()) {
-/*Line 1017 - 'AtomItemsControl.js' */                    var item = ae.current();
-/*Line 1018 - 'AtomItemsControl.js' */                    if (!item.atomControl)
-/*Line 1019 - 'AtomItemsControl.js' */                        continue;
-/*Line 1020 - 'AtomItemsControl.js' */                    var dataItem = item.atomControl.get_data();
-/*Line 1021 - 'AtomItemsControl.js' */                    AtomBinder.refreshValue(item.atomControl.get_scope(), "itemSelected");
-/*Line 1022 - 'AtomItemsControl.js' */                    this.applyItemStyle(item, dataItem, ae.isFirst(), ae.isLast());
-/*Line 1023 - 'AtomItemsControl.js' */                }
-/*Line 1024 - 'AtomItemsControl.js' */            },
+/*Line 1015 - 'AtomItemsControl.js' */            onUpdateUI: function () {
+/*Line 1016 - 'AtomItemsControl.js' */                base.onUpdateUI.call(this);
 
-/*Line 1026 - 'AtomItemsControl.js' */            onCreated: function () {
+/*Line 1018 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
+/*Line 1019 - 'AtomItemsControl.js' */                //    this.onVirtualCollectionChanged();
+/*Line 1020 - 'AtomItemsControl.js' */                //}
 
+/*Line 1022 - 'AtomItemsControl.js' */                var ae = new ChildEnumerator(this._itemsPresenter);
+/*Line 1023 - 'AtomItemsControl.js' */                while (ae.next()) {
+/*Line 1024 - 'AtomItemsControl.js' */                    var item = ae.current();
+/*Line 1025 - 'AtomItemsControl.js' */                    if (!item.atomControl)
+/*Line 1026 - 'AtomItemsControl.js' */                        continue;
+/*Line 1027 - 'AtomItemsControl.js' */                    var dataItem = item.atomControl.get_data();
+/*Line 1028 - 'AtomItemsControl.js' */                    AtomBinder.refreshValue(item.atomControl.get_scope(), "itemSelected");
+/*Line 1029 - 'AtomItemsControl.js' */                    this.applyItemStyle(item, dataItem, ae.isFirst(), ae.isLast());
+/*Line 1030 - 'AtomItemsControl.js' */                }
+/*Line 1031 - 'AtomItemsControl.js' */            },
 
-/*Line 1029 - 'AtomItemsControl.js' */                if (this._items) {
-/*Line 1030 - 'AtomItemsControl.js' */                    this.onCollectionChangedInternal("refresh", -1, null);
-/*Line 1031 - 'AtomItemsControl.js' */                }
-
-/*Line 1033 - 'AtomItemsControl.js' */                var caller = this;
-
-/*Line 1035 - 'AtomItemsControl.js' */                this.dispatcher.callLater(function () {
-/*Line 1036 - 'AtomItemsControl.js' */                    if (caller._autoScrollToSelection) {
-/*Line 1037 - 'AtomItemsControl.js' */                        caller.bringSelectionIntoView();
-/*Line 1038 - 'AtomItemsControl.js' */                    }
-/*Line 1039 - 'AtomItemsControl.js' */                });
-
-/*Line 1041 - 'AtomItemsControl.js' */            },
-
-/*Line 1043 - 'AtomItemsControl.js' */            dispose: function () {
-/*Line 1044 - 'AtomItemsControl.js' */                //this.resetVirtulContainer();
-/*Line 1045 - 'AtomItemsControl.js' */                base.dispose.call(this);
-/*Line 1046 - 'AtomItemsControl.js' */                this._selectedItems = null;
-/*Line 1047 - 'AtomItemsControl.js' */            },
+/*Line 1033 - 'AtomItemsControl.js' */            onCreated: function () {
 
 
-/*Line 1050 - 'AtomItemsControl.js' */            init: function () {
+/*Line 1036 - 'AtomItemsControl.js' */                if (this._items) {
+/*Line 1037 - 'AtomItemsControl.js' */                    this.onCollectionChangedInternal("refresh", -1, null);
+/*Line 1038 - 'AtomItemsControl.js' */                }
 
-/*Line 1052 - 'AtomItemsControl.js' */                var element = this.get_element();
+/*Line 1040 - 'AtomItemsControl.js' */                var caller = this;
+
+/*Line 1042 - 'AtomItemsControl.js' */                this.dispatcher.callLater(function () {
+/*Line 1043 - 'AtomItemsControl.js' */                    if (caller._autoScrollToSelection) {
+/*Line 1044 - 'AtomItemsControl.js' */                        caller.bringSelectionIntoView();
+/*Line 1045 - 'AtomItemsControl.js' */                    }
+/*Line 1046 - 'AtomItemsControl.js' */                });
+
+/*Line 1048 - 'AtomItemsControl.js' */            },
+
+/*Line 1050 - 'AtomItemsControl.js' */            dispose: function () {
+/*Line 1051 - 'AtomItemsControl.js' */                //this.resetVirtulContainer();
+/*Line 1052 - 'AtomItemsControl.js' */                base.dispose.call(this);
+/*Line 1053 - 'AtomItemsControl.js' */                this._selectedItems = null;
+/*Line 1054 - 'AtomItemsControl.js' */            },
 
 
-/*Line 1055 - 'AtomItemsControl.js' */                // set self as Items Presenter..
-/*Line 1056 - 'AtomItemsControl.js' */                if (!this._itemsPresenter) {
-/*Line 1057 - 'AtomItemsControl.js' */                    this._itemsPresenter = this._element;
-/*Line 1058 - 'AtomItemsControl.js' */                }
-/*Line 1059 - 'AtomItemsControl.js' */                else {
-/*Line 1060 - 'AtomItemsControl.js' */                    //this._layout = WebAtoms.AtomViewBoxLayout.defaultInstnace;
-/*Line 1061 - 'AtomItemsControl.js' */                }
+/*Line 1057 - 'AtomItemsControl.js' */            init: function () {
 
-/*Line 1063 - 'AtomItemsControl.js' */                var _this = this;
-/*Line 1064 - 'AtomItemsControl.js' */                this.bindEvent(this._selectedItems, "CollectionChanged", function () {
-/*Line 1065 - 'AtomItemsControl.js' */                    _this.onSelectedItemsChanged.apply(_this, arguments);
-/*Line 1066 - 'AtomItemsControl.js' */                });
-/*Line 1067 - 'AtomItemsControl.js' */                base.init.apply(this, arguments);
+/*Line 1059 - 'AtomItemsControl.js' */                var element = this.get_element();
 
 
-/*Line 1070 - 'AtomItemsControl.js' */                var caller = this;
+/*Line 1062 - 'AtomItemsControl.js' */                // set self as Items Presenter..
+/*Line 1063 - 'AtomItemsControl.js' */                if (!this._itemsPresenter) {
+/*Line 1064 - 'AtomItemsControl.js' */                    this._itemsPresenter = this._element;
+/*Line 1065 - 'AtomItemsControl.js' */                }
+/*Line 1066 - 'AtomItemsControl.js' */                else {
+/*Line 1067 - 'AtomItemsControl.js' */                    //this._layout = WebAtoms.AtomViewBoxLayout.defaultInstnace;
+/*Line 1068 - 'AtomItemsControl.js' */                }
 
-/*Line 1072 - 'AtomItemsControl.js' */                this.removeItemCommand = function (scope, sender) {
-/*Line 1073 - 'AtomItemsControl.js' */                    if (!sender)
-/*Line 1074 - 'AtomItemsControl.js' */                        return;
-/*Line 1075 - 'AtomItemsControl.js' */                    var d = sender.get_data();
-/*Line 1076 - 'AtomItemsControl.js' */                    AtomBinder.removeItem(caller._items, d);
-/*Line 1077 - 'AtomItemsControl.js' */                };
+/*Line 1070 - 'AtomItemsControl.js' */                var _this = this;
+/*Line 1071 - 'AtomItemsControl.js' */                this.bindEvent(this._selectedItems, "CollectionChanged", function () {
+/*Line 1072 - 'AtomItemsControl.js' */                    _this.onSelectedItemsChanged.apply(_this, arguments);
+/*Line 1073 - 'AtomItemsControl.js' */                });
+/*Line 1074 - 'AtomItemsControl.js' */                base.init.apply(this, arguments);
 
-/*Line 1079 - 'AtomItemsControl.js' */                this.removeSelectedCommand = function (scope, sender) {
-/*Line 1080 - 'AtomItemsControl.js' */                    var s = caller.get_selectedItems().slice(0);
-/*Line 1081 - 'AtomItemsControl.js' */                    var ae = new AtomEnumerator(s);
-/*Line 1082 - 'AtomItemsControl.js' */                    while (ae.next()) {
-/*Line 1083 - 'AtomItemsControl.js' */                        AtomBinder.removeItem(caller.get_items(), ae.current());
-/*Line 1084 - 'AtomItemsControl.js' */                    }
-/*Line 1085 - 'AtomItemsControl.js' */                };
 
-/*Line 1087 - 'AtomItemsControl.js' */                this.removeAllCommand = function (scope, sender) {
-/*Line 1088 - 'AtomItemsControl.js' */                    AtomBinder.clear(caller.get_items());
-/*Line 1089 - 'AtomItemsControl.js' */                };
-/*Line 1090 - 'AtomItemsControl.js' */            }
-/*Line 1091 - 'AtomItemsControl.js' */        }
-/*Line 1092 - 'AtomItemsControl.js' */    });
-/*Line 1093 - 'AtomItemsControl.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 1077 - 'AtomItemsControl.js' */                var caller = this;
+
+/*Line 1079 - 'AtomItemsControl.js' */                this.removeItemCommand = function (scope, sender) {
+/*Line 1080 - 'AtomItemsControl.js' */                    if (!sender)
+/*Line 1081 - 'AtomItemsControl.js' */                        return;
+/*Line 1082 - 'AtomItemsControl.js' */                    var d = sender.get_data();
+/*Line 1083 - 'AtomItemsControl.js' */                    AtomBinder.removeItem(caller._items, d);
+/*Line 1084 - 'AtomItemsControl.js' */                };
+
+/*Line 1086 - 'AtomItemsControl.js' */                this.removeSelectedCommand = function (scope, sender) {
+/*Line 1087 - 'AtomItemsControl.js' */                    var s = caller.get_selectedItems().slice(0);
+/*Line 1088 - 'AtomItemsControl.js' */                    var ae = new AtomEnumerator(s);
+/*Line 1089 - 'AtomItemsControl.js' */                    while (ae.next()) {
+/*Line 1090 - 'AtomItemsControl.js' */                        AtomBinder.removeItem(caller.get_items(), ae.current());
+/*Line 1091 - 'AtomItemsControl.js' */                    }
+/*Line 1092 - 'AtomItemsControl.js' */                };
+
+/*Line 1094 - 'AtomItemsControl.js' */                this.removeAllCommand = function (scope, sender) {
+/*Line 1095 - 'AtomItemsControl.js' */                    AtomBinder.clear(caller.get_items());
+/*Line 1096 - 'AtomItemsControl.js' */                };
+/*Line 1097 - 'AtomItemsControl.js' */            }
+/*Line 1098 - 'AtomItemsControl.js' */        }
+/*Line 1099 - 'AtomItemsControl.js' */    });
+/*Line 1100 - 'AtomItemsControl.js' */})(WebAtoms.AtomControl.prototype);
 /*Line 0 - 'AtomButton.js' */
 
 /*Line 2 - 'AtomButton.js' */(function (base) {

@@ -38,10 +38,10 @@ window.AtomEnumerator = AtomEnumerator;
 var Atom = {
 
     version: {
-        text: "1.8.237",
+        text: "1.8.238",
         major: 1,
         minor: 8,
-        build: 237
+        build: 238
     },
 
     refreshWindowCommand: function () {
