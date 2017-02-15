@@ -1009,9 +1009,9 @@
             onUpdateUI: function () {
                 base.onUpdateUI.call(this);
 
-                if (this._uiVirtualize) {
-                    this.onVirtualCollectionChanged();
-                }
+                //if (this._uiVirtualize) {
+                //    this.onVirtualCollectionChanged();
+                //}
 
                 var ae = new ChildEnumerator(this._itemsPresenter);
                 while (ae.next()) {

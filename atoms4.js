@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.236",
+/*Line 40 - 'Atom.js' */        text: "1.8.237",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 236
+/*Line 43 - 'Atom.js' */        build: 237
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7424,9 +7424,9 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 1008 - 'AtomItemsControl.js' */            onUpdateUI: function () {
 /*Line 1009 - 'AtomItemsControl.js' */                base.onUpdateUI.call(this);
 
-/*Line 1011 - 'AtomItemsControl.js' */                if (this._uiVirtualize) {
-/*Line 1012 - 'AtomItemsControl.js' */                    this.onVirtualCollectionChanged();
-/*Line 1013 - 'AtomItemsControl.js' */                }
+/*Line 1011 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
+/*Line 1012 - 'AtomItemsControl.js' */                //    this.onVirtualCollectionChanged();
+/*Line 1013 - 'AtomItemsControl.js' */                //}
 
 /*Line 1015 - 'AtomItemsControl.js' */                var ae = new ChildEnumerator(this._itemsPresenter);
 /*Line 1016 - 'AtomItemsControl.js' */                while (ae.next()) {
