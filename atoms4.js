@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.239",
+/*Line 40 - 'Atom.js' */        text: "1.8.241",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 239
+/*Line 43 - 'Atom.js' */        build: 241
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7379,14 +7379,14 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 963 - 'AtomItemsControl.js' */                    });
 /*Line 964 - 'AtomItemsControl.js' */                }
 
-/*Line 966 - 'AtomItemsControl.js' */                var scope = null;
+/*Line 966 - 'AtomItemsControl.js' */                var index = ae ? ae.currentIndex() : -1;
+/*Line 967 - 'AtomItemsControl.js' */                var scope = null;
 
-/*Line 968 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
-/*Line 969 - 'AtomItemsControl.js' */                //    var scopes = this._scopes || {
-/*Line 970 - 'AtomItemsControl.js' */                //    };
-/*Line 971 - 'AtomItemsControl.js' */                //    this._scopes = scopes;
+/*Line 969 - 'AtomItemsControl.js' */                //if (this._uiVirtualize) {
+/*Line 970 - 'AtomItemsControl.js' */                //    var scopes = this._scopes || {
+/*Line 971 - 'AtomItemsControl.js' */                //    };
+/*Line 972 - 'AtomItemsControl.js' */                //    this._scopes = scopes;
 
-/*Line 973 - 'AtomItemsControl.js' */                //    var index = ae ? ae.currentIndex() : -1;
 /*Line 974 - 'AtomItemsControl.js' */                //    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
 /*Line 975 - 'AtomItemsControl.js' */                //    scopes[index] = scope;
 /*Line 976 - 'AtomItemsControl.js' */                //} else {

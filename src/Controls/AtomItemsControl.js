@@ -964,6 +964,7 @@
                     });
                 }
 
+                var index = ae ? ae.currentIndex() : -1;
                 var scope = null;
 
                 //if (this._uiVirtualize) {
@@ -971,7 +972,6 @@
                 //    };
                 //    this._scopes = scopes;
 
-                //    var index = ae ? ae.currentIndex() : -1;
                 //    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
                 //    scopes[index] = scope;
                 //} else {
