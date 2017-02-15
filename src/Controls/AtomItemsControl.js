@@ -1051,7 +1051,7 @@
             dispose: function () {
                 //this.resetVirtulContainer();
                 base.dispose.call(this);
-                this._selectedItems = null;
+                //this._selectedItems = null;
             },
 
 

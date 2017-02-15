@@ -2457,10 +2457,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.238",
+/*Line 40 - 'Atom.js' */        text: "1.8.239",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 238
+/*Line 43 - 'Atom.js' */        build: 239
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -7466,7 +7466,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 1050 - 'AtomItemsControl.js' */            dispose: function () {
 /*Line 1051 - 'AtomItemsControl.js' */                //this.resetVirtulContainer();
 /*Line 1052 - 'AtomItemsControl.js' */                base.dispose.call(this);
-/*Line 1053 - 'AtomItemsControl.js' */                this._selectedItems = null;
+/*Line 1053 - 'AtomItemsControl.js' */                //this._selectedItems = null;
 /*Line 1054 - 'AtomItemsControl.js' */            },
 
 
