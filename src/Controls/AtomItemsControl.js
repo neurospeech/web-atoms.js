@@ -609,7 +609,7 @@
 
 
                 if (this._training) {
-                    if (vcHeight >= itemsHeight/3) {
+                    if (vcHeight >= itemsHeight) {
                         // lets add item...
                         var ce = lc.previousElementSibling;
                         var index = 0;
@@ -652,13 +652,23 @@
                         var allRows = Math.ceil(items.length / columns);
                         var visibleRows = Math.ceil(totalVisibleItems / columns);
 
+                        console.log({
+                            avgWidth:avgWidth,
+                            avgHeight: avgHeight,
+                            totalVisibleItems: totalVisibleItems,
+                            allRows: allRows,
+                            columns: columns
+                        });
+
                         //this._visibleBlock = visibleRows * avgHeight;
                         //this._itemsInBlock = totalVisibleItems;
                         this._allRows = allRows;
                         this._columns = columns;
 
+
                         //this._allRows = allRows;
-                        //this._visibleRows = visibleRows;
+                        this._visibleRows = visibleRows;
+                        this._visibleHeight = visibleRows * avgHeight;
 
                         // set height of last child... to increase padding
                         $lc.css({
@@ -673,6 +683,8 @@
                 }
 
                 var self = this;
+
+                this.lastScrollTop = vc.scrollTop;
 
                 if (this._isChanging) {
                     //setTimeout(function () {
@@ -759,7 +771,7 @@
                 WebAtoms.dispatcher.callLater(function () {
 
                     var oldHeight = $fc.height();
-                    var newHeight = index * vcHeight;
+                    var newHeight = index * self._visibleHeight;
 
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;
@@ -807,9 +819,9 @@
 
             onCollectionChanged: function (mode, index, item) {
 
-                //if (/reset|refresh/i.test(mode)) {
-                //    this.resetVirtulContainer();
-                //}
+                if (/reset|refresh/i.test(mode)) {
+                    this.resetVirtulContainer();
+                }
 
 
                 // just reset for now...
@@ -828,10 +840,10 @@
                     return;
                 }
 
-                //if (this._uiVirtualize) {
-                //    this.onVirtualCollectionChanged();
-                //    return;
-                //}
+                if (this._uiVirtualize) {
+                    this.onVirtualCollectionChanged();
+                    return;
+                }
 
                 var parentScope = this.get_scope();
 
@@ -967,16 +979,16 @@
                 var index = ae ? ae.currentIndex() : -1;
                 var scope = null;
 
-                //if (this._uiVirtualize) {
-                //    var scopes = this._scopes || {
-                //    };
-                //    this._scopes = scopes;
+                if (this._uiVirtualize) {
+                    var scopes = this._scopes || {
+                    };
+                    this._scopes = scopes;
 
-                //    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
-                //    scopes[index] = scope;
-                //} else {
+                    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
+                    scopes[index] = scope;
+                } else {
                     scope = new AtomScope(this, parentScope, parentScope.__application);
-                //}
+                }
 
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
@@ -1016,9 +1028,9 @@
             onUpdateUI: function () {
                 base.onUpdateUI.call(this);
 
-                //if (this._uiVirtualize) {
-                //    this.onVirtualCollectionChanged();
-                //}
+                if (this._uiVirtualize) {
+                    this.onVirtualCollectionChanged();
+                }
 
                 var ae = new ChildEnumerator(this._itemsPresenter);
                 while (ae.next()) {
@@ -1049,7 +1061,7 @@
             },
 
             dispose: function () {
-                //this.resetVirtulContainer();
+                this.resetVirtulContainer();
                 base.dispose.call(this);
                 //this._selectedItems = null;
             },
