@@ -106,16 +106,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>atoms.tt</DependentUpon>
     </Content>
-    <Content Include="atoms3.js">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>atoms.tt</DependentUpon>
-    </Content>
-    <Content Include="atoms4.js">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>atoms.tt</DependentUpon>
-    </Content>
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -266,6 +256,7 @@
     <Content Include="docs\controls\samples\atom-time-picker.html" />
     <Content Include="docs\controls\samples\atom-view-stack.html" />
     <Content Include="docs\concepts\next\samples\window-action.html" />
+    <Content Include="docs\controls\samples\atom-virtual-grid.html" />
     <Content Include="docs\controls\samples\atom-window-command-template.html" />
     <Content Include="docs\controls\samples\atom-window-iframe.html" />
     <Content Include="docs\controls\samples\atom-window.html" />
@@ -869,7 +860,7 @@
     <Content Include="res\share\twitter.png" />
     <Content Include="atoms.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms4.js</LastGenOutput>
+      <LastGenOutput>atoms1.js</LastGenOutput>
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />

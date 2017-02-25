@@ -153,6 +153,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
     System.IO.File.WriteAllText(currentDirectory + "\\atoms-debug.js" , txt);
 
+	try{
+	System.IO.File.WriteAllText(currentDirectory + "\\atoms.js" , txt);
+	}catch{}
+
 		
     //Action[] actions= new Action[]{
     //    ()=> Minify(currentDirectory, txt,"code", "atoms.min.js"),

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.js"></script>
+
+    <script>
+        var items = new Array(100);
+        for (var i = 0; i < 100; i++) {
+            var n = i;
+            items[i] = {
+                label: "Item (" + (n + 1) + ")",
+                value: n
+            };
+        }
+    </script>
+
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <!-- sample -->
+
+        <div atom-type="AtomListBox"
+             atom-auto-scroll-to-selection="true"
+             atom-value="$[appScope.value]"
+             atom-items="{ items }"
+             atom-ui-virtualize="{true}"
+             style="height:400px; width:400px;"
+             atom-name="movieList">
+            <div atom-presenter="itemsPresenter" style="padding:10px">
+                <div atom-template="itemTemplate" style="width:170px; height: 100px; margin:5px; background-color: lightcoral; float:left;display:inline-block">
+                    <span style="display:inline-block;height:20px;padding:5px" atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
+                    <span style="display:inline-block;height:20px;padding:5px" atom-text="{ $data.label }"></span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <span>Selected Movie: </span>
+            <span atom-text="[($scope.movieList.selectedItem.label || '')]">
+            </span>
+            <span atom-text="['('+($scope.movieList.selectedItem.value ||'')+')']">
+            </span>
+        </div>
+
+        <!-- end-sample -->
+    </div>
+</body>
+</html>

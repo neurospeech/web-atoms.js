@@ -695,28 +695,46 @@
                 this._isChanging = true;
 
                 var block = Math.floor(vcHeight / avgHeight);
-                var itemsInBlock = block * this._columns;
+                var itemsInBlock = this._visibleRows * this._columns;
 
                 // lets simply recreate the view... if we are out of the scroll bounds... 
-                var index = Math.max(0, Math.floor(vc.scrollTop / vcHeight) - 1);
+                var index = Math.floor(vc.scrollTop / vcHeight) - 1;
                 var itemIndex = index * itemsInBlock;
-                console.log("First block index is " + index + " item index is " + index * itemsInBlock);
+                //console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
                 if (itemIndex >= items.length) {
                     this._isChanging = false;
                     return;
                 }
 
+                var lastIndex = (Math.max(index,0) + 1) * itemsInBlock - 1;
+                var firstIndex =  Math.max(0, (index) * itemsInBlock);
+
                 var ce = fc.nextElementSibling;
 
-                if (ce != lc) {
-                    var scopeIndex = ce.atomControl.get_scope().itemIndex;
-                    if (scopeIndex == itemIndex) {
-                        console.log("No need to create any item");
-                        this._isChanging = false;
+                var firstItem = fc.nextElementSibling;
+                var lastItem = lc.previousElementSibling;
+
+                if (firstItem != lastItem) {
+                    var st = vc.scrollTop;
+                    if (!(firstItem.offsetTop > st && (lastItem.offsetTop + lastItem.offsetHeight) < st + this._visibleHeight))
                         return;
-                    }
+                    //var firstVisibleIndex = firstItem.atomControl.get_scope().itemIndex;
+                    //var lastVisibleIndex = lastItem.atomControl.get_scope().itemIndex;
+                    //console.log({
+                    //    first: firstVisibleIndex,
+                    //    firstIndex: firstIndex,
+                    //    last: lastVisibleIndex,
+                    //    lastIndex: lastIndex
+                    //});
+                    //if (firstVisibleIndex <= firstIndex && lastVisibleIndex >= lastIndex) {
+                    //    this._isChanging = false;
+                    //    return;
+                    //}
                 }
+
+                firstIndex = Math.max(0, firstIndex - itemsInBlock);
+                lastIndex = Math.max(items.length, firstIndex + itemsInBlock);
 
                 var remove = [];
                 var cache = {};
@@ -735,7 +753,7 @@
 
 
                 var ae = new AtomEnumerator(items);
-                for (var i = 0; i < itemIndex; i++) {
+                for (var i = 0; i < firstIndex; i++) {
                     ae.next();
                 }
 
@@ -746,7 +764,7 @@
 
                 var add = [];
 
-                for (var i = 0; i < itemsInBlock * 3; i++) {
+                for (var i = firstIndex; i <= lastIndex; i++) {
                     if (!ae.next())
                         break;
                     var index2 = ae.currentIndex();
