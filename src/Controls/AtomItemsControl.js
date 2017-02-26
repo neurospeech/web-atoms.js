@@ -694,11 +694,11 @@
                 }
                 this._isChanging = true;
 
-                var block = Math.floor(vcHeight / avgHeight);
+                var block = Math.floor(this._visibleHeight / avgHeight);
                 var itemsInBlock = this._visibleRows * this._columns;
 
                 // lets simply recreate the view... if we are out of the scroll bounds... 
-                var index = Math.floor(vc.scrollTop / vcHeight) - 1;
+                var index = Math.floor(vc.scrollTop / this._visibleHeight);
                 var itemIndex = index * itemsInBlock;
                 //console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
@@ -707,7 +707,7 @@
                     return;
                 }
 
-                var lastIndex = (Math.max(index,0) + 1) * itemsInBlock - 1;
+                var lastIndex = (Math.max(index,0) + 3 ) * itemsInBlock - 1;
                 var firstIndex =  Math.max(0, (index) * itemsInBlock);
 
                 var ce = fc.nextElementSibling;
@@ -716,25 +716,20 @@
                 var lastItem = lc.previousElementSibling;
 
                 if (firstItem != lastItem) {
-                    var st = vc.scrollTop;
-                    if (!(firstItem.offsetTop > st && (lastItem.offsetTop + lastItem.offsetHeight) < st + this._visibleHeight))
+                    var firstVisibleIndex = firstItem.atomControl.get_scope().itemIndex;
+                    var lastVisibleIndex = lastItem.atomControl.get_scope().itemIndex;
+                    console.log({
+                        firstVisibleIndex: firstVisibleIndex,
+                        firstIndex: firstIndex,
+                        lastVisibleIndex: lastVisibleIndex,
+                        lastIndex: lastIndex
+                    });
+                    if (firstIndex >= firstVisibleIndex && lastIndex <= lastVisibleIndex) {
+                        console.log("All items are visible...");
+                        this._isChanging = false;
                         return;
-                    //var firstVisibleIndex = firstItem.atomControl.get_scope().itemIndex;
-                    //var lastVisibleIndex = lastItem.atomControl.get_scope().itemIndex;
-                    //console.log({
-                    //    first: firstVisibleIndex,
-                    //    firstIndex: firstIndex,
-                    //    last: lastVisibleIndex,
-                    //    lastIndex: lastIndex
-                    //});
-                    //if (firstVisibleIndex <= firstIndex && lastVisibleIndex >= lastIndex) {
-                    //    this._isChanging = false;
-                    //    return;
-                    //}
+                    }
                 }
-
-                firstIndex = Math.max(0, firstIndex - itemsInBlock);
-                lastIndex = Math.max(items.length, firstIndex + itemsInBlock);
 
                 var remove = [];
                 var cache = {};
@@ -783,7 +778,7 @@
                 }
 
 
-                var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
+                var h = (this._allRows - block * 3) * avgHeight -  index * this._visibleHeight;
                 console.log("last child height = " + h);
 
                 WebAtoms.dispatcher.callLater(function () {
