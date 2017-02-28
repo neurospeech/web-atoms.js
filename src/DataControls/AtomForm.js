@@ -11,6 +11,7 @@
             this._attachments = null;
         },
         properties: {
+            method: 'POST',
             result: null,
             errorNext: null,
             mergeData: null,
@@ -73,7 +74,7 @@
 
                 var data = this.preparePostData();
                 var url = AtomPromise.getUrl(this._postUrl);
-                var p = AtomPromise.json(url, { _tv: Atom.time() }, { type: "POST", data: data });
+                var p = AtomPromise.json(url, { _tv: Atom.time() }, { type: this.get_method(), data: data });
                 p.then(this._success);
                 var errorNext = this._errorNext;
                 if (errorNext) {

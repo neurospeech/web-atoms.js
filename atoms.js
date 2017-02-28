@@ -2740,10 +2740,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "2.1.103",
+/*Line 40 - 'Atom.js' */        text: "2.1.104",
 /*Line 41 - 'Atom.js' */        major: 2,
 /*Line 42 - 'Atom.js' */        minor: 1,
-/*Line 43 - 'Atom.js' */        build: 103
+/*Line 43 - 'Atom.js' */        build: 104
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
@@ -9430,163 +9430,164 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 10 - 'AtomForm.js' */            this._attachments = null;
 /*Line 11 - 'AtomForm.js' */        },
 /*Line 12 - 'AtomForm.js' */        properties: {
-/*Line 13 - 'AtomForm.js' */            result: null,
-/*Line 14 - 'AtomForm.js' */            errorNext: null,
-/*Line 15 - 'AtomForm.js' */            mergeData: null,
-/*Line 16 - 'AtomForm.js' */            mergeResult: true,
-/*Line 17 - 'AtomForm.js' */            postUrl: null,
-/*Line 18 - 'AtomForm.js' */            postData: null,
-/*Line 19 - 'AtomForm.js' */            successMessage: null,
-/*Line 20 - 'AtomForm.js' */            clearData: false,
-/*Line 21 - 'AtomForm.js' */            errorTemplate: null
-/*Line 22 - 'AtomForm.js' */        },
-/*Line 23 - 'AtomForm.js' */        methods: {
-/*Line 24 - 'AtomForm.js' */            createFormLayout: function () {
-/*Line 25 - 'AtomForm.js' */            },
+/*Line 13 - 'AtomForm.js' */            method: 'POST',
+/*Line 14 - 'AtomForm.js' */            result: null,
+/*Line 15 - 'AtomForm.js' */            errorNext: null,
+/*Line 16 - 'AtomForm.js' */            mergeData: null,
+/*Line 17 - 'AtomForm.js' */            mergeResult: true,
+/*Line 18 - 'AtomForm.js' */            postUrl: null,
+/*Line 19 - 'AtomForm.js' */            postData: null,
+/*Line 20 - 'AtomForm.js' */            successMessage: null,
+/*Line 21 - 'AtomForm.js' */            clearData: false,
+/*Line 22 - 'AtomForm.js' */            errorTemplate: null
+/*Line 23 - 'AtomForm.js' */        },
+/*Line 24 - 'AtomForm.js' */        methods: {
+/*Line 25 - 'AtomForm.js' */            createFormLayout: function () {
+/*Line 26 - 'AtomForm.js' */            },
 
 
-/*Line 28 - 'AtomForm.js' */            preparePostData: function () {
+/*Line 29 - 'AtomForm.js' */            preparePostData: function () {
 
 
-/*Line 31 - 'AtomForm.js' */                var element = this.get_element();
-/*Line 32 - 'AtomForm.js' */                var data = this._postData || this.get_data();
+/*Line 32 - 'AtomForm.js' */                var element = this.get_element();
+/*Line 33 - 'AtomForm.js' */                var data = this._postData || this.get_data();
 
-/*Line 34 - 'AtomForm.js' */                var m = this._mergeData;
-/*Line 35 - 'AtomForm.js' */                if (m) {
-/*Line 36 - 'AtomForm.js' */                    for (var i in m) {
-/*Line 37 - 'AtomForm.js' */                        data[i] = m[i];
-/*Line 38 - 'AtomForm.js' */                    }
-/*Line 39 - 'AtomForm.js' */                }
+/*Line 35 - 'AtomForm.js' */                var m = this._mergeData;
+/*Line 36 - 'AtomForm.js' */                if (m) {
+/*Line 37 - 'AtomForm.js' */                    for (var i in m) {
+/*Line 38 - 'AtomForm.js' */                        data[i] = m[i];
+/*Line 39 - 'AtomForm.js' */                    }
+/*Line 40 - 'AtomForm.js' */                }
 
-/*Line 41 - 'AtomForm.js' */                return data;
-/*Line 42 - 'AtomForm.js' */            },
+/*Line 42 - 'AtomForm.js' */                return data;
+/*Line 43 - 'AtomForm.js' */            },
 
-/*Line 44 - 'AtomForm.js' */            onSubmit: function () {
+/*Line 45 - 'AtomForm.js' */            onSubmit: function () {
 
-/*Line 46 - 'AtomForm.js' */                //if (!this.isValid()) {
-/*Line 47 - 'AtomForm.js' */                //    return;
-/*Line 48 - 'AtomForm.js' */                //}
+/*Line 47 - 'AtomForm.js' */                //if (!this.isValid()) {
+/*Line 48 - 'AtomForm.js' */                //    return;
+/*Line 49 - 'AtomForm.js' */                //}
 
-/*Line 50 - 'AtomForm.js' */                this.validate();
+/*Line 51 - 'AtomForm.js' */                this.validate();
 
-/*Line 52 - 'AtomForm.js' */                var errors = this.get_errors();
-/*Line 53 - 'AtomForm.js' */                if (errors.length) {
-/*Line 54 - 'AtomForm.js' */                    var labels = document.getElementsByTagName("label");
-/*Line 55 - 'AtomForm.js' */                    this.invokeAction({
-/*Line 56 - 'AtomForm.js' */                        localWindow: {
-/*Line 57 - 'AtomForm.js' */                            path: this.getTemplate("errorTemplate"),
-/*Line 58 - 'AtomForm.js' */                            prop: {
-/*Line 59 - 'AtomForm.js' */                                data: errors.map(function (i) {
-/*Line 60 - 'AtomForm.js' */                                    var l = Atom.query(labels).firstOrDefault({ control: i.value });
-/*Line 61 - 'AtomForm.js' */                                    if (l) {
-/*Line 62 - 'AtomForm.js' */                                        i.label = $(l).text() + " (" + i.label + ")";
-/*Line 63 - 'AtomForm.js' */                                    }
-/*Line 64 - 'AtomForm.js' */                                    return i;
-/*Line 65 - 'AtomForm.js' */                                }),
-/*Line 66 - 'AtomForm.js' */                                title: "Form Errors"
-/*Line 67 - 'AtomForm.js' */                            }
-/*Line 68 - 'AtomForm.js' */                        }
-/*Line 69 - 'AtomForm.js' */                    });
-/*Line 70 - 'AtomForm.js' */                    return;
-/*Line 71 - 'AtomForm.js' */                }
+/*Line 53 - 'AtomForm.js' */                var errors = this.get_errors();
+/*Line 54 - 'AtomForm.js' */                if (errors.length) {
+/*Line 55 - 'AtomForm.js' */                    var labels = document.getElementsByTagName("label");
+/*Line 56 - 'AtomForm.js' */                    this.invokeAction({
+/*Line 57 - 'AtomForm.js' */                        localWindow: {
+/*Line 58 - 'AtomForm.js' */                            path: this.getTemplate("errorTemplate"),
+/*Line 59 - 'AtomForm.js' */                            prop: {
+/*Line 60 - 'AtomForm.js' */                                data: errors.map(function (i) {
+/*Line 61 - 'AtomForm.js' */                                    var l = Atom.query(labels).firstOrDefault({ control: i.value });
+/*Line 62 - 'AtomForm.js' */                                    if (l) {
+/*Line 63 - 'AtomForm.js' */                                        i.label = $(l).text() + " (" + i.label + ")";
+/*Line 64 - 'AtomForm.js' */                                    }
+/*Line 65 - 'AtomForm.js' */                                    return i;
+/*Line 66 - 'AtomForm.js' */                                }),
+/*Line 67 - 'AtomForm.js' */                                title: "Form Errors"
+/*Line 68 - 'AtomForm.js' */                            }
+/*Line 69 - 'AtomForm.js' */                        }
+/*Line 70 - 'AtomForm.js' */                    });
+/*Line 71 - 'AtomForm.js' */                    return;
+/*Line 72 - 'AtomForm.js' */                }
 
-/*Line 73 - 'AtomForm.js' */                var data = this.preparePostData();
-/*Line 74 - 'AtomForm.js' */                var url = AtomPromise.getUrl(this._postUrl);
-/*Line 75 - 'AtomForm.js' */                var p = AtomPromise.json(url, { _tv: Atom.time() }, { type: "POST", data: data });
-/*Line 76 - 'AtomForm.js' */                p.then(this._success);
-/*Line 77 - 'AtomForm.js' */                var errorNext = this._errorNext;
-/*Line 78 - 'AtomForm.js' */                if (errorNext) {
-/*Line 79 - 'AtomForm.js' */                    var self = this;
-/*Line 80 - 'AtomForm.js' */                    p.failed(function (pr) {
-/*Line 81 - 'AtomForm.js' */                        self.invokeAction(errorNext);
-/*Line 82 - 'AtomForm.js' */                    });
-/*Line 83 - 'AtomForm.js' */                }
-/*Line 84 - 'AtomForm.js' */                p.invoke();
-/*Line 85 - 'AtomForm.js' */            },
+/*Line 74 - 'AtomForm.js' */                var data = this.preparePostData();
+/*Line 75 - 'AtomForm.js' */                var url = AtomPromise.getUrl(this._postUrl);
+/*Line 76 - 'AtomForm.js' */                var p = AtomPromise.json(url, { _tv: Atom.time() }, { type: this.get_method(), data: data });
+/*Line 77 - 'AtomForm.js' */                p.then(this._success);
+/*Line 78 - 'AtomForm.js' */                var errorNext = this._errorNext;
+/*Line 79 - 'AtomForm.js' */                if (errorNext) {
+/*Line 80 - 'AtomForm.js' */                    var self = this;
+/*Line 81 - 'AtomForm.js' */                    p.failed(function (pr) {
+/*Line 82 - 'AtomForm.js' */                        self.invokeAction(errorNext);
+/*Line 83 - 'AtomForm.js' */                    });
+/*Line 84 - 'AtomForm.js' */                }
+/*Line 85 - 'AtomForm.js' */                p.invoke();
+/*Line 86 - 'AtomForm.js' */            },
 
-/*Line 87 - 'AtomForm.js' */            onSuccess: function (p) {
+/*Line 88 - 'AtomForm.js' */            onSuccess: function (p) {
 
-/*Line 89 - 'AtomForm.js' */                var result = p.value();
+/*Line 90 - 'AtomForm.js' */                var result = p.value();
 
-/*Line 91 - 'AtomForm.js' */                AtomBinder.setValue(this, "result", result);
+/*Line 92 - 'AtomForm.js' */                AtomBinder.setValue(this, "result", result);
 
-/*Line 93 - 'AtomForm.js' */                if (this._mergeResult) {
-/*Line 94 - 'AtomForm.js' */                    // merge...
-/*Line 95 - 'AtomForm.js' */                    // AtomBinder.setValue(this, "data", result);
-/*Line 96 - 'AtomForm.js' */                    var data = this.get_data();
-/*Line 97 - 'AtomForm.js' */                    for (var index in result) {
-/*Line 98 - 'AtomForm.js' */                        AtomBinder.setValue(data, index, result[index]);
-/*Line 99 - 'AtomForm.js' */                    }
-/*Line 100 - 'AtomForm.js' */                }
+/*Line 94 - 'AtomForm.js' */                if (this._mergeResult) {
+/*Line 95 - 'AtomForm.js' */                    // merge...
+/*Line 96 - 'AtomForm.js' */                    // AtomBinder.setValue(this, "data", result);
+/*Line 97 - 'AtomForm.js' */                    var data = this.get_data();
+/*Line 98 - 'AtomForm.js' */                    for (var index in result) {
+/*Line 99 - 'AtomForm.js' */                        AtomBinder.setValue(data, index, result[index]);
+/*Line 100 - 'AtomForm.js' */                    }
+/*Line 101 - 'AtomForm.js' */                }
 
-/*Line 102 - 'AtomForm.js' */                if (this._clearData) {
-/*Line 103 - 'AtomForm.js' */                    var data = this.get_data();
-/*Line 104 - 'AtomForm.js' */                    for (var index in this._clearData) {
-/*Line 105 - 'AtomForm.js' */                        AtomBinder.setValue(data, index, result[index]);
-/*Line 106 - 'AtomForm.js' */                    }
-/*Line 107 - 'AtomForm.js' */                }
+/*Line 103 - 'AtomForm.js' */                if (this._clearData) {
+/*Line 104 - 'AtomForm.js' */                    var data = this.get_data();
+/*Line 105 - 'AtomForm.js' */                    for (var index in this._clearData) {
+/*Line 106 - 'AtomForm.js' */                        AtomBinder.setValue(data, index, result[index]);
+/*Line 107 - 'AtomForm.js' */                    }
+/*Line 108 - 'AtomForm.js' */                }
 
-/*Line 109 - 'AtomForm.js' */                if (this._successMessage) {
-/*Line 110 - 'AtomForm.js' */                    Atom.alert(this._successMessage);
-/*Line 111 - 'AtomForm.js' */                }
+/*Line 110 - 'AtomForm.js' */                if (this._successMessage) {
+/*Line 111 - 'AtomForm.js' */                    Atom.alert(this._successMessage);
+/*Line 112 - 'AtomForm.js' */                }
 
-/*Line 113 - 'AtomForm.js' */                this.invokeAction(this._next);
+/*Line 114 - 'AtomForm.js' */                this.invokeAction(this._next);
 
-/*Line 115 - 'AtomForm.js' */            },
+/*Line 116 - 'AtomForm.js' */            },
 
-/*Line 117 - 'AtomForm.js' */            onKeyUp: function (e) {
-/*Line 118 - 'AtomForm.js' */                if (e.target && e.target.nodeName && /textarea/gi.test(e.target.nodeName))
-/*Line 119 - 'AtomForm.js' */                    return;
-/*Line 120 - 'AtomForm.js' */                if (e.keyCode == 13) {
-/*Line 121 - 'AtomForm.js' */                    var self = this;
-/*Line 122 - 'AtomForm.js' */                    // fix for IE 11, IE 11 does not fire Change event on enter
-/*Line 123 - 'AtomForm.js' */                    if (/input/gi.test(e.target.nodeName)) {
-/*Line 124 - 'AtomForm.js' */                        $(e.target).change();
-/*Line 125 - 'AtomForm.js' */                    }
-/*Line 126 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
-/*Line 127 - 'AtomForm.js' */                        self.onSubmit();
-/*Line 128 - 'AtomForm.js' */                    });
-/*Line 129 - 'AtomForm.js' */                }
-/*Line 130 - 'AtomForm.js' */            },
+/*Line 118 - 'AtomForm.js' */            onKeyUp: function (e) {
+/*Line 119 - 'AtomForm.js' */                if (e.target && e.target.nodeName && /textarea/gi.test(e.target.nodeName))
+/*Line 120 - 'AtomForm.js' */                    return;
+/*Line 121 - 'AtomForm.js' */                if (e.keyCode == 13) {
+/*Line 122 - 'AtomForm.js' */                    var self = this;
+/*Line 123 - 'AtomForm.js' */                    // fix for IE 11, IE 11 does not fire Change event on enter
+/*Line 124 - 'AtomForm.js' */                    if (/input/gi.test(e.target.nodeName)) {
+/*Line 125 - 'AtomForm.js' */                        $(e.target).change();
+/*Line 126 - 'AtomForm.js' */                    }
+/*Line 127 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
+/*Line 128 - 'AtomForm.js' */                        self.onSubmit();
+/*Line 129 - 'AtomForm.js' */                    });
+/*Line 130 - 'AtomForm.js' */                }
+/*Line 131 - 'AtomForm.js' */            },
 
-/*Line 132 - 'AtomForm.js' */            init: function () {
-/*Line 133 - 'AtomForm.js' */                baseType.init.call(this);
+/*Line 133 - 'AtomForm.js' */            init: function () {
+/*Line 134 - 'AtomForm.js' */                baseType.init.call(this);
 
-/*Line 135 - 'AtomForm.js' */                var self = this;
-/*Line 136 - 'AtomForm.js' */                this._success = function () {
-/*Line 137 - 'AtomForm.js' */                    self.onSuccess.apply(self, arguments);
-/*Line 138 - 'AtomForm.js' */                };
+/*Line 136 - 'AtomForm.js' */                var self = this;
+/*Line 137 - 'AtomForm.js' */                this._success = function () {
+/*Line 138 - 'AtomForm.js' */                    self.onSuccess.apply(self, arguments);
+/*Line 139 - 'AtomForm.js' */                };
 
-/*Line 140 - 'AtomForm.js' */                this._submit = function () {
-/*Line 141 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
-/*Line 142 - 'AtomForm.js' */                        self.onSubmit.apply(self, arguments);
-/*Line 143 - 'AtomForm.js' */                    });
-/*Line 144 - 'AtomForm.js' */                };
+/*Line 141 - 'AtomForm.js' */                this._submit = function () {
+/*Line 142 - 'AtomForm.js' */                    WebAtoms.dispatcher.callLater(function () {
+/*Line 143 - 'AtomForm.js' */                        self.onSubmit.apply(self, arguments);
+/*Line 144 - 'AtomForm.js' */                    });
+/*Line 145 - 'AtomForm.js' */                };
 
-/*Line 146 - 'AtomForm.js' */                var element = this.get_element();
+/*Line 147 - 'AtomForm.js' */                var element = this.get_element();
 
-/*Line 148 - 'AtomForm.js' */                this.submitCommand = this._submit;
+/*Line 149 - 'AtomForm.js' */                this.submitCommand = this._submit;
 
-/*Line 150 - 'AtomForm.js' */                if (/form/i.test(this._element.nodeName)) {
-/*Line 151 - 'AtomForm.js' */                    this.bindEvent(element, "submit", function (e) {
-/*Line 152 - 'AtomForm.js' */                        if (e) { e.preventDefault(); }
-/*Line 153 - 'AtomForm.js' */                        self.submitCommand();
-/*Line 154 - 'AtomForm.js' */                        return false;
-/*Line 155 - 'AtomForm.js' */                    });
-/*Line 156 - 'AtomForm.js' */                }else{
-/*Line 157 - 'AtomForm.js' */                    this.bindEvent(element, "keyup", "onKeyUp");
+/*Line 151 - 'AtomForm.js' */                if (/form/i.test(this._element.nodeName)) {
+/*Line 152 - 'AtomForm.js' */                    this.bindEvent(element, "submit", function (e) {
+/*Line 153 - 'AtomForm.js' */                        if (e) { e.preventDefault(); }
+/*Line 154 - 'AtomForm.js' */                        self.submitCommand();
+/*Line 155 - 'AtomForm.js' */                        return false;
+/*Line 156 - 'AtomForm.js' */                    });
+/*Line 157 - 'AtomForm.js' */                }else{
+/*Line 158 - 'AtomForm.js' */                    this.bindEvent(element, "keyup", "onKeyUp");
 
-/*Line 159 - 'AtomForm.js' */                    $(element).find("input[type=submit]").bind("click", null, this._submit);
-/*Line 160 - 'AtomForm.js' */                    $(element).find("button[type=submit]").bind("click", null, this._submit);
-/*Line 161 - 'AtomForm.js' */                }
+/*Line 160 - 'AtomForm.js' */                    $(element).find("input[type=submit]").bind("click", null, this._submit);
+/*Line 161 - 'AtomForm.js' */                    $(element).find("button[type=submit]").bind("click", null, this._submit);
+/*Line 162 - 'AtomForm.js' */                }
 
 
 
-/*Line 165 - 'AtomForm.js' */            }
+/*Line 166 - 'AtomForm.js' */            }
 
-/*Line 167 - 'AtomForm.js' */        }
-/*Line 168 - 'AtomForm.js' */    });
-/*Line 169 - 'AtomForm.js' */})(WebAtoms.AtomControl.prototype);
+/*Line 168 - 'AtomForm.js' */        }
+/*Line 169 - 'AtomForm.js' */    });
+/*Line 170 - 'AtomForm.js' */})(WebAtoms.AtomControl.prototype);
 
 /*Line 0 - 'AtomFormLayout.js' */
 
