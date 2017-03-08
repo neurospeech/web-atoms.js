@@ -2,7 +2,7 @@
   {
     "outputFileName": "atoms.min.js",
     "inputFiles": [
-      "atoms.js"
+      "atoms-debug.js"
     ],
     "sourceMap": true
   }
