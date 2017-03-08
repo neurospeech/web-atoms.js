@@ -400,7 +400,7 @@ window.AtomProperties = AtomProperties;
                 try {
                     runAction.call(this,action, evt);
                 } catch (e) {
-                    alert(e);
+                    Atom.alert(e);
                     if (console.error) {
                         console.error(e);
                     }
@@ -1079,7 +1079,7 @@ window.AtomProperties = AtomProperties;
                                 this.set_scope(s);
                             } catch (ex) {
                                 log(JSON.stringify(ex));
-                                alert(JSON.stringify(ex));
+                                Atom.alert(JSON.stringify(ex));
                             }
 
                         }

@@ -70,7 +70,7 @@ $x.isValid = function (target,action) {
         
         var e = this.get_errors();
         if (e && e.length) {
-            alert(Atom.mapJoin(e,"label","\n"));
+            Atom.alert(Atom.mapJoin(e,"label","\n"));
             return;
         }
         this.invokeAction(action);
@@ -79,7 +79,7 @@ $x.isValid = function (target,action) {
 
 $x.alert = function (msg) {
     return function () {
-        alert(msg);
+        Atom.alert(msg);
     };
 };
 

@@ -11,7 +11,7 @@
             this._onUIChanged = false;
             this._itemsPresenter = null;
             this._itemsPanel = null;
-            this._presenters = ["itemsPresenter"];
+            this._presenters = ["itemsPresenter", "virtualContainer"];
             this._childItemType = WebAtoms.AtomControl;
         },
         properties: {
@@ -146,7 +146,7 @@
                 var errors = this.get_errors();
                 if (errors.length) {
 
-                    alert(errors.join("\n"));
+                    Atom.alert(errors.join("\n"));
 
                     return false;
                 }
@@ -351,7 +351,7 @@
 
                     var scrollTop = Math.floor(index / itemsInBlock);
                     vc.scrollTop(scrollTop * vcHeight);
-                    
+
 
 
                     return;
@@ -500,7 +500,7 @@
                     overflow: "auto"
                 });
 
-                this.bindEvent(vc, "scroll","onScroll");
+                this.bindEvent(vc, "scroll", "onScroll");
 
                 var $ip = $(ip);
                 $ip.css({
@@ -521,8 +521,8 @@
                     lc = document.createElement("DIV");
                 }
 
-                $(fc).addClass("sticky first-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
-                $(lc).addClass("sticky last-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
+                $(fc).addClass("sticky first-child").css({ posiiton: "relative", height: 0, width: "100%", clear: "both" });
+                $(lc).addClass("sticky last-child").css({ posiiton: "relative", height: 0, width: "100%", clear: "both" });
 
                 this._firstChild = fc;
                 this._lastChild = lc;
@@ -543,7 +543,7 @@
                 });
             },
 
-            resetVirtualContainer: function () {
+            resetVirtulContainer: function () {
                 if (this._itemsPresenter) {
                     this.disposeChildren(this._itemsPresenter);
                 }
@@ -562,7 +562,7 @@
 
                 var items = this.get_dataItems();
                 if (!items.length) {
-                    this.resetVirtualContainer();
+                    this.resetVirtulContainer();
                     return;
                 }
 
@@ -584,7 +584,7 @@
                 var vcHeight = $vc.innerHeight();
                 var vcScrollHeight = vc.scrollHeight;
 
-                if ( isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
+                if (isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
                     // leave it..
                     var self = this;
                     setTimeout(function () {
@@ -609,7 +609,7 @@
 
 
                 if (this._training) {
-                    if (vcHeight >= itemsHeight/3) {
+                    if (vcHeight >= itemsHeight) {
                         // lets add item...
                         var ce = lc.previousElementSibling;
                         var index = 0;
@@ -624,7 +624,7 @@
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, null, data, ae);
                             //WebAtoms.dispatcher.callLater(function () { 
-                            ip.insertBefore(elementChild,lc);
+                            ip.insertBefore(elementChild, lc);
                             //});
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                             this.postVirtualCollectionChanged();
@@ -652,17 +652,27 @@
                         var allRows = Math.ceil(items.length / columns);
                         var visibleRows = Math.ceil(totalVisibleItems / columns);
 
+                        console.log({
+                            avgWidth: avgWidth,
+                            avgHeight: avgHeight,
+                            totalVisibleItems: totalVisibleItems,
+                            allRows: allRows,
+                            columns: columns
+                        });
+
                         //this._visibleBlock = visibleRows * avgHeight;
                         //this._itemsInBlock = totalVisibleItems;
                         this._allRows = allRows;
                         this._columns = columns;
 
+
                         //this._allRows = allRows;
-                        //this._visibleRows = visibleRows;
+                        this._visibleRows = visibleRows;
+                        this._visibleHeight = visibleRows * avgHeight;
 
                         // set height of last child... to increase padding
                         $lc.css({
-                            height: ((allRows-visibleRows+1) * avgHeight) + "px"
+                            height: ((allRows - visibleRows + 1) * avgHeight) + "px"
                         });
                         this._training = false;
                         this._ready = true;
@@ -674,6 +684,8 @@
 
                 var self = this;
 
+                this.lastScrollTop = vc.scrollTop;
+
                 if (this._isChanging) {
                     //setTimeout(function () {
                     //    self.onVirtualCollectionChanged();
@@ -682,25 +694,38 @@
                 }
                 this._isChanging = true;
 
-                var block = Math.floor(vcHeight / avgHeight);
-                var itemsInBlock = block * this._columns;
+                var block = Math.floor(this._visibleHeight / avgHeight);
+                var itemsInBlock = this._visibleRows * this._columns;
 
                 // lets simply recreate the view... if we are out of the scroll bounds... 
-                var index = Math.max(0, Math.floor(vc.scrollTop / vcHeight) - 1);
+                var index = Math.floor(vc.scrollTop / this._visibleHeight);
                 var itemIndex = index * itemsInBlock;
-                console.log("First block index is " + index + " item index is " + index * itemsInBlock);
+                //console.log("First block index is " + index + " item index is " + index * itemsInBlock);
 
                 if (itemIndex >= items.length) {
                     this._isChanging = false;
                     return;
                 }
 
+                var lastIndex = (Math.max(index, 0) + 3) * itemsInBlock - 1;
+                var firstIndex = Math.max(0, (index) * itemsInBlock);
+
                 var ce = fc.nextElementSibling;
 
-                if (ce != lc) {
-                    var scopeIndex = ce.atomControl.get_scope().itemIndex;
-                    if (scopeIndex == itemIndex) {
-                        console.log("No need to create any item");
+                var firstItem = fc.nextElementSibling;
+                var lastItem = lc.previousElementSibling;
+
+                if (firstItem != lastItem) {
+                    var firstVisibleIndex = firstItem.atomControl.get_scope().itemIndex;
+                    var lastVisibleIndex = lastItem.atomControl.get_scope().itemIndex;
+                    console.log({
+                        firstVisibleIndex: firstVisibleIndex,
+                        firstIndex: firstIndex,
+                        lastVisibleIndex: lastVisibleIndex,
+                        lastIndex: lastIndex
+                    });
+                    if (firstIndex >= firstVisibleIndex && lastIndex <= lastVisibleIndex) {
+                        console.log("All items are visible...");
                         this._isChanging = false;
                         return;
                     }
@@ -723,7 +748,7 @@
 
 
                 var ae = new AtomEnumerator(items);
-                for (var i = 0; i < itemIndex; i++) {
+                for (var i = 0; i < firstIndex; i++) {
                     ae.next();
                 }
 
@@ -734,7 +759,7 @@
 
                 var add = [];
 
-                for (var i = 0; i < itemsInBlock * 3; i++) {
+                for (var i = firstIndex; i <= lastIndex; i++) {
                     if (!ae.next())
                         break;
                     var index2 = ae.currentIndex();
@@ -753,28 +778,20 @@
                 }
 
 
-                var h = (this._allRows - block * 3) * avgHeight -  index * vcHeight;
+                var h = (this._allRows - block * 3) * avgHeight - index * this._visibleHeight;
                 console.log("last child height = " + h);
 
                 WebAtoms.dispatcher.callLater(function () {
 
                     var oldHeight = $fc.height();
-                    var newHeight = index * vcHeight;
+                    var newHeight = index * self._visibleHeight;
 
                     var diff = newHeight - oldHeight;
                     var oldScrollTop = vc.scrollTop;
 
 
 
-                    var a = new AtomEnumerator(remove);
-                    while (a.next()) {
-                        var ec = a.current();
-                        if (!ec.before) {
-                            ec.atomControl.dispose();
-                        }
-                        ec.remove();
-                    }
-                    a = new AtomEnumerator(add);
+                    var a = new AtomEnumerator(add);
                     while (a.next()) {
                         var ec = a.current();
                         ip.insertBefore(ec, ec.before.nextElementSibling);
@@ -785,17 +802,28 @@
                         height: newHeight
                     });
 
+                    a = new AtomEnumerator(remove);
+                    while (a.next()) {
+                        var ec = a.current();
+                        if (!ec.before) {
+                            ec.atomControl.dispose();
+                        }
+                        ec.remove();
+                    }
+
+
                     //vc.scrollTop = oldScrollTop - diff;
 
 
                     $lc.css({
-                        height:  h
+                        height: h
                     });
 
 
                     console.log("Old: " + oldScrollTop + " Diff: " + diff + " Old Height: " + oldHeight + " Height: " + newHeight);
 
                     self._isChanging = false;
+
                 });
                 WebAtoms.dispatcher.start();
 
@@ -805,8 +833,7 @@
             onCollectionChanged: function (mode, index, item) {
 
                 if (/reset|refresh/i.test(mode)) {
-                    this._scopes = {};
-                    this._cachedItems = null;
+                    this.resetVirtulContainer();
                 }
 
 
@@ -888,46 +915,46 @@
                 var ae = new AtomEnumerator(items);
 
 
-                    this.getTemplate("itemTemplate");
+                this.getTemplate("itemTemplate");
 
-                    while (ae.next()) {
-                        var data = ae.current();
-                        var elementChild = this.createChildElement(parentScope, element, data, ae);
-                        added.push(elementChild);
-                        this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                while (ae.next()) {
+                    var data = ae.current();
+                    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                    added.push(elementChild);
+                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                }
+
+
+                //var ae = new AtomEnumerator(items);
+                //while (ae.next()) {
+                //    var data = ae.current();
+                //    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                //}
+                var self = this;
+                WebAtoms.dispatcher.callLater(function () {
+                    var dirty = [];
+                    var ce = new ChildEnumerator(element);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        var f = added.filter(function (fx) { return item == fx; });
+                        if (f.pop() != item) {
+                            dirty.push(item);
+                        }
+                    }
+                    ce = new AtomEnumerator(dirty);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        //self.dispose(item);
+                        if (item.atomControl) {
+                            item.atomControl.dispose();
+                        }
+                        $(item).remove();
                     }
 
+                });
 
-                    //var ae = new AtomEnumerator(items);
-                    //while (ae.next()) {
-                    //    var data = ae.current();
-                    //    var elementChild = this.createChildElement(parentScope, element, data, ae);
-                    //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
-                    //}
-                    var self = this;
-                    WebAtoms.dispatcher.callLater(function () {
-                        var dirty = [];
-                        var ce = new ChildEnumerator(element);
-                        while (ce.next()) {
-                            var item = ce.current();
-                            var f = added.filter(function (fx) { return item == fx; });
-                            if (f.pop() != item) {
-                                dirty.push(item);
-                            }
-                        }
-                        ce = new AtomEnumerator(dirty);
-                        while (ce.next()) {
-                            var item = ce.current();
-                            //self.dispose(item);
-                            if (item.atomControl) {
-                                item.atomControl.dispose();
-                            }
-                            $(item).remove();
-                        }
 
-                    });
-
-                
 
                 WebAtoms.dispatcher.start();
 
@@ -948,7 +975,7 @@
             createChildElement: function (parentScope, parentElement, data, ae, before) {
 
                 var elementChild = AtomUI.cloneNode(this._itemTemplate);
-                elementChild._logicalParent = parentElement;
+                elementChild._logicalParent = parentElement || this._itemsPresenter;
                 elementChild._templateParent = this;
                 elementChild._isDirty = true;
 
@@ -962,13 +989,20 @@
                     });
                 }
 
-                var scopes = this._scopes || {
-                };
-                this._scopes = scopes;
-
                 var index = ae ? ae.currentIndex() : -1;
-                var scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
-                scopes[index] = scope;
+                var scope = null;
+
+                if (this._uiVirtualize) {
+                    var scopes = this._scopes || {
+                    };
+                    this._scopes = scopes;
+
+                    scope = scopes[index] || new AtomScope(this, parentScope, parentScope.__application);
+                    scopes[index] = scope;
+                } else {
+                    scope = new AtomScope(this, parentScope, parentScope.__application);
+                }
+
                 if (ae) {
                     scope.itemIsFirst = ae.isFirst();
                     scope.itemIsLast = ae.isLast();
@@ -977,7 +1011,7 @@
                     scope.data = data;
                     scope.get_itemSelected = function () {
                         return scope.owner.isSelected(data);
-                };
+                    };
                     scope.set_itemSelected = function (v) {
                         scope.owner.toggleSelection(data, true);
                     };
@@ -1040,9 +1074,9 @@
             },
 
             dispose: function () {
-                this.resetVirtualContainer();
+                this.resetVirtulContainer();
                 base.dispose.call(this);
-                this._selectedItems = null;
+                //this._selectedItems = null;
             },
 
 
