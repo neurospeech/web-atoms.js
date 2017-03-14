@@ -1852,44 +1852,67 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 124 - 'Stop.js' */            path: a.path,
 /*Line 125 - 'Stop.js' */            next: a.next,
 /*Line 126 - 'Stop.js' */            scope: a.scope
+/*Line 127 - 'Stop.js' */        };
 
-/*Line 128 - 'Stop.js' */        };
 /*Line 129 - 'Stop.js' */    }
-/*Line 130 - 'Stop.js' */    return function () {
-/*Line 131 - 'Stop.js' */        WebAtoms.AtomWindow.openNewWindow({
-/*Line 132 - 'Stop.js' */            url: a,
-/*Line 133 - 'Stop.js' */            scope: this.get_scope(),
-/*Line 134 - 'Stop.js' */            opener: this
-/*Line 135 - 'Stop.js' */        });
-/*Line 136 - 'Stop.js' */    }
-/*Line 137 - 'Stop.js' */};
 
 
-/*Line 140 - 'Stop.js' */$x.localWindow = function (path, props, scope, next) {
-/*Line 141 - 'Stop.js' */    var a = path;
-/*Line 142 - 'Stop.js' */    if (arguments.length > 1) {
-/*Line 143 - 'Stop.js' */        a = {
-/*Line 144 - 'Stop.js' */            path: path,
-/*Line 145 - 'Stop.js' */            prop: props,
-/*Line 146 - 'Stop.js' */            next: next,
-/*Line 147 - 'Stop.js' */            scope: scope
-/*Line 148 - 'Stop.js' */        };
-/*Line 149 - 'Stop.js' */    }
-/*Line 150 - 'Stop.js' */    return function () {
-/*Line 151 - 'Stop.js' */        WebAtoms.AtomWindow.openNewWindow({
-/*Line 152 - 'Stop.js' */            url: a,
-/*Line 153 - 'Stop.js' */            scope: this.get_scope(),
-/*Line 154 - 'Stop.js' */            localScope: true,
-/*Line 155 - 'Stop.js' */            opener: this
-/*Line 156 - 'Stop.js' */        });
-/*Line 157 - 'Stop.js' */    }
-/*Line 158 - 'Stop.js' */};
+/*Line 132 - 'Stop.js' */    a.prop = a.prop || {};
+/*Line 133 - 'Stop.js' */    for (var k in a) {
+/*Line 134 - 'Stop.js' */        if (!a.hasOwnProperty(k))
+/*Line 135 - 'Stop.js' */            continue;
+/*Line 136 - 'Stop.js' */        if (/path|prop|next|scope/.test(k))
+/*Line 137 - 'Stop.js' */            continue;
+/*Line 138 - 'Stop.js' */        a.prop[k] = a[k];
+/*Line 139 - 'Stop.js' */    }
 
-/*Line 160 - 'Stop.js' */$x.reveal = function (e) {
-/*Line 161 - 'Stop.js' */    return function () {
+/*Line 141 - 'Stop.js' */    return function () {
+/*Line 142 - 'Stop.js' */        WebAtoms.AtomWindow.openNewWindow({
+/*Line 143 - 'Stop.js' */            url: a,
+/*Line 144 - 'Stop.js' */            scope: this.get_scope(),
+/*Line 145 - 'Stop.js' */            opener: this
+/*Line 146 - 'Stop.js' */        });
+/*Line 147 - 'Stop.js' */    }
+/*Line 148 - 'Stop.js' */};
 
-/*Line 163 - 'Stop.js' */    }
-/*Line 164 - 'Stop.js' */};
+
+/*Line 151 - 'Stop.js' */$x.localWindow = function (path, props, scope, next) {
+/*Line 152 - 'Stop.js' */    var a = path;
+/*Line 153 - 'Stop.js' */    if (arguments.length > 1) {
+/*Line 154 - 'Stop.js' */        a = {
+/*Line 155 - 'Stop.js' */            path: path,
+/*Line 156 - 'Stop.js' */            prop: props,
+/*Line 157 - 'Stop.js' */            next: next,
+/*Line 158 - 'Stop.js' */            scope: scope
+/*Line 159 - 'Stop.js' */        };
+
+/*Line 161 - 'Stop.js' */    }
+
+/*Line 163 - 'Stop.js' */    a.prop = a.prop || {};
+/*Line 164 - 'Stop.js' */    for (var k in a) {
+/*Line 165 - 'Stop.js' */        if (!a.hasOwnProperty(k))
+/*Line 166 - 'Stop.js' */            continue;
+/*Line 167 - 'Stop.js' */        if (/path|prop|next|scope/.test(k))
+/*Line 168 - 'Stop.js' */            continue;
+/*Line 169 - 'Stop.js' */        a.prop[k] = a[k];
+/*Line 170 - 'Stop.js' */    }
+
+
+/*Line 173 - 'Stop.js' */    return function () {
+/*Line 174 - 'Stop.js' */        WebAtoms.AtomWindow.openNewWindow({
+/*Line 175 - 'Stop.js' */            url: a,
+/*Line 176 - 'Stop.js' */            scope: this.get_scope(),
+/*Line 177 - 'Stop.js' */            localScope: true,
+/*Line 178 - 'Stop.js' */            opener: this
+/*Line 179 - 'Stop.js' */        });
+/*Line 180 - 'Stop.js' */    }
+/*Line 181 - 'Stop.js' */};
+
+/*Line 183 - 'Stop.js' */$x.reveal = function (e) {
+/*Line 184 - 'Stop.js' */    return function () {
+
+/*Line 186 - 'Stop.js' */    }
+/*Line 187 - 'Stop.js' */};
 /*Line 0 - 'ActionSet.js' */
 
 
@@ -2740,10 +2763,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "2.1.107",
+/*Line 40 - 'Atom.js' */        text: "2.1.108",
 /*Line 41 - 'Atom.js' */        major: 2,
 /*Line 42 - 'Atom.js' */        minor: 1,
-/*Line 43 - 'Atom.js' */        build: 107
+/*Line 43 - 'Atom.js' */        build: 108
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
