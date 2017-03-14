@@ -5,5 +5,12 @@
       "atoms-debug.js"
     ],
     "sourceMap": true
+  },
+  {
+    "outputFileName": "web-atoms.min.js",
+    "inputFiles": [
+      "web-atoms.js"
+    ],
+    "sourceMap": true
   }
 ]

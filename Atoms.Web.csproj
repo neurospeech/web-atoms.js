@@ -94,7 +94,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="atoms-debug.js" />
     <Content Include="atoms.js" />
     <Content Include="atoms.min.js">
       <DependentUpon>atoms.js</DependentUpon>
@@ -871,6 +870,8 @@
       <DependentUpon>atoms.min.js</DependentUpon>
     </Content>
     <Content Include="bundleconfig.json" />
+    <Content Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -1060,6 +1061,10 @@
       <DependentUpon>view-stack.css</DependentUpon>
     </Content>
     <Content Include="tools\metadata.html" />
+    <Content Include="web-atoms.js" />
+    <Content Include="web-atoms.min.js">
+      <DependentUpon>web-atoms.js</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1136,6 +1141,9 @@
     <Content Include="style\src\pending.less" />
     <Content Include="style\src\pending.css.map">
       <DependentUpon>pending.css</DependentUpon>
+    </Content>
+    <Content Include="web-atoms.min.js.map">
+      <DependentUpon>web-atoms.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
