@@ -191,6 +191,9 @@ WebAtoms.AtomWindow.openNewWindow = function (c) {
     var wt = url.path;
     if (!AtomUI.isNode(wt)) {
         wt = Atom.get(c.scope, url.path);
+        if (!wt) {
+            wt = Atom.get(appScope, url.path);
+        }
     }
 
     var $wt = $( AtomUI.cloneNode(wt));

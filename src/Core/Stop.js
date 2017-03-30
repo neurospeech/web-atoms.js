@@ -125,9 +125,20 @@ $x.window = function (path, props, data, next) {
             path: a.path,
             next: a.next,
             scope: a.scope
-
         };
+
     }
+
+
+    a.prop = a.prop || {};
+    for (var k in a) {
+        if (!a.hasOwnProperty(k))
+            continue;
+        if (/path|prop|next|scope/.test(k))
+            continue;
+        a.prop[k] = a[k];
+    }
+
     return function () {
         WebAtoms.AtomWindow.openNewWindow({
             url: a,
@@ -147,7 +158,19 @@ $x.localWindow = function (path, props, scope, next) {
             next: next,
             scope: scope
         };
+
     }
+
+    a.prop = a.prop || {};
+    for (var k in a) {
+        if (!a.hasOwnProperty(k))
+            continue;
+        if (/path|prop|next|scope/.test(k))
+            continue;
+        a.prop[k] = a[k];
+    }
+
+
     return function () {
         WebAtoms.AtomWindow.openNewWindow({
             url: a,

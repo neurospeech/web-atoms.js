@@ -151,8 +151,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 		string txt = this.GenerationEnvironment.ToString();
 
-    System.IO.File.WriteAllText(currentDirectory + "\\atoms-debug.js" , txt);
-	System.IO.File.WriteAllText(currentDirectory + "\\atoms.js" , txt);
+    System.IO.File.WriteAllText(currentDirectory + "\\web-atoms.js" , txt);
+	//System.IO.File.WriteAllText(currentDirectory + "\\atoms.js" , txt);
 
 		
     //Action[] actions= new Action[]{
