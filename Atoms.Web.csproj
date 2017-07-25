@@ -98,7 +98,9 @@
       <DependentUpon>atoms-gen.tt</DependentUpon>
     </Content>
     <Content Include="atoms.js" />
-    <Content Include="atoms.min.js" />
+    <Content Include="atoms.min.js">
+      <DependentUpon>atoms.js</DependentUpon>
+    </Content>
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -855,9 +857,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>atoms-gen.js</LastGenOutput>
     </Content>
-    <Content Include="atoms.min.map" />
     <Content Include="README.md" />
-    <Content Include="atoms.min.js.map" />
+    <Content Include="atoms.min.js.map">
+      <DependentUpon>atoms.min.js</DependentUpon>
+    </Content>
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

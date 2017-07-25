@@ -119,6 +119,7 @@
                 var r = this._countries;
                 var options = this.cs.options;
                 options.length = r.length;
+                var last = this.cs.selectedIndex;
                 var ae = new AtomEnumerator(r);
                 while (ae.next()) {
                     var ci = ae.current();
@@ -130,6 +131,7 @@
                 }
 
                 this.setupValues();
+                this.cs.selectedIndex = last;
 
                 var cs = this.cs;
                 if (cs.selectedIndex == -1)
