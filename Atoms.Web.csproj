@@ -38,17 +38,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.5.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.5.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="NeuroSpeech.AtomsPreCompiler, Version=1.1.161.39891, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Atoms.PreCompiler.1.1.161\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NeuroSpeech.AtomsPreCompiler, Version=1.1.161.30904, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Atoms.PreCompiler.1.1.162\lib\NeuroSpeech.AtomsPreCompiler.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -93,14 +92,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="atoms-debug.js" />
-    <Content Include="atoms.js">
+    <Content Include="atoms-gen.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>atoms.tt</DependentUpon>
+      <DependentUpon>atoms-gen.tt</DependentUpon>
     </Content>
-    <Content Include="atoms.min.js">
-      <DependentUpon>atoms.js</DependentUpon>
-    </Content>
+    <Content Include="atoms.js" />
+    <Content Include="atoms.min.js" />
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -853,15 +851,13 @@
     <Content Include="res\share\stumbleupon.png" />
     <Content Include="res\share\tumblr.png" />
     <Content Include="res\share\twitter.png" />
-    <Content Include="atoms.tt">
+    <Content Include="atoms-gen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms1.js</LastGenOutput>
+      <LastGenOutput>atoms-gen.js</LastGenOutput>
     </Content>
     <Content Include="atoms.min.map" />
     <Content Include="README.md" />
-    <Content Include="atoms.min.js.map">
-      <DependentUpon>atoms.min.js</DependentUpon>
-    </Content>
+    <Content Include="atoms.min.js.map" />
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">

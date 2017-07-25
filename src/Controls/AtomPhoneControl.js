@@ -118,7 +118,7 @@
 
                 var r = this._countries;
                 var options = this.cs.options;
-                options.length = 0;
+                options.length = r.length;
                 var ae = new AtomEnumerator(r);
                 while (ae.next()) {
                     var ci = ae.current();
