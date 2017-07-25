@@ -101,11 +101,6 @@
     <Content Include="atoms.min.js">
       <DependentUpon>atoms.js</DependentUpon>
     </Content>
-    <Content Include="atoms1.js">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>atoms.tt</DependentUpon>
-    </Content>
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
