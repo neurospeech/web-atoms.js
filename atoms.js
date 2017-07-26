@@ -1734,7 +1734,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 22 - 'Stop.js' */$x.invoke = function(i,d,v){
 /*Line 23 - 'Stop.js' */    return function(){
 /*Line 24 - 'Stop.js' */        var a = {};
-/*Line 25 - 'Stop.js' */        if(v === undefined){
+/*Line 25 - 'Stop.js' */        if(v !== undefined){
 /*Line 26 - 'Stop.js' */            var x = {};
 /*Line 27 - 'Stop.js' */            x[d] = v;
 /*Line 28 - 'Stop.js' */            a[i] = x;        
@@ -2583,10 +2583,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.251",
+/*Line 40 - 'Atom.js' */        text: "1.8.252",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 251
+/*Line 43 - 'Atom.js' */        build: 252
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {

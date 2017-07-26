@@ -23,7 +23,7 @@ $x.timeout = function (i, actions) {
 $x.invoke = function(i,d,v){
     return function(){
         var a = {};
-        if(v === undefined){
+        if(v !== undefined){
             var x = {};
             x[d] = v;
             a[i] = x;        
