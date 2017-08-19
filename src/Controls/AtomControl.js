@@ -200,6 +200,7 @@ window.AtomProperties = AtomProperties;
             layout: null,
             loadNext: null,
             next: null,
+            viewModel: null,
             merge: undefined,
             value: undefined
         },
@@ -317,6 +318,16 @@ window.AtomProperties = AtomProperties;
                 if (!p)
                     throw new Error("Could not find templateParent");
                 return this.get_templateParent(element._logicalParent || element.parentNode);
+            },
+
+            get_viewModel: function () {
+                if (this._viewModel === undefined) {
+                    // get parent..
+                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
+                    if (ap)
+                        return ap.get_viewModel();
+                }
+                return this._viewModel;
             },
 
             get_data: function () {
@@ -817,6 +828,12 @@ window.AtomProperties = AtomProperties;
 
 
             dispose: function (e) {
+
+                var vm = this._viewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                    this._viewModel = null;
+                }
 
                 // disposing only one element
                 if (e) {

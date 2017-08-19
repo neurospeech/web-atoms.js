@@ -13,6 +13,10 @@ function runAction(action,evt) {
 
         var f = action;
 
+        if (f.isMVVMAtomCommand) {
+            f.execute(this);
+        }
+
         // is it atomControl?
         if (f.atomControl) {
             f = f.atomControl;

@@ -213,6 +213,11 @@ var Atom = {
             u = u.replace(/http\:\/\//, "https://");
         }
         return u;
+    },
+
+    showError: function (e) {
+        // show slight warning.. make warning go away...
+        Atom.alert(e);
     }
 };
 
