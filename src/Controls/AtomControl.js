@@ -200,7 +200,6 @@ window.AtomProperties = AtomProperties;
             layout: null,
             loadNext: null,
             next: null,
-            viewModel: null,
             merge: undefined,
             value: undefined
         },
@@ -329,6 +328,24 @@ window.AtomProperties = AtomProperties;
                 }
                 return this._viewModel;
             },
+            set_viewModel: function(v){
+                this._viewModel = v;
+                
+               function propogate(e){
+                    var ae = new ChildEnumerator(e);
+                    while(ae.next()){
+                        var child = ae.current();
+                        if(child.atomControl && child.atomControl._created){
+                            var ctrl = child.atomControl;
+                            if(ctrl._viewModel !== undefined)
+                                continue;
+                            Atom.refresh(ctrl,"viewModel");
+                        }
+                        propogate(child);
+                    }
+               };
+               propogate(this._element);
+            },
 
             get_data: function () {
                 if (this._data === undefined) {
@@ -338,7 +355,7 @@ window.AtomProperties = AtomProperties;
                         return ap.get_data();
                 }
                 return this._data;
-            },
+            },            
             set_data: function (d) {
                 this._data = d;
                 this.mergeData();

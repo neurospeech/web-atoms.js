@@ -35,6 +35,9 @@
                 ]
             },
             {
+                label: "MVVM", value: "concepts/mvvm/mvvm.html", bold: true
+            },
+            {
                 label: "Scope", value: "concepts/scope/index.html",
                 links: [
                     { label: "appScope", value: "concepts/scope/app-scope.html" },

@@ -16,9 +16,9 @@ var AtomEvaluator = {
         if (be)
             return be;
 
-        var regex = /(?:(\$)(window|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
+        var regex = /(?:(\$)(window|viewModel|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
 
-        var keywords = /(window|appScope|scope|data|owner|localScope)/gi;
+        var keywords = /(window|viewModel|appScope|scope|data|owner|localScope)/gi;
 
         var path = [];
         var vars = [];

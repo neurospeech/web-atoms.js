@@ -21,6 +21,13 @@
 
                 AtomUI.cancelEvent(e);
 
+                if(this._command){
+                    var self = this;
+                    setTimeout(function(){
+                        self._command.execute();
+                    });
+                    return;
+                }
 
 
                 if (this._next) {

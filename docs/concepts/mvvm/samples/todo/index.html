@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="../../../../../jquery-1.8.2.min.js"></script>
+    <link href="../../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../../atoms.js"></script>
+    <script src="../../../../../mvvm.js"></script>
+    <script src="TodoViewModel.js"></script>
+</head>
+<body>
+    <div 
+         atom-type="AtomApplication" 
+         atom-view-model="{ new TodoViewModel() }"
+         atom-render-as-page="true">
+
+        <div>
+            <input type="text" atom-value="$[viewModel.newItem.label]" placeholder="New Task"/>
+        </div>
+        <div>
+            <button 
+                    atom-type="AtomButton" 
+                    atom-command="{$viewModel.addCommand}"
+                    atom-command-parameter="{$viewModel.newItem}">Add Mew</button>
+        </div>
+        
+
+        <div 
+             atom-type="AtomListBox"
+             atom-items="[$viewModel.list]">
+            <div atom-template="itemTemplate">
+                <span atom-text="{$data.label}"></span>
+                <button 
+                        atom-type="AtomDeleteButton"
+                        atom-command="{$viewMode.removeCommand}"
+                        atom-command-paremter="{$data}">Delete</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
