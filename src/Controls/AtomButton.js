@@ -11,9 +11,12 @@
         },
         properties: {
             sendData: false,
+            command: null,
+            commandParameter: null,
             invalid: null
         },
         methods: {
+
             onClickHandler: function (e) {
 
                 AtomUI.cancelEvent(e);
@@ -45,6 +48,9 @@
 
                 var element = this._element;
                 this.bindEvent(element, "click", "onClickHandler");
+                this.bind(element, "isEnabled", [["command"],["command", "enabled"]], 0, function (v1,v2) {
+                    return v1 ? v2 : true; 
+                });
                 base.init.apply(this);
             }
         }
