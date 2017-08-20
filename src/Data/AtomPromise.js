@@ -231,8 +231,7 @@ AtomPromise.ajax = function (url, query, options, type) {
         };
     }
 
-    if (AtomConfig.ajax.versionUrl)
-    {
+    if (AtomConfig.ajax.versionUrl) {
         if (options.versionUrl !== undefined && options.versionUrl) {
             query = query || {};
             query[AtomConfig.ajax.versionKey] = AtomConfig.ajax.version;
@@ -382,7 +381,6 @@ AtomPromise.ajax = function (url, query, options, type) {
 
     return p;
 };
-
 AtomPromise.get = function (url, query, options) {
     options = options || {};
     options.type = options.type || "get";
@@ -567,7 +565,6 @@ AtomPromise.prototype.toNativePromise = function () {
         });
     });
 };
-
 
 //$setValue = AtomBinder.setValue;
 //$getValue = AtomBinder.getValue;

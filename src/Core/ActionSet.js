@@ -1,4 +1,4 @@
-﻿/// <reference path="Stop.js" />
+/// <reference path="Stop.js" />
 
 
 
@@ -12,6 +12,11 @@ function runAction(action,evt) {
     else {
 
         var f = action;
+
+        if (f.isMVVMAtomCommand) {
+            f.execute(this);
+        }
+        
 
         // is it atomControl?
         if (f.atomControl) {

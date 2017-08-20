@@ -1,4 +1,4 @@
-﻿var $x = {};
+var $x = {};
 
 window.$x = $x;
 
