@@ -67,6 +67,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             }
         },
         properties: {
+            dropZone: null,
             items: null,
             fileTypes: undefined,
             accept: "*/*",
@@ -76,7 +77,7 @@ window.__atom_flash_uploader_event = function (id, json) {
             uploadUrl: null,
             postData: {},
             finished: false,
-            maxFileSize: 104857600,
+            maxFileSize: 524288000,
             maxFiles: -1,
             maxFilesErrorMessage: null,
             headers: null,
@@ -264,8 +265,8 @@ window.__atom_flash_uploader_event = function (id, json) {
                     fd.append("fileToUpload", item.file);
 
                     if (this._uploadUrl) {
-                        if (this._postData) {
-                            fd.append("formModel", JSON.stringify(this._postData));
+                        if (item.postData) {
+                            fd.append("formModel", JSON.stringify(item.postData));
                         }
                     }
 
@@ -314,7 +315,9 @@ window.__atom_flash_uploader_event = function (id, json) {
                 }
                 ae = new AtomEnumerator(v);
                 while (ae.next()) {
-                    na.push(ae.current());
+                    var item = ae.current();
+                    item.postData = this._postData;
+                    na.push(item);
                 }
 
                 this.set_items(na);
@@ -354,6 +357,33 @@ window.__atom_flash_uploader_event = function (id, json) {
                 } else {
                     return document[appName];
                 }
+            },
+
+            set_dropZone: function (v) {
+                var c = this._dropZone;
+                if (c) {
+                    var $c = $(c);
+                    $c.off("drop");
+                    $c.off("dragover");
+                }
+                this._dropZone = v;
+                if (!v)
+                    return;
+                var $v = $(v._element || v);
+                var self = this;
+                $v.on("drop", function (e) {
+                    e.preventDefault();
+                    var droppedFiles = e.originalEvent.dataTransfer.files;
+                    var files = [];
+                    for (var i = 0; i < droppedFiles.length; i++) {
+                        var file = droppedFiles[i];
+                        files.push({ id: i, file: file, name: file.name, size: file.size, type: file.type, error: '', status: '' });
+                    }
+                    self.add_items(files);
+                });
+                $v.on("dragover", function (e) {
+                    e.preventDefault();
+                });
             },
 
             createFilePresenter: function () {

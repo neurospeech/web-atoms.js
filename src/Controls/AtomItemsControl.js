@@ -353,7 +353,6 @@
                     vc.scrollTop(scrollTop * vcHeight);
 
 
-
                     return;
                 }
 
@@ -952,7 +951,9 @@
                         $(item).remove();
                     }
 
-                });
+                    });
+
+                
 
 
 
@@ -1011,7 +1012,7 @@
                     scope.data = data;
                     scope.get_itemSelected = function () {
                         return scope.owner.isSelected(data);
-                    };
+                };
                     scope.set_itemSelected = function (v) {
                         scope.owner.toggleSelection(data, true);
                     };
