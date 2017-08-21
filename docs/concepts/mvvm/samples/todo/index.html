@@ -5,38 +5,83 @@
     <script src="../../../../../jquery-1.8.2.min.js"></script>
     <link href="../../../../../style/atoms.css" rel="stylesheet" />
     <script src="../../../../../atoms.js"></script>
-    <script src="../../../../../mvvm.js"></script>
+    <script src="../../../../../mvvm/mvvm.js"></script>
+    <script src="../../../../../mvvm/mvvm-notification-service.js"></script>
     <script src="TodoViewModel.js"></script>
 </head>
 <body>
-    <div 
-         atom-type="AtomApplication" 
-         atom-view-model="{ new TodoViewModel() }"
-         atom-render-as-page="true">
+    
+<!-- sample -->
 
-        <div>
-            <input type="text" atom-value="$[viewModel.newItem.label]" placeholder="New Task"/>
-        </div>
-        <div>
-            <button 
-                    atom-type="AtomButton" 
-                    atom-command="{$viewModel.addCommand}"
-                    atom-command-parameter="{$viewModel.newItem}">Add Mew</button>
-        </div>
+    <!--
+    
+        <script src="../../../../../mvvm.js"></script>
+        <script src="TodoViewModel.js"></script>
+        
+    -->
+
+    
+<div 
+        atom-type="AtomApplication" 
+        atom-view-model="{ new TodoViewModel() }"
+        atom-render-as-page="true">
+
+    <div>
+        <input type="text" 
+               atom-value="$[viewModel.newItem.label]" 
+               placeholder="New Task"/>
+        <button 
+                atom-type="AtomButton" 
+                atom-command="{$viewModel.addCommand}"
+                atom-command-parameter="{$viewModel.newItem}">Add Mew</button>
+    </div>
         
 
-        <div 
-             atom-type="AtomListBox"
-             atom-items="[$viewModel.list]">
-            <div atom-template="itemTemplate">
-                <span atom-text="{$data.label}"></span>
-                <button 
-                        atom-type="AtomDeleteButton"
-                        atom-command="{$viewModel.removeCommand}"
-                        atom-command-parameter="{$data}">Delete</button>
-            </div>
+    <div 
+            atom-type="AtomListBox"
+            atom-items="[$viewModel.list]">
+        <div atom-template="itemTemplate">
+            <span atom-text="{$data.label}"></span>
+            <button 
+                    atom-type="AtomDeleteButton"
+                    atom-command="{$viewModel.removeCommand}"
+                    atom-command-parameter="{$data}">Delete</button>
+        </div>
+    </div>
+
+
+    <!-- Notification UI -->
+
+    <div 
+         atom-type="AtomItemsControl"
+         atom-view-model="{ new WebAtoms.AtomNotificationService() }"
+         atom-items="{$viewModel.notifications}"
+         style="position:absolute;top:0;left:0;"
+         style-display="[$viewModel.notifications.length ? 'block' : 'none']"
+         style-width="100%"
+         style-height="100%">
+
+        <div style="margin:200px;position:relative;opacity:0.5;background-color:aquamarine"
+             atom-presenter="itemsPresenter">
+             <div atom-template="itemTemplate">
+                 <div>
+                     <span atom-text="{$data.title}"></span>
+                     <button 
+                             atom-type="AtomButton"
+                             atom-command-parameter="{$data}"
+                             atom-command="{$viewModel.removeCommand}"
+                             >Close</button>
+                 </div>
+                 <div atom-text="{$data.message}"></div>
+                 <div atom-text="['Closing in (' + (($data.delay/1000)+1) + ') seconds.. ']"></div>
+             </div>
         </div>
 
     </div>
+
+</div>
+
+<!-- end-sample -->
+
 </body>
 </html>

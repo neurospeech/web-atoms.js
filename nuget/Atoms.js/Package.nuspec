@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Atoms.js</id>
-    <version>1.8.252</version>
+    <version>1.8.253</version>
     <title>Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -36,6 +36,10 @@
     <file src="..\..\atoms.js" target="content\Scripts\atoms.js" />
     <file src="..\..\atoms.min.js" target="content\Scripts\atoms.min.js" />
     <file src="..\..\atoms.min.js.map" target="content\Scripts\atoms.min.js.map" />
+
+    <file src="..\..\mvvm.ts" target="content\Scripts\mvvm.ts" />
+    <file src="..\..\mvvm.js" target="content\Scripts\mvvm.js" />
+    <file src="..\..\mvvm.js.map" target="content\Scripts\mvvm.js.map" />
 
     <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\atoms\plugins\entity-framework\entity-context.js"/>
     <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\atoms\plugins\entity-framework\entity-controls.js"/>

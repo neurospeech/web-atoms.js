@@ -1,4 +1,5 @@
-﻿///<reference path="../../../../../mvvm.ts"/>
+﻿///<reference path="../../../../../mvvm/mvvm.ts"/>
+///<reference path="../../../../../mvvm/mvvm-notification-service.ts"/>
 
 if(!window["Promise"]){
     var Promise;
@@ -32,13 +33,31 @@ class TodoViewModel extends WebAtoms.AtomViewModel {
 
         this.newItem = new TodoItem();
         this.list = new WebAtoms.AtomList<TodoItem>();
-        this.addCommand = new WebAtoms.AtomCommand<TodoItem>(c => this.onAddCommand() );
-        this.removeCommand = new WebAtoms.AtomCommand<TodoItem>( c => this.onRemoveCommand(c) );
+
+        this.addCommand =
+            new WebAtoms.AtomCommand<TodoItem>(
+                c => this.onAddCommand());
+
+        this.removeCommand =
+            new WebAtoms.AtomCommand<TodoItem>(
+                c => this.onRemoveCommand(c));
+
+        this.onMessage("notification-event", (d) => {
+            // message received from somewhere...
+        });
+
+
     }
 
     async onAddCommand(): Promise<any>{
-        var n = this.newItem;
-        this.list.add(n);
+
+        if (!this.newItem.label) {
+            this.broadcast("ui-notification",
+                new WebAtoms.AtomNotification("Required", "Task cannot be empty"));
+            return;
+        }
+
+        this.list.add(this.newItem);
         this.newItem = new TodoItem();
     }
 

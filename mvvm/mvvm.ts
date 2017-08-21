@@ -36,6 +36,10 @@
 
         static instance: AtomDevice = new AtomDevice();
 
+        constructor() {
+            this.bag = {};
+        }
+
         public async runAsync<T>(task: Promise<T>): Promise<any> {
             try {
                 await task;
@@ -52,7 +56,7 @@
             if (!ary)
                 return;
             for (let entry of ary.list) {
-                entry.call(this, [msg, data]);
+                entry.call(this, msg, data);
             }
         }
 
@@ -146,6 +150,7 @@
             var i = this.length;
             var n = this.push(item);
             AtomBinder.invokeItemsEvent(this, "add", i, item);
+            Atom.refresh(this, "length");
             return n;
         }
 
@@ -154,18 +159,21 @@
                 var i = this.length;
                 this.push(item);
                 AtomBinder.invokeItemsEvent(this, "add", i, item);
+                Atom.refresh(this, "length");
             }
         }
 
         insert(i: number, item: T) {
             var n = this.splice(i, 0, item);
             AtomBinder.invokeItemsEvent(this, "add", i, item);
+            Atom.refresh(this, "length");
         }
 
         removeAt(i: number) {
             var item = this[i];
             this.splice(i, 1);
             AtomBinder.invokeItemsEvent(this, "remove", i, item);
+            Atom.refresh(this, "length");
         }
 
         remove(item: T) {
@@ -175,8 +183,14 @@
             }
         }
 
+        clear() {
+            this.length = 0;
+            this.refresh();
+        }
+
         refresh() {
             AtomBinder.invokeItemsEvent(this, "refresh", -1, null);
+            Atom.refresh(this, "length");
         }
 
     }

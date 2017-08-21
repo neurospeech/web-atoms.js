@@ -64,7 +64,7 @@ CodeMirror.defineMode("htmlmixed", function (config) {
 
             var bg = " " + def || "";
 
-            var m = stream.match(/^\$(data|get|url|json|owner|scope|appScope)[\.a-z0-9\_]*/i);
+            var m = stream.match(/^\$(viewModel|data|get|url|json|owner|scope|appScope)[\.a-z0-9\_]*/i);
             if (m) {
                 return "web-atom-binding-exp" + bg;
             }
@@ -220,6 +220,7 @@ CodeMirror.defineMIME("text/html", "htmlmixed");
                             var a = _this.editor.getScrollInfo();
                             //console.log(JSON.stringify(a));
                             if (a.height) {
+                                _this._resize = false;
                                 _this.editor.setSize(null, a.height);
                                 if (window.frameElement) {
                                     var h = $(window.frameElement).innerHeight();

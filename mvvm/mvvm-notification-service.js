@@ -1,5 +1,4 @@
-///<reference path="../../../../../mvvm/mvvm.ts"/>
-///<reference path="../../../../../mvvm/mvvm-notification-service.ts"/>
+/// <reference path="mvvm.ts" />
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -51,60 +50,71 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-if (!window["Promise"]) {
-    var Promise;
-}
-var TodoItem = (function () {
-    function TodoItem() {
-        this.label = "";
-    }
-    return TodoItem;
-}());
-__decorate([
-    bindableProperty
-], TodoItem.prototype, "label", void 0);
-var TodoViewModel = (function (_super) {
-    __extends(TodoViewModel, _super);
-    function TodoViewModel() {
-        var _this = _super.call(this) || this;
-        _this.newItem = new TodoItem();
-        _this.list = new WebAtoms.AtomList();
-        _this.addCommand =
-            new WebAtoms.AtomCommand(function (c) { return _this.onAddCommand(); });
-        _this.removeCommand =
-            new WebAtoms.AtomCommand(function (c) { return _this.onRemoveCommand(c); });
-        _this.onMessage("notification-event", function (d) {
-            // message received from somewhere...
-        });
-        return _this;
-    }
-    TodoViewModel.prototype.onAddCommand = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                if (!this.newItem.label) {
-                    this.broadcast("ui-notification", new WebAtoms.AtomNotification("Required", "Task cannot be empty"));
+var WebAtoms;
+(function (WebAtoms) {
+    var AtomNotification = (function () {
+        function AtomNotification(message, title, icon, delay) {
+            if (icon === void 0) { icon = null; }
+            if (delay === void 0) { delay = 5000; }
+            this.message = message;
+            this.title = title;
+            this.icon = icon || "";
+            this.delay = delay || 5000;
+        }
+        AtomNotification.short = function (message, title) {
+            if (title === void 0) { title = ""; }
+            return new AtomNotification(message, title);
+        };
+        return AtomNotification;
+    }());
+    __decorate([
+        bindableProperty
+    ], AtomNotification.prototype, "delay", void 0);
+    WebAtoms.AtomNotification = AtomNotification;
+    var AtomNotificationService = (function (_super) {
+        __extends(AtomNotificationService, _super);
+        function AtomNotificationService() {
+            var _this = _super.call(this) || this;
+            _this.notifications = new WebAtoms.AtomList();
+            _this.removeCommand = new WebAtoms.AtomCommand(function (n) { return _this.onRemoveCommand(n); });
+            // subscribe to UI notifications sent by anyone...
+            WebAtoms.AtomDevice.instance.subscribe("ui-notification", function (m, n) { return _this.onNotified(n); });
+            return _this;
+        }
+        AtomNotificationService.prototype.onRemoveCommand = function (n) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    this.notifications.remove(n);
+                    if (n.timeout) {
+                        clearTimeout(n.timeout);
+                    }
                     return [2 /*return*/];
-                }
-                this.list.add(this.newItem);
-                this.newItem = new TodoItem();
-                return [2 /*return*/];
+                });
             });
-        });
-    };
-    TodoViewModel.prototype.onRemoveCommand = function (item) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                this.list.remove(item);
-                return [2 /*return*/];
+        };
+        AtomNotificationService.prototype.onNotified = function (n) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    this.notifications.add(n);
+                    if (n.delay > 0) {
+                        this.updateTimer(n);
+                    }
+                    return [2 /*return*/];
+                });
             });
-        });
-    };
-    return TodoViewModel;
-}(WebAtoms.AtomViewModel));
-__decorate([
-    bindableProperty
-], TodoViewModel.prototype, "selection", void 0);
-__decorate([
-    bindableProperty
-], TodoViewModel.prototype, "newItem", void 0);
-//# sourceMappingURL=TodoViewModel.js.map
+        };
+        AtomNotificationService.prototype.updateTimer = function (n) {
+            var _this = this;
+            if (n.delay > 0) {
+                n.delay = n.delay - 1000;
+                setTimeout(function () { return _this.updateTimer(n); }, 1000);
+            }
+            else {
+                this.notifications.remove(n);
+            }
+        };
+        return AtomNotificationService;
+    }(WebAtoms.AtomViewModel));
+    WebAtoms.AtomNotificationService = AtomNotificationService;
+})(WebAtoms || (WebAtoms = {}));
+//# sourceMappingURL=mvvm-notification-service.js.map
