@@ -141,7 +141,7 @@ var WebAtoms;
             _this.parameterChanged = onParameterSet;
             _this.execute = function () {
                 if (self.enabled) {
-                    this.invokeAction(self.invokeAction());
+                    this.invokeAction(self.executeAction());
                 }
             };
             return _this;
@@ -171,7 +171,7 @@ var WebAtoms;
             enumerable: true,
             configurable: true
         });
-        AtomCommand.prototype.invokeAction = function () {
+        AtomCommand.prototype.executeAction = function () {
             var result = this.action(this.parameter);
             if (result && result.catch) {
                 result.catch(function (error) {

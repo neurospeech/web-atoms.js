@@ -116,7 +116,7 @@
 
         public execute: Function;
 
-        private invokeAction(): any {
+        private executeAction(): any {
 
             var result = this.action(this.parameter);
 
@@ -138,7 +138,7 @@
             this.parameterChanged = onParameterSet;
             this.execute = function () {
                 if (self.enabled) {
-                    this.invokeAction(self.invokeAction());
+                    this.invokeAction(self.executeAction());
                 }
             };
 

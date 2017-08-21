@@ -5,7 +5,12 @@ if(!window["Promise"]){
 }
 
 class TodoItem {
+    @bindableProperty
     label: string;
+
+    constructor() {
+        this.label = "";
+    }
 }
 
 class TodoViewModel extends WebAtoms.AtomViewModel {
@@ -27,13 +32,13 @@ class TodoViewModel extends WebAtoms.AtomViewModel {
 
         this.newItem = new TodoItem();
         this.list = new WebAtoms.AtomList<TodoItem>();
-        this.addCommand = new WebAtoms.AtomCommand<TodoItem>( async c => await this.onAddCommand() );
-        this.removeCommand = new WebAtoms.AtomCommand<TodoItem>( async c =>await this.onRemoveCommand(c) );
+        this.addCommand = new WebAtoms.AtomCommand<TodoItem>(c => this.onAddCommand() );
+        this.removeCommand = new WebAtoms.AtomCommand<TodoItem>( c => this.onRemoveCommand(c) );
     }
 
     async onAddCommand():Promise<any>{
-        this.list.add(newItem);
-        newItem = new TodoItem();
+        this.list.add(this.newItem);
+        this.newItem = new TodoItem();
     }
 
     async onRemoveCommand(item:TodoItem): Promise<any>{

@@ -26,7 +26,7 @@
                     setTimeout(function(){
                         self._command.execute();
                     });
-                    return;
+                    return false;
                 }
 
 

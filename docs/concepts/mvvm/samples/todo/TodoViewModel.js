@@ -55,33 +55,28 @@ if (!window["Promise"]) {
 }
 var TodoItem = (function () {
     function TodoItem() {
+        this.label = "";
     }
     return TodoItem;
 }());
+__decorate([
+    bindableProperty
+], TodoItem.prototype, "label", void 0);
 var TodoViewModel = (function (_super) {
     __extends(TodoViewModel, _super);
     function TodoViewModel() {
         var _this = _super.call(this) || this;
         _this.newItem = new TodoItem();
         _this.list = new WebAtoms.AtomList();
-        _this.addCommand = new WebAtoms.AtomCommand(function (c) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, this.onAddCommand(c)];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        }); }); });
-        _this.removeCommand = new WebAtoms.AtomCommand(function (c) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, this.onRemoveCommand(c)];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        }); }); });
+        _this.addCommand = new WebAtoms.AtomCommand(function (c) { return _this.onAddCommand(); });
+        _this.removeCommand = new WebAtoms.AtomCommand(function (c) { return _this.onRemoveCommand(c); });
         return _this;
     }
-    TodoViewModel.prototype.onAddCommand = function (item) {
+    TodoViewModel.prototype.onAddCommand = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.list.add(item);
+                this.list.add(this.newItem);
+                this.newItem = new TodoItem();
                 return [2 /*return*/];
             });
         });
