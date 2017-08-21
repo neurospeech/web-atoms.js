@@ -17,8 +17,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t;
+    return { next: verb(0), "throw": verb(1), "return": verb(2) };
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -130,18 +130,15 @@ var WebAtoms;
     WebAtoms.AtomModel = AtomModel;
     var AtomCommand = (function (_super) {
         __extends(AtomCommand, _super);
-        function AtomCommand(action, onParameterSet) {
-            if (onParameterSet === void 0) { onParameterSet = null; }
+        function AtomCommand(action) {
             var _this = _super.call(this) || this;
             _this.isMVVMAtomCommand = true;
             _this._enabled = true;
-            _this._parameter = null;
             _this.action = action;
             var self = _this;
-            _this.parameterChanged = onParameterSet;
-            _this.execute = function () {
-                if (self.enabled) {
-                    this.invokeAction(self.executeAction());
+            _this.execute = function (p) {
+                if (_this.enabled) {
+                    _this.executeAction(p);
                 }
             };
             return _this;
@@ -157,22 +154,8 @@ var WebAtoms;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(AtomCommand.prototype, "parameter", {
-            get: function () {
-                return this._parameter;
-            },
-            set: function (v) {
-                this._parameter = v;
-                if (this.parameterChanged) {
-                    this.enabled = this.parameterChanged(v);
-                }
-                this.refresh("parameter");
-            },
-            enumerable: true,
-            configurable: true
-        });
-        AtomCommand.prototype.executeAction = function () {
-            var result = this.action(this.parameter);
+        AtomCommand.prototype.executeAction = function (p) {
+            var result = this.action(p);
             if (result && result.catch) {
                 result.catch(function (error) {
                     console.error(error);
@@ -310,15 +293,17 @@ function bindableProperty(target, key) {
     var Atom = window["Atom"];
     // property value
     var _val = this[key];
+    var keyName = "_" + key;
+    this[keyName] = _val;
     // property getter
     var getter = function () {
         //console.log(`Get: ${key} => ${_val}`);
-        return _val;
+        return this[keyName];
     };
     // property setter
     var setter = function (newVal) {
         //console.log(`Set: ${key} => ${newVal}`);
-        _val = newVal;
+        this[keyName] = newVal;
         Atom.refresh(this, key);
     };
     // Delete property.

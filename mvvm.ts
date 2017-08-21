@@ -99,26 +99,14 @@
             this.refresh("enabled");
         }
 
-        private _parameter: T = null;
-        get parameter(): T {
-            return this._parameter;
-        }
-        set parameter(v: T) {
-            this._parameter = v;
-            if (this.parameterChanged) {
-                this.enabled = this.parameterChanged(v);
-            }
-            this.refresh("parameter");
-        }
 
         private action: (p: T) => any;
-        private parameterChanged: (p: T) => boolean;
 
-        public execute: Function;
+        public execute: (p:T) => any;
 
-        private executeAction(): any {
+        private executeAction(p:T): any {
 
-            var result = this.action(this.parameter);
+            var result = this.action(p);
 
             if (result && result.catch) {
                 result.catch((error) => {
@@ -129,16 +117,14 @@
         }
 
         constructor(
-            action: (p: T) => any,
-            onParameterSet: (p: T) => boolean = null) {
+            action: (p: T) => any) {
             super();
             this.action = action;
 
             var self = this;
-            this.parameterChanged = onParameterSet;
-            this.execute = function () {
-                if (self.enabled) {
-                    this.invokeAction(self.executeAction());
+            this.execute = (p:T) => {
+                if (this.enabled) {
+                    this.executeAction(p);
                 }
             };
 
@@ -270,16 +256,20 @@ function bindableProperty(target: any, key: string) {
     // property value
     var _val = this[key];
 
+    var keyName = "_" + key;
+
+    this[keyName] = _val;
+
     // property getter
     var getter = function () {
         //console.log(`Get: ${key} => ${_val}`);
-        return _val;
+        return this[keyName];
     };
 
     // property setter
     var setter = function (newVal) {
         //console.log(`Set: ${key} => ${newVal}`);
-        _val = newVal;
+        this[keyName] = newVal;
         Atom.refresh(this, key);
     };
 

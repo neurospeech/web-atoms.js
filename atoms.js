@@ -7733,8 +7733,8 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 
 /*Line 23 - 'AtomButton.js' */                if(this._command){
 /*Line 24 - 'AtomButton.js' */                    var self = this;
-/*Line 25 - 'AtomButton.js' */                    setTimeout(function(){
-/*Line 26 - 'AtomButton.js' */                        self._command.execute();
+/*Line 25 - 'AtomButton.js' */                    setTimeout(function () {
+/*Line 26 - 'AtomButton.js' */                        self._command.execute(self._commandParameter);
 /*Line 27 - 'AtomButton.js' */                    });
 /*Line 28 - 'AtomButton.js' */                    return false;
 /*Line 29 - 'AtomButton.js' */                }

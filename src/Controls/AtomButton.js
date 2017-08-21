@@ -23,8 +23,8 @@
 
                 if(this._command){
                     var self = this;
-                    setTimeout(function(){
-                        self._command.execute();
+                    setTimeout(function () {
+                        self._command.execute(self._commandParameter);
                     });
                     return false;
                 }

@@ -36,8 +36,9 @@ class TodoViewModel extends WebAtoms.AtomViewModel {
         this.removeCommand = new WebAtoms.AtomCommand<TodoItem>( c => this.onRemoveCommand(c) );
     }
 
-    async onAddCommand():Promise<any>{
-        this.list.add(this.newItem);
+    async onAddCommand(): Promise<any>{
+        var n = this.newItem;
+        this.list.add(n);
         this.newItem = new TodoItem();
     }
 
