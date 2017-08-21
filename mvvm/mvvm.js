@@ -17,8 +17,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t;
-    return { next: verb(0), "throw": verb(1), "return": verb(2) };
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -68,6 +68,7 @@ var WebAtoms;
     }());
     var AtomDevice = (function () {
         function AtomDevice() {
+            this.bag = {};
         }
         AtomDevice.prototype.runAsync = function (task) {
             return __awaiter(this, void 0, void 0, function () {
@@ -96,7 +97,7 @@ var WebAtoms;
                 return;
             for (var _i = 0, _a = ary.list; _i < _a.length; _i++) {
                 var entry = _a[_i];
-                entry.call(this, [msg, data]);
+                entry.call(this, msg, data);
             }
         };
         AtomDevice.prototype.subscribe = function (msg, action) {
@@ -177,6 +178,7 @@ var WebAtoms;
             var i = this.length;
             var n = this.push(item);
             AtomBinder.invokeItemsEvent(this, "add", i, item);
+            Atom.refresh(this, "length");
             return n;
         };
         AtomList.prototype.addAll = function (items) {
@@ -185,16 +187,19 @@ var WebAtoms;
                 var i = this.length;
                 this.push(item);
                 AtomBinder.invokeItemsEvent(this, "add", i, item);
+                Atom.refresh(this, "length");
             }
         };
         AtomList.prototype.insert = function (i, item) {
             var n = this.splice(i, 0, item);
             AtomBinder.invokeItemsEvent(this, "add", i, item);
+            Atom.refresh(this, "length");
         };
         AtomList.prototype.removeAt = function (i) {
             var item = this[i];
             this.splice(i, 1);
             AtomBinder.invokeItemsEvent(this, "remove", i, item);
+            Atom.refresh(this, "length");
         };
         AtomList.prototype.remove = function (item) {
             var n = this.indexOf(item);
@@ -202,8 +207,13 @@ var WebAtoms;
                 this.removeAt(n);
             }
         };
+        AtomList.prototype.clear = function () {
+            this.length = 0;
+            this.refresh();
+        };
         AtomList.prototype.refresh = function () {
             AtomBinder.invokeItemsEvent(this, "refresh", -1, null);
+            Atom.refresh(this, "length");
         };
         return AtomList;
     }(Array));
