@@ -43,6 +43,7 @@
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
   </PropertyGroup>
@@ -140,6 +141,9 @@
     <Content Include="docs\concepts\element.html" />
     <Content Include="docs\concepts\index.html" />
     <Content Include="docs\concepts\json-filter.html" />
+    <Content Include="docs\concepts\mvvm\mvvm.html" />
+    <Content Include="docs\concepts\mvvm\samples\todo\index.html" />
+    <Content Include="docs\concepts\mvvm\samples\todo\TodoViewModel.js" />
     <Content Include="docs\concepts\next.html" />
     <Content Include="docs\concepts\next\actions.html" />
     <Content Include="docs\concepts\next\expressions.html" />
@@ -587,6 +591,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="jquery-1.8.2.min.js" />
+    <Content Include="mvvm.js" />
     <Content Include="plugins\ckeditor\adapters\jquery.js" />
     <Content Include="plugins\ckeditor\atom-ckeditor.js" />
     <Content Include="plugins\ckeditor\build-config.js" />
@@ -884,9 +889,13 @@
     <Content Include="atoms.min.js.map">
       <DependentUpon>atoms.min.js</DependentUpon>
     </Content>
-    <Content Include="bundleconfig.json" />
-    <Content Include="compilerconfig.json" />
-    <Content Include="compilerconfig.json.defaults" />
+    <None Include="bundleconfig.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="docs\concepts\mvvm\samples\todo\TodoViewModel.js.map" />
+    <Content Include="mvvm.js.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -979,7 +988,6 @@
     <Content Include="src\Core\AtomQuery.js" />
     <Content Include="src\Core\AtomUI.js" />
     <Content Include="src\Core\AtomUIComponent.js" />
-    <Content Include="src\Core\AtomViewModel.js" />
     <Content Include="src\Core\ChildEnumerator.js" />
     <Content Include="src\Core\Stop.js" />
     <Content Include="src\Core\WebAtoms.Core.js" />
@@ -1178,7 +1186,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\Core\AtomViewModel.ts" />
+    <TypeScriptCompile Include="docs\concepts\mvvm\samples\todo\TodoViewModel.ts" />
+    <TypeScriptCompile Include="mvvm.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

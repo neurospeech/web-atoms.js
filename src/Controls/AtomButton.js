@@ -22,6 +22,13 @@
 
                 AtomUI.cancelEvent(e);
 
+                if(this._command){
+                    var self = this;
+                    setTimeout(function () {
+                        self._command.execute(self._commandParameter);
+                    });
+                    return false;
+                }
 
                 var vr = this._validationRoot;
                 if (vr) {
