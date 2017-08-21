@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Web.Atoms.js</id>
-    <version>2.1.112</version>
+    <version>2.1.113</version>
     <title>Web.Atoms.js</title>
     <authors>Akash Kava</authors>
     <owners></owners>
@@ -36,6 +36,14 @@
     <file src="..\..\web-atoms.js" target="content\Scripts\web-atoms\web-atoms.js" />
     <file src="..\..\web-atoms.min.js" target="content\Scripts\web-atoms\web-atoms.min.js" />
     <file src="..\..\web-atoms.min.js.map" target="content\Scripts\web-atoms\web-atoms.min.js.map" />
+
+    <file src="..\..\mvvm\mvvm.ts" target="content\Scripts\web-atoms\mvvm\mvvm.ts" />
+    <file src="..\..\mvvm\mvvm.js" target="content\Scripts\web-atoms\mvvm\mvvm.js" />
+    <file src="..\..\mvvm\mvvm.js.map" target="content\Scripts\web-atoms\mvvm\mvvm.js.map" />
+
+    <file src="..\..\mvvm\mvvm-notification-service.ts" target="content\Scripts\web-atoms\mvvm\mvvm-notification-service.ts" />
+    <file src="..\..\mvvm\mvvm-notification-service.js" target="content\Scripts\web-atoms\mvvm\mvvm-notification-service.js" />
+    <file src="..\..\mvvm\mvvm-notification-service.js.map" target="content\Scripts\web-atoms\mvvm\mvvm-notification-service.js.map" />
 
     <file src="..\..\plugins\entity-framework\entity-context.js" target="content\Scripts\web-atoms\plugins\entity-framework\entity-context.js"/>
     <file src="..\..\plugins\entity-framework\entity-controls.js" target="content\Scripts\web-atoms\plugins\entity-framework\entity-controls.js"/>
