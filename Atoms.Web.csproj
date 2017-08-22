@@ -1171,7 +1171,6 @@
     <Content Include="web-atoms.min.js.map">
       <DependentUpon>web-atoms.min.js</DependentUpon>
     </Content>
-    <Content Include="src\Core\AtomViewModel.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
