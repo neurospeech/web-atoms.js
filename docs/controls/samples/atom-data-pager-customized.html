@@ -4,7 +4,7 @@
     <title>Atom-Control Sample</title>
     <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../atoms.min.js"></script>
+    <script src="../../../web-atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication" atom-render-as-page="true" style="margin:10px;">
@@ -47,7 +47,7 @@
             <button
                 atom-template="itemTemplate"
                 atom-text="{$data.label}"
-                atom-event-click="{ { appScope: { start: $data.value }} }"
+                atom-event-click="{ $x.appScope({ start: $data.value }) }"
                 style-background-color="[ $data.value == $appScope.start ? 'gray' : 'inherit' ]"></button>
         </span>
 

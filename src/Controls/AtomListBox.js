@@ -72,6 +72,9 @@
                 var target = event ? event.target : null;
                 var element = this._itemsPresenter;
                 var childElement = target || sender._element;
+
+                var isCheckBox = /checkbox/i.test(childElement.type);
+
                 while (childElement.parentNode != null && childElement.parentNode != element)
                     childElement = childElement.parentNode;
                 if (childElement == document) {
@@ -83,7 +86,17 @@
                     dataItem = childElement.atomControl.get_data();
                 }
 
-                this.toggleSelection(dataItem);
+                if (isCheckBox) {
+                    var oldS = this._allowMultipleSelection;
+                    try {
+                        this._allowMultipleSelection = true;
+                        this.toggleSelection(dataItem);
+                    } finally {
+                        this._allowMultipleSelection = oldS;
+                    }
+                } else {
+                    this.toggleSelection(dataItem);
+                }
 
             },
 

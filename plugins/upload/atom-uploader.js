@@ -118,7 +118,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                     case "ready":
                         break;
                     case "click-error":
-                        alert(JSON.stringify(evt.e));
+                        Atom.alert(JSON.stringify(evt.e));
                         break;
                     case "select":
                         this.add_items(evt.files);
@@ -283,7 +283,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                 if (this._maxFileSize != -1) {
                     var bigFiles = Atom.query(v).where({ 'size >': this._maxFileSize });
                     if (bigFiles.any()) {
-                        alert('File has to be less then ' + AtomFileSize.toFileSize(this._maxFileSize));
+                        Atom.alert('File has to be less then ' + AtomFileSize.toFileSize(this._maxFileSize));
                         if (this._filePresenter) {
                             this.createFilePresenter();
                             return;
@@ -295,7 +295,7 @@ window.__atom_flash_uploader_event = function (id, json) {
                     if (v.length > this._maxFiles) {
                         var msg = this._maxFilesErrorMessage ;
                         if (!msg) { msg = "You cannot choose more than " + this._maxFiles + " files"; }
-                        alert(msg);
+                        Atom.alert(msg);
                         if (this._filePresenter) {
                             this.createFilePresenter();
                             return;

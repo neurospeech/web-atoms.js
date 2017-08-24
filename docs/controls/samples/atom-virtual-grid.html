@@ -7,8 +7,8 @@
     <script src="../../../atoms.js"></script>
 
     <script>
-        var items = new Array(100);
-        for (var i = 0; i < 100; i++) {
+        var items = new Array(1000);
+        for (var i = 0; i < 1000; i++) {
             var n = i;
             items[i] = {
                 label: "Item (" + (n + 1) + ")",
@@ -29,8 +29,8 @@
              atom-ui-virtualize="{true}"
              style="height:400px; width:400px;"
              atom-name="movieList">
-            <div atom-presenter="itemsPresenter" style="padding:10px">
-                <div atom-template="itemTemplate" style="width:170px; height: 100px; margin:5px; background-color: lightcoral; float:left;display:inline-block">
+            <div atom-presenter="itemsPresenter">
+                <div atom-template="itemTemplate" style="width:170px;float:left;display:inline-block">
                     <span style="display:inline-block;height:20px;padding:5px" atom-text="{ ($scope.itemIndex + 1) + ') ' }"></span>
                     <span style="display:inline-block;height:20px;padding:5px" atom-text="{ $data.label }"></span>
                 </div>
@@ -39,9 +39,9 @@
 
         <div>
             <span>Selected Movie: </span>
-            <span atom-text="[($scope.movieList.selectedItem.label || '')]">
+            <span atom-text="[($scope.movieList.selectedItem.MovieName || '')]">
             </span>
-            <span atom-text="['('+($scope.movieList.selectedItem.value ||'')+')']">
+            <span atom-text="['('+($scope.movieList.selectedItem.MovieCategory||'')+')']">
             </span>
         </div>
 

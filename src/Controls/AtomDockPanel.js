@@ -117,6 +117,10 @@
                     if (isScriptOrStyle.test(e.tagName))
                         continue;
                     var $e = $(e);
+                    if ($e.css("display") == "none")
+                        continue;
+                    if ($e.css("visibility") == "hidden")
+                        continue;
                     if ($e.is(".dock-left,[dock$='Left']")) {
                         childList.left.push(e);
                         continue;
@@ -143,10 +147,11 @@
                 en = new AtomEnumerator(childList.top);
                 while (en.next()) {
                     item = en.current();
+                    var $item = $(item);
 
-                    itemHeight = $(item).outerHeight(true);
+                    itemHeight = $item.outerHeight(true);
 
-                    AtomUI.setItemRect(item, { top: top, left: left, width: width });
+                    AtomUI.setItemRect($item,item, { top: top, left: left, width: width });
 
                     top += itemHeight;
                     height -= itemHeight;
@@ -157,11 +162,12 @@
                 en = new AtomEnumerator(childList.bottom.reverse());
                 while (en.next()) {
                     item = en.current();
-                    itemHeight = $(item).outerHeight(true);
+                    var $item = $(item);
+                    itemHeight = $item.outerHeight(true);
 
                     height -= itemHeight;
 
-                    AtomUI.setItemRect(item, { left: left, top: (top + height), width: width });
+                    AtomUI.setItemRect($item,item, { left: left, top: (top + height), width: width });
 
                     this.resizeChild(item);
                 }
@@ -169,11 +175,11 @@
                 en = new AtomEnumerator(childList.left);
                 while (en.next()) {
                     item = en.current();
-
-                    var itemWidth = $(item).outerWidth(true);
+                    var $item = $(item);
+                    var itemWidth = $item.outerWidth(true);
                     width -= itemWidth;
 
-                    AtomUI.setItemRect(item, { top: top, left: left, height: height });
+                    AtomUI.setItemRect($item, item, { top: top, left: left, height: height });
                     left += itemWidth;
 
                     this.resizeChild(item);
@@ -182,10 +188,11 @@
                 en = new AtomEnumerator(childList.right.reverse());
                 while (en.next()) {
                     item = en.current();
-                    var itemWidth = $(item).outerWidth(true);
+                    var $item = $(item);
+                    var itemWidth = $item.outerWidth(true);
                     width -= itemWidth;
 
-                    AtomUI.setItemRect(item, { left: (width + left), top: top, height: height });
+                    AtomUI.setItemRect($item, item, { left: (width + left), top: top, height: height });
 
                     this.resizeChild(item);
                 }
@@ -193,7 +200,8 @@
                 en = new AtomEnumerator(childList.fill);
                 while (en.next()) {
                     item = en.current();
-                    itemWidth = $(item).css("max-width");
+                    var $item = $(item);
+                    itemWidth = $item.css("max-width");
                     if (itemWidth) {
                         itemWidth = parseFloat(itemWidth);
                         if (itemWidth > 0) {
@@ -201,7 +209,7 @@
                         }
                     }
 
-                    AtomUI.setItemRect(item, { left: left, top: top, width: width, height: height });
+                    AtomUI.setItemRect($item, item, { left: left, top: top, width: width, height: height });
 
                     this.resizeChild(item);
                 }

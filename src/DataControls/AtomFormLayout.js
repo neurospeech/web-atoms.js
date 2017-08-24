@@ -17,7 +17,8 @@
 
                 var isChildField = false;
 
-                var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
+                //var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|required|regex|data\-type|is\-valid|field\-(value|visible|class)|error))$/i);
+                var amap = AtomUI.attributeMap(child, /^(atom\-(init|type|label|field\-(visible|class)))$/i);
 
                 var at = amap["atom-type"];
                 if (at) {
@@ -63,21 +64,13 @@
                     field.setAttributeNode(v.node);
                 }
 
-                amap = AtomUI.attributeMap(field, /^atom\-(field\-value|is\-valid)$/i);
+                amap = AtomUI.attributeMap(child, /^atom\-required$/i);
 
-                if (!(amap["atom-field-value"] || amap["atom-is-valid"])) {
-                    var v = AtomUI.attr(child, "atom-value");
-                    if (v && /^\$\[/gi.test(v)) {
-                        // must be a two way binding..
-                        v = v.substr(2);
-                        if (!/^\$/gi.test(v)) {
-                            v = "$" + v;
-                        }
-                        v = "[" + v;
-                        var ind = v.indexOf(']');
-                        v = v.substr(0, ind + 1);
-                        AtomUI.attr(field, "atom-field-value", v);
-                    }
+                var childID = AtomUI.assignID(child);
+                AtomUI.attr(field, "atom-field-id", childID);
+
+                if (amap["atom-required"]) {
+                    AtomUI.attr(field, "atom-required", "true");
                 }
 
                 return AtomUI.createControl(field, WebAtoms.AtomFieldType);

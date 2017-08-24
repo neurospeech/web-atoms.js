@@ -23,4 +23,5 @@ nuget/Atoms.js/obj
 /obj
 nuget/Atoms.js/NuGet.log
 
+/atoms.t.js
 .vs/

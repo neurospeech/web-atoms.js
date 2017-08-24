@@ -4,14 +4,14 @@
     <title>Atom-Control Sample</title>
     <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../atoms.min.js"></script>
+    <script src="../../../web-atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication">
 <!-- sample -->
 <a
     atom-type="AtomButton"
-    atom-next="{ { alert: 'You clicked button !!!'} }"
+    atom-next="{ $x.alert('You clicked button !!!') }"
     style="text-decoration:underline; color:blue; cursor:pointer"
     >Click Me</a>
 

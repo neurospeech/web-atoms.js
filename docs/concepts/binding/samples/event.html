@@ -4,7 +4,7 @@
     <title>Atom-Control Sample</title>
     <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../../atoms.min.js"></script>
+    <script src="../../../../web-atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication" atom-render-as-page="true">
@@ -15,13 +15,12 @@
         })
     </script>
     <button
-        atom-event-click="{ { alert: 'Clicked !!!' } }">Click Me</button>
+        atom-event-click="{ $x.alert('Clicked !!!') }">Click Me</button>
 
-    <div
-        style="width:200px;height:200px;border: solid 1px gray;"
-        atom-event-mouseenter="{ { scope: { color: 'red' } } }"
-        atom-event-mouseout="{ { scope: { color: 'white' } } }"
-        style-background="[$scope.color]">
+    <div style="width:200px;height:200px;border: solid 1px gray;"
+         atom-event-mouseenter="{ $x.scope('color','red') }"
+         atom-event-mouseout="{ $x.scope('color','white') }"
+         style-background="[$scope.color]">
 
     </div>
 

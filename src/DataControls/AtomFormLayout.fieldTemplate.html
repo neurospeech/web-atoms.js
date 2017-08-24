@@ -2,18 +2,21 @@
     atom-type="AtomFormField">
     <td 
         class="atom-form-label"
-        atom-text="[$owner.label]"
-        style-min-width="[$owner.atomParent.minLabelWidth || undefined]"></td>
+        style-min-width="[$owner.atomParent.minLabelWidth || undefined]">
+        <label 
+               atom-for="{$owner.fieldId}"
+               atom-text="[$owner.label]"></label>
+    </td>
     <td
         class="atom-form-required"
         atom-text="[$owner.required ? '*' : '']">
     </td>
     <td
         class="atom-form-content"
-        atom-class="[$owner.error ? 'atom-data-error' : '']"
+        
         atom-presenter="contentPresenter">
         <span
-            class="atom-form-error"
-            atom-text="[$owner.error || '']"></span>
+            style="background-color:red;color:white; display:inline-block;float:right"
+            atom-text="[Atom.csv($owner.errors,'label') || '']"></span>
     </td>
 </tr>

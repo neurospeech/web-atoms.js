@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../../web-atoms.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <!-- sample -->
+        <script>
+            ({
+                termsAgreed: false
+            })
+        </script>
+
+        <div>
+            <p>
+                Do you agree to terms?
+                <input type="checkbox"
+                       atom-checked="$[scope.termsAgreed]" />
+            </p>
+        </div>
+
+        <button 
+                atom-invalid="[$x.if(!$scope.termsAgreed, 'Please agree to terms')]"
+                atom-event-click="{ $x.isValid($x.alert('Clicked !!!')) }">
+            Click Me
+        </button>
+        <!-- end-sample -->
+    </div>
+</body>
+</html>

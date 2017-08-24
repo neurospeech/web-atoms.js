@@ -4,7 +4,7 @@
     <title>Window Action Sample</title>
     <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../../atoms.min.js"></script>
+    <script src="../../../../atoms.js"></script>
 </head>
 <body>
     <div atom-type="AtomApplication">
@@ -15,15 +15,26 @@
             one-time binding will not work for controls defined later
             in the visual hierarchy -->
         <button atom-type="AtomButton"
-                atom-next="{ { window: {path: $scope.labelWindow, prop:{ title:'Open Window' },  scope:{ label: 'Window Label' },next: { alert: 'Done' } }  } }">
+                atom-next="{ $x.window({
+                        path: 'labelWindow',
+                        title:'Open Window',
+                        data: {
+                            label: 'This Window'
+                        },
+                        windowWidth: 400,
+                        windowHeight: 300,
+                        scope: {
+                            someScopeValue: 1
+                        },
+                        next: $x.alert('Done')
+                    }) }">
             Open Window
         </button>
 
 
-        <div atom-template-name="labelWindow"
-             atom-template="windowTemplate">
+        <div atom-template-name="labelWindow">
             This is inside the window.
-            <div atom-text="[ 'Opener Data: ' + $scope.label ]"></div>
+            <div atom-text="[ 'Opener Data: ' + $data.label ]"></div>
 
 
             <!-- To host buttons -->

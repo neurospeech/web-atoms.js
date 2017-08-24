@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">.\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
@@ -107,16 +109,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="atoms-debug.js" />
-    <Content Include="atoms-gen.js">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>atoms-gen.tt</DependentUpon>
-    </Content>
     <Content Include="atoms.js" />
     <Content Include="atoms.min.js">
       <DependentUpon>atoms.js</DependentUpon>
     </Content>
+    <None Include="atoms.t.js">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>atoms-gen.tt</DependentUpon>
+    </None>
     <Content Include="docs\code.html" />
     <Content Include="docs\concepts\atom-control.html" />
     <Content Include="docs\concepts\atom-promise.html" />
@@ -145,11 +146,13 @@
     <Content Include="docs\concepts\mvvm\samples\todo\TodoViewModel.js" />
     <Content Include="docs\concepts\next.html" />
     <Content Include="docs\concepts\next\actions.html" />
+    <Content Include="docs\concepts\next\expressions.html" />
     <Content Include="docs\concepts\next\samples\alert-action.html" />
     <Content Include="docs\concepts\next\samples\array-action.html" />
     <Content Include="docs\concepts\next\samples\confirm-action.html" />
     <Content Include="docs\concepts\next\samples\data-action.html" />
     <Content Include="docs\concepts\next\samples\function-action.html" />
+    <Content Include="docs\concepts\next\samples\is-valid-action.html" />
     <Content Include="docs\concepts\next\samples\local-window-action.html" />
     <Content Include="docs\concepts\next\samples\scope-action.html" />
     <Content Include="docs\concepts\next\samples\string-action.html" />
@@ -252,6 +255,7 @@
     <Content Include="docs\controls\samples\atom-filter.html" />
     <Content Include="docs\controls\samples\atom-form-grid-layout.html" />
     <Content Include="docs\controls\samples\atom-form-grid-tabs.html" />
+    <Content Include="docs\controls\samples\atom-form-layout-validation.html" />
     <Content Include="docs\controls\samples\atom-form-layout.html" />
     <Content Include="docs\controls\samples\atom-form.html" />
     <Content Include="docs\controls\samples\atom-frame-view.html" />
@@ -271,6 +275,7 @@
     <Content Include="docs\controls\samples\atom-view-stack.html" />
     <Content Include="docs\concepts\next\samples\window-action.html" />
     <Content Include="docs\controls\samples\atom-virtual-grid.html" />
+    <Content Include="docs\controls\samples\atom-virtual-list-box.html" />
     <Content Include="docs\controls\samples\atom-window-command-template.html" />
     <Content Include="docs\controls\samples\atom-window-iframe.html" />
     <Content Include="docs\controls\samples\atom-window.html" />
@@ -877,9 +882,11 @@
     <Content Include="res\share\twitter.png" />
     <Content Include="atoms-gen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>atoms-gen.js</LastGenOutput>
+      <LastGenOutput>atoms.t.js</LastGenOutput>
     </Content>
     <Content Include="README.md" />
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
     <Content Include="atoms.min.js.map">
       <DependentUpon>atoms.min.js</DependentUpon>
     </Content>
@@ -989,6 +996,7 @@
     <Content Include="src\Core\ZZZZZInitializer.js" />
     <Content Include="src\DataControls\AtomAutoPostForm.js" />
     <Content Include="src\DataControls\AtomDataGrid.js" />
+    <Content Include="src\DataControls\AtomForm.errorTemplate.html" />
     <Content Include="src\DataControls\AtomForm.js" />
     <Content Include="src\DataControls\AtomFormField.js" />
     <Content Include="src\DataControls\AtomFormGrid.css" />
@@ -1002,6 +1010,7 @@
     <Content Include="src\DataControls\AtomFormVerticalLayout.js" />
     <Content Include="src\Data\AtomBinding.js" />
     <Content Include="src\Data\AtomBindingHelper.js" />
+    <Content Include="src\Data\AtomErrors.js" />
     <Content Include="src\Data\AtomPromise.js" />
     <Content Include="src\jquery.maskedinput.js" />
     <Content Include="src\Layouts\AtomLayout.js" />
@@ -1078,14 +1087,22 @@
       <DependentUpon>view-stack.css</DependentUpon>
     </Content>
     <Content Include="tools\metadata.html" />
+    <Content Include="web-atoms.js" />
+    <Content Include="web-atoms.min.js">
+      <DependentUpon>web-atoms.js</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Module\CachedRoute.cs" />
+    <Compile Include="Module\CachifyModule.cs" />
+    <Compile Include="Module\StringHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1151,6 +1168,9 @@
     <Content Include="style\src\pending.css.map">
       <DependentUpon>pending.css</DependentUpon>
     </Content>
+    <Content Include="web-atoms.min.js.map">
+      <DependentUpon>web-atoms.min.js</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1195,6 +1215,11 @@
   </ItemGroup>
 </Target>  
   
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

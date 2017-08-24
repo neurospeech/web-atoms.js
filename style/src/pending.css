@@ -17,7 +17,7 @@
   width: 200px;
   height: 50px;
   background-color: #fff;
-  border-style: solid 2px #DA3535;
+  border: solid 2px rgba(0, 0, 0, 0.2);
   padding: 5px;
   text-align: center;
   vertical-align: middle;
@@ -104,7 +104,8 @@
   background-color: white;
   overflow: auto;
   border-top-width: 2px;
-  padding: 0px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 .atom-window-template .atom-view-stack {
   margin: 2px 2px 2px 5px;

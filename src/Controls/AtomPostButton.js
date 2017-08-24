@@ -9,8 +9,10 @@
         properties: {
             postData: null,
             postResult: null,
+            postError: null,
             postUrl: null,
             next: null,
+            errorNext: null,
             confirm: false,
             confirmMessage: null,
             mergeData: null,
@@ -53,6 +55,25 @@
                     return;
                 }
 
+                var vr = this._validationRoot;
+                if (vr) {
+                    vr.validate();
+                    var errors = vr.get_errors();
+                    if (errors.length) {
+                        Atom.alert(Atom.mapJoin(errors,'label'));
+                        return false;
+                    }
+                }
+
+
+                var errors = this.get_errors();
+                if (errors.length) {
+
+                    Atom.alert(Atom.mapJoin(errors, 'label'));
+
+                    return false;
+                }
+
 
                 var data = this.get_postData();
 
@@ -75,12 +96,20 @@
                 };
 
                 //this.invokeAjax(this._postUrl, { type: "POST", data: data, success: invokeNext });
-                AtomPromise.json(this._postUrl, null, { type: "POST", data: data }).then(invokeNext).failed(function () {
-                    var en = caller.get_errorNext();
-                    if (en) {
-                        caller.invokeAction(en);
-                    }
-                }).invoke();
+
+
+                var p = AtomPromise.json(this._postUrl, null, { type: "POST", data: data });
+                p.then(invokeNext);
+
+                var errorNext = this._errorNext;
+                if (errorNext) {
+                    p.failed(function (pr) {
+                        AtomBinder.setValue(caller, "postError", pr);
+                        caller.invokeAction(caller, errorNext);
+                    });
+                }
+
+                p.invoke();
 
             }
         }

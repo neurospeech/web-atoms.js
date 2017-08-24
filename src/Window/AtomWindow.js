@@ -213,6 +213,10 @@ WebAtoms.AtomWindow.openNewWindow = function (c) {
         w._windowTemplate = wt;
     }
 
+    if (c.localScope && c.opener) {
+        var d = c.opener.get_data();
+        w._data = d;
+    }
 
     w.init();
 

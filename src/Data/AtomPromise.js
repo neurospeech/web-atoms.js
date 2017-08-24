@@ -186,6 +186,8 @@ AtomPromise.getUrl = function (url) {
     }
 };
 
+var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+
 AtomPromise.parseDates = function (obj) {
     if (!obj)
         return obj;
@@ -209,6 +211,10 @@ AtomPromise.parseDates = function (obj) {
     if (typeof (obj) === 'string' || obj.constructor === String) {
         if (/^\/date\(/gi.test(obj) && /\)\/$/gi.test(obj)) {
             return AtomDate.parse(obj);
+        }
+
+        if (reISO.test(obj)) {
+            return new Date(obj);
         }
     }
     return obj;
@@ -344,7 +350,7 @@ AtomPromise.ajax = function (url, query, options, type) {
 
         var res = p.errors[0].responseText;
         if (!res) {
-            if (p.errors[2] !== 'Internal Server Error') {
+            if (!res || p.errors[2] !== 'Internal Server Error') {
                 var m = p.errors[2];
                 if (m)
                     res = m;
@@ -629,4 +635,3 @@ AtomPromise.plugins["local-storage"] = function (url, query, options) {
     });
     return ap;
 };
-

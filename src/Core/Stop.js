@@ -1,6 +1,7 @@
-﻿var $x = {};
+var $x = {};
 
 window.$x = $x;
+
 
 $x.stop = function stop(test, msg) {
     return function () {
@@ -38,19 +39,19 @@ $x.data = function (d, v) {
     return $x.invoke("data", d, v);
 }
 
-$x.scope = function (d, v) {
+$x.scope = function (d,v) {
     return $x.invoke("scope", d, v);
 }
 
-$x.localScope = function (d, v) {
+$x.localScope = function (d,v) {
     return $x.invoke("localScope", d, v);
 }
 
-$x.appScope = function (d, v) {
+$x.appScope = function (d,v) {
     return $x.invoke("appScope", d, v);
 }
 
-$x.owner = function (d, v) {
+$x.owner = function (d,v) {
     return $x.invoke("owner", d, v);
 }
 
@@ -59,17 +60,17 @@ $x.if = function (c, r) {
     return null;
 }
 
-$x.isValid = function (target, action) {
+$x.isValid = function (target,action) {
     return function () {
         if (action === undefined) {
             target = o;
             target = this;
-        }
+        } 
         target.validate();
-
+        
         var e = this.get_errors();
         if (e && e.length) {
-            Atom.alert(Atom.mapJoin(e, "label", "\n"));
+            Atom.alert(Atom.mapJoin(e,"label","\n"));
             return;
         }
         this.invokeAction(action);
@@ -177,5 +178,11 @@ $x.localWindow = function (path, props, scope, next) {
             localScope: true,
             opener: this
         });
+    }
+};
+
+$x.reveal = function (e) {
+    return function () {
+
     }
 };

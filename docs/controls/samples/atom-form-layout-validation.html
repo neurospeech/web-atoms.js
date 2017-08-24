@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Atom-Control Sample</title>
+    <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
+    <link href="../../../style/atoms.css" rel="stylesheet" />
+    <script src="../../../atoms.js"></script>
+</head>
+<body>
+    <div atom-type="AtomApplication">
+        <!-- sample -->
+            <div 
+                 id="theForm"
+                 atom-data="{ { FirstName: '', LastName: '', Username: '', Password: '', Password2:'' } }"
+                 atom-type="AtomFormVerticalLayout">
+
+                <input type="text"
+                       atom-label="Username:"
+                       atom-required="true"
+                       atom-value="$[data.Username]" />
+
+                <input type="password"
+                       atom-label="Password:"
+                       atom-value="$[data.Password]"
+                       atom-required="true" />
+
+                <input type="password"
+                       atom-label="(Again) Password:"
+                       atom-value="$[data.Password2]"
+                       atom-invalid="[$x.if( $data.Password != $data.Password2 , 'Passwords do not match')]" />
+
+                <span atom-label="Name:"
+                      atom-required="true"
+                      atom-invalid="[$x.if(!$data.FirstName || !$data.LastName, 'Please enter first name and last name')]">
+                    <input placeholder="First Name:"
+                           type="text"
+                           atom-value="$[data.FirstName]" />
+
+                    <input placeholder="Last Name:"
+                           type="text"
+                           atom-value="$[data.LastName]" />
+                </span>
+
+                <input atom-label="Email Address:"
+                       type="text"
+                       atom-data-type="email"
+                       atom-value="$[data.EmailAddress]" />
+
+                <input atom-label="Zip: (Numbers only)"
+                       type="text"
+                       atom-regex="/[0-9]+/"
+                       atom-value="$[data.ZipCode]" />
+
+                <!-- Validation Root makes sure that control is valid and has no errors before proceeding... -->
+
+                <button 
+                        atom-type="AtomPostButton"
+                        atom-post-url="/Url/insert"
+                        atom-validation-root="{$appScope.theForm}"
+                        >Save</button>
+
+                <button atom-type="AtomButton"
+                        atom-validation-root="{$appScope.theForm}"
+                        atom-next="{$x.alert('Done')}">
+                    Next
+                </button>
+
+            </div>
+        <!-- end-sample -->
+    </div>
+</body>
+</html>

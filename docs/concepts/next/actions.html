@@ -5,41 +5,54 @@
     <link href="../../style/docs.min.css" rel="stylesheet" />
 </head>
 <body>
-
     <h1>Actions</h1>
     <p>
-        Action in action set represents single instruction that will be invoked in future. Inline functions or lambda expressions are too noisy to write. As you have seen in previous section, inline function or function references are valid actions as well, following used inside an anonymous object lets you perform respective actions.</p>
+        Action in action set represents single instruction that will be invoked in future. Inline functions or lambda expressions are too noisy to write. As you have seen in previous section, inline function or function references are valid actions as well, following used inside an anonymous object lets you perform respective actions.
+    </p>
     <h2>
-        Data Action</h2>
-    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/data-action.html" >
-
-    </iframe>
-
+        Data Action
+    </h2>
+    <pre>
+        $x.data('property','value') 
+        //or
+        $x.data({ property1: value1, property2: value2 })
+    </pre>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/data-action.html"></iframe>
     <br />
     Data action merges given values into data of current atom control. If you look carefully, <span class="inlineCode">atom-event-click</span> points to an action set, which will be executed on click. With each click action set itself will change leading to next available value.<h2>
-        Scope Action (AppScope, LocalScope and Scope)</h2>
-    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/scope-action.html" >
-
-    </iframe>
+        Scope Action (AppScope, LocalScope and Scope)
+    </h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/scope-action.html"></iframe>
     <h2>
-        Alert Action</h2>
-    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/alert-action.html" >
-
-    </iframe>
+        Alert Action
+    </h2>
+    <pre>
+        $x.alert("message") // this will not display alert, but it is a callback to display an alert
+    </pre>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/alert-action.html"></iframe>
     <h2>
-        Confirm Action</h2>
+        Is Valid Action
+    </h2>
+    <pre>
+        $x.isValid(action) // this will only execute actions if current element is valid
+    </pre>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/is-valid-action.html"></iframe>
+    <h2>
+        Confirm Action
+    </h2>
+    <pre>
+        $x.confirm('are you sure message?', actions...)
+</pre>
     <p>
-        Confirm action requires an array, in which first item inside array is message for confirmation and next item is an action set, action sets can have nested action sets as well.</p>
-    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/confirm-action.html" >
-
-    </iframe>    <p>
-        &nbsp;</p>
+        Confirm action requires an array, in which first item inside array is message for confirmation and next item is an action set, action sets can have nested action sets as well.
+    </p>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/confirm-action.html"></iframe>    <p>
+        &nbsp;
+    </p>
     <h2>
-        Timeout Action</h2>
-    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/timeout-action.html" >
-
-    </iframe>   
-
+        Timeout Action
+    </h2>
+    <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/timeout-action.html"></iframe>
     <h2>Window Action</h2>
     <iframe class="atom-code-frame" src="../../code.html#codeFile=concepts/next/samples/window-action.html"></iframe>
 

@@ -83,8 +83,8 @@
                     var height = $(element).innerHeight();
 
                     this._selectedChild = selectedElement;
-
-                    AtomUI.setItemRect(selectedElement, { width: width, height: height });
+                    var $selectedElement = $(selectedElement);
+                    AtomUI.setItemRect($selectedElement,selectedElement, { width: width, height: height });
                     var sac = selectedElement.atomControl;
                     if (sac) {
                         sac.updateUI();
@@ -93,41 +93,42 @@
                     if (previousElement && previousElement != selectedElement) {
                         var self = this;
 
+                        var $previousElement = $(previousElement);
 
                         var sd = this._swipeDirection;
                         if (sd != null && /none/i.test(sd)) {
-                            $(previousElement).addClass("hidden");
-                            $(selectedElement).removeClass("hidden");
+                            $previousElement.addClass("hidden");
+                            $selectedElement.removeClass("hidden");
                         } else {
                             // animate...
                             var ael = [selectedElement, previousElement];
                             $(ael).removeClass("hidden");
                             this._isAnimating = true;
                             if (selectedIndex < previousIndex) {
-                                $(selectedElement).css("left", -width);
+                                $selectedElement.css("left", -width);
                                 //log("left: -" + width);
                             } else {
-                                $(selectedElement).css("left", width);
+                                $selectedElement.css("left", width);
                                 //log("left: " + width);
                             }
                             $(ael).addClass("animate-left-property");
                             setTimeout(function () {
-                                $(selectedElement).css("left", 0);
+                                $selectedElement.css("left", 0);
                                 //log("left: 0");
                                 if (selectedIndex < previousIndex) {
-                                    $(previousElement).css("left", width);
+                                    $previousElement.css("left", width);
                                 } else {
-                                    $(previousElement).css("left", -width);
+                                    $previousElement.css("left", -width);
                                 }
                                 setTimeout(function () {
                                     self._isAnimating = false;
                                     $(ael).removeClass("animate-left-property");
-                                    $(previousElement).addClass("hidden");
+                                    $previousElement.addClass("hidden");
                                 }, 800);
                             }, 50);
                         }
                     } else {
-                        $(selectedElement).removeClass("hidden");
+                        $selectedElement.removeClass("hidden");
                     }
                 }
 
@@ -136,15 +137,14 @@
             },
             init: function () {
                 var element = this.get_element();
-                $(element).addClass("atom-view-stack");
+                var $element = $(element);
+                $element.addClass("atom-view-stack");
                 baseType.init.call(this);
 
-                var element = this.get_element();
-
                 if (!element.parentNode.atomControl) {
-                    $(element).addClass("atom-view-stack-fill");
+                    $element.addClass("atom-view-stack-fill");
                 }
-                $(element).addClass(this._swipeDirection);
+                $element.addClass(this._swipeDirection);
 
                 //this.updateUI();
             }

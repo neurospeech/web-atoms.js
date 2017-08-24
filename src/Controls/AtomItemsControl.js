@@ -11,7 +11,7 @@
             this._onUIChanged = false;
             this._itemsPresenter = null;
             this._itemsPanel = null;
-            this._presenters = ["itemsPresenter","virtualContainer"];
+            this._presenters = ["itemsPresenter", "virtualContainer"];
             this._childItemType = WebAtoms.AtomControl;
         },
         properties: {
@@ -143,13 +143,13 @@
 
 
 
-                //var errors = this.get_errors();
-                //if (errors.length) {
+                var errors = this.get_errors();
+                if (errors.length) {
 
-                //    alert(errors.join("\n"));
+                    Atom.alert(errors.join("\n"));
 
-                //    return false;
-                //}
+                    return false;
+                }
 
                 if (this._confirm) {
                     if (!confirm(this._confirmMessage))
@@ -351,7 +351,6 @@
 
                     var scrollTop = Math.floor(index / itemsInBlock);
                     vc.scrollTop(scrollTop * vcHeight);
-                    
 
 
                     return;
@@ -500,7 +499,7 @@
                     overflow: "auto"
                 });
 
-                this.bindEvent(vc, "scroll","onScroll");
+                this.bindEvent(vc, "scroll", "onScroll");
 
                 var $ip = $(ip);
                 $ip.css({
@@ -521,8 +520,8 @@
                     lc = document.createElement("DIV");
                 }
 
-                $(fc).addClass("sticky first-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
-                $(lc).addClass("sticky last-child").css({ posiiton:"relative", height: 0, width: "100%", clear: "both" });
+                $(fc).addClass("sticky first-child").css({ posiiton: "relative", height: 0, width: "100%", clear: "both" });
+                $(lc).addClass("sticky last-child").css({ posiiton: "relative", height: 0, width: "100%", clear: "both" });
 
                 this._firstChild = fc;
                 this._lastChild = lc;
@@ -584,7 +583,7 @@
                 var vcHeight = $vc.innerHeight();
                 var vcScrollHeight = vc.scrollHeight;
 
-                if ( isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
+                if (isNaN(vcHeight) || vcHeight <= 0 || vcScrollHeight <= 0) {
                     // leave it..
                     var self = this;
                     setTimeout(function () {
@@ -624,7 +623,7 @@
                             var data = ae.current();
                             var elementChild = this.createChildElement(parentScope, null, data, ae);
                             //WebAtoms.dispatcher.callLater(function () { 
-                            ip.insertBefore(elementChild,lc);
+                            ip.insertBefore(elementChild, lc);
                             //});
                             this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
                             this.postVirtualCollectionChanged();
@@ -653,7 +652,7 @@
                         var visibleRows = Math.ceil(totalVisibleItems / columns);
 
                         console.log({
-                            avgWidth:avgWidth,
+                            avgWidth: avgWidth,
                             avgHeight: avgHeight,
                             totalVisibleItems: totalVisibleItems,
                             allRows: allRows,
@@ -672,7 +671,7 @@
 
                         // set height of last child... to increase padding
                         $lc.css({
-                            height: ((allRows-visibleRows+1) * avgHeight) + "px"
+                            height: ((allRows - visibleRows + 1) * avgHeight) + "px"
                         });
                         this._training = false;
                         this._ready = true;
@@ -707,8 +706,8 @@
                     return;
                 }
 
-                var lastIndex = (Math.max(index,0) + 3 ) * itemsInBlock - 1;
-                var firstIndex =  Math.max(0, (index) * itemsInBlock);
+                var lastIndex = (Math.max(index, 0) + 3) * itemsInBlock - 1;
+                var firstIndex = Math.max(0, (index) * itemsInBlock);
 
                 var ce = fc.nextElementSibling;
 
@@ -778,7 +777,7 @@
                 }
 
 
-                var h = (this._allRows - block * 3) * avgHeight -  index * this._visibleHeight;
+                var h = (this._allRows - block * 3) * avgHeight - index * this._visibleHeight;
                 console.log("last child height = " + h);
 
                 WebAtoms.dispatcher.callLater(function () {
@@ -816,7 +815,7 @@
 
 
                     $lc.css({
-                        height:  h
+                        height: h
                     });
 
 
@@ -915,46 +914,48 @@
                 var ae = new AtomEnumerator(items);
 
 
-                    this.getTemplate("itemTemplate");
+                this.getTemplate("itemTemplate");
 
-                    while (ae.next()) {
-                        var data = ae.current();
-                        var elementChild = this.createChildElement(parentScope, element, data, ae);
-                        added.push(elementChild);
-                        this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                while (ae.next()) {
+                    var data = ae.current();
+                    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                    added.push(elementChild);
+                    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                }
+
+
+                //var ae = new AtomEnumerator(items);
+                //while (ae.next()) {
+                //    var data = ae.current();
+                //    var elementChild = this.createChildElement(parentScope, element, data, ae);
+                //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
+                //}
+                var self = this;
+                WebAtoms.dispatcher.callLater(function () {
+                    var dirty = [];
+                    var ce = new ChildEnumerator(element);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        var f = added.filter(function (fx) { return item == fx; });
+                        if (f.pop() != item) {
+                            dirty.push(item);
+                        }
                     }
-
-
-                    //var ae = new AtomEnumerator(items);
-                    //while (ae.next()) {
-                    //    var data = ae.current();
-                    //    var elementChild = this.createChildElement(parentScope, element, data, ae);
-                    //    this.applyItemStyle(elementChild, data, ae.isFirst(), ae.isLast());
-                    //}
-                    var self = this;
-                    WebAtoms.dispatcher.callLater(function () {
-                        var dirty = [];
-                        var ce = new ChildEnumerator(element);
-                        while (ce.next()) {
-                            var item = ce.current();
-                            var f = added.filter(function (fx) { return item == fx; });
-                            if (f.pop() != item) {
-                                dirty.push(item);
-                            }
+                    ce = new AtomEnumerator(dirty);
+                    while (ce.next()) {
+                        var item = ce.current();
+                        //self.dispose(item);
+                        if (item.atomControl) {
+                            item.atomControl.dispose();
                         }
-                        ce = new AtomEnumerator(dirty);
-                        while (ce.next()) {
-                            var item = ce.current();
-                            //self.dispose(item);
-                            if (item.atomControl) {
-                                item.atomControl.dispose();
-                            }
-                            $(item).remove();
-                        }
+                        $(item).remove();
+                    }
 
                     });
 
                 
+
+
 
                 WebAtoms.dispatcher.start();
 

@@ -66,6 +66,7 @@ var AtomEvaluator = {
 
         vars.push("Atom");
         vars.push("AtomPromise");
+        vars.push("$x");
 
         e = new Function(vars,method);
         this.ecache[k] = e;

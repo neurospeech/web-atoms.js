@@ -4,15 +4,15 @@
     <title>Atom-Control Sample</title>
     <script src="../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../atoms.min.js"></script>
+    <script src="../../../atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication">
 <!-- sample -->
-<div
+<form
     atom-type="AtomForm"
     atom-post-url="/Url/Insert"
-    atom-data="{ { FirstName: '', LastName: '', Password: '', Password2:'' } }"
+    atom-data="{ { FirstName: '', LastName: '', Username: '', Password: '', Password2:'' } }"
     atom-success-message="Information Saved Correctly">
     <div
         atom-type="AtomFormLayout">
@@ -35,14 +35,12 @@
             type="password"
             atom-label="(Again) Password:"
             atom-value="$[data.Password2]"
-            atom-is-valid="[$data.Password == $data.Password2]"
-            atom-error="[$owner.isValid ? '' : 'Passwords do not match']"
-            />
+            atom-invalid="[$x.if( $data.Password != $data.Password2 , 'Passwords do not match')]" />
 
         <span 
             atom-label="Name:"
             atom-required="true"
-            atom-is-valid="[$data.FirstName && $data.LastName]">
+            atom-invalid="[$x.if(!$data.FirstName || !$data.LastName, 'Please enter first name and last name')]">
             <input 
                 placeholder="First Name:"
                 type="text" 
@@ -71,7 +69,7 @@
         <input type="submit" value="Save" />
 
     </div>
-</div>
+</form>
 <!-- end-sample -->
 </div>
 </body>

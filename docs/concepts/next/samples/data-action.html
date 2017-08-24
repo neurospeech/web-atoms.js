@@ -4,7 +4,7 @@
     <title>Atom-Control Sample</title>
     <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../../atoms.min.js"></script>
+    <script src="../../../../atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication" atom-render-as-page="true">
@@ -18,11 +18,11 @@
 </script>
 <div atom-type="AtomControl" atom-data="{$scope.model}">
     <button 
-        atom-event-click="[ { data: { index: $data.index - 1 } } ]"
+        atom-event-click="[ $x.data('index', $data.index - 1) ]"
         >Down</button>
     <input type="text" atom-value="$[data.index]" />
     <button 
-        atom-event-click="[ { data: { index: $data.index + 1 } } ]"
+        atom-event-click="[ $x.data('index', $data.index + 1) ]"
         >Up</button>
 </div>
 <!-- end-sample -->

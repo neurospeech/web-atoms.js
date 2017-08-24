@@ -4,7 +4,7 @@
     <title>Atom-Control Sample</title>
     <script src="../../../../Scripts/jquery-1.11.1.min.js"></script>
     <link href="../../../../style/atoms.css" rel="stylesheet" />
-    <script src="../../../../atoms.min.js"></script>
+    <script src="../../../../web-atoms.js"></script>
 </head>
 <body>
 <div atom-type="AtomApplication" atom-render-as-page="true">
@@ -22,7 +22,7 @@
 
 <button
     atom-type="AtomButton"
-    atom-next="{ { scope : { name: 'Akash Kava' , color: 'Orange' } } }"
+    atom-next="{ [$x.scope('name','Akash Kava'), $x.scope('color','Orange')] }"
     >Modify Name</button>
 
 <!-- end-sample -->

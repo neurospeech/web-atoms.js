@@ -1,6 +1,6 @@
 ﻿<tr atom-type="AtomFormField">
     <td>
-        <div>
+        <div class="atom-field-header">
             <span class="atom-form-label" atom-text="[$owner.label]"></span>
             <span class="atom-form-required" atom-text="[$owner.required ? '*' : '']"></span>
         </div>
@@ -10,6 +10,6 @@
             atom-presenter="contentPresenter"></div>
         <div
             class="atom-form-error"
-            atom-text="[$owner.error || '']"></div>
+            atom-text="[Atom.csv($owner.errors,'label') || '']"></div>
     </td>
 </tr>
