@@ -21,7 +21,7 @@ Development
 
 MVVM
     
-    Please look at https://github.com/neurospeech/web-atoms-mvvm.js for additional libraries of MVVM.
+Please look at <a href="//github.com/neurospeech/web-atoms-mvvm.js">Web Atoms MVVM</a> for additional libraries of MVVM.
 
 ![Atoms.js](https://github.com/neurospeech/web-atoms.js/raw/master/res/atoms-promo.png)
 
