@@ -19,6 +19,10 @@ Development
 
     npm install web-atoms
 
+MVVM
+    
+    Please look at https://github.com/neurospeech/web-atoms-mvvm.js for additional libraries of MVVM.
+
 ![Atoms.js](https://github.com/neurospeech/web-atoms.js/raw/master/res/atoms-promo.png)
 
 Powerful customizable Scopes
