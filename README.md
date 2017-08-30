@@ -6,6 +6,19 @@ Web Atoms.js is the only JavaScript framework with precompiler [Atoms.js PreComp
 AtomsPreCompiler compiles atoms markup into valid HTML5 by breaking up inline expressions into
 generated JavaScript. This pre-compiled document runs in strict mode without using `eval` without compromising speed.
 
+Installation
+------------
+
+Production
+```html
+    <script src="//cdn.jsdelivr.net/npm/web-atoms@2.1.114/web-atoms.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/web-atoms@2.1.114/style/atoms.min.css"/>
+```    
+
+Development
+
+    npm install web-atoms
+
 ![Atoms.js](https://github.com/neurospeech/web-atoms.js/raw/master/res/atoms-promo.png)
 
 Powerful customizable Scopes
