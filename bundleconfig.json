@@ -1,12 +1,5 @@
 [
   {
-    "outputFileName": "atoms.min.js",
-    "inputFiles": [
-      "atoms-debug.js"
-    ],
-    "sourceMap": true
-  },
-  {
     "outputFileName": "web-atoms.min.js",
     "inputFiles": [
       "web-atoms.js"

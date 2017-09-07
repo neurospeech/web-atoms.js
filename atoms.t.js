@@ -2573,81 +2573,94 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 143 - 'AtomBrowser.js' */AtomBrowser.init();
 
 
-/*Line 2 - 'AtomEvaluator.js' */var AtomEvaluator = {
+/*Line 2 - 'AtomEvaluator.js' */ var AtomEvaluator = {
+    
+/*Line 4 - 'AtomEvaluator.js' */        ecache: {},
+    
+/*Line 6 - 'AtomEvaluator.js' */        becache: {},
+    
+/*Line 8 - 'AtomEvaluator.js' */        parse: function (txt) {
+    
+/*Line 10 - 'AtomEvaluator.js' */            // http://jsfiddle.net/A3vg6/44/ (recommended)
+/*Line 11 - 'AtomEvaluator.js' */            // http://jsfiddle.net/A3vg6/45/ (working)
+/*Line 12 - 'AtomEvaluator.js' */            // http://jsfiddle.net/A3vg6/51/ (including $ sign)
+    
+/*Line 14 - 'AtomEvaluator.js' */            var be = this.becache[txt];
+/*Line 15 - 'AtomEvaluator.js' */            if (be)
+/*Line 16 - 'AtomEvaluator.js' */                return be;
+    
+/*Line 18 - 'AtomEvaluator.js' */            var regex = /(?:(\$)(window|viewModel|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*(\()?)*/gi;
+    
+/*Line 20 - 'AtomEvaluator.js' */            var keywords = /(window|viewModel|appScope|scope|data|owner|localScope)/gi;
+    
+/*Line 22 - 'AtomEvaluator.js' */            var path = [];
+/*Line 23 - 'AtomEvaluator.js' */            var vars = [];
+    
+/*Line 25 - 'AtomEvaluator.js' */            var found = {};
+    
+/*Line 27 - 'AtomEvaluator.js' */            var ms = txt.replace(regex,
+/*Line 28 - 'AtomEvaluator.js' */                function (match) {
+/*Line 29 - 'AtomEvaluator.js' */                    var nv = "v" + (path.length + 1);
+/*Line 30 - 'AtomEvaluator.js' */                    if (match.indexOf("$owner.") == 0) {
+/*Line 31 - 'AtomEvaluator.js' */                        match = match.substr(7);
+/*Line 32 - 'AtomEvaluator.js' */                    } else
+/*Line 33 - 'AtomEvaluator.js' */                    {
+/*Line 34 - 'AtomEvaluator.js' */                        if (match.indexOf("owner.") == 0) {
+/*Line 35 - 'AtomEvaluator.js' */                            match = match.substr(6);
+/*Line 36 - 'AtomEvaluator.js' */                        } else {
+/*Line 37 - 'AtomEvaluator.js' */                            match = match.substr(1);
+/*Line 38 - 'AtomEvaluator.js' */                        }
+/*Line 39 - 'AtomEvaluator.js' */                    }
 
-/*Line 4 - 'AtomEvaluator.js' */    ecache: {},
+/*Line 41 - 'AtomEvaluator.js' */                    match = match.split(".");
 
-/*Line 6 - 'AtomEvaluator.js' */    becache: {},
+/*Line 43 - 'AtomEvaluator.js' */                    var trail = "";
 
-/*Line 8 - 'AtomEvaluator.js' */    parse: function (txt) {
+/*Line 45 - 'AtomEvaluator.js' */                    match = match.filter(function(m) {
+/*Line 46 - 'AtomEvaluator.js' */                        if(!m.endsWith("(")){
+/*Line 47 - 'AtomEvaluator.js' */                            return true;
+/*Line 48 - 'AtomEvaluator.js' */                        }
+/*Line 49 - 'AtomEvaluator.js' */                        trail = "." + m;
+/*Line 50 - 'AtomEvaluator.js' */                        return false;
+/*Line 51 - 'AtomEvaluator.js' */                    });
 
-/*Line 10 - 'AtomEvaluator.js' */        // http://jsfiddle.net/A3vg6/44/ (recommended)
-/*Line 11 - 'AtomEvaluator.js' */        // http://jsfiddle.net/A3vg6/45/ (working)
-/*Line 12 - 'AtomEvaluator.js' */        // http://jsfiddle.net/A3vg6/51/ (including $ sign)
+/*Line 53 - 'AtomEvaluator.js' */                    path.push(match);
+/*Line 54 - 'AtomEvaluator.js' */                    vars.push(nv);
+/*Line 55 - 'AtomEvaluator.js' */                    return "(" + nv + ")" + trail;
+/*Line 56 - 'AtomEvaluator.js' */                }
+/*Line 57 - 'AtomEvaluator.js' */                );
+    
+    
+/*Line 60 - 'AtomEvaluator.js' */            var method = "return " + ms + ";";
+/*Line 61 - 'AtomEvaluator.js' */            var methodString = method;
+/*Line 62 - 'AtomEvaluator.js' */            try {
+/*Line 63 - 'AtomEvaluator.js' */                method = AtomEvaluator.compile(vars, method);
+/*Line 64 - 'AtomEvaluator.js' */            } catch (e) {
+/*Line 65 - 'AtomEvaluator.js' */                throw new Error("Error executing \n" + methodString + "\nOriginal: " + txt + "\r\n" + e);
+/*Line 66 - 'AtomEvaluator.js' */            }
+    
+/*Line 68 - 'AtomEvaluator.js' */            be = { length: vars.length, method: method, path: path, original: ms };
+/*Line 69 - 'AtomEvaluator.js' */            this.becache[txt] = be;
+/*Line 70 - 'AtomEvaluator.js' */            return be;
+/*Line 71 - 'AtomEvaluator.js' */        },
+/*Line 72 - 'AtomEvaluator.js' */        compile: function (vars, method) {
+/*Line 73 - 'AtomEvaluator.js' */            var k = vars.join("-") + ":" + method;
+/*Line 74 - 'AtomEvaluator.js' */            var e = this.ecache[k];
+/*Line 75 - 'AtomEvaluator.js' */            if (e)
+/*Line 76 - 'AtomEvaluator.js' */                return e;
+    
+/*Line 78 - 'AtomEvaluator.js' */            vars.push("Atom");
+/*Line 79 - 'AtomEvaluator.js' */            vars.push("AtomPromise");
+/*Line 80 - 'AtomEvaluator.js' */            vars.push("$x");
+    
+/*Line 82 - 'AtomEvaluator.js' */            e = new Function(vars,method);
+/*Line 83 - 'AtomEvaluator.js' */            this.ecache[k] = e;
+/*Line 84 - 'AtomEvaluator.js' */            return e;
+/*Line 85 - 'AtomEvaluator.js' */        }
+/*Line 86 - 'AtomEvaluator.js' */    };
+    
 
-/*Line 14 - 'AtomEvaluator.js' */        var be = this.becache[txt];
-/*Line 15 - 'AtomEvaluator.js' */        if (be)
-/*Line 16 - 'AtomEvaluator.js' */            return be;
-
-/*Line 18 - 'AtomEvaluator.js' */        var regex = /(?:(\$)(window|viewModel|appScope|scope|data|owner|localScope))(?:\.[a-zA-Z_][a-zA-Z_0-9]*)*/gi;
-
-/*Line 20 - 'AtomEvaluator.js' */        var keywords = /(window|viewModel|appScope|scope|data|owner|localScope)/gi;
-
-/*Line 22 - 'AtomEvaluator.js' */        var path = [];
-/*Line 23 - 'AtomEvaluator.js' */        var vars = [];
-
-/*Line 25 - 'AtomEvaluator.js' */        var found = {};
-
-/*Line 27 - 'AtomEvaluator.js' */        var ms = txt.replace(regex,
-/*Line 28 - 'AtomEvaluator.js' */            function (match) {
-/*Line 29 - 'AtomEvaluator.js' */                var nv = "v" + (path.length + 1);
-/*Line 30 - 'AtomEvaluator.js' */                if (match.indexOf("$owner.") == 0) {
-/*Line 31 - 'AtomEvaluator.js' */                    match = match.substr(7);
-/*Line 32 - 'AtomEvaluator.js' */                } else
-/*Line 33 - 'AtomEvaluator.js' */                {
-/*Line 34 - 'AtomEvaluator.js' */                    if (match.indexOf("owner.") == 0) {
-/*Line 35 - 'AtomEvaluator.js' */                        match = match.substr(6);
-/*Line 36 - 'AtomEvaluator.js' */                    } else {
-/*Line 37 - 'AtomEvaluator.js' */                        match = match.substr(1);
-/*Line 38 - 'AtomEvaluator.js' */                    }
-/*Line 39 - 'AtomEvaluator.js' */                }
-/*Line 40 - 'AtomEvaluator.js' */                path.push(match.split('.'));
-/*Line 41 - 'AtomEvaluator.js' */                vars.push(nv);
-/*Line 42 - 'AtomEvaluator.js' */                return nv;
-/*Line 43 - 'AtomEvaluator.js' */            }
-/*Line 44 - 'AtomEvaluator.js' */            );
-
-
-/*Line 47 - 'AtomEvaluator.js' */        var method = "return " + ms + ";";
-/*Line 48 - 'AtomEvaluator.js' */        var methodString = method;
-/*Line 49 - 'AtomEvaluator.js' */        try {
-/*Line 50 - 'AtomEvaluator.js' */            method = AtomEvaluator.compile(vars, method);
-/*Line 51 - 'AtomEvaluator.js' */        } catch (e) {
-/*Line 52 - 'AtomEvaluator.js' */            Atom.alert("Error executing \n" + methodString + "\nOriginal: " + txt);
-/*Line 53 - 'AtomEvaluator.js' */            throw e;
-/*Line 54 - 'AtomEvaluator.js' */        }
-
-/*Line 56 - 'AtomEvaluator.js' */        be = { length: vars.length, method: method, path: path, original: ms };
-/*Line 57 - 'AtomEvaluator.js' */        this.becache[txt] = be;
-/*Line 58 - 'AtomEvaluator.js' */        return be;
-/*Line 59 - 'AtomEvaluator.js' */    },
-/*Line 60 - 'AtomEvaluator.js' */    compile: function (vars, method) {
-/*Line 61 - 'AtomEvaluator.js' */        var k = vars.join("-") + ":" + method;
-/*Line 62 - 'AtomEvaluator.js' */        var e = this.ecache[k];
-/*Line 63 - 'AtomEvaluator.js' */        if (e)
-/*Line 64 - 'AtomEvaluator.js' */            return e;
-
-/*Line 66 - 'AtomEvaluator.js' */        vars.push("Atom");
-/*Line 67 - 'AtomEvaluator.js' */        vars.push("AtomPromise");
-/*Line 68 - 'AtomEvaluator.js' */        vars.push("$x");
-
-/*Line 70 - 'AtomEvaluator.js' */        e = new Function(vars,method);
-/*Line 71 - 'AtomEvaluator.js' */        this.ecache[k] = e;
-/*Line 72 - 'AtomEvaluator.js' */        return e;
-/*Line 73 - 'AtomEvaluator.js' */    }
-/*Line 74 - 'AtomEvaluator.js' */};
-
-/*Line 76 - 'AtomEvaluator.js' */window.AtomEvaluator = AtomEvaluator;
+/*Line 89 - 'AtomEvaluator.js' */window.AtomEvaluator = AtomEvaluator;
 /*Line 0 - 'ChildEnumerator.js' */
 
 /*Line 2 - 'ChildEnumerator.js' */var ChildEnumerator = null;
@@ -2768,10 +2781,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "2.1.113",
+/*Line 40 - 'Atom.js' */        text: "2.1.116",
 /*Line 41 - 'Atom.js' */        major: 2,
 /*Line 42 - 'Atom.js' */        minor: 1,
-/*Line 43 - 'Atom.js' */        build: 113
+/*Line 43 - 'Atom.js' */        build: 116
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
