@@ -328,8 +328,14 @@ window.AtomProperties = AtomProperties;
                 }
                 return this._viewModel;
             },
-            set_viewModel: function(v){
-                this._viewModel = v;
+            set_viewModel: function (v) {
+
+                var vm = this._viewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                }
+
+               this._viewModel = v;
                 
                function propogate(e){
                     var ae = new ChildEnumerator(e);
