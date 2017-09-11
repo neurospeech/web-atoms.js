@@ -25,3 +25,4 @@ nuget/Atoms.js/NuGet.log
 
 /atoms.t.js
 .vs/
+node_modules/
