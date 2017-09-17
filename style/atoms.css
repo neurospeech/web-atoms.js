@@ -763,7 +763,7 @@ ul.atom-tab-bar > li.list-item.selected-item a {
   text-align: right;
 }
 .atom-window .atom-wizard-command-bar button {
-  float: left;
+  float: inherit;
 }
 /*#endregion */
 .atom-time-editor > input[type=text],
