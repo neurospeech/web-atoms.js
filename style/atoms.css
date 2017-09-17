@@ -599,7 +599,7 @@ ul.atom-tab-bar > li.list-item.selected-item a {
   vertical-align: top;
 }
 .atom-error-span {
-  color: #ff0000;
+  color: #f00;
 }
 .atom-form-error {
   border-color: #f00;
@@ -759,6 +759,12 @@ ul.atom-tab-bar > li.list-item.selected-item a {
   border: 1px solid #255bb7;
   border-bottom-color: #2f5bb7;
 }
+.atom-window .atom-wizard-command-bar {
+  text-align: right;
+}
+.atom-window .atom-wizard-command-bar button {
+  float: left;
+}
 /*#endregion */
 .atom-time-editor > input[type=text],
 .atom-time-editor > input[type=number] {
@@ -770,4 +776,3 @@ ul.atom-tab-bar > li.list-item.selected-item a {
 .atom-time-editor > ul.atom-toggle-button-bar {
   display: inline-block;
 }
-/*# sourceMappingURL=atoms.css.map */

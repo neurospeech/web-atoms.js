@@ -3,5 +3,9 @@
     "outputFile": "web-atoms.min.js",
     "inputFile": "web-atoms.js",
     "sourceMap": true
+  },
+  {
+    "outputFile": "style/atoms.css",
+    "inputFile": "style/atoms.less"
   }
 ]
