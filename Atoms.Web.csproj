@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -36,7 +36,7 @@
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
     <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />    
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -109,10 +109,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="atoms.js" />
-    <Content Include="atoms.min.js">
-      <DependentUpon>atoms.js</DependentUpon>
-    </Content>
     <None Include="atoms.t.js">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -887,9 +883,6 @@
     <Content Include="README.md" />
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
-    <Content Include="atoms.min.js.map">
-      <DependentUpon>atoms.min.js</DependentUpon>
-    </Content>
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
@@ -1208,13 +1201,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  
-<Target Name="AddTsToContent" AfterTargets="CompileTypeScript" Condition="'$(BuildingProject)' != 'false'">
-  <ItemGroup>
-    <Content Include="@(TypeScriptCompile)" Condition="'$(TypeScriptSourceMap)' == 'true'"/>
-  </ItemGroup>
-</Target>  
-  
+  <Target Name="AddTsToContent" AfterTargets="CompileTypeScript" Condition="'$(BuildingProject)' != 'false'">
+    <ItemGroup>
+      <Content Include="@(TypeScriptCompile)" Condition="'$(TypeScriptSourceMap)' == 'true'" />
+    </ItemGroup>
+  </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

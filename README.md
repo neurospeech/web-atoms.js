@@ -11,8 +11,8 @@ Installation
 
 Production
 ```html
-    <script src="//cdn.jsdelivr.net/npm/web-atoms@2.1.114/web-atoms.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/web-atoms@2.1.114/style/atoms.min.css"/>
+    <script src="//cdn.jsdelivr.net/npm/web-atoms@2.1.121/web-atoms.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/web-atoms@2.1.121/style/atoms.min.css"/>
 ```    
 
 Development

@@ -12,14 +12,22 @@
     return mapLibrary(n.substr(index + 1), r, v);
 };
 
-function createProperty(name, g) {
+function createProperty(name, g, update) {
     if (g) {
         return function () {
             return this[name];
         };
     }
     return function (v) {
-        this[name] = v;
+        if (update) {
+            var old = this[name];
+            if (old != v) {
+                this[name] = v;
+                Atom.refresh(this, update);
+            }
+        } else {
+            this[name] = v;
+        }
     };
 }
 
@@ -82,8 +90,15 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
                 classPrototype["get_" + k] = createProperty("_"+ k,true);
             }
             if (!classPrototype["set_" + k]) {
-                classPrototype["set_" + k] = createProperty("_" + k);
+                classPrototype["set_" + k] = createProperty("_" + k); 
             }
+
+            Object.defineProperty(classPrototype, k, {
+                get: classPrototype["get_" + k],
+                set: createProperty("_" + k, false, k),
+                enumerable: true,
+                configurable: true
+            });
         }
     }
 

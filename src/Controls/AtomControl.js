@@ -482,7 +482,13 @@ window.AtomProperties = AtomProperties;
                 }
                 return this._viewModel;
             },
-            set_viewModel: function(v){
+            set_viewModel: function (v) {
+
+                var vm = this._viewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                }
+
                 this._viewModel = v;
                 
                function propogate(e){
