@@ -85,7 +85,12 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
             if (classPrototype[k])
                 continue;
             if (bpt.hasOwnProperty(k)) {
-                classPrototype[k] = bpt[k];
+                var pd = Object.getOwnPropertyDescriptor(bpt, k);
+                if (!pd) {
+                    classPrototype[k] = bpt[k];
+                } else {
+                    Object.defineProperty(classPrototype, k, pd);
+                }
             }
         }
 
@@ -115,10 +120,21 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
             if (!classPrototype["set_" + k]) {
                 classPrototype["set_" + k] = createProperty("_" + k); 
             }
+        }
 
-            Object.defineProperty(classPrototype, k, {
-                get: classPrototype["get_" + k],
-                set: createProperty("_" + k, false, k),
+    }
+
+    for (var k in classPrototype) {
+
+        if (/^get\_/.test(k)) {
+
+            var gx = classPrototype[k];
+            var nx = k.substr(4);
+            var sx = classPrototype["set_" + nx];
+
+            Object.defineProperty(classPrototype, nx, {
+                get: gx,
+                set: sx ? createProperty("_" + nx, false, nx) : undefined,
                 enumerable: true,
                 configurable: true
             });
@@ -2796,10 +2812,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "2.1.121",
+/*Line 40 - 'Atom.js' */        text: "2.1.124",
 /*Line 41 - 'Atom.js' */        major: 2,
 /*Line 42 - 'Atom.js' */        minor: 1,
-/*Line 43 - 'Atom.js' */        build: 121
+/*Line 43 - 'Atom.js' */        build: 124
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
