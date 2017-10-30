@@ -35,14 +35,22 @@ function mapLibrary(n, p, v) {
     return mapLibrary(n.substr(index + 1), r, v);
 };
 
-function createProperty(name, g) {
+function createProperty(name, g, update) {
     if (g) {
         return function () {
             return this[name];
         };
     }
     return function (v) {
-        this[name] = v;
+        if (update) {
+            var old = this[name];
+            if (old != v) {
+                this[name] = v;
+                Atom.refresh(this, update);
+            }
+        } else {
+            this[name] = v;
+        }
     };
 }
 
@@ -105,8 +113,15 @@ function classCreator(name, basePrototype, classConstructor, classPrototype, cla
                 classPrototype["get_" + k] = createProperty("_"+ k,true);
             }
             if (!classPrototype["set_" + k]) {
-                classPrototype["set_" + k] = createProperty("_" + k);
+                classPrototype["set_" + k] = createProperty("_" + k); 
             }
+
+            Object.defineProperty(classPrototype, k, {
+                get: classPrototype["get_" + k],
+                set: createProperty("_" + k, false, k),
+                enumerable: true,
+                configurable: true
+            });
         }
     }
 
@@ -2587,10 +2602,10 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 37 - 'Atom.js' */var Atom = {
 
 /*Line 39 - 'Atom.js' */    version: {
-/*Line 40 - 'Atom.js' */        text: "1.8.255",
+/*Line 40 - 'Atom.js' */        text: "1.8.256",
 /*Line 41 - 'Atom.js' */        major: 1,
 /*Line 42 - 'Atom.js' */        minor: 8,
-/*Line 43 - 'Atom.js' */        build: 255
+/*Line 43 - 'Atom.js' */        build: 256
 /*Line 44 - 'Atom.js' */    },
 
 /*Line 46 - 'Atom.js' */    refreshWindowCommand: function () {
