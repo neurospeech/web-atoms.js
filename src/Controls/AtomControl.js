@@ -473,6 +473,41 @@ window.AtomProperties = AtomProperties;
                 return this.get_templateParent(element._logicalParent || element.parentNode);
             },
 
+            get_localViewModel: function () {
+                if (this._localViewModel === undefined) {
+                    // get parent..
+                    var ap = this.get_atomParent(this._element._logicalParent || this._element.parentNode);
+                    if (ap)
+                        return ap.get_localViewModel();
+                }
+                return this._localViewModel;
+            },
+            set_localViewModel: function (v) {
+
+                var vm = this._localViewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                }
+
+                this._localViewModel = v;
+
+                function propogate(e) {
+                    var ae = new ChildEnumerator(e);
+                    while (ae.next()) {
+                        var child = ae.current();
+                        if (child.atomControl && child.atomControl._created) {
+                            var ctrl = child.atomControl;
+                            if (ctrl._localViewModel !== undefined)
+                                continue;
+                            Atom.refresh(ctrl, "localViewModel");
+                        }
+                        propogate(child);
+                    }
+                };
+                propogate(this._element);
+            },
+
+
             get_viewModel: function () {
                 if (this._viewModel === undefined) {
                     // get parent..
@@ -1010,12 +1045,6 @@ window.AtomProperties = AtomProperties;
 
             dispose: function (e) {
 
-                var vm = this._viewModel;
-                if (vm && vm.dispose) {
-                    vm.dispose();
-                    this._viewModel = null;
-                }
-
                 // disposing only one element
                 if (e) {
                     var eac = e.atomControl;
@@ -1030,6 +1059,25 @@ window.AtomProperties = AtomProperties;
                 }
 
                 e = this._element;
+
+                var vm = this._viewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                    this._viewModel = null;
+                }
+
+                vm = this._localViewModel;
+                if (vm && vm.dispose) {
+                    vm.dispose();
+                    this._localViewModel = null;
+                }
+
+                //vm = this._data;
+                //if (vm && vm.dispose) {
+                //    vm.dispose();
+                //    this._data = undefined;
+                //}
+
 
                 this._disposed = true;
                 this.disposeChildren(e);
