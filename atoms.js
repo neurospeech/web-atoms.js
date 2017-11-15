@@ -11047,7 +11047,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 31 - 'AtomPhoneControl.js' */            label: "(UK +44)",
 /*Line 32 - 'AtomPhoneControl.js' */            code: 44,
 /*Line 33 - 'AtomPhoneControl.js' */            country: "UK",
-/*Line 34 - 'AtomPhoneControl.js' */            format: "999-999-9999"
+/*Line 34 - 'AtomPhoneControl.js' */            format: "9999-999-9999"
 /*Line 35 - 'AtomPhoneControl.js' */        },
 /*Line 36 - 'AtomPhoneControl.js' */    ];
 

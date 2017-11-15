@@ -32,7 +32,7 @@
             label: "(UK +44)",
             code: 44,
             country: "UK",
-            format: "999-999-9999"
+            format: "9999-999-9999"
         },
     ];
 
