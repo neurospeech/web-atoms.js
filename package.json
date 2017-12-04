@@ -1,6 +1,6 @@
 {
   "name": "web-atoms",
-  "version": "2.1.127",
+  "version": "2.1.128",
   "description": "Enterprise grade JavaScript UI framework inspired from Flex and Silverlight will MVVM support.",
   "main": "web-atoms.js",
   "directories": {
