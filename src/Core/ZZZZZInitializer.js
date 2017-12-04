@@ -13,7 +13,7 @@ $(document).ready(function () {
     d.start();
 });
 
-$(window).unload(function () {
+$(window).on("unload",function () {
 
     function dispose(e) {
         if (!e)
