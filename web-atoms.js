@@ -13283,7 +13283,7 @@ this.setLocalValue('src', Atom.get(this,'templateParent.url'), e);
 /*Line 12 - 'ZZZZZInitializer.js' */    d.start();
 /*Line 13 - 'ZZZZZInitializer.js' */});
 
-/*Line 15 - 'ZZZZZInitializer.js' */$(window).unload(function () {
+/*Line 15 - 'ZZZZZInitializer.js' */$(window).on("unload", function () {
 
 /*Line 17 - 'ZZZZZInitializer.js' */    function dispose(e) {
 /*Line 18 - 'ZZZZZInitializer.js' */        if (!e)
