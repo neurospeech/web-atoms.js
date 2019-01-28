@@ -1,3 +1,6 @@
+# This project has been replaced with Web Atoms Core.
+https://github.com/neurospeech/web-atoms-core - An Advanced MVVM Framework for JavaScript in Web and Xamarin.Forms
+
 Web Atoms.js
 ========
 Enterprise Grade JavaScript UI Framework inspired from Flex and Silverlight.
